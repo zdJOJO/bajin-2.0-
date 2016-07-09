@@ -23,6 +23,8 @@ footer,.wrapper{
 	height: 0.22rem;
 	width: 0.22rem;
 	margin-right: 0.04rem;
+	margin-top: 9px;
+	float: left;
 }
 .good>div{
 	float:right; 
@@ -63,6 +65,7 @@ footer,.wrapper{
 	line-height: 0.12rem;
 	width: 1rem;
 	border-bottom:#b2b2b2 1px solid;
+	clear: both;
 }
 .address>img{
 	float: left;
@@ -90,7 +93,7 @@ footer,.wrapper{
 	color: 
 }
 .time{
-	height: 0.18rem;
+	height: 0.3rem;
 	line-height: 1.6;
 	box-sizing:border-box;
 	padding: 0.03rem;

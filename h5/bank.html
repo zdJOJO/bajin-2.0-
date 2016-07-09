@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="screen-orientation"content="portrait">
+	<meta name="x5-orientation"content="portrait">
+	<meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
+	<title>绑定银行卡</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/bank.css">
+	<script src="js/zepto.js"></script>
+	<script src="js/bank.js"></script>
+	<script>
+		var iWidth=document.documentElement.clientWidth;
+		document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+	</script>
+</head>
+<body>
+<!-- 	<header id="header">
+		<div class="msg">
+			<a href="javascript:;" id="personal_But">&lt; 返回</a>
+			<span>我的银行卡</span>
+		</div>
+	</header> -->
+	<div class="addCard">
+		<div class="wrap">
+			<h2><a>添加信用卡 <span>+</span></a></h2>
+		</div>
+	</div>
+
+	<div class="cardList">
+			<!--<div class="cardItem">
+				<div class="card-logo">
+					<img src="imgs/bank.jpg" alt="">
+				</div>
+				<div class="card-info">
+					<div class="card-name">中国工商银行</div>
+					<div class="card-tip">尾号8647</div>
+					<div class="card-r">&gt;</div>
+				</div>
+			</div>
+			<div class="cardItem">
+				<div class="card-logo">
+					<img src="imgs/bank.jpg" alt="">
+				</div>
+				<div class="card-info">
+					<div class="card-name">中国工商银行</div>
+					<div class="card-tip">尾号8647</div>
+					<div class="card-r">&gt;</div>
+				</div>
+			</div>-->
+			
+	</div>
+	<!-- <a href = "lottery.html" >抽奖页面测试入口</a> -->
+
+	<form name="info" id="info" method="post" action="http://web.zj.icbc.com.cn/mobile/Bjzx.do?scene=bjzx"> 
+		<input type="hidden" id="merSignMsg" name="merSignMsg" value=""/> 
+		<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/> 
+	</form> 
+</body>
+</html>

@@ -1,0 +1,108 @@
+@font-face{
+	font-family:"微软雅黑";
+}
+h1,h2,h3{
+	font-weight: normal;
+}
+body{
+	font-family:"微软雅黑";
+}
+#header{
+	width:100%;
+	
+	line-height: 0.17rem;
+	padding: 0 0.025rem;
+	box-sizing:border-box;
+	position: fixed;
+	top:0;
+	background: rgba(255,255,255,0.3);
+	z-index: 3;
+	color:#000;
+	border-bottom: 1px solid #cccccc;
+}
+#header div{
+	float:left;
+}
+#header .msg{
+	width:100%;
+	text-align: center;
+
+	position: relative;
+}
+.msg span{font-size:20px;}
+.msg a{
+	position: absolute;
+	font-size:16px;
+	left:0;
+	top:0;
+}
+
+.wrap{
+	padding: 0 0.025rem;
+}
+
+.addCard{
+/*	margin-top: 0.21rem;*/
+	margin-bottom: 0.04rem;
+	height:0.17rem;
+	line-height:0.17rem;
+	border-top: 1px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+}
+.addCard h2 span{
+	float:right;
+	font-size: 34px;
+}
+
+.cardList{
+	margin-top: 0.02rem;
+	border-top: 1px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	padding-left:0.075rem;
+}
+.cardItem{
+	height:0.17rem;
+}
+.card-logo{
+	height:100%;
+	float: left;
+	width:20%;
+	line-height:0.17rem;
+}
+.card-logo img{ width:80%;}
+.card-info{
+	width:80%;
+	height:100%;
+	float: left;
+	position: relative;
+	border-bottom: 1px solid #cccccc;
+}
+.cardItem:last-child .card-info{
+	border:none;
+}
+.card-name,.card-tip,.card-r{
+	position: absolute;
+}
+.card-name{
+	left:0;
+	top:0;
+	line-height:0.1rem;
+	font-size: 15px;
+    font-weight:bolder;
+}
+.card-tip{
+	left:0;
+	bottom:0.02rem;
+	color: #c7c7c7;
+}
+.card-r{
+	line-height:0.17rem;
+	right:0.025rem;
+	top:0;
+	font-size: 24px;
+}
+/*提示信息的样式*/
+.alert_q{
+	text-align: center;
+	margin:0.04rem 0 0.04rem -0.075rem;
+}

@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+<title>意见反馈</title>
+<meta charset="utf-8">
+<meta name="screen-orientation"content="portrait">
+<meta name="x5-orientation"content="portrait">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+<link href="css/style.css" rel="stylesheet" type="text/css">
+    <script>
+        var iWidth=document.documentElement.clientWidth;
+        document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+    </script>
+</head>
+<body>
+
+<div id="header_fee">
+        <!--<div class="fh"><a href="javascript:;" id="personal_But">&lt; 返回</a></div>-->
+        <h2 class="search">意见反馈</h2>
+        <!--<div class="send"><a href="javascript:;">发送</a></div>-->
+ </div>
+ <div id="feedback">
+  	<textarea  id="yj"  placeholder="请告诉我们您遇到的问题或想反馈的意见（必填）"></textarea>
+    <!--<input type="email" id="email" placeholder="邮箱（必填）"></input>-->
+    <button id ="sub_q">确定</button>
+ </div>
+ <script src="js/zepto.js"></script>
+ <script>
+
+$(function(){
+	var token = "";
+	//获取存在于cookie中的token值
+	function getCookie(c_name)
+	{
+	if (document.cookie.length>0)
+	  {
+	  c_start=document.cookie.indexOf(c_name + "=")
+	  if (c_start!=-1)
+	    { 
+	    c_start=c_start + c_name.length+1 
+	    c_end=document.cookie.indexOf(";",c_start)
+	    if (c_end==-1) c_end=document.cookie.length
+	    return unescape(document.cookie.substring(c_start,c_end))
+	    } 
+	  }
+	return undefined;
+	}
+	token = getCookie("token");
+	var reg=/^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+
+
+	var userPhoneNum = '';
+	var userEmail = '';
+	$.get( port+"/card/user?token="+token, function(result){
+		userPhoneNum = result.phone;
+		userEmail = result.email;
+	});
+
+	$("#sub_q").click(function(){
+	    var yj = $("#yj").val();
+		if(yj){
+			var data = {
+				feedbackDetail:$("#yj").val(),
+				feedbackPhone: userPhoneNum
+			};
+			if(userEmail){
+				data.feedbackMail = userEmail;
+			}
+
+			$.ajax({
+				type:"POST",
+				url:"http://www.winthen.com/card/feedback",
+				dataType:"json",
+				contentType : "application/json;charset=UTF-8",
+				data:JSON.stringify(data),
+				success:function(data){
+					console.log(data);
+					alert("反馈意见提交成功，谢谢你的建议！！");
+					history.back();
+				}
+			});
+		}else{
+			alert("反馈意见和邮箱不能为空！")
+		}       
+	})	
+}) 	
+</script>
+</body>
+</html>

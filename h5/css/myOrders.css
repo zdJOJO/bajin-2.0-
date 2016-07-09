@@ -1,0 +1,342 @@
+@font-face{
+	font-family:"微软雅黑";
+}
+h1,h2,h3{
+	font-weight: normal;
+}
+body{
+	font-family:"微软雅黑";
+	/*background: #eeeeee;*/
+	margin: 0;
+	padding: 0;
+}
+header,.wrapper{
+	font-size: 16px;
+}
+header{
+	height: 0.14rem;
+	width: 1rem;
+	line-height: 0.12rem;
+	box-sizing:border-box;
+	/*margin-bottom:0.02rem;*/
+	font-size: 14px;
+	position: fixed;
+	top: 0;
+    background-color: #fff;
+    z-index: 20;
+}
+header div{
+	display: inline-block;
+	width: 0.2rem;
+	margin:0 0.05rem;
+	/*border-bottom: 1px solid #b2b2b2;*/
+	/*color: #6b6b6b;*/
+	color:#b2b2b2;
+	font-weight: bold;
+}
+/*内容部分*/
+.wrapper{
+	position: absolute;
+	top: 0.14rem;
+	width: 1rem;
+}
+.wrapper .singleOrders{
+	border-top:#b2b2b2 1px solid;
+	height: 0.28rem;
+	width: 1rem;
+	box-sizing:border-box;
+	padding: 0.03rem 0.04rem;
+}
+.wrapper .singleOrders>img{
+	height: 0.22rem;
+	width: 0.22rem;
+	margin-right: 0.04rem;
+	float: left;
+}
+.wrapper .singleOrders .detail{
+	width: 0.66rem;
+	float: right;
+	height: 0.18rem;
+}
+.wrapper .singleOrders .detail h3{
+	-webkit-margin-before:0;
+	-webkit-margin-after:0.2em;
+	font-size: 16px;
+}
+@media screen and (min-width:375px){
+	.wrapper .singleOrders .detail h3{
+		-webkit-margin-after:1em;
+	}
+}
+.wrapper .singleOrders .detail .address .pic_1{
+	background: url("../imgs/adr-18.png") no-repeat;
+	width:13px;
+	height:18px;
+    font-size: 0;
+    margin-right: 6px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.wrapper .singleOrders .detail .address .adr{
+    display: inline-block;
+    /*zoom: 1;兼容IE6、IE7、IE8浏览器，经常会遇到一些问题，可以使用zoom:1来解决*/
+    vertical-align: middle;
+    line-height: 18px;
+    font-size: 12px;
+}
+.wrapper .singleOrders .detail .time .pic_2{
+	background: url("../imgs/time_2.png") no-repeat;
+	width:14px;
+	height:14px;
+    font-size: 0;
+    margin-right: 5px;
+    display:inline-block;
+    vertical-align: middle;
+}
+.wrapper .singleOrders .detail .time .tim{
+	font-size: 12px;
+    vertical-align: middle;
+    line-height: 14px;
+    display: inline-block;
+}
+/*商品订单选项卡*/
+.wrapper .header{
+	width: 1rem;
+	height: 0.12rem;
+	color: #9f9f9f;
+	border-top:#b2b2b2 1px solid;	
+	/*position: absolute;*/
+	top: 0.14rem;
+	text-align: center;
+	position: fixed;
+    background-color: #fff;
+    z-index: 20;
+}
+.wrapper .header>div{
+	display:inline-block;
+	width: 0.15rem;
+	margin:0 0.01rem;
+	height: 0.06rem;
+	margin-top: 0.02rem;
+	/*color:#fff;*/
+	color: #9f9f9f;
+	padding: 0.01rem 0.02rem;
+	/*background-color: #b7a66e;*/
+	background-color: #fff;
+}
+.wrapper .container{
+	position: absolute;
+	top: 0.12rem;
+}
+.wrapper .container .singleMsg{
+	border-bottom:#b2b2b2 1px solid;
+	/*height: 0.36rem;*/
+	width: 1rem;
+	box-sizing:border-box;
+	padding-top: 0.03rem;
+	background-color: #fafafa;
+}
+.wrapper .container .singleMsg>img{
+	height: 0.22rem;
+	width: 0.22rem;
+	margin-right: 0.04rem;
+	margin-left: 0.04rem;
+	float: left;	
+    margin-bottom: 0.01rem;
+}
+.wrapper .container .singleMsg .msg{
+	width: 0.68rem;
+	height: 0.22rem;
+	float: right;
+	padding-right: 0.03rem;
+	position: relative;
+	box-sizing:border-box;
+	margin-bottom: 0.01rem;
+
+	/*background-color: #eee;*/
+}
+.wrapper .container .singleMsg .msg h3,.wrapper .container .singleMsg .msg p{
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+}
+.wrapper .container .singleMsg .msg h3{
+	font-size: 16px;
+	line-height: 0.06rem;
+	height: 0.06rem;
+	-webkit-margin-before:0.5em;
+	-webkit-margin-after:0.5em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.wrapper .container .singleMsg .msg p{
+	font-size: 14px;
+}
+.wrapper .container .singleMsg .msg p.cost{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+.wrapper .container .singleMsg .msg p.number{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin-right: 0.03rem;
+}
+.wrapper .totleMsg{
+	clear: left;
+	height: 0.109rem;
+	line-height: 0.109rem;	
+	box-sizing:border-box;
+	background-color: #ffffff;
+}
+.wrapper .totleMsg p{
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+}
+.wrapper .totleMsg p.status{
+	float: left;
+	margin-left: 0.2rem;
+	color:#c1af74;
+}
+.wrapper .totleMsg p.detail{
+	float: right;
+	margin-right: 0.03rem;
+}
+/*.wrapper .container .singleMsg .msg>div{
+	width: 0.68rem;
+	height: 0.06rem;
+}
+.wrapper .container .singleMsg .msg>div h3{
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+	float: left;	
+	color: #6c6c6c;
+	font-size: 17px;
+	margin-right: 0.04rem;
+}
+.wrapper .container .singleMsg .msg>div p{
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+	float: left;
+	color: #9f9f9f;	
+}
+.wrapper .container .singleMsg .msg>div p.status{
+	color: #b7a66e;
+	float: right;
+}
+.wrapper .container .singleMsg .msg>div p.number{
+	font-size: 17px;
+}
+.wrapper .container .singleMsg .msg>p.what{
+	-webkit-margin-before:0.1em;
+	-webkit-margin-after:1em;
+	clear: left;	
+	font-size: 14px;
+	color: #9b9b9b;
+}
+.wrapper .container .singleMsg .msg>p.cost{
+	color: #5b5b5b;
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+	font-size: 18px;
+}
+@media screen and (max-width: 320px){
+	.wrapper .container .singleMsg .msg>p.cost{
+		font-size: 16px;
+	}
+	.wrapper .container .singleMsg .msg>p.what{
+		-webkit-margin-before:0.1em;
+		-webkit-margin-after:0.5em;
+	}
+}*/
+
+/*预约重做的样式*/
+.appointment{
+	font-size: 16px;
+	position: absolute;
+	top: 0.14rem;
+}
+.appointment .singleAppointment h4,.appointment .singleAppointment p{
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+}
+.appointment .singleAppointment{
+	width: 1rem;
+	box-sizing:border-box;
+	padding:0.03rem 0.03rem 0 0.03rem;
+}
+.appointment .singleAppointment>img{
+	width: 0.25rem;
+	height: 0.25rem;
+	margin-right: 0.04rem;
+}
+.appointment .singleAppointment .detail{
+	width: .65rem;
+	height: 0.25rem;
+	float: right;
+	position: relative;
+}
+.appointment .singleAppointment .detail h4{
+	color: #161616;
+	margin:0.03rem 0 0.04rem 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 0.53rem
+}
+.appointment .singleAppointment .detail  span{
+	float: right;
+	font-size: 14px;
+	color: #c1af74;
+	position: relative;
+	top: -0.115rem
+}
+.appointment .singleAppointment .detail .time{
+	font-size: 12px;
+	position: absolute;
+	bottom: 0.06rem;
+	width: 0.65rem;
+	color: #9f9f9f;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.appointment .singleAppointment .detail .time img{
+	height: 0.03rem;
+	vertical-align:middle;
+	margin-bottom: 2px;
+	margin-right: 0.03rem;
+}
+.appointment .singleAppointment .detail .address{
+	font-size: 12px;
+	position: absolute;
+	bottom: 0;
+	color: #9f9f9f;
+	width: 0.65rem;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.appointment .singleAppointment .detail .address img{
+	height: 0.04rem;
+	vertical-align: middle;
+	margin-right: 0.03rem;
+}
+.strEmpty{
+	width: 1rem;
+}
+center{
+	width: 1rem;
+}
+/*空页面的样式*/
+center img{
+	margin-top: 0.2rem;
+}
+center p:last-child{
+	width: 0.5rem;
+	height: 0.1rem;
+	line-height: 0.1rem;
+	margin-top: 0.2rem;
+	background-color: #c1b02b;
+}

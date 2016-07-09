@@ -1,0 +1,254 @@
+@font-face{
+	font-family:"微软雅黑";
+}
+h1,h2,h3{
+	font-weight: normal;
+}
+body{
+	font-family:"微软雅黑";
+	/*background: #eeeeee;*/
+	margin: 0;
+	padding: 0;
+}
+/*中间内容区域*/
+.wrapper{
+	font-size: 16px;
+	width: 1rem;
+	padding-top: 0.05rem;	
+	margin-bottom: 0.12rem;
+}
+.wrapper .singleBrand{
+	height: 0.267rem;
+	padding-bottom: 0.01rem;
+	vertical-align: middle;
+	padding-left: 0.02rem;
+	padding-right: 0.02rem;
+}
+.wrapper .singleBrand img:first-child{
+	width: 0.066rem;
+	float: left;
+	height: 0.066rem;
+	margin: 0.1rem 0;
+} 
+.wrapper .singleBrand img:nth-child(2){
+	width: 0.266rem;
+	float: left;
+	height: 0.266rem;
+	margin: 0 0.04rem 0 0.03rem;
+}
+.wrapper .singleBrand .detail{
+	height: 0.266rem;
+	width: 0.55rem;
+	float: left;
+	box-sizing:border-box;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+}
+.wrapper .singleBrand .detail h3{
+	-webkit-margin-before: 0.025rem;
+    -webkit-margin-after: 0.018rem;
+}
+.wrapper .singleBrand .detail p.subtitle{
+	-webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    font-size: 12px;
+    height:32px;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+.wrapper .singleBrand .detail p.singleCost{
+	-webkit-margin-before: 0.5em;
+    -webkit-margin-after: 0;
+    font-size: 14px;
+}
+
+.wrapper .singleBrand .detail .singleCost{
+	font-size: 16px;
+}
+.wrapper .singleBrand .subtitle{
+	color:#b9b9b9;
+}
+.wrapper .singleBrand .singleCost span:nth-child(2){
+	float: right;
+}
+
+
+/*空页面的样式*/
+.wrapper center img{
+	margin-top: 0.2rem;
+}
+.wrapper center p:last-child{
+	width: 0.5rem;
+	height: 0.1rem;
+	line-height: 0.1rem;
+	margin-top: 0.2rem;
+	background-color: #c1b02b;
+}
+
+
+/*底部部分*/
+footer{
+	font-size: 16px;
+	width: 1rem;
+	height: 0.12rem;
+	background-color:#f0f0f0; 
+	position: fixed;
+	bottom: 0;
+	text-align: center;
+}
+/*全选按钮*/
+footer div.select_all{	
+	width: 0.22rem;
+	height: 0.12rem;
+	float: left;
+	line-height: 0.12rem;
+}
+footer div.select_all p{
+	-webkit-margin-before:0;
+    -webkit-margin-after:0;
+}
+footer div.select_all img{
+	width: 0.066rem;
+	height: 0.066rem;
+    vertical-align: middle;
+    margin-right:0.03rem;
+}
+footer div.select_all span{
+	position: relative;
+	top: 1px;
+}
+/*信息窗口*/
+footer div.message{
+	width: 0.33rem;
+	float: left;
+}
+footer div.message .cost{
+	color: #020202;
+	width: 100%;
+	font-size: 14px;
+	float:left;
+	height: 0.055rem;
+	-webkit-margin-before:0.005rem;
+    -webkit-margin-after:0;
+}
+footer div.message .remark{
+	-webkit-margin-before:0;
+    -webkit-margin-after:0;
+	width: 100%;
+	height: 0.06rem;
+	line-height: 0.03rem;
+	color:#b9b9b9;
+	font-size: 12px;
+	float:left;
+}
+footer div.edit_all{
+	width: 0.22rem;
+	height: 0.12rem;
+	float: right;
+	line-height: 0.12rem;
+	box-sizing:border-box;
+}
+/*购买数量选项卡*/
+footer div.brandNum{
+	width: 0.23rem;
+	height: 0.12rem;
+	line-height: 0.12rem;
+	float: left;
+	color: #f0f0f0;
+	background-color: #2e3133;
+}
+footer div.brandNum p{
+	-webkit-margin-before:0;
+    -webkit-margin-after:0;
+    height: 0.12rem;
+}
+footer .done{
+	/*display: none;*/
+}
+
+/*编辑部分*/
+footer .edit{
+	width: 1rem;
+	height: 0.12rem;
+	display: none;
+}
+footer .edit .edit_{
+	float: right;
+	width: 0.33rem;
+}
+footer .edit .edit_ p{
+	-webkit-margin-before:0;
+    -webkit-margin-after:0;
+	height: 0.12rem;
+	line-height: 0.12rem;
+}
+
+footer div.select_all_{	
+	width: 0.33rem;
+	height: 0.12rem;
+	float: left;
+	line-height: 0.12rem;
+}
+footer div.select_all_ p{
+	-webkit-margin-before:0;
+    -webkit-margin-after:0;
+}
+footer div.select_all_ img{
+	width: 0.066rem;
+	height: 0.066rem;
+    vertical-align: middle;
+    margin-right:0.03rem;
+}
+footer div.select_all_ span{
+	position: relative;
+	top: 1px;
+}
+
+footer div.delete_all{
+	/*width: 0.33rem;宽度自适应，两端固定的布局，nice*/
+	width: auto;
+	height: 0.12rem;
+	line-height: 0.12rem;
+	position: absolute;
+	left: 0.33rem;
+	right:0.33rem;
+	color:#f0f0f0;
+	background-color: #2e3131;
+}
+footer div.delete_all img{
+	width: 0.066rem;
+	height: 0.066rem;
+    vertical-align: middle;
+    margin-right:0.05rem;
+}
+
+/*加减操作按钮*/
+.count{
+	font-size: 12px;
+    text-align: center;
+    float: left;
+    border:1px solid #333333;
+    /*height:0.05rem;*/
+}
+.count-i{
+    float: left;
+    padding:0 0.01rem;
+    /*height:0.05rem;*/
+}
+.add{
+    background: #000000;
+    color: #fff;
+}
+.reduce{
+    background: #A2A2A2;
+    color: #ffffff;
+}
+
+.singleBrand .count{
+	display: none;
+}
+.singleBrand .singleCost{
+	/*display: none;*/
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="screen-orientation"content="portrait">
+	<meta name="x5-orientation"content="portrait">
+    <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
+    <title>报名</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/doenrol.css">
+    <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="js/weixin/jweixin-1.0.0.js"></script>
+    <script src="js/zepto.js"></script>
+
+    <script type="text/javascript" src="js/jquery/md5.js"></script>
+    <script  id="ip" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+
+    <script type="text/javascript" src=""></script>
+    <script src="js/doenrol.js"></script>
+    <script>
+        var iWidth=document.documentElement.clientWidth;
+        document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+    </script>
+</head>
+<body>
+<!-- <header id="header">
+    <div class="msg">
+        <a href="javascript:;" id="enrol_But">&lt; 返回</a>
+        <span>报名</span>
+    </div>
+</header> -->
+<section class="activityDetail">
+    <img src=""/>
+    <div>
+        <h3></h3>
+        <p class="time"><img src="imgs/time.png"><span></span></p>
+        <p class="address"><img src="imgs/address.png"><span></span></p>    
+    </div>
+</section>
+<section class="infoBox">
+    <!-- <div class="tip">联系人</div> -->
+    <div class="listItem">
+        <span>真实姓名：</span><input placeholder="姓名不能为空" id="applyName" type="text">
+    </div>
+    <div class="listItem">
+        <span>联系电话：</span><input placeholder="电话不能为空" id="applyPhone" type="text">
+    </div>
+    <div class="listItem">
+        <span>电子邮箱：</span><input type="email" placeholder="邮箱可以为空" id="email">
+    </div>
+</section>
+<section class="personNum">
+    <span>报名人数</span>
+    <div class="count">
+<!--         <span class="reduce count-i">-</span>
+        <span class="num count-i">1</span>
+        <span class="add count-i">+</span> --> 
+        <img class="reduce" src="imgs/reduce.png">
+        <span class="currentNum num">1</span>
+        <img class="add" src="imgs/add.png">      
+    </div>
+</section>
+<p class="tips">活动费用</p>
+<p class="cost"></p>
+<!-- <section class="messageBox" contenteditable="true">
+    如有其他需求请在此备注
+</section> -->
+<p class="note">备注</p>
+<textarea class="note_q" type="text" placeholder="如有其他需求请在此备注"></textarea>
+<div id="payType">
+   <div class="block">
+       <button class="bankCardPay">银行卡支付</button>
+       <button class="weixinPay" id="weixinPay">微信支付</button>
+       <a class="cancel">取消</a>
+   </div>
+</div>
+<footer class="nav">
+    <p id="checkInfo">确认信息</p>
+</footer>
+</body>
+</html>

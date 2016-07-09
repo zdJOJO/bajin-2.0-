@@ -1,0 +1,115 @@
+@font-face{
+	font-family:"微软雅黑"
+}
+h1,h2,h3{
+	font-weight: normal;
+}
+body{
+	font-family: "微软雅黑";
+}
+center,.wrap{
+	font-size: 16px;
+}
+center{
+	width: 1rem;
+	height: 0.5rem;
+}
+center input,center img{
+	width: 0.3rem;
+	height: 0.3rem;
+	border-radius: 0.3rem;
+	position: absolute;
+	top: 0.1rem;
+}
+center input{
+	opacity:0;
+	left: 0.35rem;
+	z-index: 20;
+}
+center img{
+	right: 0.35rem;
+	left: 0.35rem;
+	z-index: 19;
+}
+.wrap{
+	position: absolute;
+	top: 0.5rem;
+}
+.wrap div{
+	position: relative;
+	box-sizing:border-box;
+	border-bottom: #f2f2f2 1px solid;
+	height: 0.18rem;
+	width: 1rem;
+	line-height: 0.18rem;
+	padding-left: 0.04rem;
+	padding-right: 0.04rem;
+}
+.wrap div img{
+	width: 0.025rem;
+	position: absolute;
+	height: 0.06rem;
+	top: 0.067rem;
+	right: 0.04rem;
+}
+.wrap div input{
+	color:#888;
+	text-align: right;
+	overflow: hidden;
+	width: 0.5rem;
+	position: absolute;
+	height: 0.06rem;
+	line-height: 0.06rem;
+	font-size: 14px;
+	top: 0.065rem;
+	right: 0.08rem;
+	border: none;
+}
+.wrap div input#setPhoneNum{
+	width: 0.25rem;
+	background-color: #fff;
+    color: #000;
+}
+.wrap div input#setAddress{
+	background-color: #fff;
+    color: #000;
+}
+select#setAgx{
+    color: #888;
+    text-align: right;
+    /*overflow: hidden;*/
+    /*width: 0.1rem;*/
+    position: absolute;
+    height: 0.04rem;
+    top: 0.065rem;
+    right: 0.08rem;
+    height: 0.06rem;
+    font-size: 14px;
+    border: none;
+    appearance:none;
+ 	-moz-appearance:none; /* Firefox */
+ 	-webkit-appearance:none; /* Safari 和 Chrome */
+ 	background-color: #fff;
+}
+.wrap div .btn{
+	height: 0.1rem;
+	line-height: 0.1rem;
+	width: 0.3rem;
+	color: #fff;
+	font-size: 16px;
+	background-color: #c1af74;
+	border:none;
+	position: absolute;
+	right: 0.35rem;
+	text-align: center;
+	
+}
+.wrap div:last-child{
+	border-bottom: none;
+}
+.wrap div input:disabled{
+	color:#888;
+}
+.wrap div input#setAddress{
+	background-color: #fff;
+}

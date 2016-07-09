@@ -1,0 +1,180 @@
+@font-face{
+	font-family:"微软雅黑";
+}
+h1,h2,h3{
+	font-weight: normal;
+}
+body{
+	font-family:"微软雅黑";
+	margin: 0;
+	padding: 0;
+}
+.message,.good,.coupon{
+	font-size: 16px;
+}
+.message{
+	border-bottom: 1px solid #f2f2f2;
+}
+.message p img:nth-child(1){
+	vertical-align: middle;
+	height: 0.06rem;
+	margin-left: 0.04rem;
+}
+.message p img:last-child{
+	height: 0.04rem;
+	position: absolute;
+	right: 0.06rem;
+}
+.message p{
+	line-height: 0.06rem;
+}
+.message p span{
+	top: 2px;
+}
+.message .userName span{
+	margin-left: 0.06rem;
+	color: #808080;
+}
+.message .phone span{
+	margin-left: 0.041rem;
+	color: #808080;
+}
+.message .address{
+	margin-left: 0.141rem;
+	color: #c0c0c0;
+    padding-right: 0.05rem;
+}
+.good .singleBrand{
+	height: 0.267rem;
+	vertical-align: middle;
+	padding: 0.01rem 0;
+	border-bottom: 1px solid #f2f2f2;
+}
+.good .singleBrand>img:first-child{
+	width: 0.266rem;
+	float: left;
+	height: 0.266rem;
+	margin-right: 0.06rem;
+}
+.good .singleBrand .detail{
+	height: 0.266rem;
+	width: 0.63rem;
+	float: left;
+	position: relative;
+	box-sizing:border-box;
+}
+.good .singleBrand .detail h3{
+	-webkit-margin-before: 0.025rem;
+    	-webkit-margin-after: 0.018rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.good .singleBrand .detail p.subtitle{
+	-webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    font-size: 12px;
+    height:32px;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+.good .singleBrand .detail p.singleCost{
+	-webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    font-size: 14px;
+    position: absolute;
+    bottom: 0;
+    width: 0.63rem;
+}
+.good .singleBrand .detail .singleCost{
+	font-size: 16px;
+	width:0.63rem;
+}
+.good .singleBrand .subtitle{
+	color:#b9b9b9;
+}
+.good .singleBrand .singleCost span:nth-child(2){
+	float: right;
+}
+.coupon div{
+	height: 0.06rem;
+	line-height: 0.06rem;
+	box-sizeing:border-box;
+	margin: 0.04rem 0;
+	padding:0 0.06rem 0 0.141rem;
+	font-size: 18px;
+}
+.coupon p:first-child{
+	float: left;
+	-webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+	margin-right: 0.09rem;	
+}
+.coupon p:nth-child(2){
+	float: left;
+	width: 0.16rem;
+	text-align: center;
+	-webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    background-color: #c9c9c9;
+	border-radius: 0.04rem;
+	color: #fff;
+	font-size: 14px;
+	height: 0.04rem;
+	line-height: 0.04rem;
+	margin-top: 0.01rem;
+	padding: 0;
+}
+.coupon img{
+	float: right;
+	height: 0.04rem;
+	margin-top: 0.01rem;
+}
+/*底部确认按钮*/
+footer{
+	height: 0.12rem;
+	width: 1rem;
+	position: fixed;
+	bottom: 0;
+	background-color:#f0f0f0;
+	font-size: 16px;
+}
+footer p{
+	position: absolute;
+	width: 0.36rem;
+	right: 0;
+	height: 0.12rem;
+	line-height: 0.12rem;
+	-webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    text-align: center;
+    color: #f0f0f0;
+    background-color: #222;
+}
+/*默认地址为空的时候的样式*/
+.noneAddress{
+	height: 0.2rem;
+	line-height: 0.2rem;
+	box-sizing:border-box;
+	width: 1rem;
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+	padding:0 0.06rem;
+}
+.noneAddress img{
+    float: right;
+    height: 0.04rem;
+    margin-top: 0.08rem;
+}
+.singleCost .num{
+	float: right;
+}
+
+
+
+
+
+
+
+
+

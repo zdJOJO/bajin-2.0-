@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="screen-orientation"content="portrait">
+	<meta name="x5-orientation"content="portrait">
+    <meta name="viewport" content="width=device-width,initial-scale=1,userscalable=no"/>
+    <title>我的订单</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/buySuccess.css">
+    <script>
+        var iWidth=document.documentElement.clientWidth;
+        document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+    </script>
+</head>
+<body>
+<center>
+    <img src = "imgs/success_q.png"/>
+    <p class="viewOrder">查看订单</p>
+    <p class="backHome">返回首页</p>
+</center>
+<script src="js/zepto.js"></script>
+<script>
+	$(document).ready(function(){
+    var token = "";
+    //获取存在于cookie中的token值
+    function getCookie(c_name)
+    {
+    if (document.cookie.length>0)
+      {
+      c_start=document.cookie.indexOf(c_name + "=")
+      if (c_start!=-1)
+        { 
+        c_start=c_start + c_name.length+1 
+        c_end=document.cookie.indexOf(";",c_start)
+        if (c_end==-1) c_end=document.cookie.length
+        return unescape(document.cookie.substring(c_start,c_end))
+        } 
+      }
+    return undefined;
+    }
+    token = getCookie("token");
+
+
+	// var activityid= window.location.search.split('=')[2];
+ //    $("#appointment_But").click(function(){
+ //        window.location.href = "appointment.html?id="+activityid;
+ //    });
+ //    $("#index_But").click(function(){
+ //        window.location.href = "index.html";
+ //    });
+ //    $("#doenrol_But").click(function(){
+ //        window.location.href = "doenrol.html";
+ //    });
+	});
+</script>
+</body>
+</html>

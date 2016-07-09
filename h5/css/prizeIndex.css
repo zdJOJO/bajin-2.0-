@@ -1,0 +1,121 @@
+@font-face{
+    font-family: "微软雅黑"
+}
+*{margin: 0; padding: 0;}
+body{
+    font-family: "微软雅黑";
+    background: #fafafa;
+    font-size: 14px;
+    width: 100%;
+}
+#prizeBanner{
+    width: 1rem;
+    /*height: 0.5rem;*/
+}
+#prizeBanner img{
+    width: 100%;
+}
+#prizeName ul li{
+    width: 1rem;
+    height: 0.08rem;
+    border-bottom: 1px solid #f0f0f0;
+    line-height: 0.08rem;
+}
+#prizeName ul li span{
+    color: #a0a0a0;
+    margin-left: 0.05rem;
+    margin-right: 0.08rem;
+
+}
+#prizeImg{
+    margin: 0.03rem 0.02rem;
+    padding-bottom: 0.08rem;
+}
+
+#prizeImg img{
+    width: 100%;
+
+}
+#prizeFooter{
+    width: 1rem;
+    height: 0.1rem;
+    background: #f0f0f0;
+    display: block;
+    position: fixed;
+    bottom: 0;
+
+}
+
+#prizeBut{
+    color: #fff;
+    font-size: 0.041rem;
+    width: 0.3rem;
+    height: 0.1rem;
+    background: #af904a;
+    border: none;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    line-height: 0.1rem;
+
+
+}
+#divShow{
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    position:fixed;
+    opacity: 0.3;
+    z-index: 500;
+    display: none;
+}
+
+#phoneValidation {
+    display: none;
+    width: 0.65rem;
+    position: fixed;
+    z-index: 1000;
+    top: 0.5rem;
+    left: 0.175rem;
+    height: 0.5rem;
+    background: #fff;
+    text-align: center;
+}
+
+#phoneValidation  span {
+    line-height: 0.18rem;
+    font-size: 0.045rem;
+}
+#phone{
+    margin-bottom: 0.02rem;
+    height: 0.06rem;
+}
+#phoneValidation button{
+    width: 0.1rem;
+    height: 0.1rem;
+
+}
+
+#confirm,#cancel{
+    margin-top: 0.06rem;
+    width: 0.18rem;
+    height: 0.08rem;
+    /*display: block;*/
+    background: #af904a;
+    color: #fff;
+    border: none;
+
+}
+#confirm{
+    margin-right: 0.1rem;
+}
+
+
+
+
+
+
+
+
+
+

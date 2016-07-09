@@ -1,0 +1,258 @@
+@font-face{
+	font-family:"微软雅黑";
+}
+h1,h2,h3{
+    font-weight: normal;
+}
+body{
+    font-family: "微软雅黑";
+    background: #eeeeee;
+}
+#header{
+    width:100%;
+    height: 0.17rem;
+    line-height: 0.17rem;
+    padding: 0 0.025rem;
+    box-sizing:border-box;
+    position: fixed;
+    top:0;
+    background: #FFFFFF;
+    z-index: 3;
+    color:#000;
+}
+#header .msg{
+    width:100%;
+    font-size:16px;
+    position: relative;
+}
+.msg .left{
+    width:20%;
+    height:0.17rem;
+    float: left;
+}
+.msg .right{
+    width:60%;
+    height:0.17rem;
+    float: right;
+    text-align: right;
+}
+.msg-tit{
+    float: left;
+    line-height:24px;
+    font-size: 20px;
+    width: 0.7rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.btn_q{
+    float: right;
+    /*line-height:0.08rem;*/
+}
+
+.love-btn,.share-btn,.tellNum{
+    /*width:0.12rem;*/
+    /*line-height:0.08rem;*/
+    /*height: 0.08rem;*/
+/*    height:0.17rem;*/
+    display: inline-block;
+
+}
+.love-btn img,.share-btn img,.tellNum img{
+    width: 24px;
+    height: 22px;
+    /*background-position: center center;*/
+}
+.tellNum{
+    margin-right: 7px;
+}
+
+.share-btn{
+   margin-left: 7px;
+   /*background-position: center center;*/
+}
+.banner{
+    height:0.5rem;
+    background:url(../imgs/13.jpg) no-repeat;
+    margin-top: 0.19rem;
+}
+.msgBox{
+    background: #ffffff;
+}
+
+
+/*客服电话*/
+.main > .phoneNumBox{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 200;
+}
+
+.main > .phoneNumBox>span{
+    width: 65%;
+    height: 130px;
+    line-height: 130px;
+    margin: 250px auto 0 auto;
+    display: block;
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    font-size: 1.5em;
+}
+
+.main > .phoneNumBox>span.close{
+    margin: 0;
+    padding: 0;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 20px;
+    display: inline-block;
+    position: absolute;
+    right: 74px;
+    top: 254px;
+    background: rgb(152, 152, 152);
+    color: #fff;
+}
+
+
+
+
+.msg-wrap{
+    width:0.93rem;
+    padding:0.05rem 0;
+    margin:0 0.035rem;
+}
+.msg-time{
+    margin-top: 0.10rem;
+    margin-bottom: 0.02rem;
+    clear: both;
+}
+.msg-time img,.msg-address img{
+/*    width:0.04rem;
+    height: 0.04rem;*/
+    /*vertical-align: middle;*/
+    margin: 1px auto 2px;
+    /*margin-right:0.02rem;*/
+    /*height: 16px;*/
+
+}
+.msg-address img{
+    /*width:0.036rem;*/
+    width: 16px;
+    height: 18px;
+    margin: 2px auto;
+}
+.content{
+    margin-top: 0.02rem;
+    margin-bottom: 0.12rem;
+    background: #ffffff;
+    padding:0.04rem 0;
+}
+.content-tit{
+    width:0.24rem;
+    background: #C8A971;
+    color: #ffffff;
+    height:0.07rem;
+    line-height:0.07rem;
+    margin:0 auto 0.05rem;
+    text-align: center;
+    border-radius: 3px;
+    position: relative;
+}
+.content-tit:after{
+    content: '';
+    width:0;
+    height:0;
+    position: absolute;
+    top:0.07rem;
+    left:50%;
+    margin-left: -8px;
+    border-top: 8px solid #C8A971;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+}
+.content-text{
+    padding:0 0.06rem;
+    /*line-height:0.07rem;*/
+}
+.text-item{
+    margin-top: 0.07rem;
+}
+.text-item:before{
+    content: '';
+    width:5px;
+    height:5px;
+    border-radius: 50%;
+    background: #C8A971;
+    margin-right: 5px;
+    margin-top: 0.03rem;
+    float: left;
+}
+.img-item{
+    width:100%;
+/*    margin-top: 0.17rem;*/
+}
+.img-item img{
+    width:100%;
+    height:auto;
+    margin: 15px 0;
+}
+.img-item:first-child img{
+    margin: 0;
+}
+footer.nav{
+    background: #000;
+    width:100%;
+    height:0.12rem;
+    box-sizing:border-box;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    color: #ffffff;
+}
+.nav p{
+    background: #C8A971;
+    line-height:0.17rem;
+    font-size: 18px;
+    height: 0.12rem;
+    line-height: 0.12rem;
+}
+#share-mask{
+    background: rgba(255,255,255,0.5);
+    z-index: 101;
+    display: none;
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    z-index: 3000;
+}
+/*更改字体的大小*/
+.msg-time,.msg-address{
+    font-size: 14px;
+    /*height: 20px;*/
+    line-height: 20px;
+}
+.content .text-item p{
+    font-size: 15px;
+}
+#share-mask img{
+    width: 1rem;
+    /*opacity:0.5;*/
+}
+
+.content-text img{
+    width: 0.88rem!important;
+    height: auto;
+    /*margin: 0.02rem 0 0.02rem -0.06rem;*/
+}
+.content-text{
+    line-height: 1.6;
+}

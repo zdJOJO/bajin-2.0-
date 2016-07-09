@@ -1,0 +1,137 @@
+@font-face{
+	font-family:"微软雅黑";
+}
+h1,h2,h3{
+	font-weight: normal;
+}
+body{
+	font-family:"微软雅黑";
+	/*background: #eeeeee;*/
+	margin: 0;
+	padding: 0;
+}
+header,.wrapper{
+	font-size: 16px;
+}
+header{
+	height: 0.14rem;
+	width: 1rem;
+	line-height: 0.12rem;
+	box-sizing:border-box;
+	margin-bottom:0.02rem;
+	font-size: 14px;
+	position: fixed;
+	top: 0;
+	background-color: #fff;
+	border-bottom:#b2b2b2 1px solid;
+	z-index: 20;
+}
+header div{
+	display: inline-block;
+	width: 0.18rem;
+	margin:0 0.05rem;
+	/*border-bottom: 1px solid #b2b2b2;*/
+	/*color: #6b6b6b;*/
+	color:#b2b2b2;
+	font-weight: bold;
+}
+.wrapper{
+	position: absolute;
+	top: 0.14rem;
+}
+.wrapper .singleMsg{
+	border-bottom:#b2b2b2 1px solid;
+	position: relative;
+}
+.wrapper .singleMsg p{
+	-webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+	width: 1rem;
+	text-align: center;
+	color: #a5a5a5;
+	background-color: #f7f7f7;
+	height: 0.12rem;
+	line-height: 0.12rem;
+	box-sizing:border-box;
+}
+.wrapper .singleMsg .detail .title{
+	position: relative;
+	height: 0.16rem;
+	width: 1rem;
+	/*background-color: #f7f7f7;*/
+	color: #a5a5a5;	
+}
+.wrapper .singleMsg .detail .title img{
+	width: 0.02rem;
+	position: absolute;
+	top: 0.035rem;
+	left: 0.04rem;
+}
+.wrapper .singleMsg .detail .title h3{
+	position: absolute;
+	left: 0.06rem;
+	width: 0.88rem;
+	-webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    top: 0.04rem;
+    color: #343434;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.wrapper .singleMsg .detail .title span{
+	position: absolute;
+	right: 0.08rem;
+	top: 0.04rem;
+	color: #909090;
+}
+.wrapper .singleMsg .detail .read{
+	box-sizing:border-box;
+	width: 1rem;
+	padding:0 0.06rem;
+	/*background-color:#fafafa;*/
+	color:#646464;
+	font-size: 14px;
+	line-height: 2;
+}
+.wrapper .singleMsg .more{
+	text-align: center;
+	height: 0.16rem;
+	width: 1rem;
+	/*background-color:#fafafa;*/
+	box-sizing:border-box;
+	padding-top: 0.02rem;
+}
+.wrapper .singleMsg .more img{
+	vertical-align: middle;
+	height: 12px;
+	margin-left: 0.03rem;
+}
+section.imgList{
+	margin-top: 0.02rem;
+	height: 0.12rem;
+}
+section.imgList img{
+	height: 0.12rem;
+	width: 0.12rem;
+}
+.imgAndWord{
+	box-sizing:border-box;
+	padding:0 0.06rem
+}
+.imgAndWord img{
+	width: 0.12rem;
+	height: 0.12rem;
+	float: left;
+	margin-right:0.06rem; 
+}
+.imgAndWord section{
+	font-size: 14px;
+	line-height: 1.5;
+}
+.singleMsg .detail .toDetail{
+	text-align: right;
+	box-sizing:border-box;
+	padding-right:0.08rem;
+	background-color: #fff;
+}

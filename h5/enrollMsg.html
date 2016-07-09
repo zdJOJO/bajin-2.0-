@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="screen-orientation"content="portrait">
+	<meta name="x5-orientation"content="portrait">
+	<meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
+	<title>报名信息完成</title>
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/enrollMsg.css">
+	<script src="js/zepto.js"></script>
+	<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+	<script  id="ip" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+	<script type="text/javascript" src="js/jquery/md5.js"></script>
+	<script src="js/enrollMsg.js"></script>
+	<script>
+		var iWidth=document.documentElement.clientWidth;
+		document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+	</script>
+</head>
+<body>
+	<div class="detailUrl">
+		<div class="left">
+			<img />
+		</div>
+		<div class="right">
+			<h2></h2>
+			<p class="time"><img src="imgs/time.png"/><span></span></p>
+			<p class="address"><img src="imgs/address.png"/><span></span></p>
+		</div>
+	</div>
+	<div class="enrollMsg">
+		<p>
+			<span>报名登记:</span><span class="register">报名登记</span>
+		</p>
+		<p>
+			<span>联系电话:</span><span class="telephone"></span>
+		</p>
+		<p>
+			<span>邮箱地址:</span><span class="email"></span>
+		</p>
+		<p>
+			<span>报名人数:</span><span class="number"></span>
+		</p>
+		<p>
+			<span>活动费用:</span><span class="cost"></span>
+		</p>
+		<p>
+			<span>备注要求:</span><span class="remark"></span>
+		</p>
+	</div>
+
+	<div id="payType">
+		<div class="block">
+			<button class="bankCardPay">银行卡支付</button>
+			<button class="weixinPay" id="weixinPay">微信支付</button>
+			<a class="cancel">取消</a>
+		</div>
+	</div>
+
+	<footer>
+		<p>去付款</p>
+	</footer>
+</body>
+</html>

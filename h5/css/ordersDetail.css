@@ -1,0 +1,183 @@
+@font-face{
+	font-family:"微软雅黑";
+}
+h1,h2,h3{
+	font-weight: normal;
+}
+body{
+	font-family:"微软雅黑";
+	/*background: #eeeeee;*/
+	margin: 0;
+	padding: 0;
+}
+footer,.wrapper{
+	font-size: 16px;
+}
+.good{
+	/*height:0.3rem;*/
+	box-sizing:border-box;
+	width: 1rem;
+	padding: 0.04rem 0.03rem;
+}
+.good img{
+	height: 0.22rem;
+	width: 0.22rem;
+	margin-right: 0.04rem;
+}
+.good>div{
+	float:right; 
+	width: 0.68rem;
+}
+.good>div div.subtitle{
+	color:#b9b9b9;
+	font-size: 14px;
+	margin:0.02rem 0 0.04rem 0;
+}
+@media screen and (max-width:320px){
+	.good>div div.subtitle{
+		margin:0.01rem 0 0.02rem 0;
+	}
+}
+.good>div div.title{
+	color:#5e5e5e;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.good>div div.cost p{
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+	float: left;
+}
+.good>div div.cost p:first-child{
+	font-size: 17px;
+	color: #5b5b5b;	
+}
+.good>div div.cost p:nth-child(2){
+	font-size: 17px;
+	color: #9f9f9f;	
+	float: right;
+}
+.address{
+	height: 0.12rem;
+	line-height: 0.12rem;
+	width: 1rem;
+	border-bottom:#b2b2b2 1px solid;
+}
+.address>img{
+	float: left;
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+	margin:0.03rem 0.04rem 0 0.03rem;
+}
+.address .adr{
+	float: left;
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+	font-size: 13px;
+	color: #989898;
+}
+.address .person{
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+	float: right;
+	margin-right: 0.03rem;
+	font-weight: bold;
+}
+.address .person span{
+	font-size: 14px;
+	margin-left: 0.03rem;
+	color: 
+}
+.time{
+	height: 0.18rem;
+	line-height: 1.6;
+	box-sizing:border-box;
+	padding: 0.03rem;
+    border-bottom: #b2b2b2 1px solid;
+}
+.time p{
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+	font-size: 14px;
+	color: #989898;
+}
+.time p:nth-child(2) span:nth-child(2){
+	float: right;
+	color: #c1af74;
+}
+.logistical{
+	width:1rem;
+	box-sizing:border-box;
+	padding: 0.04rem 0.03rem;
+    border-bottom: #b2b2b2 1px solid;
+}
+.logistical .detailAddress>img{	
+	float: left;
+	margin:0.04rem 0.03rem 0.04rem 0; 
+}
+.logistical .detailAddress p{
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+	color: #6a6a6a;
+	line-height: 1.5;
+}
+.logistical .searchPoint span{
+	color: #989898;
+}
+.logistical .searchPoint img{
+	float: right;
+	margin-right: 0.02rem;
+	margin-top: 7px;
+}
+footer{
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	height: 0.12rem;
+	line-height: 0.12rem;
+	text-align: center;
+	width: 1rem;
+	background-color:#eeeeee;
+}
+footer p{
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+	width: 0.33rem;
+}
+footer p:nth-child(2){
+	float: right;
+}
+footer p:first-child{
+	float: right;
+	background-color: #c1af74;
+	color: #eee;
+}
+/*tradeSuccess页面具体调整*/
+footer .delete_sucs{
+	float: right!important;
+}
+/*hadSent页面具体调整*/
+footer .delete_hadSent{
+	float: right!important;
+}
+/*hadPaid页面具体调整*/	
+footer .delete_hadPaid{
+	float: right!important;
+}
+
+.cost_unpaid{
+	color:#c1af74;
+	font-size: 16px;
+	position: fixed;
+	bottom: 0.12rem;
+	height: 0.12rem;
+	width: 0.43rem;
+	line-height: 0.12rem;
+	right: 0;
+}
+
+/*unpaid页面的具体调整*/
+.unpaid_margin_bottom{
+	margin-bottom: 0.3rem;
+}

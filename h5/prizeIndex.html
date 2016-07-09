@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>抽奖规则</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
+    <meta name="screen-orientation"content="portrait">
+    <meta name="x5-orientation"content="portrait">
+    <link rel="stylesheet" href="css/prizeIndex.css">
+    <script>
+        var iWidth=document.documentElement.clientWidth;
+        document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+    </script>
+</head>
+<body>
+<div id="divShow"></div>
+    <header>
+        <div id="prizeBanner">
+            <img src="images/lottery_rule_banner.png">
+
+        </div>
+    </header>
+    <section>
+        <div id="prizeName">
+            <ul>
+                <li><span>名称</span>绑卡有礼</li>
+                <li><span>时间</span>6月13日-7月31日</li>
+                <li><span>地点</span>浙江</li>
+            </ul>
+        </div>
+
+        <div id="prizeImg">
+            <img src="images/lottery_rule_detail.jpg"/>
+        </div>
+
+        <div id="phoneValidation">
+            <span>请输入你的手机号</span>
+            <input type="text" placeholder="请输入手机号" id="phone"/><br/>
+            <input type="button" value="确定" id="confirm"/><input type="button" value="取消" id="cancel"/>
+
+        </div>
+    </section>
+    <footer>
+        <div id="prizeFooter">
+            <div id="prizeBut"  >去抽奖</div>
+        </div>
+    </footer>
+
+    <script src="js/zepto.js"></script>
+    <script src="js/prizeIndex.js"></script>
+</body>
+</html>

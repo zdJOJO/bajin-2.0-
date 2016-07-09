@@ -1,0 +1,308 @@
+
+//此页面的问题很多，留到最后处理
+$(document).ready(function(){
+	var token = "";
+	//获取存在于cookie中的token值
+	function getCookie(c_name) {
+	if (document.cookie.length>0)
+	  {
+	  c_start=document.cookie.indexOf(c_name + "=")
+	  if (c_start!=-1)
+	    { 
+	    c_start=c_start + c_name.length+1 
+	    c_end=document.cookie.indexOf(";",c_start)
+	    if (c_end==-1) c_end=document.cookie.length
+	    return unescape(document.cookie.substring(c_start,c_end))
+	    } 
+	  }
+	return undefined;
+	}
+	token = getCookie("token");
+	console.log(token);
+	var activityid= window.location.search.split('=')[2];
+	// console.log(token);
+	//历史页面的记录用于登陆成功或者注册、更改密码成功后跳回的页面
+	var his = window.location.pathname.split("/");
+	his = his[his.length-1];
+	// console.log(his);
+	//侧边栏切换
+	$("#vip").click(function(){
+		$(".showDiv2").show();
+		$(".showDiv3").show();
+		// $("body").css("overflow", "hidden")
+		// $("body,html").css({"overflow":"hidden"});
+		$(".showDiv1").css("position","fixed")
+		//侧边栏登陆
+		if(token!=undefined){
+			console.log(0000);
+			$.get(port +"/card/user?token="+token,function(data){
+				console.log(data);
+				//当token过期的时候会出错，code：666,这个时候需要
+				if(typeof(data) == "string"){
+					$(".pic_but").html("");
+					// window.location.href = "login.html?his=" + his;
+					var item=$('<div class="pic"><img src="imgs/defaultPic.png"></div><div class="user_But">未登录</div>');
+					$(".pic_but").append(item);	
+					return;				
+				}
+				$(".pic_but").html("");
+				var headPic = data.headPic==""?"imgs/defaultPic.png":data.headPic;
+				var userName = data.userName==""?"已登录":data.userName;
+				var item=$('<div class="pic"><img src='+headPic+'></div><div class="user_But">'+userName+'</div>');
+				$(".pic_but").append(item);
+			});			
+		}else{
+			$(".pic_but").html("");
+			// window.location.href = "login.html?his=" + his;
+			var item=$('<div class="pic"><img src="imgs/defaultPic.png"></div><div class="user_But">未登录</div>');
+			$(".pic_but").append(item);
+		}//侧边栏登陆结束
+		if(token!=undefined){
+			$.get(port+'/card/car/sum?token='+token,function(data){
+				console.log(data);
+				if(typeof(data) == "string"){
+					$(".order_tj").css("display","none");
+					return;
+				}
+				if(data.data.sum==undefined || data.data.sum == 0){
+					$(".order_tj").css("display","none");
+				}else{
+					$(".order_tj").val(data.data.sum);
+				}
+			});			
+		}else{
+			$(".order_tj").css("display","none");
+		}
+	});
+	//页面跳转统一处理
+	function turnUrl(point,url){
+		point.bind("click",function(){
+			if(token==undefined){
+				window.location.href = "login.html?his="+escape(url);
+			}else{
+				window.location.href = url;
+			}		
+		});
+	}
+	$(".showDiv3").click(function(){
+		$(".showDiv2").hide();
+		$(".showDiv3").hide();
+		$(".showDiv1").css("position","static")
+		// $("body").css("overflow", "visible")
+
+	});
+	turnUrl($("#fav_But"),"favorites.html");
+	turnUrl($("#myMessage_But"),"myMessage.html");	
+	turnUrl($("#shop_But"),"shoppingCart.html");
+	turnUrl($("#order_But"),"myOrders.html");
+	turnUrl($("#bank_But"),"bank.html");
+	turnUrl($(".pic_but"),"set.html");
+	$(".feed_But").click(function(){
+		window.location.href="feedback.html";
+		
+	});
+	$(".set_But").bind("click",function(){
+		window.location.href = "changePassword.html";
+	});
+	//设置元素的高度等于移动设备的高度
+	$(".showDiv2").height($(window).height());
+	$(".clubPage").click(function(){
+		window.location.href = "culb.html";
+	});
+	$(".readPage").click(function(){
+		window.location.href = "read.html";
+	});
+	$(".pierrePage").click(function(){
+		window.location.href = "pierre.html";
+	});
+	var showMore=$('#moreAct');
+	var activities=$("#activities");
+	var actBottom=$(".act-bottom");
+	var moreCheck=true;
+    //更多的操作
+	showMore.click(function(){
+		if(moreCheck){
+			//更改图片事件		    
+			actBottom.css({
+				marginTop:"0.025rem",
+				height:"0.154rem"
+			});
+			$("#moreAct img").attr("src","imgs/top.png");   
+			moreCheck=false;
+		}else{			
+			actBottom.css({
+				marginTop:"0",
+				height:"0"
+			});
+			$("#moreAct img").attr("src","imgs/bottom.png");
+			moreCheck=true;
+		}
+	});
+	//轮播图页面部分
+	//http://121.196.232.233:9292/card/banner
+	var bannerWrap=$('.swiper-slide');
+	function getBannerData(){
+		$.ajax({
+			type:"get",
+			async:true,
+			url:port +'/card/banner',
+			success:function(data){
+				
+				var arr = data.list;
+				// Array.prototype.push.apply(arr, arr);
+				var content_ = $('<div class="swiper-container"><div class="swiper-wrapper"></div><div class="swiper-pagination"></div></div>');
+	            $(".carousel").append(content_);
+				for(var i=0;i<arr.length;i++){
+					var str=$('<div class="swiper-slide"><p class="mask_banner">'+arr[i].bannerTitle+'</p><img src="'+arr[i].bannerPic+'" data-id="'+arr[i].bannerId+'" data-type="'+arr[i].type+'" data-itemId="'+arr[i].itemId+'" data-url="'+arr[i].bannerUrl+'" class="swiper-slide_img"/></div>');
+					$(".swiper-wrapper").append(str);
+				}
+				//这里区分type，
+				//		如果是0，不操作，
+				//		如果是1，拿到itemId，然后导向活动页面
+				//		如果是2，拿到itemId，然后导向白金人生页面
+				//		如果是3, 拿到itemId，然后导向商品页面，现在没有的，所以现在也为空
+				//		如果是4，拿到itemId，然后导向抽奖页面
+				//		如果是5，直接导向给定的url
+				var mySwiper = new Swiper('.swiper-container', {
+					autoplay: 2000,
+					pagination : '.swiper-pagination',
+			        loop : true,
+				});
+				$(".swiper-slide img").click(function(){
+					var type = $(this).data("type");
+			        if(type == 0){
+			        	return;
+			        }else if(type == 1){
+			        	window.location.href = "enrol.html?id=" + $(this).data("itemid");
+			        }else if(type == 2){
+			        	window.location.href = "life.html?id="+ $(this).data("itemid");
+			        }else if(type == 3){
+			        	window.location.href = "brandDetail.html?id="+$(this).data("itemid");
+			        	return;
+			        }else if(type == 4){
+			        	if(token != undefined){
+			        		//调到抽奖中间页
+			        		window.location.href="lottery_rule.html?lottery=lottery";
+			        		// window.location.href = "fareDraw.html?token="+token;
+			        		// window.location.href = "lottery.html?itemId="+$(this).data("itemid");
+			        	}else{
+			        		window.location.href = "login.html?his=" + his;
+			        	}		        	
+			        }else if(type == 6){
+			            // window.location.href = $(this).data("url");
+			            // return;
+						if(token != undefined){
+							//调到抽奖中间页
+							window.location.href="lottery_rule.html?lottery=lottery";
+							// window.location.href = "fareDraw.html?token="+token;
+							// window.location.href = "lottery.html?itemId="+$(this).data("itemid");
+						}else{
+							window.location.href = "login.html?his=" + his;
+						}
+					}else if(type == 5){
+			        	window.location.href = "mall.html?id="+$(this).data("itemid");
+			        	return;
+			        }
+				});
+			}
+		});
+	}
+	getBannerData();
+	//http://121.196.232.233:9292/card/activity?currentPage={pagenum}&size={size}
+	var itemWrap=$('.items').eq(0);
+	var itemWrap1=$('.items1').eq(0);
+	function getActData(){
+		//这里应该加载下边的选项的时候，先加载部分，在触发上滑事件(需要判断距离底端的距离)的时候触发继续加载更多的页面
+		//加载上边三张图，加载下边三张图
+	    $.get(port+"/card/mpage/hot",function(data){
+			console.log(data);
+			for(var i=0;i<data.length;i++){
+				if(i ==0||i==1){
+				var item=$('<div class="itemLeft" ><img src='+data[i].minPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/><div class = "mask_lhq"><p class="tit_tq">'+data[i].title+'</p><p class="tit_bq">'+data[i].subtitle+'</p></div></div>');				
+				}else if(i==2){
+				var item=$('<div class="items_img" ><img src='+data[i].maxPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/><div class = "mask_lq"><p class="tit_tq1">'+data[i].title+'</p><div class="tit_bq1">'+data[i].detail+'</div></div><div id="tit_ck" data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img">查看更多</div><div class="xhx"></div></div>');
+				}
+				itemWrap.append(item);
+			}			
+			$(".tit_bq1").each(function(){ 
+				var maxwidth=50;   
+				if($(this).text().length>maxwidth){   
+				$(this).text($(this).text().substring(0,maxwidth));    
+				$(this).html($(this).html()+'...');    
+				} 
+			});	
+			//加载下面三张图，加载出来四个信息，只渲染前三个
+			$.get(port+"/card/mpage/new",function(data){
+				console.log(data);
+				for(var i=0;i<data.length;i++){
+					var item=$('<div class="itemLeft"><img src='+data[i].minPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/><div class = "mask_lhq"><p class="tit_tq">'+data[i].title+'</p><p class="tit_bq">'+data[i].subtitle+'</p></div></div>');
+					itemWrap1.append(item);
+				}
+				$(".activity-img").click(function(){
+					toActivity($(this).attr('data-type'),$(this).attr('data-itemid'));
+				})
+			});
+			function toActivity(type,id){
+				if(type == 1)
+					window.location.href="enrol.html?id="+id;
+				else if(type == 2)
+					window.location.href="life.html?id="+id;
+				else if(type == 3)
+					window.location.href="brandDetail.html?id="+id;
+				else if(type == 5)
+					window.location.href="mall.html?id="+id;
+			}
+		});
+	}
+	getActData();      
+	$(".item_q").click(function(){
+	    if(token != undefined){
+	    	if($(this).attr("id")=="phone"){
+	    		window.location.href = 'tel://' + '400-009-5588';
+	    		return;	    		
+	    	}else if($(this).attr("id")=="personalServe"){
+	    		getMessage();
+	    		return;
+	    	}
+	    	window.location.href = "bank.html?pickid=" + $(this).data("pickid"); 
+	    }else{
+	    	window.location.href = "login.html?his="+his;
+	    }
+	});
+	//工行的button请求数据
+	//http://121.196.232.233/card/icbcbutton
+	$.ajax({
+		type:"get",
+		url:port+"/card/icbcbutton",
+		success:function(data){
+			console.log(data);
+			var actList = $(".wrap .activities .fun");
+			console.log(actList);
+			for(var i=0,len=actList.length;i<len;i++){
+				$(actList[i]).attr("data-pickid",data.list[i].pickId);
+				$(actList[i]).find("img").attr("src",data.list[i].buttonPic);
+				$(actList[i]).children("span").html(data.list[i].buttonTitle);
+			}
+		},
+		error:function(data){
+			console.log(data);
+		}
+	});
+	//私人预约服务
+	function getMessage(){
+		$.ajax({
+			type:"GET",
+        	dataType:"string",
+			url:port+"/card/bank/encryption/privatejcyy?token="+token,
+			success:function(data){
+	 			console.log(data);
+		    	if(data.length<50){
+					window.location.href = "login.html?his="+his;
+				}else{
+					$("#merSignMsg").val(data);
+					$("#info").submit();
+ 				}
+ 			}
+		});	    
+	};	
+});

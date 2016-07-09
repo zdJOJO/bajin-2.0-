@@ -1,0 +1,45 @@
+
+
+
+
+.main{
+    width: 0.867rem;
+    height:0.8rem;
+    background: url(../imgs/turntable-bg.jpg) no-repeat;
+    background-size: 100% 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+#rotate{
+    width: 0.6rem;
+    height: 0.6rem;
+    /*background: url(../imgs/turntable.png) no-repeat;*/
+    background-size: 100% 100%;
+    margin: 0.0787rem 0px 0px 0.1573rem;
+    transition: 0s;
+}
+
+.start{
+    width:0.232rem;
+    height:0.304rem;
+    position: absolute;
+    top:0.2rem;
+    left: 0.333rem;
+    border:none;
+    background:url(../imgs/pointer.png);
+    background-size: 100% 100%;
+    outline:none;
+    -webkit-tap-highlight-color:rgba(255,255,255,0);
+}
+
+body{
+    background:url("../imgs/bg_p.png") repeat-y ;
+}
+
+.tips_ img{
+    width: 0.866rem;
+    /*text-align: center;*/
+    margin: 0.1rem 0.067rem 0 0.067rem;
+}

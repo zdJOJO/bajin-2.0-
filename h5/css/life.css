@@ -1,0 +1,138 @@
+@font-face{
+	font-family:"微软雅黑";
+}
+body{
+    font-family: "微软雅黑";
+    /*background: #eeeeee;*/
+}
+#header{
+    width:100%;
+    height: 0.17rem;
+    line-height: 0.17rem;
+    padding: 0 0.025rem;
+    box-sizing:border-box;
+    position: fixed;
+    top:0;
+    background: #FFFFFF;
+    z-index: 3;
+    color:#000;
+}
+#header .msg{
+    width:100%;
+    font-size:16px;
+    position: relative;
+}
+.msg .left{
+    width:20%;
+    height:0.17rem;
+    float: left;
+}
+.msg .right{
+    width:70%;
+    height:0.17rem;
+    float: right;
+    text-align: right;;
+}
+.btn_q{
+    padding:0.14rem 0 0 0.03rem;
+    float: right;
+}
+
+/*更改的部分*/
+.love-btn,.share-btn{
+    width:0.10rem;
+    margin-right:0.02rem;
+/*    height:0.17rem;*/
+    display: inline-block;
+}
+.love-btn{ 
+    background-position: center center;
+}
+.share-btn{  
+    background-position: center center;
+}
+
+.content{
+/*    margin-top: 0.19rem;*/
+    background: #ffffff;
+}
+.msg-tit{
+    padding:0.14rem 0 0 0.03rem;
+    float: left;
+    font-size: 18px;
+    width: 0.7rem;
+    line-height: 35px;
+}
+.tit-sm{
+    font-size: 16px;
+    padding:0.02rem 0 0 0.03rem;
+    clear: both;
+}
+.tip{
+    padding:0.04rem 0.03rem;
+    overflow: hidden;
+    padding-right:0.1rem;
+}
+.content p{
+    padding:0.02rem 0.03rem;
+    font-size: 13px;
+    line-height:0.07rem;
+}
+.author{
+    float:left;
+}
+.time{
+    float: left;
+    margin-left: 0.04rem;
+}
+.img-item img{
+    width:100%;
+}
+.sub-tit{
+    font-size: 14px;
+    padding:0.04rem 0 0 0.03rem;
+}
+
+/*分享*/
+#share-mask{
+    background: rgba(255,255,255,0.5);
+    z-index: 101;
+    display: none;
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    z-index: 3000;
+}
+
+/*富文本的样式更改*/
+.liftContent{
+    /*margin: 0 0.06rem;*/
+    line-height: 1.6;
+    /*border-top: 0.03rem solid #eee;*/
+}
+
+.liftContent img{
+    /*width: 0.88rem;*/
+    width: 100%;
+    /*height: 100%;   */
+    height: auto;
+    /*margin:0.02rem 0 0.02rem -0.03rem;*/
+}
+.author,.time{
+    font-size: 16px;
+}
+.author img,.time img{
+    margin-bottom: 3px;
+}
+.love-btn img,.share-btn img{
+    width: 24px;
+    height: 22px;
+}
+
+#share-mask img{
+    width: 1rem;
+    /*opacity:0.5;*/
+}

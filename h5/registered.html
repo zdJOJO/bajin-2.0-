@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<title>注册</title>
+<meta charset="utf-8">
+<meta name="screen-orientation"content="portrait">
+<meta name="x5-orientation"content="portrait">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+<link href="css/style.css" rel="stylesheet" type="text/css">
+    <script>
+        var iWidth=document.documentElement.clientWidth;
+        document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+    </script>
+</head>
+<body>
+<div id="ld_bj">
+	<div id="gb_but"><a><img src="images/zc_but.png"></a></div>
+    <div id="zc_content">
+    	<div class="yhm_dl"><img src="images/yhm_dl.png"><input id="phoneNum" type="text" placeholder="手机号"></div>
+        <div class="yhm_dl_gym"><div class="yhm_sr"><img src="images/yzm_zc.png"><input id="captcha" type="text" placeholder="请输入验证码"></div>
+            <button id="getCaptcha" class="yhm_fs">获取验证码</button>
+        <!-- <span class="yhm_fs"><input type="button" id="getCaptcha" class="hqyzm" value="获取验证码"></span> --></div>
+        <div style="clear:both;"></div>
+        <div class="yhm_dl"><img src="images/ma_gl.png"><input id="passWord" type="password" placeholder="请设置登录密码"></div>
+       <!--  <div class="yhm_dl"><img src="images/ma_gl.png"><input id="rePass" type="password" placeholder="请设置登录密码"></div> -->
+        <div id="regist-btn" class="but_dl">注册</div>
+        <div id="xy_zc"><input type="checkbox" id="ty"><span id="ty_zc">同意</span><span>用户协议</span></div>
+    </div>
+</div>
+</body>
+<script src="js/zepto.js"></script>
+<script src="js/regist.js"></script>
+<script src="js/md5.js"></script>
+</html>

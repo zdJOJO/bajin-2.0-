@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>编辑地址</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
+    <meta name="screen-orientation"content="portrait">
+	<meta name="x5-orientation"content="portrait">
+	<link rel="stylesheet" href="css/address.css">
+	<link rel="stylesheet" href="css/LArea.css">
+	<script>
+        var iWidth=document.documentElement.clientWidth;
+        document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";       
+    </script>
+</head>
+<body>
+    <section>
+        <div class="add_address">
+            <label>收货人&nbsp;</label>
+            <input type="text" class="receiverName" placeholder="填写收货人的地址！！"/>
+        </div>	
+        <div class="add_address">	
+            <label>联系电话</label>
+            <input type="text" class="receiverPhone" placeholder="请填写联系电话！！"/>
+        </div>
+        <div class="content-block">
+            <label>所在地区</label> 
+            <input id="demo1" type="text" readonly="" placeholder="请选择所在地区！！"/>
+            <input id="value2" type="hidden"/>
+        </div>
+        <div class="add_address_xq">
+            <textarea type="text"  placeholder="详细地址，具体到街道！！" class="detilAddress"></textarea>
+        </div>	
+    </section>
+    <footer>
+        <div class="add_save_But" ><div class="add_save">保存</div></div>	
+    </footer>
+    <script src="js/LAreaData1.js"></script>
+    <script src="js/LAreaData2.js"></script>
+    <script src="js/LArea.js"></script>
+    <script src="js/zepto.js"></script>
+    <script src="js/addAddress.js"></script>
+    <script type="text/javascript">
+    	var area1 = new LArea();
+        area1.init({
+            'trigger': '#demo1',
+            'valueTo': '#value1',
+            'keys': {
+                id: 'id',
+                name: 'name'
+            },
+            'type': 1,
+            'data':LAreaData,
+        });
+        area1.value=[27,17,8];//控制初始位置，注意：该方法并不会影响到input的value  
+    </script>
+</body>
+</html>

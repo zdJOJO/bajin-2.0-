@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<title>个人中心</title>
+<meta charset="utf-8">
+<meta name="screen-orientation"content="portrait">
+<meta name="x5-orientation"content="portrait">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+<link href="css/style.css" rel="stylesheet" type="text/css">
+    <script>
+        var iWidth=document.documentElement.clientWidth;
+        document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+    </script>
+</head>
+<body>
+<div id="box1">
+    <div class="pe_benner">
+    	<div class="home" style = "right:0.03rem;top:0.03rem;"><a id="per_gd"><img src="images/personal_gd.png"></a></div>
+        <div class="pe_benner_djdl"><a id="personal_dl"><img src="images/personal_dl.png"><h2 id="djdl_But"></h2></a></div>
+    </div>
+    <div class="per_content">
+        <h2><a  id="favorite">我的收藏</a></h2>
+        <h2><a  id="appointment">我的预约</a></h2>
+        <h2><a  id = "bank">我的银行卡</a></h2>
+    </div>
+</div>
+<div id="box2">
+    <h2 id="per_fh"><img src="images/zc_but.png"></h2>
+    <div class="gd_content">        
+        <h2><a  >关于我们</a></h2>
+        <h2><a  id="feedback_But" >意见反馈</a></h2>
+        <h2><a  >注销</a></h2>
+    </div>
+</div>
+<script src="js/zepto.js"></script>
+<script src="js/personal.js"></script>
+<script>
+$(function(){
+	var box1=$('#box1').eq(0);
+	var box2=$('#box2').eq(0);
+	$("#per_gd").click(function(){		
+		box1.hide();
+		box2.show();		 
+		});
+	
+	$("#per_fh").click(function(){
+		box2.hide();
+		box1.show();		 
+		});	
+	});
+</script>
+
+</body>
+</html>

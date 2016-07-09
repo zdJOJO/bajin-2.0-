@@ -1,0 +1,189 @@
+
+@font-face{
+	font-family:"微软雅黑"
+}
+h1,h2,h3{
+	font-weight: normal;
+}
+body{
+	font-family: "微软雅黑";
+}
+
+
+#header{
+	width:100%;
+	height: 0.17rem;
+	line-height: 0.17rem;
+	padding: 0 0.075rem;
+	box-sizing:border-box;
+	background: rgba(255,255,255,0.3);
+	font-size:20px;
+	z-index: 3;
+	color:#000;
+	text-align: center;;
+}
+.infoList{
+	margin-bottom: 0.14rem;
+}
+.infoItem{
+	height:0.4rem;
+	position: relative;
+/*	margin-bottom:0.01rem;*/
+}
+.tit-wrap{
+	position: relative;
+	width: 0.5rem;
+	/*height:100%;*/
+	height: 0.4rem;
+	background: #ffffff;
+}
+.infoItem:nth-child(odd) .tit-content{
+	width:80%;
+	height:0.21rem;
+	line-height:0.07rem;
+	text-align: center;
+	color: #ffffff;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+.infoItem:nth-child(even) .tit-content{
+	width:0.44rem;
+/*	height:0.25rem;*/
+	margin: 0 0.03rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+.infoItem h1{ 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 0.03rem;
+    height: 24px;
+    line-height: 24px;
+    font-size: 20px;
+}
+@media screen and (max-width:375px){
+
+}
+.tit-content .detile{
+	margin:0.026rem 0 0.010rem 0;
+	line-height:0.07rem;
+	color:#878787;
+}
+.tit-content .jump{
+	margin-left: 0.03rem;
+}
+.leftItem .tit-wrap{
+	float: left;
+}
+.rightItem .tit-wrap{
+	float: right;
+}
+.mask{
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.3);
+	position: absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+}
+
+/*footer.nav{
+	background: #000;
+	width:100%;
+	box-sizing:border-box;
+	justify-content: space-around;
+	padding: 0.01rem 0;
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	color: #ffffff;
+}
+.nav-item{ float:left; width:33.3%;}
+.nav-item img{ width:20%}
+#active img{width:30%;margin-top: 5px;}
+.nav-item p{
+	margin-top: 0.01rem;
+}*/
+footer{
+	width: 1rem;
+	height: 0.12rem;
+	background-color:#f0f0f0; 
+	position: fixed;
+	bottom: 0;
+	z-index: 2500;
+	text-align: center;
+}
+footer div{
+	width: 0.25rem;
+	float: left;
+	box-sizing:border-box;
+	height: 0.12rem;
+	/*background-color: #222;*/
+}
+footer div img{
+	height: 0.04rem;
+	width: 0.04rem;
+	margin-top: 0.015rem;
+}
+footer div p{
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    font-size: 12px;
+}
+.clubPage{
+	background: #2e3133;
+	display: block;
+	height: 0.12rem;
+	color: #fff0cc;
+}
+.tit-wrap .tit-content .detile p{
+	height: 50px;
+    text-overflow: hidden;
+    /* word-wrap: break-word; */
+    text-overflow: ellipsis;
+    /*white-space: nowrap;*/
+    overflow: hidden;
+}
+@media screen and (min-height:700px){
+	.infoItem:nth-child(even) .tit-content{
+	    margin: 0 0.03rem;	
+	}
+	.tit-content .detile{
+		margin:0.026rem 0 0.020rem 0;
+	}
+}
+/*这里缩小了图片的宽度*/
+
+@media screen and (max-width:320px){
+	.rightItem .jump-img,.leftItem .jump-img{
+		width: 0.06rem;
+		position: relative;
+		left: 0.16rem;
+	}
+	.infoItem .jump-img{
+		width: 0.06rem;
+	}
+	.infoItem h1{ 
+    white-space: nowrap;
+    /*overflow: hidden;*/
+    text-overflow: ellipsis;
+    margin-top: 0.03rem;
+    font-size: 18px;	
+}
+}
+
+/*调整文字靠左的样式*/
+.leftItem>img{
+	width: 0.5rem;
+	height: 0.4rem;
+}

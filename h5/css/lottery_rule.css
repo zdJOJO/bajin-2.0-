@@ -1,0 +1,54 @@
+@font-face{
+	font-family:"微软雅黑";
+}
+h1,h2,h3{
+	font-weight: normal;
+}
+body{
+	font-family:"微软雅黑";
+}
+header img{
+	width:1rem;
+}
+header .detail>div{
+	width: 1rem;
+	box-sizing:border-box;
+	height: 0.12rem;
+	line-height: 0.12rem;
+}
+header .detail>div p:nth-child(1){
+	float:left;
+	width: 0.3rem;
+	box-sizing:border-box;
+	padding-left: 0.06rem;
+	color: #aaa;
+	font-size: 14px;
+}
+header .detail>div p:nth-child(2){
+	float:right;
+	width: 0.7rem;
+	font-weight: bold;
+	font-size: 16px;
+}
+.lottery_rule_detail img{
+	width: 1rem;
+	box-sizing:border-box;
+	padding:0 0.02rem;
+}
+footer{
+	position: fixed;
+	z-index: 101;
+	bottom: 0;
+	height: 0.12rem;
+	width: 1rem;
+	line-height: 0.12rem;
+	background-color: #fff;
+}
+footer p{
+	width: 0.33rem;
+	float: right;
+	text-align: center;
+	background-color: #999e38;
+	font-size: 16px;
+	color: #fff;
+}

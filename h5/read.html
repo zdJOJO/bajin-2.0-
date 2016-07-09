@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="screen-orientation"content="portrait">
+	<meta name="x5-orientation"content="portrait">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>白金阅读</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/read.css">
+    <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+    <script src="js/zepto.js"></script>
+    <script src="js/read.js"></script>
+    <script>
+        var iWidth=document.documentElement.clientWidth;
+        document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+    </script>
+</head>
+<body>
+<!-- <header id="header">
+    <div class="msg">
+        <a href="javascript:;" id="index_But">&lt; 返回</a>
+        <span>白金阅读</span>
+    </div>
+</header> -->
+    <div class="tab">
+        <div class="life active">人物</div>
+        <div class="read">书籍</div>
+    </div>
+
+    <div class="list vipList"></div>
+    <div class="list readList">
+        <p>
+            <img src="imgs/read.png">
+            请登录查看
+        </p>
+        <button id="loginToRead">登录</button>
+    </div>
+
+    <div class="readIframe">
+        <iframe src="" scrolling="no" style="border:none;min-height:700px;height:100%;margin-bottom:0.17rem;margin-bottom: 0.13rem;display: block;width:375px;margin-top:0.12rem;"></iframe>
+    </div>
+    <!-- <a href="testRead.html">testRead</a> -->
+
+    <footer>
+      <div class="indexPage">
+        <img src="imgs/icbc.png"/>
+        <p>首页</p>
+      </div>
+      <div class="clubPage">
+        <img src="imgs/club.png"/>
+        <p>活动</p>
+      </div>
+      <div class="pierrePage">
+        <img src="imgs/pierre.png"/>
+        <p>尊享</p>
+      </div>
+      <div class="readPage">
+        <img src="imgs/readSwitch.png"/>
+        <p>人生</p>
+      </div>
+    </footer>
+</body>
+</html>

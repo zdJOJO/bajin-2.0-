@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
+    <meta name="screen-orientation"content="portrait">
+	<meta name="x5-orientation"content="portrait">
+	<title>白金尊享</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/swiper.min.css">
+		<link rel="stylesheet" href="css/index.css">
+	<script src="js/zepto.js"></script>
+	<script src="js/index.js"></script>
+	<script src="js/swiper.min.js"></script>
+    <script>
+        var iWidth=document.documentElement.clientWidth;
+        document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";       
+    </script>
+</head>
+<body>
+	<div class="showDiv1">
+		<header id="header">
+			<div class="vip">
+				<span id="vip"><img src="imgs/personal.png" /></span>
+			</div>
+		</header>
+		<div class="wrap">
+				<section class="carousel"></section>
+			<section class="activities" id="activities">
+				<div class="activity item_q fun" id="personalServe">
+					<div class="icon">
+						<img src=""/>
+					</div>
+					<span class="info"></span>
+				</div>
+				<div class="activity item_q fun">
+					<div class="icon">
+						<img src=""/>
+					</div>
+					<span class="info"></span>
+				</div>
+				<div class="activity item_q fun">
+					<div class="icon">
+						<img src=""/>
+					</div>
+					<span class="info"></span>
+				</div>
+				<div class="activity item_q fun">
+					<div class="icon">
+						<img src=""/>
+					</div>
+					<span class="info"></span>
+				</div>
+				<div class="activity" id="moreAct">
+					<div class="icon">
+						<img src="imgs/bottom.png" />
+					</div>
+					<span class="info">更多</span>
+				</div>
+				<div class="activity act-bottom item_q fun">
+					<div class="icon">
+						<img src="" />
+					</div>
+					<span class="info"></span>
+				</div>
+				<div class="activity act-bottom item_q fun">
+					<div class="icon">
+						<img src="" />
+					</div>
+					<span class="info"></span>
+				</div>
+				<div class="activity act-bottom item_q fun">
+					<div class="icon">
+						<img src="" />
+					</div>
+					<span class="info"></span>
+				</div>
+				<div class="activity act-bottom item_q fun">
+					<div class="icon">
+						<img src=""/>
+					</div>
+					<span class="info"></span>
+				</div>
+				<div class="activity act-bottom item_q fun" id="phone">
+					<div class="icon">
+						<img src="" />
+					</div>
+					<span class="info"></span>
+				</div>
+			</section>			
+			<section class="items">
+				<div class="brand_But">
+					<h1>热门<span>HOT</span></h1>
+					<!-- <p>当前最热的产品和活动</p> -->					
+				</div>
+			</section>
+			<section class="items1">
+				<div class="latest_But">
+					<h1>最新<span>NEW</span></h1>
+					<!-- <p>预热产品和活动</p> -->
+				</div>
+			</section>
+		</div>		
+		<footer>
+				<div class="indexPage">
+					<img src="imgs/icbcSwitch.png"/>
+					<p>首页</p>
+				</div>
+				<div class="clubPage">
+					<img src="imgs/club.png"/>
+					<p>活动</p>
+				</div>
+				<div class="pierrePage">
+					<img src="imgs/pierre.png"/>
+					<p>尊享</p>
+				</div>
+				<div class="readPage">
+					<img src="imgs/read.png"/>
+					<p>人生</p>
+				</div>
+		</footer>
+	</div>
+	<div class="showDiv3"></div>
+	<div class="showDiv2" id="showDiv2">
+		<div class="pic_but">
+		</div>		
+		<div class="left_nav">
+			<ul>
+				<li id="fav_But"><span><img src="imgs/pic_1.png"></span>我的收藏</li>
+				<li id="myMessage_But" class="active_new"><span><img src="imgs/yzm_zc.png"></span>我的消息</li>
+				<li id="shop_But"><span ><img src="imgs/pic_3.png"></span>我的购物车<input type="text" class="order_tj" /></li>
+				<li id="order_But" class="active"><span><img src="imgs/pic_2.png"></span>我的订单</li>
+				<li id="bank_But" class="active_bank"><span><img src="imgs/pic_7.png"></span>银行卡管理</li>
+				<!-- <li id="cou_But"><span><img src="imgs/pic_6.png"></span>我的优惠劵</li> -->
+			</ul>			
+		</div>
+		<div class="footer clearfix">
+			<div class="feed_But">
+			<span><img src="imgs/pic_4.png"></span>意见反馈			
+			</div>
+			<div class="set_But">
+				<span><img src="imgs/pic_8.png"></span>设置
+			</div>
+
+		</div>
+		<div class="icbc_But">
+			<img src="imgs/pic_9.png">
+		</div>
+		
+	</div>	
+
+<form name="info" id="info" method="post" action="http://web.zj.icbc.com.cn/mobile/Bjzx.do?scene=bjzx"> 
+	<input type="hidden" id="merSignMsg" name="merSignMsg" value=""/> 
+	<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/> 
+</form> 
+</body>
+</html>

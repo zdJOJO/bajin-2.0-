@@ -1,0 +1,170 @@
+@font-face{
+	font-family: "微软雅黑"
+}
+*{margin: 0; padding: 0;}
+body{
+	font-family: "微软雅黑";
+	background: #fafafa;
+	font-size: 14px;
+	width: 100%;
+}
+#add{
+	margin-bottom:0.1rem;
+}
+.ad_But{
+	margin-top: 0.05rem
+}
+.user_But{
+	width: 0.49rem;
+	float: left;
+	margin-left: 0.03rem;
+}
+.phone_But{
+	width:  0.3rem;
+	float: right;
+	margin-right: 0.03rem;
+}
+.reg_But{
+	margin:0.03rem 0.03rem;
+}
+.add_editor{
+	width: 0.08rem;
+	float: left;
+}
+/*设置默认地址开始*/
+.Check_But{
+	width: 0.08rem;
+	float: left;
+	margin-left: 0.03rem
+}
+.Check_But img{
+	margin-top: 0.02rem;
+}
+.set_But{
+	width: 0.4rem;
+	float: left;
+	margin-top: 0.012rem;
+	color:#acacac;
+}
+.add_delete{
+	width: 0.08rem;
+	float: left;
+}
+/*设置默认地址结束*/
+.fr{
+	font-size: 16px;
+	margin-bottom: 0.03rem;
+	padding-bottom: 0.05rem;
+	margin-top: 0.06rem;
+	border-bottom: 1px solid #e9e9e9;
+}
+.fr img{
+	margin-top: 0.015rem;
+}
+.font_set,.font_del,.set_But{
+	margin-top:0.012rem;
+}
+.font_set,.font_del{
+	width:0.15rem;
+	float:left;
+/*	color: #acacac;*/	
+}
+.add_add{
+	background: #383838;
+	text-align: center;
+	position: fixed;
+    width: 0.4rem;
+    bottom: 0;
+    right: 0;
+    height: 0.12rem;
+    line-height:0.12rem;
+}
+.add_add_But{
+	position: fixed;
+    bottom: 0;
+	width: 1rem;
+	height: 0.12rem;
+	background: #f1f1f1;
+	display: block;
+	color: #fafafa;
+}
+/*.add_editor span,.add_delete span{
+	margin-right: 0.03rem;
+}*/
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.clearfix {
+    *zoom: 1;
+}
+/*新增地址开始*/
+.add_address,.content-block{
+	width:1rem;
+	height: 0.2rem;
+	border-bottom: 1px solid #e9e9e9;
+	line-height: 0.2rem;
+    clear: left;
+}
+.add_address input,.content-block input{
+	border: none;
+	margin-left: 0.02rem;
+    width: 0.6rem;
+}
+.add_address label,.content-block label{
+	margin-left: 0.05rem;
+    display: inline-block;
+    width: 0.2rem;
+}
+.add_address_xq{
+	height: 0.4rem;
+	border-bottom: 1px solid #e9e9e9;
+}
+.add_address_xq textarea{
+	width: 0.9rem;
+	position: relative;
+	top:0.05rem;
+	left: 0.05rem;
+	height: 0.3rem;
+	border: none;
+	resize: none;	
+}
+.add_address_xq textarea,.add_address input,.content-block input{
+	background: #fafafa;
+	box-sizing: border-box;
+	outline: 0;
+	font-family: "微软雅黑";
+}
+.add_save_But{
+	position: fixed;
+    bottom: 0;
+	width: 1rem;
+	height: 0.12rem;
+	background: #f1f1f1;
+	display: block;
+	color: #fafafa;
+}
+.add_save{
+	position:absolute;
+	right:0;
+	bottom: 0;
+	height: 0.12rem;
+	width: 0.33rem;
+	color: #fafafa;
+	background:#383838;
+	display: block;
+	font-size: 16px;
+	cursor:pointer;
+	/*letter-spacing:0.01rem;*/
+	text-align: center;
+	line-height: 0.12rem;
+}
+/*新增地址结束*/
+.noneAds{
+	line-height: 0.2rem;
+    height: 0.2rem;
+    padding: 0 0.03rem;
+}

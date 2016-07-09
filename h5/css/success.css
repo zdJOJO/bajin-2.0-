@@ -1,0 +1,78 @@
+@font-face{
+	font-family:"微软雅黑";
+}
+h1,h2,h3{
+    font-weight: normal;
+}
+body{
+    font-family:"微软雅黑";
+}
+input{
+    border:none;
+    outline:none;
+}
+#header{
+    width:100%;
+    height: 0.17rem;
+    line-height: 0.17rem;
+    padding: 0 0.075rem;
+    box-sizing:border-box;
+    position: fixed;
+    top:0;
+    background: #ffffff;
+    z-index: 3;
+    color:#000;
+    border-bottom: 1px solid #cccccc;
+}
+#header div{
+    float:left;
+}
+#header .msg span{ font-size:20px;}
+#header .msg{
+    width:100%;
+    text-align: center;
+    position: relative;
+}
+.msg a{
+    position: absolute;
+    left:0;
+    top:0;
+	 font-size:16px;
+}
+
+.main{
+    width:50%;
+    margin:0.19rem auto 0;
+    text-align: center;
+    overflow: hidden;
+}
+/*.view-box{
+    margin-top: 0.17rem;
+}*/
+.view-box .tip{
+    margin-top: 0.07rem;
+    border:none!important;
+    font-size: 18px;
+}
+.view-box .img{
+    max-width:0.3rem;
+    max-height:0.3rem;
+}
+.return-box{
+    margin-top: 0.15rem;
+    line-height:0.13rem;
+    font-size: 14px;
+    border:none!important;
+    color: #ffffff;
+}
+.return-box p{
+    margin:0.05rem 0;
+    border:none;
+    border-radius: 5px;
+    background: #cfa972;
+    border: 1px solid #cfa972;
+}
+/*提示成功的页面的字体设置为白色*/
+.return-box a{
+    color: #fff;
+}

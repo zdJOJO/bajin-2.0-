@@ -104,7 +104,12 @@
                                             data:JSON.stringify(info),
                                             contentType:'application/json',
                                             success:function(data){
-                                                order = data.data.applyId;
+                                                if(data.data.applyId){
+                                                    order = data.data.applyId;
+                                                }else {
+                                                    $.alert("原因：活动名额已满！", "报名失败", function() {});
+                                                    return;
+                                                }
                                                     if(data.code=='201'){
                                                         // $('#applyName').val("");
                                                         // $('#applyPhone').val("");
@@ -115,6 +120,27 @@
                                                             //费用不为0则跳转到工行支付接口 或者  微信支付
 
                                                             $("#payType").fadeIn(300);
+
+                                                            // $(document).on("click", "#checkInfo", function() {
+                                                            //     $.actions({
+                                                            //         actions: [
+                                                            //             {
+                                                            //                 text: "银行卡支付",
+                                                            //                 className: "bg-primary",
+                                                            //                 onClick: function() {
+                                                            //                     $.alert("你选择了“删除”");
+                                                            //                 }
+                                                            //             },
+                                                            //             {
+                                                            //                 text: "微信支付",
+                                                            //                 className: "bg-warning",
+                                                            //                 onClick: function() {
+                                                            //                     $.alert("你选择了“删除”");
+                                                            //                 }
+                                                            //             },
+                                                            //         ]
+                                                            //     });
+                                                            // });
 
                                                             //跳转 银行卡支付
                                                             $("#payType >.block>.bankCardPay").click(function () {

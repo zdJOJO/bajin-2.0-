@@ -9,7 +9,7 @@ $(function () {
             var Phone=$("#phone").val();
             $.ajax({
                 type:"GET",
-                url:"http://www.winthen.com:9292/card/isPhoneCarded?phone="+Phone,
+                url: port + "/card/isPhoneCarded?phone="+Phone,
                 contentType : "application/json",
                 success:function(data){
                     console.log('data = '+data.isCarded);

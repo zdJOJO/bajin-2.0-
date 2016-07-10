@@ -34,8 +34,8 @@ $(function(){
     var sectionId = 7;//本次确定的期数
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
-    //使用正式环境的数据
-    var port = "http://www.winthen.com";
+    // //使用正式环境的数据
+    // var port = "http://www.winthen.com";
     // var sectionId =1;
     var objArr = [];  
     if(token != undefined){
@@ -112,7 +112,7 @@ $(function(){
                             if(data_.code == 207){
                                 alert(data_.message); 
                                 // window.location.href="https://baidu.com";  
-                                window.location.href = "http://www.winthen.com/test/index.html";
+                                window.location.href =  port + "/test/index.html";
                                 isClick = true;
                             }else if(data_.code == 208){  
                                 prizeId = objArr[objArr.length-1].prizeId;
@@ -131,7 +131,7 @@ $(function(){
                                         alert(objArr[m].message);
                                         // alert("这里是测试环境");
                                         // window.location.href="https://baidu.com";
-                                        window.location.href = "http://www.winthen.com/test/index.html";
+                                        window.location.href = port + "/test/index.html";
                                     },3000);
                                 }
                             }                                                          

@@ -3,8 +3,9 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
 
 
 
-var port = "http://www.winthen.com";
-// 	var port = "http://test.winthen.com";
+// var port = "http://www.winthen.com";
+	var port = "http://test.winthen.com";
+
 
 
 //多行显示省略号的方法

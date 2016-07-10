@@ -123,7 +123,7 @@
                                                                         text: "银行卡支付",
                                                                         className: "color-warning",
                                                                         onClick: function() {  //跳转 银行卡支付
-                                                                            window.location.href = "payIFrame.html?id="+data.data.applyId;
+                                                                            window.location.href = "payIFrame.html?id=" + data.data.applyId;
                                                                             $('#applyName').val("");
                                                                             $('#applyPhone').val("");
                                                                             $("#email").val("");

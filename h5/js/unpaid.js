@@ -140,7 +140,9 @@ $(document).ready(function(){
 					text: "银行卡支付",
 					className: "color-warning",
 					onClick: function() {  //跳转 银行卡支付
-						window.location.href="payIFrame.html?cardid="+$(this).data("cardid");
+
+						console.log($(this).data("cardid"))
+						window.location.href = "payIFrame.html?cardid=" + cardid;
 					}
 				},
 				{
@@ -176,65 +178,6 @@ $(document).ready(function(){
 				},
 			]
 		});
-
-
-
-		// $("#payType").fadeIn(300);
-
-		// //跳转 银行卡支付
-		// $("#payType >.block>.bankCardPay").click(function () {
-		// 	window.location.href="payIFrame.html?cardid="+$(this).data("cardid");
-		// });
-
-
-
-		// //唤起 微信支付
-		// $("#payType >.block>.weixinPay").click(function () {
-		// 	console.log(000000)
-		// 	console.log(appid)
-		// 	console.log(timeStamp)
-		// 	console.log(nonceStr)
-		// 	console.log(package)
-		// 	console.log(sign)
-		// 	console.log(111111)
-        //
-		// 	function onBridgeReady(){
-		// 		WeixinJSBridge.invoke(
-		// 			'getBrandWCPayRequest', {
-		// 				"appId" : appid,     //公众号名称，由商户传入
-		// 				"timeStamp": timeStamp,         //时间戳，自1970年以来的秒数
-		// 				"nonceStr" : nonceStr, //随机串
-		// 				"package" : package,
-		// 				"signType" : "MD5",         //微信签名方式：
-		// 				"paySign" : sign  //微信签名
-		// 			},
-		// 			function(res){
-		// 				if(res.err_msg == "get_brand_wcpay_request：ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
-		// 			}
-		// 		);
-		// 	}
-		// 	if (typeof WeixinJSBridge == "undefined"){
-		// 		if( document.addEventListener ){
-		// 			document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-		// 		}else if (document.attachEvent){
-		// 			document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-		// 			document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-		// 		}
-		// 	}else{
-		// 		onBridgeReady();
-		// 	}
-		// });
-        //
-        //
-		// //隐藏
-		// $("#payType >.block>.cancel").click(function () {
-		// 	$("#payType").fadeOut(300);
-		// });
-
-
-
-
-
 	});
 });
 

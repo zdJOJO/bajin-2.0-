@@ -32,9 +32,17 @@
 	//http://121.196.232.233/test/pay.html?id="+applyid;
 
 
-	var iframeUrl = "http://test.winthen.com:9292/bcard/pay.html?id="+applyid;
+
+	//test为真实环境    bcard为测试环境
+
+//	var iframeUrl = port + "/test/pay.html?id="+applyid;
+	var iframeUrl = port + "/bcard/pay.html?id="+applyid;
+
+	console.log(window.location.search.split("=")[0])
+
 	if(window.location.search.split("=")[0]=="?cardid"){
-		iframeUrl = "http://test.winthen.com:9292/bcard/pay.html?cardid="+applyid;
+//		iframeUrl = port + "/test/pay.html?cardid="+applyid;
+		iframeUrl =  port + "/bcard/pay.html?cardid=" + applyid;
 	}
 	iframe.src = iframeUrl;
 	var sss = window.top.document.getElementById("iframeId").contentWindow;	 
@@ -60,7 +68,7 @@
 	} else { 
 			iframe.onload = function(){
 
-				console.log( sss.document.getElementsByTagName("pre"));
+//				console.log( sss.document.getElementsByTagName("pre"));
 
 			  var nodeArr = sss.document.getElementsByTagName("pre");
 			  if(nodeArr.length == 0){

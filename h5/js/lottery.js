@@ -33,8 +33,8 @@ $(function(){
     }
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
-    //使用正式环境的数据
-    var port = "http://www.winthen.com";
+    // //使用正式环境的数据
+    // var port = "http://www.winthen.com";
     // var sectionId =1;
     var objArr = [];  
     if(token != undefined ){

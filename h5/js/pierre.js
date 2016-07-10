@@ -44,6 +44,7 @@ $(document).ready(function(){
 
 	//分页获取商品http://121.196.232.233/card/goods?currentPage=1&brandId=0
 	function getGoods(page,brandId,isDelete){
+		// $(".content").html('<span id="brandList">加载中...</span>');
 		$.ajax({
 		type:"get",
 		async:true,
@@ -85,6 +86,8 @@ $(document).ready(function(){
 	//获取服务的方法
 	function getServer(currentPage,size){
 		//http://121.196.232.233/card/mall?currentPage={pagenum}&size={size}
+		// $(".brandList").html('<span id="loading">加载中...</span>');
+
 		$.ajax({
 			type:"get",
 			url:port+"/card/mall?currentPage="+currentPage+"&size="+size+"&token="+token,
@@ -106,7 +109,9 @@ $(document).ready(function(){
 			}
 		});
 	}
-	//切换热推与商品
+
+
+	//臻品
 	$(".hot").bind("click",function(){
 		$(this).css("border-bottom","1px solid #666;").css("color","#323232");
 		$(this).siblings().css("border-bottom","none").css("color","#9c9c9c");
@@ -114,6 +119,8 @@ $(document).ready(function(){
 		$(".brandList").css("display","none");
 		getGoods(1,0,0);
 	});
+
+	//乐享
 	$(".brand").bind("click",function(){
 		$(".brandList").css("display","block");
 		$(".content").css("display","none");

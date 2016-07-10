@@ -41,19 +41,19 @@ $(document).ready(function(){
 								window.location.href = "culb.html";
 						});
 						return;
-					}				
+					}
 					for(var i=0,len=data.list.length;i<len;i++){
 						if(data.list[i].applyPrice == 0){//付款与否的状态确定
-							state = "免费";						
+							state = "免费";
 						}else{
 							if(data.list[i].isPay==0){
 								state = "未付款";
 							}else if(data.list[i].isPay==1){
 								state = "已付款";
-							}				
-						}	
+							}
+						}
 	                    var str = $('<div class="singleAppointment" data-id="'+data.list[i].applyId+'"><img src="'+data.list[i].activity.maxPic+'"/><div class="detail"><h4>'+data.list[i].activity.activityTitle+'</h4><span>'+state+'</span><p class="time"><img src="imgs/time.png"/>'+new Date(data.list[i].activity.startTime*1000).Formate()+'-'+new Date(data.list[i].activity.endTime*1000).Formate()+'</p><p class="address"><img src="imgs/address.png"/>'+data.list[i].activity.activityAddress+'</p></div></div>');
-	                    $(".appointment").append(str);						
+	                    $(".appointment").append(str);
 					}
 					//添加事件，到详细    enrollMsg.html
 					$(".singleAppointment").bind("click",function(){
@@ -61,7 +61,7 @@ $(document).ready(function(){
 					});
 				}
 			}
-		});		
+		});
 	}
 		
 	//主要 切换选项卡，活动预约与商品订单切换按钮

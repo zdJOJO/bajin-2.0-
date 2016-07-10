@@ -9,12 +9,7 @@ $(function(){
     if(his=="changePassword.html"){
     	his = "index.html";
     }
-
-	console.log(11111111111111)
-    console.log(his);
-    console.log(unescape(his));
-	console.log(11111111111111)
-
+	
 
 	var Butlog=$("#login");
 	//点击叉号的时候直接导向到index页面

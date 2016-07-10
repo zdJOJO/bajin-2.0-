@@ -37,18 +37,46 @@ $(function(){
         window.location.href="index.html";
 	})		
     var dataWrap=$('.main').eq(0);
-    //进入页面就会执行的函数，也只是调用了一次    
+    //进入页面就会执行的函数，也只是调用了一次
+
+    //判断活动人数是否已经爆满
+    var peopleNumber = 0;   //总允许报名人数
+    var applyNumber = 0;    //已报名人数
+
     function getActDetail(){
         $.get(port+"/card/activity/"+activityid,function(data){
-            console.log(data);
-            console.log(data.imgList);
+
+            console.log(data)
+
+            peopleNumber = data.peopleNumber;
+            applyNumber = data.applyNumber;
             // var str_='';
             // for(var i = 1,len = data.imgList.length-1;i<=len;i++){
             //     str_ = str_ + '<img src='+data.imgList[i].pic+'>';
             // }
-            var str1=$('<div class="img-item"><img src='+data.imgList[0].pic+' /></div><section class="msgBox"><div class="msg-wrap"><h1 class="msg-tit">'+data.activityTitle+'</h1><div class = "btn_q"><a href="tel:400-111-3797" class="tellNum"><img src="imgs/iconfont-kefu.png"></a><span class="love-btn"><img src="imgs/iconfont-love.png"></span><span class="share-btn"><img src="imgs/iconfont-p-share.png"></span></div><p class="msg-time"><img src="imgs/iconfont-shijian.png" /> '+new Date(data.startTime*1000).Formate()+'-'+new Date(data.endTime*1000).Formate()+'</p> <p class="msg-address"><img src="imgs/iconfont-location.png" /> '+data.activityAddress+'</p> </div> </section>');
+            var actPrice = '￥'+ data.activityPrice.toFixed(2);
+            if(data.activityPrice == 0){
+                actPrice = '免费';
+            }
+            var str1=$('<div class="img-item"><img src='+data.imgList[0].pic+' /></div><section class="msgBox"><div class="msg-wrap"><h1 class="msg-tit">'+data.activityTitle+'</h1><div class = "btn_q"><a href="tel:400-111-3797" class="tellNum"><img src="imgs/iconfont-kefu.png"></a>' +
+                '<span class="love-btn"><img src="imgs/iconfont-love.png"></span><span class="share-btn"><img src="imgs/iconfont-p-share.png"></span></div><p class="msg-time"><img src="imgs/iconfont-shijian.png" /> '+new Date(data.startTime*1000).Formate()+'-'+new Date(data.endTime*1000).Formate()+'</p> ' +
+                '<p class="msg-address"><img src="imgs/iconfont-location.png" /> '+data.activityAddress+'</p>' +
+                '<p class="msg-price"><span class="head">价格</span>'+actPrice+'</p>' +
+                '<p class="msg-num"><span class="head">人数</span>'+data.peopleNumber+'人'+'</p>' +
+                '<p class="msg-num"><span class="head">已报名</span>'+data.applyNumber+'人'+'</p></div></section>');
+
             // var str2=$('<section class="content"><div class="content-text"><div class="text-item"><p>'+data.activityDetail+'</p> </div> </div> <div class="img-item">'+str_+'</div></section>');
             var str2 = $('<section class="content"><div class="content-text">'+data.activityDetail+'</div></section>');
+            $("#doEnrol").append('<span class="closeDate">'+'报名截止时间：'+ new Date(data.endTime*1000).Formate() +'</span>');
+
+            if(new Date().getTime() > data.endTime*1000){
+                $("#doEnrol>button").attr({
+                    disabled: true ,
+                    style:"background:#9c9c9c;"
+                });
+            }
+
+
 
             dataWrap.append(str1).append(str2);
             //这里删除了活动亮点
@@ -187,13 +215,19 @@ $(function(){
 
     getActDetail();
 
-    var enrolBtn=$('#doEnrol');
+    var enrolBtn=$('#doEnrol>button');
     enrolBtn.click(function(){
         doEnrol();
     });
+
     function doEnrol(){
         if(token != undefined){
-            window.location.href = "doenrol.html?id="+activityid;
+            if(peopleNumber <= applyNumber){
+                $.alert("活动申请人数已满", "报名失败", function() {});
+            }else {
+                window.location.href = "doenrol.html?id=" + activityid;
+            };
+
         }else{
             window.location.href = "login.html?his="+escape(his);
         }

@@ -81,6 +81,10 @@ body{
 }
 
 
+
+
+
+
 /*客服电话*/
 .main > .phoneNumBox{
     position: fixed;
@@ -127,6 +131,22 @@ body{
     padding:0.05rem 0;
     margin:0 0.035rem;
 }
+
+.msgBox>.msg-wrap>p{
+    font-size: 14px;
+    height: 35px;
+    line-height: 35px;
+    border-bottom: 1px #EEE solid;
+}
+
+.msgBox>.msg-wrap>p>.head{
+    display: inline-block;
+    width: 65px;
+    font-size: 1.1em;
+    text-align: left;
+    color: #AEAEAE;
+}
+
 .msg-time{
     margin-top: 0.10rem;
     margin-bottom: 0.02rem;
@@ -256,3 +276,54 @@ footer.nav{
 .content-text{
     line-height: 1.6;
 }
+
+#doEnrol{
+    background: #eee;
+    position: relative;
+
+}
+
+#doEnrol > button{
+    height: 100%;
+    width: 30%;
+    border: none;
+    position: absolute;
+    right: 0px;
+    color: #fff;
+    background: #C8A971;
+    font-size: 1.1em;
+    font-family: '微软雅黑';
+}
+
+#doEnrol>.closeDate{
+    position: absolute;
+    left: 62px;
+    color: #000;
+    font-size: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

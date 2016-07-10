@@ -104,6 +104,8 @@ footer,.wrapper{
 	-webkit-margin-after:0;
 	font-size: 14px;
 	color: #989898;
+	height: 40px;
+	line-height: 40px;
 }
 .time p:nth-child(2) span:nth-child(2){
 	float: right;
@@ -142,6 +144,7 @@ footer{
 	text-align: center;
 	width: 1rem;
 	background-color:#eeeeee;
+	z-index: 10;
 }
 footer p{
 	-webkit-margin-before:0;

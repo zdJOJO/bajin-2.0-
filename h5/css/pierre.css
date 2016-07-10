@@ -332,3 +332,16 @@ footer div.pierrePage{
 	/*height: 0.4rem;*/
 }
 
+.content, .newBrandList{
+	z-index: 9;
+}
+#loading{
+	display: block;
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	margin-top: 200px;
+	font-size: 2em;
+	position: absolute;
+	z-index: -1;
+}

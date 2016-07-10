@@ -47,7 +47,6 @@ $(document).ready(function(){
 		type:"get",
 		url:port+"/card/order/"+cardid+"?token="+token,
 		success:function(data){
-			console.log(data);
 			var str= "";
 			var num = 1;
 			if(data.goodsAndSkuModels.length==1){
@@ -70,17 +69,17 @@ $(document).ready(function(){
 				type:"get",
 				url:port+"/card/receiver/"+data.orderModel.receiveId+"?token="+token,
 				success:function(data){
-					console.log(data);
 					//插入收货人的地址和收货人的姓名
 					$(".person").html(data.receiverName+"<span>收</span>");
 					$(".adr").html(data.province+data.city+data.district+"&nbsp;"+data.detilAddress)
 				},
 				error:function(data){
-					console.log(data);
+					//todo
 				},
 			});
+
 			//插入订单编号
-			$(".time p:nth-child(1) span").html("订单编号");
+			$(".time p:nth-child(1) span").html(data.orderModel.orderId);
 			//插入时间
 			$(".time p.createTime span:nth-child(1)").html(new Date(data.orderModel.createTime*1000).Formate());
 
@@ -90,10 +89,8 @@ $(document).ready(function(){
 			applyid = data.orderModel.orderId;
 			$.ajax({
 				type: "get",
-				url: "http://www.winthen.com/card/weixin/getRepay?orderId=" + applyid + "&token=" + token + "&type=1&ipAddress=" + ip ,
+				url: port + "/card/weixin/getRepay?orderId=" + applyid + "&token=" + token + "&type=1&ipAddress=" + ip ,
 				success: function (result) {
-
-					console.log(result);
 
 					appid =  String(result.appId);
 					nonceStr = String(result.nonceStr);
@@ -108,7 +105,7 @@ $(document).ready(function(){
 
 		},
 		error:function(data){
-			console.error(data);
+			//todo
 		}
 	});
 
@@ -122,12 +119,10 @@ $(document).ready(function(){
 			contentType:"application/json;charset=UTF-8",
 			url:port+"/card/order/"+$(this).data("receiveid")+"?token="+token,
 			success:function(data){
-				console.log(data);
 				// alert("删除订单成功");
 				window.location.href = "myOrders.html";
 			},
 			error:function(data){
-				console.log(data);
 			}
 		});
 	});
@@ -136,57 +131,105 @@ $(document).ready(function(){
 	//去支付
 	$(".f_2").bind("click",function(){
 
-		$("#payType").fadeIn(300);
 
-		//跳转 银行卡支付
-		$("#payType >.block>.bankCardPay").click(function () {
-			window.location.href="payIFrame.html?cardid="+$(this).data("cardid");
-		});
-
-
-
-		//唤起 微信支付
-		$("#payType >.block>.weixinPay").click(function () {
-			console.log(000000)
-			console.log(appid)
-			console.log(timeStamp)
-			console.log(nonceStr)
-			console.log(package)
-			console.log(sign)
-			console.log(111111)
-
-			function onBridgeReady(){
-				WeixinJSBridge.invoke(
-					'getBrandWCPayRequest', {
-						"appId" : appid,     //公众号名称，由商户传入
-						"timeStamp": timeStamp,         //时间戳，自1970年以来的秒数
-						"nonceStr" : nonceStr, //随机串
-						"package" : package,
-						"signType" : "MD5",         //微信签名方式：
-						"paySign" : sign  //微信签名
-					},
-					function(res){
-						if(res.err_msg == "get_brand_wcpay_request：ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+		$.actions({
+			title: "请选择支付方式",
+			onClose: function() {},
+			actions: [
+				{
+					text: "银行卡支付",
+					className: "color-warning",
+					onClick: function() {  //跳转 银行卡支付
+						window.location.href="payIFrame.html?cardid="+$(this).data("cardid");
 					}
-				);
-			}
-			if (typeof WeixinJSBridge == "undefined"){
-				if( document.addEventListener ){
-					document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-				}else if (document.attachEvent){
-					document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-					document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-				}
-			}else{
-				onBridgeReady();
-			}
+				},
+				{
+					text: "微信支付",
+					className: "color-primary",
+					onClick: function() {
+						function onBridgeReady(){
+							WeixinJSBridge.invoke(
+								'getBrandWCPayRequest', {
+									"appId" : appid,     //公众号名称，由商户传入
+									"timeStamp": timeStamp,         //时间戳，自1970年以来的秒数
+									"nonceStr" : nonceStr, //随机串
+									"package" : package,
+									"signType" : "MD5",         //微信签名方式：
+									"paySign" : sign  //微信签名
+								},
+								function(res){
+									if(res.err_msg == "get_brand_wcpay_request：ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+								}
+							);
+						}
+						if (typeof WeixinJSBridge == "undefined"){
+							if( document.addEventListener ){
+								document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+							}else if (document.attachEvent){
+								document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+								document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+							}
+						}else{
+							onBridgeReady();
+						}
+					}
+				},
+			]
 		});
 
 
-		//隐藏
-		$("#payType >.block>.cancel").click(function () {
-			$("#payType").fadeOut(300);
-		});
+
+		// $("#payType").fadeIn(300);
+
+		// //跳转 银行卡支付
+		// $("#payType >.block>.bankCardPay").click(function () {
+		// 	window.location.href="payIFrame.html?cardid="+$(this).data("cardid");
+		// });
+
+
+
+		// //唤起 微信支付
+		// $("#payType >.block>.weixinPay").click(function () {
+		// 	console.log(000000)
+		// 	console.log(appid)
+		// 	console.log(timeStamp)
+		// 	console.log(nonceStr)
+		// 	console.log(package)
+		// 	console.log(sign)
+		// 	console.log(111111)
+        //
+		// 	function onBridgeReady(){
+		// 		WeixinJSBridge.invoke(
+		// 			'getBrandWCPayRequest', {
+		// 				"appId" : appid,     //公众号名称，由商户传入
+		// 				"timeStamp": timeStamp,         //时间戳，自1970年以来的秒数
+		// 				"nonceStr" : nonceStr, //随机串
+		// 				"package" : package,
+		// 				"signType" : "MD5",         //微信签名方式：
+		// 				"paySign" : sign  //微信签名
+		// 			},
+		// 			function(res){
+		// 				if(res.err_msg == "get_brand_wcpay_request：ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+		// 			}
+		// 		);
+		// 	}
+		// 	if (typeof WeixinJSBridge == "undefined"){
+		// 		if( document.addEventListener ){
+		// 			document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+		// 		}else if (document.attachEvent){
+		// 			document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+		// 			document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+		// 		}
+		// 	}else{
+		// 		onBridgeReady();
+		// 	}
+		// });
+        //
+        //
+		// //隐藏
+		// $("#payType >.block>.cancel").click(function () {
+		// 	$("#payType").fadeOut(300);
+		// });
 
 
 

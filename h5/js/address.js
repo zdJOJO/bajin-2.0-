@@ -26,7 +26,7 @@ $(function(){
 	
 	//返回页面的操作，添加链接地址，返回过程中依然要传递参数token，如果合并js就不用如此操作
 	var Add=$("#add")
-	$.get('http://www.winthen.com/card/receiver?token='+token+'&currentPage=1',function(data){
+	$.get( port + "/card/receiver?token=" + token + '&currentPage=1',function(data){
 		for(var i=0; i<data.list.length;i++) {
 			var item;
 			if(data.list[i].receiveId==7){

@@ -59,7 +59,7 @@
             if(typeof(data) =="string"){
                 window.location.href = "login.html?his="+his;
             }else{
-            user=data;
+            user = data;
             $.ajax({
                 type:"get",
                 url:port+"/card/activity/"+activityid,
@@ -104,12 +104,7 @@
                                             data:JSON.stringify(info),
                                             contentType:'application/json',
                                             success:function(data){
-                                                if(data.data.applyId){
-                                                    order = data.data.applyId;
-                                                }else {
-                                                    $.alert("原因：活动名额已满！", "报名失败", function() {});
-                                                    return;
-                                                }
+                                                order = data.data.applyId;
                                                     if(data.code=='201'){
                                                         // $('#applyName').val("");
                                                         // $('#applyPhone').val("");
@@ -119,70 +114,72 @@
                                                         }else {
                                                             //费用不为0则跳转到工行支付接口 或者  微信支付
 
-                                                            $("#payType").fadeIn(300);
+                                                            // $("#payType").fadeIn(300);
+                                                            $.actions({
+                                                                title: "请选择支付方式",
+                                                                onClose: function() {},
+                                                                actions: [
+                                                                    {
+                                                                        text: "银行卡支付",
+                                                                        className: "color-warning",
+                                                                        onClick: function() {  //跳转 银行卡支付
+                                                                            window.location.href = "payIFrame.html?id="+data.data.applyId;
+                                                                            $('#applyName').val("");
+                                                                            $('#applyPhone').val("");
+                                                                            $("#email").val("");
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        text: "微信支付",
+                                                                        className: "color-primary",
+                                                                        onClick: function() {
+                                                                            arouseWeixinPay();  //点击  微信支付
+                                                                        }
+                                                                    },
+                                                                ]
+                                                            });
 
-                                                            // $(document).on("click", "#checkInfo", function() {
-                                                            //     $.actions({
-                                                            //         actions: [
-                                                            //             {
-                                                            //                 text: "银行卡支付",
-                                                            //                 className: "bg-primary",
-                                                            //                 onClick: function() {
-                                                            //                     $.alert("你选择了“删除”");
-                                                            //                 }
-                                                            //             },
-                                                            //             {
-                                                            //                 text: "微信支付",
-                                                            //                 className: "bg-warning",
-                                                            //                 onClick: function() {
-                                                            //                     $.alert("你选择了“删除”");
-                                                            //                 }
-                                                            //             },
-                                                            //         ]
-                                                            //     });
+                                                            // //跳转 银行卡支付
+                                                            // $("#payType >.block>.bankCardPay").click(function () {
+                                                            //     window.location.href = "payIFrame.html?id="+data.data.applyId;
+                                                            //     $('#applyName').val("");
+                                                            //     $('#applyPhone').val("");
+                                                            //     $("#email").val("");
                                                             // });
 
-                                                            //跳转 银行卡支付
-                                                            $("#payType >.block>.bankCardPay").click(function () {
-                                                                window.location.href = "payIFrame.html?id="+data.data.applyId;
-                                                                $('#applyName').val("");
-                                                                $('#applyPhone').val("");
-                                                                $("#email").val("");
-                                                            });
 
+                                                            //点击  微信支付  时候的函数
+                                                            var arouseWeixinPay = function () {
+                                                                //请求微信支付所需的参数
+                                                                var ip = String(returnCitySN["cip"]);
+                                                                var applyid = order;
 
+                                                                var appid =  '';
+                                                                var nonceStr = '';
+                                                                var  package = '';
+                                                                var myDate = new Date();
+                                                                var timeStamp = '';
+                                                                var stringA ='' ;
+                                                                var stringSignTemp = '';
+                                                                var sign = '';
 
-                                                            //请求微信支付所需的参数
-                                                            var ip = String(returnCitySN["cip"]);
-                                                            var applyid = order;
+                                                                //9292端口为测试环境，真实环境的话需要去掉端口号
+                                                                $.ajax({
+                                                                    type: "get",
+                                                                    url: port + "/card/weixin/getRepay?orderId=" + applyid + "&token=" + token + "&type=0&ipAddress=" + ip ,
+                                                                    success: function (result) {
+                                                                        appid =  String(result.appId);
+                                                                        nonceStr = String(result.nonceStr);
+                                                                        package = String(result.package);
+                                                                        timeStamp = String(myDate.getTime());
 
-                                                            var appid =  '';
-                                                            var nonceStr = '';
-                                                            var  package = '';
-                                                            var myDate = new Date();
-                                                            var timeStamp = '';
-                                                            var stringA ='' ;
-                                                            var stringSignTemp = '';
-                                                            var sign = '';
+                                                                        stringA = "appId=" + appid + "&nonceStr=" + nonceStr + "&package=" + package + "&signType=MD5&timeStamp=" + timeStamp ;
+                                                                        stringSignTemp = stringA + "&key=29798840529798840529798840529798";
+                                                                        sign = hex_md5(stringSignTemp).toUpperCase();
+                                                                    }
+                                                                });
 
-                                                            //9292端口为测试环境，真实环境的话需要去掉端口号
-                                                            $.ajax({
-                                                                type: "get",
-                                                                url: "http://www.winthen.com/card/weixin/getRepay?orderId=" + applyid + "&token=" + token + "&type=0&ipAddress=" + ip ,
-                                                                success: function (result) {
-                                                                     appid =  String(result.appId);
-                                                                     nonceStr = String(result.nonceStr);
-                                                                     package = String(result.package);
-                                                                     timeStamp = String(myDate.getTime());
-
-                                                                     stringA = "appId=" + appid + "&nonceStr=" + nonceStr + "&package=" + package + "&signType=MD5&timeStamp=" + timeStamp ;
-                                                                     stringSignTemp = stringA + "&key=29798840529798840529798840529798";
-                                                                     sign = hex_md5(stringSignTemp).toUpperCase();
-                                                                }
-                                                            });
-
-                                                            //唤起 微信支付
-                                                            $("#payType >.block>.weixinPay").click(function () {
+                                                                //唤起 微信支付
                                                                 function onBridgeReady(){
                                                                     WeixinJSBridge.invoke(
                                                                         'getBrandWCPayRequest', {
@@ -208,12 +205,17 @@
                                                                 }else{
                                                                     onBridgeReady();
                                                                 }
-                                                            });
+                                                            }
 
-                                                            //隐藏
-                                                            $("#payType >.block>.cancel").click(function () {
-                                                                $("#payType").fadeOut(300);
-                                                            });
+
+
+                                                            // $("#payType >.block>.weixinPay").click(function () {
+                                                            //
+                                                            // });
+                                                            // //隐藏
+                                                            // $("#payType >.block>.cancel").click(function () {
+                                                            //     $("#payType").fadeOut(300);
+                                                            // });
 
                                                             // window.location.href = "pay.html?id="+data.data.applyId;
                                                         }

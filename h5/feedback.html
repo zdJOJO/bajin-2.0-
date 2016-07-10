@@ -69,7 +69,7 @@ $(function(){
 
 			$.ajax({
 				type:"POST",
-				url:"http://www.winthen.com/card/feedback",
+				url: port + "/card/feedback",
 				dataType:"json",
 				contentType : "application/json;charset=UTF-8",
 				data:JSON.stringify(data),

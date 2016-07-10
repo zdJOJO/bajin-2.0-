@@ -340,3 +340,24 @@ center p:last-child{
 	margin-top: 0.2rem;
 	background-color: #c1b02b;
 }
+
+
+
+.appointment,.container{
+	width: 100%;
+}
+#loading{
+	display: block;
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	margin-top: 200px;
+	font-size: 2em;
+}
+
+
+
+
+
+
+

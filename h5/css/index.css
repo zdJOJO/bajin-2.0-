@@ -535,6 +535,20 @@ section.items1>div:last-child .mask_lq{
 
 
 
+/*  修改  支付样式  绿色变为金色*/
+.weui_btn_primary{
+	background-color: #C8A971;
+	height: 100%;
+	border-radius: 0;
+}
+
+.weui_btn_primary:not(.weui_btn_disabled):active{
+	color: hsla(0,0%,100%,.4);
+	background-color: #C8A971;
+}
+
+
+
 
 
 

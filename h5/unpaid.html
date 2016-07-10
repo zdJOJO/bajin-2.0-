@@ -4,12 +4,18 @@
 <title>待付款</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <meta name="screen-orientation"content="portrait">
+    <meta name="x5-orientation"content="portrait">
+
     <link rel="stylesheet" href="css/weiXin/weui.min.css">
-<link href="css/ordersDetail.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="css/index.css">
-<meta name="screen-orientation"content="portrait">
-<meta name="x5-orientation"content="portrait">
+    <link rel="stylesheet" href="css/weiXin/jquery-weui.css">
+
+    <link  rel="stylesheet" href="css/index.css">
+    <link  rel="stylesheet" type="text/css" href="css/ordersDetail.css">
+
     <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
+
     <script  id="ip" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
     <script type="text/javascript" src="js/jquery/md5.js"></script>
     <script>
@@ -35,11 +41,13 @@
   </div>
   <div class="address">
     <img src="imgs/detailAddress.png"/>
-    <p class="adr">浙江省杭州市西湖区留和路288号</p>
-    <p class="person">张某某<span>收</span></p>
+    <p class="adr"></p>
+    <p class="person">
+        <span></span>
+    </p>
   </div>
   <div class="time unpaid_margin_bottom">
-    <!-- <p class="num">订单编号&nbsp;:&nbsp;<span>12654646554564</span></p> -->
+     <p class="num">订单编号&nbsp;:&nbsp;<span>12654646554564</span></p>
     <p class="createTime">创建时间&nbsp;:&nbsp;<span>2016-04-10 08:37:33</span>
     <!-- <span>10天后过期</span> -->
     </p>
@@ -59,13 +67,6 @@
 </div>
 <div class="cost_unpaid">总额:&nbsp;￥<span>123456</span></div>
 
-<div id="payType">
-    <div class="block">
-        <button class="bankCardPay weui_btn weui_btn_primary">银行卡支付</button>
-        <button class="weixinPay weui_btn weui_btn_primary" id="weixinPay">微信支付</button>
-        <a class="cancel weui_btn weui_btn_disabled weui_btn_warn">取消</a>
-    </div>
-</div>
 <footer>
   <p class="f_2">去支付</p>
   <p class="f_1">删除订单</p>  

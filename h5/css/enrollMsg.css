@@ -86,6 +86,7 @@ footer{
 	right: 0;
 	height: 0.12rem;
 	background-color: #ccc;
+	z-index: 10;
 }
 footer p{
 	font-size: 16px;

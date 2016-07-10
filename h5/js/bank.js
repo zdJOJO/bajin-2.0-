@@ -99,7 +99,7 @@ $(function(){
 		$(".addCard").click(function(){
 			fidCard();
 		});
-		//http://121.196.232.233:9292/card/bank/encryption/{pickId}/{cardno}?token=e7120d7a-456b-4471-8f86-ac638b348a53
+		//http://121.196.232.233:9292/card/bank/encryption/{pickId}/{cardno}?token=e7120d7a-456b-4471-8f86-ac638b348a53http://www.winthen.com
 	    //绑定点击事件，获取cardid 发送请求，拿到一串字符，然后就跟绑定一样的操作
 		}else{
 		window.location.href = "login.html?his="+his;

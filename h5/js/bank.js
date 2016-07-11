@@ -33,10 +33,6 @@ $(function(){
 			 	url:port+"/card/card?token="+token,
 			 	success:function(data){
 
-					console.log(11111111111111)
-					console.log(data)
-					console.log(111111111111111)
-
 		    	if(typeof(data) == "string"){
 					window.location.href = "login.html?his="+his;
 				}else{

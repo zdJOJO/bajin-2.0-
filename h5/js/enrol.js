@@ -1,6 +1,4 @@
 
-
-
 $(function(){
     //此页面逻辑：进入页面加载活动内容，然后判断用户是否收藏该活动，如果收藏就要现实收藏的图标，否则就是没有收藏
     var data;
@@ -42,11 +40,12 @@ $(function(){
     //判断活动人数是否已经爆满
     var peopleNumber = 0;   //总允许报名人数
     var applyNumber = 0;    //已报名人数
+    var obj = {};
 
     function getActDetail(){
         $.get(port+"/card/activity/"+activityid,function(data){
-
-            console.log(data)
+            $("title").html(data.activityTitle);
+            obj = data ;
 
             peopleNumber = data.peopleNumber;
             applyNumber = data.applyNumber;
@@ -215,6 +214,7 @@ $(function(){
 
     getActDetail();
 
+
     var enrolBtn=$('#doEnrol>button');
     enrolBtn.click(function(){
         doEnrol();
@@ -234,49 +234,51 @@ $(function(){
         
     }
     
- // //微信部分   
+ //微信部分
  //    loadwx(function(){
  //        alert('获取微信接口成功');
  //    });
  //    wx.onMenuShareTimeline({
- //        title: sharetit, // 分享标题
- //        link: shareurl, // 分享链接
- //        imgUrl: shareimg, // 分享图标
- //        success: function () { 
+ //        title: obj.title, // 分享标题
+ //        link: window.location.href, // 分享链接
+ //        imgUrl:    '',       // 分享图标
+ //        success: function () {
  //            // 用户确认分享后执行的回调函数
  //            alert('分享到朋友圈成功');
  //        },
- //        cancel: function () { 
+ //        cancel: function () {
  //            // 用户取消分享后执行的回调函数
  //            alert('取消分享到朋友圈成功');
  //        }
  //    });
  //    wx.onMenuShareAppMessage({
- //        title: sharetit, // 分享标题
- //        desc: sharedesc, // 分享描述
- //        link: shareurl, // 分享链接
- //        imgUrl: shareimg, // 分享图标
+ //        title: obj.title, // 分享标题
+ //        desc: obj.subTitle, // 分享描述
+ //        link: window.location.href, // 分享链接
+ //        imgUrl: '', // 分享图标
  //        type: 'link', // 分享类型,music、video或link，不填默认为link
  //        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
- //        success: function () { 
+ //        success: function () {
  //            // 用户确认分享后执行的回调函数
  //            alert('分享给朋友成功');
  //        },
- //        cancel: function () { 
+ //        cancel: function () {
  //            // 用户取消分享后执行的回调函数
  //            alert('取消分享给朋友成功');
  //        }
  //    });
+
+
  //    wx.onMenuShareQQ({
  //        title: sharetit, // 分享标题
  //        desc: sharedesc, // 分享描述
  //        link: shareurl, // 分享链接
  //        imgUrl: shareimg, // 分享图标
- //        success: function () { 
+ //        success: function () {
  //            // 用户确认分享后执行的回调函数
  //            alert('分享到QQ成功');
  //        },
- //        cancel: function () { 
+ //        cancel: function () {
  //            // 用户取消分享后执行的回调函数
  //            alert('取消分享到QQ成功');
  //        }
@@ -286,11 +288,11 @@ $(function(){
  //        desc: sharedesc, // 分享描述
  //        link: shareurl, // 分享链接
  //        imgUrl: shareimg, // 分享图标
- //        success: function () { 
+ //        success: function () {
  //            // 用户确认分享后执行的回调函数
  //            alert('分享到腾讯微博成功');
  //        },
- //        cancel: function () { 
+ //        cancel: function () {
  //            // 用户取消分享后执行的回调函数
  //            alert('取消分享到腾讯微博成功');
  //        }
@@ -300,11 +302,11 @@ $(function(){
  //        desc: sharedesc, // 分享描述
  //        link: shareurl, // 分享链接
  //        imgUrl: shareimg, // 分享图标
- //        success: function () { 
+ //        success: function () {
  //            // 用户确认分享后执行的回调函数
  //            alert('分享到QQ空间成功');
  //        },
- //        cancel: function () { 
+ //        cancel: function () {
  //            // 用户取消分享后执行的回调函数
  //            alert('取消分享到QQ空间成功');
  //        }

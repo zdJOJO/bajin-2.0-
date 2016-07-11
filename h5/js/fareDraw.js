@@ -110,9 +110,9 @@ $(function(){
                             console.log(data_);
                             var prizeId;                            
                             if(data_.code == 207){
-                                alert(data_.message); 
-                                // window.location.href="https://baidu.com";  
-                                window.location.href =  port + "/test/index.html";
+                                alert(data_.message);
+                                // window.location.href =  port + "/test/index.html";    //正式环境
+                                window.location.href =  port + "/bcard/index.html";   //测试环境
                                 isClick = true;
                             }else if(data_.code == 208){  
                                 prizeId = objArr[objArr.length-1].prizeId;
@@ -129,9 +129,8 @@ $(function(){
                                     var m = k;
                                     setTimeout(function(){ 
                                         alert(objArr[m].message);
-                                        // alert("这里是测试环境");
-                                        // window.location.href="https://baidu.com";
-                                        window.location.href = port + "/test/index.html";
+                                        // window.location.href =  port + "/test/index.html";    //正式环境
+                                        window.location.href =  port + "/bcard/index.html";   //测试环境
                                     },3000);
                                 }
                             }                                                          

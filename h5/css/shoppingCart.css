@@ -18,11 +18,12 @@ body{
 	margin-bottom: 0.12rem;
 }
 .wrapper .singleBrand{
-	height: 0.267rem;
+	height: 0.3rem;
 	padding-bottom: 0.01rem;
 	vertical-align: middle;
 	padding-left: 0.02rem;
 	padding-right: 0.02rem;
+	border-bottom: 1px #B6B6B6 solid;
 }
 .wrapper .singleBrand img:first-child{
 	width: 0.066rem;
@@ -34,7 +35,7 @@ body{
 	width: 0.266rem;
 	float: left;
 	height: 0.266rem;
-	margin: 0 0.04rem 0 0.03rem;
+	margin: 7px 0.04rem 0 0.03rem;
 }
 .wrapper .singleBrand .detail{
 	height: 0.266rem;
@@ -122,16 +123,18 @@ footer div.select_all span{
 /*信息窗口*/
 footer div.message{
 	width: 0.33rem;
-	float: left;
+	height: 0.12rem;
+	float: right;
 }
 footer div.message .cost{
 	color: #020202;
 	width: 100%;
 	font-size: 14px;
-	float:left;
-	height: 0.055rem;
-	-webkit-margin-before:0.005rem;
-    -webkit-margin-after:0;
+	float: left;
+	line-height: 0.11rem;
+	-webkit-margin-before: 0.005rem;
+	-webkit-margin-after: 0;
+	height: 100%;
 }
 footer div.message .remark{
 	-webkit-margin-before:0;
@@ -152,12 +155,12 @@ footer div.edit_all{
 }
 /*购买数量选项卡*/
 footer div.brandNum{
-	width: 0.23rem;
+	width: 0.26rem;
 	height: 0.12rem;
 	line-height: 0.12rem;
-	float: left;
+	float: right;
 	color: #f0f0f0;
-	background-color: #2e3133;
+	background-color: #C1AF74;
 }
 footer div.brandNum p{
 	-webkit-margin-before:0;
@@ -194,6 +197,7 @@ footer div.select_all_{
 footer div.select_all_ p{
 	-webkit-margin-before:0;
     -webkit-margin-after:0;
+	padding-right: 41px;
 }
 footer div.select_all_ img{
 	width: 0.066rem;
@@ -212,9 +216,9 @@ footer div.delete_all{
 	height: 0.12rem;
 	line-height: 0.12rem;
 	position: absolute;
-	left: 0.33rem;
-	right:0.33rem;
-	color:#f0f0f0;
+	left: 277px;
+	right: 0;
+	color: #f0f0f0;
 	background-color: #2e3131;
 }
 footer div.delete_all img{
@@ -227,10 +231,10 @@ footer div.delete_all img{
 /*加减操作按钮*/
 .count{
 	font-size: 12px;
-    text-align: center;
-    float: left;
-    border:1px solid #333333;
-    /*height:0.05rem;*/
+	text-align: center;
+	float: right;
+	border: 1px solid #333333;
+	margin-top: 8px;
 }
 .count-i{
     float: left;
@@ -252,3 +256,37 @@ footer div.delete_all img{
 .singleBrand .singleCost{
 	/*display: none;*/
 }
+
+
+
+header{
+	font-size: 17px;
+	position: relative;
+}
+
+header>.shoppingCar{
+	display: block;
+	width: 20%;
+	margin: auto;
+	text-align: center;
+	padding-top: 0.5em;
+	font-size: 17px;
+}
+
+header>.edit_all , header>.edit_{
+	position: absolute;
+	right: 13px;
+	top: 9px;
+}
+header>.edit_{
+	position: absolute;
+	right: 13px;
+	top: -7px;
+	display: none;
+}
+
+
+
+
+
+

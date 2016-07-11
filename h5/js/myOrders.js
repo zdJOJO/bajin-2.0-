@@ -1,44 +1,46 @@
-$(document).ready(function(){	
+$(document).ready(function(){
 	//获取token
 	var token = "";
 	//获取存在于cookie中的token值
 	function getCookie(c_name)
 	{
-	if (document.cookie.length>0)
-	  {
-	  c_start=document.cookie.indexOf(c_name + "=")
-	  if (c_start!=-1)
-	    { 
-	    c_start=c_start + c_name.length+1 
-	    c_end=document.cookie.indexOf(";",c_start)
-	    if (c_end==-1) c_end=document.cookie.length
-	    return unescape(document.cookie.substring(c_start,c_end))
-	    } 
-	  }
-	return undefined;
+		if (document.cookie.length>0)
+		{
+			c_start=document.cookie.indexOf(c_name + "=")
+			if (c_start!=-1)
+			{
+				c_start=c_start + c_name.length+1
+				c_end=document.cookie.indexOf(";",c_start)
+				if (c_end==-1) c_end=document.cookie.length
+				return unescape(document.cookie.substring(c_start,c_end))
+			}
+		}
+		return undefined;
 	}
-	token = getCookie("token");//便于本地测试
-	// token = getCookie("token");
+	// token = getCookie("token") || "795f7773-3efe-4c14-ab3e-19631cc38333";//便于本地测试
+	token = getCookie("token");
 	//获取页面的名称
-	var his = window.location.pathname.split("/");
-	his = his[his.length-1];
+	var hisStr = window.location.pathname.split("/");
+	var his = hisStr[hisStr.length-1];
+
+
 	//订单加载
 	function getAppointment(currentPage,size){
 		$.ajax({
 			type:"get",
 			url:port+"/card/apply?currentPage="+currentPage+"&size="+size+"&token="+token,
 			success:function(data){
-				console.log(data);
 				var state;
 				$(".appointment").html("");
-		    	if(typeof(data) == "string"){
+
+				if(typeof(data) == "string"){
 					window.location.href = "login.html?his="+his;
 				}else{
 					if(data.list.length==0){
 						var strEmpty = '<center><img src="imgs/save_.png"/><h2>你还没有预约任何活动</h2><p>再去看看吧</p><p class="turnPage">再去看看</p></center>';
 						$(".appointment").append(strEmpty);
 						$(".appointment .turnPage").click(function(){
-								window.location.href = "culb.html";
+							window.location.href = "culb.html";
 						});
 						return;
 					}
@@ -52,8 +54,8 @@ $(document).ready(function(){
 								state = "已付款";
 							}
 						}
-	                    var str = $('<div class="singleAppointment" data-id="'+data.list[i].applyId+'"><img src="'+data.list[i].activity.maxPic+'"/><div class="detail"><h4>'+data.list[i].activity.activityTitle+'</h4><span>'+state+'</span><p class="time"><img src="imgs/time.png"/>'+new Date(data.list[i].activity.startTime*1000).Formate()+'-'+new Date(data.list[i].activity.endTime*1000).Formate()+'</p><p class="address"><img src="imgs/address.png"/>'+data.list[i].activity.activityAddress+'</p></div></div>');
-	                    $(".appointment").append(str);
+						var str = $('<div class="singleAppointment" data-id="'+data.list[i].applyId+'"><img src="'+data.list[i].activity.maxPic+'"/><div class="detail"><h4>'+data.list[i].activity.activityTitle+'</h4><span>'+state+'</span><p class="time"><img src="imgs/time.png"/>'+new Date(data.list[i].activity.startTime*1000).Formate()+'-'+new Date(data.list[i].activity.endTime*1000).Formate()+'</p><p class="address"><img src="imgs/address.png"/>'+data.list[i].activity.activityAddress+'</p></div></div>');
+						$(".appointment").append(str);
 					}
 					//添加事件，到详细    enrollMsg.html
 					$(".singleAppointment").bind("click",function(){

@@ -114,11 +114,17 @@ $(document).ready(function(){
 			window.location.href = "login.html?his="+his;
 		}
 	}
-	shoppingCart();	
+
+
+	shoppingCart();
+
+
 	//编辑按钮切换
-	$(".done .edit_all").bind("click",function(){
-		$(".done").css("display","none");
+	$("header > .edit_all").bind("click",function(){
+		$(".edit_all").css("display","none");
+		$(".edit_").css("display","block");
 		$(".edit").css("display","block");
+		$(".done").css("display","none");
 		//清除全选的按钮
 		$(this).siblings().find(".select_all p img").attr("src","imgs/notSel.png");
 		//同时需要清除已经选中的状态
@@ -129,9 +135,14 @@ $(document).ready(function(){
 		$(".singleBrand .singleCost").css("display","none");
 		$(".singleBrand .count").css("display","block");		
 	});
-	$(".edit .edit_").bind("click",function(){
+
+
+	$("header .edit_").bind("click",function(){
+		$(".edit_").css("display","none");
 		$(".edit").css("display","none");
+		$(".edit_all").css("display","block");
 		$(".done").css("display","block");
+
 		$(".singleBrand .sel").attr("src","imgs/notSel.png");
 		$(".done .cost").html("￥&nbsp;0");
 		$(".done .brandNum span").html("0");
@@ -139,6 +150,9 @@ $(document).ready(function(){
 		$(".singleBrand .singleCost").css("display","block");
 		$(".singleBrand .count").css("display","none");	
 	});
+
+
+
 	//全选与全部取消
 	$(".done .select_all").bind("click",function(){
 		if($(this).find("img").attr("src")=="imgs/notSel.png"){

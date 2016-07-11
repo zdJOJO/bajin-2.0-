@@ -27,7 +27,7 @@ $(function(){
 	var addForm = document.getElementById("addFormButton");  //addFormButton
 
 	if(token != undefined){
-		  var cardList=$(".cardList").eq(0);
+		  var cardList = $(".cardList").eq(0);
 		  $.ajax({
 			 	type:"get",
 			 	url:port+'/card/card?token='+token,
@@ -84,22 +84,34 @@ $(function(){
 				}
 			});//ajax请求结束
 
+
+		$(".addCard").click(function(){
+			fidCard();
+		});
+
 		  function fidCard(){
 				$.ajax({
 					type:"GET",
-			        dataType:"string",
+			        dataType:"text",
 					url: port+"/card/bank/encryption/register?token="+token,
 						success:function(data){
 							//alert("没有银行卡的时候");
-					    	if(data.length<50){
-									window.location.href = "login.html?his="+his;
-								}else{
-								var str='<input type="hidden" id="merSignMsg" name="merSignMsg" value="'+data+'"/> '+
-										'<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/> ';
 
-					    	addForm.innerHTML = str;
-					    	addForm.submit();
-						}
+							var str='<input type="hidden" id="merSignMsg" name="merSignMsg" value="'+data+'"/> '+
+								'<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/> ';
+
+							addForm.innerHTML = str;
+							addForm.submit();
+
+                            // if(data.length<50){
+							// 		window.location.href = "login.html?his="+his;
+							// 	}else{
+							// 	var str='<input type="hidden" id="merSignMsg" name="merSignMsg" value="'+data+'"/> '+
+							// 			'<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/> ';
+                            //
+							// 	addForm.innerHTML = str;
+							// 	addForm.submit();
+							// }
 					},
 					error:function(data){
 						window.location.href = "login.html?his="+his;
@@ -107,9 +119,6 @@ $(function(){
 
 				});
 			}
-			$(".addCard").click(function(){
-				fidCard();
-			});
 
 	}else{
 		//alert("您的账号还未登陆,请登陆后操作！");

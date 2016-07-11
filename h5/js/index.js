@@ -77,11 +77,11 @@ $(document).ready(function(){
 	//页面跳转统一处理
 	function turnUrl(point,url){
 		point.bind("click",function(){
-			if(token==undefined){
+			if(!token){
 				window.location.href = "login.html?his="+escape(url);
 			}else{
 				window.location.href = url;
-			}		
+			}
 		});
 	}
 	$(".showDiv3").click(function(){

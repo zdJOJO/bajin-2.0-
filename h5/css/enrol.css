@@ -124,8 +124,6 @@ body{
 }
 
 
-
-
 .msg-wrap{
     width:0.93rem;
     padding:0.05rem 0;
@@ -134,7 +132,6 @@ body{
 
 .msgBox>.msg-wrap>p{
     font-size: 14px;
-    height: 35px;
     line-height: 35px;
     border-bottom: 1px #EEE solid;
 }
@@ -167,6 +164,8 @@ body{
     height: 18px;
     margin: 2px auto;
 }
+
+
 .content{
     margin-top: 0.02rem;
     margin-bottom: 0.12rem;
@@ -259,6 +258,7 @@ footer.nav{
     font-size: 14px;
     /*height: 20px;*/
     line-height: 20px;
+    height: auto;
 }
 .content .text-item p{
     font-size: 15px;
@@ -303,20 +303,36 @@ footer.nav{
 }
 
 
+.swiper-container{
+    width: 375px;
+    height: 380px;
+}
+
+.swiper-container img{
+    width: 1rem;
+    height: 1rem;
+}
 
 
 
 
 
+/* swiper 滚动条修改 */
+.swiper-container-horizontal>.swiper-scrollbar{
+    top: 99%;
+     background: rgba(0, 0, 0, 0.03);
+}
 
-
-
-
-
-
-
-
-
+.swiper-scrollbar-drag{
+    height: 80px;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background: #C8A971;
+    border-radius: 10px;
+    left: 0;
+    top: 0;
+}
 
 
 

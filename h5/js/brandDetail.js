@@ -53,15 +53,21 @@ $(document).ready(function(){
 
 			for(var i in picList){
 				var str = $('<div class="swiper-slide"><img src="'+picList[i]+'"/></div>');
-				$(".swiper-wrapper").append(str);
 			}
-			//保存当前的商品的图片地址到立即购买按钮上		    
-		    var swiper = new Swiper('.swiper-container', {
-		        nextButton: '.swiper-button-next',
-		        prevButton: '.swiper-button-prev',
-		        pagination: '.swiper-pagination',
-		        paginationType: 'progress'
-		    });
+			$(".swiper-wrapper").append(str);
+			//保存当前的商品的图片地址到立即购买按钮上
+			if(picList.length  && picList.length > 1){
+				var swiper = new Swiper('.swiper-container', {
+					loop: false,
+					autoplay: 3000,
+					speed:300,
+					scrollbar:'.swiper-scrollbar',
+					scrollbarHide : false,
+					scrollbarDraggable : true ,
+					scrollbarSnapOnRelease : true ,
+				});
+			}
+
 		    // 进入页面检测是否收藏，如果是登录的状态
 		    if(token==undefined){
 		    	return;

@@ -40,13 +40,11 @@ $(function(){
     //判断活动人数是否已经爆满
     var peopleNumber = 0;   //总允许报名人数
     var applyNumber = 0;    //已报名人数
-    var obj = {};
+
 
     function getActDetail(){
         $.get(port+"/card/activity/"+activityid,function(data){
             $("title").html(data.activityTitle);
-            obj = data ;
-
             peopleNumber = data.peopleNumber;
             applyNumber = data.applyNumber;
             // var str_='';
@@ -57,12 +55,40 @@ $(function(){
             if(data.activityPrice == 0){
                 actPrice = '免费';
             }
-            var str1=$('<div class="img-item"><img src='+data.imgList[0].pic+' /></div><section class="msgBox"><div class="msg-wrap"><h1 class="msg-tit">'+data.activityTitle+'</h1><div class = "btn_q"><a href="tel:400-111-3797" class="tellNum"><img src="imgs/iconfont-kefu.png"></a>' +
+
+            var picStr =  '';
+            for(var i=0; i<data.imgList.length; i++){
+                picStr += '<div class="swiper-slide"><img src="' + data.imgList[i].pic + '"/></div>' ;
+            }
+            $(".swiper-wrapper").append(picStr);
+
+            if(data.imgList.length > 1){
+                var mySwiper = new Swiper('.swiper-container',{
+                    loop: false,
+                    autoplay: 3000,
+                    speed:300,
+                    scrollbar:'.swiper-scrollbar',
+                    scrollbarHide : false,
+                    scrollbarDraggable : true ,
+                    scrollbarSnapOnRelease : true ,
+                });
+            }
+
+
+
+            var str1=$('<section class="msgBox"><div class="msg-wrap"><h1 class="msg-tit">'+data.activityTitle+'</h1><div class = "btn_q"><a href="tel:400-111-3797" class="tellNum"><img src="imgs/iconfont-kefu.png"></a>' +
                 '<span class="love-btn"><img src="imgs/iconfont-love.png"></span><span class="share-btn"><img src="imgs/iconfont-p-share.png"></span></div><p class="msg-time"><img src="imgs/iconfont-shijian.png" /> '+new Date(data.startTime*1000).Formate()+'-'+new Date(data.endTime*1000).Formate()+'</p> ' +
                 '<p class="msg-address"><img src="imgs/iconfont-location.png" /> '+data.activityAddress+'</p>' +
                 '<p class="msg-price"><span class="head">价格</span>'+actPrice+'</p>' +
                 '<p class="msg-num"><span class="head">人数</span>'+data.peopleNumber+'人'+'</p>' +
                 '<p class="msg-num"><span class="head">已报名</span>'+data.applyNumber+'人'+'</p></div></section>');
+            
+            // var str1=$('<div class="img-item"><img src='+data.imgList[0].pic+' /></div><section class="msgBox"><div class="msg-wrap"><h1 class="msg-tit">'+data.activityTitle+'</h1><div class = "btn_q"><a href="tel:400-111-3797" class="tellNum"><img src="imgs/iconfont-kefu.png"></a>' +
+            //     '<span class="love-btn"><img src="imgs/iconfont-love.png"></span><span class="share-btn"><img src="imgs/iconfont-p-share.png"></span></div><p class="msg-time"><img src="imgs/iconfont-shijian.png" /> '+new Date(data.startTime*1000).Formate()+'-'+new Date(data.endTime*1000).Formate()+'</p> ' +
+            //     '<p class="msg-address"><img src="imgs/iconfont-location.png" /> '+data.activityAddress+'</p>' +
+            //     '<p class="msg-price"><span class="head">价格</span>'+actPrice+'</p>' +
+            //     '<p class="msg-num"><span class="head">人数</span>'+data.peopleNumber+'人'+'</p>' +
+            //     '<p class="msg-num"><span class="head">已报名</span>'+data.applyNumber+'人'+'</p></div></section>');
 
             // var str2=$('<section class="content"><div class="content-text"><div class="text-item"><p>'+data.activityDetail+'</p> </div> </div> <div class="img-item">'+str_+'</div></section>');
             var str2 = $('<section class="content"><div class="content-text">'+data.activityDetail+'</div></section>');
@@ -74,17 +100,24 @@ $(function(){
                     style:"background:#9c9c9c;"
                 });
             }
+            //
+            // for(var i in picList){
+            //     var str = $('<div class="swiper-slide"><img src="'+picList[i]+'"/></div>');
+            //     $(".swiper-wrapper").append(str);
+            // }
 
 
 
             dataWrap.append(str1).append(str2);
+
+
+
             //这里删除了活动亮点
             //这里进行是否收藏活动判断
             $.ajax({
                 type:"get",
                 url:port+"/card/file/getImage",
                 success:function(data){
-                    console.log(data);
                     var str = $('<img src="'+data.data.url+'" style="width:0.88rem;height:auto;margin:0.08rem 0.06rem;"/>');
                     $("section.content").append(str);
                 }
@@ -113,7 +146,6 @@ $(function(){
             });
 
             var url = port +"/card/collect/item?token="+token+"&itemId="+data.activityId+"&itemType=1";
-            console.log(url);
             //加载成功页面后就判断是否已经被收藏过了    
 			 if(token != undefined){
                 $.ajax({
@@ -142,14 +174,12 @@ $(function(){
                    //alert("用户未登录，请登录后再操作！！！！");
                    window.location.href="login.html?his="+escape(his);
             }else{
-                console.log(data);
                 var info ={
                     //"userId":data.userId,
                     "itemId":data.activityId,
                     "itemType":"1",   //1表示收藏活动，2表示收藏白金人生
                 }				
 				$.get(url,function(data){
-                console.log(data);				
                 if(data.message == "该项目未被收藏"){					 
 					$(".btn_q .love-btn img").attr("src","imgs/iconfont-love_save.png")
                     $.ajax({
@@ -162,7 +192,6 @@ $(function(){
                             if(typeof(data) == "string"){
                                 window.location.href = "login.html?his="+escape(his);
                             }else{
-                            console.log(data);
 							//alert("收藏成功")
                         } },                            
                         error:function(data){
@@ -179,7 +208,6 @@ $(function(){
                             url:url,
                             success:function(data){
                             //alert("删除查询成功");
-                            console.log(data);
                             $.ajax({
                                 type:"DELETE",
                                 url:port+"/card/collect/"+data.data.collectId+"?token="+token+"",
@@ -190,7 +218,7 @@ $(function(){
                                 if(typeof(data) == "string"){
                                     window.location.href = "login.html?his="+escape(his);
                                 }else{
-                                    console.log(data);
+                                    //todo
                                 } },
                                 error:function(data){
                                     //alert("请求出错，重新登陆")

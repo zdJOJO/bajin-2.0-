@@ -222,3 +222,28 @@ header .saveAndShare img:first-child{
 .wrapper .currentCost span{
 	color: #F5B22F;
 }
+
+
+
+
+
+/* swiper 滚动条修改 */
+.swiper-container-horizontal>.swiper-scrollbar{
+	top: 99%;
+	background: rgba(0, 0, 0, 0.03);
+}
+
+.swiper-scrollbar-drag{
+	height: 80px;
+	height: 100%;
+	width: 100%;
+	position: relative;
+	background: #C8A971;
+	border-radius: 10px;
+	left: 0;
+	top: 0;
+}
+
+
+
+

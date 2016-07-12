@@ -32,8 +32,6 @@ $(document).ready(function(){
 				dataType:"json",
 				async:true,
 				success:function(data){
-					console.log("请求的数据:")
-					console.log(data);
 					//填写数据,要区分
 					if(data.list.length != 0){//有收藏活动的时候
 						for(var i=0,len=data.list.length;i<len;i++){
@@ -75,7 +73,7 @@ $(document).ready(function(){
 						}else{
 							$(this).attr("src","imgs/notSel.png");
 							costAll();
-						}			
+						}
 					});	
 						//加减操作
 						var addBtn=$('.add');
@@ -195,7 +193,7 @@ $(document).ready(function(){
 				cardids.push(cardid);
 			}
 		}
-		$(".done .cost").html("￥&nbsp;"+cost);
+		$(".done .cost").html("￥&nbsp;"+ cost.toFixed(2));
 		$(".done .brandNum span").html(numAll);
 		brandList.cards = cardids;//直接添加属性的时候好像不可以直接使用[]来赋值
 		return brandList;
@@ -206,21 +204,14 @@ $(document).ready(function(){
 		if(numAll==0){
 			alert("你还没选择商品")
 		}else {
-			console.log(11111111111111111)
-			console.log(costAll());
-			console.log(JSON.stringify(costAll()));
-			console.log(JSON.parse(JSON.stringify(costAll())));
-			console.log(11111111111111111)
-
 			var skuIdStr = '';
 			var tmpArray = costAll().cards;
 			for(var i=0; i<tmpArray.length; i++){
 				skuIdStr +=  tmpArray[i] + '&&' ;
-
 			}
-
-			// window.location.href = "fillInOrder.html?obj="+escape(JSON.stringify(costAll()));
-			window.location.href = "fillInOrder.html?cards=" + skuIdStr ;
+			//cards 用于判读
+			window.location.href = "fillInOrder.html?cards&&obj="+escape(JSON.stringify(costAll()));
+			// window.location.href = "fillInOrder.html?cards=" + skuIdStr ;
 		}
 
 

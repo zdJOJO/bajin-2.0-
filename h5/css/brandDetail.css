@@ -225,8 +225,6 @@ header .saveAndShare img:first-child{
 
 
 
-
-
 /* swiper 滚动条修改 */
 .swiper-container-horizontal>.swiper-scrollbar{
 	top: 99%;
@@ -243,7 +241,6 @@ header .saveAndShare img:first-child{
 	left: 0;
 	top: 0;
 }
-
 
 
 

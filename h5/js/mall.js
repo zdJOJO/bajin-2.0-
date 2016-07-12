@@ -50,10 +50,12 @@ $(document).ready(function(){
 			}
 			//保存当前的商品的图片地址到立即购买按钮上		    
 		    var swiper = new Swiper('.swiper-container', {
-		        nextButton: '.swiper-button-next',
-		        prevButton: '.swiper-button-prev',
+
+				autoplay: 3000,//可选选项，自动滑动
 		        pagination: '.swiper-pagination',
-		        paginationType: 'progress'
+		        paginationType: 'progress',
+				scrollbar: '.swiper-scrollbar',
+				scrollbarHide: false
 		    });
 		    // 进入页面检测是否收藏，如果是登录的状态
 		    if(token==undefined){

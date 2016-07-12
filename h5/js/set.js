@@ -63,39 +63,36 @@ $(function(){
 			if($("#setUserName").val().length>18){
 				alert("用户名的字符不要超过18个字符");
 			}else{
-				var setAgx=$("#setAgx").val();
+				var setAgx = $("#setAgx").val();
 				if(setAgx=="男"){
 					setAgx=1;
-				}else if(setAgx=="女"){
+				}else{
 					setAgx=2
-
-				}else {
-					setAgx=" "
 				}
-
-
 
 				var  info = {
 				  "headPic":$(".headPic").attr("src"),
-				  "gender":setAgx,
+				  "gender": setAgx,
 			      "userName": $("#setUserName").val(),      
 			      "email":$("#setEmail").val()
 			      // "signature": $("#setGx").val()
 				};
 				//更新信息
-				$.ajax({
-					type:"PUT",
-					url:port+"/card/user?token="+token,
-					contentType: "application/json",
-					data:JSON.stringify(info),
-					success:function(data){
-						console.log(data);						
-						// alert("save success");
-					},
-					error:function(data){
-						// window.location.href = "login.html?his="+his;
-					}
-				});							
+				if(setAgx){
+					$.ajax({
+						type:"PUT",
+						url:port+"/card/user?token="+token,
+						contentType: "application/json",
+						data:JSON.stringify(info),
+						success:function(data){
+							console.log(data);
+							// alert("save success");
+						},
+						error:function(data){
+							// window.location.href = "login.html?his="+his;
+						}
+					});
+				}
 			}
 		}else{
 			alert("请输入正确格式的邮箱地址！！！");
@@ -105,7 +102,7 @@ $(function(){
 
 
 	$(".btn").bind("click",function(){
-		window.location.href="index.html";
+		window.location.href = "index.html";
 	});
 	//尼玛的，set竟然也要加载默认地址，我还要把所有的地址加载出来，然后筛选出来默认的地址
 	$.ajax({

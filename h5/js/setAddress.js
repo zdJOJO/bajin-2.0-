@@ -29,10 +29,13 @@ $(function(){
 	his = his[his.length-1];
 	
 	//获取从fillInOrder页面传递来的obj
-	if(window.location.search!=""){
-		var  JSONstr = window.location.search.split("=")[1];
-		console.log(JSON.parse(unescape(JSONstr)));
-		var obj = JSON.parse(unescape(JSONstr));		
+	if(window.location.search != ""){
+		if(window.location.search.indexOf("isShoppingCart=false") > 0){
+			var  JSONstr = window.location.search.split("=")[1].split("&&")[0];
+		}else {
+			var  JSONstr = window.location.search.split("=")[1];
+		}
+		var obj = JSON.parse(unescape(JSONstr));
 	}
 
 
@@ -54,11 +57,22 @@ $(function(){
 				Add.append(item);
 			}			
 		}
+
 		//选择地址跳转
-		$(".reg_But,.ad_But").bind("click",function(){			
+		$(".reg_But,.ad_But").bind("click",function(){
 			obj.receiveId = $(this).data("id");
-			window.location.href = "fillInOrder.html?obj="+escape(JSON.stringify(obj));
+
+			if(window.location.search.indexOf("isShoppingCart=false") > 0){
+				// window.location.href = "fillInOrder.html?obj=" + escape(JSON.stringify(obj));
+
+				window.location.href = "fillInOrder.html?cost="+ obj.cost + "&&goodsId="+obj.goodsId+ "&&num=" +obj.num+ "&&pic=" +obj.pic+ "&&skuId="+obj.skuId+ "&&subTitle="+obj.subTitle + "&&title="+obj.title + "&&receiveId="+obj.receiveId;
+
+			}else {
+				window.location.href = "fillInOrder.html?obj=" + escape(JSON.stringify(obj));
+			}
 		});
+
+
 		$(".Check_But,.set_But").click(function(){//切换默认地址，接口还没写好
 			$(".Check_But").find("img").attr("src","imgs/add_pic3.png")
 			$(".set_But").html("设为默认");
@@ -98,7 +112,7 @@ $(function(){
 	 		});
 
 		});
-		$(".font_del,add_delete").click(function(){//删除地址
+		$(".font_del,.add_delete").click(function(){	//删除地址
 		 	var receiverId=$(this).data('id');
 		 	$.ajax({
 		 		type:"DELETE",

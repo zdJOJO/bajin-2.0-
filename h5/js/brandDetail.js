@@ -36,7 +36,6 @@ $(document).ready(function(){
 		async:true,
 		dataType:"json",
 		success:function(data){
-			console.log(data);
 			$(".buyNow").attr("data-goodsid",data.goodsId);
 			$(".wrapper .title").html(data.goodsTitle);
 			$(".wrapper .subtitle").html(data.goodsSubtitle);
@@ -50,17 +49,21 @@ $(document).ready(function(){
 			$(".brandDetail").click();
 			$(".saveAndShare").attr("data-itemid",data.goodsId);
 
-
+			var picArray = []
 			for(var i in picList){
-				var str = $('<div class="swiper-slide"><img src="'+picList[i]+'"/></div>');
+				picArray.push(picList[i]);
 			}
-			$(".swiper-wrapper").append(str);
+			var str = '';
+			for(var i=0 ; i<picArray.length;i++){
+				str += '<div class="swiper-slide"><img src="'+ picArray[i] +'"/></div>' ;
+			}
+			$(".swiper-wrapper").append($(str));
 			//保存当前的商品的图片地址到立即购买按钮上
-			if(picList.length  && picList.length > 1){
-				var swiper = new Swiper('.swiper-container', {
+			if(picArray.length > 1){
+				var mySwiper = new Swiper('.swiper-container', {
 					loop: false,
 					autoplay: 3000,
-					speed:300,
+					speed:	300,
 					scrollbar:'.swiper-scrollbar',
 					scrollbarHide : false,
 					scrollbarDraggable : true ,
@@ -184,7 +187,8 @@ $(document).ready(function(){
 			console.log(JSON.stringify(obj));
 			console.log(escape(JSON.stringify(obj)));
 			// window.location.href = "fillInOrder.html?obj="+escape(JSON.stringify(obj));
-			window.location.href = "fillInOrder.html?cost="+ obj.cost + "&&goodsId="+obj.goodsId+ "&&num=" +obj.num+ "&&pic=" +obj.pic+ "&&skuId="+obj.skuId+ "&&subTitle="+obj.subTitle + "&&title="+obj.title ;
+			//brandDetail 用于判断从哪里进行支付， 以便于删除点但之后返回哪里去
+			window.location.href = "fillInOrder.html?brandDetail&cost=" + obj.cost + "&&goodsId="+obj.goodsId+ "&&num=" +obj.num+ "&&pic=" +obj.pic+ "&&skuId="+obj.skuId+ "&&subTitle="+obj.subTitle + "&&title="+obj.title ;
 		}else{
 			window.location.href = "login.html?his=" + escape(his);
 		}
@@ -223,7 +227,7 @@ $(document).ready(function(){
 	var currentNum = $(".currentNum").html();
 	$(".addAndReduce img.reduce").bind("click",function(){
 		if(currentNum==1){
-			alert('已经最少！');
+			$.alert('已经最少！');
 			return;
 		}else{
 			currentNum--;
@@ -234,7 +238,7 @@ $(document).ready(function(){
 			if(currentNum)
 			currentNum++;
 		if(currentNum  > stockAll){
-			alert('超出库存！');
+			$.alert('超出库存！');
 			return;
 		}
 		$(".currentNum").html(currentNum);

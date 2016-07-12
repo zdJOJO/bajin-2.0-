@@ -74,23 +74,21 @@ $(function(){
                 });
             }
 
-
+            var peopleNumberStr = ''
+            if(peopleNumber ==  999999){
+                peopleNumberStr = '不限';
+            }else {
+                peopleNumberStr = data.peopleNumber + '人';
+            }
 
             var str1=$('<section class="msgBox"><div class="msg-wrap"><h1 class="msg-tit">'+data.activityTitle+'</h1><div class = "btn_q"><a href="tel:400-111-3797" class="tellNum"><img src="imgs/iconfont-kefu.png"></a>' +
                 '<span class="love-btn"><img src="imgs/iconfont-love.png"></span><span class="share-btn"><img src="imgs/iconfont-p-share.png"></span></div><p class="msg-time"><img src="imgs/iconfont-shijian.png" /> '+new Date(data.startTime*1000).Formate()+'-'+new Date(data.endTime*1000).Formate()+'</p> ' +
                 '<p class="msg-address"><img src="imgs/iconfont-location.png" /> '+data.activityAddress+'</p>' +
                 '<p class="msg-price"><span class="head">价格</span>'+actPrice+'</p>' +
-                '<p class="msg-num"><span class="head">人数</span>'+data.peopleNumber+'人'+'</p>' +
+                '<p class="msg-num"><span class="head">人数</span>'+ peopleNumberStr + '</p>' +
                 '<p class="msg-num"><span class="head">已报名</span>'+data.applyNumber+'人'+'</p></div></section>');
-            
-            // var str1=$('<div class="img-item"><img src='+data.imgList[0].pic+' /></div><section class="msgBox"><div class="msg-wrap"><h1 class="msg-tit">'+data.activityTitle+'</h1><div class = "btn_q"><a href="tel:400-111-3797" class="tellNum"><img src="imgs/iconfont-kefu.png"></a>' +
-            //     '<span class="love-btn"><img src="imgs/iconfont-love.png"></span><span class="share-btn"><img src="imgs/iconfont-p-share.png"></span></div><p class="msg-time"><img src="imgs/iconfont-shijian.png" /> '+new Date(data.startTime*1000).Formate()+'-'+new Date(data.endTime*1000).Formate()+'</p> ' +
-            //     '<p class="msg-address"><img src="imgs/iconfont-location.png" /> '+data.activityAddress+'</p>' +
-            //     '<p class="msg-price"><span class="head">价格</span>'+actPrice+'</p>' +
-            //     '<p class="msg-num"><span class="head">人数</span>'+data.peopleNumber+'人'+'</p>' +
-            //     '<p class="msg-num"><span class="head">已报名</span>'+data.applyNumber+'人'+'</p></div></section>');
 
-            // var str2=$('<section class="content"><div class="content-text"><div class="text-item"><p>'+data.activityDetail+'</p> </div> </div> <div class="img-item">'+str_+'</div></section>');
+
             var str2 = $('<section class="content"><div class="content-text">'+data.activityDetail+'</div></section>');
             $("#doEnrol").append('<span class="closeDate">'+'报名截止时间：'+ new Date(data.endTime*1000).Formate() +'</span>');
 
@@ -98,7 +96,7 @@ $(function(){
                 $("#doEnrol>button").attr({
                     disabled: true ,
                     style:"background:#9c9c9c;"
-                });
+                }).html('已过期');
             }
             //
             // for(var i in picList){
@@ -243,24 +241,25 @@ $(function(){
     getActDetail();
 
 
-    var enrolBtn=$('#doEnrol>button');
+    function doEnrol(){
+        if(token != undefined){
+            if(applyNumber >= peopleNumber ){
+                $.alert("活动申请人数已满", "报名失败");
+            }else {
+                window.location.href = "doenrol.html?id=" + activityid;
+            };
+        }else{
+            window.location.href = "login.html?his="+escape(his);
+        }
+
+    }
+
+    var enrolBtn = $('#doEnrol>button');
     enrolBtn.click(function(){
         doEnrol();
     });
 
-    function doEnrol(){
-        if(token != undefined){
-            if(peopleNumber <= applyNumber){
-                $.alert("活动申请人数已满", "报名失败", function() {});
-            }else {
-                window.location.href = "doenrol.html?id=" + activityid;
-            };
 
-        }else{
-            window.location.href = "login.html?his="+escape(his);
-        }
-        
-    }
     
  //微信部分
  //    loadwx(function(){

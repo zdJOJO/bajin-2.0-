@@ -22,18 +22,17 @@ $(function(){
 					type:"POST",
 					url:port+"/card/tcaptcha?phone="+phoneNum+"",
 					success:function(data){
-						console.log(data);
+						$("#getCaptcha").attr('disabled',"true");
 						var getCaptcha=$("#getCaptcha");
 						var i=60;
 						var timer=setInterval(function(){
 							if(i!=0){
 								i--;
 								getCaptcha.html(i+'s后重新获取');
-								getCaptcha.attr('disabled',"true");
 							}else{
 								clearInterval(timer);
-								getCaptcha.html('重新获取');
-								getCaptcha.removeAttr('disabled');
+								$("#getCaptcha").removeAttr('disabled');
+								$("#getCaptcha").html('重新获取');
 							}
 						},1000);
 						//保存的是验证码

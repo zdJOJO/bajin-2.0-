@@ -44,14 +44,12 @@ $(document).ready(function(){
 
 	//分页获取商品http://121.196.232.233/card/goods?currentPage=1&brandId=0
 	function getGoods(page,brandId,isDelete){
-		// $(".content").html('<span id="brandList">加载中...</span>');
 		$.ajax({
 		type:"get",
 		async:true,
 		dataType:'json',
 		url:port+"/card/goods?currentPage="+page+"&brandId="+brandId+"&isDelete="+isDelete+"&token="+token,
 		success:function(data){
-			console.log(data);
 			// 清空内容
 			$(".wrapper .content").html("");
 			var str;
@@ -64,7 +62,6 @@ $(document).ready(function(){
 				}else{
 					costFormate = data.list[i].goodsPrice+".00";
 				}
-				console.log(costFormate);
 				if(i%2==0){
 					//<div class="logo"><img src="imgs/pierre.png"/></div>
 					str = $('<div class="lar" data-id="'+data.list[i].goodsId+'"><img src="'+data.list[i].hotPic+'"/><div class="detail"><p class="title" style="margin: 15px 0 5px 0;">'+data.list[i].goodsTitle+'</p><p class="subTitle">'+data.list[i].goodsSubtitle+'</p><p class="pirce">￥&nbsp;'+costFormate+'</p></div></div>');
@@ -79,20 +76,16 @@ $(document).ready(function(){
 				});			
 			},
 			error:function(data){
-				console.log(data);
+				//todo
 			}
 		});
 	}
 	//获取服务的方法
 	function getServer(currentPage,size){
-		//http://121.196.232.233/card/mall?currentPage={pagenum}&size={size}
-		// $(".brandList").html('<span id="loading">加载中...</span>');
-
 		$.ajax({
 			type:"get",
 			url:port+"/card/mall?currentPage="+currentPage+"&size="+size+"&token="+token,
 			success:function(data){
-				console.log(data);
 				for(var i=0,len=data.data.list.length;i<len;i++){
 					var str=$('<div class="singleBrand_q" data-mallid ="'+data.data.list[i].mallId+'"><img src="'+data.data.list[i].pic+'"/><div class="detail_q"><h3>'+data.data.list[i].title+'<span>'+data.data.list[i].discount+'</span></h3><p>'+data.data.list[i].subtitle+'</p><div><p><img src="imgs/position_qq.png"/><span>'+data.data.list[i].address+'<span></p></div></div></div>');
 					$(".wrapper .newBrandList").append(str);
@@ -105,7 +98,6 @@ $(document).ready(function(){
 				});
 			},
 			error:function(data){
-				console.log(data);
 			}
 		});
 	}
@@ -129,5 +121,4 @@ $(document).ready(function(){
 		getServer(1,100);
 	});
 	$(".hot").click();//默认点击一下热推
-
 });

@@ -25,57 +25,76 @@ body{
 .infoList{
 	margin-bottom: 0.14rem;
 }
+
 .infoItem{
-	height:0.4rem;
+	height: 0.4rem;
 	position: relative;
-/*	margin-bottom:0.01rem;*/
+	margin-bottom: 1px;
+	/*padding-bottom: 1px;*/
 }
+
+.infoItem:last-child{
+	margin-bottom: 0;
+}
+
+
+
 .tit-wrap{
 	position: relative;
-	width: 0.5rem;
-	/*height:100%;*/
-	height: 0.4rem;
+	width: 63%;
+	height: 100%;
 	background: #ffffff;
+	border-bottom: 1px rgba(203, 199, 200, 0.31) solid;
+	right: -138px;
 }
-.infoItem:nth-child(odd) .tit-content{
-	width:80%;
-	height:0.21rem;
-	line-height:0.07rem;
-	text-align: center;
-	color: #ffffff;
-	margin: auto;
+/*.infoItem:nth-child(odd) .tit-content{*/
+	/*width:80%;*/
+	/*height:0.21rem;*/
+	/*line-height:0.07rem;*/
+	/*text-align: center;*/
+	/*color: #ffffff;*/
+	/*margin: auto;*/
+	/*position: absolute;*/
+	/*top: 0;*/
+	/*left: 0;*/
+	/*bottom: 0;*/
+	/*right: 0;*/
+/*}*/
+/*.infoItem:nth-child(even) .tit-content{*/
+	/*width:0.44rem;*/
+/*!*	height:0.25rem;*!*/
+	/*margin: 0 0.03rem;*/
+	/*position: absolute;*/
+	/*top: 0;*/
+	/*left: 0;*/
+	/*bottom: 0;*/
+	/*right: 0;*/
+/*}*/
+.infoItem h1{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 95%;
+	height: 25px;
+	line-height: 25px;
+	font-size: 17px;
 	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-}
-.infoItem:nth-child(even) .tit-content{
-	width:0.44rem;
-/*	height:0.25rem;*/
-	margin: 0 0.03rem;
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-}
-.infoItem h1{ 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-top: 0.03rem;
-    height: 24px;
-    line-height: 24px;
-    font-size: 20px;
+	top: 25px;
+	left: 13px;
 }
 @media screen and (max-width:375px){
 
 }
 .tit-content .detile{
-	margin:0.026rem 0 0.010rem 0;
-	line-height:0.07rem;
-	color:#878787;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 90%;
+	line-height: 0.07rem;
+	color: #878787;
+	position: absolute;
+	top: 57px;
+	left: 14px;
 }
 .tit-content .jump{
 	margin-left: 0.03rem;
@@ -147,7 +166,8 @@ footer div p{
 	color: #fff0cc;
 }
 .tit-wrap .tit-content .detile p{
-	height: 50px;
+	height: 20px;
+	line-height: 20px;
     text-overflow: hidden;
     /* word-wrap: break-word; */
     text-overflow: ellipsis;

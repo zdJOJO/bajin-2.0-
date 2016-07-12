@@ -119,8 +119,13 @@ $(document).ready(function(){
 			contentType:"application/json;charset=UTF-8",
 			url:port+"/card/order/"+$(this).data("receiveid")+"?token="+token,
 			success:function(data){
-				// alert("删除订单成功");
-				window.location.href = "myOrders.html";
+				alert("删除订单成功");
+				window.location.href = "myOrders.html?hasDelete";
+				if(window.location.search.indexOf('brandDetail') > 0){
+					window.location.href = "brandDetail.html";
+				}else {
+					window.location.href = "myOrders.html?hasDelete";
+				}
 			},
 			error:function(data){
 			}

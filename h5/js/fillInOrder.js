@@ -39,39 +39,45 @@ $(document).ready(function(){
 	his = his[his.length-1];
 
 
-
-
-	
 	//解析前一个页面传递的对象，包含汉字
+	var obj = {};
 	if(window.location.search.indexOf("cards") < 0){
 		var str =  window.location.search.split("?")[1];
 		var arry = str.split("&&");
-		var obj = {};
-		obj.cost = arry[0].split("=")[1].split(";")[1];
+
+		obj.cost = (arry[0].split("=")[1].indexOf(";") > 0) ? arry[0].split("=")[1].split(";")[1] : arry[0].split("=")[1];
+
 		obj.goodsId = arry[1].split("=")[1];
 		obj.num = arry[2].split("=")[1];
 		obj.pic = arry[3].split("=")[1];
 		obj.skuId = arry[4].split("=")[1];
 		obj.subTitle = arry[5].split("=")[1];
 		obj.title = arry[6].split("=")[1];
-	}else {
-		// var  str = window.location.search.split("=")[1];
-		// var obj = JSON.parse(unescape(str));
-		// var obj = JSON.parse(str);
-		var  str = window.location.search.split("=")[1];
-		var obj = {
-			cards: []
-		};
-
-		console.log(str)
-		console.log(str.split("&&"))
-		console.log(str.split("&&")[0])
-
-		for(var i = 0; i< str.split("&&").length-1; i++){
-			obj.cards[i] = str.split("&&")[i];
-			console.log(obj.cards[i])
+		if(arry[7]){
+			obj.receiveId = arry[7].split("=")[1];
 		}
+	}else {
+		var  str = window.location.search.split("=")[1];
+		obj = JSON.parse(unescape(str));
+		// if(window.location.search.indexOf("receiveId") < 0){
+		// 	// var  str = window.location.search.split("=")[1];
+		// 	// var obj = JSON.parse(unescape(str));
+		// 	// var obj = JSON.parse(str);
+		// 	console.log(222222222222222222)
+		// 	var  str = window.location.search.split("=")[1];
+		// 	var obj = {
+		// 		cards: []
+		// 	};
+		// 	for(var i = 0; i< str.split("&&").length-1; i++){
+		// 		obj.cards[i] = str.split("&&")[i];
+		// 	}
+		// }else {
+		// 	var  str = window.location.search.split("=")[1];
+		// 	var obj = JSON.parse(unescape(str));
+		// }
+
 	}
+
 
 
 	//填入数据
@@ -87,7 +93,11 @@ $(document).ready(function(){
 		$(".singleBrand").attr("data-id",obj.skuId);		
 	}
 	$(".message").bind("click",function(){
-		window.location.href = "setAddress.html?obj="+escape(JSON.stringify(obj));
+		if(window.location.search.indexOf("cards") < 0){
+			window.location.href = "setAddress.html?obj=" + escape(JSON.stringify(obj)) + '&&isShoppingCart=false';
+		}else {
+			window.location.href = "setAddress.html?obj=" + escape(JSON.stringify(obj));
+		}
 	});
 	// 拿到cardid来请求的到商品的信息
 	
@@ -129,7 +139,7 @@ $(document).ready(function(){
 				console.log(data);
 			}
 		});		
-	}else{//有地址的id，就会去请求得到地址的id，然后填写到页面上边
+	}else{			//有地址的id，就会去请求得到地址的id，然后填写到页面上边
 		$.ajax({
 			type:"get",
 			url:port+"/card/receiver/"+receiveId+"?token="+token,
@@ -181,7 +191,6 @@ $(document).ready(function(){
 	}//这里跟单个物品立即购买处理的不同。
 	//这里处理确认订单按钮的事件，区分添加的来源
 	$("footer p").bind("click",function(){
-
 		if(obj.cost!=undefined){			//直接购买的地方
 			$.ajax({
 				type:"post",
@@ -195,8 +204,12 @@ $(document).ready(function(){
 					num:obj.num // 购买数量
 				}),
 				success:function(data){
-					console.log(data);
-					window.location.href="unpaid.html?cardid="+data.data.orderModel.orderId;
+					if(window.location.search.indexOf('brandDetail')> 0){
+						window.location.href = "unpaid.html?brandDetail&&cardid=" + data.data.orderModel.orderId;
+					}else {
+						window.location.href = "unpaid.html?cardid=" + data.data.orderModel.orderId;
+					}
+
 				},
 				error:function(data){
 					console.log(data);

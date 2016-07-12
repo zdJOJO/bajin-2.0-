@@ -23,7 +23,6 @@ $(function(){
     token = getCookie("token");
     $(".readIframe").css("display","none");
     var dataWrap=$('.vipList').eq(0);
-	console.log(token);
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
     $(".indexPage").click(function(){
@@ -105,7 +104,6 @@ $(function(){
                     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
                     // alert('是否是Android：'+isAndroid);
                     // alert('是否是iOS：'+isiOS);
-
                     $(".readIframe").css("display","block");
                     $(".vipList").css("display","none");
                     var w = $(window).width();
@@ -119,11 +117,9 @@ $(function(){
             }
         });
         }else{
-            $(".vipList").animate({
-                right:'375px',
-                opacity:'0.5'
-            });
-            $(".readList").show(600);
+            $(".vipList").css("display","none");
+            $(".readList").show();
+
         }
         $(".life.active").css("border-bottom","none").css("color","#9c9c9c");
         $(".read").css("border-bottom","1px solid  #666").css("color","#323232");
@@ -135,11 +131,6 @@ $(function(){
     $(".read").css("border-bottom","none").css("color","#9c9c9c");
     //切换到白金人生的部分
     $(".life").click(function(){
-        // $("footer").css("display","block");
-        $(".vipList").animate({
-            opacity:'1.0',
-            right:'0'
-        });
         $(".readList").hide();
         $(".readIframe").css("display","none");
         $(".vipList").css("display","block");

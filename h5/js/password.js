@@ -18,19 +18,19 @@ $(function(){
 					url:port+"/card/isPhoneRegistered?phone="+phone,
 					success:function(data){
 						if(data.status){
-						var getCaptcha=$('#getCaptcha');
-									var i=60;
-									var timer=setInterval(function(){
-										if(i!=0){
-											i--;
-											getCaptcha.html(i+'s后重新获取');
-											getCaptcha.attr('disabled',"false");
-										}else{
-											clearInterval(timer);
-											getCaptcha.html('重新获取');
-											getCaptcha.removeAttr('disabled');
-										}
-									},1000);								
+							$("#getCaptcha").attr('disabled',"true");
+							var getCaptcha=$('#getCaptcha');
+							var i=60;
+							var timer=setInterval(function(){
+								if(i!=0){
+									i--;
+									getCaptcha.html(i+'s后重新获取');
+								}else{
+									clearInterval(timer);
+									$('#getCaptcha').html('重新获取');
+									$('#getCaptcha').removeAttr('disabled');
+								}
+							},1000);
 							$.ajax({
 								type:"POST",
 								url:port+"/card/tcaptcha?phone="+phone+"",

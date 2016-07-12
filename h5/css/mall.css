@@ -225,3 +225,7 @@ header .saveAndShare img:first-child{
 	color: #2F2F2F;
 }
 
+.swiper-scrollbar-drag{
+	background: rgba(183, 166, 110, 1);
+}
+

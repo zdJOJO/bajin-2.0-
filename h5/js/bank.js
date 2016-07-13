@@ -24,6 +24,9 @@ $(function(){
 
 	var pickid = window.location.search.split('=')[1];
 	var pathname = window.location.pathname.split("/")[6] == "bank.html";
+
+	var isBJVip = false;
+
 	if(token != undefined){
 	//拿到pickid继续获取参数然后发送请求
 		var cardList=$(".cardList").eq(0);
@@ -36,33 +39,41 @@ $(function(){
 		    	if(typeof(data) == "string"){
 					window.location.href = "login.html?his="+his;
 				}else{
-			 	console.log(data);
 				 	for(var i=0;i<data.list.length;i++){
 						var item=$('<div class="cardItem" data-cardId='+data.list[i].cardNumber+'><div class="card-logo" ><img src="imgs/bank.jpg"></div><div class="card-info"><div class="card-name">中国工商银行</div><div class="card-tip">尾号'+data.list[i].cardNumber+'</div><div class="card-r">&gt;</div></div></div>')
-					console.log(item);
-					cardList.append(item);	
+						cardList.append(item);
+						if(data.list[i].bjke == 1){
+							isBJVip = true;
+						}else {
+							isBJVip = false;
+						}
+
 					}
 				    if($(".cardList").children().length == 0){
 				      	//alert("你还没有添加银行卡,请先添加银行卡，然后再操作！！");
 				      	cardList.append("<h2 class= 'alert_q'>你还没有添加银行卡</h2>");				      					      					      					      	
 			        }else{
 			        	//一定要注意，在元素出来的时候再帮定事件，不然就没效
-			    		$(".cardItem").click(function(){//点击选中银行卡事件
-							var cardItem = $(this).data("cardid");	
-							$.ajax({
-								type:"GET",
-					        	dataType:"string",
-								url:port+"/card/bank/encryption/"+pickid+"/"+cardItem+"?token="+token,
-								success:function(data){
-						 			console.log(data);
-							    	if(data.length<50){
-										window.location.href = "login.html?his="+his;
-									}else{
-						 				toIcbc(data);
-					 				}
-					 			},
-							});
-						    
+			    		$(".cardItem").click(function(){		 //点击选中银行卡事件
+							if(pickid==11 && !isBJVip){
+								$.alert('本功能仅限工银白金卡用户尊享');
+								return
+							}else {
+								var cardItem = $(this).data("cardid");
+								$.ajax({
+									type:"GET",
+									dataType:"text",
+									url:port+"/card/bank/encryption/"+pickid+"/"+cardItem+"?token="+token,
+									success:function(data){
+										console.log(data);
+										if(data.length<50){
+											window.location.href = "login.html?his="+his;
+										}else{
+											toIcbc(data);
+										}
+									},
+								});
+							}
 						});
 			        }		    
 				} },

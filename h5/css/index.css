@@ -337,7 +337,7 @@ section.items1>div:last-child .mask_lq{
 .showDiv2{
 	width: 0.78rem;
 	background: #3a3d41;
-	height: auto;
+	height: 100%;
 	position:fixed;
 	z-index: 3000;
 	top: 0;

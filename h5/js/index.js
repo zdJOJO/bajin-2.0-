@@ -77,10 +77,10 @@ $(document).ready(function(){
 	//页面跳转统一处理
 	function turnUrl(point,url){
 		point.bind("click",function(){
-			if(!token){
-				window.location.href = "login.html?his="+escape(url);
-			}else{
+			if(token){
 				window.location.href = url;
+			}else{
+				window.location.href = "login.html?his="+escape(url);
 			}
 		});
 	}
@@ -92,17 +92,24 @@ $(document).ready(function(){
 
 	});
 	turnUrl($("#fav_But"),"favorites.html");
-	turnUrl($("#myMessage_But"),"myMessage.html");	
+	turnUrl($("#myMessage_But"),"myMessage.html");
 	turnUrl($("#shop_But"),"shoppingCart.html");
 	turnUrl($("#order_But"),"myOrders.html");
 	turnUrl($("#bank_But"),"bank.html");
 	turnUrl($(".pic_but"),"set.html");
+
+
+
 	$(".feed_But").click(function(){
 		window.location.href="feedback.html";
 		
 	});
 	$(".set_But").bind("click",function(){
-		window.location.href = "changePassword.html";
+		if(!token){
+			window.location.href = "login.html";
+		}else {
+			window.location.href = "changePassword.html";
+		}
 	});
 	//设置元素的高度等于移动设备的高度
 	$(".showDiv2").height($(window).height());

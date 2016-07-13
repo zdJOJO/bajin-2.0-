@@ -73,12 +73,12 @@ html {
 body {
   font-size: 16px;
 }
-@media only screen and (min-width: 400px) {
+@media only screen and (min-width: 417px) {
   html {
     font-size: 21.33333333px !important;
   }
 }
-@media only screen and (min-width: 414px) {
+@media only screen and (min-width: 417px) {
   html {
     font-size: 22.08px !important;
   }

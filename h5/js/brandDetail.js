@@ -209,12 +209,17 @@ $(document).ready(function(){
 					skuId:skuid
 				}),
 				success:function(data){
-					console.log(data);
-					// alert(data.message);
-					alert_replace("test.winthen.com","加入购物车成功",2);
+					$.modal({
+						title: "提示",
+						text: "加入购物车成功",
+						buttons: [
+							{ text: "去购物车", onClick: function(){window.location.href='shoppingCart.html'}},
+							{ text: "确定", className: "default", onClick: function(){}}
+						]
+					});
 				},
 				error:function(data){
-					console.log(data);
+					$.alert('加入购物车失败');
 				}
 			});			
 		}else{
@@ -238,7 +243,7 @@ $(document).ready(function(){
 			if(currentNum)
 			currentNum++;
 		if(currentNum  > stockAll){
-			$.alert('超出库存！');
+			$.alert('超出限量');
 			return;
 		}
 		$(".currentNum").html(currentNum);

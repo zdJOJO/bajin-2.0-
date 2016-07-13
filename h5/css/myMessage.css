@@ -40,19 +40,20 @@ header div{
 	top: 0.14rem;
 }
 .wrapper .singleMsg{
-	border-bottom:#b2b2b2 1px solid;
+	border-bottom: #b2b2b2 1px solid;
 	position: relative;
+	height: 0.58rem;
 }
 .wrapper .singleMsg p{
 	-webkit-margin-before: 0;
-    -webkit-margin-after: 0;
+	-webkit-margin-after: 0;
 	width: 1rem;
 	text-align: center;
 	color: #a5a5a5;
 	background-color: #f7f7f7;
-	height: 0.12rem;
-	line-height: 0.12rem;
-	box-sizing:border-box;
+	height: 0.1rem;
+	line-height: 0.1rem;
+	box-sizing: border-box;
 }
 .wrapper .singleMsg .detail .title{
 	position: relative;
@@ -64,8 +65,8 @@ header div{
 .wrapper .singleMsg .detail .title img{
 	width: 0.02rem;
 	position: absolute;
-	top: 0.035rem;
-	left: 0.04rem;
+	top: 0.05rem;
+	left: 0.025rem;
 }
 .wrapper .singleMsg .detail .title h3{
 	position: absolute;
@@ -117,13 +118,14 @@ section.imgList img{
 }
 .imgAndWord{
 	box-sizing:border-box;
-	padding:0 0.06rem
+	padding:0 0.06rem;
+	color: rgb(178, 178, 178);
 }
 .imgAndWord img{
-	width: 0.12rem;
-	height: 0.12rem;
+	width: 0.15rem;
+	height: 0.15rem;
 	float: left;
-	margin-right:0.06rem; 
+	margin-right: 0.04rem;
 }
 .imgAndWord section{
 	font-size: 14px;
@@ -134,4 +136,6 @@ section.imgList img{
 	box-sizing:border-box;
 	padding-right:0.08rem;
 	background-color: #fff;
+	position: absolute;
+	top: 0.44rem;
 }

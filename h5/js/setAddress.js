@@ -120,10 +120,10 @@ $(function(){
 		 		contentType:"application/json",
 		 		success:function(data){
 		 			if(data.code==203){
-						alert("删除成功");
+						$.alert("删除成功");
 						window.location.reload();
 					}else{	
-						alert("删除失败");
+						$.alert("删除失败");
 					}	
 		 		}
 		 	})

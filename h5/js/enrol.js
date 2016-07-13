@@ -101,7 +101,7 @@ $(function(){
             //
             // for(var i in picList){
             //     var str = $('<div class="swiper-slide"><img src="'+picList[i]+'"/></div>');
-            //     $(".swiper-wrapper").append(str);
+            //     $(".swiper-wrapper   ").append(str);
             // }
 
 

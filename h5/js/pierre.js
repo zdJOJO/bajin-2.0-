@@ -94,7 +94,7 @@ $(document).ready(function(){
 				lessAll($(".singleBrand_q .detail_q>p"),25);
 				// 添加到详细页面的跳转http://121.196.232.233/card/mall/{id}
 				$(".singleBrand_q").bind("click",function(){
-					window.location.href="mall.html?id="+$(this).data("mallid");
+					window.location.href = "mall.html?id="+$(this).data("mallid");
 				});
 			},
 			error:function(data){
@@ -120,5 +120,7 @@ $(document).ready(function(){
 		$(this).siblings().css("border-bottom","none").css("color","#9c9c9c");
 		getServer(1,100);
 	});
+
+
 	$(".hot").click();//默认点击一下热推
 });

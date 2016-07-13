@@ -334,6 +334,7 @@ footer div.pierrePage{
 
 .content, .newBrandList{
 	z-index: 9;
+	overflow-x:hidden;
 }
 #loading{
 	display: block;

@@ -11,13 +11,8 @@
     <link rel="stylesheet" href="css/weiXin/jquery-weui.css">
 
     <link  rel="stylesheet" href="css/index.css">
+    <!--<link  rel="stylesheet" type="text/css" href="css/ordersDetail.css">-->
     <link  rel="stylesheet" type="text/css" href="css/ordersDetail.css">
-
-    <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
-
-    <script id="ip" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
-    <script type="text/javascript" src="js/jquery/md5.js"></script>
     <script>
         var iWidth=document.documentElement.clientWidth;
         document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
@@ -65,13 +60,18 @@
     </div> -->
   </div>
 </div>
-<div class="cost_unpaid">总额:&nbsp;￥<span></span></div>
+<div class="cost_unpaid">
+    <span></span>
+</div>
 
 <footer>
-  <p class="f_2">去支付</p>
-  <p class="f_1">删除订单</p>  
+  <p class="f_2">去付款</p>
+  <p class="f_1">取消订单</p>
 </footer>
+<script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
+<script type="text/javascript" src="js/jquery/md5.js"></script>
 <script src="js/zepto.js"></script>
 <script src="js/unpaid.js"></script>
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
 </body>
 </html>

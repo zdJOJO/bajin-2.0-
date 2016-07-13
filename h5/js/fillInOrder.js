@@ -41,7 +41,8 @@ $(document).ready(function(){
 
 	//解析前一个页面传递的对象，包含汉字
 	var obj = {};
-	if(window.location.search.indexOf("cards") < 0){
+
+	try{
 		var str =  window.location.search.split("?")[1];
 		var arry = str.split("&&");
 
@@ -56,29 +57,48 @@ $(document).ready(function(){
 		if(arry[7]){
 			obj.receiveId = arry[7].split("=")[1];
 		}
-	}else {
+	}catch(e){
 		var  str = window.location.search.split("=")[1];
 		obj = JSON.parse(unescape(str));
-		// if(window.location.search.indexOf("receiveId") < 0){
-		// 	// var  str = window.location.search.split("=")[1];
-		// 	// var obj = JSON.parse(unescape(str));
-		// 	// var obj = JSON.parse(str);
-		// 	console.log(222222222222222222)
-		// 	var  str = window.location.search.split("=")[1];
-		// 	var obj = {
-		// 		cards: []
-		// 	};
-		// 	for(var i = 0; i< str.split("&&").length-1; i++){
-		// 		obj.cards[i] = str.split("&&")[i];
-		// 	}
-		// }else {
-		// 	var  str = window.location.search.split("=")[1];
-		// 	var obj = JSON.parse(unescape(str));
-		// }
-
 	}
 
 
+	// if(window.location.search.indexOf("cards") < 0){
+	// 	var str =  window.location.search.split("?")[1];
+	// 	var arry = str.split("&&");
+    //
+	// 	obj.cost = (arry[0].split("=")[1].indexOf(";") > 0) ? arry[0].split("=")[1].split(";")[1] : arry[0].split("=")[1];
+    //
+	// 	obj.goodsId = arry[1].split("=")[1];
+	// 	obj.num = arry[2].split("=")[1];
+	// 	obj.pic = arry[3].split("=")[1];
+	// 	obj.skuId = arry[4].split("=")[1];
+	// 	obj.subTitle = arry[5].split("=")[1];
+	// 	obj.title = arry[6].split("=")[1];
+	// 	if(arry[7]){
+	// 		obj.receiveId = arry[7].split("=")[1];
+	// 	}
+	// }else {
+	// 	var  str = window.location.search.split("=")[1];
+	// 	obj = JSON.parse(unescape(str));
+	// }
+
+
+	//备份一份  防止用户返回而丢失数据
+	var tempObj = {}
+
+	var deepCopy = function(source) {
+		for (var key in source) {
+			tempObj[key] = typeof source[key]==='object'? deepCoyp(source[key]): source[key];
+		}
+		return tempObj;
+	}
+
+	deepCopy(obj);
+
+	obj = obj || tempObj;
+
+	
 
 	//填入数据
 	if(obj.cost!=undefined){

@@ -33,24 +33,42 @@ $(function(){
         window.location.href = "pierre.html";
     });
 
+    var actWrap = $('.infoList>.lists').eq(0);
 
-    var page = 0;   //第一页
-    var actWrap=$('.infoList>.lists').eq(0);
 
+    var pageNum = 0;   //第一页
+    // var numSize = 5 ;  //每一页展示 numSize 个
+    // var pageStart = 0, pageEnd = 0;
+    var str = ''
+
+
+    //使用 滑动ajax插件 进行加载
+
+    var dropload = $('.infoList').dropload({
+        scrollArea : window,
+        domDown : {
+            domClass   : 'dropload-down',
+            domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+            domNoData  : '<div class="dropload-noData">已无数据</div>'
+        },
+        loadDownFn : function(me){
+            pageNum++;
+            getPage(pageNum);
+        }
+    });
 
     function getPage(page){
-        var str="";
-        $.get(port+"/card/activity?currentPage="+page+"&size=10",function(data){
+        $.get(port+"/card/activity?currentPage="+page+"&size=4",function(data){
             if(data.list.length != 0){//如果加载的是非空页面
                 for(var i=0;i<data.list.length;i++){
-                    str=$('<div class="infoItem" data-i="'+data.list[i].activityId+'" style="background: url('+data.list[i].activityPic+') no-repeat; background-size:37% 100%;">' +
+                    str += '<div class="infoItem" data-i="'+data.list[i].activityId+'" style="background: url('+data.list[i].activityPic+') no-repeat; background-size:37% 100%;">' +
                         '<div class="tit-wrap"><div class="tit-content"> ' +
                         '<h1>'+data.list[i].activityTitle+'</h1>' +
                         '<div class="detile">' +
                         '<p >'+data.list[i].activityBrief+'</p></div>' +
                         '<p style="font-size:13px;  position: absolute;top: 99px;left: 13px;">'+new Date(data.list[i].createTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
-                        '</p></div></div></div>');
-                    $('.lists').append(str);
+                        '</p></div></div></div>';
                 }
                 //整个div点击跳转
                 $('.infoItem').click(function(){
@@ -61,103 +79,19 @@ $(function(){
                     toActivity($(this).attr('data-id'));
                 });
                 less_q();
-                setTimeout(function(){
-                    $('.lists').append(str);
-                    // 每次数据加载完，必须重置
-                    dropload.resetload();
-                },1000);
-            }else{
+                $('.lists').append(str);
+                // 每次数据加载完，必须重置
                 dropload.resetload();
+            }else{
+                // 锁定
+                dropload.lock();
+                // 无数据
+                dropload.noData();
+                setTimeout('$(".dropload-down").css("height","0")',1000)
+
             }
         });
     }
-
-    //使用 滑动ajax插件 进行加载
-    var dropload = $('.infoList').dropload({
-        domDown : {
-            domClass   : 'dropload-down',
-            domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
-            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
-            domNoData  : '<div class="dropload-noData">暂无数据</div>'
-        },
-        loadDownFn : function(me){
-            page += 1 ;
-            getPage(page);
-        }
-    });
-
-
-
-
-
-
-
-
-
-
-    // function getActData(){
-    //     var str="";
-    //     function getPage(page){
-    //         $.get(port+"/card/activity?currentPage="+page+"&size=10",function(data){
-    //             console.log(data);
-    //             if(data.list.length != 0){//如果加载的是非空页面
-    //                 for(var i=0;i<data.list.length;i++){
-    //                     if(i%2==0){
-    //                             str=$('<div class="infoItem" data-i="'+data.list[i].activityId+'"style="background: url('+data.list[i].maxPic+') no-repeat;background-size:cover;"> <div class="mask"></div> <div class="tit-content"> <h1>'+data.list[i].activityTitle+'</h1> <p style="font-size:13px;">'+new Date(data.list[i].createTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+'</p></div> </div>');
-    //                     }else if(i%4==1){
-    //                             str=$('<div class="infoItem rightItem" data-i="'+data.list[i].activityId+'" style="background: url('+data.list[i].activityPic+') no-repeat; background-size:50%;"><div class="tit-wrap"><div class="tit-content"> <h1>'+data.list[i].activityTitle+'</h1><div class="detile"><p >'+data.list[i].activityBrief+'</p></div><p style="font-size:13px;">'+new Date(data.list[i].createTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+'</p></div></div></div>');
-    //                         }else if(i%4 == 3){
-    //                             str=$('<div class="infoItem leftItem" data-i="'+data.list[i].activityId+'" style="background: url('+data.list[i].activityPic+') no-repeat;"><div class="tit-wrap"><div class="tit-content"> <h1>'+data.list[i].activityTitle+'</h1><div class="detile"> <p>'+data.list[i].activityBrief+'</p></div> <p style="font-size:13px;">'+new Date(data.list[i].createTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+'</p> </div> </div><img src="'+data.list[i].activityPic+'"/></div>');
-    //                         }
-    //                     actWrap.append(str);
-    //                 }
-    //                 //整个div点击跳转
-    //                 $('.infoItem').click(function(){
-    //                     toActivity($(this).attr('data-i'));
-    //                 });
-    //                 //点击箭头跳转
-    //                 $('.jump-img').click(function(){
-    //                     toActivity($(this).attr('data-id'));
-    //                 });
-    //                 less_q();
-    //             }else{
-    //                 return ;
-    //             }
-    //         });
-    //     }
-    //     getPage(1);
-    //     //拉加载处理
-    //     var touchEvents = {
-    //             touchstart: "touchstart",
-    //             touchmove: "touchmove",
-    //             touchend: "touchend",
-    //             /**
-    //              * @desc:判断是否pc设备，若是pc，需要更改touch事件为鼠标事件，否则默认触摸事件
-    //              */
-    //             initTouchEvents: function () {
-    //                 if (isPC()) {
-    //                     this.touchstart = "mousedown";
-    //                     this.touchmove = "mousemove";
-    //                     this.touchend = "mouseup";
-    //                 }
-    //             }
-    //         };
-    //         //touchEvents.touchend
-    //         $(document).bind(touchEvents.touchend, function (event) {
-    //             //event.preventDefault();
-    //             //这里触发事件
-    //             //判断加载的条件
-    //             // console.log("屏幕的高度：");
-    //             // alert($(document).height());
-    //             // console.log("滚动的的高度：");
-    //             // alert($(window).scrollTop());
-    //
-    //             if($(document).height() >= $(window).height() + $(window).scrollTop()){
-    //                 page++;
-    //                 getPage(page);
-    //             }
-    //         });//下拉加载函数结束
-    // }
 
 
 

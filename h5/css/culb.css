@@ -24,6 +24,7 @@ body{
 }
 .infoList{
 	margin-bottom: 0.14rem;
+	overflow-x: hidden;
 }
 
 .infoItem{
@@ -41,11 +42,11 @@ body{
 
 .tit-wrap{
 	position: relative;
-	width: 63%;
+	width: 65%;
 	height: 100%;
 	background: #ffffff;
 	border-bottom: 1px rgba(203, 199, 200, 0.31) solid;
-	right: -138px;
+	right: -0.35rem;
 }
 /*.infoItem:nth-child(odd) .tit-content{*/
 	/*width:80%;*/

@@ -20,15 +20,21 @@ footer,.wrapper{
 	padding: 0.04rem 0.03rem;
 }
 .good img{
-	height: 0.22rem;
-	width: 0.22rem;
+	height: 98%;
+	width: 0.29rem;
 	margin-right: 0.04rem;
-	margin-top: 9px;
+	 margin-top: 9px;
 	float: left;
 }
+.good >.goodBox>img{
+	margin-top: 0;
+}
+
+
 .good>div{
-	float:right; 
-	width: 0.68rem;
+	float: right;
+	width: 100%;
+	height: 0.33rem;
 }
 .good>div div.subtitle{
 	color:#b9b9b9;
@@ -45,6 +51,7 @@ footer,.wrapper{
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	margin-top: 6px;
 }
 .good>div div.cost p{
 	-webkit-margin-before:0;
@@ -52,14 +59,17 @@ footer,.wrapper{
 	float: left;
 }
 .good>div div.cost p:first-child{
-	font-size: 17px;
-	color: #5b5b5b;	
+	font-size: 15px;
+	color: #B9B9B9;
 }
 .good>div div.cost p:nth-child(2){
 	font-size: 17px;
-	color: #9f9f9f;	
+	color: #363E3E;
 	float: right;
 }
+
+
+
 .address{
 	height: 0.12rem;
 	line-height: 0.12rem;
@@ -79,6 +89,10 @@ footer,.wrapper{
 	-webkit-margin-after:0;
 	font-size: 13px;
 	color: #989898;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 60%;
 }
 .address .person{
 	-webkit-margin-before:0;
@@ -86,11 +100,15 @@ footer,.wrapper{
 	float: right;
 	margin-right: 0.03rem;
 	font-weight: bold;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 25%;
+	color: #3A3A3A;
 }
 .address .person span{
 	font-size: 14px;
 	margin-left: 0.03rem;
-	color: 
 }
 .time{
 	height: 0.3rem;
@@ -178,12 +196,22 @@ footer .delete_hadPaid{
 	position: fixed;
 	bottom: 0.12rem;
 	height: 0.12rem;
-	width: 0.43rem;
+	width: 0.7rem;
 	line-height: 0.12rem;
 	right: 0;
+}
+
+.cost_unpaid>span{
+	position: absolute;
+	right: 9%;
 }
 
 /*unpaid页面的具体调整*/
 .unpaid_margin_bottom{
 	margin-bottom: 0.3rem;
+}
+
+
+.weui_mask, .weui_mask_transition, .weui_mask_transparent{
+	z-index: 10;
 }

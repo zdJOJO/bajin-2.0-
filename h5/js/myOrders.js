@@ -24,40 +24,94 @@ $(document).ready(function(){
 	var his = hisStr[hisStr.length-1];
 
 
-	// 判断 从哪里跳转此页面  （hasDelete 是从 删除订单跳转回来）
-	var isDeleteAction =  window.location.search.indexOf('hasDelete');
+	// 判断 从哪里跳转此页面
+	var isDeleteAction = -1;
+	if(window.location.search.indexOf('allApo') > 0){
+		isDeleteAction = 0;
+	}
+	if(window.location.search.indexOf('waittingForApo') > 0){
+		isDeleteAction = 1;
+	}
+	if(window.location.search.indexOf('havePaidApo') > 0){
+		isDeleteAction = 2;
+	}
+	if(window.location.search.indexOf('havePostApo') > 0){
+		isDeleteAction = 3;
+	}
 
-	if(isDeleteAction > 0) {
+
+	var orderTab = '';
+	var whereLocationHere = function (num) {
+		switch(num)
+		{
+			case 0:
+				orderTab  = 'allApo';
+				break;
+			case 1:
+				orderTab  = 'waittingForApo';
+				break;
+			case 2:
+				orderTab  = 'havePaidApo';
+				break;
+			case 3:
+				orderTab  = 'havePostApo';
+				break;
+		}
+		return orderTab;
+	}
+
+	//对Tab进行渲染
+	var to_OrderTab = function (str) {
 		//选择第一级
 		$(".commodityOrder").css("border-bottom", "1px solid #6b6b6b;").css("color", "#6b6b6b").siblings().css("border-bottom", "none").css("color", "#b2b2b2");
 		$(".wrapper").css("display", "block");
 		$(".appointment").css("display", "none");
 
 		//选择第二级
-		$(".waitingForPayApo").css("background-color", "#b7a66e").css("color", "#fff").siblings().css("background-color", "#fff").css("color", "#9f9f9f");
+		$("." + str).css("background-color", "#b7a66e").css("color", "#fff").siblings().css("background-color", "#fff").css("color", "#9f9f9f");
 		getOrders(1, 1000, 1);
 	}
 
+	if(isDeleteAction >= 0){
+		to_OrderTab(whereLocationHere(isDeleteAction));
+	}
+
+
+
+
+
+
 	//主要 切换选项卡，活动预约与商品订单切换按钮
 	$(".appointments").click(function(){
-		// getMessage(1);
-		doCss(this);
-		getAppointment(1,100);
-		$(".wrapper").css("display","none");
-		$(".appointment").css("display","block");
+		window.location.href = 'myOrders.html';
 	});
+
+
+
 	$(".commodityOrder").click(function(){
 		// getMessage(2);
 		doCss(this);
 		$(".wrapper").css("display","block");
 		$(".appointment").css("display","none");
+		isDeleteAction = 0;
+		to_OrderTab(whereLocationHere(isDeleteAction));
 	});
 
 
-	if(isDeleteAction < 0){
-		$(".appointments").click();
-	}
+	var tabOrderJO = $(".wrapper>header>div");
+	tabOrderJO.click(function () {
+		orderTab = tabOrderJO.attr("class");
+		to_OrderTab(whereLocationHere(isDeleteAction));
+	});
 
+
+	console.log(isDeleteAction);
+	if(isDeleteAction == -1){
+		doCss($(".appointments"));
+		getAppointment(1,100);
+		$(".wrapper").css("display","none");
+		$(".appointment").css("display","block");
+	}
 
 
 	//处理选项卡公共的事件
@@ -71,9 +125,8 @@ $(document).ready(function(){
 		getOrders(1,1000,$(this).data("orderstate"));
 	});
 
-	if(isDeleteAction < 0) {
-		$(".header div.allApo").click();
-	}
+
+
 
 	function doCss2(self){
 		$(self).css("background-color","#b7a66e").css("color","#fff");
@@ -132,8 +185,6 @@ $(document).ready(function(){
     //http://121.196.232.233/card/order/admin?currentPage={pagenum}&size={size}&orderState=0&token=e7120d7a-456b-4471-8f86-ac638b348a53
     // 备注:orderState 订单状态，0:全部,1：未付款，2：已付款，3：已发货，4：已退款，5：交易关闭，6：已收货
     function getOrders(currentPage,size,orderState){
-
-
     	$.ajax({
     		type:"get",
     		aysnc:true,
@@ -167,24 +218,26 @@ $(document).ready(function(){
 					}						
 					if(data.list[i].orderModel.orderState ==1){
 						state = "待付款";
-						url = "unpaid.html?cardid="+data.list[i].orderModel.orderId;
+						url = +data.list[i].orderModel.orderId;
 					}else if(data.list[i].orderModel.orderState ==2){
 						state = "已付款";
-						url = "hadPaid.html?cardid="+data.list[i].orderModel.orderId;
+						url = data.list[i].orderModel.orderId;
 					}else if(data.list[i].orderModel.orderState ==3){
 						state = "已发货";
-						url = "hadSent.html?cardid="+data.list[i].orderModel.orderId;
+						url = data.list[i].orderModel.orderId;
 					}
 					var html = $('<div class="singleMsg" data-url="'+url+'">'+str+'<div class="totleMsg"><p class="status">'+state+'</p><p class="detail">共'+data.list[i].orderModel.orderNumber+'件商品&nbsp;合计:￥'+ data.list[i].orderModel.orderCount.toFixed(2) + '</p></div></div>');
 				    $(".container").append(html);
+
+
 				    //绑定点击跳转事件
 				    $(".singleMsg").bind("click",function(){
-				    	window.location.href = $(this).data("url");
+						window.location.href = "unpaid.html?" + orderTab + "&&&" + "cardid=" + $(this).data("url");
 					});
+
 				}
     		},
     		error:function(data){
-				console.log(data);
     		}
     	});
     }

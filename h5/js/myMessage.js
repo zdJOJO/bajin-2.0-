@@ -125,7 +125,7 @@ $(document).ready(function(){
 	}//标记函数结束
 
 
-	$(".systemMsg").click();
+
 	// 切换选项卡
 	$(".systemMsg").click(function(){
 		getMessage(1,1,100);
@@ -135,21 +135,24 @@ $(document).ready(function(){
 	// 	getMessage(2);
 	// 	doCss(this);
 	// });
+
+
 	$(".preferentialMsg").click(function(){
 		getMessage(3,1,100);
 		doCss(this);
 	});
+
+	$(".preferentialMsg").click();
+
 	// $(".customerServiceMsg").click(function(){
 	// 	getMessage(3);
 	// 	doCss(this);
 	// });
     //处理选项卡公共的事件
     function doCss(self){
-		$(self).css("border-bottom","1px solid #6b6b6b;").css("color","#6b6b6b");
+		$(self).css("border-bottom","2px solid #6b6b6b;").css("color","#6b6b6b");
 		$(self).siblings().css("border-bottom","none").css("color","#b2b2b2");
     }
-
-    $(".systemMsg").click();
 });
 //格式化时间，在date原形上边添加方法
 Date.prototype.Formate=function(){

@@ -23,7 +23,7 @@ $(function(){
 		if(User!=""&&Pass!=""){
 			$.ajax({
 				type:"POST",
-				url:port+"/card/login",
+				url: port + "/card/login?isWx=true",
 				dataType:"json",
 				contentType : "application/json;charset=UTF-8",  
 				data:JSON.stringify({
@@ -65,12 +65,22 @@ $(function(){
 						return ""
 						}
 	                    if(window.history.length > 1){
-	                    	window.location.href = unescape(his);
+							//测试  环境
+							window.location.href = unescape(his);
+
+
+                            // //正式环境
                             // var token = getCookie("token");
                             // window.location.href = 	"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx886a1d1acb7084a5&redirect_uri=http%3a%2f%2fwww.winthen.com%2fcard%2fweixin%2fauthorize&response_type=code&scope=snsapi_base&state=" + token + "bjzx" + unescape(his) + "#wechat_redirect";
+
 						}else{
+							//测试  环境
 	                    	window.location.href = "index.html";
-							// var token = getCookie("token");
+
+							
+
+                            // //正式环境
+                            // var token = getCookie("token");
                             // window.location.href = 	"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx886a1d1acb7084a5&redirect_uri=http%3a%2f%2fwww.winthen.com%2fcard%2fweixin%2fauthorize&response_type=code&scope=snsapi_base&state=" + token + "bjzx" + "index.html#wechat_redirect";
 
 						}

@@ -53,23 +53,23 @@ $(function(){
 					}),
 					success:function(data){
 						if(data.code==201){
-							alert("创建成功!");
+							$.alert("创建成功!");
 							$("#demo1").val("");
 							$(".receiverPhone").val("");
 							$(".detilAddress").val("");
 							$(".receiverName").val("");
 							// 延迟跳转
 							window.location.href = "setAddress.html?obj="+escape(JSON.stringify(obj));
-						}else{	
-							alert("创建失败!");
+						}else{
+							$.alert("创建失败!");
 						}				
 					},
 				})
 			}else{
-				alert("请输入正确的电话号码!");
+				$.alert("请输入正确的电话号码!");
 			}
 		}else{
-			alert("以上内容不能为空!");
+			$.alert("以上内容不能为空!");
 		}
 	});	
 });

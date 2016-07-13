@@ -292,14 +292,13 @@ $(document).ready(function(){
 			}
 		},
 		error:function(data){
-			console.log(data);
 		}
 	});
 	//私人预约服务
 	function getMessage(){
 		$.ajax({
 			type:"GET",
-        	dataType:"string",
+        	dataType:"text",
 			url:port+"/card/bank/encryption/privatejcyy?token="+token,
 			success:function(data){
 	 			console.log(data);

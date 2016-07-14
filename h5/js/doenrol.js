@@ -82,7 +82,7 @@
                         var email = $("#email").val();
                         var reg_email=/^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
                             if(applyName==''||applyPhone==''){
-                                 alert("请输入真实姓名和手机号");
+                                 $.alert("请输入真实姓名和手机号");
                             }else{
                             var checked = checkMobile(applyPhone);
                                 if(checked){
@@ -220,20 +220,20 @@
                                                             // window.location.href = "pay.html?id="+data.data.applyId;
                                                         }
                                                     }else{
-                                                        alert(data.message);
+                                                        $.alert(data.message);
                                                     }
                                             },
                                              error:function(data){
-                                                 alert("您的账号还未登陆");
+                                                 $.alert("您的账号还未登陆");
                                                  window.location.href="login.html?his="+escape(his);
                                             }
                                         });
 
                                     }else{
-                                        alert("请填写正确的邮箱");
+                                        $.alert("请填写正确的邮箱");
                                     }
                                 }else{
-                                    alert("请填写正确的手机号码");
+                                    $.alert("请填写正确的手机号码");
                                 }
                             }
                     });

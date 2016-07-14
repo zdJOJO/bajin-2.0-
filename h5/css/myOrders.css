@@ -27,13 +27,26 @@ header{
 }
 header div{
 	display: inline-block;
-	width: 0.2rem;
-	margin:0 0.05rem;
-	/*border-bottom: 1px solid #b2b2b2;*/
-	/*color: #6b6b6b;*/
+	/*width: 0.2rem;*/
+	width: 0.05rem;
+	margin:0 0.08rem;
+	border-bottom: 1px solid #b2b2b2;
 	color:#b2b2b2;
 	font-weight: bold;
+	position: relative;
+	top: 0.05rem;
 }
+
+header div>.tab{
+	display: block;
+	position: absolute;
+	width: 75px;
+	height: 45px;
+	top: -0.11rem;
+	left: -0.07rem;
+}
+
+
 /*内容部分*/
 .wrapper{
 	position: absolute;

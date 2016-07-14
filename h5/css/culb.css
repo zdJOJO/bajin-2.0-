@@ -23,7 +23,7 @@ body{
 	text-align: center;;
 }
 .infoList{
-	margin-bottom: 0.14rem;
+	margin-bottom: 0.12rem;
 	overflow-x: hidden;
 }
 
@@ -36,6 +36,18 @@ body{
 
 .infoItem:last-child{
 	margin-bottom: 0;
+}
+
+
+.infoItem >.tit-wrap .type{
+	position: absolute;
+	display: inline-block;
+	padding: 1.2% 4%;
+	text-align: center;
+	background: rgb(46, 49, 51);
+	color: #fff;
+	top: 0.04rem;
+	left: 0.04rem;
 }
 
 
@@ -80,7 +92,7 @@ body{
 	line-height: 25px;
 	font-size: 17px;
 	position: absolute;
-	top: 25px;
+	top: 50px;
 	left: 13px;
 }
 @media screen and (max-width:375px){
@@ -94,7 +106,7 @@ body{
 	line-height: 0.07rem;
 	color: #878787;
 	position: absolute;
-	top: 57px;
+	top: 75px;
 	left: 14px;
 }
 .tit-content .jump{

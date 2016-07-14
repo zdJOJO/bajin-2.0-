@@ -87,18 +87,37 @@ $(document).ready(function(){
 	//备份一份  防止用户返回而丢失数据
 	var tempObj = {}
 
-	var deepCopy = function(source) {
-		for (var key in source) {
-			tempObj[key] = typeof source[key]==='object'? deepCoyp(source[key]): source[key];
+	function clone3(obj){
+		function Clone(){}
+		Clone.prototype = obj;
+		var o = new Clone();
+		for(var a in o){
+			if(typeof o[a] == "object") {
+				o[a] = clone3(o[a]);
+			}
 		}
-		return tempObj;
+		return o;
 	}
 
-	deepCopy(obj);
+	clone3(obj);
 
-	obj = obj || tempObj;
 
-	
+
+	// obj = obj || tempObj;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	//填入数据
 	if(obj.cost!=undefined){

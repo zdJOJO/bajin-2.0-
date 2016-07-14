@@ -39,7 +39,7 @@ $(function(){
     var pageNum = 0;   //第一页
     // var numSize = 5 ;  //每一页展示 numSize 个
     // var pageStart = 0, pageEnd = 0;
-    var str = ''
+    var actStr = '' ;
 
 
     //使用 滑动ajax插件 进行加载
@@ -59,17 +59,24 @@ $(function(){
     });
 
     function getPage(page){
-        $.get(port+"/card/activity?currentPage="+page+"&size=4",function(data){
+        $.get(port+"/card/activity?currentPage="+page+"&size=10",function(data){
             if(data.list.length != 0){//如果加载的是非空页面
                 for(var i=0;i<data.list.length;i++){
-                    str += '<div class="infoItem" data-i="'+data.list[i].activityId+'" style="background: url('+data.list[i].activityPic+') no-repeat; background-size:37% 100%;">' +
+                    actStr += '<div class="infoItem" data-i="'+data.list[i].activityId+'" style="background: url('+data.list[i].activityPic+') no-repeat; background-size:37% 100%;">' +
                         '<div class="tit-wrap"><div class="tit-content"> ' +
+                        '<span class="type">' + data.list[i].activityType + '</span>' +
                         '<h1>'+data.list[i].activityTitle+'</h1>' +
                         '<div class="detile">' +
-                        '<p >'+data.list[i].activityBrief+'</p></div>' +
-                        '<p style="font-size:13px;  position: absolute;top: 99px;left: 13px;">'+new Date(data.list[i].createTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
+                        '<p >'+data.list[i].activitySubtitle+'</p></div>' +
+                        '<p style="font-size:13px;  position: absolute;top: 122px;left: 13px;">'+new Date(data.list[i].createTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
                         '</p></div></div></div>';
                 }
+                $('.lists').append(actStr);
+                // 每次数据加载完，必须重置
+                actStr = '';
+                dropload.resetload();
+
+
                 //整个div点击跳转
                 $('.infoItem').click(function(){
                     toActivity($(this).attr('data-i'));
@@ -79,9 +86,6 @@ $(function(){
                     toActivity($(this).attr('data-id'));
                 });
                 less_q();
-                $('.lists').append(str);
-                // 每次数据加载完，必须重置
-                dropload.resetload();
             }else{
                 // 锁定
                 dropload.lock();
@@ -92,6 +96,7 @@ $(function(){
             }
         });
     }
+
 
 
 

@@ -59,7 +59,12 @@ $(function(){
 							$(".detilAddress").val("");
 							$(".receiverName").val("");
 							// 延迟跳转
-							window.location.href = "setAddress.html?obj="+escape(JSON.stringify(obj));
+
+							if(window.location.href.indexOf('fromePersonNalInfo') > 0){
+								window.location.href = "setAddress.html?fromePersonNalInfo&&obj="+escape(JSON.stringify(obj));
+							}else {
+								window.location.href = "setAddress.html?obj="+escape(JSON.stringify(obj));
+							}
 						}else{
 							$.alert("创建失败!");
 						}				

@@ -50,7 +50,6 @@ $(document).ready(function(){
 			}
 			//保存当前的商品的图片地址到立即购买按钮上		    
 		    var swiper = new Swiper('.swiper-container', {
-
 				autoplay: 3000,//可选选项，自动滑动
 		        pagination: '.swiper-pagination',
 		        paginationType: 'progress',

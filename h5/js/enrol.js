@@ -65,7 +65,6 @@ $(function(){
             if(data.imgList.length > 1){
                 var mySwiper = new Swiper('.swiper-container',{
                     loop: false,
-                    autoplay: 3000,
                     speed:300,
                     scrollbar:'.swiper-scrollbar',
                     scrollbarHide : false,

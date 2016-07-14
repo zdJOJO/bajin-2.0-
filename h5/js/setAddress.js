@@ -18,25 +18,52 @@ $(function(){
 	  }
 	return undefined;
 	}
-	//token = getCookie("token") ||"19cdc036-c98e-4958-8d89-1b55f0e09695";//便于本地测试
 	token = getCookie("token");
+
+
+
+    //用于判断从哪里跳进这个页面
+	var isPersonNalInfo = window.location.href.indexOf('fromePersonNalInfo') ;
+
+
+
 	//获取页面的名称
 	$(".add_add").click(function(){
-		window.location.href="addAddress.html?obj="+escape(JSON.stringify(obj));
+		window.location.href = isPersonNalInfo > 0 ? window.location.href="addAddress.html?fromePersonNalInfo&&obj="+escape(JSON.stringify(obj)) : window.location.href="addAddress.html?obj="+escape(JSON.stringify(obj));
 	});
-	console.log(token)
+
+
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];
 	
-	//获取从fillInOrder页面传递来的obj
-	if(window.location.search != ""){
+	// //获取从fillInOrder页面传递来的obj
+	// if(window.location.search != ""){
+	// 	if(window.location.search.indexOf("isShoppingCart=false") > 0){
+	// 		var  JSONstr = window.location.search.split("=")[1].split("&&")[0];
+	// 	}else {
+	// 		var  JSONstr = window.location.search.split("=")[1];
+	// 	}
+	// 	var obj = JSON.parse(unescape(JSONstr));
+	// }
+
+
+
+	//获取从上个（fillInOrder.html 或者 set.html）页面传递来的obj
+	var JSONstr = '';
+	var obj = {};
+	if(isPersonNalInfo > 0){
+		// JSONstr = window.location.search.split("=")[1];
+	}else {
 		if(window.location.search.indexOf("isShoppingCart=false") > 0){
-			var  JSONstr = window.location.search.split("=")[1].split("&&")[0];
+			  JSONstr = window.location.search.split("=")[1].split("&&")[0];
 		}else {
-			var  JSONstr = window.location.search.split("=")[1];
+			  JSONstr = window.location.search.split("=")[1];
 		}
-		var obj = JSON.parse(unescape(JSONstr));
+		obj = JSON.parse(unescape(JSONstr));
 	}
+
+
+
 
 
 	//获取上个页面的url
@@ -62,18 +89,21 @@ $(function(){
 		$(".reg_But,.ad_But").bind("click",function(){
 			obj.receiveId = $(this).data("id");
 
-			if(window.location.search.indexOf("isShoppingCart=false") > 0){
-				// window.location.href = "fillInOrder.html?obj=" + escape(JSON.stringify(obj));
-
-				window.location.href = "fillInOrder.html?cost="+ obj.cost + "&&goodsId="+obj.goodsId+ "&&num=" +obj.num+ "&&pic=" +obj.pic+ "&&skuId="+obj.skuId+ "&&subTitle="+obj.subTitle + "&&title="+obj.title + "&&receiveId="+obj.receiveId;
-
+			if(isPersonNalInfo > 0){
+				return;
 			}else {
-				window.location.href = "fillInOrder.html?obj=" + escape(JSON.stringify(obj));
+				if(window.location.search.indexOf("isShoppingCart=false") > 0){
+					window.location.href = "fillInOrder.html?cost="+ obj.cost + "&&goodsId="+obj.goodsId+ "&&num=" +obj.num+ "&&pic=" +obj.pic+ "&&skuId="+obj.skuId+ "&&subTitle="+obj.subTitle + "&&title="+obj.title + "&&receiveId="+obj.receiveId;
+				}else {
+					window.location.href = "fillInOrder.html?obj=" + escape(JSON.stringify(obj));
+				}
 			}
+
+
 		});
 
 
-		$(".Check_But,.set_But").click(function(){//切换默认地址，接口还没写好
+		$(".Check_But,.set_But").click(function(){			//切换默认地址，接口还没写好
 			$(".Check_But").find("img").attr("src","imgs/add_pic3.png")
 			$(".set_But").html("设为默认");
 			$(".set_But").css("color","#acacac");
@@ -87,10 +117,10 @@ $(function(){
 	 		var obj = $(this).parent();
 	 		var ads = obj.data("address").split(",");
 	 		$.ajax({
-	 			type:"put",
-	 			url:port+"/card/receiver/"+receiverid+"?token="+token,
-	 			dataType:"josn",
-	 			contentType:"application/json",
+	 			type: "put",
+	 			url: port+"/card/receiver/"+receiverid+"?token="+token,
+	 			dataType: "str",
+	 			contentType: "application/json",
 	 			async:true,
 	 			data:JSON.stringify({
 	 				receiveId:receiverid,
@@ -101,19 +131,24 @@ $(function(){
 					city:ads[1],
 					district:ads[2],
 					detilAddress:ads[3],
-					isDefault:1
+					isDefault: 1
 	 			}),
 	 			success:function(data){
-	 				console.log(data);
+					//todo
 	 			},
 	 			error:function(data){
-	 				console.log(data);
+					if(isPersonNalInfo > 0){
+						window.location.href = "set.html?";
+					}
 	 			}
 	 		});
 
 		});
+
+
+
 		$(".font_del,.add_delete").click(function(){	//删除地址
-		 	var receiverId=$(this).data('id');
+		 	var receiverId = $(this).data('id');
 		 	$.ajax({
 		 		type:"DELETE",
 		 		url:port+"/card/receiver/"+receiverId+"?token="+token,
@@ -127,9 +162,12 @@ $(function(){
 					}	
 		 		}
 		 	})
-		})//删除地址结束	
+		})//删除地址结束
+
+
+		//编辑地址
 		$(".add_editor,.font_set").bind("click",function(){
-			window.location.href = "editAddress.html?id="+$(this).data("id");
+			window.location.href = isPersonNalInfo > 0 ?  window.location.href = "editAddress.html?fromePersonNalInfo&&id="+$(this).data("id") : window.location.href = "editAddress.html?id="+$(this).data("id");
 		});	
 	})//ajax请求结束
 });

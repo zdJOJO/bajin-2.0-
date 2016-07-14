@@ -55,7 +55,7 @@ $(document).ready(function(){
 			var str;
 			for(var i=0,len=data.list.length;i<len;i++){
 				// 处理金钱数后边的.00
-				var costFormate=0.00;
+				var costFormate = 0.00;
 				if(/[\.]{1}/.test(data.list[i].goodsPrice)){
 					var str= data.list[i].goodsPrice.toString().split(".");
 					costFormate = str[0]+"."+str[1].substring(0,2);
@@ -63,11 +63,19 @@ $(document).ready(function(){
 					costFormate = data.list[i].goodsPrice+".00";
 				}
 				if(i%2==0){
-					//<div class="logo"><img src="imgs/pierre.png"/></div>
-					str = $('<div class="lar" data-id="'+data.list[i].goodsId+'"><img src="'+data.list[i].hotPic+'"/><div class="detail"><p class="title" style="margin: 15px 0 5px 0;">'+data.list[i].goodsTitle+'</p><p class="subTitle">'+data.list[i].goodsSubtitle+'</p><p class="pirce">￥&nbsp;'+costFormate+'</p></div></div>');
-				}else if(i%2==1){
-					str = $('<div class="uad" data-id="'+data.list[i].goodsId+'"><img src="'+data.list[i].maxPic+'"/><div class="down"><center><p class="title">'+data.list[i].goodsTitle+'</p><p class="subtitle">'+data.list[i].goodsSubtitle+'</p><p class="pirce">￥&nbsp;'+costFormate+'</p><p class="buy">购买</p></center></div></div>');
+					
 				}
+				str = $('<div class="lar" data-id="'+data.list[i].goodsId+'"><img src="'+data.list[i].hotPic+'"/>' +
+					'<div class="detail"><p class="title" style="margin: 5px 0 5px 0;">'+data.list[i].goodsTitle+'</p>' +
+					'<p class="subTitle">'+data.list[i].goodsSubtitle+'</p><p class="pirce">￥&nbsp;'+costFormate+'</p></div></div>');
+
+				// if(i%2==0){
+				// 	//<div class="logo"><img src="imgs/pierre.png"/></div>
+				// 	str = $('<div class="lar" data-id="'+data.list[i].goodsId+'"><img src="'+data.list[i].hotPic+'"/><div class="detail"><p class="title" style="margin: 15px 0 5px 0;">'+data.list[i].goodsTitle+'</p><p class="subTitle">'+data.list[i].goodsSubtitle+'</p><p class="pirce">￥&nbsp;'+costFormate+'</p></div></div>');
+				// }else if(i%2==1){
+				// 	str = $('<div class="uad" data-id="'+data.list[i].goodsId+'"><img src="'+data.list[i].maxPic+'"/><div class="down"><center><p class="title">'+data.list[i].goodsTitle+'</p><p class="subtitle">'+data.list[i].goodsSubtitle+'</p><p class="pirce">￥&nbsp;'+costFormate+'</p><p class="buy">购买</p></center></div></div>');
+				// }
+
 				$(".wrapper .content").append(str);
 			}
 			//添加导航事件

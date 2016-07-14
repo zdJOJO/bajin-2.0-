@@ -72,7 +72,18 @@ $(document).ready(function(){
 									url=data.list[i].url;
 								}
 							}
-							var str=$('<div class="singleMsg" data-url="'+url+'" data-isread="'+data.list[i].isRead+'" data-itemtype="'+data.list[i].itemType+'" data-itemid="'+itemid+'" data-messageid="'+data.list[i].messageId+'"><p class="date">'+new Date(data.list[i].pushTime*1000).Formate()+'</p><div class="detail"><div class="title">'+tip+'<h3>'+data.list[i].messageTitle+'</h3></div><div class="imgAndWord"><img src="'+data.list[i].messagePic+'"/><section>'+data.list[i].messageDetail+'</section></div><p class="toDetail">查看详情>></p></div></div>');
+
+							var str = '';
+							if(data.list[i].messageDetail){
+								str = data.list[i].messageDetail;
+							}
+
+							var str=$('<div class="singleMsg" data-url="'+url+'" data-isread="'+data.list[i].isRead+'" data-itemtype="'+data.list[i].itemType+'" data-itemid="'+itemid+'" data-messageid="'+data.list[i].messageId+'">' +
+								'<p class="date">'+new Date(data.list[i].pushTime*1000).Formate()+'</p>' +
+								'<div class="detail"><div class="title">'+tip+'<h3>'+data.list[i].messageTitle+'</h3>' +
+								'</div><div class="imgAndWord"><img src="'+data.list[i].messagePic+'"/><section>' + str + '</section></div>' +
+								'<p class="toDetail">查看详情>></p></div></div>');
+
 							$(".wrapper").append(str);
 						}
 						$(".singleMsg").bind("click",function(){

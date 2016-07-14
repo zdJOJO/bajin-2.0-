@@ -6,12 +6,15 @@
 <meta name="screen-orientation"content="portrait">
 <meta name="x5-orientation"content="portrait">
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-<link href="css/style.css" rel="stylesheet" type="text/css">
-<link href="css/set.css" rel="stylesheet" type="text/css">
+
+    <link  rel="stylesheet" type="text/css" href="css/weiXin/weui.min.css">
+    <link  rel="stylesheet" type="text/css" href="css/weiXin/jquery-weui.css">
+
+
+<link  rel="stylesheet" type="text/css" href="css/style.css">
+<link  rel="stylesheet" type="text/css" href="css/set.css">
 </head>
 <body>
-<!-- 页面重写22016.5.29 -->
-<!-- 这里的性别应该是一个select，下面的签名框应该是一个textarea，有事件就来改一下 -->
 <center>
     <input type="file" id="setPic" onchange="readFile(this)" />            
     <img class="headPic" src="images/personal_dl.png">
@@ -50,6 +53,8 @@
 </div>
 <!-- <img id="hid" />
 <img  id="hid2" /> -->
+<script src="js/jquery/jquery.min.js"></script>
+<script src="js/jquery/jquery-weui.min.js"></script>
 <script src="js/zepto.js"></script>
 <script src="js/set.js"></script>
 <script>

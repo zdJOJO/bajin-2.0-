@@ -13,6 +13,8 @@ input,textarea{
     outline:none;
     font-size: 14px;
     font-family: "微软雅黑";
+    padding-left: 0.05rem;
+    color: #777;
 }
 #header{
     width:100%;
@@ -175,12 +177,8 @@ body{
 .activityDetail{
     width:1rem;
     box-sizing:border-box;
-/*    margin:0.04rem 0.04rem 0 0.04rem;
-    border: 1px solid #e4e4e4;
-    border-radius: 3px;*/
-/*    padding-left: 0.07rem;*/
-
     padding:0.04rem;
+    min-height: 0.4rem;
 }
 .activityDetail>img{
     width: 0.26rem;
@@ -192,11 +190,11 @@ body{
     float: right;
 }
 .activityDetail>div h3{
-    margin-bottom: 0.02rem;
+    margin-bottom: 0.065rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
+    font-size: 1.4em;
 }
 @media screen and (max-width:320px){
     .activityDetail>div h3{
@@ -211,6 +209,7 @@ body{
     text-overflow:ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    margin-bottom: 0.03rem;
 }
 .activityDetail>div .time img{
     width: 0.03rem;
@@ -225,6 +224,12 @@ body{
     height: 0.04rem;
     margin: 0 0.02rem 1px 0;
 }
+
+.activityDetail>div>p{
+    color: rgb(156, 156, 156);
+}
+
+
 .personNum{
     width: 1rem;
     height: 0.12rem;

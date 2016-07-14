@@ -18,8 +18,13 @@ $(function(){
 	}
 	// token = getCookie("token") ||"56ec9682-6180-4672-9ab2-3ac12604fab9";//便于本地测试
 	token = getCookie("token")
+
+
+
+
 	//获取页面的名称
-	console.log(token);
+	var isPersonNalInfo = window.location.href.indexOf('fromePersonNalInfo') ;
+
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];	
 	//返回页面的操作，添加链接地址，返回过程中依然要传递参数token，如果合并js就不用如此操作
@@ -67,7 +72,8 @@ $(function(){
 					console.log(data);
 					// alert("编辑保存成功！");
 					alert_replace("test.winthen.com","编辑保存成功",2);
-					window.location.href = "setAddress.html";
+
+					window.location.href = isPersonNalInfo > 0 ? "setAddress.html?fromePersonNalInfo" : "setAddress.html" ;
 				},
 				error:function(data){
 					console.log(data);

@@ -90,7 +90,6 @@ $(function(){
                 if(typeof(data) == "string"){
                     window.location.href = "login.html?his="+his;
                 }else{
-                    console.log(data);
                     $("iframe").attr("src",data.readUrl);
                     if(!!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){
                         $("iframe").attr("scrolling","no");

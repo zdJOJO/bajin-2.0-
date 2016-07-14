@@ -13,7 +13,7 @@ body{
 	font-size: 16px;
 }
 .message{
-	border-bottom: 1px solid #f2f2f2;
+	border-bottom: 11px solid #f2f2f2;
 }
 .message p img:nth-child(1){
 	vertical-align: middle;
@@ -24,6 +24,7 @@ body{
 	height: 0.04rem;
 	position: absolute;
 	right: 0.06rem;
+	top: 0.155rem;
 }
 .message p{
 	line-height: 0.06rem;

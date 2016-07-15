@@ -46,7 +46,7 @@ body{
 	text-align: center;
 	background: rgb(46, 49, 51);
 	color: #fff;
-	top: 0.04rem;
+	top: 8%;
 	left: 0.04rem;
 }
 
@@ -54,11 +54,11 @@ body{
 
 .tit-wrap{
 	position: relative;
-	width: 65%;
+	width: 63%;
 	height: 100%;
 	background: #ffffff;
 	border-bottom: 1px rgba(203, 199, 200, 0.31) solid;
-	right: -0.35rem;
+	right: -39%;
 }
 /*.infoItem:nth-child(odd) .tit-content{*/
 	/*width:80%;*/
@@ -92,7 +92,7 @@ body{
 	line-height: 25px;
 	font-size: 17px;
 	position: absolute;
-	top: 50px;
+	top: 27%;
 	left: 13px;
 }
 @media screen and (max-width:375px){

@@ -81,7 +81,6 @@ $(document).ready(function(){
 		$(".appointment").css("display", "none");
 		$(".wrapper").css("display", "block");
 
-
 		//选择第二级
 		$("." + str).css("background-color", "#b7a66e").css("color", "#fff").siblings().css("background-color", "#fff").css("color", "#9f9f9f");
 
@@ -125,7 +124,6 @@ $(document).ready(function(){
 		self.css("background-color","#b7a66e").css("color","#fff");
 		self.siblings().css("background-color","#fff").css("color","#9f9f9f");
 	}
-
 
 
 	//二级 商品订单下的切换按钮

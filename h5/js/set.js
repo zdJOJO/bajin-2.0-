@@ -20,7 +20,7 @@ $(function(){
 	token = getCookie("token");
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];
-	
+
 
 	$.ajax({
 		type:"GET",
@@ -51,6 +51,9 @@ $(function(){
             window.location.href = "login.html?his="+his;
         }
     });
+
+
+
     $('input,select').bind('input propertychange', function() {//输入字符检测
     	if($("#setUserName").val().length==18){
     		$("#setUserName").val($("#setUserName").val().substring(0,17));
@@ -58,9 +61,10 @@ $(function(){
     });
 
 
-	var  info = {}
-	$("input,select").blur(function(){		
-		//更新设置函数	
+	var  info = {};
+	$("input,select").blur(function(){
+		//更新设置函数
+
 		var regExp = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
 		if(regExp.test($("#setEmail").val())||$("#setEmail").val()==""){
 			if($("#setUserName").val().length>18){
@@ -74,10 +78,10 @@ $(function(){
 				}
 
 				info = {
-				  "headPic":$(".headPic").attr("src"),
-				  "gender": setAgx,
-			      "userName": $("#setUserName").val(),      
-			      "email":$("#setEmail").val()
+					"headPic":$(".headPic").attr("src"),
+					"gender": setAgx,
+					"userName": $("#setUserName").val(),
+					"email":$("#setEmail").val()
 				};
 
 
@@ -89,7 +93,7 @@ $(function(){
 						contentType: "application/json",
 						data:JSON.stringify(info),
 						success:function(data){
-							// alert("save success");
+							$.alert('更新成功');
 						},
 						error:function(data){
 							// window.location.href = "login.html?his="+his;
@@ -101,7 +105,7 @@ $(function(){
 			}
 		}else{
 			$.alert("请输入正确格式的邮箱地址");
-		}			
+		}
 	});
 		
 
@@ -125,7 +129,7 @@ $(function(){
 				for(var i=0,len = data.list.length;i<len;i++){
 					if(data.list[i].isDefault == 1){
 						if(data.list[i].province=="北京市"||data.list[i].province=="上海市"||data.list[i].province=="重庆市"||data.list[i].province=="天津市"){
-							str = data.list[i].city+"-"+data.list[i].district;
+							str = data.list[i].province + "-" + data.list[i].city;
 						}else{
 							str = data.list[i].province+"-"+data.list[i].city+"-"+data.list[i].district;
 						}

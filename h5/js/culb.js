@@ -43,7 +43,6 @@ $(function(){
 
 
     //使用 滑动ajax插件 进行加载
-
     var dropload = $('.infoList').dropload({
         scrollArea : window,
         domDown : {
@@ -60,15 +59,18 @@ $(function(){
 
     function getPage(page){
         $.get(port+"/card/activity?currentPage="+page+"&size=10",function(data){
-            if(data.list.length != 0){//如果加载的是非空页面
+            if(data.list.length != 0){          //如果加载的是非空页面
                 for(var i=0;i<data.list.length;i++){
-                    actStr += '<div class="infoItem" data-i="'+data.list[i].activityId+'" style="background: url('+data.list[i].activityPic+') no-repeat; background-size:37% 100%;">' +
-                        '<div class="tit-wrap"><div class="tit-content"> ' +
-                        '<span class="type">' + data.list[i].activityType + '</span>' +
+                    var activityTypeStr = '';
+                    if(data.list[i].activityType){
+                        activityTypeStr = '<span class="type">' + data.list[i].activityType + '</span>';
+                    }
+                    actStr += '<div class="infoItem" data-i="'+data.list[i].activityId+'" style="background: url('+data.list[i].activityPic+') no-repeat; background-size:39% 100%;">' +
+                        '<div class="tit-wrap"><div class="tit-content"> ' + activityTypeStr +
                         '<h1>'+data.list[i].activityTitle+'</h1>' +
                         '<div class="detile">' +
                         '<p >'+data.list[i].activitySubtitle+'</p></div>' +
-                        '<p style="font-size:13px;  position: absolute;top: 122px;left: 13px;">'+new Date(data.list[i].createTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
+                        '<p style="font-size:13px;  position: absolute;top: 82%;left: 13px;">'+new Date(data.list[i].createTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
                         '</p></div></div></div>';
                 }
                 $('.lists').append(actStr);

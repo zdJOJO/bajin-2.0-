@@ -34,10 +34,10 @@ $(function(){
 	//返回页面的操作，添加链接地址，返回过程中依然要传递参数token，如果合并js就不用如此操作
 	$(".add_save").click(function(){
 		var str = $("#demo1").val();
-		var fg=str.split(",");
+		var fg = str.split(",");
 		var receiverPhone=$(".receiverPhone").val();
 		var checked=checkMobile(receiverPhone);
-		if($(".receiverName").val()!=""&&$(".detilAddress").val()!==""&&fg[0]!=""&&fg[1]!=""&&fg[2]!=""&&receiverPhone!=""){
+		if($(".receiverName").val()!=""&&$(".detilAddress").val()!==""&&fg[0]!=""&&fg[1]!=""&&fg[2]!="" && receiverPhone != "" ){
 			if(checked){
 				$.ajax({
 					type:"POST",
@@ -48,7 +48,7 @@ $(function(){
 						receiverPhone:receiverPhone,
 						province:fg[0],
 						city:fg[1],
-						district:fg[2],
+						district: fg[2] || '',
 						detilAddress:$(".detilAddress").val()
 					}),
 					success:function(data){

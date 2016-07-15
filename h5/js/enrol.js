@@ -115,7 +115,7 @@ $(function(){
                 type:"get",
                 url:port+"/card/file/getImage",
                 success:function(data){
-                    var str = $('<img src="'+data.data.url+'" style="width:0.88rem;height:auto;margin:0.08rem 0.06rem;"/>');
+                   var str = $('<img src="'+ data.data.url+'" style="width:87%;height:auto;margin: 8% 0.06rem;"/>');
                     $("section.content").append(str);
                 }
             });
@@ -143,21 +143,19 @@ $(function(){
             });
 
             var url = port +"/card/collect/item?token="+token+"&itemId="+data.activityId+"&itemType=1";
+
             //加载成功页面后就判断是否已经被收藏过了    
 			 if(token != undefined){
                 $.ajax({
                     url:url,
                     success:function(data){
-                    if(typeof(data) == "string"){
-                        window.location.href = "login.html?his="+escape(his);
-                    }else{
                         if(data.message == "该项目未被收藏"){
                             $(".btn_q .love-btn img").attr("src","imgs/iconfont-love.png");
-                        
+
                         }else{
                             $(".btn_q .love-btn img").attr("src","imgs/iconfont-love_save.png");
                         }
-                    } },
+                     },
                     error:function(data){
                         window.location.href="login.html?his="+escape(his);
                     }
@@ -227,8 +225,7 @@ $(function(){
                                     //alert("请求出错，重新登陆")
                                     window.location.href = "login.html?his="+escape(his);
                         }
-                    });    
-					
+                    });
                 }
             });			
 		}//登陆判断结束为止

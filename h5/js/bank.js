@@ -75,7 +75,8 @@ $(function(){
 								}
 							});
 						}
-					} },
+					}
+				},
 				error:function(data){
 					window.location.href = "login.html?his="+his;
 				}

@@ -227,7 +227,9 @@ $(document).ready(function(){
 				if(i ==0||i==1){
 				var item=$('<div class="itemLeft" ><img src='+data[i].minPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/><div class = "mask_lhq"><p class="tit_tq">'+data[i].title+'</p><p class="tit_bq">'+data[i].subtitle+'</p></div></div>');				
 				}else if(i==2){
-				var item=$('<div class="items_img" ><img src='+data[i].maxPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/><div class = "mask_lq"><p class="tit_tq1">'+data[i].title+'</p><div class="tit_bq1">'+data[i].detail+'</div></div><div id="tit_ck" data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img">查看更多</div><div class="xhx"></div></div>');
+				var item=$('<div class="items_img" ><img src='+data[i].maxPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/><div class = "mask_lq"><p class="tit_tq1">'+data[i].title+'</p>' +
+					'<div class="tit_bq1">'+data[i].detail+'</div></div>' +
+					'<div id="tit_ck" data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img">查看更多</div><div class="xhx"></div></div>');
 				}
 				itemWrap.append(item);
 			}			
@@ -261,7 +263,7 @@ $(document).ready(function(){
 			}
 		});
 	}
-	getActData();      
+	getActData();
 	$(".item_q").click(function(){
 	    if(token != undefined){
 	    	if($(this).attr("id")=="phone"){
@@ -296,19 +298,42 @@ $(document).ready(function(){
 	});
 	//私人预约服务
 	function getMessage(){
+
 		$.ajax({
-			type:"GET",
-        	dataType:"text",
-			url:port+"/card/bank/encryption/privatejcyy?token="+token,
+			type: "GET",
+			dataType:"text",
+			url: port+"/card/bank/encryption/privatejcyy?token="+token,
 			success:function(data){
-	 			console.log(data);
-		    	if(data.length<50){
+				console.log(data);
+				if(data.length<50){
 					window.location.href = "login.html?his="+his;
 				}else{
 					$("#merSignMsg").val(data);
 					$("#info").submit();
- 				}
- 			}
-		});	    
+				}
+			},
+			error: function () {
+				$.ajax({
+					type: "GET",
+					dataType:"string",
+					url: port+"/card/bank/encryption/privatejcyy?token="+token,
+					success:function(data){
+						console.log(data);
+						if(data.length<50){
+							window.location.href = "login.html?his="+his;
+						}else{
+							$("#merSignMsg").val(data);
+							$("#info").submit();
+						}
+					}
+				});
+			}
+		});
+
+
+
+
+
+
 	};	
 });

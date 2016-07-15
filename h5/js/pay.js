@@ -102,19 +102,26 @@ $(function(){
 
 							addForm.innerHTML = str;
 							addForm.submit();
-
-                            // if(data.length<50){
-							// 		window.location.href = "login.html?his="+his;
-							// 	}else{
-							// 	var str='<input type="hidden" id="merSignMsg" name="merSignMsg" value="'+data+'"/> '+
-							// 			'<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/> ';
-                            //
-							// 	addForm.innerHTML = str;
-							// 	addForm.submit();
-							// }
 					},
 					error:function(data){
-						window.location.href = "login.html?his="+his;
+						$.ajax({
+							type:"GET",
+							dataType:"string",
+							url: port+"/card/bank/encryption/register?token="+token,
+							success:function(data){
+								//alert("没有银行卡的时候");
+
+								var str='<input type="hidden" id="merSignMsg" name="merSignMsg" value="'+data+'"/> '+
+									'<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/> ';
+
+								addForm.innerHTML = str;
+								addForm.submit();
+							},
+							error:function(data){
+								window.location.href = "login.html?his="+his;
+							}
+
+						});
 					}
 
 				});

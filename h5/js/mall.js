@@ -39,6 +39,10 @@ $(document).ready(function(){
 			$(".currentCost span").html(data.data.address);
 			$(".stock span").html(data.data.discount);
 			$(".message div").html(data.data.detail);
+			$(".message div img").css({
+				"width": "100%",
+				"height": "auto"
+			});
 			$("footer a").attr("href","tel:"+data.data.phone);
 			$(".saveAndShare").attr("data-itemid",data.data.mallId);
 			var picList = data.data.imgList;
@@ -158,6 +162,9 @@ $(document).ready(function(){
     sharebtn.click(function(){
         sharemask.show();
     });
+
+
+
     //二维码
     $.ajax({
 	    type:"get",
@@ -166,7 +173,8 @@ $(document).ready(function(){
 	        console.log(data);
 	        var str = $('<img src="'+data.data.url+'" style="width:0.88rem;height:auto;margin:0.08rem 0.06rem;"/>');
 	        $(".wrapper").append(str);
-	    }
+			$(".wrapper img").css('with','100%');
+		}
 	});
     $("body").prepend($('<div id ="urlToDownload" style="width:1rem;height:0.12rem;position: fixed;z-index: 2000;"><img style="width:0.8rem;height:0.12rem;position: absolute;top:0;"src="imgs/bg-baoming.png"/><div style="background-color:#fafafa;float:right;text-align:center;width:0.2rem;height:0.12rem;line-height:0.12rem;"><p style="width:0.08rem;margin-top: 0.02rem;height:0.08rem;line-height:0.08rem;margin-left:0.06rem;background-color:#ccc;border-radius:0.08rem;font-size:0.06rem;">×</p></div></div>'));
     $("#urlToDownload>img").bind("click",function(){

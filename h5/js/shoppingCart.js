@@ -65,8 +65,12 @@ $(document).ready(function(){
 							window.location.href = "pierre.html";
 						});
 					}
+
+
 					//单个选择事件
 					$(".singleBrand .sel").bind("click",function(){
+						var selJo = $(".singleBrand .sel");
+
 						if($(this).attr("src")=="imgs/notSel.png"){
 							$(this).attr("src","imgs/sel.png");
 							costAll();
@@ -74,7 +78,10 @@ $(document).ready(function(){
 							$(this).attr("src","imgs/notSel.png");
 							costAll();
 						}
-					});	
+					});
+
+
+
 						//加减操作
 						var addBtn=$('.add');
 						var personNum=$('.num');
@@ -163,6 +170,9 @@ $(document).ready(function(){
 			costAll();
 		}			
 	});
+
+
+
 	//编辑删除页面的全选与全取消
 	$(".edit .select_all_").bind("click",function(){
 		if($(this).find("img").attr("src")=="imgs/notSel.png"){
@@ -173,6 +183,8 @@ $(document).ready(function(){
 			$(".singleBrand .sel").attr("src","imgs/notSel.png");
 		}			
 	});
+
+
 	//选择之后触发的事件
 	var numAll = "";//总个数
 	function costAll(){

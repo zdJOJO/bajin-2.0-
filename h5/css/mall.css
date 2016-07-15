@@ -229,3 +229,9 @@ header .saveAndShare img:first-child{
 	background: rgba(183, 166, 110, 1);
 }
 
+
+.message img{
+	width: 100%;
+	
+}
+

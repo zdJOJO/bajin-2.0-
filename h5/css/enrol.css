@@ -1,5 +1,5 @@
 @font-face{
-	font-family:"微软雅黑";
+    font-family:"微软雅黑";
 }
 h1,h2,h3{
     font-weight: normal;
@@ -55,7 +55,7 @@ body{
     /*width:0.12rem;*/
     /*line-height:0.08rem;*/
     /*height: 0.08rem;*/
-/*    height:0.17rem;*/
+    /*    height:0.17rem;*/
     display: inline-block;
 
 }
@@ -69,8 +69,8 @@ body{
 }
 
 .share-btn{
-   margin-left: 7px;
-   /*background-position: center center;*/
+    margin-left: 7px;
+    /*background-position: center center;*/
 }
 .banner{
     height:0.5rem;
@@ -146,13 +146,13 @@ body{
 }
 
 .msg-time{
-     margin-top: 11%;
-  margin-bottom: 1%;
-  clear: both;
+    margin-top: 11%;
+    margin-bottom: 1%;
+    clear: both;
 }
 .msg-time img,.msg-address img{
-/*    width:0.04rem;
-    height: 0.04rem;*/
+    /*    width:0.04rem;
+        height: 0.04rem;*/
     /*vertical-align: middle;*/
     margin: 1px auto 2px;
     /*margin-right:0.02rem;*/
@@ -172,9 +172,7 @@ body{
     margin-bottom: 0.12rem;
     background: #ffffff;
     padding: 0.04rem 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    overflow:hidden;
 }
 
 .content >.content-text>p>span{
@@ -226,7 +224,7 @@ body{
 }
 .img-item{
     width:100%;
-/*    margin-top: 0.17rem;*/
+    /*    margin-top: 0.17rem;*/
 }
 .img-item img{
     width:100%;
@@ -245,7 +243,7 @@ footer.nav{
     position: fixed;
     bottom: 0;
     color: #ffffff;
-	z-index: 1000
+    z-index: 1000
 }
 .nav p{
     background: #C8A971;
@@ -292,7 +290,7 @@ footer.nav{
 #doEnrol{
     background: #eee;
     position: relative;
-	height:	100%;
+    height:	100%;
 }
 
 #doEnrol > button{
@@ -310,7 +308,7 @@ footer.nav{
 #doEnrol>.closeDate{
     position: absolute;
     left: 40px;
-	top: 30%;
+    top: 30%;
     color: #000;
     font-size: 15px;
 }
@@ -333,7 +331,7 @@ footer.nav{
 /* swiper 滚动条修改 */
 .swiper-container-horizontal>.swiper-scrollbar{
     top: 99%;
-     background: rgba(0, 0, 0, 0.03);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .swiper-scrollbar-drag{
@@ -354,11 +352,14 @@ footer.nav{
 }
 
 .content img{
-	float: left;
+    float: left;
+    width: 100%;
 }
 
 
-
+.content-text>p>span>img{
+    width: 100%;
+}
 
 
 

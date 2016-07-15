@@ -88,7 +88,7 @@ $(function(){
                 '<p class="msg-num"><span class="head">已报名</span>'+data.applyNumber+'人'+'</p></div></section>');
 
 
-            var str2 = $('<section class="content"><div class="content-text">'+data.activityDetail+'</div></section>');
+            var str2 = $('<section class="content"><div class="content-text">' + data.activityDetail + '</div></section>');
             $("#doEnrol").append('<span class="closeDate">'+'报名截止时间：'+ new Date(data.endTime*1000).Formate() +'</span>');
 
             if(new Date().getTime() > data.endTime*1000){
@@ -338,9 +338,13 @@ $(function(){
     $("#urlToDownload>img").bind("click",function(){
         window.location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.kting.baijinka";
     });
+
     $("#urlToDownload>div").bind("click",function(){
         $("#urlToDownload").css("display","none");
-    })
+    });
+
+    $(".mian img").css("width","100%")
+
 });
 
 Date.prototype.Formate=function(){

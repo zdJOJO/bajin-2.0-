@@ -23,6 +23,8 @@ $(document).ready(function(){
 	var his = hisStr[hisStr.length-1];
 
 
+
+
 	// 判断 从哪里跳转此页面
 	var isDeleteAction = -1;
 	if(window.location.search.indexOf('allApo') > 0){
@@ -62,22 +64,21 @@ $(document).ready(function(){
 
 	if(isDeleteAction == -1){
 		doCss($(".appointments"));
+
 		getAppointment(1,100);
+
+
 		$(".wrapper").css("display","none");
 		$(".appointment").css("display","block");
 		$(".appointments").css("border-bottom", "3px solid #6b6b6b");
 	}
 
-
-
-
+	
 
 	//对Tab进行渲染
 	var to_OrderTab = function (str,orderState) {
 		//选择第一级
 		$(".commodityOrder").css("border-bottom", "3px solid #6b6b6b").css("color", "#6b6b6b").siblings().css("border-bottom", "3px solid #fff").css("color", "#b2b2b2");
-
-
 		$(".appointment").css("display", "none");
 		$(".wrapper").css("display", "block");
 
@@ -148,6 +149,10 @@ $(document).ready(function(){
 		to_OrderTab(whereLocationHere(isDeleteAction),num);
 		doCss2($(this));
 	});
+
+
+
+
 
 
 
@@ -295,22 +300,22 @@ $(document).ready(function(){
 
 //格式化两行换行
 function less_q(text,length){
-    // var text = $('.tit-wrap .detile p');
-    var textLen = length;
-    for(var k=0,len=text.length;k<len;k++){
-        // console.log($(text[k]).html());
-        if($(text[k]).html().length>textLen){
-            var str = $(text[k]).html().substring(0,textLen)+"..."
-            $(text[k]).html(str);
-        }
-    }
+	// var text = $('.tit-wrap .detile p');
+	var textLen = length;
+	for(var k=0,len=text.length;k<len;k++){
+		// console.log($(text[k]).html());
+		if($(text[k]).html().length>textLen){
+			var str = $(text[k]).html().substring(0,textLen)+"..."
+			$(text[k]).html(str);
+		}
+	}
 }
 //格式化时间，在date原形上边添加方法
 Date.prototype.Formate=function(){
-    var y=this.getFullYear();
-    var m=this.getMonth()+1>9?(this.getMonth()+1):'0'+(this.getMonth()+1);
-    var d=this.getDate()>9?this.getDate():'0'+this.getDate();
+	var y=this.getFullYear();
+	var m=this.getMonth()+1>9?(this.getMonth()+1):'0'+(this.getMonth()+1);
+	var d=this.getDate()>9?this.getDate():'0'+this.getDate();
 	var h=this.getHours()>9?this.getHours():'0'+this.getHours();
 	var f=this.getMinutes()>9?this.getMinutes():'0'+this.getMinutes();
-    return (y+'-'+m+'-'+d+' '+h+':'+f);
+	return (y+'-'+m+'-'+d+' '+h+':'+f);
 }

@@ -36,12 +36,11 @@ $(function(){
     var actWrap = $('.infoList>.lists').eq(0);
 
 
+
+
     var pageNum = 0;   //第一页
-    // var numSize = 5 ;  //每一页展示 numSize 个
-    // var pageStart = 0, pageEnd = 0;
     var actStr = '' ;
-
-
+    
     //使用 滑动ajax插件 进行加载
     var dropload = $('.infoList').dropload({
         scrollArea : window,
@@ -93,8 +92,7 @@ $(function(){
                 dropload.lock();
                 // 无数据
                 dropload.noData();
-                setTimeout('$(".dropload-down").css("height","0")',1000)
-
+                setTimeout('$(".dropload-down").css("height","0")',1000);
             }
         });
     }
@@ -110,9 +108,12 @@ $(function(){
     }
 
     // getActData();
-
-
 });
+
+
+
+
+
 //通用函数，也是可以写到zepto.js里面的
 Date.prototype.Formate=function(){
     var y=this.getFullYear();

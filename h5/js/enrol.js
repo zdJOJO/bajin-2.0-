@@ -106,6 +106,10 @@ $(function(){
 
 
             dataWrap.append(str1).append(str2);
+            $(".content-text img").css({
+                'width': '100%',
+                'height': 'auto'
+            })
 
 
 

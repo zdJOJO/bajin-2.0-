@@ -28,17 +28,24 @@ $(document).ready(function(){
 
 	//套路
 
-	//  loading 加载 插件
-	var pageNum = 0 ;
-	var str = '';
-	// dropload
-	var myDropload = $('.wrapper').dropload({
-		scrollArea : window,
-		loadDownFn : function(){
-			pageNum++;
-			getShoppingCart(pageNum)
-		}
-	});
+
+	if(!token){
+		window.location.href = "login.html?his="+his;
+	}else {
+		//  loading 加载 插件
+		var pageNum = 0 ;
+		var str = '';
+		// dropload
+		var myDropload = $('.wrapper').dropload({
+			scrollArea : window,
+			loadDownFn : function(){
+				pageNum++;
+				getShoppingCart(pageNum)
+			}
+		});
+	}
+
+
 
 
 	//获取购物车的商品
@@ -153,25 +160,6 @@ $(document).ready(function(){
 			window.location.href = "login.html?his="+his;
 		}
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	//编辑按钮切换

@@ -23,7 +23,7 @@ body{
 	vertical-align: middle;
 	padding-left: 0.02rem;
 	padding-right: 0.02rem;
-	border-bottom: 1px #B6B6B6 solid;
+	border-bottom: 1px rgba(182, 182, 182, 0.23) solid;
 }
 .wrapper .singleBrand img:first-child{
 	width: 0.066rem;
@@ -71,6 +71,11 @@ body{
 .wrapper .singleBrand .subtitle{
 	color:#b9b9b9;
 }
+
+.wrapper .singleBrand .detail .singleCost span:first-child{
+	color: #b9b9b9;
+}
+
 .wrapper .singleBrand .singleCost span:nth-child(2){
 	float: right;
 }

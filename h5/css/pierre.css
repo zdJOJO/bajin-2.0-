@@ -1,3 +1,4 @@
+
 @font-face{
 	font-family:"微软雅黑";
 }
@@ -7,13 +8,13 @@ h1,h2,h3{
 body{
 	font-family:"微软雅黑";
 	/*background: #eeeeee;*/
-    font: 12px/150% "微软雅黑", "\5b8b\4f53";
+	font: 12px/150% "微软雅黑", "\5b8b\4f53";
 	margin: 0;
 	padding: 0;
 }
 header,.wrapper,footer{
 	font-size: 16px;
-	background-color:#fff; 
+	background-color:#fff;
 }
 header{
 	height: 0.14rem;
@@ -22,6 +23,7 @@ header{
 	position:fixed;
 	top: 0;
 	z-index: 20;
+	border-bottom: rgba(172, 172, 172, 0.23) solid 1px;
 }
 header center{
 	width: 1rem;
@@ -38,7 +40,7 @@ header div{
 footer{
 	width: 1rem;
 	height: 0.12rem;
-	background-color:#f0f0f0; 
+	background-color:#f0f0f0;
 	position: fixed;
 	bottom: 0;
 	text-align: center;
@@ -57,27 +59,27 @@ footer div img{
 	margin-top: 0.015rem;
 }
 footer div p{
-    -webkit-margin-before: 0;
-    -webkit-margin-after: 0;
-    font-size: 12px;
-    line-height: 18px;
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
+	font-size: 12px;
+	line-height: 18px;
 }
 footer div.pierrePage{
 	background-color: #000;
 	color: #fff0cc;
-    height: 0.12rem;
+	height: 0.12rem;
 }
 .wrapper{
 	width: 1rem;
-    margin-top: 0.14rem;
-    z-index: 19;
+	margin-top: 0.14rem;
+	z-index: 19;
 	margin-bottom: 0.24rem;
 	-webkit-margin-after: 0.24rem;
-    box-sizing: content-box;
+	box-sizing: content-box;
 }
 
 /*.wrapper .content .lar,.wrapper .content .uad{*/
-	/*clear: left;*/
+/*clear: left;*/
 /*}*/
 
 .wrapper .content .lar{
@@ -85,7 +87,7 @@ footer div.pierrePage{
 	width: 47%;
 	float: left;
 	margin: 2% 1% 0 1%;
-	border: 1px #ECECEC solid;
+	border: 1px rgba(236, 236, 236, 0.6) solid;
 	position: relative;
 }
 .wrapper .content .lar>img{
@@ -114,15 +116,15 @@ footer div.pierrePage{
 .wrapper .content .lar .detail .subTitle{
 	color: #353535;
 	font-size: 12px;
-    -webkit-margin-after: 0;
-/*    -webkit-margin-before: 2em;*/
+	-webkit-margin-after: 0;
+	/*    -webkit-margin-before: 2em;*/
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 .wrapper .content .lar .detail .title{
-    -webkit-margin-before: 0.01rem;
-    color: #353535;
+	-webkit-margin-before: 0.01rem;
+	color: #353535;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -130,9 +132,9 @@ footer div.pierrePage{
 	font-weight: bold;
 }
 .wrapper .content .lar .detail .pirce{
-    -webkit-margin-before: 2em;
-    color: rgb(172, 172, 172);
-    font-size: 14px;
+	-webkit-margin-before: 2em;
+	color: rgb(172, 172, 172);
+	font-size: 14px;
 }
 
 .lar .pirce{
@@ -184,7 +186,7 @@ footer div.pierrePage{
 	right: 0.02rem;
 	top: 1.5%;
 	z-index: 40;
-	height: 
+	height:
 }
 .shoppingCart img{
 	width: auto;
@@ -255,7 +257,7 @@ footer div.pierrePage{
 	-webkit-margin-after:0;
 	width: 0.26rem;
 	height: 0.08rem;
-    line-height: 0.08rem;
+	line-height: 0.08rem;
 	margin-top: 0.09rem;
 	padding-top: 2px;
 	float: right;
@@ -271,7 +273,7 @@ footer div.pierrePage{
 .newBrandList .singleBrand_q{
 	height: 0.3rem;
 	width: 1rem;
-	border-bottom: #acacac solid 1px;
+	border-bottom: rgba(172, 172, 172, 0.24) solid 1px;
 	margin-bottom: 0.01rem;
 	box-sizing:border-box;
 }
@@ -293,11 +295,11 @@ footer div.pierrePage{
 	-webkit-margin-after:0em;
 	color: #3f3f3f;
 	font-weight: bold;
-/*	width: 0.5rem;*/
+	/*	width: 0.5rem;*/
 	font-size: 16px;
-/*	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;*/
+	/*	overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;*/
 }
 .newBrandList .singleBrand_q .detail_q h3 span{
 	color: #cd9f00;

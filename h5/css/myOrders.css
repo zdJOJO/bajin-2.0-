@@ -117,7 +117,7 @@ header div>.tab{
 	width: 1rem;
 	height: 0.12rem;
 	color: #9f9f9f;
-	border-top:#b2b2b2 1px solid;	
+	border-top: rgba(178, 178, 178, 0.17) 1px solid;
 	/*position: absolute;*/
 	top: 0.14rem;
 	text-align: center;
@@ -140,9 +140,10 @@ header div>.tab{
 .wrapper .container{
 	position: absolute;
 	top: 0.12rem;
+	color: #9f9f9f;
 }
 .wrapper .container .singleMsg{
-	border-bottom:#b2b2b2 1px solid;
+	border-top: rgba(178, 178, 178, 0.17) 1px solid;
 	/*height: 0.36rem;*/
 	width: 1rem;
 	box-sizing:border-box;
@@ -181,6 +182,7 @@ header div>.tab{
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	color: #0D0D0D;
 }
 .wrapper .container .singleMsg .msg p{
 	font-size: 14px;
@@ -195,6 +197,7 @@ header div>.tab{
 	bottom: 0;
 	right: 0;
 	margin-right: 0.03rem;
+	color: #0D0D0D;
 }
 .wrapper .totleMsg{
 	clear: left;
@@ -215,6 +218,7 @@ header div>.tab{
 .wrapper .totleMsg p.detail{
 	float: right;
 	margin-right: 0.03rem;
+	color: #0D0D0D;
 }
 /*.wrapper .container .singleMsg .msg>div{
 	width: 0.68rem;

@@ -84,8 +84,8 @@ input,textarea{
     left:0.07rem;
 }
 .listItem{
-    line-height:0.12rem;
-    border-bottom: 1px solid #e1e1e1;
+    line-height: 0.12rem;
+    border-bottom: 1px solid rgba(189, 189, 189, 0.24);
 }
 .listItem:last-child{
     /*border-bottom: none;*/

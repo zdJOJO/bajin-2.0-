@@ -33,6 +33,8 @@ $(document).ready(function(){
 	$(".readPage").click(function(){
 		window.location.href = "read.html";
 	});
+
+
 	//购物车导航
 	$(".shoppingCart").bind("click",function(){
 		if(token==undefined){
@@ -88,6 +90,8 @@ $(document).ready(function(){
 			}
 		});
 	}
+
+
 	//获取服务的方法
 	function getServer(currentPage,size){
 		$.ajax({
@@ -131,4 +135,15 @@ $(document).ready(function(){
 
 
 	$(".hot").click();//默认点击一下热推
+
+
+
+	if(token){
+		$.get(port+"/card/car?currentPage="+1+"&size="+ 10 +"&token="+token ,function (result) {
+			if(result.list.length > 0){
+				$(".shoppingCart>img").attr('src','imgs/shoppingCart-2.png');
+			}
+		})
+	}
+
 });

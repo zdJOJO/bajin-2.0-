@@ -230,7 +230,7 @@ header .saveAndShare img:first-child{
 
 /* swiper 滚动条修改 */
 .swiper-container-horizontal>.swiper-scrollbar{
-	top: 99%;
+	top: 98.6%;
 	background: rgba(0, 0, 0, 0.03);
 }
 

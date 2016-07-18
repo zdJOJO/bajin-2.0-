@@ -1,4 +1,5 @@
 
+
 //此页面的问题很多，留到最后处理
 $(document).ready(function(){
 	var token = "";
@@ -24,6 +25,12 @@ $(document).ready(function(){
 	//历史页面的记录用于登陆成功或者注册、更改密码成功后跳回的页面
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];
+
+
+	//判断是否在微信客户端打开
+	// is_weixin();
+
+
 	// console.log(his);
 	//侧边栏切换
 	$("#vip").click(function(){
@@ -80,7 +87,7 @@ $(document).ready(function(){
 			if(token){
 				window.location.href = url;
 			}else{
-				window.location.href = "login.html?his="+escape(url);
+				window.location.href = "login.html?his=" + escape(url);
 			}
 		});
 	}

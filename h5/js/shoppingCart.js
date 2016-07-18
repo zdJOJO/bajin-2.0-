@@ -27,8 +27,7 @@ $(document).ready(function(){
 
 
 	//套路
-
-
+	
 	if(!token){
 		window.location.href = "login.html?his="+his;
 	}else {

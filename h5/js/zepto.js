@@ -8,6 +8,22 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
 
 
 
+
+
+//判断是否在微信客户端打开
+var is_weixin = function () {
+	var ua = navigator.userAgent.toLowerCase();
+	var isWeixin = ua.indexOf('micromessenger') != -1;
+	var isAndroid = ua.indexOf('android') != -1;
+	var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);
+	if (!isWeixin) {
+		window.location.href = 'isWeiXin.html';
+	}
+}
+
+
+
+
 //多行显示省略号的方法
 function lessAll(text,length){
     // var text = $('.tit-wrap .detile p');

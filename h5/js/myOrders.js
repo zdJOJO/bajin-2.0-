@@ -23,8 +23,6 @@ $(document).ready(function(){
 	var his = hisStr[hisStr.length-1];
 
 
-
-
 	// 判断 从哪里跳转此页面
 	var isDeleteAction = -1;
 	if(window.location.search.indexOf('allApo') > 0){
@@ -64,23 +62,25 @@ $(document).ready(function(){
 
 	if(isDeleteAction == -1){
 		doCss($(".appointments"));
-
 		getAppointment(1,100);
-
-
 		$(".wrapper").css("display","none");
 		$(".appointment").css("display","block");
 		$(".appointments").css("border-bottom", "3px solid #6b6b6b");
 	}
 
-	
+
+
+
 
 	//对Tab进行渲染
 	var to_OrderTab = function (str,orderState) {
 		//选择第一级
 		$(".commodityOrder").css("border-bottom", "3px solid #6b6b6b").css("color", "#6b6b6b").siblings().css("border-bottom", "3px solid #fff").css("color", "#b2b2b2");
+
+
 		$(".appointment").css("display", "none");
 		$(".wrapper").css("display", "block");
+
 
 		//选择第二级
 		$("." + str).css("background-color", "#b7a66e").css("color", "#fff").siblings().css("background-color", "#fff").css("color", "#9f9f9f");
@@ -127,6 +127,7 @@ $(document).ready(function(){
 	}
 
 
+
 	//二级 商品订单下的切换按钮
 	$(".wrapper>.header>div").bind("click",function () {
 		var num;
@@ -154,10 +155,6 @@ $(document).ready(function(){
 
 
 
-
-
-
-
 	//二级 商品订单下的切换按钮
 	// $(".header div").bind("click",function(){
 	// 	doCss2(this);
@@ -175,7 +172,7 @@ $(document).ready(function(){
 				$(".appointment").html("");
 
 				if(typeof(data) == "string"){
-					window.location.href = "login.html?his="+his;
+					// window.location.href = "login.html?his="+his;
 				}else{
 					if(data.list.length==0){
 						var strEmpty = '<center><img src="imgs/save_.png"/><h2>你还没有预约任何活动</h2><p>再去看看吧</p><p class="turnPage">再去看看</p></center>';

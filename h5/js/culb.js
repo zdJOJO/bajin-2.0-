@@ -69,7 +69,7 @@ $(function(){
                         '<h1>'+data.list[i].activityTitle+'</h1>' +
                         '<div class="detile">' +
                         '<p >'+data.list[i].activitySubtitle+'</p></div>' +
-                        '<p style="font-size:13px;  position: absolute;top: 82%;left: 13px;">'+new Date(data.list[i].createTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
+                        '<p style="font-size:13px;  position: absolute;top: 82%;left: 13px;">'+ new Date(data.list[i].createTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
                         '</p></div></div></div>';
                 }
                 $('.lists').append(actStr);
@@ -114,13 +114,7 @@ $(function(){
 
 
 
-//通用函数，也是可以写到zepto.js里面的
-Date.prototype.Formate=function(){
-    var y=this.getFullYear();
-    var m=this.getMonth()+1>9?(this.getMonth()+1):'0'+(this.getMonth()+1);
-    var d=this.getDate()>9?this.getDate():'0'+this.getDate();
-    return (y+'.'+m+'.'+d);
-}
+
 
 //两行加省略
 function less_q(){

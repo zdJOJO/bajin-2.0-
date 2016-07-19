@@ -78,7 +78,7 @@
                         lessAll($(".activityDetail .address span"),25);
                         $(".tips").attr("data-cost",data.activityPrice);
                         $(".cost").html(data.activityPrice==0?"免费活动":"￥"+data.activityPrice);
-                        activity=data;
+                        activity = data;
 
 
                         checkBtn.click(function(){

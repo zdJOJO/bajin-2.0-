@@ -1,0 +1,158 @@
+html,body{
+    font-size: 20px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: #fff;
+}
+
+
+
+
+
+
+header{
+    position: relative;
+    height: 0.25rem;
+    border-top: 1px rgba(128, 128, 128, 0.21) solid;
+}
+
+header>h3{
+    margin-top: 25px;
+    padding-left: 4.5%;
+}
+
+header>span{
+    font-size: 0.7em;
+    color: #808080;
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 9%;
+    width: 25%;
+}
+
+header>.abstr{
+    background: url("../imgs/life-hot/author.png") no-repeat 0 55%;
+    background-size: 30%;
+    left: 3%;
+    top: 67%;
+
+}
+
+header>.time{
+    background: url("../imgs/life-hot/time.png") no-repeat 0 55%;
+    background-size: 30%;
+    left: 38.5%;
+    top: 67%;
+}
+
+
+article{
+    border-top: 1px rgba(128, 128, 128, 0.21) solid;
+    width: 93%;
+    margin: auto;
+    min-height: 1rem;
+    word-break: break-all;
+}
+
+article>.content{
+    margin-top: 0;
+    padding: 0;
+}
+
+article>.content>.readNum{
+    display: block;
+    color: rgba(173, 173, 173, 0.53);
+    font-size: 0.8em;
+    margin-top: 10px;
+}
+
+article img{
+    width: 100%;
+}
+
+
+article >.comments{
+    position: relative;
+    border-top: 1px #f1f1f1 solid;
+    padding-top: 25px;
+    margin-bottom: 55px;
+}
+
+
+article >.comments>.totalNum{
+    display: block;
+    position: absolute;
+    color: #d4d4d4;
+    font-size: 0.75em;
+    background: #fff;
+    z-index: 100;
+    top: -14px;
+    left: 42%;
+}
+
+
+article >.comments>.commentList>.singleCmt{
+    position: relative;
+    width: 100%;
+    height: 0.3rem;
+    margin: 32px 0;
+}
+
+article >.comments>.commentList>.singleCmt>img{
+    position: absolute;
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    top: 0;
+}
+
+article >.comments>.commentList>.singleCmt>.userName{
+    position: absolute;
+    display: block;
+    font-size: 0.9em;
+    font-family: "黑体";
+    color: #323232;
+    left: 23%;
+    top: 11px;
+}
+
+article >.comments>.commentList>.singleCmt>p{
+    position: absolute;
+    color: #808080;
+    font-size: 0.8em;
+    left: 23%;
+    top: 48px;
+    width: 75%;
+    height: 45%;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+article >.comments>.commentList>.singleCmt>.creatTime{
+    position: absolute;
+    display: block;
+    font-size: 0.7em;
+    color: #cfcfcf;
+    left: 23%;
+    bottom: 0;
+}
+
+
+
+
+
+
+
+
+
+
+

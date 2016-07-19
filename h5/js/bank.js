@@ -56,7 +56,7 @@ $(function(){
 							//一定要注意，在元素出来的时候再帮定事件，不然就没效
 							$(".cardItem").click(function(){		 //点击选中银行卡事件
 								if(pickid==11 && !isBJVip){
-									$.alert('本功能仅限工银白金卡用户尊享');
+									$.alert('本功能仅限工行白金卡用户');
 									return
 								}else {
 									var cardItem = $(this).data("cardid");

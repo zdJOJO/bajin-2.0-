@@ -10,6 +10,17 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
 
 
 
+//通用函数，也是可以写到zepto.js里面的   时间戳转换成 固定格式
+Date.prototype.Formate=function(){
+	var y=this.getFullYear();
+	var m=this.getMonth()+1>9?(this.getMonth()+1):'0'+(this.getMonth()+1);
+	var d=this.getDate()>9?this.getDate():'0'+this.getDate();
+	return (y+'.'+m+'.'+d);
+}
+
+
+
+
 //判断是否在微信客户端打开
 var is_weixin = function () {
 	var ua = navigator.userAgent.toLowerCase();

@@ -42,6 +42,11 @@ $(function(){
         isHotDoor = true;
     }
 
+    if(!isHotDoor){
+        $("body").prepend('<header> <div class="jionAct active">报名<hr class="active"></div> <div class="consultation">咨询<hr></div></header>');
+        $(".infoList").css('margin-top' ,'0.143rem');
+    }
+
 
 
 
@@ -125,18 +130,17 @@ $(function(){
 
 
     //跳转函数
-    function toActivity(id,_type){
+function toActivity(id,_type){
       if(!isHotDoor){
           window.location.href = "enrol.html?id=" + id;
       }else {
           window.location.href = jumpPage(_type) + '?id=' + id;
       }
-    }
-});
+    }});
 
 
 
-//页面判断
+//页面判断  跳转到哪里
 function jumpPage(type) {
     var htmlStr = '';
     switch(type) {
@@ -154,7 +158,7 @@ function jumpPage(type) {
             break;
         case "5":
             htmlStr = 'mall.html';
-            break;  
+            break;
         case "6":
             htmlStr = '';
             break;
@@ -173,6 +177,21 @@ function jumpPage(type) {
 
 
 
+
+
+//如果 是活动页
+// var chooseType = function () {
+//
+// };
+$('header>div').click(function () {
+    if($(this).hasClass('active')){
+        return;
+    }else {
+        $(this).children('hr').addClass('active');
+        $(this).addClass('active').siblings().removeClass('active');
+        $(this).siblings().children('hr').removeClass('active');
+    }
+});
 
 
 

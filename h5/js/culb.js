@@ -43,18 +43,90 @@ $(function(){
     }
 
     if(!isHotDoor){
-        $("body").prepend('<header> <div class="jionAct active">报名<hr class="active"></div> <div class="consultation">咨询<hr></div></header>');
+        $("body").prepend('<header> <div class="joinAct active">报名<hr class="active"></div> <div class="consultation">咨询<hr></div></header>');
         $(".infoList").css('margin-top' ,'0.143rem');
+    };
+
+
+
+
+    //使用 滑动ajax插件 进行加载  (先声明 dropload )
+    var pageNum = 0;   //第一页
+    var pageNum_consultation = 0 ;
+    var actStr = '' ;
+    var consultationStr = '';
+
+
+    //如果是活动页,tab切换(报名/咨询)
+    $('header>div').click(function () {
+        //初始化一下
+        if($(this).hasClass('active')){
+            return;
+        }else {
+            $(this).children('hr').addClass('active');
+            $(this).addClass('active').siblings().removeClass('active');
+            $(this).siblings().children('hr').removeClass('active');
+        }
+        if($(this).hasClass('consultation')){
+            $("#consultationList").show().siblings("#actList").hide();
+        }else {
+            $("#actList").show().siblings("#consultationList").hide();
+        }
+    });
+
+
+
+
+    var dropload_consultation = $('#consultationList').dropload({
+        scrollArea : window,
+        domDown : {
+            domClass   : 'dropload-down',
+            domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+            domNoData  : '<div class="dropload-noData">已无数据</div>'
+        },
+        loadDownFn : function(me){
+            pageNum_consultation++;
+            getPage_consultation(pageNum_consultation);
+        }
+    });
+
+    function getPage_consultation(page) {
+        var url = port + '/card/consult?currentPage=' + page + '&token=' + token + '&type=7';
+        $.get(url,function(data){
+            if(data.list.length != 0){
+                for(var i=0;i<data.list.length;i++){
+                    consultationStr += '<div class="singleHot" data-id="'+data.list[i].id+'" style="background: url('+data.list[i].maxPic+') no-repeat 50%;background-size: 1rem 0.5rem">' +
+                        '<h4 class="title">'+data.list[i].title+'</h4>' +
+                        '<span class="creatTime">'+ new Date(data.list[i].createTime*1000).Formate()+'</span>' +
+                        '<span class="lookNum">'+data.list[i].viewNum+' 已阅</span></div>';
+                }
+
+                $('#consultationList>.lists').append(consultationStr);
+
+                // 每次数据加载完，必须重置
+                consultationStr = '';
+                dropload_consultation.resetload();
+
+                $('.singleHot').click(function(){
+                    window.location.href = "consultation.html?id=" + $(this).attr('data-id');
+                });
+
+            }else {
+                // 锁定
+                dropload_consultation.lock();
+                // 无数据
+                dropload_consultation.noData();
+                setTimeout('$("#consultationList .dropload-down").css("height","0")',1000);
+            }
+        });
     }
 
 
 
 
-    var pageNum = 0;   //第一页
-    var actStr = '' ;
-    
-    //使用 滑动ajax插件 进行加载
-    var dropload = $('.infoList').dropload({
+
+    var dropload = $('#actList').dropload({
         scrollArea : window,
         domDown : {
             domClass   : 'dropload-down',
@@ -68,9 +140,10 @@ $(function(){
         }
     });
 
+    //报名列表获取
     function getPage(page){
 
-        var url = !isHotDoor ? port+"/card/activity?currentPage="+page+"&size=10" :  port+"/card/mpage/hotpage?currentPage="+page+"&size=10" ;
+        var url = !isHotDoor ? port+"/card/activity?currentPage="+page+"&size=10" : port+"/card/mpage/hotpage?currentPage="+page+"&size=10" ;
 
         $.get(url,function(data){
             if(data.list.length != 0){          //如果加载的是非空页面
@@ -96,11 +169,14 @@ $(function(){
                            '<span class="type">' + typeJudge(data.list[i].type) + '</span>' + '</div></div></div>';
                    }
                 }
-                $('.lists').append(actStr);
+                $('#actList>.lists').append(actStr);
+                if(!isHotDoor){
+                    $('.infoList').css('margin-bottom','0.123rem');
+                }
+
                 // 每次数据加载完，必须重置
                 actStr = '';
                 dropload.resetload();
-
 
                 //整个div点击跳转
                 $('.infoItem').click(function(){
@@ -121,7 +197,7 @@ $(function(){
                 dropload.lock();
                 // 无数据
                 dropload.noData();
-                setTimeout('$(".dropload-down").css("height","0")',1000);
+                setTimeout('$("#actList .dropload-down").css("height","0")',1000);
             }
         });
     }
@@ -129,82 +205,69 @@ $(function(){
 
 
 
-    //跳转函数
-function toActivity(id,_type){
-      if(!isHotDoor){
-          window.location.href = "enrol.html?id=" + id;
-      }else {
-          window.location.href = jumpPage(_type) + '?id=' + id;
-      }
-    }});
+    // 更多热门单个元素 的跳转  函数
+    function toActivity(id,_type){
+          if(!isHotDoor){
+              window.location.href = "enrol.html?id=" + id;
+          }else {
+              window.location.href = jumpPage(_type) + '?id=' + id;
+          }
+        }});
 
 
-
-//页面判断  跳转到哪里
-function jumpPage(type) {
-    var htmlStr = '';
-    switch(type) {
-        case "1":
-            htmlStr = 'enrol.html';
-            break;
-        case "2":
-            htmlStr = 'life.html';
-            break;
-        case "3":
-            htmlStr = 'bradDetail.html';
-            break;
-        case "4":
-            htmlStr = '';
-            break;
-        case "5":
-            htmlStr = 'mall.html';
-            break;
-        case "6":
-            htmlStr = '';
-            break;
-        case "7":
-            htmlStr = 'consulation.html';
-            break;
-        case "8":
-            htmlStr = '';
-            break;
-        case "9":
-            htmlStr = 'consulation.html';
-            break;
-    }
-    return htmlStr;
-};
-
-
-
-
-
-//如果 是活动页
-// var chooseType = function () {
-//
-// };
-$('header>div').click(function () {
-    if($(this).hasClass('active')){
-        return;
-    }else {
-        $(this).children('hr').addClass('active');
-        $(this).addClass('active').siblings().removeClass('active');
-        $(this).siblings().children('hr').removeClass('active');
-    }
-});
-
-
-
-
-
-//两行加省略
-function less_q(){
-    var text = $('.tit-wrap .detile p');
-    var textLen = 20;
-    for(var k=0,len=text.length;k<len;k++){
-        if($(text[k]).html().length>textLen){
-            var str = $(text[k]).html().substring(0,textLen)+"..."
-            $(text[k]).html(str);
+    //页面判断  跳转到哪里
+    function jumpPage(type) {
+        var htmlStr = '';
+        switch(type) {
+            case "1":
+                htmlStr = 'enrol.html';
+                break;
+            case "2":
+                htmlStr = 'life.html';
+                break;
+            case "3":
+                htmlStr = 'bradDetail.html';
+                break;
+            case "4":
+                htmlStr = '';
+                break;
+            case "5":
+                htmlStr = 'mall.html';
+                break;
+            case "6":
+                htmlStr = '';
+                break;
+            case "7":
+                htmlStr = 'consulation.html';
+                break;
+            case "8":
+                htmlStr = '';
+                break;
+            case "9":
+                htmlStr = 'consulation.html';
+                break;
         }
-    }
-}
+        return htmlStr;
+    };
+
+
+
+
+
+
+
+
+
+
+
+    //两行加省略
+    function less_q(){
+        var text = $('.tit-wrap .detile p');
+        var textLen = 20;
+        for(var k=0,len=text.length;k<len;k++){
+            if($(text[k]).html().length>textLen){
+                var str = $(text[k]).html().substring(0,textLen)+"..."
+                $(text[k]).html(str);
+            }
+        }
+    };

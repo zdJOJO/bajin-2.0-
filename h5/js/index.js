@@ -259,7 +259,7 @@ $(document).ready(function(){
 					window.location.href="mall.html?id="+id;
 			}
 
-			itemWrap.after('<div id="lookMore"><a href="">查看更多</a><hr></div>');
+			itemWrap.after('<div id="lookMore"><a href="#">查看更多</a><hr></div>');
 			$("#lookMore>a").click(function () {
 				window.location.href = 'hotDoor.html';
 			});

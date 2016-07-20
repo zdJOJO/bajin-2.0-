@@ -27,6 +27,7 @@ body{
 	overflow-x: hidden;
 }
 
+
 .infoItem{
 	height: 0.4rem;
 	position: relative;
@@ -129,6 +130,8 @@ body{
 	bottom:0;
 }
 
+
+
 /*footer.nav{
 	background: #000;
 	width:100%;
@@ -181,11 +184,10 @@ footer div p{
 .tit-wrap .tit-content .detile p{
 	height: 20px;
 	line-height: 20px;
-    text-overflow: hidden;
-    /* word-wrap: break-word; */
-    text-overflow: ellipsis;
+	/*word-break: break-all;*/
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
     /*white-space: nowrap;*/
-    overflow: hidden;
 }
 @media screen and (min-height:700px){
 	.infoItem:nth-child(even) .tit-content{
@@ -195,8 +197,8 @@ footer div p{
 		margin:0.026rem 0 0.020rem 0;
 	}
 }
-/*这里缩小了图片的宽度*/
 
+/*这里缩小了图片的宽度*/
 @media screen and (max-width:320px){
 	.rightItem .jump-img,.leftItem .jump-img{
 		width: 0.06rem;
@@ -220,3 +222,71 @@ footer div p{
 	width: 0.5rem;
 	height: 0.4rem;
 }
+
+
+
+
+
+
+
+
+
+/* -----------------------   更多热门    -------------------------*/
+
+.hotList{
+	margin-bottom: 5px;
+}
+
+.hotList >.lists >.hotItem{
+	border: 1px #e8e8e8 solid;
+	margin-bottom: 5%;
+}
+
+.hotList >.lists >.hotItem h1{
+	color: #7b7b7b;
+	top: 10%;
+	font-family: '黑体';
+	font-size: 20px;
+	width: 65%;
+}
+
+.hotList >.lists >.hotItem .detile{
+	top: 48px;
+	color: #b3b3b3;
+	font-size: 15px;
+}
+
+.hotList >.lists >.hotItem .detile>p{
+	height: 0.15rem;
+	word-break: break-all;
+	white-space: normal;
+}
+
+.hotList >.lists >.hotItem .tit-content>p{
+	font-size: 13px;
+	position: absolute;
+	top: 14%;
+	right: 15px;
+	color: #b3b3b3;
+}
+
+
+.hotItem >.tit-wrap .type{
+	position: absolute;
+	display: block;
+	width: 0.12rem;
+	text-align: center;
+	color: #b3b3b3;
+	text-align: right;
+	background: none;
+	padding: 0;
+	left: 75%;
+	top: 85%;
+}
+
+
+
+
+
+
+

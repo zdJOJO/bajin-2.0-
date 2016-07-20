@@ -46,9 +46,39 @@ body{
     margin-top: 0.012rem;
     width: 0.12rem;
 }
+
 .wrap{
 	margin-bottom: 0.15rem;
 }
+
+#lookMore{
+	margin-top: 38px;
+	height: 0.3rem;
+	z-index: 100;
+}
+
+#lookMore>a{
+	text-align: center;
+	display: block;
+	width: 25%;
+	margin: auto;
+	font-size: 18px;
+	position: relative;
+	top: 90%;
+	color: rgb(182, 166, 109);
+	z-index: 1000;
+}
+
+hr{
+	border-top: 1px rgb(182, 166, 109) solid;
+	border-bottom: none;
+	width: 40px;
+	position: relative;
+	margin: auto;
+	top: 100%;
+}
+
+
 .carousel{
 	width: 100%;
 	height: 0.5rem;
@@ -278,17 +308,24 @@ footer div p{
 }
 
 .items_img:last-child{
+	position: relative;
 }
 
 .mask_lhq:nth-child(3),.mask_lhq:nth-child(4){
 	top: -0.21rem;
 }
-section.items>div:last-child .mask_lq{
-    margin-bottom: 0.32rem;
-    width: 0.8rem;
-    margin-left: 0.1rem;
 
+section.items>div:last-child .mask_lq{
+    width: 0.8rem;
+	height: 0.3rem;
+	border: 1px #D1D1CE solid;
+    margin-left: -0.4rem;
+	position: absolute;
+	left: 50%;
+	top: 80%;
+	background: #fff;
 }
+
 section.items1>div:last-child .mask_lq{
     margin-bottom: -0.1rem;
 }

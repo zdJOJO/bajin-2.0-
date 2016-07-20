@@ -8,6 +8,9 @@ html,body{
     background: #fff;
 }
 
+ul li{
+   list-style: none;
+}
 
 
 
@@ -49,6 +52,19 @@ header>.time{
     background-size: 30%;
     left: 38.5%;
     top: 67%;
+}
+
+#collectionShare{
+    position: absolute;
+    top: 0.075rem;
+    right: 0;
+    width: 0.2rem
+}
+
+#collectionShare>img{
+    width: 30%;
+    height: auto;
+    margin-right: 10%;
 }
 
 
@@ -107,9 +123,9 @@ article >.comments>.commentList>.singleCmt{
 article >.comments>.commentList>.singleCmt>img{
     position: absolute;
     display: block;
-    width: 80px;
-    height: 80px;
-    border-radius: 40px;
+    width: 21%;
+    height: 65%;
+    border-radius: 60%;
     top: 0;
 }
 
@@ -147,6 +163,22 @@ article >.comments>.commentList>.singleCmt>.creatTime{
 }
 
 
+#shareMask{
+    background: rgba(68, 68, 68, 0.35);
+    z-index: 1000;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+}
+
+#shareMask>img{
+    width: 100%;
+    height: 13.7%;
+}
 
 
 

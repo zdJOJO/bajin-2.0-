@@ -94,6 +94,7 @@ $(document).ready(function(){
 
 	//获取服务的方法
 	function getServer(currentPage,size){
+		$(".wrapper .newBrandList").html('');
 		$.ajax({
 			type:"get",
 			url:port+"/card/mall?currentPage="+currentPage+"&size="+size+"&token="+token,
@@ -103,7 +104,7 @@ $(document).ready(function(){
 					$(".wrapper .newBrandList").append(str);
 				}
 				//多行省略显示
-				lessAll($(".singleBrand_q .detail_q>p"),25);
+				lessAll($(".singleBrand_q .detail_q > p"),25);
 				// 添加到详细页面的跳转http://121.196.232.233/card/mall/{id}
 				$(".singleBrand_q").bind("click",function(){
 					window.location.href = "mall.html?id="+$(this).data("mallid");

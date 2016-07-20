@@ -3,8 +3,11 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
 
 
 
-       // var port = "http://www.winthen.com";
-	var port = "http://test.winthen.com";
+
+
+
+   // var port = "http://www.winthen.com";
+var port = "http://test.winthen.com";
 
 
 
@@ -34,27 +37,68 @@ var is_weixin = function () {
 
 
 
+//type判断   1活动 2 白金人生 3商品 4抽奖 5c 6url 7咨询 8工会服务 9热点
+var typeJudge = function (type) {
+	var typeStr = '';
+	switch(type)
+	{
+		case 1:
+			typeStr = '活动';
+			break;
+		case 2:
+			typeStr = '白金人生';
+			break;
+		case 3:
+			typeStr = '商品';
+			break;
+		case 4:
+			typeStr = '抽奖';
+			break;
+		case 5:
+			typeStr = '乐享';
+			break;
+		case 6:
+			typeStr = 'url';
+			break;
+		case 7:
+			typeStr = '咨询';
+			break;
+		case 8:
+			typeStr = '工会服务';
+			break;
+		case 9:
+			typeStr = '热点';
+			break;
+	}
+	return typeStr;
+};
+
+
+
+
+
+
 
 //多行显示省略号的方法
 function lessAll(text,length){
-    // var text = $('.tit-wrap .detile p');
-    var textLen = length;
-    for(var k=0,len=text.length;k<len;k++){
-        // console.log($(text[k]).html());
-        if($(text[k]).html().length>textLen){
-            var str = $(text[k]).html().substring(0,textLen)+"..."
-            $(text[k]).html(str);
-        }
-    }
+	// var text = $('.tit-wrap .detile p');
+	var textLen = length;
+	for(var k=0,len=text.length;k<len;k++){
+		// console.log($(text[k]).html());
+		if($(text[k]).html().length>textLen){
+			var str = $(text[k]).html().substring(0,textLen)+"..."
+			$(text[k]).html(str);
+		}
+	}
 }
 // 验证手机号的方法
 function checkMobile(str){
-    var re = /^[1][35847][0-9]{9}$/;
-    if (re.test(str)) {
-        return true;
-    } else {
-        return false;
-    }
+	var re = /^[1][35847][0-9]{9}$/;
+	if (re.test(str)) {
+		return true;
+	} else {
+		return false;
+	}
 }
 //格式化金钱数
 function formatePrice(price){

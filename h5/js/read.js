@@ -154,6 +154,7 @@ $(function(){
                 }
             });
             }else{
+                $(".hotList").css("display","none");
                 $(".vipList").css("display","none");
                 $(".readList").show();
             }
@@ -162,7 +163,7 @@ $(function(){
 
 
 
-    var tabJo =  $(".tab >div");
+    var tabJo =  $(".tab > div");
     tabJo.click(function () {
         $(this).addClass('active').siblings().removeClass('active');
         if($(this).hasClass('hot') || $(this).hasClass('life')){

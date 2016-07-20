@@ -2,6 +2,7 @@
 
 //此页面的问题很多，留到最后处理
 $(document).ready(function(){
+
 	var token = "";
 	//获取存在于cookie中的token值
 	function getCookie(c_name) {
@@ -27,11 +28,6 @@ $(document).ready(function(){
 	his = his[his.length-1];
 
 
-	//判断是否在微信客户端打开
-	// is_weixin();
-
-
-	// console.log(his);
 	//侧边栏切换
 	$("#vip").click(function(){
 		$(".showDiv2").show();
@@ -41,9 +37,7 @@ $(document).ready(function(){
 		$(".showDiv1").css("position","fixed")
 		//侧边栏登陆
 		if(token!=undefined){
-			console.log(0000);
 			$.get(port +"/card/user?token="+token,function(data){
-				console.log(data);
 				//当token过期的时候会出错，code：666,这个时候需要
 				if(typeof(data) == "string"){
 					$(".pic_but").html("");
@@ -66,7 +60,6 @@ $(document).ready(function(){
 		}//侧边栏登陆结束
 		if(token!=undefined){
 			$.get(port+'/card/car/sum?token='+token,function(data){
-				console.log(data);
 				if(typeof(data) == "string"){
 					$(".order_tj").css("display","none");
 					return;
@@ -229,16 +222,14 @@ $(document).ready(function(){
 		//这里应该加载下边的选项的时候，先加载部分，在触发上滑事件(需要判断距离底端的距离)的时候触发继续加载更多的页面
 		//加载上边三张图，加载下边三张图
 	    $.get(port+"/card/mpage/hot",function(data){
-			console.log(data);
 			for(var i=0;i<data.length;i++){
 				if(i ==0||i==1){
 				var item=$('<div class="itemLeft" ><img src='+data[i].minPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/><div class = "mask_lhq"><p class="tit_tq">'+data[i].title+'</p><p class="tit_bq">'+data[i].subtitle+'</p></div></div>');				
 				}else if(i==2){
 				var item=$('<div class="items_img" ><img src='+data[i].maxPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/><div class = "mask_lq"><p class="tit_tq1">'+data[i].title+'</p>' +
-					'<div class="tit_bq1">'+data[i].detail+'</div></div>' +
-					'<div id="tit_ck" data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img">查看更多</div><div class="xhx"></div></div>');
+					'<div class="tit_bq1">'+data[i].detail+'</div></div>');
 				}
-				itemWrap.append(item);
+				itemWrap.append(item)
 			}			
 			$(".tit_bq1").each(function(){ 
 				var maxwidth=50;   
@@ -249,7 +240,6 @@ $(document).ready(function(){
 			});	
 			//加载下面三张图，加载出来四个信息，只渲染前三个
 			$.get(port+"/card/mpage/new",function(data){
-				console.log(data);
 				for(var i=0;i<data.length;i++){
 					var item=$('<div class="itemLeft"><img src='+data[i].minPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/><div class = "mask_lhq"><p class="tit_tq">'+data[i].title+'</p><p class="tit_bq">'+data[i].subtitle+'</p></div></div>');
 					itemWrap1.append(item);
@@ -268,6 +258,11 @@ $(document).ready(function(){
 				else if(type == 5)
 					window.location.href="mall.html?id="+id;
 			}
+
+			itemWrap.after('<div id="lookMore"><a href="#">查看更多</a><hr></div>');
+			$("#lookMore>a").click(function () {
+				window.location.href = 'hotDoor.html';
+			});
 		});
 	}
 	getActData();
@@ -291,9 +286,7 @@ $(document).ready(function(){
 		type:"get",
 		url:port+"/card/icbcbutton",
 		success:function(data){
-			console.log(data);
 			var actList = $(".wrap .activities .fun");
-			console.log(actList);
 			for(var i=0,len=actList.length;i<len;i++){
 				$(actList[i]).attr("data-pickid",data.list[i].pickId);
 				$(actList[i]).find("img").attr("src",data.list[i].buttonPic);
@@ -311,7 +304,6 @@ $(document).ready(function(){
 			dataType:"text",
 			url: port+"/card/bank/encryption/privatejcyy?token="+token,
 			success:function(data){
-				console.log(data);
 				if(data.length<50){
 					window.location.href = "login.html?his="+his;
 				}else{
@@ -325,7 +317,6 @@ $(document).ready(function(){
 					dataType:"string",
 					url: port+"/card/bank/encryption/privatejcyy?token="+token,
 					success:function(data){
-						console.log(data);
 						if(data.length<50){
 							window.location.href = "login.html?his="+his;
 						}else{
@@ -336,11 +327,5 @@ $(document).ready(function(){
 				});
 			}
 		});
-
-
-
-
-
-
-	};	
+	};
 });

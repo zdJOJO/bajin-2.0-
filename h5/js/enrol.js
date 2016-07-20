@@ -30,6 +30,15 @@ $(function(){
     his = his + window.location.search;
 
 
+
+    //判断是 活动 还是  热门
+    var isHotDoor = false;
+    if(window.location.pathname.indexOf('hotDoorDetail') > 0){
+        isHotDoor = true;
+    }
+
+
+
     // alert(his);
     $("#culb_But").click(function(){			
         window.location.href="index.html";
@@ -124,18 +133,10 @@ $(function(){
                 }
             });
             
-            // //客服电话
-            // var tellNumJo =  $('.tellNum');
-            // tellNumJo.click(function () {
-            //     $(this).show();
-            //     $(".main").append('<div class="phoneNumBox"><span>客服电话: 4001113797</span><span class="close">X</span></div>');
-            //
-            //     $(".main >.phoneNumBox>.close").click(function () {
-            //         $(".phoneNumBox").hide();
-            //     });
-            // });
+
             
-            
+
+
             //分享部分
             var sharebtn=$('.share-btn').eq(0);
             var sharemask=$('#share-mask');

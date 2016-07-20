@@ -18,12 +18,17 @@
     <h3></h3>
     <span class="abstr"></span>
     <span class="time"></span>
+    <div id="collectionShare">
+        <img class="love" src="imgs/iconfont-love.png">
+        <img class="share" src="imgs/iconfont-p-share.png">
+    </div>
 </header>
 
 <article>
     <section class="content"></section>
     <section class="comments">
         <span class="totalNum"></span>
+        <ul class="commentList"></ul>
     </section>
 </article>
 
@@ -31,12 +36,10 @@
     <div class="weui_search_bar" id="search_bar">
         <form class="weui_search_outer">
             <div class="weui_search_inner">
-                <i class="weui_icon_search"></i>
                 <input type="search" class="weui_search_input" id="search_input" placeholder="添加评论" required/>
                 <a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
             </div>
             <label for="search_input" class="weui_search_text" id="search_text">
-                <i class="weui_icon_search"></i>
                 <span>添加评论</span>
             </label>
         </form>
@@ -44,16 +47,13 @@
     </div>
 </footer>
 
-<div id="share-mask"><img src="imgs/shareImg.png"/></div>
-
+<div id="shareMask"><img src="imgs/shareImg.png"/></div>
 
 </body>
 
 <script>var IS_WX_LOADED=0;</script>
-<script src="js/zepto.js"></script>
 <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
-<script type="text/javascript" src="js/plugin/smart-time-ago.js"></script>
 <script type="text/javascript" src="js/consultation.js"></script>
 <script>
     var iWidth=document.documentElement.clientWidth;

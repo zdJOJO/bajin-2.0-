@@ -170,7 +170,6 @@ $("#shareMask").click(function () {
 
 
 
-
 //收藏(添加/删除)   //   card/collect/{collectId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
 $('#collectionShare>.love').click(function () {
     if(token){
@@ -210,7 +209,6 @@ $('#collectionShare>.love').click(function () {
 
 
 
-
 // time ago
 var timeAgo = function (preTime) {
     if(preTime<60){
@@ -231,7 +229,26 @@ var timeAgo = function (preTime) {
 
 
 
+//安卓  和 ios  评论时候 判断
+$('#search_input').focus(function () {
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;  //android终端
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);     //ios终端
 
+    if(isAndroid > -1 ){
+        $('footer').css({
+            'bottom' : '8%',
+        });
+        $('footer form').css('z-index','100');
+        $('footer a').css('z-index','100');
+    }
+});
+
+$('#search_input').blur(function () {
+    $('footer').css({
+        'bottom' : '0',
+    })
+});
 
 
 

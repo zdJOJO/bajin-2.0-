@@ -356,3 +356,12 @@ footer div.pierrePage{
 	position: absolute;
 	z-index: -1;
 }
+
+
+
+
+@media only screen and (max-width: 320px){
+	.lar .pirce{
+		bottom: -43%;
+	}
+}

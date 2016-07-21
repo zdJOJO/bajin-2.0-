@@ -401,3 +401,28 @@ footer div p{
 	}
 }
 
+
+@media only screen and (max-width: 320px){
+
+	.hotList >.lists >.hotItem h1{
+		font-size: 16px;
+		width: 54%;
+	}
+
+	.hotList >.lists >.hotItem .detile{
+		width: 82%;
+		font-size: 13px;
+	}
+
+	.hotList >.lists >.hotItem .tit-content>p{
+		top: 19%;
+		right: 10px;
+	}
+
+	.hotItem >.tit-wrap .type{
+		width: 0.16rem;
+		left: 67%;
+		top: 82%;
+	}
+}
+

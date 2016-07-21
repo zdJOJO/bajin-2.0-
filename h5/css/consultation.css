@@ -205,10 +205,24 @@ article >.comments>.commentList>.singleCmt>.creatTime{
     animation: rotate 0.75s linear infinite;
 }
 
+footer.nav{
+    height: 7.7%;
+}
+
 
 
 /*  iphoen 4 5 情况下 */
 @media only screen and (max-width: 320px){
+
+    header>h3{
+        margin-top: 20px;
+        width: 65%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+
     article >.comments>.commentList>.singleCmt>img{
         position: absolute;
         display: block;
@@ -228,6 +242,13 @@ article >.comments>.commentList>.singleCmt>.creatTime{
         top: 34px;
         height: 44%;
     }
+
+    footer.nav{
+        height: 8.7%;
+        bottom: 1px;
+    }
+
+
 }
 
 

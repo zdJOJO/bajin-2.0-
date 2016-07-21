@@ -282,11 +282,15 @@ footer div p{
 }
 
 
-
+@media only screen and (max-width: 384px){
+    .tab > div>span{
+        top: 10px;
+    }
+}
 
 @media only screen and (max-width: 375px){
     .tab > div>span{
-        top: 11px;
+        top: 10px;
     }
 }
 

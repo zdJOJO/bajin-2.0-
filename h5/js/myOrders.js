@@ -212,7 +212,6 @@ $(document).ready(function(){
 	//http://121.196.232.233/card/order/admin?currentPage={pagenum}&size={size}&orderState=0&token=e7120d7a-456b-4471-8f86-ac638b348a53
 	// 备注:orderState 订单状态，0:全部,1：未付款，2：已付款，3：已发货，4：已退款，5：交易关闭，6：已收货
 	function getOrders(currentPage,size,orderState){
-		console.log(orderState);
 		if(orderState == 0){
 			orderTab = 'allApo';
 		}
@@ -234,7 +233,6 @@ $(document).ready(function(){
 			dataType:"json",
 			contentType:"application/json;charset=UTF-8",
 			success:function(data){
-				console.log(data);
 				// 这里添加一个注释，购物车区分不同的添加方法，从购物车里边添加进来的时候，商品是完全分开的，每个商品都不一样，
 				// 如果是直接购买的话商品是合并的。
 				// 这里先要判断订单的来源，使用goodsAndSkuModels.length与orderModel.orderNumber进行对比
@@ -273,7 +271,6 @@ $(document).ready(function(){
 				}
 				//绑定点击跳转事件
 				$(".singleMsg").bind("click",function(){
-					console.log(orderTab)
 					window.location.href = "unpaid.html?" + orderTab + "&&&" + "cardid=" + $(this).data("url");
 				});
 			},
@@ -300,7 +297,6 @@ function less_q(text,length){
 	// var text = $('.tit-wrap .detile p');
 	var textLen = length;
 	for(var k=0,len=text.length;k<len;k++){
-		// console.log($(text[k]).html());
 		if($(text[k]).html().length>textLen){
 			var str = $(text[k]).html().substring(0,textLen)+"..."
 			$(text[k]).html(str);

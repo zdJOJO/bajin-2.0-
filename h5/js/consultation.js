@@ -229,13 +229,15 @@ var timeAgo = function (preTime) {
 
 
 
-//安卓  和 ios  评论时候 判断
+// PC 、 安卓  、 ios  评论时候 判断
+
+
 $('#search_input').focus(function () {
     var u = navigator.userAgent;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;  //android终端
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);     //ios终端
 
-    if(isAndroid > -1 ){
+    if(isAndroid > -1){
         $('footer').css({
             'bottom' : '8%',
         });
@@ -244,12 +246,12 @@ $('#search_input').focus(function () {
     }
 });
 
+
 $('#search_input').blur(function () {
     $('footer').css({
         'bottom' : '0',
     })
 });
-
 
 
 

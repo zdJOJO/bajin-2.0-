@@ -7,25 +7,29 @@
 	<meta name="x5-orientation"content="portrait">
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <title>白金阅读</title>
+    <link rel="stylesheet" href="css/plugin/dropload.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/read.css">
-    <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
-    <script src="js/zepto.js"></script>
-    <script src="js/read.js"></script>
     <script>
         var iWidth=document.documentElement.clientWidth;
         document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
     </script>
 </head>
 <body>
-    <div class="tab">
-        <div class="hot active"><span>热点</span></div>
+    <header class="tab">
+        <div class="hot"><span>热点</span></div>
         <div class="life"><span>人物</span></div>
         <div class="read"><span>书籍</span></div>
-    </div>
+    </header>
 
-    <div class="list hotList"></div>
-    <div class="list vipList"></div>
+    <section id="hot">
+        <div class="list hotList"></div>
+    </section>
+
+    <section id="vip">
+        <div class="list vipList" ></div>
+    </section>
+
     <div class="list readList">
         <p>
             <img src="imgs/read.png">
@@ -34,10 +38,9 @@
         <button id="loginToRead">登录</button>
     </div>
 
-    <div class="readIframe">
+    <div class="readIframe" style="display: none">
         <iframe src="" scrolling="no" style="border:none;min-height:700px;height:100%;margin-bottom:0.17rem;margin-bottom: 0.13rem;display: block;width:375px;margin-top:0.12rem;"></iframe>
     </div>
-    <!-- <a href="testRead.html">testRead</a> -->
 
     <footer>
       <div class="indexPage">
@@ -58,4 +61,7 @@
       </div>
     </footer>
 </body>
+<script src="js/zepto.js"></script>
+<script type="text/javascript" src="js/plugin/dropload.min.js"></script>
+<script src="js/read.js"></script>
 </html>

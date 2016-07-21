@@ -117,10 +117,10 @@ $(document).ready(function(){
 		window.location.href = "culb.html?joinAct";
 	});
 	$(".readPage").click(function(){
-		window.location.href = "read.html";
+		window.location.href = "read.html?hot";
 	});
 	$(".pierrePage").click(function(){
-		window.location.href = "pierre.html";
+		window.location.href = "pierre.html?good";
 	});
 	var showMore=$('#moreAct');
 	var activities=$("#activities");

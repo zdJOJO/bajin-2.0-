@@ -26,11 +26,11 @@ $(function(){
     });
 
 	$(".readPage").click(function(){
-        window.location.href = "read.html";
+        window.location.href = "read.html?hot";
     });
 
     $(".pierrePage").click(function(){
-        window.location.href = "pierre.html";
+        window.location.href = "pierre.html?good";
     });
 
     var actWrap = $('.infoList>.lists').eq(0);
@@ -82,40 +82,11 @@ $(function(){
 
     //使用 滑动ajax插件 进行加载  (先声明 dropload )
     var pageNum = 0;   //第一页
-    var pageNum_consultation = 0 ;
     var actStr = '' ;
+    var pageNum_consultation = 0 ;
     var consultationStr = '';
 
 
-    if(window.location.href.indexOf('joinAct') > 0 || isHotDoor){
-        var dropload = $('#actList,#moreHot').dropload({
-            scrollArea : window,
-            domDown : {
-                domClass   : 'dropload-down',
-                domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
-                domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
-                domNoData  : '<div class="dropload-noData">已无数据</div>'
-            },
-            loadDownFn : function(me){
-                pageNum++;
-                getPage(pageNum);
-            }
-        });
-    }else {
-        var dropload_consultation = $('#consultationList').dropload({
-            scrollArea : window,
-            domDown : {
-                domClass   : 'dropload-down',
-                domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
-                domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
-                domNoData  : '<div class="dropload-noData">已无数据</div>'
-            },
-            loadDownFn : function(me){
-                pageNum_consultation++;
-                getPage_consultation(pageNum_consultation);
-            }
-        });
-    }
 
 
 
@@ -155,8 +126,7 @@ $(function(){
 
 
 
-
-
+    
 
     //报名列表获取
     function getPage(page){
@@ -222,6 +192,42 @@ $(function(){
             }
         });
     }
+
+
+
+
+
+    //判断
+    if(window.location.href.indexOf('joinAct') > 0 || isHotDoor){
+        var dropload = $('#actList,#moreHot').dropload({
+            scrollArea : window,
+            domDown : {
+                domClass   : 'dropload-down',
+                domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+                domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+                domNoData  : '<div class="dropload-noData">已无数据</div>'
+            },
+            loadDownFn : function(me){
+                pageNum++;
+                getPage(pageNum);
+            }
+        });
+    }else {
+        var dropload_consultation = $('#consultationList').dropload({
+            scrollArea : window,
+            domDown : {
+                domClass   : 'dropload-down',
+                domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+                domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+                domNoData  : '<div class="dropload-noData">已无数据</div>'
+            },
+            loadDownFn : function(me){
+                pageNum_consultation++;
+                getPage_consultation(pageNum_consultation);
+            }
+        });
+    }
+
 
 
 

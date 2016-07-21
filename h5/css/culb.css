@@ -142,9 +142,7 @@ header >div>hr.active{
 	top: 27%;
 	left: 13px;
 }
-@media screen and (max-width:375px){
 
-}
 .tit-content .detile{
 	white-space: nowrap;
 	overflow: hidden;
@@ -235,7 +233,7 @@ footer div p{
     /*text-overflow: ellipsis;*/
     /*white-space: nowrap;*/
 }
-@media screen and (min-height:800px){
+@media screen and (min-height:737px){
 	.infoItem:nth-child(even) .tit-content{
 	    margin: 0 0.03rem;	
 	}
@@ -391,5 +389,15 @@ footer div p{
 
 
 
+@media screen and (min-width:415px){
+	.tit-content .detile{
+		top: 53%;
+	}
+}
 
+@media screen and (min-width: 737px	){
+	.tit-content .detile{
+		margin: 0 0 0.020rem 0;
+	}
+}
 

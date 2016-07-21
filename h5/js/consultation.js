@@ -116,8 +116,16 @@ $('#moreComts').click(function () {
 //发表评论
 $("#search_cancel").click(function () {
     if(!token){
-        $.toast("登陆之后才能评论", "text");
-        return;
+        $.modal({
+            title: "评论失败",
+            text: "登陆之后才能评论",
+            buttons: [
+                {text: "点击登录", onClick: function(){
+                    window.location.href = "login.html?his=" + escape(his);
+                }},
+                { text: "取消", className: "default", onClick: function(){return;} },
+            ]
+        });
     }
     if($("#search_input").val().length > 140){
         $.alert("评论内容过长，请重新填写", "评论失败", function() {

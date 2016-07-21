@@ -145,9 +145,9 @@ article >.comments>.commentList>.singleCmt>.userName{
 article >.comments>.commentList>.singleCmt>p{
     position: absolute;
     color: #808080;
-    font-size: 0.8em;
+    font-size: 0.75em;
     left: 23%;
-    top: 48px;
+    top: 41px;
     width: 75%;
     height: 45%;
     word-break: break-all;
@@ -204,6 +204,49 @@ article >.comments>.commentList>.singleCmt>.creatTime{
     -webkit-animation: rotate 0.75s linear infinite;
     animation: rotate 0.75s linear infinite;
 }
+
+
+
+/*  iphoen 4 5 情况下 */
+@media only screen and (max-width: 320px){
+    article >.comments>.commentList>.singleCmt>img{
+        position: absolute;
+        display: block;
+        width: 16%;
+        height: 52%;
+        border-radius: 58%;
+        top: 6px;
+        left: 12px
+    }
+
+    article >.comments>.commentList>.singleCmt>.userName{
+        font-size: 0.7em;
+    }
+
+    article >.comments>.commentList>.singleCmt>p{
+        font-size: 0.4em;
+        top: 34px;
+        height: 44%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

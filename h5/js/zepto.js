@@ -61,7 +61,7 @@ var typeJudge = function (type) {
 			typeStr = 'url';
 			break;
 		case 7:
-			typeStr = '咨询';
+			typeStr = '资讯';
 			break;
 		case 8:
 			typeStr = '工会服务';

@@ -47,11 +47,11 @@ $(document).ready(function(){
 								$(".contentStyle .detail,.contentStyle .activityPic").click(function(){//这里需要区分类型的
 									window.location.href="enrol.html?id="+$(this).parent().data("itemid");
 				    			});
-							}else{//没有活动收藏
+							}else{			//没有活动收藏
 								var emptyPage = $('<center><img src="imgs/save_.png"/><h2>你还没有收藏任何活动</h2><p>再去看看吧</p><p class="turnPage">再去看看</p></center>');
 								$(".content").append(emptyPage);
 								$(".content .turnPage").click(function(){
-									window.location.href = "culb.html";
+									window.location.href = "culb.html?jionAct";
 								});
 							}							
 						}else if(type == 2){//阅读							

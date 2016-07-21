@@ -36,6 +36,7 @@ $(function(){
     var actWrap = $('.infoList>.lists').eq(0);
 
 
+
     //判断是 活动 还是  热门
     var isHotDoor = false;
     if(window.location.pathname.indexOf('hotDoor') > 0){
@@ -43,9 +44,38 @@ $(function(){
     }
 
     if(!isHotDoor){
-        $("body").prepend('<header> <div class="joinAct active">报名<hr class="active"></div> <div class="consultation">咨询<hr></div></header>');
+        $("body").prepend('<header> <div class="joinAct active">报名<hr class="active"></div> <div class="consultation">资讯<hr></div></header>');
         $(".infoList").css('margin-top' ,'0.143rem');
-    };
+
+        var thisJO = $('header>.' + window.location.href.split("?")[1])
+        thisJO.children('hr').addClass('active');
+        thisJO.addClass('active').siblings().removeClass('active');
+        thisJO.siblings().children('hr').removeClass('active');
+
+
+        //隐藏 兄弟 section
+        if( window.location.href.indexOf('joinAct') > 0){
+            $('#actList').show().siblings('section').hide();
+        }
+        if( window.location.href.indexOf('consultation') > 0){
+            $('#consultationList').show().siblings('section').hide();
+        }
+
+
+        //如果是活动页,tab切换(报名/咨询)
+        $('header>div').click(function () {
+            //初始化一下
+            if($(this).hasClass('active')){
+                return;
+            }
+
+            if($(this).hasClass('consultation')){
+                window.location.href = 'culb.html?consultation';
+            }else {
+                window.location.href = 'culb.html?joinAct';
+            }
+        });
+    }
 
 
 
@@ -57,40 +87,40 @@ $(function(){
     var consultationStr = '';
 
 
-    //如果是活动页,tab切换(报名/咨询)
-    $('header>div').click(function () {
-        //初始化一下
-        if($(this).hasClass('active')){
-            return;
-        }else {
-            $(this).children('hr').addClass('active');
-            $(this).addClass('active').siblings().removeClass('active');
-            $(this).siblings().children('hr').removeClass('active');
-        }
-        if($(this).hasClass('consultation')){
-            $("#consultationList").show().siblings("#actList").hide();
-        }else {
-            $("#actList").show().siblings("#consultationList").hide();
-        }
-    });
+    if(window.location.href.indexOf('joinAct') > 0 || isHotDoor){
+        var dropload = $('#actList,#moreHot').dropload({
+            scrollArea : window,
+            domDown : {
+                domClass   : 'dropload-down',
+                domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+                domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+                domNoData  : '<div class="dropload-noData">已无数据</div>'
+            },
+            loadDownFn : function(me){
+                pageNum++;
+                getPage(pageNum);
+            }
+        });
+    }else {
+        var dropload_consultation = $('#consultationList').dropload({
+            scrollArea : window,
+            domDown : {
+                domClass   : 'dropload-down',
+                domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+                domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+                domNoData  : '<div class="dropload-noData">已无数据</div>'
+            },
+            loadDownFn : function(me){
+                pageNum_consultation++;
+                getPage_consultation(pageNum_consultation);
+            }
+        });
+    }
 
 
 
 
-    var dropload_consultation = $('#consultationList').dropload({
-        scrollArea : window,
-        domDown : {
-            domClass   : 'dropload-down',
-            domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
-            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
-            domNoData  : '<div class="dropload-noData">已无数据</div>'
-        },
-        loadDownFn : function(me){
-            pageNum_consultation++;
-            getPage_consultation(pageNum_consultation);
-        }
-    });
-
+    //报名咨询获取
     function getPage_consultation(page) {
         var url = port + '/card/consult?currentPage=' + page + '&token=' + token + '&type=7';
         $.get(url,function(data){
@@ -126,19 +156,7 @@ $(function(){
 
 
 
-    var dropload = $('#actList').dropload({
-        scrollArea : window,
-        domDown : {
-            domClass   : 'dropload-down',
-            domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
-            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
-            domNoData  : '<div class="dropload-noData">已无数据</div>'
-        },
-        loadDownFn : function(me){
-            pageNum++;
-            getPage(pageNum);
-        }
-    });
+
 
     //报名列表获取
     function getPage(page){
@@ -169,9 +187,12 @@ $(function(){
                            '<span class="type">' + typeJudge(data.list[i].type) + '</span>' + '</div></div></div>';
                    }
                 }
-                $('#actList>.lists').append(actStr);
+
                 if(!isHotDoor){
+                    $('#actList>.lists').append(actStr);
                     $('.infoList').css('margin-bottom','0.123rem');
+                }else {
+                    $('.lists').append(actStr);
                 }
 
                 // 每次数据加载完，必须重置
@@ -197,10 +218,12 @@ $(function(){
                 dropload.lock();
                 // 无数据
                 dropload.noData();
-                setTimeout('$("#actList .dropload-down").css("height","0")',1000);
+                setTimeout('$("#actList .dropload-down ,#moreHot .dropload-down").css("height","0")',1000);
             }
         });
     }
+
+
 
 
 
@@ -213,6 +236,8 @@ $(function(){
               window.location.href = jumpPage(_type) + '?id=' + id;
           }
         }});
+
+
 
 
     //页面判断  跳转到哪里

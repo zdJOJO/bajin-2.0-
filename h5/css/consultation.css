@@ -109,7 +109,10 @@ article >.comments>.totalNum{
     background: #fff;
     z-index: 100;
     top: -14px;
-    left: 42%;
+    left: 50%;
+    width: 98px;
+    margin-left: -49px;
+    text-align: center;
 }
 
 
@@ -181,8 +184,26 @@ article >.comments>.commentList>.singleCmt>.creatTime{
 }
 
 
+#loading{
+    position: relative;
+    overflow: hidden;
+    font-size: 12px;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
 
-
+#loading > span{
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    border-radius: 100%;
+    margin: 6px;
+    border: 2px solid #666;
+    border-bottom-color: transparent;
+    vertical-align: middle;
+    -webkit-animation: rotate 0.75s linear infinite;
+    animation: rotate 0.75s linear infinite;
+}
 
 
 

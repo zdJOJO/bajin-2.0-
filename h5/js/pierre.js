@@ -28,7 +28,7 @@ $(document).ready(function(){
 		window.location.href = "index.html";
 	});
 	$(".clubPage").click(function(){
-		window.location.href = "culb.html";
+		window.location.href = "culb.html?joinAct";
 	});	
 	$(".readPage").click(function(){
 		window.location.href = "read.html";

@@ -21,31 +21,34 @@ function getCookie(c_name)
 
 
 token = getCookie("token");
-var his = window.location.pathname.split("/");
+var his = window.location.href.split("/");
 his = his[his.length-1];
 
 var consultationId = window.location.href.split("=")[1];
 
 
 
-var itemId = 0 ;
+var itemId = window.location.href.split("=")[1];
 var pageNum = 1;
 var collectId = 0;
+var commentStr = '';
 
 
 //获取内容
 var getHotDetail = function () {
     $.get( port + '/card/consult/' + consultationId + '?token=' + token,function (data) {
         $('title').html(data.title)
-        itemId = data.id;
         $("h3").html(data.title);
         $("header>.abstr").html(data.abstr);
         $("header>.time").html(data.title);
         $("article>.content").html(data.content).append('<span class="readNum">阅读量：' + data.viewNum + '</span>');
-        getCommentList(1);
         isCollected();
     });
 }
+
+
+getHotDetail();
+
 
 
 
@@ -63,16 +66,21 @@ var isCollected = function () {
     });
 };
 
-getHotDetail();
-
-
-
 
 
 //每一页评论默认返回10条数据
+var isPublishCtm = false;
 var getCommentList = function (page) {
-    $("article>.comments>.commentList").html('');
-    var commentStr = '';
+
+    $('#loading').show();
+    $('#loading span').show();
+    $('#moreComts').hide();
+
+    if(isPublishCtm){
+        $("article>.comments>.commentList").html('');
+        commentStr = '' ;
+    }
+
     $.get( port + '/card/comment/list?currentPage=' + page + '&type=' + 7 + '&itemId=' + itemId,function (data) {
         $("article>.comments>.totalNum").html('共' + data.rowCount + '条评论');
         if(data.list.length !=0){
@@ -82,12 +90,26 @@ var getCommentList = function (page) {
                     '<p>'+ data.list[i].commentContent +'</p>' + '<span class="creatTime">'+ timeAgo((new Date().getTime()/1000)-data.list[i].createTime) +'</span></li>';
             }
             $("article>.comments>.commentList").append(commentStr);
+            $('#loading').hide();
+            $('#moreComts').show();
         }else {
-           //todo
+            setTimeout('$("#loading").hide()',1000);
         }
     });
 };
 
+getCommentList(1);
+
+
+
+//点击查看更多评论
+$('#moreComts').click(function () {
+    isPublishCtm = false;
+    if(pageNum >= 1){
+        pageNum++;
+    }
+    getCommentList(pageNum);
+});
 
 
 
@@ -116,6 +138,7 @@ $("#search_cancel").click(function () {
                 if(result.code == 201){
                     $.toast("发表评论成功");
                     $("#search_input").val('');
+                    isPublishCtm = true;
                     getCommentList(1);
                 }
             },
@@ -172,7 +195,7 @@ $('#collectionShare>.love').click(function () {
             }
         });
     }else {
-        window.location.href = "login.html?his="+escape(his);
+        window.location.href = "login.html?his=" + escape(his);
     }
 });
 
@@ -196,19 +219,6 @@ var timeAgo = function (preTime) {
         return parseInt(preTime/3600/24/365)+"年前";
     }
 };
-
-
-
-
-
-
-// $('header>h3').click(function () {
-//     //回到品评论开头
-//     $("body,html").animate({
-//         scrollTop:  $("#commentPop").offset().top    //让body的scrollTop等于pos的top，就实现了滚动
-//     },500);
-// });
-
 
 
 

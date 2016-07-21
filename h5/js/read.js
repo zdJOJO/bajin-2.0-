@@ -27,13 +27,13 @@ $(function(){
     his = his[his.length-1];
     
     
-    
-    
+
+
     $(".indexPage").click(function(){
         window.location.href = "index.html";
     });
     $(".clubPage").click(function(){
-        window.location.href = "culb.html";
+        window.location.href = "culb.html?joinAct";
     });
     $(".pierrePage").click(function(){
         window.location.href = "pierre.html";
@@ -85,36 +85,6 @@ $(function(){
             });
         });
     }
-
-        // //这里定义下拉加载
-        // //定义触发的事件
-        // var touchEvents = {
-        //     touchstart: "touchstart",
-        //     touchmove: "touchmove",
-        //     touchend: "touchend",
-        //     /**
-        //      * @desc:判断是否pc设备，若是pc，需要更改touch事件为鼠标事件，否则默认触摸事件
-        //      */
-        //     initTouchEvents: function () {
-        //         if (isPC()){
-        //             this.touchstart = "mousedown";
-        //             this.touchmove = "mousemove";
-        //             this.touchend = "mouseup";
-        //         }
-        //     }
-        // };
-        // $(document).bind(touchEvents.touchend, function (event) {
-        //     //event.preventDefault();
-        //     //这里触发事件
-        //     //判断加载的条件
-        //     //alert($(document).height());
-        //     //alert($(window).height() + $(window).scrollTop());
-        //     if($(document).height() >= $(window).height() + $(window).scrollTop()){
-        //         page++;
-        //         getData(page,'life');
-        //     }
-        // });//下拉加载函数
-
 
 
 

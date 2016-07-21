@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="css/weiXin/weui.min.css">
     <link rel="stylesheet" href="css/weiXin/jquery-weui.css">
+    <link rel="stylesheet" href="css/plugin/dropload.css">
 
     <link rel="stylesheet" href="css/enrol.css">
     <link rel="stylesheet" href="css/consultation.css">
@@ -29,6 +30,8 @@
     <section class="comments">
         <span class="totalNum"></span>
         <ul class="commentList"></ul>
+        <div id="loading" class="dropload-load"><span class="loading" style="display: none"></span>加载中...</div>
+        <div id="moreComts" class="dropload-down"><div class="dropload-refresh" ><span></span>点击查看更多评论</div></div>
     </section>
 </article>
 
@@ -53,6 +56,7 @@
 
 <script>var IS_WX_LOADED=0;</script>
 <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/plugin/dropload.min.js"></script>
 <script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
 <script type="text/javascript" src="js/consultation.js"></script>
 <script>

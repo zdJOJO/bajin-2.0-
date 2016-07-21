@@ -178,7 +178,7 @@ $(document).ready(function(){
 						var strEmpty = '<center><img src="imgs/save_.png"/><h2>你还没有预约任何活动</h2><p>再去看看吧</p><p class="turnPage">再去看看</p></center>';
 						$(".appointment").append(strEmpty);
 						$(".appointment .turnPage").click(function(){
-							window.location.href = "culb.html";
+							window.location.href = "culb.html?joinAct";
 						});
 						return;
 					}

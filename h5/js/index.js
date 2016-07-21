@@ -114,7 +114,7 @@ $(document).ready(function(){
 	//设置元素的高度等于移动设备的高度
 	$(".showDiv2").height($(window).height());
 	$(".clubPage").click(function(){
-		window.location.href = "culb.html";
+		window.location.href = "culb.html?joinAct";
 	});
 	$(".readPage").click(function(){
 		window.location.href = "read.html";

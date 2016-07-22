@@ -210,8 +210,21 @@ footer.nav{
 }
 
 
+/*   */
+@media only screen and (max-width: 420px){
+    header>h3{
+        margin-top: 20px;
+        width: 70%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
 
-/*  iphoen 4 5 情况下 */
+
+
+
+/*  iphoen 4  5 情况下 */
 @media only screen and (max-width: 320px){
 
     header>h3{

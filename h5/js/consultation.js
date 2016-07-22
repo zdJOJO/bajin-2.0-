@@ -141,6 +141,7 @@ $("#search_cancel").click(function () {
             return;
         });
     }else {
+        
         $.ajax({
             type: 'post',
             dataType: "json",

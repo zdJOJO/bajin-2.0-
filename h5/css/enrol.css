@@ -368,3 +368,144 @@ footer.nav{
 }
 
 
+
+
+
+
+/* 评论 列表 */
+#comment{
+    background: #fff;
+    position: relative;
+    top: -52px;
+}
+
+#comment > h3{
+    height: 25px;
+    line-height: 25px;
+    color: #777;
+    padding-left: 25px;
+}
+
+#comment >.commentList>.singleCmt{
+    height: 0.27rem;
+    margin-bottom: 0.06rem;
+    position: relative;
+}
+
+
+#comment >.commentList>.singleCmt>img{
+    height: 64px;
+    width: 64px;
+    border-radius: 32px;
+    position: absolute;
+    top: 6%;
+    left: 4%;
+}
+
+#comment >.commentList>.singleCmt>.userName{
+    position: absolute;
+    top: 14%;
+    left: 24%;
+    display: block;
+    font-size: 16px;
+    font-family: 黑体;
+    width: 56%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#comment >.commentList>.singleCmt>p{
+    position: absolute;
+    top: 40%;
+    left: 24%;
+    color: #777;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    width: 60%;
+    height: 40%;
+}
+
+#comment >.commentList>.singleCmt>.creatTime{
+    position: absolute;
+    bottom: 8%;
+    left: 24%;
+    color: #777;
+}
+
+
+#comment > .box{
+    height: 0.1rem;
+    font-size: 15px;
+}
+
+#commentContent{
+    width: 80%;
+    height: 60%;
+    margin-top: 7px;
+    margin-left: 20px;
+    padding-left: 10px;
+    background: rgb(238, 238, 238);
+    border: none;
+}
+
+#publishCmt{
+    text-align: center;
+    display: inline-block;
+    padding: 4px;
+    color: #000;
+    font-family: 黑体;
+}
+
+
+
+
+@media screen and (max-width: 320px){
+    #comment >.commentList>.singleCmt>.userName{
+        left: 28%;
+    }
+
+    #comment >.commentList>.singleCmt>p{
+        left: 28%;
+        height: 35%;
+    }
+
+    #comment >.commentList>.singleCmt>.creatTime{
+        left: 28%;
+    }
+
+    #comment > .box{
+        height: 0.15rem;
+    }
+
+    #commentContent{
+        width: 70%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

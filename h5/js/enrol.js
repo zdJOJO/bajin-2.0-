@@ -38,6 +38,10 @@ $(function(){
     }
 
 
+    var itemId = window.location.href.split("=")[1];
+    var commentStr = '';
+    var pageNum = 1;
+
 
     // alert(his);
     $("#culb_But").click(function(){			
@@ -106,12 +110,6 @@ $(function(){
                     style:"background:#9c9c9c;"
                 }).html('已过期');
             }
-            //
-            // for(var i in picList){
-            //     var str = $('<div class="swiper-slide"><img src="'+picList[i]+'"/></div>');
-            //     $(".swiper-wrapper   ").append(str);
-            // }
-
 
 
             dataWrap.append(str1).append(str2);
@@ -120,6 +118,9 @@ $(function(){
                 'height': 'auto'
             })
 
+            //加载评论列表
+            getCommentList(1);
+            $('#comment').show();
 
 
             //这里删除了活动亮点
@@ -132,9 +133,6 @@ $(function(){
                     $("section.content").append(str);
                 }
             });
-            
-
-            
 
 
             //分享部分
@@ -167,8 +165,7 @@ $(function(){
                 });
             }            
         
-            //这里需要加判断用户是否登录           
-            //http://121.196.232.233:9292/card/item?token=e7120d7a-456b-4471-8f86-ac638b348a53&itemId=1&itemType=1
+            //这里需要加判断用户是否登录
             $(".btn_q .love-btn").click(function(target){              
 			if(token == undefined){
                    //alert("用户未登录，请登录后再操作！！！！");
@@ -176,7 +173,7 @@ $(function(){
             }else{
                 var info ={
                     //"userId":data.userId,
-                    "itemId":data.activityId,
+                    "itemId": data.activityId,
                     "itemType":"1",   //1表示收藏活动，2表示收藏白金人生
                 }				
 				$.get(url,function(data){
@@ -234,12 +231,118 @@ $(function(){
                 }
             });			
 		}//登陆判断结束为止
-     })              
+     })
+        });
+    }
 
-});
-}
 
     getActDetail();
+
+
+
+
+
+
+
+    //获取评论列表
+    var isPublishCtm = false;
+    function getCommentList(page) {
+        $('#loading').show();
+        $('#loading span').show();
+        $('#moreComts').hide();
+
+        if(isPublishCtm){
+            $("#comment>.commentList").html('');
+            commentStr = '' ;
+        }
+        $.get( port + '/card/comment/list?currentPage=' + page + '&type=1&itemId=' + itemId,function (data) {
+            $("#comment>h3.cmtNUm").html('评论' + data.rowCount + '条');
+            if(data.list.length !=0){
+                var headPicStr = '';
+                var nameStr = '';
+                for(var i=0 ;i<data.list.length;i++){
+                    if(data.list[i].user){
+                        headPicStr = data.list[i].user.headPic || port + '/bcard/imgs/headPic_default.png' ;
+                        nameStr = data.list[i].user.userName || '';
+                    }else {
+                        headPicStr = port + '/bcard/imgs/headPic_default.png';
+                        nameStr = '';
+                    }
+                    commentStr += '<li class="singleCmt">' +
+                        '<img src="'+ headPicStr +'">' + '<span class="userName">' + nameStr + '</span>' +
+                        '<p>'+ data.list[i].commentContent +'</p>' + '<span class="creatTime">'+ timeAgo((new Date().getTime()/1000)-data.list[i].createTime) +'</span></li>';
+                }
+                $("#comment>.commentList").append(commentStr);
+                $('#loading').hide();
+                $('#moreComts').show();
+            }else {
+                setTimeout('$("#loading").hide()',1000);
+            }
+        });
+    }
+
+
+    //点击查看更多评论
+    $('#moreComts').click(function () {
+        isPublishCtm = false;
+        if(pageNum >= 1){
+            pageNum++;
+        }
+        getCommentList(pageNum);
+    });
+
+
+
+    //发表评论
+    $("#publishCmt").click(function () {
+        if(!token){
+            $.modal({
+                title: "评论失败",
+                text: "登陆之后才能评论",
+                buttons: [
+                    {text: "点击登录", onClick: function(){
+                        window.location.href = "login.html?his=" + escape(his);
+                    }},
+                    { text: "取消", className: "default", onClick: function(){return;} },
+                ]
+            });
+        }
+        if($("#commentContent").val().length > 140){
+            $.alert("评论内容过长，请重新填写", "评论失败", function() {
+                return;
+            });
+        }else {
+
+            $.ajax({
+                type: 'post',
+                dataType: "json",
+                contentType : "application/json",
+                url: port + '/card/comment?token=' + token ,
+                data: JSON.stringify({
+                    itemType: 1,
+                    itemId: itemId,
+                    commentContent: $("#commentContent").val()
+                }),
+                success: function (result) {
+                    if(result.code == 201){
+                        $.toast("发表评论成功");
+                        $("#commentContent").val('');
+                        isPublishCtm = true;
+                        getCommentList(1);
+                    }
+                },
+                error: function () {
+                    $.toast("发表评论失败", "cancel");
+                }
+            });
+        }
+    });
+
+
+
+
+
+    
 
 
     function doEnrol(){
@@ -261,84 +364,28 @@ $(function(){
     });
 
 
-    
- //微信部分
- //    loadwx(function(){
- //        alert('获取微信接口成功');
- //    });
- //    wx.onMenuShareTimeline({
- //        title: obj.title, // 分享标题
- //        link: window.location.href, // 分享链接
- //        imgUrl:    '',       // 分享图标
- //        success: function () {
- //            // 用户确认分享后执行的回调函数
- //            alert('分享到朋友圈成功');
- //        },
- //        cancel: function () {
- //            // 用户取消分享后执行的回调函数
- //            alert('取消分享到朋友圈成功');
- //        }
- //    });
- //    wx.onMenuShareAppMessage({
- //        title: obj.title, // 分享标题
- //        desc: obj.subTitle, // 分享描述
- //        link: window.location.href, // 分享链接
- //        imgUrl: '', // 分享图标
- //        type: 'link', // 分享类型,music、video或link，不填默认为link
- //        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
- //        success: function () {
- //            // 用户确认分享后执行的回调函数
- //            alert('分享给朋友成功');
- //        },
- //        cancel: function () {
- //            // 用户取消分享后执行的回调函数
- //            alert('取消分享给朋友成功');
- //        }
- //    });
+
+// time ago
+    var timeAgo = function (preTime) {
+        if(preTime<60){
+            return parseInt(preTime)+"秒前";
+        }else if((preTime/60)<60){
+            return parseInt(preTime/60)+"分钟前";
+        }else if((preTime/3600)<24){
+            return parseInt(preTime/3600)+"小时前";
+        }else if((preTime/3600/24)<30){
+            return parseInt(preTime/3600/24)+"天前";
+        }else if((preTime/3600/24/30)<12){
+            return parseInt(preTime/3600/24/30)+"月前";
+        }else{
+            return parseInt(preTime/3600/24/365)+"年前";
+        }
+    };
 
 
- //    wx.onMenuShareQQ({
- //        title: sharetit, // 分享标题
- //        desc: sharedesc, // 分享描述
- //        link: shareurl, // 分享链接
- //        imgUrl: shareimg, // 分享图标
- //        success: function () {
- //            // 用户确认分享后执行的回调函数
- //            alert('分享到QQ成功');
- //        },
- //        cancel: function () {
- //            // 用户取消分享后执行的回调函数
- //            alert('取消分享到QQ成功');
- //        }
- //    });
- //    wx.onMenuShareWeibo({
- //        title: sharetit, // 分享标题
- //        desc: sharedesc, // 分享描述
- //        link: shareurl, // 分享链接
- //        imgUrl: shareimg, // 分享图标
- //        success: function () {
- //            // 用户确认分享后执行的回调函数
- //            alert('分享到腾讯微博成功');
- //        },
- //        cancel: function () {
- //            // 用户取消分享后执行的回调函数
- //            alert('取消分享到腾讯微博成功');
- //        }
- //    });
- //    wx.onMenuShareQZone({
- //        title: sharetit, // 分享标题
- //        desc: sharedesc, // 分享描述
- //        link: shareurl, // 分享链接
- //        imgUrl: shareimg, // 分享图标
- //        success: function () {
- //            // 用户确认分享后执行的回调函数
- //            alert('分享到QQ空间成功');
- //        },
- //        cancel: function () {
- //            // 用户取消分享后执行的回调函数
- //            alert('取消分享到QQ空间成功');
- //        }
- //    });
+
+
+
     $("body").prepend($('<div id ="urlToDownload" style="width:1rem;height:0.12rem;position: fixed;z-index: 2000;"><img style="width:0.8rem;height:0.12rem;" src="imgs/bg-baoming.png"/><div style="background-color:#fafafa; float:right;text-align:center;width:0.2rem;height:0.12rem;line-height:0.12rem;"><p style="width:0.08rem;margin-top: 0.02rem;height:0.08rem;line-height:0.08rem;margin-left:0.06rem;background-color:#ccc;border-radius:0.08rem;font-size:0.06rem;">×</p></div></div>'));
     $("#urlToDownload>img").bind("click",function(){
         window.location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.kting.baijinka";

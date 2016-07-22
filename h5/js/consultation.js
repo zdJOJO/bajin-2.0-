@@ -84,9 +84,18 @@ var getCommentList = function (page) {
     $.get( port + '/card/comment/list?currentPage=' + page + '&type=' + 7 + '&itemId=' + itemId,function (data) {
         $("article>.comments>.totalNum").html('共' + data.rowCount + '条评论');
         if(data.list.length !=0){
+            var headPicStr = '';
+            var nameStr = '';
             for(var i=0 ;i<data.list.length;i++){
+                if(data.list[i].user){
+                    headPicStr = data.list[i].user.headPic || port + '/bcard/imgs/headPic_default.png' ;
+                    nameStr = data.list[i].user.userName || '';
+                }else {
+                    headPicStr = port + '/bcard/imgs/headPic_default.png';
+                    nameStr = '';
+                }
                 commentStr += '<li class="singleCmt">' +
-                    '<img src="'+ data.list[i].user.headPic +'">' + '<span class="userName">' + data.list[i].user.userName + '</span>' +
+                    '<img src="'+ headPicStr +'">' + '<span class="userName">' + nameStr + '</span>' +
                     '<p>'+ data.list[i].commentContent +'</p>' + '<span class="creatTime">'+ timeAgo((new Date().getTime()/1000)-data.list[i].createTime) +'</span></li>';
             }
             $("article>.comments>.commentList").append(commentStr);

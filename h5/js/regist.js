@@ -54,7 +54,7 @@ $(function(){
 														contentType : "application/json;charset=UTF-8",
 														url:port+"/card/user?captcha="+captchabox,
 														data:JSON.stringify({
-															userName:"bjzx" + new Date().getTime(),
+															userName: '',
 															password:pass,
 															phone:phoneNum,
 															userRole:0,

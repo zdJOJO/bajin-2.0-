@@ -68,7 +68,7 @@ $(document).ready(function(){
 								data.list[i].carModel.goodsId+'"/><div class="detail" data-id="'+
 								data.list[i].carModel.goodsId+'"><h3>'+
 								data.list[i].goodsModel.goodsTitle+'</h3><p class="subtitle">'+
-								data.list[i].goodsModel.goodsSubtitle+'</p><p class="singleCost"><span>￥&nbsp;'+
+								data.list[i].skuModel.skuGague +'</p><p class="singleCost"><span>￥&nbsp;'+
 								data.list[i].skuModel.skuPrice+'</span><span>×'+
 								data.list[i].carModel.num+'</span><div class="count"><span class="reduce count-i" data-cardid="'+
 								data.list[i].carModel.id+'" data-skuid="'+

@@ -94,7 +94,7 @@ function upLoadImg(obj){
                             if($('#imgList').children('li').length < 8){
                                 $('#imgList').prepend('<li class="weui_uploader_file"><img src="'+ data.url +'" style="height: 100%;width: 100%"></li>')
 
-                                $('#picNum').html( $('#imgList').children('li').length + '/8');
+                                $('#picNum').html( $('#imgList').children('li').length-1 + '/8');
                             }else {
                                 $('#advicePic').attr('disabled','true');
                             }

@@ -35,7 +35,9 @@ $(document).ready(function(){
 	});
 
 
-	
+
+	var	pageNum_good = 0 ;
+	var str_good = '';
 
 	var	pageNum = 0 ;
 	var str = '';
@@ -53,26 +55,31 @@ $(document).ready(function(){
 	});
 
 	//获取 臻品列表
-	function getGoods(page,brandId,isDelete){
+	function getGoods(page,isDelete){
 		$.ajax({
 			type:"get",
 			async:true,
 			dataType:'json',
-			url:port+"/card/goods?currentPage="+page+"&brandId="+brandId+"&isDelete="+isDelete+"&token="+token,
+			url:port+"/card/goods?currentPage="+page+"&isDelete="+isDelete+"&token="+token,
 			success:function(data){
 				// 清空内容
 				if(data.list.length != 0){
 					for(var i=0,len=data.list.length;i<len;i++){
-						str += '<div class="lar" data-id="'+data.list[i].goodsId+'"><img src="'+data.list[i].hotPic+'"/>' +
+						str_good += '<div class="lar" data-id="'+data.list[i].goodsId+'"><img src="'+data.list[i].hotPic+'"/>' +
 							'<div class="detail"><p class="title" style="margin: 5px 0 5px 0;">'+data.list[i].goodsTitle+'</p>' +
 							'<p class="subTitle">'+data.list[i].goodsSubtitle+'</p><p class="pirce">￥&nbsp;'+data.list[i].goodsPrice.toFixed(2)+'</p></div></div>' ;
 					}
-					$(".wrapper .content").append(str);
+					$("#good >.content").append(str_good);
+
+					// 每次数据加载完，必须重置
+					str_good = '';
+					dropload_good.resetload();
 
 					//添加导航事件
 					$(".lar,.uad").bind("click",function(){
 						window.location.href = "brandDetail.html?id="+$(this).data("id");
 					});
+
 
 				}else {
 					// 锁定
@@ -99,7 +106,11 @@ $(document).ready(function(){
 					for(var i=0,len=data.data.list.length;i<len;i++){
 						str += '<div class="singleBrand_q" data-mallid ="'+data.data.list[i].mallId+'"><img src="'+data.data.list[i].pic+'"/><div class="detail_q"><h3>'+data.data.list[i].title+'<span>'+data.data.list[i].discount+'</span></h3><p>'+data.data.list[i].subtitle+'</p><div><p><img src="imgs/position_qq.png"/><span>'+data.data.list[i].address+'<span></p></div></div></div>' ;
 					}
-					$(".wrapper .newBrandList").append(str);
+					$("#brand >.newBrandList").append(str);
+
+					// 每次数据加载完，必须重置
+					str = '';
+					dropload_brand.resetload();
 
 					$(".singleBrand_q").bind("click",function(){
 						window.location.href = "mall.html?id="+$(this).data("mallid");
@@ -128,8 +139,8 @@ $(document).ready(function(){
 		pageNum = 0;
 		str = '';
 		$('header .good').addClass('active').siblings().removeClass('active');
-		$('.wrapper >.content').show().siblings().hide();
-		var dropload_good = $('.wrapper').dropload({
+		$('#good').show().siblings('section').hide();
+		var dropload_good = $('#good').dropload({
 			scrollArea : window,
 			domDown : {
 				domClass   : 'dropload-down',
@@ -138,19 +149,19 @@ $(document).ready(function(){
 				domNoData  : '<div class="dropload-noData">已无数据</div>'
 			},
 			loadDownFn : function(me){
-				pageNum++;
-				if(pageNum == 1){
-					setTimeout('$(".dropload-down").css("height","0")',1000);
-				}
-				getGoods(pageNum,0,0);
+				pageNum_good++;
+				getGoods(pageNum_good,0);
+				// if(pageNum == 1){
+				// 	setTimeout('$(".dropload-down").css("height","0")',1000);
+				// }
 			}
 		});
 	}else {
 		pageNum = 0;
 		str = '';
 		$('header .brand').addClass('active').siblings().removeClass('active');
-		$('.wrapper >.brandList').show().siblings().hide();
-		var dropload_brand = $('.wrapper').dropload({
+		$('#brand').show().siblings('section').hide();
+		var dropload_brand = $('#brand').dropload({
 			scrollArea : window,
 			domDown : {
 				domClass   : 'dropload-down',
@@ -160,10 +171,10 @@ $(document).ready(function(){
 			},
 			loadDownFn : function(me){
 				pageNum++;
-				if(pageNum == 1){
-					setTimeout('$(".dropload-down").css("height","0")',1000);
-				}
-				getServer(pageNum,5);
+				getServer(pageNum,10);
+				// if(pageNum == 1){
+				// 	setTimeout('$(".dropload-down").css("height","0")',1000);
+				// }
 			}
 		});
 	}

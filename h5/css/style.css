@@ -547,6 +547,19 @@ body{
 }
 
 
+@media only screen and (min-width: 415px){
+	.weui_uploader_hd{
+		top: 23.5%;
+	}
+}
+
+
+@media only screen and (max-width: 414px){
+	.weui_uploader_hd{
+		top: 23%;
+	}
+}
+
 
 @media only screen and (max-width: 375px){
 	.weui_uploader_hd{

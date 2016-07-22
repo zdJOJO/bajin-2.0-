@@ -171,6 +171,16 @@ footer p.joinCart{
 	box-sizing:border-box;
 	padding:0.04rem;
 }
+
+
+
+
+
+
+
+
+
+
 /*分享与收藏按钮*/
 header{
 	position:relative;
@@ -243,6 +253,13 @@ header .saveAndShare img:first-child{
 	border-radius: 10px;
 	left: 0;
 	top: 0;
+}
+
+
+
+.message_1 img , .message_2 img{
+	width: 100%;
+	height: auto;
 }
 
 

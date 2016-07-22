@@ -42,6 +42,13 @@ $(document).ready(function(){
 			$(".buyNow").attr("data-pic",data.maxPic);
 			$(".message_1").html(data.goodsDetail);
 			$(".message_2").html(data.goodsGauge);
+
+			$(".message_1 img ,.message_2 img, .message_1 a , .message_2 a").css({
+				'width': '100%',
+				'height': 'auto'
+			});
+
+
 			var picList = data.goodsPics;
 
 

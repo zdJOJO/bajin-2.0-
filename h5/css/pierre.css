@@ -12,7 +12,7 @@ body{
 	margin: 0;
 	padding: 0;
 }
-header,.wrapper,footer{
+header ,section ,footer{
 	font-size: 15px;
 	font-family: '黑体';
 	background-color:#fff;
@@ -102,20 +102,18 @@ footer div.pierrePage{
 	color: #fff0cc;
 	height: 0.12rem;
 }
-.wrapper{
+section{
 	width: 1rem;
 	margin-top: 0.14rem;
 	z-index: 19;
-	margin-bottom: 0.24rem;
-	-webkit-margin-after: 0.24rem;
+	-webkit-margin-after: 0.11rem;
 	box-sizing: content-box;
+	margin-bottom: 0.12rem;
 }
 
-/*.wrapper .content .lar,.wrapper .content .uad{*/
-/*clear: left;*/
-/*}*/
 
-.wrapper .content .lar{
+
+section .content .lar{
 	height: 0.7rem;
 	width: 47%;
 	float: left;
@@ -123,30 +121,30 @@ footer div.pierrePage{
 	border: 1px rgba(236, 236, 236, 0.6) solid;
 	position: relative;
 }
-.wrapper .content .lar>img{
+section .content .lar>img{
 	box-sizing: border-box;
 	width: 0.47rem;
 	height: 0.47rem;
 	float: left;
 }
-.wrapper .content .lar .detail{
+section .content .lar .detail{
 	position: absolute;
 	box-sizing: border-box;
 	width: 98%;
 	top: 69%;
 	left: 4%;
 }
-.wrapper .content .lar .detail .logo{
+section .content .lar .detail .logo{
 	height: 0.12rem;
 	width: auto;
 	visibility:hidden;
 }
-.wrapper .content .lar .detail .logo img{
+section .content .lar .detail .logo img{
 	height: 0.08rem;
 	width: auto;
 	margin-top: 0.02rem;
 }
-.wrapper .content .lar .detail .subTitle{
+section .content .lar .detail .subTitle{
 	color: #353535;
 	font-size: 12px;
 	-webkit-margin-after: 0;
@@ -155,7 +153,7 @@ footer div.pierrePage{
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-.wrapper .content .lar .detail .title{
+section .content .lar .detail .title{
 	-webkit-margin-before: 0.01rem;
 	color: #353535;
 	overflow: hidden;
@@ -164,7 +162,7 @@ footer div.pierrePage{
 	font-size: 0.9em;
 	font-weight: bold;
 }
-.wrapper .content .lar .detail .pirce{
+section .content .lar .detail .pirce{
 	-webkit-margin-before: 2em;
 	color: rgb(172, 172, 172);
 	font-size: 14px;
@@ -180,31 +178,31 @@ footer div.pierrePage{
 
 
 
-.wrapper .content .uad{
+section.content .uad{
 	width: 1rem;
 	height: auto;
 }
-.wrapper .content .uad>img{
+section.content .uad>img{
 	width: 1rem;
 	height: 0.5rem;
 	margin-top: 0.01rem;
 }
-.wrapper .content .uad .title{
+section .content .uad .title{
 	font-size: 18px;
 	color: #323232;
 	margin:1em 0;
 }
-.wrapper .content .uad .subtitle{
+section .content .uad .subtitle{
 	-webkit-margin-before: 0;
 	font-size: 14px;
 	color: #9c9c9c;
 }
-.wrapper .content .uad .pirce{
+section .content .uad .pirce{
 	font-size: 14px;
 	color:  #c1af74;;
 	margin:1em 0;
 }
-.wrapper .content .uad .buy{
+section .content .uad .buy{
 	width: 0.2rem;
 	height: 0.08rem;
 	line-height: 0.08rem;
@@ -368,7 +366,7 @@ footer div.pierrePage{
 	-webkit-margin-before:0;
 	-webkit-margin-after:0;
 }
-.wrapper .brandList{
+section .brandList{
 	padding-top: 0.01rem;
 }
 .down{

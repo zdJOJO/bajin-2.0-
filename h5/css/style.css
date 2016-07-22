@@ -439,7 +439,7 @@ span{color:#fff}
 	font-size: 24px;
 	color: #fff;
 	position: absolute;
-	top: 70%;
+	top: 80%;
 	left: 50%;
 	margin-left: -40%
 }
@@ -507,9 +507,21 @@ body{
 }
 
 
-.weui_uploader_bd>ul{
+.weui_uploader_bd>ul>li{
 	float: left;
 }
+
+.weui_uploader_file{
+	width: 70px;
+	height: 70px
+}
+
+.weui_uploader_input_wrp{
+	width: 70px;
+	height: 70px
+}
+
+
 
 .weui_cell{
 	margin-top: 0.05rem;
@@ -530,8 +542,8 @@ body{
 
 
 .weui_cell.weui_cell_warn{
-	border-top: 1px #DDDCDA solid;
 	border-bottom: 1px #DDDCDA solid;
+	margin-top: 0;
 }
 
 

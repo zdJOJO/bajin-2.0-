@@ -139,6 +139,9 @@ $(document).ready(function(){
 			},
 			loadDownFn : function(me){
 				pageNum++;
+				if(pageNum == 1){
+					setTimeout('$(".dropload-down").css("height","0")',1000);
+				}
 				getGoods(pageNum,0,0);
 			}
 		});
@@ -157,6 +160,9 @@ $(document).ready(function(){
 			},
 			loadDownFn : function(me){
 				pageNum++;
+				if(pageNum == 1){
+					setTimeout('$(".dropload-down").css("height","0")',1000);
+				}
 				getServer(pageNum,5);
 			}
 		});

@@ -6,7 +6,11 @@
 <meta name="screen-orientation"content="portrait">
 <meta name="x5-orientation"content="portrait">
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-<link href="css/style.css" rel="stylesheet" type="text/css">
+
+	<link rel="stylesheet" href="css/weiXin/jquery-weui.css">
+	<link rel="stylesheet" href="css/weiXin/weui.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
     <script>
         var iWidth=document.documentElement.clientWidth;
         document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
@@ -14,76 +18,132 @@
 </head>
 <body>
 
-<div id="header_fee">
-        <!--<div class="fh"><a href="javascript:;" id="personal_But">&lt; 返回</a></div>-->
-        <h2 class="search">意见反馈</h2>
-        <!--<div class="send"><a href="javascript:;">发送</a></div>-->
- </div>
- <div id="feedback">
-  	<textarea  id="yj"  placeholder="请告诉我们您遇到的问题或想反馈的意见（必填）"></textarea>
-    <!--<input type="email" id="email" placeholder="邮箱（必填）"></input>-->
-    <button id ="sub_q">确定</button>
- </div>
- <script src="js/zepto.js"></script>
- <script>
 
-$(function(){
-	var token = "";
-	//获取存在于cookie中的token值
-	function getCookie(c_name)
-	{
-	if (document.cookie.length>0)
-	  {
-	  c_start=document.cookie.indexOf(c_name + "=")
-	  if (c_start!=-1)
-	    { 
-	    c_start=c_start + c_name.length+1 
-	    c_end=document.cookie.indexOf(";",c_start)
-	    if (c_end==-1) c_end=document.cookie.length
-	    return unescape(document.cookie.substring(c_start,c_end))
-	    } 
-	  }
-	return undefined;
-	}
-	token = getCookie("token");
-	var reg=/^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+<div class="weui_tab">
+	<div class="weui_navbar">
+		<a class="weui_navbar_item weui_bar_item_on">问题与意见</a>
+	</div>
+</div>
+
+<div class="weui_cells weui_cells_form">
+	<div class="weui_cell">
+		<div class="weui_cell_bd weui_cell_primary">
+			<textarea class="weui_textarea" placeholder="请简要叙述您的问题和意见" rows="3" id="yj"></textarea>
+			<div class="weui_textarea_counter"><span></span></div>
+		</div>
+	</div>
+</div>
 
 
-	var userPhoneNum = '';
-	var userEmail = '';
-	$.get( port+"/card/user?token="+token, function(result){
-		userPhoneNum = result.phone;
-		userEmail = result.email;
-	});
+<div class="weui_tab pic">
+	<div class="weui_navbar">
+		<a class="weui_navbar_item weui_bar_item_on">图片 （选填，提供问题截图）</a>
+	</div>
+</div>
 
-	$("#sub_q").click(function(){
-	    var yj = $("#yj").val();
-		if(yj){
-			var data = {
-				feedbackDetail:$("#yj").val(),
-				feedbackPhone: userPhoneNum
-			};
-			if(userEmail){
-				data.feedbackMail = userEmail;
-			}
+<div class="weui_uploader_hd weui_cell">
+	<div class="weui_cell_bd weui_cell_primary">图片上传</div>
+	<div class="weui_cell_ft" id="picNum">0/8</div>
+</div>
 
-			$.ajax({
-				type:"POST",
-				url: port + "/card/feedback",
-				dataType:"json",
-				contentType : "application/json;charset=UTF-8",
-				data:JSON.stringify(data),
-				success:function(data){
-					console.log(data);
-					alert("反馈意见提交成功，谢谢你的建议！！");
-					history.back();
-				}
-			});
-		}else{
-			alert("反馈意见和邮箱不能为空！")
-		}       
-	})	
-}) 	
-</script>
+
+<div class="weui_cell weui_cell_warn">
+	<div class="weui_cell">
+		<div class="weui_cell_bd weui_cell_primary">
+			<div class="weui_uploader">
+				<div class="weui_uploader_bd" >
+					<ul class="weui_uploader_files"  id="imgList">
+						<!--<li class="weui_uploader_file" ></li>-->
+					</ul>
+					<ul class="weui_uploader_input_wrp">
+						<input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" id="advicePic" onchange="upLoadImg(this)">
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<button id ="sub_q">确定</button>
 </body>
+
+
+
+
+
+
+<script src="js/zepto.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
+<script type="text/javascript" src="js/postImg.js"></script>
+
+<script>
+
+	$(function(){
+		var token = "";
+		//获取存在于cookie中的token值
+		function getCookie(c_name)
+		{
+			if (document.cookie.length>0)
+			{
+				c_start=document.cookie.indexOf(c_name + "=")
+				if (c_start!=-1) {
+					c_start=c_start + c_name.length+1
+					c_end=document.cookie.indexOf(";",c_start)
+					if (c_end==-1) c_end=document.cookie.length
+					return unescape(document.cookie.substring(c_start,c_end))
+				}
+			}
+			return undefined;
+		}
+		token = getCookie("token");
+		var reg = /^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+
+
+		var userPhoneNum = '';
+		var imgList = [];
+		$.get( port+"/card/user?token="+token, function(result){
+			userPhoneNum = result.phone;
+			userEmail = result.email;
+		});
+
+
+
+		$("#sub_q").click(function(){
+
+			console.log($("#yj").val())
+
+			var yj = $("#yj").val();
+			if(yj){
+				var data = {
+					feedbackDetail: $("#yj").val(),
+					feedbackPhone: userPhoneNum
+				};
+				if($('#imgList').children('li').length > 0){
+					for(var i=0; i<$('#imgList').children('li').length;i++){
+						imgList.push({
+							pic: $('#imgList').children('li').eq(i).children('img').attr('src')
+						});
+					}
+					data.imgList = imgList;
+				}
+				$.ajax({
+					type:"POST",
+					url: port + "/card/feedback",
+					dataType:"json",
+					contentType : "application/json;charset=UTF-8",
+					data:JSON.stringify(data),
+					success:function(data){
+						console.log(data);
+						alert("反馈意见提交成功，谢谢你的建议！！");
+						setTimeout('history.back()',200)
+					}
+				});
+			}else{
+				alert("反馈意见不能为空！")
+			}
+		})
+	})
+</script>
 </html>

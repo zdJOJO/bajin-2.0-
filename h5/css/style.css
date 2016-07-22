@@ -123,9 +123,7 @@ p{ line-height:20px;}
 /* feedback  */	
 #header_fee{width:100%; height:11%; border-bottom:1px solid #e8e8e8;}
 #feedback{ width:100%; top:5%;}
-#yj{ width:90%; height:300px; font-size:16px;margin-left:4%;
-border:1px solid #ccc; 
- padding:1%;}
+
 #email{ border:1px solid #ccc; width:90%; font-size:16px; margin-top:3%; height:40px;  line-height:40px;padding: 1%; margin-left:4%; }
 
 
@@ -153,6 +151,8 @@ border:1px solid #ccc;
     margin: 0.05rem 0 -0.05rem 0.05rem;
 }
 #djdl_But{ font-size:16px;}
+
+
 
 /*index ,personal*/
 .benner{ width:100%; position:absolute; top:0; height:41.2%;}
@@ -432,15 +432,19 @@ span{color:#fff}
 
 /*feedback页面的样式更改*/
 #sub_q{
-    width: 93%;
-    margin-top: 30%;
-    margin-left: 4%;
-    line-height: 50px;
-    background-color: #000;
-    border:none;
-    font-size: 24px;
-    color:#eee;
+	width: 80%;
+	line-height: 50px;
+	background-color: #C8A971;
+	border: none;
+	font-size: 24px;
+	color: #fff;
+	position: absolute;
+	top: 70%;
+	left: 50%;
+	margin-left: -40%
 }
+
+
 /*personal页面右上角的图标位置调整*/
 .home{
     padding-top: 0;
@@ -466,3 +470,120 @@ span{color:#fff}
 		padding-top: 1px;
 	}
 }
+
+
+
+
+
+
+
+
+/*   意见反馈   */
+
+body{
+	overflow-x: hidden;
+	position: relative;
+}
+
+.weui_tab{
+	height: 6%;
+}
+
+.weui_tab.pic{
+
+}
+
+
+
+.weui_navbar_item.weui_bar_item_on{
+	text-align: left;
+	padding-left: 17px;
+	font-family: '黑体';
+	background: #fff;
+}
+
+.weui_cells{
+	margin-top: -1px;
+}
+
+
+.weui_uploader_bd>ul{
+	float: left;
+}
+
+.weui_cell{
+	margin-top: 0.05rem;
+}
+
+.weui_uploader_hd{
+	position: absolute;
+	top: 22.5%;
+	right: 10px;
+	margin-top: 0;
+	z-index: 1;
+}
+
+
+.weui_cell:before{
+	border: none;
+}
+
+
+.weui_cell.weui_cell_warn{
+	border-top: 1px #DDDCDA solid;
+	border-bottom: 1px #DDDCDA solid;
+}
+
+
+
+@media only screen and (max-width: 375px){
+	.weui_uploader_hd{
+		top: 24.5%;
+	}
+}
+
+@media only screen and (max-width: 360px){
+	.weui_uploader_hd{
+		top: 24.5%;
+	}
+}
+
+@media only screen and (max-width: 320px){
+
+	.weui_uploader_hd{
+		top: 26.7%;
+	}
+
+	.weui_uploader_input_wrp{
+		width: 50px;
+		height: 50px;
+	}
+	.weui_uploader_input_wrp:before{
+		height: 23.5px;
+	}
+
+	.weui_uploader_input_wrp:after{
+		width: 23.5px;
+	}
+
+	#imgList li{
+		width: 50px;
+		height: 50px;
+	}
+
+
+	#sub_q{
+		width: 76%;
+		margin-left: -38%;
+	}
+}
+
+
+
+
+
+
+
+
+
+

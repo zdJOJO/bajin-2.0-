@@ -4,18 +4,18 @@ $(function(){
 	//获取存在于cookie中的token值
 	function getCookie(c_name)
 	{
-	if (document.cookie.length>0)
-	  {
-	  c_start=document.cookie.indexOf(c_name + "=")
-	  if (c_start!=-1)
-	    { 
-	    c_start=c_start + c_name.length+1 
-	    c_end=document.cookie.indexOf(";",c_start)
-	    if (c_end==-1) c_end=document.cookie.length
-	    return unescape(document.cookie.substring(c_start,c_end))
-	    } 
-	  }
-	return undefined;
+		if (document.cookie.length>0)
+		{
+			c_start=document.cookie.indexOf(c_name + "=")
+			if (c_start!=-1)
+			{
+				c_start=c_start + c_name.length+1
+				c_end=document.cookie.indexOf(";",c_start)
+				if (c_end==-1) c_end=document.cookie.length
+				return unescape(document.cookie.substring(c_start,c_end))
+			}
+		}
+		return undefined;
 	}
 	token = getCookie("token");
 	var his = window.location.pathname.split("/");
@@ -27,7 +27,7 @@ $(function(){
 		url:port+"/card/user?token="+token,
 		contentType: "application/json",
 		success:function(data){
-	    	if(typeof(data) == "string"){
+			if(typeof(data) == "string"){
 				window.location.href = "login.html?his="+his;
 			}else{
 				var headPic = data.headPic==""?"imgs/defaultPic.png":data.headPic;
@@ -44,25 +44,27 @@ $(function(){
 				$("#setPhoneNum").val(data.phone);
 				$("#setAgx").val(data.gender);
 				// $("#setGx").val(data.signature==undefined?"":data.signature);
-				$("#setEmail").val(data.email==undefined?"":data.email);							
-			} 
+				$("#setEmail").val(data.email==undefined?"":data.email);
+			}
 		},
-        error:function(data){
-            window.location.href = "login.html?his="+his;
-        }
-    });
+		error:function(data){
+			window.location.href = "login.html?his="+his;
+		}
+	});
 
 
 
-    $('input,select').bind('input propertychange', function() {//输入字符检测
-    	if($("#setUserName").val().length==18){
-    		$("#setUserName").val($("#setUserName").val().substring(0,17));
-    	};
-    });
+	$('input,select').bind('input propertychange', function() {//输入字符检测
+		if($("#setUserName").val().length==18){
+			$("#setUserName").val($("#setUserName").val().substring(0,17));
+		};
+	});
 
 
+
+	//  #setPic  #setUserName #setEmail #setAddress
 	var  info = {};
-	$("input,select").blur(function(){
+	$(" #setPic,#setUserName,#setEmail,#setAddress,select").blur(function(){
 		//更新设置函数
 
 		var regExp = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
@@ -107,7 +109,7 @@ $(function(){
 			$.alert("请输入正确格式的邮箱地址");
 		}
 	});
-		
+
 
 
 	$(".btn").bind("click",function(){

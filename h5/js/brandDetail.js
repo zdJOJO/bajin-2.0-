@@ -78,6 +78,8 @@ $(document).ready(function(){
 				});
 			}
 
+
+
 		    // 进入页面检测是否收藏，如果是登录的状态
 		    if(token==undefined){
 		    	return;
@@ -105,6 +107,7 @@ $(document).ready(function(){
 			console.log(data);
 		}
 	});
+
 	//获取商品库存，并显示出颜色
 	var stockAll = 0;
 	$.ajax({

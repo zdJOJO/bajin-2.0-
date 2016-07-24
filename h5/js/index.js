@@ -284,21 +284,23 @@ $(document).ready(function(){
 	//http://121.196.232.233/card/icbcbutton
 	$.ajax({
 		type:"get",
-		url:port+"/card/icbcbutton",
+		url: port+"/card/icbcbutton",
 		success:function(data){
 			var actList = $(".wrap .activities .fun");
-			for(var i=0,len=actList.length;i<len;i++){
+			for(var i=0,len = actList.length; i<len;i++){
 				$(actList[i]).attr("data-pickid",data.list[i].pickId);
 				$(actList[i]).find("img").attr("src",data.list[i].buttonPic);
 				$(actList[i]).children("span").html(data.list[i].buttonTitle);
 			}
 		},
 		error:function(data){
+			//todo
 		}
 	});
+
+
 	//私人预约服务
 	function getMessage(){
-
 		$.ajax({
 			type: "GET",
 			dataType:"text",

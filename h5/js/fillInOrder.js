@@ -113,12 +113,6 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-
-
 	//填入数据
 	if(obj.cost!=undefined){
 		var str =$('<div class="singleBrand"><img src="" class="activityPic"/><div class="detail"><h3></h3><p class="subtitle"></p><p class="singleCost"><span class="price"></span><span class="num"></span></p></div></div>');
@@ -160,7 +154,10 @@ $(document).ready(function(){
 				}else{
 					for(var i=0,len=data.list.length;i<len;i++){
 						if(data.list[i].isDefault==1){
-							var str=$('<p class="userName"><img src="imgs/userName.png"/><span></span></p><p class="phone"><img src="imgs/phone.png"/><span></span><img src="imgs/go.png"/></p><p class="address"></p>');
+							var str = $('<p class="userName"><span></span></p>' +
+								'<p class="phone"><span></span><img src="imgs/go.png"/></p>' +
+								'<p class="address"></p>');
+
 							$(".message").html(str);
 							$(".userName span").html(data.list[i].receiverName);
 							$(".phone span").html(data.list[i].receiverPhone);

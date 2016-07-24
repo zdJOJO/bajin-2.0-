@@ -1,11 +1,11 @@
 @font-face{
-	font-family:"微软雅黑";
+	font-family:"黑体";
 }
 h1,h2,h3{
 	font-weight: normal;
 }
 body{
-	font-family:"微软雅黑";
+	font-family:"黑体";
 	margin: 0;
 	padding: 0;
 }
@@ -13,7 +13,7 @@ body{
 	font-size: 16px;
 }
 .message{
-	border-bottom: 11px solid #f2f2f2;
+	border-bottom: 1px solid #f2f2f2;
 }
 .message p img:nth-child(1){
 	vertical-align: middle;
@@ -33,7 +33,7 @@ body{
 	top: 2px;
 }
 .message .userName span{
-	margin-left: 0.06rem;
+	margin-left: 0.04rem;
 	color: #808080;
 }
 .message .phone span{
@@ -41,24 +41,24 @@ body{
 	color: #808080;
 }
 .message .address{
-	margin-left: 0.141rem;
+	margin-left: 0.04rem;
 	color: #c0c0c0;
     padding-right: 0.05rem;
+	font-size: 0.9em;
 }
 .good .singleBrand{
 	height: 0.267rem;
 	vertical-align: middle;
-	padding: 0.01rem 0;
 	border-bottom: 1px solid #f2f2f2;
 }
 .good .singleBrand>img:first-child{
 	width: 0.266rem;
 	float: left;
-	height: 0.266rem;
+	height: 100%;
 	margin-right: 0.06rem;
 }
 .good .singleBrand .detail{
-	height: 0.266rem;
+	height: 0.27rem;
 	width: 0.63rem;
 	float: left;
 	position: relative;
@@ -81,11 +81,12 @@ body{
 }
 .good .singleBrand .detail p.singleCost{
 	-webkit-margin-before: 0;
-    -webkit-margin-after: 0;
-    font-size: 14px;
-    position: absolute;
-    bottom: 0;
-    width: 0.63rem;
+	-webkit-margin-after: 0;
+	font-size: 14px;
+	position: absolute;
+	bottom: 9px;
+	left: -4px;
+	width: 0.63rem;
 }
 .good .singleBrand .detail .singleCost{
 	font-size: 16px;

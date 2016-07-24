@@ -37,7 +37,7 @@ $(document).ready(function(){
 					}else{
 						$(".content").html("");
 						//获取数据正常的时候渲染页面
-						if(type == 1){//活动
+						if(type == 1){			//活动
 							if(data.list.length != 0){//有收藏活动的时候
 								for(var i=0,len=data.list.length;i<len;i++){
 									var str = $('<div class="activity contentStyle" data-itemid="'+data.list[i].itemId+'"><img src="imgs/notSel.png" data-collectid="'+data.list[i].collectId+'" class="sel"/><img src="'+data.list[i].thumbnail+'" class="activityPic"/><div class="detail"><h3>'+data.list[i].title+'</h3><p>'+data.list[i].about+'</p></div></div>');									
@@ -51,7 +51,7 @@ $(document).ready(function(){
 								var emptyPage = $('<center><img src="imgs/save_.png"/><h2>你还没有收藏任何活动</h2><p>再去看看吧</p><p class="turnPage">再去看看</p></center>');
 								$(".content").append(emptyPage);
 								$(".content .turnPage").click(function(){
-									window.location.href = "culb.html?jionAct";
+									window.location.href = "culb.html?joinAct";
 								});
 							}							
 						}else if(type == 2){//阅读							
@@ -71,7 +71,7 @@ $(document).ready(function(){
 									window.location.href = "read.html";
 								});
 							}
-						}else if(type == 3){//商品收藏现在没有做，显示一个跳转到app下载的页面								
+						}else if(type == 3){		//臻品收藏现在没有做，显示一个跳转到app下载的页面
 							if(data.list.length != 0){
 								for(var i=0,len=data.list.length;i<len;i++){
 									var str = $('<div class="brand contentStyle" data-itemid="'+data.list[i].itemId+'"><img src="imgs/notSel.png" data-collectid="'+data.list[i].collectId+'" class="sel"/><img src="'+data.list[i].thumbnail+'" class="activityPic"/><div class="detail"><h3>'+data.list[i].title+'</h3><p>'+data.list[i].about+'<br>'+data.list[i].price+'</p></div></div>');									
@@ -86,10 +86,10 @@ $(document).ready(function(){
 								$(".content").append(emptyPage);
 								//给再去看看的地方添加事件，导向到对应的页面
 								$(".content .turnPage").click(function(){
-									window.location.href = "pierre.html";
+									window.location.href = "pierre.html?good";
 								});
 							}	
-						}else if(type == 5){//商铺收藏
+						}else if(type == 5){			//乐享 收藏
 							if(data.list.length != 0){
 								for(var i=0,len=data.list.length;i<len;i++){
 									var str = $('<div class="brand contentStyle" data-itemid="'+data.list[i].itemId+'"><img src="imgs/notSel.png" data-collectid="'+data.list[i].collectId+'" class="sel"/><img src="'+data.list[i].thumbnail+'" class="activityPic"/><div class="detail"><h3>'+data.list[i].title+'</h3><p>'+data.list[i].about+'<br></p></div></div>');									
@@ -104,7 +104,7 @@ $(document).ready(function(){
 								$(".content").append(emptyPage);
 								//给再去看看的地方添加事件，导向到对应的页面
 								$(".content .turnPage").click(function(){
-									window.location.href = "pierre.html";
+									window.location.href = "pierre.html?brand";
 								});
 							}
 						}		

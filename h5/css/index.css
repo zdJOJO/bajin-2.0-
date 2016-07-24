@@ -202,7 +202,8 @@ footer div img{
 footer div p{
     -webkit-margin-before: 0;
     -webkit-margin-after: 0;
-    font-size: 12px;
+	margin-top: 4px;
+    font-size: 9px;
 }
 .indexPage{
 	background: #2e3133;

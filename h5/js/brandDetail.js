@@ -115,7 +115,7 @@ $(document).ready(function(){
 			var maxPrice = 0;
 			for(var i=0,len=data.length;i<len;i++){				
 				// stockAll += data[i].stockNumber;//如果是总数要在这里写
-				var str_ = $('<p data-soldnumber="'+data[i].soldNumber+'" data-stock="'+data[i].stockNumber+'" data-marketPrice="'+data[i].marketPrice+'"  data-skuprice="'+formatePrice(data[i].skuPrice)+'" data-skuid="'+data[i].skuId+'">'+data[i].skuGague+'</p>');
+				var str_ = $('<p data-soldnumber="'+data[i].soldNumber+'" data-stock="'+data[i].stockNumber+'" data-marketPrice="'+data[i].marketPrice+'"  data-skuprice="'+ data[i].skuPrice +'" data-skuid="'+data[i].skuId+'">'+data[i].skuGague+'</p>');
 				$(".colorPick .colors").append(str_);
 				maxPrice = maxPrice>data[i].skuPrice?maxPrice:data[i].skuPrice;			
 			}
@@ -123,8 +123,8 @@ $(document).ready(function(){
 			stockAll += data[0].stockNumber;//如果是每次进入先显示第一个就这样写
 			//原价||现价||库存
 			//这里筛选出来最高的价格，暂且作为市场价格填写到市场价格的地方			
-			$(".currentCost span").html("￥&nbsp;"+formatePrice(data[0].skuPrice));
-			$(".primeCost span").html("￥&nbsp;"+formatePrice(data[0].marketPrice));
+			$(".currentCost span").html("￥&nbsp;"+data[0].skuPrice.toFixed(2) );
+			$(".primeCost span").html("￥&nbsp;"+data[0].marketPrice.toFixed(2));
 			$($(".colorPick .colors p")[0]).css("background-color","#b7a66e").css("color","#fafafa");
 			//填入总库存
 			$(".stock span").html(stockAll+"件");
@@ -134,8 +134,8 @@ $(document).ready(function(){
 			$(".colorPick .colors p").bind("click",function(){
 				stockAll = $(this).data("stock");
 				$(".stock span").html($(this).data("stock")+"件");
-				$(".currentCost span").html("￥&nbsp;"+$(this).data("skuprice"));//这个地方到时间是要变的
-				$(".primeCost span").html("￥&nbsp;"+$(this).data("marketprice"));
+				$(".currentCost span").html("￥&nbsp;" + parseInt($(this).data("skuprice")).toFixed(2));		//尊享价格
+				$(".primeCost span").html("￥&nbsp;" + parseInt($(this).data("marketprice")).toFixed(2) );	//市场价格
 				$(this).css("background-color","#b7a66e").css("color","#fafafa");
 				$(this).siblings().css("background-color","#ffffff").css("color","#b0b0b0");
 				$(".joinCart").attr("data-skuid",$(this).data("skuid"));

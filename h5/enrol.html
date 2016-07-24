@@ -14,12 +14,6 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/enrol.css">
     <script>var IS_WX_LOADED=0;</script>
-    <script src="js/zepto.js"></script>
-    <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
-    <script type="text/javascript" src="js/plugin/dropload.min.js"></script>
-    <script src="js/loadwx.js"></script>
-    <script src="js/enrol.js"></script>
     <script>
         var iWidth=document.documentElement.clientWidth;
         document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
@@ -40,7 +34,7 @@
     <div id="loading" class="dropload-load"><span class="loading" style="display: none"></span>加载中...</div>
     <div id="moreComts" class="dropload-down"><div class="dropload-refresh" ><span></span>点击查看更多评论</div></div>
     <div class="box">
-        <input type="text"  id="commentContent"  placeholder="发表评论">
+        <input type="text"  id="commentContent"  placeholder="发表评论"  onkeyup="judgeContent()" >
         <span id="publishCmt">评论</span>
     </div>
 </section>
@@ -55,5 +49,20 @@
 </footer> 
     <div id="share-mask"><img src="imgs/shareImg.png"/></div> 
 </body>
+<script src="js/zepto.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
+<script type="text/javascript" src="js/plugin/dropload.min.js"></script>
 <script src="js/swiper.min.js"></script>
+<script src="js/loadwx.js"></script>
+<script src="js/enrol.js"></script>
+<script type="text/javascript">
+    function judgeContent() {
+        if($('#commentContent').val().length > 0){
+            $("#publishCmt").css('color','#000');
+        }else {
+            $("#publishCmt").css('color','#ccc');
+        }
+    }
+</script>
 </html>

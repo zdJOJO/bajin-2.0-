@@ -217,7 +217,8 @@ footer div img{
 footer div p{
     -webkit-margin-before: 0;
     -webkit-margin-after: 0;
-    font-size: 12px;
+    font-size: 9px;
+	margin-top: 4px;
 }
 .clubPage{
 	background: #2e3133;
@@ -395,11 +396,19 @@ footer div p{
 	}
 }
 
+@media screen and (min-width:424px){
+	.tit-content .detile{
+		top: 5%;
+	}
+}
+
 @media screen and (min-width: 737px	){
 	.tit-content .detile{
 		margin: 0 0 0.020rem 0;
 	}
 }
+
+
 
 
 @media only screen and (max-width: 320px){

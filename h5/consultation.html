@@ -36,17 +36,9 @@
 </article>
 
 <footer class="nav">
-    <div class="weui_search_bar" id="search_bar">
-        <form class="weui_search_outer">
-            <div class="weui_search_inner">
-                <input type="search" class="weui_search_input" id="search_input" placeholder="添加评论" required/>
-                <a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
-            </div>
-            <label for="search_input" class="weui_search_text" id="search_text">
-                <span>添加评论</span>
-            </label>
-        </form>
-        <a href="javascript:" class="weui_search_cancel" id="search_cancel">发表</a>
+    <div class="box">
+        <input type="text"  id="commentContent"  placeholder="发表评论"  onkeyup="judgeContent_cmt()" >
+        <span id="publishCmt" >评论</span>
     </div>
 </footer>
 
@@ -62,5 +54,14 @@
 <script>
     var iWidth=document.documentElement.clientWidth;
     document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+</script>
+<script type="text/javascript">
+    function judgeContent_cmt() {
+        if($('#commentContent').val().length > 0){
+            $("#publishCmt").css('color','#000');
+        }else {
+            $("#publishCmt").css('color','#ccc');
+        }
+    }
 </script>
 </html>

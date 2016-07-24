@@ -1,6 +1,15 @@
 /**
  * Created by Administrator on 2016/7/19.
  */
+
+
+// 判断 是否安卓  IOS
+var u = navigator.userAgent;
+var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;  //android终端
+var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);     //ios终端
+
+
+
 var token = "";
 //获取存在于cookie中的token值
 function getCookie(c_name)
@@ -24,9 +33,10 @@ token = getCookie("token");
 var his = window.location.href.split("/");
 his = his[his.length-1];
 
+//设置为1s
+$.toast.prototype.defaults.duration = 1000;
+
 var consultationId = window.location.href.split("=")[1];
-
-
 
 var itemId = window.location.href.split("=")[1];
 var pageNum = 1;
@@ -40,7 +50,7 @@ var getHotDetail = function () {
         $('title').html(data.title)
         $("h3").html(data.title);
         $("header>.abstr").html(data.abstr);
-        $("header>.time").html(data.title);
+        $("header>.time").html( new Date(data.createTime*1000).Formate());
         $("article>.content").html(data.content).append('<span class="readNum">阅读量：' + data.viewNum + '</span>');
         isCollected();
     });
@@ -123,7 +133,7 @@ $('#moreComts').click(function () {
 
 
 //发表评论
-$("#search_cancel").click(function () {
+$("#publishCmt").click(function () {
     if(!token){
         $.modal({
             title: "评论失败",
@@ -135,35 +145,44 @@ $("#search_cancel").click(function () {
                 { text: "取消", className: "default", onClick: function(){return;} },
             ]
         });
-    }
-    if($("#search_input").val().length > 140){
-        $.alert("评论内容过长，请重新填写", "评论失败", function() {
-            return;
-        });
     }else {
-        
-        $.ajax({
-            type: 'post',
-            dataType: "json",
-            contentType : "application/json",
-            url: port + '/card/comment?token=' + token ,
-            data: JSON.stringify({
-                itemType: 7,
-                itemId: itemId,
-                commentContent: $("#search_input").val()
-            }),
-            success: function (result) {
-                if(result.code == 201){
-                    $.toast("发表评论成功");
-                    $("#search_input").val('');
-                    isPublishCtm = true;
-                    getCommentList(1);
+        if(!$("#commentContent").val()){
+            $.alert("请填写后再评论", "评论失败", function() {
+            });
+            return;
+        }
+
+        if($("#commentContent").val().length > 140){
+            $.alert("评论内容过长，请重新填写", "评论失败", function() {
+            });
+            return;
+        }else {
+
+            $.ajax({
+                type: 'post',
+                dataType: "json",
+                contentType : "application/json",
+                url: port + '/card/comment?token=' + token ,
+                data: JSON.stringify({
+                    itemType: 7,
+                    itemId: itemId,
+                    commentContent: $("#commentContent").val()
+                }),
+                success: function (result) {
+                    if(result.code == 201){
+                        $.toast("发表评论成功", function() {
+                            $('footer').css('height','7%');
+                            $("#commentContent").val('');
+                            isPublishCtm = true;
+                            getCommentList(1);
+                        });
+                    }
+                },
+                error: function () {
+                    $.toast("发表评论失败", "cancel");
                 }
-            },
-            error: function () {
-                $.toast("发表评论失败", "cancel");
-            }
-        });
+            });
+        }
     }
 });
 
@@ -239,46 +258,18 @@ var timeAgo = function (preTime) {
 
 
 
-// PC 、 安卓  、 ios  评论时候 判断
-
-
-$('#search_input').focus(function () {
-    var u = navigator.userAgent;
-    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;  //android终端
-    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);     //ios终端
-
-    if(isAndroid > -1){
-        $('footer').css({
-            'bottom' : '8%',
-        });
-        $('footer form').css('z-index','100');
-        $('footer a').css('z-index','100');
+// 评论时候 IOS 安卓 不同, 在这里做判断
+$("#commentContent").focus(function () {
+    if(isAndroid > -1 ){
+        $('footer').css('height','20%');
     }
+}).blur(function () {
+    $("#publishCmt").css('color','#ccc');
 });
 
-
-$('#search_input').blur(function () {
-    $('footer').css({
-        'bottom' : '0',
-    })
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+if(isAndroid > -1 ){
+    $('footer.nav').css('height','8%');
+}
 
 
 

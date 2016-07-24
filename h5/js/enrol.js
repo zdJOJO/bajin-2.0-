@@ -1,5 +1,16 @@
 
 $(function(){
+
+
+    // 判断 是否安卓  IOS
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;  //android终端
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);     //ios终端
+
+
+
+
+
     //此页面逻辑：进入页面加载活动内容，然后判断用户是否收藏该活动，如果收藏就要现实收藏的图标，否则就是没有收藏
     var data;
     var token = "";
@@ -30,6 +41,8 @@ $(function(){
     his = his + window.location.search;
 
 
+    //设置为1s
+    $.toast.prototype.defaults.duration = 1000;
 
     //判断是 活动 还是  热门
     var isHotDoor = false;
@@ -295,6 +308,7 @@ $(function(){
 
     //发表评论
     $("#publishCmt").click(function () {
+
         if(!token){
             $.modal({
                 title: "评论失败",
@@ -303,48 +317,72 @@ $(function(){
                     {text: "点击登录", onClick: function(){
                         window.location.href = "login.html?his=" + escape(his);
                     }},
-                    { text: "取消", className: "default", onClick: function(){return;} },
+                    { text: "取消", className: "default", onClick: function(){
+                        return;
+                    }},
                 ]
             });
-        }
-        if($("#commentContent").val().length > 140){
-            $.alert("评论内容过长，请重新填写", "评论失败", function() {
-                return;
-            });
         }else {
+            if(!$("#commentContent").val()){
+                $.alert("请填写后再评论", "评论失败", function() {
+                });
+                return;
+            }
 
-            $.ajax({
-                type: 'post',
-                dataType: "json",
-                contentType : "application/json",
-                url: port + '/card/comment?token=' + token ,
-                data: JSON.stringify({
-                    itemType: 1,
-                    itemId: itemId,
-                    commentContent: $("#commentContent").val()
-                }),
-                success: function (result) {
-                    if(result.code == 201){
-                        $.toast("发表评论成功");
-                        $("#commentContent").val('');
-                        isPublishCtm = true;
-                        getCommentList(1);
+            if($("#commentContent").val().length > 140){
+                $.alert("评论内容过长，请重新填写", "评论失败", function() {
+                });
+                return;
+            }else {
+
+                $.ajax({
+                    type: 'post',
+                    dataType: "json",
+                    contentType : "application/json",
+                    url: port + '/card/comment?token=' + token ,
+                    data: JSON.stringify({
+                        itemType: 1,
+                        itemId: itemId,
+                        commentContent: $("#commentContent").val()
+                    }),
+                    success: function (result) {
+                        if(result.code == 201){
+                            $.toast("发表评论成功", function() {
+                                $("#commentContent").val('');
+                                isPublishCtm = true;
+                                getCommentList(1);
+                            });
+                        }
+                    },
+                    error: function () {
+                        $.toast("发表评论失败", "cancel");
                     }
-                },
-                error: function () {
-                    $.toast("发表评论失败", "cancel");
-                }
-            });
+                });
+            }
         }
     });
 
 
 
 
+    // 评论时候 IOS 安卓 不同, 在这里做判断
+    $("#commentContent").focus(function () {
+        if(isAndroid > -1 ){
+            $('#comment').css('margin-bottom','5%');
+            $('footer.nav').hide();
+        }
+    }).blur(function () {
+        $('#comment').css('margin-bottom','10%')
+        $("#publishCmt").css('color','#ccc');
+        $('footer.nav').show();
+    });
+
+    if(isAndroid > -1 ){
+        $('footer.nav').css('height','8%');
+    }
 
     
-
-
+    
     function doEnrol(){
         if(token != undefined){
             if(applyNumber >= peopleNumber ){
@@ -405,4 +443,5 @@ Date.prototype.Formate=function(){
     var d=this.getDate()>9?this.getDate():'0'+this.getDate();
     return (y+'.'+m+'.'+d);
 }
+
 

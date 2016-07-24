@@ -205,9 +205,23 @@ article >.comments>.commentList>.singleCmt>.creatTime{
     animation: rotate 0.75s linear infinite;
 }
 
+
 footer.nav{
-    height: 7.7%;
+    background: #FFF;
+     z-index: 0;
 }
+
+footer>.box{
+    height: 100%;
+    font-size: 15px;
+}
+
+#commentContent{
+    margin-top: 13px;
+}
+
+
+
 
 
 /*   */

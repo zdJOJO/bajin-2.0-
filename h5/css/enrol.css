@@ -169,7 +169,7 @@ body{
 
 .content{
     margin-top: 0.02rem;
-    margin-bottom: 0.12rem;
+    /*margin-bottom: 0.12rem;*/
     background: #ffffff;
     padding: 0.04rem 0;
     overflow:hidden;
@@ -243,13 +243,14 @@ footer.nav{
     position: fixed;
     bottom: 0;
     color: #ffffff;
-    z-index: 1000
+    z-index: 100;
+    display: block;
 }
 .nav p{
     background: #C8A971;
     font-size: 18px;
-    height: 100%
-    line-height: 0.12rem;
+    height: 100%;
+    line-height: 0.065rem;
 }
 #share-mask{
     background: rgba(255,255,255,0.5);
@@ -289,7 +290,7 @@ footer.nav{
 
 #doEnrol{
     background: #eee;
-    position: relative;
+    /*position: relative;*/
     height:	100%;
 }
 
@@ -376,7 +377,8 @@ footer.nav{
 #comment{
     background: #fff;
     position: relative;
-    top: -52px;
+    /*top: -52px;*/
+    margin-bottom: 10%;
 }
 
 #comment > h3{
@@ -436,7 +438,7 @@ footer.nav{
 
 
 #comment > .box{
-    height: 0.1rem;
+    height: 55px;
     font-size: 15px;
 }
 
@@ -454,14 +456,29 @@ footer.nav{
     text-align: center;
     display: inline-block;
     padding: 4px;
-    color: #000;
+    color: #ccc;
     font-family: 黑体;
 }
 
 
 
 
+@media screen and (min-width: 425px){
+    #comment{
+        margin-bottom: 7%;
+    }
+}
+
+
+@media screen and (max-width: 360px){
+
+    #commentContent{
+        width: 77%;
+    }
+}
+
 @media screen and (max-width: 320px){
+
     #comment >.commentList>.singleCmt>.userName{
         left: 28%;
     }
@@ -476,7 +493,7 @@ footer.nav{
     }
 
     #comment > .box{
-        height: 0.15rem;
+        height: 45px;
     }
 
     #commentContent{

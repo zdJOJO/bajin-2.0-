@@ -5,7 +5,7 @@ h1,h2,h3{
     font-weight: normal;
 }
 body{
-    font-family: "微软雅黑";
+    font-family: "黑体";
     background: #eee;
     overflow-x: hidden;
 }
@@ -45,6 +45,7 @@ body{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #696969;
 }
 .btn_q{
     float: right;
@@ -133,16 +134,23 @@ body{
 
 .msgBox>.msg-wrap>p{
     font-size: 14px;
-    line-height: 35px;
-    border-bottom: 1px #EEE solid;
+    line-height: 60px;
+    border-bottom: 1px #f0f0f0 solid;
+    color: #d5d5d5;
+    font-size: 17px;
 }
 
 .msgBox>.msg-wrap>p>.head{
     display: inline-block;
-    width: 65px;
-    font-size: 1.1em;
+    width: 70px;
+    font-size: 0.8em;
     text-align: left;
     color: #AEAEAE;
+}
+
+
+.msgBox>.msg-wrap>p.msg-price{
+    color: #c2b075;
 }
 
 .msg-time{
@@ -168,8 +176,7 @@ body{
 
 
 .content{
-    margin-top: 0.02rem;
-    /*margin-bottom: 0.12rem;*/
+    /*margin-top: 0.02rem;*/
     background: #ffffff;
     padding: 0.04rem 0;
     overflow:hidden;
@@ -308,9 +315,9 @@ footer.nav{
 
 #doEnrol>.closeDate{
     position: absolute;
-    left: 40px;
+    left: 30%;
     top: 30%;
-    color: #000;
+    color: #b0b0b0;
     font-size: 15px;
 }
 
@@ -382,11 +389,18 @@ footer.nav{
 }
 
 #comment > h3{
-    height: 25px;
+    height: 30px;
     line-height: 25px;
     color: #777;
     padding-left: 25px;
+    position: relative;
 }
+
+#comment > h3>span{
+    position: absolute;
+    right: 5%;
+}
+
 
 #comment >.commentList>.singleCmt{
     height: 0.27rem;
@@ -418,6 +432,7 @@ footer.nav{
 }
 
 #comment >.commentList>.singleCmt>p{
+    font-size: 15px;
     position: absolute;
     top: 40%;
     left: 24%;
@@ -426,7 +441,7 @@ footer.nav{
     text-overflow: ellipsis;
     word-break: break-all;
     width: 60%;
-    height: 40%;
+    height: 34%;
 }
 
 #comment >.commentList>.singleCmt>.creatTime{
@@ -470,10 +485,26 @@ footer.nav{
 }
 
 
+
+
+
+
+
+@media screen and (max-width: 375px){
+    #doEnrol>.closeDate{
+        left: 98px;
+    }
+}
+
+
 @media screen and (max-width: 360px){
 
     #commentContent{
         width: 77%;
+    }
+
+    #doEnrol>.closeDate{
+        left: 24%;
     }
 }
 
@@ -498,6 +529,10 @@ footer.nav{
 
     #commentContent{
         width: 70%;
+    }
+
+    #doEnrol>.closeDate{
+        left: 60px;
     }
 }
 

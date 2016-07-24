@@ -107,15 +107,16 @@ $(function(){
             }
 
             var str1=$('<section class="msgBox"><div class="msg-wrap"><h1 class="msg-tit">'+data.activityTitle+'</h1><div class = "btn_q"><a href="tel:400-111-3797" class="tellNum"><img src="imgs/iconfont-kefu.png"></a>' +
-                '<span class="love-btn"><img src="imgs/iconfont-love.png"></span><span class="share-btn"><img src="imgs/iconfont-p-share.png"></span></div><p class="msg-time"><img src="imgs/iconfont-shijian.png" /> '+new Date(data.startTime*1000).Formate()+'-'+new Date(data.endTime*1000).Formate()+'</p> ' +
-                '<p class="msg-address"><img src="imgs/iconfont-location.png" /> '+data.activityAddress+'</p>' +
+                '<span class="love-btn"><img src="imgs/iconfont-love.png"></span><span class="share-btn"><img src="imgs/iconfont-p-share.png"></span></div>' +
+                '<p class="msg-time"><span class="head">时间</span>'+new Date(data.startTime*1000).Formate()+'-'+new Date(data.endTime*1000).Formate()+'</p> ' +
+                '<p class="msg-address"> <span class="head">地点</span>'+data.activityAddress+'</p>' +
                 '<p class="msg-price"><span class="head">价格</span>'+actPrice+'</p>' +
                 '<p class="msg-num"><span class="head">人数</span>'+ peopleNumberStr + '</p>' +
                 '<p class="msg-num"><span class="head">已报名</span>'+data.applyNumber+'人'+'</p></div></section>');
 
 
             var str2 = $('<section class="content"><div class="content-text">' + data.activityDetail + '</div></section>');
-            $("#doEnrol").append('<span class="closeDate">'+'报名截止时间：'+ new Date(data.endTime*1000).Formate() +'</span>');
+            $("#doEnrol").append('<span class="closeDate">'+'截止时间：'+ new Date(data.endTime*1000).Formate() +'</span>');
 
             if(new Date().getTime() > data.endTime*1000){
                 $("#doEnrol>button").attr({
@@ -266,10 +267,10 @@ $(function(){
 
         if(isPublishCtm){
             $("#comment>.commentList").html('');
-            commentStr = '' ;
         }
+        commentStr = '' ;
         $.get( port + '/card/comment/list?currentPage=' + page + '&type=1&itemId=' + itemId,function (data) {
-            $("#comment>h3.cmtNUm").html('评论' + data.rowCount + '条');
+            $("#comment>h3.cmtNUm").html('评论' + '<span>'+ data.rowCount + ' 条</span>');
             if(data.list.length !=0){
                 var headPicStr = '';
                 var nameStr = '';

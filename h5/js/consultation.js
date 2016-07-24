@@ -88,8 +88,10 @@ var getCommentList = function (page) {
 
     if(isPublishCtm){
         $("article>.comments>.commentList").html('');
-        commentStr = '' ;
     }
+
+
+    commentStr = '' ;
 
     $.get( port + '/card/comment/list?currentPage=' + page + '&type=' + 7 + '&itemId=' + itemId,function (data) {
         $("article>.comments>.totalNum").html('共' + data.rowCount + '条评论');

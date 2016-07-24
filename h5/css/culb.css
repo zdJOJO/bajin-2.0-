@@ -1,12 +1,12 @@
 
 @font-face{
-	font-family:"微软雅黑"
+	font-family:"黑体"
 }
 h1,h2,h3{
 	font-weight: normal;
 }
 body{
-	font-family: "微软雅黑";
+	font-family: "黑体";
 }
 
 
@@ -26,23 +26,25 @@ header{
 
 header >div{
 	width: 15%;
-	margin: 6% auto 0 auto;
+	margin: 5.6% auto 0 auto;
 	display: inline-block;
 	color: #8B8B8B;
+	font-size: 15px;
+	font-family: '黑体';
 }
 
 header >div:first-child{
-	margin-right: 40px;
+	margin-right: 29.5px;
 }
 header >div:last-child{
-	margin-left: 40px;
+	margin-left: 29.5px;
 }
 
 header >div>hr{
 	width: 0.035rem;
 	height: 0px;
 	border: none;
-	margin-top: 2px;
+	margin-top: 4px;
 }
 
 header >div.active{
@@ -410,8 +412,32 @@ footer div p{
 
 
 
+@media screen and (max-width: 360px	){
+	header >div{
+		margin: 4.6% auto 0 auto;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media only screen and (max-width: 320px){
+
+	header >div:first-child{
+		margin-right: 31.5px;
+	}
+	header >div:last-child{
+		margin-left: 31.5px;
+	}
 
 	.hotList >.lists >.hotItem h1{
 		font-size: 16px;

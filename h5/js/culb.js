@@ -43,7 +43,7 @@ $(function(){
         isHotDoor = true;
     }
 
-    if(!isHotDoor){
+    if(!isHotDoor &&　window.location.pathname.indexOf('icbcServe') < 0){
         $("body").prepend('<header> <div class="joinAct active">报名<hr class="active"></div> <div class="consultation">资讯<hr></div></header>');
         $(".infoList").css('margin-top' ,'0.143rem');
 
@@ -91,9 +91,15 @@ $(function(){
 
 
 
-    //报名咨询获取
+    //咨询列表获取
     function getPage_consultation(page) {
         var url = port + '/card/consult?currentPage=' + page + '&token=' + token + '&type=7';
+
+        //工行服务
+        if(window.location.href.indexOf('icbcServe') > 0){
+            url =  port + '/card/consult?currentPage=' + page + '&token=' + token + '&type=8';
+        }
+
         $.get(url,function(data){
             if(data.list.length != 0){
                 for(var i=0;i<data.list.length;i++){
@@ -109,9 +115,15 @@ $(function(){
                 consultationStr = '';
                 dropload_consultation.resetload();
 
-                $('.singleHot').click(function(){
-                    window.location.href = "consultation.html?id=" + $(this).attr('data-id');
-                });
+                if(window.location.href.indexOf('icbcServe') > 0){
+                    $('.singleHot').click(function(){
+                        window.location.href = "consultation.html?icbc&&id=" + $(this).attr('data-id');
+                    });
+                }else {
+                    $('.singleHot').click(function(){
+                        window.location.href = "consultation.html?id=" + $(this).attr('data-id');
+                    });
+                }
 
             }else {
                 // 锁定
@@ -128,7 +140,7 @@ $(function(){
 
     
 
-    //报名列表获取
+    //报名列表 获取
     function getPage(page){
 
         var url = !isHotDoor ? port+"/card/activity?currentPage="+page+"&size=10" : port+"/card/mpage/hotpage?currentPage="+page+"&size=10" ;
@@ -229,6 +241,12 @@ $(function(){
     }
 
 
+    if(window.location.href.indexOf('icbcServe') > 0){
+        $('section').css({
+            'margin' : '0'
+        })
+    }
+
 
 
 
@@ -239,7 +257,14 @@ $(function(){
           if(!isHotDoor){
               window.location.href = "enrol.html?id=" + id;
           }else {
-              window.location.href = jumpPage(_type) + '?id=' + id;
+
+              // console.log(id);
+              // console.log(_type);
+              // console.log(
+              //     jumpPage(_type).htmlStr + '?' + jumpPage(_type).tab + 'id=' + id
+              // )
+
+             window.location.href = jumpPage(_type).htmlStr + '?' + jumpPage(_type).tab + 'id=' + id ;
           }
         }});
 
@@ -248,37 +273,44 @@ $(function(){
 
     //页面判断  跳转到哪里
     function jumpPage(type) {
+        var obj = {
+            htmlStr: '',
+            tab: '',
+        }
         var htmlStr = '';
+        var tab = '' ;
         switch(type) {
             case "1":
-                htmlStr = 'enrol.html';
+                obj.htmlStr = 'enrol.html';
                 break;
             case "2":
-                htmlStr = 'life.html';
+                obj.htmlStr = 'life.html';
                 break;
             case "3":
-                htmlStr = 'bradDetail.html';
+                obj.htmlStr = 'bradDetail.html';
                 break;
             case "4":
-                htmlStr = '';
+                obj.htmlStr = '';
                 break;
             case "5":
-                htmlStr = 'mall.html';
+                obj.htmlStr = 'mall.html';
                 break;
             case "6":
-                htmlStr = '';
+                obj.htmlStr = '';
                 break;
             case "7":
-                htmlStr = 'consulation.html';
+                obj.htmlStr = 'consulation.html';
                 break;
             case "8":
-                htmlStr = '';
+                obj.htmlStr = 'consulation.html';
+                obj.tab = 'hot&&';
                 break;
             case "9":
-                htmlStr = 'consulation.html';
+                obj.htmlStr = 'consulation.html';
+                obj.tab = 'icbc&&';
                 break;
         }
-        return htmlStr;
+        return obj;
     };
 
 

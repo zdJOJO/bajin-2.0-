@@ -266,6 +266,11 @@ $(document).ready(function(){
 		});
 	}
 	getActData();
+
+
+
+
+	//工行 各个按钮
 	$(".item_q").click(function(){
 	    if(token != undefined){
 	    	if($(this).attr("id")=="phone"){
@@ -274,12 +279,19 @@ $(document).ready(function(){
 	    	}else if($(this).attr("id")=="personalServe"){
 	    		getMessage();
 	    		return;
-	    	}
-	    	window.location.href = "bank.html?pickid=" + $(this).data("pickid"); 
+	    	}else if($(this).attr("data-pickid")=="888"){
+				window.location.href = "icbcServe.html";   //跳转工行服务按钮
+			}else {
+				window.location.href = "bank.html?pickid=" + $(this).data("pickid");
+			}
 	    }else{
 	    	window.location.href = "login.html?his="+his;
 	    }
 	});
+
+
+
+	
 	//工行的button请求数据
 	//http://121.196.232.233/card/icbcbutton
 	$.ajax({
@@ -330,4 +342,5 @@ $(document).ready(function(){
 			}
 		});
 	};
+	
 });

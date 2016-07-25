@@ -57,6 +57,10 @@ header,.wrapper,footer{
 .wrapper>p.primeCost span{
  	color:#9e9e9e;
 }
+.wrapper>p.content span{
+	color:#9e9e9e;
+}
+
 .wrapper .colorPick{
 	color:#ababab;
 	width: 1rem;
@@ -110,6 +114,7 @@ header,.wrapper,footer{
 	width: 1rem;
 	text-align: center;
 }
+
 .wrapper .details p{
 	width: 0.28rem;
 	display: inline-block;
@@ -117,6 +122,15 @@ header,.wrapper,footer{
     -webkit-margin-after: 0;
     padding-bottom: 1em;
 }
+
+.wrapper .details p.active{
+	color: rgb(102, 102, 102);
+	/*border-bottom: 1px  rgb(102, 102, 102) solid ;*/
+}
+
+
+
+
 footer{
 	width: 1rem;
 	height: 0.12rem;
@@ -172,8 +186,11 @@ footer p.joinCart{
 	padding:0.04rem;
 }
 
-
-
+.message_1 video{
+	width: 100%;
+	height: auto;
+	z-index: 20
+}
 
 
 
@@ -195,13 +212,14 @@ header .saveAndShare{
 	position: absolute;
 	top: 12px;
 	z-index: 20;
-	width: 110px;
+	width: 125px;
 	height: 22px;
-	right: 10px;
+	right: 15px;
 }
 header .saveAndShare img{
     width: 24px;
-    height: 22px;    
+    height: 22px;
+	margin-left: 10px;
 }
 header .saveAndShare img:first-child{
 	/*margin-right: 10px;	*/
@@ -265,6 +283,292 @@ header .saveAndShare img:first-child{
 	width: 100%;
 	height: auto;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  修改之后的  详情页    */
+
+body{
+	font-family: "黑体";
+}
+
+footer{
+	z-index: 0;
+}
+
+
+#addToShoppingCart{
+	background: #FAFAFA;
+	color: #B7A66E;
+}
+
+
+#buyNow{
+	background: #B7A66E;
+	color: #fff;
+}
+
+
+#mask{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.09);
+	z-index: 300;
+	bottom: 0;
+}
+
+#goodDetail{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	/*height: 0;*/
+	height: 60%;
+	background: rgb(250, 250, 250);
+	display: none;
+	z-index: 400;
+}
+
+
+
+
+#goodDetail>div{
+	position: relative;
+	min-height: 30%;
+}
+
+
+#goodDetail>.name>span,#goodDetail>.name>p{
+	position: absolute;
+}
+
+#goodDetail>.name>.price{
+	top: 10px;
+	left: 44%;
+	color: #B7A66E;;
+}
+#goodDetail>.name>.count{
+	top: 48px;
+	left: 44%;;
+	color: #525252;
+}
+#goodDetail>.name>.spe{
+	top: 75px;
+	left: 44%;
+	font-size: 0.9em;
+	color: #b5b5b5;
+}
+#goodDetail>.name>.spe>span{
+	color: #525252;
+}
+
+
+#goodDetail>.name>.goodHeadPic{
+	width: 130px;
+	height: 130px;
+	position: absolute;
+	background: #fff;
+	top: -16px;
+	left: 7%;
+	z-index: 600;
+}
+
+#goodDetail>.name>.close{
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	top: 7px;
+	right: 7px;
+}
+
+
+#goodDetail  h4{
+	color: #acacac;
+	font-weight: 100;
+	margin-left: 28px;
+}
+
+#goodDetail>.specifications>.speList{
+	margin: 5px 0 0 28px;
+}
+
+#goodDetail>.specifications>.speList li{
+	display: inline-block;
+	text-align: center;
+	padding: 0.5% 4%;
+	float: left;
+	background: #f0f0f0;
+	color: #8a8a8a;
+	min-width: 30px;
+	margin: 0 15px 13px 0;
+}
+
+
+#goodDetail>.specifications>.speList li.active{
+	display: inline-block;
+	text-align: center;
+	padding: 0.5% 4%;
+	float: left;
+	background: #B7A66E;
+	color: #f0f0f0;
+}
+
+
+
+
+#goodDetail>.num>.numBox{
+	margin-top: 5px;
+	padding-left: 28px;
+}
+
+#goodDetail>.num input{
+	border: none;
+	width: 70px;
+	height: 30px;
+	line-height: 30px;
+	background: #f0f0f0;
+	color: #8a8a8a;
+	text-align: center;
+	position: absolute;
+	left: 15%;
+}
+
+#goodDetail>.num img{
+	width: 30px;
+	height: 30px;
+	position: absolute;
+}
+
+#goodDetail>.num img.plus{
+	left: 33%;
+}
+
+#goodDetail>.num img.sub{
+
+}
+
+
+#goodDetail>button{
+	width: 90%;
+	background: #B7A66E;
+	border: none;
+	height: 50px;
+	display: block;
+	margin: auto;
+	color: #fff;
+	font-size: 1em;
+	font-family: 黑体;
+	position: relative;
+	bottom: 30px;
+}
+
+.weui_mask.weui_mask_visible{
+	z-index: 500;
+}
+
+.weui_dialog.weui_dialog_visible, .weui_toast.weui_dialog_visible, .weui_dialog.weui_toast_visible, .weui_toast.weui_toast_visible{
+	z-index: 600;
+}
+
+
+
+
+#goodDetail > .btnBox{
+	margin: auto;
+	width: 92%;
+	height: 50px;
+	top: -20px;
+}
+
+#goodDetail > .btnBox > button{
+	width: 50%;
+	height: 0.12rem;
+	line-height: 0.12rem;
+	border: none;
+	float: left;
+	font-size: 1em;
+	font-family: 黑体;
+}
+
+#sureAdd{
+	background: #f5f5f5;
+	color: #B7A66E;
+}
+
+#sureBuyNow{
+	background: #B7A66E;
+	color: #FAFAFA;
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 375px){
+	#goodDetail>.num input{
+		left: 19%;
+	}
+
+	#goodDetail>.num img.plus{
+		left: 41%;
+	}
+}
+
+
+@media screen and (max-width: 320px){
+	#goodDetail>.name>.goodHeadPic{
+		width: 90px;
+		height: 90px;
+	}
+
+	#goodDetail>.name>.count{
+		top: 36px;
+	}
+
+	#goodDetail>.name>.spe{
+		top: 60px;
+	}
+
+	#goodDetail>.num input{
+		left: 19.5%;
+	}
+
+	#goodDetail>.num img.plus{
+		left: 42.5%;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

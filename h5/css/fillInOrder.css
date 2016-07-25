@@ -66,10 +66,12 @@ body{
 }
 .good .singleBrand .detail h3{
 	-webkit-margin-before: 0.025rem;
-    	-webkit-margin-after: 0.018rem;
+	-webkit-margin-after: 0.018rem;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	color: #5e5e5e;
+	font-size: 1.2em;
 }
 .good .singleBrand .detail p.subtitle{
 	-webkit-margin-before: 0;
@@ -82,7 +84,7 @@ body{
 .good .singleBrand .detail p.singleCost{
 	-webkit-margin-before: 0;
 	-webkit-margin-after: 0;
-	font-size: 14px;
+	font-size: 1em;
 	position: absolute;
 	bottom: 9px;
 	left: -4px;
@@ -151,8 +153,24 @@ footer p{
     -webkit-margin-after: 0;
     text-align: center;
     color: #f0f0f0;
-    background-color: #222;
+    background-color: #B7A66E;
 }
+
+footer>div.total{
+	position: absolute;
+	top: 32%;
+	left: 27%;
+}
+
+footer>div.total>span{
+	font-size: 1.25em;
+	color: #B7A66E;
+}
+
+
+
+
+
 /*默认地址为空的时候的样式*/
 .noneAddress{
 	height: 0.2rem;

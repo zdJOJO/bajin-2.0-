@@ -149,7 +149,7 @@ article >.comments>.commentList>.singleCmt>p{
     left: 23%;
     top: 41px;
     width: 75%;
-    height: 45%;
+    height: 43%;
     word-break: break-all;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -208,7 +208,7 @@ article >.comments>.commentList>.singleCmt>.creatTime{
 
 footer.nav{
     background: #FFF;
-     z-index: 0;
+     z-index: 200;
 }
 
 footer>.box{
@@ -222,6 +222,15 @@ footer>.box{
 
 
 
+@media only screen and (max-width: 430px){
+    header>h3{
+        margin-top: 20px;
+        width: 72%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
 
 
 /*   */
@@ -243,7 +252,7 @@ footer>.box{
 
     header>h3{
         margin-top: 20px;
-        width: 65%;
+        width: 68%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;

@@ -160,17 +160,51 @@ footer{
 	background-color:#eeeeee;
 	line-height: 0.12rem;
 }
-footer p{
-	position: absolute;
-	right: 0;
-	-webkit-margin-before: 0;
-    -webkit-margin-after: 0;	
-	background-color:#b7a66e;
-	color: #fff;
+
+footer a{
 	width: 0.33rem;
 	height: 0.12rem;
 	text-align: center;
+	width: 50%;
+	float: right;
+	color: #b7a66e;
+	text-decoration: none;
 }
+footer a>p{
+	width: 100%;
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
+}
+
+
+#payOnline{
+	border: none;
+	width: 50%;
+	height: 0.12rem;
+	text-align: center;
+	width: 50%;
+	float: left;
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
+	background-color:#b7a66e;
+	color: #fff;
+	font-size: 1em;
+	font-family: 微软雅黑;
+}
+
+/*.payOnline{*/
+	/*position: absolute;*/
+	/*right: 0;*/
+	/*-webkit-margin-before: 0;*/
+	/*-webkit-margin-after: 0;*/
+	/*background-color:#b7a66e;*/
+	/*color: #fff;*/
+/*}*/
+
+
+
+
+
 /*分享与收藏按钮*/
 header{
 	position:relative;

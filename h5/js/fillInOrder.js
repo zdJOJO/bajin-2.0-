@@ -63,26 +63,6 @@ $(document).ready(function(){
 	}
 
 
-	// if(window.location.search.indexOf("cards") < 0){
-	// 	var str =  window.location.search.split("?")[1];
-	// 	var arry = str.split("&&");
-    //
-	// 	obj.cost = (arry[0].split("=")[1].indexOf(";") > 0) ? arry[0].split("=")[1].split(";")[1] : arry[0].split("=")[1];
-    //
-	// 	obj.goodsId = arry[1].split("=")[1];
-	// 	obj.num = arry[2].split("=")[1];
-	// 	obj.pic = arry[3].split("=")[1];
-	// 	obj.skuId = arry[4].split("=")[1];
-	// 	obj.subTitle = arry[5].split("=")[1];
-	// 	obj.title = arry[6].split("=")[1];
-	// 	if(arry[7]){
-	// 		obj.receiveId = arry[7].split("=")[1];
-	// 	}
-	// }else {
-	// 	var  str = window.location.search.split("=")[1];
-	// 	obj = JSON.parse(unescape(str));
-	// }
-
 
 	//备份一份  防止用户返回而丢失数据
 	var tempObj = {}
@@ -103,28 +83,23 @@ $(document).ready(function(){
 
 
 
-	// obj = obj || tempObj;
-
-
-
-
-
-
-
 
 
 	//填入数据
 	if(obj.cost!=undefined){
 		var str =$('<div class="singleBrand"><img src="" class="activityPic"/><div class="detail"><h3></h3><p class="subtitle"></p><p class="singleCost"><span class="price"></span><span class="num"></span></p></div></div>');
+
+
 		$(".good").append(str);
 		$(".good .activityPic").attr("src",obj.pic);
 		$(".good .detail h3").html(decodeURIComponent(obj.title));
 		$(".good .detail .subtitle").html(decodeURIComponent(obj.subTitle));
-		$(".good .detail .singleCost span.price").html("￥" + obj.cost);
+		$(".good .detail .singleCost span.price").html("￥" +  parseInt(obj.cost).toFixed(2));
 		$(".good .detail .singleCost span.num").html("×"+obj.num);
-		$(".good .detail .currentNum").html(obj.num);	
+		$(".good .detail .currentNum").html(obj.num);
 		$(".singleBrand").attr("data-id",obj.skuId);		
 	}
+
 	$(".message").bind("click",function(){
 		if(window.location.search.indexOf("cards") < 0){
 			window.location.href = "setAddress.html?obj=" + escape(JSON.stringify(obj)) + '&&isShoppingCart=false';

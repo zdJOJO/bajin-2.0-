@@ -36,17 +36,44 @@ his = his[his.length-1];
 //设置为1s
 $.toast.prototype.defaults.duration = 1000;
 
-var consultationId = window.location.href.split("=")[1];
+
+
+
+//  咨询/工行服务/热点    id是唯一的,根据type区别  三个模块判断
+
+var isIcbc = false;
+var isHot = false;
+var type = -1;
+
+if(window.location.search.indexOf('icbc') > 0 ){
+    isIcbc = true ;
+    isHot = false;
+    type = 8;
+}else if(window.location.search.indexOf('hot') > 0) {
+    isIcbc = false;
+    isHot = true;
+    type = 9;
+}else {
+    isIcbc = false;
+    isHot = false;
+    type = 7;
+}
 
 var itemId = window.location.href.split("=")[1];
 var pageNum = 1;
-var collectId = 0;
 var commentStr = '';
 
 
+var collectId = 0;
+var collectId_icbc = 0;
+var collectId_hot = 0;
+
+
+
+
 //获取内容
-var getHotDetail = function () {
-    $.get( port + '/card/consult/' + consultationId + '?token=' + token,function (data) {
+var getDetail = function () {
+    $.get(port + '/card/consult/' + itemId + '?token=' + token,function (data) {
         $('title').html(data.title)
         $("h3").html(data.title);
         $("header>.abstr").html(data.abstr);
@@ -57,20 +84,29 @@ var getHotDetail = function () {
 }
 
 
-getHotDetail();
-
+getDetail();
 
 
 
 
 //判断是否已被收藏
 var isCollected = function () {
-    $.get(port + '/card/collect/item?token=' + token + '&itemId=' + itemId + '&itemType=7',function (result) {
+    var typeNum =  isHot ? 9 : ( isIcbc ? 8 : 7 );
+    var url =  port + '/card/collect/item?token=' + token + '&itemId=' + itemId + '&itemType=' + typeNum;
+    $.get( url,function (result) {
         if(result.code == 204){
-            collectId = result.data.collectId;
+            if(isIcbc){
+                collectId_icbc = result.data.collectId;
+            }else if(isHot){
+                collectId_hot = result.data.collectId;
+            }else {
+                collectId = result.data.collectId;
+            }
             $('#collectionShare>.love').attr('src','imgs/iconfont-love_save.png');
         }else {
-            collectId = '';
+            collectId = 0;
+            collectId_icbc = 0;
+            collectId_hot = 0 ;
             $('#collectionShare>.love').attr('src','imgs/iconfont-love.png');
         }
     });
@@ -90,10 +126,11 @@ var getCommentList = function (page) {
         $("article>.comments>.commentList").html('');
     }
 
-
     commentStr = '' ;
 
-    $.get( port + '/card/comment/list?currentPage=' + page + '&type=' + 7 + '&itemId=' + itemId,function (data) {
+    var typeNum = isHot ? 9 : ( isIcbc ? 8 : 7 ) ;
+    var url = port + '/card/comment/list?currentPage=' + page + '&type=' + typeNum + '&itemId=' + itemId ;
+    $.get(url ,function (data) {
         $("article>.comments>.totalNum").html('共' + data.rowCount + '条评论');
         if(data.list.length !=0){
             var headPicStr = '';
@@ -159,14 +196,13 @@ $("#publishCmt").click(function () {
             });
             return;
         }else {
-
             $.ajax({
                 type: 'post',
                 dataType: "json",
                 contentType : "application/json",
                 url: port + '/card/comment?token=' + token ,
                 data: JSON.stringify({
-                    itemType: 7,
+                    itemType: isHot ? 9 : ( isIcbc ? 8 : 7 ),
                     itemId: itemId,
                     commentContent: $("#commentContent").val()
                 }),
@@ -204,12 +240,29 @@ $("#shareMask").click(function () {
 //收藏(添加/删除)   //   card/collect/{collectId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
 $('#collectionShare>.love').click(function () {
     if(token){
-        var ajaxTypeStr = collectId ? 'delete' : 'post' ;
-        var url = collectId ? port + '/card/collect/' +  collectId + '?token=' + token : port + '/card/collect?token=' + token  ;
-        var data = collectId  ? '' : JSON.stringify({
-            itemType: 7,
-            itemId: itemId
-        }) ;
+        var ajaxTypeStr = (collectId>0 || collectId_icbc > 0 || collectId_hot) ? 'delete' : 'post' ;
+        var url = '';
+        var data = '';
+        if(isHot){
+             url = collectId_hot>0 ? port + '/card/collect/' +  collectId_hot + '?token=' + token : port + '/card/collect?token=' + token  ;
+             data = collectId_hot>0  ? '' : JSON.stringify({
+                itemType: 9,
+                itemId: itemId
+            }) ;
+        }else if(isIcbc){
+            url = collectId_icbc>0 ? port + '/card/collect/' +  collectId_icbc + '?token=' + token : port + '/card/collect?token=' + token  ;
+            data = collectId_icbc>0  ? '' : JSON.stringify({
+                itemType: 8,
+                itemId: itemId
+            }) ;
+        }else {
+            url = collectId>0 ? port + '/card/collect/' +  collectId + '?token=' + token : port + '/card/collect?token=' + token  ;
+            data = collectId>0  ? '' : JSON.stringify({
+                itemType: 7,
+                itemId: itemId
+            }) ;
+        }
+
         $.ajax({
             type: ajaxTypeStr,
             dataType: "json",
@@ -219,11 +272,14 @@ $('#collectionShare>.love').click(function () {
             success: function (result) {
                 if(result.code == 201){
                     $('#collectionShare>.love').attr('src','imgs/iconfont-love_save.png');
-                    $.toast("收藏成功");
-                    isCollected();
+                    $.toast("收藏成功",function () {
+                        isCollected();
+                    });
                 }else if(result.code == 203){
-                    $.toast("取消收藏成功");
-                    isCollected();
+                    $('#collectionShare>.love').attr('src','imgs/iconfont-love.png');
+                    $.toast("取消收藏成功",function () {
+                        isCollected();
+                    });
                 }else {
                     $.toast("操作失败", "cancel");
                 }

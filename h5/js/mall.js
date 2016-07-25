@@ -27,6 +27,7 @@ $(document).ready(function(){
     if(/&/g.test(mallid)){
         mallid = mallid.split("&")[0];
     }
+	
     //获取商品http://121.196.232.233/card/goods/{goodsId}	
 	$.ajax({
 		type:"get",

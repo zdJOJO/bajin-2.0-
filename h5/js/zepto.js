@@ -13,6 +13,7 @@ var port = "http://test.winthen.com";
 
 
 
+
 //通用函数，也是可以写到zepto.js里面的   时间戳转换成 固定格式
 Date.prototype.Formate=function(){
 	var y=this.getFullYear();
@@ -79,6 +80,8 @@ var typeJudge = function (type) {
 
 
 
+
+
 //多行显示省略号的方法
 function lessAll(text,length){
 	// var text = $('.tit-wrap .detile p');
@@ -100,6 +103,9 @@ function checkMobile(str){
 		return false;
 	}
 }
+
+
+
 //格式化金钱数
 function formatePrice(price){
 	// 处理金钱数后边的.00

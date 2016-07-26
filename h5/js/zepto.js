@@ -112,7 +112,6 @@ function formatePrice(price){
 	var price = price.toString();
 	var costFormate=0.00;
 	if(/[\.]/.test(price)){
-		console.log("有小数点");
 		var str = price.split(".");
 		costFormate = str[0]+"."+str[1].substring(0,2);
 	}else{

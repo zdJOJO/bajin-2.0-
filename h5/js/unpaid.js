@@ -61,32 +61,23 @@ $(document).ready(function(){
 	//获取页面数据
 	$.ajax({
 		type:"get",
-		url:port+"/card/order/"+cardid+"?token="+token,
+		url:port+"/card/order/v2/"+cardid+"?token="+token,
 		success:function(data){
 			var str= "";
 			var num = 1;
-			if(!data.goodsAndSkuModels){
-				window.location.href = 'pierre.html?';
+
+			for(var i=0;i<data.detailOrderModels.length;i++){
+				str += '<div class="goodBox" data-goodId="'+ data.detailOrderModels[i].goodsId +'"><img src="'+ data.detailOrderModels[i].hotPic+'"/><div>' +
+					'<div class="title">'+data.detailOrderModels[i].goodsTitle+'</div>' +
+					'<div class="subtitle">'+data.detailOrderModels[i].skuGague+'</div>' +
+					'<div class="cost"><p>￥&nbsp;'+formatePrice(data.detailOrderModels[i].skuPrice.toFixed(2))+'</p>' +
+					'<p>×'+ data.detailOrderModels[i].count+'</p></div></div></div>';
 			}
-			if(data.goodsAndSkuModels.length==1){
-				num = data.orderModel.orderNumber;
-				str = '<div class="goodBox"><img src="'+data.goodsAndSkuModels[0].goodsModel.maxPic+'"/>' +
-					'<div><div class="title">'+data.goodsAndSkuModels[0].goodsModel.goodsTitle+'</div>' +
-					'<div class="subtitle">'+data.goodsAndSkuModels[0].skuModel.skuGague+'</div>' +
-					'<div class="cost"><p>￥&nbsp;'+formatePrice(data.goodsAndSkuModels[0].skuModel.skuPrice)+'</p>' +
-					'<p>×'+num+'</p></div></div></div>';
-			}else{
-				for(var i=0,len=data.goodsAndSkuModels.length;i<len;i++){
-					str += '<div class="goodBox"><img src="'+data.goodsAndSkuModels[i].goodsModel.maxPic+'"/><div>' +
-						'<div class="title">'+data.goodsAndSkuModels[i].goodsModel.goodsTitle+'</div>' +
-						'<div class="subtitle">'+data.goodsAndSkuModels[i].skuModel.skuGague+'</div>' +
-						'<div class="cost"><p>￥&nbsp;'+formatePrice(data.goodsAndSkuModels[i].skuModel.skuPrice)+'</p><p>×1</p></div></div></div>';
-				}
-			}
+			
 			//插入商品信息
 			$(".good").append(str);
 			//总价格
-		    $(".cost_unpaid span").html('￥ ' + formatePrice(data.orderModel.orderCount));
+		    $(".cost_unpaid span").html('总额：  ￥ ' + formatePrice(data.orderModel.orderCount));
 			//保存id到删除按钮
 			$(".f_1").attr("data-receiveid",data.orderModel.orderId);
 			$(".f_2").attr("data-cardid",data.orderModel.orderId);
@@ -104,13 +95,17 @@ $(document).ready(function(){
 				},
 			});
 
+			//点击跳转到相应的商品页面
+			$('.goodBox').click(function () {
+				window.location.href = 'brandDetail.html?id=' + $(this).attr('data-goodId')
+			});
 
 			applyid = data.orderModel.orderId;   //微信请求参数时候用到
 
 			//插入订单编号
 			$(".time p:nth-child(1) span").html(data.orderModel.orderId);
 			//插入时间
-			$(".time p.createTime span:nth-child(1)").html(new Date(data.orderModel.createTime*1000).Formate());
+			$(".time p.createTime span:nth-child(1)").html(new Date(data.orderModel.createTime*1000).Formate().split(" ")[0]);
 		},
 		error:function(data){
 			//todo

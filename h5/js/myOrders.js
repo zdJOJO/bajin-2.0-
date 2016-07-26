@@ -23,6 +23,9 @@ $(document).ready(function(){
 	var his = hisStr[hisStr.length-1];
 
 
+
+	var page = 1;
+
 	// 判断 从哪里跳转此页面
 	var isDeleteAction = -1;
 	if(window.location.search.indexOf('allApo') > 0){
@@ -86,7 +89,7 @@ $(document).ready(function(){
 		$("." + str).css("background-color", "#b7a66e").css("color", "#fff").siblings().css("background-color", "#fff").css("color", "#9f9f9f");
 
 		if(orderState >= 0){
-			getOrders(1, 1000, orderState);
+			getOrders(1, 10, orderState);
 		}
 	}
 
@@ -128,6 +131,9 @@ $(document).ready(function(){
 
 
 
+
+
+
 	//二级 商品订单下的切换按钮
 	$(".wrapper>.header>div").bind("click",function () {
 		var num;
@@ -147,19 +153,12 @@ $(document).ready(function(){
 				num  = 3;
 				break;
 		}
+		$(".container").html("");
 		to_OrderTab(whereLocationHere(isDeleteAction),num);
 		doCss2($(this));
 	});
 
 
-
-
-
-	//二级 商品订单下的切换按钮
-	// $(".header div").bind("click",function(){
-	// 	doCss2(this);
-	// 	getOrders(1,1000,$(this).data("orderstate"));
-	// });
 
 
 	//活动加载
@@ -208,8 +207,21 @@ $(document).ready(function(){
 
 
 
+
+	//滚动加载 订单
+	$(window).scroll(function () {
+		var scrollTop = $(this).scrollTop();
+		var scrollHeight = $(document).height();
+		var windowHeight = $(this).height();
+		if (scrollTop + windowHeight == scrollHeight) {
+			page++;
+			getOrders(page, 10, isDeleteAction);
+		}
+	});
+
+
+
 	//获取订单详情
-	//http://121.196.232.233/card/order/admin?currentPage={pagenum}&size={size}&orderState=0&token=e7120d7a-456b-4471-8f86-ac638b348a53
 	// 备注:orderState 订单状态，0:全部,1：未付款，2：已付款，3：已发货，4：已退款，5：交易关闭，6：已收货
 	function getOrders(currentPage,size,orderState){
 		if(orderState == 0){
@@ -226,36 +238,51 @@ $(document).ready(function(){
 		}
 
 
+		$('#orderLoading').show();
+
 		$.ajax({
 			type:"get",
 			aysnc:true,
-			url:port+"/card/order?currentPage="+currentPage+"&size="+size+"&orderState="+orderState+"&token="+token,
 			dataType:"json",
 			contentType:"application/json;charset=UTF-8",
+			url:port+"/card/order/v2?currentPage="+currentPage+"&size="+size+"&orderState="+orderState+"&token="+token,
 			success:function(data){
 				// 这里添加一个注释，购物车区分不同的添加方法，从购物车里边添加进来的时候，商品是完全分开的，每个商品都不一样，
 				// 如果是直接购买的话商品是合并的。
 				// 这里先要判断订单的来源，使用goodsAndSkuModels.length与orderModel.orderNumber进行对比
-				$(".container").html("");
-				if(data.list.length==0){
+
+				if(currentPage == 1 && data.list.length==0){
 					var strEmpty = '<center><img src="imgs/save_.png"/><h2>该分类里没有商品</h2><p>再去看看吧</p><p class="turnPage">再去看看</p></center>';
 					$(".container").append(strEmpty);
 					$(".container .turnPage").click(function(){
-						window.location.href = "pierre.html";
+						window.location.href = "pierre.html?good";
 					});
 					return;
 				}
-				for(var i=0,len = data.list.length;i<len;i++){
+
+				if(currentPage > 1 && data.list.length == 0){
+					$(window).unbind('scroll');
+					setTimeout(function () {
+						$('#orderLoading').hide();
+						$(".container >div:last-child").css('margin-bottom','0');
+					},1500);
+					return;
+				}
+
+				for(var i=0;i<data.list.length;i++){
 					var str= "";
-					var num = 1;
 					var state = "";
 					var url;
-					if(data.list[i].goodsAndSkuModels.length==1){
-						num = data.list[i].orderModel.orderNumber;
+
+					for(var j=0; j<data.list[i].detailOrderModels.length;j++){
+						str +='<img src="'+data.list[i].detailOrderModels[j].hotPic+'"/>' +
+							'<div class="msg"><h3>'+data.list[i].detailOrderModels[j].goodsTitle+'</h3>' +
+							'<p class="what">'+data.list[i].detailOrderModels[j].skuGague+'</p>' +
+							'<p class="cost">￥'+formatePrice(data.list[i].detailOrderModels[j].skuPrice)+'</p>' +
+							'<p class="number">×'+data.list[i].detailOrderModels[j].count+'</p></div>';
 					}
-					for(var j=0,len_=data.list[i].goodsAndSkuModels.length;j<len_;j++){
-						str +='<img src="'+data.list[i].goodsAndSkuModels[j].goodsModel.maxPic+'"/><div class="msg"><h3>'+data.list[i].goodsAndSkuModels[j].goodsModel.goodsTitle+'</h3><p class="what">'+data.list[i].goodsAndSkuModels[j].skuModel.skuGague+'</p><p class="cost">￥'+formatePrice(data.list[i].goodsAndSkuModels[j].skuModel.skuPrice)+'</p><p class="number">×'+num+'</p></div>';
-					}
+
+
 					if(data.list[i].orderModel.orderState == 1){
 						state = "待付款";
 						url = +data.list[i].orderModel.orderId;
@@ -266,9 +293,19 @@ $(document).ready(function(){
 						state = "已发货";
 						url = data.list[i].orderModel.orderId;
 					}
-					var html = $('<div class="singleMsg" data-url="'+url+'">'+str+'<div class="totleMsg"><p class="status">'+state+'</p><p class="detail">共'+data.list[i].orderModel.orderNumber+'件商品&nbsp;合计:￥'+ data.list[i].orderModel.orderCount.toFixed(2) + '</p></div></div>');
+
+					var html = $('<div class="singleMsg" data-url="'+url+'">'+str+'<div class="totleMsg">' +
+						'<p class="status">'+state+'</p><p class="detail">' +
+						'共'+data.list[i].orderModel.orderNumber+'件商品&nbsp;合计:￥'+ data.list[i].orderModel.orderCount.toFixed(2) + '</p></div></div>');
+
 					$(".container").append(html);
+
+					$(".container >div:last-child").css('margin-bottom','30px');
 				}
+
+				$('#orderLoading').hide();
+
+
 				//绑定点击跳转事件
 				$(".singleMsg").bind("click",function(){
 					window.location.href = "unpaid.html?" + orderTab + "&&&" + "cardid=" + $(this).data("url");
@@ -284,8 +321,6 @@ $(document).ready(function(){
 		window.location.href = 'index.html';
 	});
 });
-
-
 
 
 
@@ -310,5 +345,5 @@ Date.prototype.Formate=function(){
 	var d=this.getDate()>9?this.getDate():'0'+this.getDate();
 	var h=this.getHours()>9?this.getHours():'0'+this.getHours();
 	var f=this.getMinutes()>9?this.getMinutes():'0'+this.getMinutes();
-	return (y+'-'+m+'-'+d+' '+h+':'+f);
+	return (y+'-'+m+'-'+d);
 }

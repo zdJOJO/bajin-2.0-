@@ -56,7 +56,7 @@ var url_obj = {
 	cost: '', // 价格
 	skuId: 0, //规格id
 	goodsId: 0, //商品id
-	num: 0  //所选商品数量
+	num: 1  //所选商品数量
 };
 
 
@@ -195,7 +195,7 @@ getGoodDetail();
 
 //获取评论列表
 var getComment = function () {
-	$.get(port + '/card/comment/list?currentPage=' + 1 + '&type=' + 1 + '&itemId=' + itemId,function (result) {
+	$.get(port + '/card/comment/list?currentPage=' + 1 + '&type=' + 3 + '&itemId=' + itemId,function (result) {
 		if(result.list.length == 0){
 			$('.wrapper>.content >span').html( '暂无评论');
 		}else {

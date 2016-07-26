@@ -1,7 +1,4 @@
 
-
-
-
 $(function(){    
     var token = "";
     //获取存在于cookie中的token值

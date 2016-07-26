@@ -411,6 +411,12 @@ footer div p{
 }
 
 
+@media screen and (max-width: 400px	){
+	.hotItem >.tit-wrap .type{
+		width: 0.15rem;
+		left: 70%;
+	}
+}
 
 @media screen and (max-width: 360px	){
 	header >div{

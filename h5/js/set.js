@@ -22,6 +22,8 @@ $(function(){
 	his = his[his.length-1];
 
 
+	$.toast.prototype.defaults.duration = 1300;
+
 	$.ajax({
 		type:"GET",
 		url:port+"/card/user?token="+token,
@@ -64,7 +66,7 @@ $(function(){
 
 	//  #setPic  #setUserName #setEmail #setAddress
 	var  info = {};
-	$(" #setPic,#setUserName,#setEmail,#setAddress,select").blur(function(){
+	$("#setUserName,#setEmail,#setAddress,select").blur(function(){
 		//更新设置函数
 
 		var regExp = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
@@ -95,18 +97,18 @@ $(function(){
 						contentType: "application/json",
 						data:JSON.stringify(info),
 						success:function(data){
-							$.alert('更新成功');
+							$.toast('更新成功');
 						},
 						error:function(data){
 							// window.location.href = "login.html?his="+his;
 						}
 					});
 				}else {
-					$.alert('请正确填姓名');
+					$.toast('请正确填姓名');
 				}
 			}
 		}else{
-			$.alert("请输入正确格式的邮箱地址");
+			$.toast("请输入正确格式的邮箱地址");
 		}
 	});
 

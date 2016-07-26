@@ -66,9 +66,9 @@ $(function(){
 
 	//  #setPic  #setUserName #setEmail #setAddress
 	var  info = {};
-	$("#setUserName,#setEmail,#setAddress,select").blur(function(){
+	$("#myImage,#setUserName,#setEmail,#setAddress,select").blur(function(){
 		//更新设置函数
-
+		
 		var regExp = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
 		if(regExp.test($("#setEmail").val())||$("#setEmail").val()==""){
 			if($("#setUserName").val().length>18){
@@ -82,7 +82,7 @@ $(function(){
 				}
 
 				info = {
-					"headPic":$(".headPic").attr("src"),
+					"headPic":$("#myImage").attr("src"),
 					"gender": setAgx,
 					"userName": $("#setUserName").val(),
 					"email":$("#setEmail").val()
@@ -97,7 +97,9 @@ $(function(){
 						contentType: "application/json",
 						data:JSON.stringify(info),
 						success:function(data){
-							$.toast('更新成功');
+							if($(this).attr('id') != 'myImage'){
+								$.toast('更新成功');
+							}
 						},
 						error:function(data){
 							// window.location.href = "login.html?his="+his;

@@ -79,11 +79,12 @@
         ok: "#clipBtn",
         loadStart: function() {
             console.log("照片读取中");
+
+            $.showLoading("更换头像中");
         },
         loadComplete: function() {
             console.log("照片读取完成");
             $('#clipBtn').click();
-            $.showLoading("更换头像中");
         },
         clipFinish: function(dataURL) {
             $.ajax({
@@ -93,6 +94,7 @@
                 data:JSON.stringify(dataURL),
                 success:function(data){
                     document.querySelector("#myImage").src = data.url;
+                    $("#myImage").blur();
                     $.hideLoading();
                     $.toast("更换成功");
                 }

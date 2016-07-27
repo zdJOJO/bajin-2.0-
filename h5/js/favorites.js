@@ -40,7 +40,7 @@ $(document).ready(function(){
 						if(type == 1){			//活动
 							if(data.list.length != 0){//有收藏活动的时候
 								for(var i=0,len=data.list.length;i<len;i++){
-									var str = $('<div class="activity contentStyle" data-itemid="'+data.list[i].itemId+'"><img src="imgs/notSel.png" data-collectid="'+data.list[i].collectId+'" class="sel"/><img src="'+data.list[i].thumbnail+'" class="activityPic"/><div class="detail"><h3>'+data.list[i].title+'</h3><p>'+data.list[i].about+'</p></div></div>');									
+									var str = $('<div class="activity contentStyle" data-itemid="'+data.list[i].itemId+'"><img src="imgs/notSel.png" data-collectid="'+data.list[i].collectId+'" class="sel"/><img src="'+data.list[i].thumbnail+'" class="activityPic"/><div class="detail"><h3>'+data.list[i].title+'</h3></div></div>');
 									$(".content").append(str);
 								}
 								less_q($(".activity .detail p"));

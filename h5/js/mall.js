@@ -205,11 +205,22 @@ $(document).ready(function(){
 
 	//在线支付
 	$('#payOnline').click(function () {
-		if(mallObj.currentDiscount==0){
-			$('#payOnline').css('disabled','true');
-			$.alert('当前商铺无法在线支付');
+		if(token){
+			if(mallObj.currentDiscount==0){
+				$('#payOnline').css('disabled','true');
+				$.alert('当前商铺无法在线支付');
+			}else {
+				window.location.href = 'payMall.html?mallId=' + mallObj.mallId + '&currentDiscount=' + mallObj.currentDiscount ;
+			}
 		}else {
-			window.location.href = 'payMall.html?mallId=' + mallObj.mallId + '&currentDiscount=' + mallObj.currentDiscount ;
+			$.modal({
+			    title: "支付失败",
+			    text: "请登录后再支付",
+			    buttons: [
+			        { text: "点击登录", onClick: function(){ window.location.href = "login.html?his=" + escape(his);} },
+			        { text: "确定", className: "default", onClick: function(){} },
+			    ]
+			});
 		}
 	});
 

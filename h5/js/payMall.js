@@ -35,7 +35,6 @@ mallobj.currentDiscount = window.location.search.split("&")[1].split("=")[1];
 var price1 = 0 ;
 var price2 = 0 ;
 var totalPrice = '';   //折后合计
-var userId = '';
 
 //计算价格
 var calculateDisAmountFn = function (id) {
@@ -78,7 +77,6 @@ $('#sure').click(function () {
     if(token){
         var data = {
             mallId: mallobj.mallId,
-            userId: userId,
             disPrice: price1,
             nodisPrice: price2,
             price: totalPrice
@@ -92,7 +90,7 @@ $('#sure').click(function () {
             type: 'post',
             dataType: "json",
             contentType : "application/json",
-            url: port + '/card/mallorder',
+            url: port + '/card/mallorder?token=' + token,
             data: JSON.stringify(data),
             success: function (result) {
                 $.alert('创建成功');
@@ -118,10 +116,10 @@ $('#sure').click(function () {
 });
 
 
-//获取userId
-$.get(port+"/card/user?token="+token , function (data) {
-    userId = data.userId ;
-});
+// //获取userId
+// $.get(port+"/card/user?token="+token , function (data) {
+//     userId = data.userId ;
+// });
 
 
 

@@ -41,10 +41,11 @@ div.priceBlock >.consumption>input{
     font-family: 黑体;
     font-size: 1em;
     position: absolute;
-    top: 3px;
-    right: 15px;
+    top: 7px;
+    right: 10px;
     width: 40%;
     text-align: right;
+    padding-right: 5px;
 }
 
 ::-webkit-input-placeholder { /* WebKit browsers */
@@ -68,6 +69,10 @@ div>li>span{
 
 div.unDiscount>li>span ,div.hasDiscount>li>span{
     color: #DCC680;
+}
+
+div.totalPay>li{
+    font-size: 1.1em;
 }
 
 div.totalPay>li:first-child{
@@ -103,5 +108,5 @@ footer > button{
 }
 
 input:focus{
-    outline: 2px #DCC680 solid;
+    outline: 1px #DCC680 solid;
 }

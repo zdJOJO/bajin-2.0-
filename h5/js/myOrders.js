@@ -24,7 +24,6 @@ $(document).ready(function(){
 
 
 
-	var page = 1;
 
 	// 判断 从哪里跳转此页面
 	var isDeleteAction = -1;
@@ -73,7 +72,7 @@ $(document).ready(function(){
 
 
 
-
+	var page = 1;
 
 	//对Tab进行渲染
 	var to_OrderTab = function (str,orderState) {
@@ -88,9 +87,12 @@ $(document).ready(function(){
 		//选择第二级
 		$("." + str).css("background-color", "#b7a66e").css("color", "#fff").siblings().css("background-color", "#fff").css("color", "#9f9f9f");
 
-		if(orderState >= 0){
-			getOrders(1, 10, orderState);
-		}
+		getOrders(1, 10, orderState);
+
+		$(window).unbind("scroll");    //为了防止当前列表的 滚动条 影响 另外一个页面的滚动条
+		page = 1;
+		scrollLoadOrder(orderState);
+
 	}
 
 
@@ -206,18 +208,19 @@ $(document).ready(function(){
 
 
 
-
-
 	//滚动加载 订单
-	$(window).scroll(function () {
-		var scrollTop = $(this).scrollTop();
-		var scrollHeight = $(document).height();
-		var windowHeight = $(this).height();
-		if (scrollTop + windowHeight == scrollHeight) {
-			page++;
-			getOrders(page, 10, isDeleteAction);
-		}
-	});
+	var scrollLoadOrder = function (orderState ) {
+		$(window).bind("scroll",function(){
+			var scrollTop = $(this).scrollTop();
+			var scrollHeight = $(document).height();
+			var windowHeight = $(this).height();
+			if (scrollTop + windowHeight == scrollHeight) {
+				page++;
+				getOrders(page, 10, orderState );
+			}
+		});
+	};
+
 
 
 
@@ -237,8 +240,11 @@ $(document).ready(function(){
 			orderTab = 'havePostApo';
 		}
 
-
-		$('#orderLoading').show();
+		if(currentPage == 1){
+			$('#orderLoading').css('bottom','75%').show();
+		}else {
+			$('#orderLoading').css('bottom','6px').show();
+		}
 
 		$.ajax({
 			type:"get",
@@ -253,10 +259,12 @@ $(document).ready(function(){
 
 				if(currentPage == 1 && data.list.length==0){
 					var strEmpty = '<center><img src="imgs/save_.png"/><h2>该分类里没有商品</h2><p>再去看看吧</p><p class="turnPage">再去看看</p></center>';
-					$(".container").append(strEmpty);
+					$(".container").html(strEmpty);
 					$(".container .turnPage").click(function(){
 						window.location.href = "pierre.html?good";
 					});
+					$(window).unbind('scroll');
+					$('#orderLoading').hide();
 					return;
 				}
 

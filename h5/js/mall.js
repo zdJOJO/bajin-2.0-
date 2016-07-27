@@ -8,34 +8,48 @@ $(document).ready(function(){
 	  {
 	  c_start=document.cookie.indexOf(c_name + "=")
 	  if (c_start!=-1)
-	    { 
-	    c_start=c_start + c_name.length+1 
+	    {
+	    c_start=c_start + c_name.length+1
 	    c_end=document.cookie.indexOf(";",c_start)
 	    if (c_end==-1) c_end=document.cookie.length
 	    return unescape(document.cookie.substring(c_start,c_end))
-	    } 
+	    }
 	  }
 	return undefined;
 	}
 	token = getCookie("token");//便于本地测试
 	// token = getCookie("token");
 	//获取页面的名称
-	var his = window.location.pathname.split("/");
+	var his = window.location.href.split("/");
 	his = his[his.length-1];
 	//数量选择处理
     var mallid = window.location.search.split("=")[1];
     if(/&/g.test(mallid)){
         mallid = mallid.split("&")[0];
     }
-	
+
+
+
+	var mallObj = {
+		mallId: 0,
+		currentDiscount: 0
+	};
+
+
+
+
     //获取商品http://121.196.232.233/card/goods/{goodsId}	
 	$.ajax({
 		type:"get",
-		url:port+"/card/mall/"+mallid,
+		url:port+"/card/mall/" + mallid,
 		async:true,
 		dataType:"json",
 		success:function(data){
-			console.log(data);
+
+			mallObj.mallId = data.data.mallId;
+			mallObj.currentDiscount = data.data.currentDiscount;
+
+
 			$(".primeCost span").html(data.data.title);
 			$(".currentCost span").html(data.data.address);
 			$(".stock span").html(data.data.discount);
@@ -184,4 +198,19 @@ $(document).ready(function(){
     $("#urlToDownload>div").bind("click",function(){
         $("#urlToDownload").css("display","none");
     })
+
+
+
+
+
+	//在线支付
+	$('#payOnline').click(function () {
+		if(mallObj.currentDiscount==0){
+			$('#payOnline').css('disabled','true');
+			$.alert('当前商铺无法在线支付');
+		}else {
+			window.location.href = 'payMall.html?mallId=' + mallObj.mallId + '&currentDiscount=' + mallObj.currentDiscount ;
+		}
+	});
+
 });

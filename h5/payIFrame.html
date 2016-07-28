@@ -55,6 +55,7 @@
 	iframe.src = iframeUrl;
 	var sss = window.top.document.getElementById("iframeId").contentWindow;	 
 	console.log(sss);
+
 	if (iframe.attachEvent){ 
 		  iframe.onload = function(){ 
 			  var nodeArr = sss.document.getElementsByTagName("pre");

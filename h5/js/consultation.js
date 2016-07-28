@@ -36,6 +36,15 @@ his = his[his.length-1];
 //设置为1s
 $.toast.prototype.defaults.duration = 1000;
 
+//分享时候 传当前页面的url 和 对象obj
+get_url(window.location.href);
+var shareObj = {
+    title: '',
+    desc: '',
+    link: '',
+    imgUrl: '',
+}
+
 
 
 
@@ -74,6 +83,13 @@ var collectId_hot = 0;
 //获取内容
 var getDetail = function () {
     $.get(port + '/card/consult/' + itemId + '?token=' + token,function (data) {
+
+        shareObj.title = data.title || '';
+        shareObj.desc = data.subTitle || '';
+        shareObj.link = window.location.href;
+        shareObj.imgUrl = data.pic;
+
+
         $('title').html(data.title)
         $("h3").html(data.title);
         $("header>.abstr").html(data.abstr);
@@ -229,6 +245,7 @@ $("#publishCmt").click(function () {
 //分享
 $('#collectionShare>.share').click(function () {
     $("#shareMask").show();
+    shareModular(shareObj);
 });
 $("#shareMask").click(function () {
     $("#shareMask").hide();

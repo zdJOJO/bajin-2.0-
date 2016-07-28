@@ -32,7 +32,8 @@ $(document).ready(function(){
 
 	var mallObj = {
 		mallId: 0,
-		currentDiscount: 0
+		currentDiscount: 0,
+		title: ''
 	};
 
 
@@ -48,11 +49,14 @@ $(document).ready(function(){
 
 			mallObj.mallId = data.data.mallId;
 			mallObj.currentDiscount = data.data.currentDiscount;
+			mallObj.title = data.data.title;
+
+			$('title').html(data.data.title);
 
 
 			$(".primeCost span").html(data.data.title);
 			$(".currentCost span").html(data.data.address);
-			$(".stock span").html(data.data.discount);
+			$(".stock span").html( (data.data.currentDiscount*10).toFixed(1) + '折');
 			$(".message div").html(data.data.detail);
 			$(".message div img").css({
 				"width": "100%",
@@ -61,8 +65,6 @@ $(document).ready(function(){
 			$("footer a").attr("href","tel:"+data.data.phone);
 			$(".saveAndShare").attr("data-itemid",data.data.mallId);
 			var picList = data.data.imgList;
-			// picList = JSON.parse(picList);
-			console.log(picList);
 			for(var i=0,len=picList.length;i<len;i++){
 				var str = $('<div class="swiper-slide"><img src="'+picList[i].pic+'"/></div>');
 				$(".swiper-wrapper").append(str);
@@ -85,7 +87,6 @@ $(document).ready(function(){
 			        url:port+"/card/collect/item?token="+token+"&itemId="+$(".saveAndShare").data("itemid")+"&itemType=5",
 			        dataType:"json",
 			        success:function(data){
-			       		console.log(data);
 			       		if(data.code==204){
 			       			$(".saveAndShare img.love").attr("src","imgs/iconfont-love_save.png")
 			       		}else if(data.code==205){
@@ -93,13 +94,13 @@ $(document).ready(function(){
 			       		}
 			   		},
 			   		error:function(data){
-			   			console.log(data);
+						//todo
 			   		}
 			   	});
 			}
 		},
 		error:function(data){
-			console.log(data);
+			//todo
 		}
 	});
 
@@ -120,11 +121,10 @@ $(document).ready(function(){
 		      			itemType:5,
 					}),
 					success:function(data){
-						console.log(data);
-						// alert(data.message);
+						//todo
 					},
 					error:function(data){
-						console.log(data);
+						//todo
 					}
 				});
 		    }else{
@@ -138,7 +138,6 @@ $(document).ready(function(){
 			        url:port+"/card/collect/item?token="+token+"&itemId="+$(this).parent().data("itemid")+"&itemType=5",
 			        dataType:"json",
 			        success:function(data){
-			       		console.log(data);
 			       		if(data.data.collectId==undefined){
 			       			return;
 			       		}
@@ -149,16 +148,15 @@ $(document).ready(function(){
 							contentType:"application/json;charset=UTF-8",
 				        	url:port+"/card/collect/"+data.data.collectId+"?token="+token,
 				        	success:function(data){
-								console.log(data);
 								// alert(data.message);
 				        	},
 				        	error:function(data){
-				        		console.log(data);
+								//todo
 				        	}
 				        }); 
 			        },
 			        error:function(data){
-			        	console.log(data);
+						//todo
 			        } 	
 
 		        });	        
@@ -185,7 +183,6 @@ $(document).ready(function(){
 	    type:"get",
 	    url:port+"/card/file/getImage",
 	    success:function(data){
-	        console.log(data);
 	        var str = $('<img src="'+data.data.url+'" style="width:0.88rem;height:auto;margin:0.08rem 0.06rem;"/>');
 	        $(".wrapper").append(str);
 			$(".wrapper img").css('with','100%');
@@ -210,7 +207,7 @@ $(document).ready(function(){
 				$('#payOnline').css('disabled','true');
 				$.alert('当前商铺无法在线支付');
 			}else {
-				window.location.href = 'payMall.html?mallId=' + mallObj.mallId + '&currentDiscount=' + mallObj.currentDiscount ;
+				window.location.href = 'payMall.html?mallId=' + mallObj.mallId + '&currentDiscount=' + mallObj.currentDiscount + '&title=' + mallObj.title;
 			}
 		}else {
 			$.modal({

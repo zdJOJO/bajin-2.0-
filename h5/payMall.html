@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>店铺名字</title>
+    <title></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
     <meta name="screen-orientation"content="portrait">
@@ -20,26 +20,17 @@
 
 <body>
     <div class="priceBlock hasDiscount">
-        <li>已优惠</li>
-        <li class="consumption">
-            消费
-            <input type="tel" placeholder="请输入消费金额" id="hasDisAmount_1" onkeyup="calculateDisAmountFn(this.id)">
-        </li>
-        <li>
-            应付
-            <span id="hasDisAmount_2">￥0.00</span>
-        </li>
+        <input type="tel" placeholder="请输入参加优惠的消费金额" id="hasDisAmount_1" onkeyup="calculateDisAmountFn(this.id)">
     </div>
 
-    <div class="priceBlock unDiscount">
-        <li>未优惠</li>
-        <li class="consumption">
-            消费
-            <input type="tel" placeholder="请输入消费金额" id="unDisAmount_1" onkeyup="calculateUnDisAmountFn(this.id)">
-        </li>
-        <li>
-            应付
-            <span id="unDisAmount_2">￥0.00</span>
+    <div class="priceBlock unDiscount" style="min-height: 65px;">
+        <input type="tel" placeholder="请输入未参加优惠的消费金额" id="unDisAmount_1" onkeyup="calculateUnDisAmountFn(this.id)">
+    </div>
+
+    <div class="priceBlock disTotal discount" style="min-height: 65px;">
+        <li class="disTotal">
+            折扣
+            <span id="discount">0折</span>
         </li>
     </div>
 

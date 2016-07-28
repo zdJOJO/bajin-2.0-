@@ -53,18 +53,23 @@ $(function(){
 							var cardItem = $(this).data("cardid");
 							var url = port+"/card/bank/encryption/pay/"+cardItem+"/"+applyid+"?token="+token;
 
-							if(window.location.search.split("=")[0]=="?cardid"){
+							var orderId = window.location.search.split("=")[1];
 
-
-								var orderId = window.location.search.split("=")[1];
+							if(window.location.search.split("=")[0] == "?cardid"){
 								url = port+"/card/bank/goods/pay/"+cardItem+"/"+orderId+"?token="+token;
 							}
+							if(window.location.search.split("=")[0] == "?mallOrderId"){
+								url = port+"/card/bank/mall/pay/"+cardItem+"/"+orderId+"?token="+token;
+							}
 
+							console.log(window.location.href)
+							console.log(window.location.search.split("=")[0])
+							console.log(url);
 
 							$.ajax({
 								type: "GET",
-								dataType:"text",
-								url: port+"/card/bank/goods/pay/"+cardItem+"/"+orderId+"?token="+token,
+								dataType: "text",
+								url: url,
 								success: function(data){
 									var str='<input type="hidden" id="merSignMsg" name="merSignMsg" value="'+data+'"/> '+
 										'<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/> ';

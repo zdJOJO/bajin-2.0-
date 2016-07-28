@@ -13,9 +13,9 @@ ul,li{
 
 div.priceBlock {
     color: #606060;
-    border-top: 1px #f0f0f0 solid;
-    min-height: 145px;
-    padding-left: 3%;
+    min-height: 80px;
+    padding-left: 20px;
+    position: relative;
 }
 
 div.priceBlock  > li{
@@ -34,31 +34,36 @@ div.priceBlock > li:first-child{
 }
 
 
-div.priceBlock >.consumption>input{
-    border: none;
+div.priceBlock >input{
+    border: 1px #ededed solid;
+    background: #f5f5f5;
     color: #c9c9c9;
-    height: 65%;
     font-family: 黑体;
     font-size: 1em;
+    width: 87%;
+    height: 55px;
     position: absolute;
-    top: 7px;
-    right: 10px;
-    width: 40%;
-    text-align: right;
-    padding-right: 5px;
+    top: 11px;
+    left: 20px;
+    padding-left: 20px;
 }
 
+#unDisAmount_1{
+    top: 0
+}
+
+
 ::-webkit-input-placeholder { /* WebKit browsers */
-    color: rgba(201, 201, 201, 0.5);
+    color: #DFDFDF;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: rgba(201, 201, 201, 0.5);
+    color: #DFDFDF;
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: rgba(201, 201, 201, 0.5);
+    color: #DFDFDF;
 }
 :-ms-input-placeholder { /* Internet Explorer 10+ */
-    color: rgba(201, 201, 201, 0.5);
+    color: #DFDFDF;
 }
 
 
@@ -70,6 +75,12 @@ div>li>span{
 div.unDiscount>li>span ,div.hasDiscount>li>span{
     color: #DCC680;
 }
+
+
+div.totalPay{
+    border-top: 1px #ededed solid ;
+}
+
 
 div.totalPay>li{
     font-size: 1.1em;
@@ -83,13 +94,14 @@ div.totalPay>.disTotal>span{
     color: #C9C9C9;
 }
 
-
-
-
+#discount{
+    color: #DCC680;
+}
 
 div.totalPay>.undisTotal>span{
     color: #DCC680;
 }
+
 
 
 footer{
@@ -110,3 +122,43 @@ footer > button{
 input:focus{
     outline: 1px #DCC680 solid;
 }
+
+
+
+
+@media screen and (min-width: 420px){
+    div.priceBlock >input{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 375px){
+    div.priceBlock >input{
+        width: 85%;
+    }
+}
+
+
+@media screen and (max-width: 360px){
+    div.priceBlock >input{
+        width: 84.5%;
+    }
+}
+
+@media screen and (max-width: 320px){
+    div.priceBlock >input{
+        width: 82.5%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

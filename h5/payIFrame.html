@@ -44,6 +44,14 @@
 //		iframeUrl = port + "/test/pay.html?cardid="+applyid;
 		iframeUrl =  port + "/bcard/pay.html?cardid=" + applyid;
 	}
+	if(window.location.search.split("=")[0]=="?mallOrderId"){
+//		iframeUrl = port + "/test/pay.html?mallOrderId="+applyid;
+		iframeUrl =  port + "/bcard/pay.html?mallOrderId=" + applyid;
+	}
+
+
+
+
 	iframe.src = iframeUrl;
 	var sss = window.top.document.getElementById("iframeId").contentWindow;	 
 	console.log(sss);

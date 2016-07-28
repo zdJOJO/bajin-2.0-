@@ -31,10 +31,26 @@ his = his[his.length-1];
 var mallobj = {};
 mallobj.mallId = window.location.search.split("&")[0].split("=")[1];
 mallobj.currentDiscount = window.location.search.split("&")[1].split("=")[1];
+mallobj.title =  decodeURI( window.location.search.split("&")[2].split("=")[1] );$('title').html(mallobj.title);
 
 var price1 = 0 ;
 var price2 = 0 ;
 var totalPrice = '';   //折后合计
+
+var mallOrderId = ''
+
+
+
+
+
+//计算折扣
+var calculateDis = function (disNum) {
+    var disStr = (disNum * 10).toFixed(1) + '折' ;
+    return disStr
+};
+$('#discount').html(calculateDis(mallobj.currentDiscount));
+
+
 
 //计算价格
 var calculateDisAmountFn = function (id) {
@@ -44,9 +60,7 @@ var calculateDisAmountFn = function (id) {
     if( !price1){
         price1 = 0;
     }
-    
-    $('#hasDisAmount_2').html('￥' + (price1 * mallobj.currentDiscount).toFixed(2) );
-    
+
     //合计
     $('#totalAmount_1').html('￥' + (price1 + price2).toFixed(2));
     $('#totalAmount_2').html('￥' + ( price1* mallobj.currentDiscount + price2).toFixed(2));
@@ -59,8 +73,6 @@ var calculateUnDisAmountFn = function (id) {
     if( !price2){
         price2 = 0;
     }
-
-    $('#unDisAmount_2').html('￥' + price2.toFixed(2) );
 
     //合计
     $('#totalAmount_1').html('￥' + (price1 + price2).toFixed(2));
@@ -93,7 +105,15 @@ $('#sure').click(function () {
             url: port + '/card/mallorder?token=' + token,
             data: JSON.stringify(data),
             success: function (result) {
-                $.alert('创建成功');
+                if(result.code == 201){
+                    mallOrderId = result.data.id;
+                    window.location.href = "payIFrame.html?mallOrderId=" + mallOrderId;
+                    $('#hasDisAmount_1 ,#unDisAmount_1').val('');
+                }else {
+                    $.alert('创建订单失败');
+                    return;
+                }
+
             },
             error: function () {
                 //todo
@@ -102,57 +122,16 @@ $('#sure').click(function () {
 
     }else {
         //todo
-
-        // $.modal({
-        //     title: "支付失败",
-        //     text: "请登录后再支付",
-        //     buttons: [
-        //         { text: "点击登录", onClick: function(){ window.location.href = "login.html?his=" + escape(his);} },
-        //         { text: "确定", className: "default", onClick: function(){} },
-        //     ]
-        // });
     }
 
 });
+
 
 
 // //获取userId
 // $.get(port+"/card/user?token="+token , function (data) {
 //     userId = data.userId ;
 // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -101,14 +101,14 @@ $(function(){
 
             var peopleNumberStr = ''
             if(peopleNumber ==  999999){
-                peopleNumberStr = '不限';
+                peopleNumberStr = '不限人数';
             }else {
                 peopleNumberStr = data.peopleNumber + '人';
             }
 
             var str1=$('<section class="msgBox"><div class="msg-wrap"><h1 class="msg-tit">'+data.activityTitle+'</h1><div class = "btn_q"><a href="tel:400-111-3797" class="tellNum"><img src="imgs/iconfont-kefu.png"></a>' +
                 '<span class="love-btn"><img src="imgs/iconfont-love.png"></span><span class="share-btn"><img src="imgs/iconfont-p-share.png"></span></div>' +
-                '<p class="msg-time"><span class="head">时间</span>'+new Date(data.startTime*1000).Formate()+'-'+new Date(data.endTime*1000).Formate()+'</p> ' +
+                '<p class="msg-time"><span class="head">时间</span>'+new Date(data.startTime*1000).Formate()+'-'+ new Date(data.endTime*1000).Formate()+'</p> ' +
                 '<p class="msg-address"> <span class="head">地点</span>'+data.activityAddress+'</p>' +
                 '<p class="msg-price"><span class="head">价格</span>'+actPrice+'</p>' +
                 '<p class="msg-num"><span class="head">人数</span>'+ peopleNumberStr + '</p>' +
@@ -116,7 +116,7 @@ $(function(){
 
 
             var str2 = $('<section class="content"><div class="content-text">' + data.activityDetail + '</div></section>');
-            $("#doEnrol").append('<span class="closeDate">'+'截止时间：'+ new Date(data.endTime*1000).Formate() +'</span>');
+            $("#doEnrol").append('<span class="closeDate">'+'截止时间：'+ new Date(data.applyEndTime*1000).Formate() +'</span>');
 
             if(new Date().getTime() > data.endTime*1000){
                 $("#doEnrol>button").attr({
@@ -309,7 +309,6 @@ $(function(){
 
     //发表评论
     $("#publishCmt").click(function () {
-
         if(!token){
             $.modal({
                 title: "评论失败",
@@ -335,7 +334,6 @@ $(function(){
                 });
                 return;
             }else {
-
                 $.ajax({
                     type: 'post',
                     dataType: "json",
@@ -352,6 +350,18 @@ $(function(){
                                 $("#commentContent").val('');
                                 isPublishCtm = true;
                                 getCommentList(1);
+                            });
+                        }
+                        if(result.code == 666){
+                            $.modal({
+                                title: "评论失败",
+                                text: "当前用户错误，请重新登录",
+                                buttons: [
+                                    {text: "点击登录", onClick: function(){
+                                        window.location.href = "login.html?his=" + escape(his);
+                                    }},
+                                    { text: "取消", className: "default", onClick: function(){return;} },
+                                ]
                             });
                         }
                     },

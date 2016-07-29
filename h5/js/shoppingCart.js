@@ -26,24 +26,6 @@ $(document).ready(function(){
 
 
 
-	//套路
-	
-	if(!token){
-		window.location.href = "login.html?his="+his;
-	}else {
-		//  loading 加载 插件
-		var pageNum = 0 ;
-		var str = '';
-		// dropload
-		var myDropload = $('.wrapper').dropload({
-			scrollArea : window,
-			loadDownFn : function(){
-				pageNum++;
-				getShoppingCart(pageNum)
-			}
-		});
-	}
-
 
 
 
@@ -171,7 +153,7 @@ $(document).ready(function(){
 		$(this).siblings().find(".select_all p img").attr("src","imgs/notSel.png");
 		//同时需要清除已经选中的状态
 		$(".done .cost").html("￥&nbsp;0");
-		$(".done .brandNum span").html("0");
+		$(".done .brandNum span").html("");
 		//切换的时候要清除选中的状态
 		$(".singleBrand .sel").attr("src","imgs/notSel.png");
 		$(".singleBrand .singleCost").css("display","none");
@@ -187,7 +169,7 @@ $(document).ready(function(){
 
 		$(".singleBrand .sel").attr("src","imgs/notSel.png");
 		$(".done .cost").html("￥&nbsp;0");
-		$(".done .brandNum span").html("0");
+		$(".done .brandNum span").html("");
 		$(this).siblings().find(".select_all_ p img").attr("src","imgs/notSel.png");
 		$(".singleBrand .singleCost").css("display","block");
 		$(".singleBrand .count").css("display","none");
@@ -243,7 +225,7 @@ $(document).ready(function(){
 			}
 		}
 		$(".done .cost").html("￥&nbsp;"+ cost.toFixed(2));
-		$(".done .brandNum span").html(numAll);
+		$(".done .brandNum span").html('');
 		brandList.cards = cardids;//直接添加属性的时候好像不可以直接使用[]来赋值
 		return brandList;
 	}
@@ -259,7 +241,7 @@ $(document).ready(function(){
 				skuIdStr +=  tmpArray[i] + '&&' ;
 			}
 			//cards 用于判读
-			window.location.href = "fillInOrder.html?cards&&obj="+escape(JSON.stringify(costAll()));
+			window.location.href = "fillInOrder.html?isShopCart&&cards&&obj=" + escape(JSON.stringify(costAll()));
 			// window.location.href = "fillInOrder.html?cards=" + skuIdStr ;
 		}
 
@@ -304,19 +286,52 @@ $(document).ready(function(){
 	}//删除购物车里边的东西的函数结束
 	//删除按钮事件
 	$(".delete_all").bind("click",function(){
-		console.log(costAll());
-		var obj = costAll();
-		// for(var i in obj){
-		// 	deleteDate(obj[i]);
-		// }
-		var cards = obj.cards;
-		for(var i=0,len=cards.length;i<len;i++){
-			deleteDate(cards[i]);
-		}
-		//删除成功，然后重新请求数据，再点击一下编辑按钮。
-		$(".done .edit_all").click();
+
+		$.modal({
+			title: "提示",
+			text: "确认删除所选商品？",
+			buttons: [
+				{ text: "确认", onClick: function(){
+					var obj = costAll();
+					// for(var i in obj){
+					// 	deleteDate(obj[i]);
+					// }
+					var cards = obj.cards;
+					for(var i=0,len=cards.length;i<len;i++){
+						deleteDate(cards[i]);
+					}
+					//删除成功，然后重新请求数据，再点击一下编辑按钮。
+					$(".done .edit_all").click();
+				} },
+				{ text: "取消", className: "default", onClick: function(){ console.log(3)} },
+			]
+		});
+
+
 	});//删除按钮事件结束
+
+
+	//初始化  滚动
+	if(!token){
+		window.location.href = "login.html?his="+his;
+	}else {
+		//  loading 加载 插件
+		var pageNum = 0 ;
+		var str = '';
+		// dropload
+		var myDropload = $('.wrapper').dropload({
+			scrollArea : window,
+			loadDownFn : function(){
+				pageNum++;
+				getShoppingCart(pageNum)
+			}
+		});
+	}
+
+
 })
+
+
 
 //格式化两行换行
 function less_q(text){

@@ -10,16 +10,16 @@ body{
 }
 #header{/*index页面的header部分修改*/
 	width:100%;
-/*	height: 0.17rem;
-	line-height: 0.17rem;*/
-/*	padding: 0 0.075rem 0.025rem;*/
+	/*	height: 0.17rem;
+        line-height: 0.17rem;*/
+	/*	padding: 0 0.075rem 0.025rem;*/
 	box-sizing:border-box;
 	position: fixed;
 	top:0;
-/*	font-size:20px;*/
-/*	background: rgba(255,255,255,0.3);*/
+	/*	font-size:20px;*/
+	/*	background: rgba(255,255,255,0.3);*/
 	z-index: 3;
-/*	color:#000;*/
+	/*	color:#000;*/
 }
 #header div{
 	float:left;
@@ -41,10 +41,10 @@ body{
 	text-align: center;
 	right: 0;
 }
-#header .vip img{ 
+#header .vip img{
 	/*width:70%;*/
-    margin-top: 0.012rem;
-    width: 0.12rem;
+	margin-top: 0.012rem;
+	width: 0.12rem;
 }
 
 .wrap{
@@ -82,7 +82,7 @@ hr{
 .carousel{
 	width: 100%;
 	height: 0.5rem;
-/*	position: relative;*/
+	/*	position: relative;*/
 }
 .carousel img{
 	width:100%;
@@ -132,23 +132,23 @@ hr{
 }
 .items .itemLeft{
 	padding-right: 0.01rem;
-/*	position: relative;*/
+	/*	position: relative;*/
 }
 .items .itemRight{
 	padding-left: 5px;
 }
-.items_img{ 
+.items_img{
 	/*width:100%;*/
 	width: 1rem;
-    box-sizing: border-box;	
+	box-sizing: border-box;
 	padding-bottom: 0.01rem;
 	clear: left;
 	margin-bottom: -0.101rem;
-/*	position: relative;*/
+	/*	position: relative;*/
 
 }
 
-.items_img img{ 
+.items_img img{
 	/*width:100%;*/
 	height: 0.533rem;
 	width: 1rem;
@@ -181,7 +181,7 @@ hr{
 footer{
 	width: 1rem;
 	height: 0.12rem;
-	background-color:#f0f0f0; 
+	background-color:#f0f0f0;
 	position: fixed;
 	bottom: 0;
 	z-index: 2500;
@@ -200,10 +200,10 @@ footer div img{
 	margin-top: 0.015rem;
 }
 footer div p{
-    -webkit-margin-before: 0;
-    -webkit-margin-after: 0;
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
 	margin-top: 4px;
-    font-size: 9px;
+	font-size: 9px;
 }
 .indexPage{
 	background: #2e3133;
@@ -214,7 +214,7 @@ footer div p{
 
 /*header,.wrapper,footer{
 	font-size: 16px;
-	background-color:#fff; 
+	background-color:#fff;
 }*/
 
 
@@ -222,9 +222,9 @@ footer div p{
 .mask_lhq{
 	position: relative;
 	z-index: 999;
-	top: -0.145rem;	
+	top: -0.145rem;
 	text-align: center;
-    height: 0.1rem;	
+	height: 0.1rem;
 }
 .items1 .mask_lhq{
 	visibility: hidden;
@@ -235,18 +235,20 @@ footer div p{
 	width: 0.4rem;
 	margin-left: 0.05rem;
 	white-space: nowrap;
-     overflow: hidden; 
-    text-overflow: ellipsis;
-    /*margin-top: 0.03rem;*/
+	overflow: hidden;
+	text-overflow: ellipsis;
+	/*margin-top: 0.03rem;*/
 	color: #fff;
 }
 .mask_lq p:first-child{
 	font-size: 18px;
 	color: #000;
 	white-space: nowrap;
-     overflow: hidden; 
-    text-overflow: ellipsis;
-    line-height: 30px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: 30px;
+	margin-top: 10px;
+	text-align: center;
 }
 .mask_lhq p:last-child{
 	color: #fff;
@@ -255,21 +257,25 @@ footer div p{
 	width: 0.4rem;
 	margin-left: 0.05rem;
 	white-space: nowrap;
-     overflow: hidden; 
-    text-overflow: ellipsis;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .mask_lq p:last-child{
+	height: 57%;
 	color: #666;
 	font-size: 14px;
-	margin-top: 8px;
+	margin: 8px 0 0 18px;
+	word-break: break-all;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .mask_lq{
 	position: relative;
 	z-index: 999;
-/*    height: 36px;*/
-    top: 0.05rem;
-    height:0.1rem;
-    margin-left: 20px;
+	/*    height: 36px;*/
+	top: 0.05rem;
+	height:0.1rem;
+	margin-left: 20px;
 }
 /*更改图片产生的样式问题*/
 #moreAct div{
@@ -279,13 +285,13 @@ footer div p{
 /*banner图上的文字*/
 .carousel .mask_banner{
 	position: absolute;
-    z-index: 2;
-    bottom: 32px;
-    width: 100%;
-    text-align: center;
-    font-size: 20px;
-    color: #fff;
-    display: none;
+	z-index: 2;
+	bottom: 32px;
+	width: 100%;
+	text-align: center;
+	font-size: 20px;
+	color: #fff;
+	display: none;
 }
 .carousel img{
 	position: absolute;
@@ -317,19 +323,56 @@ footer div p{
 }
 
 section.items>div:last-child .mask_lq{
-    width: 0.8rem;
+	width: 0.92rem;
 	height: 0.3rem;
 	border: 1px #D1D1CE solid;
-    margin-left: -0.4rem;
+	margin-left: -0.46rem;
 	position: absolute;
 	left: 50%;
 	top: 80%;
 	background: #fff;
 }
 
-section.items1>div:last-child .mask_lq{
-    margin-bottom: -0.1rem;
+section.items>div:last-child .mask_lq>.tit_bq1_detail{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-family: 黑体;
+	font-size: 0.9em;
+	height: 64%;
+	width: 90%;
+	margin: auto;
+	color: #7a7a7a;
 }
+
+section.items>div:last-child .mask_lq>.tit_bq1_detail p:first-child{
+	height: 0;
+}
+
+section.items>div:last-child .mask_lq>.tit_bq1_detail p span{
+	color: #7a7a7a !important;
+}
+
+
+section.items1>div:last-child .mask_lq{
+	margin-bottom: -0.1rem;
+}
+
+
+section.items1>div:last-child .mask_lq>.tit_bq1:last-child{
+
+}
+
+
+
+
+
+
+
+
+
+
+
 .mask_lq img{
 	display: none;
 }
@@ -349,7 +392,7 @@ section.items1>div:last-child .mask_lq{
 	text-align: center;
 	padding: 0.02rem;
 	letter-spacing: 0.004rem;
-	
+
 }
 #tit_ck{
 	text-align: center;
@@ -397,7 +440,7 @@ section.items1>div:last-child .mask_lq{
 .user_But{
 	text-align: center;
 	position: relative;
-	top:0.12rem; 
+	top:0.12rem;
 	font-size: 18px;
 	color: #cdcecf;
 	letter-spacing:0.005rem
@@ -420,12 +463,12 @@ section.items1>div:last-child .mask_lq{
 .left_nav ul li span img{
 	width: 7%;
 	position: relative;
-    top: -0.004rem;
+	top: -0.004rem;
 }
 .active_new img{
 	width: 5.5% !important;
 	margin-left: 0.01rem;
-	margin-right:0.007rem; 
+	margin-right:0.007rem;
 }
 .active img{
 	width: 4.5% !important;
@@ -433,8 +476,8 @@ section.items1>div:last-child .mask_lq{
 }
 .active_bank img{
 	width: 5.5% !important;
-    margin-left: 0.005rem;
-    margin-right: 0.01rem;
+	margin-left: 0.005rem;
+	margin-right: 0.01rem;
 }
 .active span{
 	margin-right: 0.06rem !important;
@@ -455,7 +498,7 @@ section.items1>div:last-child .mask_lq{
 .feed_But img,.set_But img{
 	width: 15%;
 	position: relative;
-    top: -0.004rem;
+	top: -0.004rem;
 }
 
 .set_But{
@@ -468,7 +511,7 @@ section.items1>div:last-child .mask_lq{
 	background: #343839;
 	display: block;
 	position: absolute;
-    bottom: 0;
+	bottom: 0;
 }
 .icbc_But img{
 	margin-top: 0.03rem;
@@ -490,18 +533,18 @@ section.items1>div:last-child .mask_lq{
 	position: fixed;
 	z-index: 2500;
 	display: none;
-/*	background:#fff;*/
+	/*	background:#fff;*/
 }
 .order_tj{
 	width: 0.06rem;
-    height: 0.04rem;
-    line-height: 0.04rem;
-    background: #b6a66d;
-    border: none;
-    border-radius: 2px;
-    margin-left: 0.20rem;
-    color: #fff;
-    text-align: center;
+	height: 0.04rem;
+	line-height: 0.04rem;
+	background: #b6a66d;
+	border: none;
+	border-radius: 2px;
+	margin-left: 0.20rem;
+	color: #fff;
+	text-align: center;
 }
 /*.showDiv1{
 	position:fixed;

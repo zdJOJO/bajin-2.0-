@@ -110,27 +110,27 @@ header >div>hr.active{
 	right: -39%;
 }
 /*.infoItem:nth-child(odd) .tit-content{*/
-	/*width:80%;*/
-	/*height:0.21rem;*/
-	/*line-height:0.07rem;*/
-	/*text-align: center;*/
-	/*color: #ffffff;*/
-	/*margin: auto;*/
-	/*position: absolute;*/
-	/*top: 0;*/
-	/*left: 0;*/
-	/*bottom: 0;*/
-	/*right: 0;*/
+/*width:80%;*/
+/*height:0.21rem;*/
+/*line-height:0.07rem;*/
+/*text-align: center;*/
+/*color: #ffffff;*/
+/*margin: auto;*/
+/*position: absolute;*/
+/*top: 0;*/
+/*left: 0;*/
+/*bottom: 0;*/
+/*right: 0;*/
 /*}*/
 /*.infoItem:nth-child(even) .tit-content{*/
-	/*width:0.44rem;*/
+/*width:0.44rem;*/
 /*!*	height:0.25rem;*!*/
-	/*margin: 0 0.03rem;*/
-	/*position: absolute;*/
-	/*top: 0;*/
-	/*left: 0;*/
-	/*bottom: 0;*/
-	/*right: 0;*/
+/*margin: 0 0.03rem;*/
+/*position: absolute;*/
+/*top: 0;*/
+/*left: 0;*/
+/*bottom: 0;*/
+/*right: 0;*/
 /*}*/
 .infoItem h1{
 	white-space: nowrap;
@@ -198,7 +198,7 @@ header >div>hr.active{
 footer{
 	width: 1rem;
 	height: 0.12rem;
-	background-color:#f0f0f0; 
+	background-color:#f0f0f0;
 	position: fixed;
 	bottom: 0;
 	z-index: 2500;
@@ -217,9 +217,9 @@ footer div img{
 	margin-top: 0.015rem;
 }
 footer div p{
-    -webkit-margin-before: 0;
-    -webkit-margin-after: 0;
-    font-size: 9px;
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
+	font-size: 9px;
 	margin-top: 4px;
 }
 .clubPage{
@@ -232,13 +232,13 @@ footer div p{
 	height: 20px;
 	line-height: 20px;
 	/*word-break: break-all;*/
-    /*overflow: hidden;*/
-    /*text-overflow: ellipsis;*/
-    /*white-space: nowrap;*/
+	/*overflow: hidden;*/
+	/*text-overflow: ellipsis;*/
+	/*white-space: nowrap;*/
 }
 @media screen and (min-height:737px){
 	.infoItem:nth-child(even) .tit-content{
-	    margin: 0 0.03rem;	
+		margin: 0 0.03rem;
 	}
 	.tit-content .detile{
 		margin:0.16rem 0 0.020rem 0;
@@ -255,13 +255,13 @@ footer div p{
 	.infoItem .jump-img{
 		width: 0.06rem;
 	}
-	.infoItem h1{ 
-    white-space: nowrap;
-    /*overflow: hidden;*/
-    text-overflow: ellipsis;
-    margin-top: 0.03rem;
-    font-size: 18px;	
-}
+	.infoItem h1{
+		white-space: nowrap;
+		/*overflow: hidden;*/
+		text-overflow: ellipsis;
+		margin-top: 0.03rem;
+		font-size: 18px;
+	}
 }
 
 /*调整文字靠左的样式*/
@@ -297,6 +297,10 @@ footer div p{
 	position: absolute;
 	top: 3.5%;
 	left: 3%;
+	width: 95%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 #consultationList>.hotList>.singleHot>.creatTime{
@@ -341,7 +345,7 @@ footer div p{
 }
 
 /*.hotList >.lists:last-child{*/
-	/*margin-bottom: 0;*/
+/*margin-bottom: 0;*/
 /*}*/
 
 .hotList >.lists >.hotItem h1{

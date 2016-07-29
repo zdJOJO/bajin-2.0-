@@ -286,11 +286,29 @@ header>.edit_all , header>.edit_{
 header>.edit_{
 	position: absolute;
 	right: 13px;
-	top: -7px;
+	top: 8px;
 	display: none;
 }
 
 
+
+
+@media screen and (max-width: 320px){
+	.wrapper .singleBrand .detail p.subtitle{
+		height: 23px;
+	}
+
+	.wrapper .singleBrand .detail h3{
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		font-size: 1em;
+	}
+
+	footer div.delete_all{
+		left: 231px;
+	}
+}
 
 
 

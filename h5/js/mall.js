@@ -56,7 +56,7 @@ $(document).ready(function(){
 
 			$(".primeCost span").html(data.data.title);
 			$(".currentCost span").html(data.data.address);
-			$(".stock span").html( (data.data.currentDiscount*10).toFixed(1) + '折');
+			$(".stock span").html( (data.data.discount) + '折');
 			$(".message div").html(data.data.detail);
 			$(".message div img").css({
 				"width": "100%",

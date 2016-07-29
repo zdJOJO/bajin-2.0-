@@ -192,12 +192,13 @@ footer .delete_hadPaid{
 }
 
 .cost_unpaid{
-	color:#c1af74;
+	color: #c1af74;
+	background: #FAFAFA;
 	font-size: 16px;
 	position: fixed;
 	bottom: 0.12rem;
 	height: 0.12rem;
-	width: 0.7rem;
+	width: 100%;
 	line-height: 0.12rem;
 	right: 0;
 }

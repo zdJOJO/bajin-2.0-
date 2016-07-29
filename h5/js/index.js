@@ -145,6 +145,12 @@ $(document).ready(function(){
 			moreCheck=true;
 		}
 	});
+
+
+
+
+
+	var bannerUrl = '';
 	//轮播图页面部分
 	//http://121.196.232.233:9292/card/banner
 	var bannerWrap=$('.swiper-slide');
@@ -160,6 +166,9 @@ $(document).ready(function(){
 				var content_ = $('<div class="swiper-container"><div class="swiper-wrapper"></div><div class="swiper-pagination"></div></div>');
 	            $(".carousel").append(content_);
 				for(var i=0;i<arr.length;i++){
+					if(arr[i].bannerUrl){
+						bannerUrl = arr[i].bannerUrl;
+					}
 					var str=$('<div class="swiper-slide"><p class="mask_banner">'+arr[i].bannerTitle+'</p><img src="'+arr[i].bannerPic+'" data-id="'+arr[i].bannerId+'" data-type="'+arr[i].type+'" data-itemId="'+arr[i].itemId+'" data-url="'+arr[i].bannerUrl+'" class="swiper-slide_img"/></div>');
 					$(".swiper-wrapper").append(str);
 				}
@@ -200,9 +209,7 @@ $(document).ready(function(){
 			            // return;
 						if(token != undefined){
 							//调到抽奖中间页
-							window.location.href="lottery_rule.html?lottery=lottery";
-							// window.location.href = "fareDraw.html?token="+token;
-							// window.location.href = "lottery.html?itemId="+$(this).data("itemid");
+							window.location.href = bannerUrl;
 						}else{
 							window.location.href = "login.html?his=" + his;
 						}
@@ -226,8 +233,9 @@ $(document).ready(function(){
 				if(i ==0||i==1){
 				var item=$('<div class="itemLeft" ><img src='+data[i].minPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/><div class = "mask_lhq"><p class="tit_tq">'+data[i].title+'</p><p class="tit_bq">'+data[i].subtitle+'</p></div></div>');				
 				}else if(i==2){
-				var item=$('<div class="items_img" ><img src='+data[i].maxPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/><div class = "mask_lq"><p class="tit_tq1">'+data[i].title+'</p>' +
-					'<div class="tit_bq1">'+data[i].detail+'</div></div>');
+				var item=$('<div class="items_img" >' +
+					'<img src='+data[i].maxPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/>' +
+					'<div class = "mask_lq"><p class="tit_tq1">'+data[i].title+'</p>' + '<div class="tit_bq1_detail">'+data[i].detail+'</div></div>');
 				}
 				itemWrap.append(item)
 			}			

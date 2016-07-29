@@ -1,6 +1,7 @@
 
 
-$(document).ready(function(){	
+$(document).ready(function(){
+
 	//获取token
 	var token = "";
 	//获取存在于cookie中的token值
@@ -23,6 +24,8 @@ $(document).ready(function(){
 	//获取页面的名称
 	var hrefStr = window.location.search;
 	var cardid = hrefStr.split("=")[1];
+
+	var goodId = hrefStr.split("=")[2];   //goodId
 
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];
@@ -49,7 +52,7 @@ $(document).ready(function(){
 
 	var appid =  '';
 	var nonceStr = '';
-	var  package = '';
+	var package = '';
 	var myDate = new Date();
 	var timeStamp = '';
 	var stringA ='' ;
@@ -66,12 +69,20 @@ $(document).ready(function(){
 			var str= "";
 			var num = 1;
 
+			if(!data){
+				window.location.href = 'index.html'
+			}
+
 			for(var i=0;i<data.detailOrderModels.length;i++){
 				str += '<div class="goodBox" data-goodId="'+ data.detailOrderModels[i].goodsId +'"><img src="'+ data.detailOrderModels[i].hotPic+'"/><div>' +
 					'<div class="title">'+data.detailOrderModels[i].goodsTitle+'</div>' +
 					'<div class="subtitle">'+data.detailOrderModels[i].skuGague+'</div>' +
 					'<div class="cost"><p>￥&nbsp;'+formatePrice(data.detailOrderModels[i].skuPrice.toFixed(2))+'</p>' +
 					'<p>×'+ data.detailOrderModels[i].count+'</p></div></div></div>';
+			}
+
+			if(window.location.href.indexOf('brandDetail') > 0 ){
+				goodId = data.detailOrderModels[0].goodsId;
 			}
 			
 			//插入商品信息
@@ -158,7 +169,9 @@ $(document).ready(function(){
 				success:function(data){
 					$.toast("取消订单成功", function() {
 						if(window.location.search.indexOf('brandDetail') > 0){
-							window.location.href = "brandDetail.html";
+							window.location.href = "brandDetail.html?id=" + goodId;
+						}else if(window.location.search.indexOf('isShopCart') > 0){
+							window.location.href = "shoppingCart.html";
 						}else {
 							window.location.href = "myOrders.html?" + tabStr;   //waittingForApo
 						}

@@ -69,6 +69,13 @@ if(window.location.search.indexOf('icbc') > 0 ){
 }
 
 var itemId = window.location.href.split("=")[1];
+//分享时候，为新手机打开会在URL后面多一串字符串，
+//比如： test.winthen.com/bcard/consultation.html?id=18&from=groupmessage&isappinstalled=0
+if(itemId.indexOf("&") > 0){
+    itemId = itemId.split("&")[0];
+}
+
+
 var pageNum = 1;
 var commentStr = '';
 
@@ -96,6 +103,17 @@ var getDetail = function () {
         $("header>.time").html( new Date(data.createTime*1000).Formate());
         $("article>.content").html(data.content).append('<span class="readNum">阅读量：' + data.viewNum + '</span>');
         isCollected();
+
+        //如果在真实环境
+        if(port.indexOf('bcard') == -1){
+            var imgs = $('.content img');
+            for(var i = 0 ; i < imgs.length ; i ++){
+                if(imgs[i].src.indexOf('wx_fmt=jpeg') != -1);
+                var tmpSrc = imgs[i].src.split('?')[0];
+                imgs[i].src = tmpSrc;
+            }
+        }
+
     });
 }
 
@@ -231,6 +249,18 @@ $("#publishCmt").click(function () {
                             getCommentList(1);
                         });
                     }
+                    if(result.code == 666){
+                        $.modal({
+                            title: "评论失败",
+                            text: "当前用户错误，请重新登录",
+                            buttons: [
+                                {text: "点击登录", onClick: function(){
+                                    window.location.href = "login.html?his=" + escape(his);
+                                }},
+                                { text: "取消", className: "default", onClick: function(){return;} },
+                            ]
+                        });
+                    }
                 },
                 error: function () {
                     $.toast("发表评论失败", "cancel");
@@ -244,6 +274,7 @@ $("#publishCmt").click(function () {
 
 //分享
 $('#collectionShare>.share').click(function () {
+    
     $("#shareMask").show();
     shareModular(shareObj);
 });

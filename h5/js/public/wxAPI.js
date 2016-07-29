@@ -2,9 +2,10 @@
  * Created by Administrator on 2016/7/28.
  */
 
+
 //获取微信开放平台 access_token
 var get_access_token = function () {
-    $.get('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx468e08e2cd5f415a&secret=a407aca5a7534f11055f8e33d93b6b50',function () {
+    $.get('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx886a1d1acb7084a5&secret=e675357016644dfeabce5f7ccec7f1fb',function () {
         var access_token = result.ACCESS_TOKEN;
         return access_token;
     })
@@ -61,7 +62,7 @@ var signature = hex_sha1(get_string1(jsapi_ticket,nonceStr,timestamp,url));
 
 wx.config({
     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-    appId: 'wx468e08e2cd5f415a', // 必填，公众号的唯一标识
+    appId: 'wx886a1d1acb7084a5', // 必填，公众号的唯一标识
     timestamp: timestamp,// 必填，生成签名的时间戳
     nonceStr: nonceStr, // 必填，生成签名的随机串
     signature: signature, // 必填，签名，见附录1
@@ -87,7 +88,6 @@ var shareModular = function (shareObj) {
                 // 用户取消分享后执行的回调函数
             }
         });
-
 
         wx.onMenuShareAppMessage({
             title: '', // 分享标题

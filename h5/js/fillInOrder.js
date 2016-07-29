@@ -203,20 +203,30 @@ $(document).ready(function(){
 	//这里处理确认订单按钮的事件，区分添加的来源
 	$("footer p").bind("click",function(){
 		if(obj.cost!=undefined){			//直接购买的地方
+
+			var data = {
+				receiveId: $("footer p").data("id"), // 收货地址
+				skuId: obj.skuId, // 商品SKUID
+				num: obj.num // 购买数量
+			}
+
+
+			if(!data.receiveId || !data.skuId || !data.num){
+				alert('订单生成失败！ 请重新下订单');
+				return;
+			}
+
 			$.ajax({
 				type:"post",
 				async:true,
 				url:port+"/card/order/now?token="+token,
 				dataType:"json",
 				contentType:"application/json;charset=UTF-8",
-				data:JSON.stringify({
-					receiveId:$("footer p").data("id"), // 收货地址
-					skuId:obj.skuId, // 商品SKUID
-					num:obj.num // 购买数量
-				}),
+				data:JSON.stringify(data),
 				success:function(data){
+
 					if(window.location.search.indexOf('brandDetail')> 0){
-						window.location.href = "unpaid.html?brandDetail&&cardid=" + data.data.orderModel.orderId;
+						window.location.href = "unpaid.html?brandDetail&&cardid=" + data.data.orderModel.orderId ;
 					}else {
 						window.location.href = "unpaid.html?cardid=" + data.data.orderModel.orderId;
 					}
@@ -238,9 +248,7 @@ $(document).ready(function(){
 					carIds:cards // 购物车ID列表
 				}),
 				success:function(data){
-					window.location.href="unpaid.html?cardid="+data.data.orderModel.orderId;
-
-					// 这里到去支付
+					window.location.href = "unpaid.html?isShopCart&&cardid=" + data.data.orderModel.orderId;
 				},
 				error:function(data){
 					console.log(data);

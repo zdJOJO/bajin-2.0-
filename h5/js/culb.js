@@ -158,7 +158,7 @@ $(function(){
                            '<h1>'+data.list[i].activityTitle+'</h1>' +
                            '<div class="detile">' +
                            '<p >'+data.list[i].activitySubtitle+'</p></div>' +
-                           '<p style="font-size:13px;  position: absolute;top: 82%;left: 13px;">'+ new Date(data.list[i].createTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
+                           '<p style="font-size:13px;  position: absolute;top: 82%;left: 13px;">'+ new Date(data.list[i].startTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
                            '</p></div></div></div>';
                    }else {
                        actStr += '<div class="infoItem hotItem" data-type="'+data.list[i].type+'" data-i="'+ data.list[i].id+'" style="background: url('+data.list[i].minPic+') no-repeat #f7f7f7; background-size:39% 100%;">' +
@@ -287,7 +287,7 @@ $(function(){
                 obj.htmlStr = 'life.html';
                 break;
             case "3":
-                obj.htmlStr = 'bradDetail.html';
+                obj.htmlStr = 'brandDetail.html';
                 break;
             case "4":
                 obj.htmlStr = '';

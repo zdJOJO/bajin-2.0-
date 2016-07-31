@@ -72,7 +72,7 @@
 
     <div class="specifications">
         <h4>规格</h4>
-        <ul class="speList"></ul>
+        <ul class="speList" id="speList"></ul>
     </div>
 
     <div class="num">
@@ -91,16 +91,35 @@
     </div>
 
 </div>
-
-
-
-
 </body>
-
-
 <script src="js/zepto.js"></script>
 <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
 <script src="js/swiper.min.js"></script>
 <script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
 <script type="text/javascript" src="js/brandDetail.js"></script>
+
+<script type="text/javascript">
+    $.fn.extend({
+        "preventScroll":function(){
+            $(this).each(function(){
+                var _this = this;
+                if(navigator.userAgent.indexOf('Firefox') >= 0){   //firefox
+                    _this.addEventListener('DOMMouseScroll',function(e){
+                        _this.scrollTop += e.detail > 0 ? 60 : -60;
+                        e.preventDefault();
+                    },false);
+                }else{
+                    _this.onmousewheel = function(e){
+                        e = e || window.event;
+                        _this.scrollTop += e.wheelDelta > 0 ? -60 : 60;
+                        return false;
+                    };
+                }
+            })
+        }
+    });
+    $("#speList").preventScroll();
+</script>
+
+
 </html>

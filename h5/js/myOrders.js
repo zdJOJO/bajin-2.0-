@@ -91,7 +91,11 @@ $(document).ready(function(){
 
 		$(window).unbind("scroll");    //为了防止当前列表的 滚动条 影响 另外一个页面的滚动条
 		page = 1;
-		scrollLoadOrder(orderState);
+		try {
+			scrollLoadOrder(orderState);
+		} catch (e) {
+			//todo
+		}
 
 	}
 

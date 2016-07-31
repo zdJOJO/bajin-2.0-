@@ -401,6 +401,9 @@ footer{
 
 #goodDetail>.specifications>.speList{
 	margin: 5px 0 0 28px;
+	display: block;
+	height: 110px;
+	overflow-y: scroll;
 }
 
 #goodDetail>.specifications>.speList li{

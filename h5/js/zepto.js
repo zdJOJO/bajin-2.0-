@@ -47,7 +47,7 @@ var typeJudge = function (type) {
 			typeStr = '活动';
 			break;
 		case 2:
-			typeStr = '白金人生';
+			typeStr = '人物';
 			break;
 		case 3:
 			typeStr = '商品';
@@ -65,7 +65,7 @@ var typeJudge = function (type) {
 			typeStr = '资讯';
 			break;
 		case 8:
-			typeStr = '工会服务';
+			typeStr = '工行服务';
 			break;
 		case 9:
 			typeStr = '热点';

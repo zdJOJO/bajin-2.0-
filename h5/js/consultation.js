@@ -42,31 +42,13 @@ var shareObj = {
     title: '',
     desc: '',
     link: '',
-    imgUrl: '',
+    imgUrl: ''
 }
 
 
 
 
-//  咨询/工行服务/热点    id是唯一的,根据type区别  三个模块判断
-
-var isIcbc = false;
-var isHot = false;
-var type = -1;
-
-if(window.location.search.indexOf('icbc') > 0 ){
-    isIcbc = true ;
-    isHot = false;
-    type = 8;
-}else if(window.location.search.indexOf('hot') > 0) {
-    isIcbc = false;
-    isHot = true;
-    type = 9;
-}else {
-    isIcbc = false;
-    isHot = false;
-    type = 7;
-}
+//  咨询/工行服务/热点    id是唯一的,根据type区别 三个模块判断
 
 var itemId = window.location.href.split("=")[1];
 //分享时候，为新手机打开会在URL后面多一串字符串，
@@ -74,15 +56,14 @@ var itemId = window.location.href.split("=")[1];
 if(itemId.indexOf("&") > 0){
     itemId = itemId.split("&")[0];
 }
+var typeNum = -1;
 
 
 var pageNum = 1;
 var commentStr = '';
 
-
+// 分享的id  唯一
 var collectId = 0;
-var collectId_icbc = 0;
-var collectId_hot = 0;
 
 
 
@@ -96,13 +77,16 @@ var getDetail = function () {
         shareObj.link = window.location.href;
         shareObj.imgUrl = data.pic;
 
+        typeNum = data.type;
 
         $('title').html(data.title)
         $("h3").html(data.title);
         $("header>.abstr").html(data.abstr);
         $("header>.time").html( new Date(data.createTime*1000).Formate());
         $("article>.content").html(data.content).append('<span class="readNum">阅读量：' + data.viewNum + '</span>');
-        isCollected();
+        isCollected(typeNum);
+        getCommentList(1);
+
 
         //如果在真实环境
         if(port.indexOf('bcard') == -1){
@@ -124,23 +108,14 @@ getDetail();
 
 
 //判断是否已被收藏
-var isCollected = function () {
-    var typeNum =  isHot ? 9 : ( isIcbc ? 8 : 7 );
-    var url =  port + '/card/collect/item?token=' + token + '&itemId=' + itemId + '&itemType=' + typeNum;
+var isCollected = function (type) {
+    var url =  port + '/card/collect/item?token=' + token + '&itemId=' + itemId + '&itemType=' + type;
     $.get( url,function (result) {
         if(result.code == 204){
-            if(isIcbc){
-                collectId_icbc = result.data.collectId;
-            }else if(isHot){
-                collectId_hot = result.data.collectId;
-            }else {
-                collectId = result.data.collectId;
-            }
+            collectId = result.data.collectId;
             $('#collectionShare>.love').attr('src','imgs/iconfont-love_save.png');
         }else {
             collectId = 0;
-            collectId_icbc = 0;
-            collectId_hot = 0 ;
             $('#collectionShare>.love').attr('src','imgs/iconfont-love.png');
         }
     });
@@ -162,7 +137,6 @@ var getCommentList = function (page) {
 
     commentStr = '' ;
 
-    var typeNum = isHot ? 9 : ( isIcbc ? 8 : 7 ) ;
     var url = port + '/card/comment/list?currentPage=' + page + '&type=' + typeNum + '&itemId=' + itemId ;
     $.get(url ,function (data) {
         $("article>.comments>.totalNum").html('共' + data.rowCount + '条评论');
@@ -190,7 +164,6 @@ var getCommentList = function (page) {
     });
 };
 
-getCommentList(1);
 
 
 
@@ -236,7 +209,7 @@ $("#publishCmt").click(function () {
                 contentType : "application/json",
                 url: port + '/card/comment?token=' + token ,
                 data: JSON.stringify({
-                    itemType: isHot ? 9 : ( isIcbc ? 8 : 7 ),
+                    itemType: typeNum,
                     itemId: itemId,
                     commentContent: $("#commentContent").val()
                 }),
@@ -288,28 +261,12 @@ $("#shareMask").click(function () {
 //收藏(添加/删除)   //   card/collect/{collectId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
 $('#collectionShare>.love').click(function () {
     if(token){
-        var ajaxTypeStr = (collectId>0 || collectId_icbc > 0 || collectId_hot) ? 'delete' : 'post' ;
-        var url = '';
-        var data = '';
-        if(isHot){
-             url = collectId_hot>0 ? port + '/card/collect/' +  collectId_hot + '?token=' + token : port + '/card/collect?token=' + token  ;
-             data = collectId_hot>0  ? '' : JSON.stringify({
-                itemType: 9,
-                itemId: itemId
-            }) ;
-        }else if(isIcbc){
-            url = collectId_icbc>0 ? port + '/card/collect/' +  collectId_icbc + '?token=' + token : port + '/card/collect?token=' + token  ;
-            data = collectId_icbc>0  ? '' : JSON.stringify({
-                itemType: 8,
-                itemId: itemId
-            }) ;
-        }else {
-            url = collectId>0 ? port + '/card/collect/' +  collectId + '?token=' + token : port + '/card/collect?token=' + token  ;
-            data = collectId>0  ? '' : JSON.stringify({
-                itemType: 7,
-                itemId: itemId
-            }) ;
-        }
+        var ajaxTypeStr = collectId>0 ? 'delete' : 'post' ;
+        var url = collectId>0 ? port + '/card/collect/' +  collectId + '?token=' + token : port + '/card/collect?token=' + token  ;
+        var data = collectId>0 ? '' : JSON.stringify({
+            itemType: typeNum,
+            itemId: itemId
+        });
 
         $.ajax({
             type: ajaxTypeStr,

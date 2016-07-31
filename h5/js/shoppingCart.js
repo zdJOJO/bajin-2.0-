@@ -46,7 +46,7 @@ $(document).ready(function(){
 						for(var i=0,len = data.list.length;i<len;i++){
 							str += '<div class="singleBrand"><img src="imgs/notSel.png" class="sel" data-cardid = "'+data.list[i].carModel.id+
 								'" data-cost="'+data.list[i].skuModel.skuPrice+'"/><img src="'+
-								data.list[i].goodsModel.maxPic+'" class="activityPic" data-id="'+
+								data.list[i].goodsModel.hotPic+'" class="activityPic" data-id="'+
 								data.list[i].carModel.goodsId+'"/><div class="detail" data-id="'+
 								data.list[i].carModel.goodsId+'"><h3>'+
 								data.list[i].goodsModel.goodsTitle+'</h3><p class="subtitle">'+
@@ -241,8 +241,11 @@ $(document).ready(function(){
 				skuIdStr +=  tmpArray[i] + '&&' ;
 			}
 			//cards 用于判读
-			window.location.href = "fillInOrder.html?isShopCart&&cards&&obj=" + escape(JSON.stringify(costAll()));
-			// window.location.href = "fillInOrder.html?cards=" + skuIdStr ;
+			if(tmpArray.length > 0){
+				window.location.href = "fillInOrder.html?isShopCart&&cards&&obj=" + escape(JSON.stringify(costAll()));
+			}else {
+				alert('请选择商品');
+			}
 		}
 
 

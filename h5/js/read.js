@@ -64,7 +64,7 @@ $(function(){
 
     //发送请求，请求嵌入页面的url
     function toActivity(classStr,id){
-        window.location.href = classStr.indexOf('life')>=0 ? "life.html?id=" + id : "consultation.html?hot&&id=" + id;
+        window.location.href = classStr.indexOf('life')>=0 ? "life.html?id=" + id : "consultation.html?id=" + id;
     }
 
 

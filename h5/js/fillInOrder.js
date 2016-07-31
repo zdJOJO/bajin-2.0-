@@ -174,6 +174,8 @@ $(document).ready(function(){
 	
 	var cards = obj.cards;
 	console.log(cards);
+
+
 	//获取购物车物品，根据id来显示出物品
 	if(cards != undefined){
 		$.ajax({
@@ -189,7 +191,7 @@ $(document).ready(function(){
 						if(data.list[i].carModel.id==cards[j]){
 							console.log(data.list[i].carModel.id);
 							console.log(cards[j]);
-							var str=$('<div class="singleBrand"><img src="'+data.list[i].goodsModel.maxPic+'" class="activityPic"/><div class="detail"><h3>'+data.list[i].goodsModel.goodsTitle+'</h3><p class="subtitle">'+data.list[i].goodsModel.goodsSubtitle+'</p><p class="singleCost">￥&nbsp;'+data.list[i].carModel.price+'<span class="num">×'+data.list[i].carModel.num+'</span></p></div></div>');
+							var str=$('<div class="singleBrand"><img src="'+data.list[i].goodsModel.hotPic+'" class="activityPic"/><div class="detail"><h3>'+data.list[i].goodsModel.goodsTitle+'</h3><p class="subtitle">'+data.list[i].goodsModel.goodsSubtitle+'</p><p class="singleCost">￥&nbsp;'+data.list[i].carModel.price+'<span class="num">×'+data.list[i].carModel.num+'</span></p></div></div>');
 							$(".good").append(str);
 						}
 					}

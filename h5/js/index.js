@@ -111,6 +111,7 @@ $(document).ready(function(){
 			window.location.href = "changePassword.html";
 		}
 	});
+	
 	//设置元素的高度等于移动设备的高度
 	$(".showDiv2").height($(window).height());
 	$(".clubPage").click(function(){

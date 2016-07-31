@@ -115,15 +115,19 @@ $(function(){
                 consultationStr = '';
                 dropload_consultation.resetload();
 
-                if(window.location.href.indexOf('icbcServe') > 0){
-                    $('.singleHot').click(function(){
-                        window.location.href = "consultation.html?icbc&&id=" + $(this).attr('data-id');
-                    });
-                }else {
-                    $('.singleHot').click(function(){
-                        window.location.href = "consultation.html?id=" + $(this).attr('data-id');
-                    });
-                }
+                $('.singleHot').click(function(){
+                    window.location.href = "consultation.html?id=" + $(this).attr('data-id');
+                });
+
+                // if(window.location.href.indexOf('icbcServe') > 0){
+                //     $('.singleHot').click(function(){
+                //         window.location.href = "consultation.html?icbc&&id=" + $(this).attr('data-id');
+                //     });
+                // }else {
+                //     $('.singleHot').click(function(){
+                //         window.location.href = "consultation.html?id=" + $(this).attr('data-id');
+                //     });
+                // }
 
             }else {
                 // 锁定
@@ -161,7 +165,7 @@ $(function(){
                            '<p style="font-size:13px;  position: absolute;top: 82%;left: 13px;">'+ new Date(data.list[i].startTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
                            '</p></div></div></div>';
                    }else {
-                       actStr += '<div class="infoItem hotItem" data-type="'+data.list[i].type+'" data-i="'+ data.list[i].id+'" style="background: url('+data.list[i].minPic+') no-repeat #f7f7f7; background-size:39% 100%;">' +
+                       actStr += '<div class="infoItem hotItem" data-type="'+data.list[i].type+'" data-i="'+ data.list[i].itemId+'" style="background: url('+data.list[i].minPic+') no-repeat #f7f7f7; background-size:39% 100%;">' +
                            '<div class="tit-wrap"><div class="tit-content"><h1>'+data.list[i].title+'</h1>' +
                            '<div class="detile">' +
                            '<p >'+data.list[i].subtitle+'</p></div>' +
@@ -257,14 +261,7 @@ $(function(){
           if(!isHotDoor){
               window.location.href = "enrol.html?id=" + id;
           }else {
-
-              // console.log(id);
-              // console.log(_type);
-              // console.log(
-              //     jumpPage(_type).htmlStr + '?' + jumpPage(_type).tab + 'id=' + id
-              // )
-
-             window.location.href = jumpPage(_type).htmlStr + '?' + jumpPage(_type).tab + 'id=' + id ;
+             window.location.href = jumpPage(_type).htmlStr + '?id=' + id ;
           }
         }});
 
@@ -274,11 +271,8 @@ $(function(){
     //页面判断  跳转到哪里
     function jumpPage(type) {
         var obj = {
-            htmlStr: '',
-            tab: '',
+            htmlStr: ''
         }
-        var htmlStr = '';
-        var tab = '' ;
         switch(type) {
             case "1":
                 obj.htmlStr = 'enrol.html';
@@ -303,11 +297,9 @@ $(function(){
                 break;
             case "8":
                 obj.htmlStr = 'consulation.html';
-                obj.tab = 'hot&&';
                 break;
             case "9":
                 obj.htmlStr = 'consulation.html';
-                obj.tab = 'icbc&&';
                 break;
         }
         return obj;

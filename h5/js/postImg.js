@@ -88,10 +88,7 @@ function upLoadImg(obj){
                         url: port+"/card/file/base64.method?fileName=" + Math.floor(Math.random()*1000000)+".png",
                         data:JSON.stringify(img.src),
                         success:function(data){
-                            // alert("图片上传成功");
-                            // alert("图片上传到服务器成功");
-
-                            if($('#imgList').children('li').length < 8){
+                            if($('#imgList').children('li').length < 9){
                                 $('#imgList').prepend('<li class="weui_uploader_file"><img src="'+ data.url +'" style="height: 100%;width: 100%"></li>')
 
                                 $('#picNum').html( $('#imgList').children('li').length-1 + '/8');

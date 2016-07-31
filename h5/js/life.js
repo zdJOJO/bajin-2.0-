@@ -35,8 +35,18 @@ $(function(){
     function getData(){
         $.get(port+"/card/life/"+lifeid,function(data){
             console.log(data);
-            var str=$('<h1 class="msg-tit">'+data.lifeTitle+'</h1><div class="btn_q"><span class="love-btn"><img src="imgs/iconfont-love.png"></span><span class="share-btn"><img src="imgs/iconfont-p-share.png"></span></div><h4 class="tit-sm">'+data.lifeSubtitle+'</h4><div class="tip"><div class="author"><img src="imgs/iconfont-bi.png" /> '+data.userId+'</div><div class="time"><img src="images/iconfont-shijian_q.png" /> '+new Date(data.createTime*1000).Formate()+'</div> </div></div><div class="liftContent">'+data.lifeContent+'</div>');
+            var str=$('<h1 class="msg-tit">'+data.lifeTitle+'</h1>' +
+                '<div class="btn_q"><span class="love-btn">' +
+                '<img src="imgs/iconfont-love.png"></span><span class="share-btn">' +
+                '<img src="imgs/iconfont-p-share.png"></span></div>' +
+                '<h4 class="tit-sm">'+data.lifeSubtitle+'</h4>' +
+                '<div class="tip"><div class="author">' +
+                '<img src="imgs/iconfont-bi.png" /> '+data.userId+'</div><div class="time">' +
+                '<img src="images/iconfont-shijian_q.png" /> '+new Date(data.createTime*1000).Formate()+'</div> ' +
+                '</div></div><div class="liftContent">'+data.lifeContent+'</div>');
+
             dataWrap.append(str);
+
             $.ajax({
                 type:"get",
                 url:port+"/card/file/getImage",

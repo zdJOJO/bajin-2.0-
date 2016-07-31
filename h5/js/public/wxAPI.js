@@ -5,7 +5,7 @@
 
 //获取微信开放平台 access_token
 var get_access_token = function () {
-    $.get('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx886a1d1acb7084a5&secret=e675357016644dfeabce5f7ccec7f1fb',function () {
+    $.get('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx886a1d1acb7084a5&secret=e675357016644dfeabce5f7ccec7f1fb',function (result) {
         var access_token = result.ACCESS_TOKEN;
         return access_token;
     })

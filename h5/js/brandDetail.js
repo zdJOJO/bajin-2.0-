@@ -27,7 +27,7 @@ his = his[his.length-1];
 his = his + window.location.search;
 
 //获取商品http://121.196.232.233/card/goods/{goodsId}
-var goodsid =  window.location.search.split("=")[1] ? window.location.search.split("=")[1]:1;
+var goodsid =  window.location.search.split("=")[1] ? window.location.search.split("=")[1] : 1;
 if(/&/g.test(goodsid)){
 	goodsid = goodsid.split("&")[0];
 }
@@ -200,14 +200,16 @@ var getComment = function () {
 			$('.wrapper>.content >span').html( '暂无评论');
 		}else {
 			$('.wrapper>.content >span').html( '共有' + result.rowCount + '条评论');
+
+			//查看更多评论
+			$('.wrapper>.content').click(function () {
+				window.location.href = 'comment.html?type=' + 3 + '&itemId=' + itemId;
+			});
 		}
 	});
 };
 
-//查看更多评论
-$('.wrapper>.content').click(function () {
-	window.location.href = 'comment.html?type=' + 3 + '&itemId=' + itemId;
-});
+
 
 getComment();
 
@@ -244,12 +246,12 @@ var sureGoodInfo = function (data_sku) {
 	for(var i=0; i<data_sku.length; i++){
 		speStr += '<li class="spe" data-num=" '+ i +' ">'+ data_sku[i].skuGague +'</li>'
 	}
-	$('#goodDetail>.specifications>.speList').append(speStr);
+	$('#speList').append(speStr);
 
 
 
 	//初始化 默认值
-	$('.wrapper>.primeCost>span').html('￥ ' + data_sku[0].costPrice.toFixed(2));
+	$('.wrapper>.primeCost>span').html('￥ ' + data_sku[0].marketPrice.toFixed(2));
 	$('.wrapper>.currentCost>span').html('￥ ' + data_sku[0].skuPrice.toFixed(2));
 	$('.wrapper>.stock >span').html( data_sku[0].skuGague + '×'+ buyNum);  // 默认是1
 	$('#goodDetail>.specifications li').eq(0).addClass('active');
@@ -266,7 +268,9 @@ var sureGoodInfo = function (data_sku) {
 
 	//每个型号选择
 	$('#goodDetail>.specifications li').click(function () {
-
+		
+		$('.wrapper>.primeCost>span').html('￥ ' + data_sku[parseInt($(this).attr('data-num'))].marketPrice.toFixed(2));
+		$('.wrapper>.currentCost>span').html('￥ ' + data_sku[parseInt($(this).attr('data-num'))].skuPrice.toFixed(2));
 		stockNum = data_sku[ parseInt($(this).attr('data-num')) ].stockNumber;
 		chooseSpeStr = data_sku[ parseInt($(this).attr('data-num')) ].skuGague;
 		current_skuId = data_sku[ parseInt($(this).attr('data-num')) ].skuId;
@@ -284,6 +288,7 @@ var sureGoodInfo = function (data_sku) {
 		oneSpe( data_sku[ parseInt($(this).attr('data-num')) ] );
 	});
 }
+
 
 
 //点击 具体规格时候
@@ -352,7 +357,7 @@ var addToShoppingCartFn = function () {
 			});
 		},
 		error: function () {
-
+			//todo
 		}
 	});
 };
@@ -440,6 +445,13 @@ $('#addToShoppingCart ,#buyNow, .wrapper>.stock').click(function () {
 	});
 });
 
+
+
+
+//选择规格的滚动条 滚动时候不受外部滚动条印象
+$('#speList').hover(function () {
+	
+});
 
 
 

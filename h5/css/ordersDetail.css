@@ -134,17 +134,17 @@ footer,.wrapper{
 	width:1rem;
 	box-sizing:border-box;
 	padding: 0.04rem 0.03rem;
-    border-bottom: #b2b2b2 1px solid;
 }
-.logistical .detailAddress>img{	
+.logistical .detailAddress>img{
 	float: left;
-	margin:0.04rem 0.03rem 0.04rem 0; 
+	margin: 0 0.03rem 0.04rem 0;
 }
 .logistical .detailAddress p{
-	-webkit-margin-before:0;
-	-webkit-margin-after:0;
-	color: #6a6a6a;
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
 	line-height: 1.5;
+	font-size: 0.9em;
+	color: #B2B2B2;
 }
 .logistical .searchPoint span{
 	color: #989898;
@@ -210,10 +210,34 @@ footer .delete_hadPaid{
 
 /*unpaid页面的具体调整*/
 .unpaid_margin_bottom{
-	margin-bottom: 0.3rem;
+	/*margin-bottom: 0.3rem;*/
 }
 
 
 .weui_mask, .weui_mask_transition, .weui_mask_transparent{
 	z-index: 10;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

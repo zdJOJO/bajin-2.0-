@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <meta name="screen-orientation"content="portrait">
+    <meta name="x5-orientation"content="portrait">
+    <title>物流详情</title>
+
+    <link rel="stylesheet" type="text/css" href="css/weiXin/weui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/weiXin/jquery-weui.css">
+    <link rel="stylesheet" type="text/css" href="css/logisticsInfo.css">
+</head>
+<body>
+    <ul>
+        <li class="pic">
+            <img class="sf" src="imgs/SF.png" style="display: none">
+            <img class="ems" src="imgs/EMS.png" style="display: none">
+        </li>
+        <li class="statu">物流状态：</li>
+        <li class="compony">承运公司：</li>
+        <li class="orderNum">运单编号：</li>
+    </ul>
+
+    <div id="detail">
+        <h4>物流跟踪</h4>
+        <ul></ul>
+    </div>
+
+</body>
+<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
+<script type="text/javascript">
+
+    var expressId = window.location.search.split('=')[1];
+    var infoDetailStr = '';
+
+    var url = 'http://api.jisuapi.com/express/query?appkey=ed7720bd1cc55ee4&number=' + expressId + '&type=auto';
+    $.ajax({
+        type:'get',
+        dataType:'jsonp',
+        url:url,
+        jsonp:'callback',
+        processData: false,
+        success:function(data){
+            if(data.status == '205'){
+                //todo
+            }else {
+                if(data.result.type == 'ems'){
+                    $('body>ul>.pic>.ems').show().siblings().hide();
+                    $('body>ul>.compony').append('<span>EMS</span>');
+                }else {
+                    $('body>ul>.pic>.sf').show().siblings().hide();
+                    $('body>ul>.compony').append('<span>顺丰快递</span>');
+                }
+
+                $('body>ul>.statu').append('<span>' + statuJudge(data.result.deliverystatus) + '</span>');
+                $('body>ul>.orderNum').append('<span>' + data.result.number + '</span>');
+
+                for(var i=0; i<data.result.list.length;i++){
+                    infoDetailStr += '<li><span class="point"></span>' + data.result.list[i].status + '<br><span>' + data.result.list[i].time + '</span></li>'
+                }
+
+                $('#detail ul').append(infoDetailStr);
+            }
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown) {
+            //todo
+        }
+    });
+
+
+
+    var statuJudge = function (statu) {
+        var str = '';
+        switch (parseInt(statu)){
+            case 1:
+                str = '在途中';
+                break;
+            case 2:
+                str = '派件中';
+                break;
+            case 3:
+                str = '已签收';
+                break;
+            case 4:
+                str = '派送失败';
+                break;
+        }
+        return str;
+    }
+
+
+</script>
+</html>

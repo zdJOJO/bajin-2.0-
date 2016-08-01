@@ -45,6 +45,9 @@ $(document).ready(function(){
 	}
 
 
+	//查询物流详情的 物流订单号
+	var  expressId = 0;
+
 	
 	//请求微信支付所需的参数
 	var ip = String(returnCitySN["cip"]);;
@@ -66,6 +69,9 @@ $(document).ready(function(){
 		type:"get",
 		url:port+"/card/order/v2/"+cardid+"?token="+token,
 		success:function(data){
+
+			expressId = data.orderModel.expressId ;
+
 			var str= "";
 			var num = 1;
 
@@ -150,7 +156,6 @@ $(document).ready(function(){
 			}
 		});
 	};
-
 
 
 
@@ -248,6 +253,17 @@ $(document).ready(function(){
 			]
 		});
 	});
+
+
+
+	//已付款  订单的 详情页面
+	if(window.location.href.indexOf('havePostApo') > 0){
+		$('.logistical').show();
+		$('footer').html('').append('<p class="confirmReceipt">确认收货</p>');
+		$('.logistical a').click(function () {
+			window.location.href = "logisticsInfo.html?expressId=" + expressId ;
+		});
+	}
 });
 
 

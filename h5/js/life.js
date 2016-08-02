@@ -35,6 +35,16 @@ $(function(){
     function getData(){
         $.get(port+"/card/life/"+lifeid,function(data){
             console.log(data);
+
+            //调用分享借口
+            shareMInnit({
+                title: data.lifeTitle,
+                desc: data.lifeSubtitle,
+                link: window.location.href,
+                imgUrl: data.lifePic
+            });
+
+
             var str=$('<h1 class="msg-tit">'+data.lifeTitle+'</h1>' +
                 '<div class="btn_q"><span class="love-btn">' +
                 '<img src="imgs/iconfont-love.png"></span><span class="share-btn">' +

@@ -51,7 +51,14 @@ $(document).ready(function(){
 			mallObj.currentDiscount = data.data.currentDiscount;
 			mallObj.title = data.data.title;
 
-			$('title').html(data.data.title);
+
+			//调用分享借口
+			shareMInnit({
+				title: data.data.title,
+				desc: data.data.subtitle,
+				link: window.location.href,
+				imgUrl: data.pic
+			});
 
 
 			$(".primeCost span").html(data.data.title);

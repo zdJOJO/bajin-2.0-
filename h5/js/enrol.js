@@ -70,13 +70,17 @@ $(function(){
 
     function getActDetail(){
         $.get(port+"/card/activity/"+activityid,function(data){
-            $("title").html(data.activityTitle);
+
+            //调用分享借口
+            shareMInnit({
+                title: data.activityTitle,
+                desc: data.activitySubtitle,
+                link: window.location.href,
+                imgUrl: data.activityPic
+            });
+
             peopleNumber = data.peopleNumber;
             applyNumber = data.applyNumber;
-            // var str_='';
-            // for(var i = 1,len = data.imgList.length-1;i<=len;i++){
-            //     str_ = str_ + '<img src='+data.imgList[i].pic+'>';
-            // }
             var actPrice = '￥'+ data.activityPrice.toFixed(2);
             if(data.activityPrice == 0){
                 actPrice = '免费';

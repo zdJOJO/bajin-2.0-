@@ -142,6 +142,14 @@ var getGoodDetail = function () {
 			url_obj.title = data.goodsTitle;
 			url_obj.goodsId = data.goodsId;
 
+			//调用分享借口
+			shareMInnit({
+				title: data.goodsTitle,
+				desc: data.goodsSubtitle,
+				link: window.location.href,
+				imgUrl: data.hotPic
+			});
+
 			$(".buyNow").attr("data-goodsid",data.goodsId);
 			$(".wrapper .title").html(data.goodsTitle);
 			$(".wrapper .subtitle").html(data.goodsSubtitle);

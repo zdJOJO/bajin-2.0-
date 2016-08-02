@@ -73,9 +73,12 @@ var getDetail = function () {
     $.get(port + '/card/consult/' + itemId + '?token=' + token,function (data) {
 
         shareObj.title = data.title || '';
-        shareObj.desc = data.subTitle || '';
+        shareObj.desc = data.subtitle || '';
         shareObj.link = window.location.href;
         shareObj.imgUrl = data.pic;
+
+        //调用分享借口
+        shareMInnit(shareObj);
 
         typeNum = data.type;
 
@@ -103,6 +106,12 @@ var getDetail = function () {
 
 
 getDetail();
+
+
+
+
+
+
 
 
 
@@ -249,7 +258,6 @@ $("#publishCmt").click(function () {
 $('#collectionShare>.share').click(function () {
     
     $("#shareMask").show();
-    shareModular(shareObj);
 });
 $("#shareMask").click(function () {
     $("#shareMask").hide();

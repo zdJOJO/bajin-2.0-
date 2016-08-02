@@ -223,6 +223,23 @@ footer>.box{
 
 
 
+@media only screen and (min-width: 430px){
+    header>h3{
+        margin-top: 20px;
+        width: 72%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    #collectionShare {
+        position: absolute;
+        top: 25px;
+        right: 0;
+        width: 0.2rem;
+    }
+}
+
+
 @media only screen and (max-width: 430px){
     header>h3{
         margin-top: 20px;

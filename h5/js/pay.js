@@ -47,20 +47,26 @@ $(function(){
 
 			        	//一定要注意，在元素出来的时候再帮定事件，不然就没效
 						$(".cardItem").click(function(){
-							//商品支付http://121.196.232.233/card/bank/goods/pay/{cardno}/{orderId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
-							//活动支付http://121.196.232.233/card/bank/encryption/pay/{cardno}/{applyId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
 
-							var cardItem = $(this).data("cardid");
+							var cardItem = $(this).data("cardid");  //哪张银行卡
+
+							//活动支付http://121.196.232.233/card/bank/encryption/pay/{cardno}/{applyId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
 							var url = port+"/card/bank/encryption/pay/"+cardItem+"/"+applyid+"?token="+token;
 
 							var orderId = window.location.search.split("=")[1];
 
 							if(window.location.search.split("=")[0] == "?cardid"){
+								//商品支付http://121.196.232.233/card/bank/goods/pay/{cardno}/{orderId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
 								url = port+"/card/bank/goods/pay/"+cardItem+"/"+orderId+"?token="+token;
 							}
 							if(window.location.search.split("=")[0] == "?mallOrderId"){
 								url = port+"/card/bank/mall/pay/"+cardItem+"/"+orderId+"?token="+token;
 							}
+							if(window.location.search.split("=")[0] == "?mallOrderId"){
+								// http://121.196.232.233/card/bank/book/pay/{cardno}/{typeId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
+								url = port+"/card/bank/book/pay/"+cardItem+"/"+orderId+"?token="+token;
+							}
+
 
 							console.log(window.location.href)
 							console.log(window.location.search.split("=")[0])

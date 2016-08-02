@@ -35,24 +35,23 @@
 
 	//test为真实环境    bcard为测试环境
 
-//	var iframeUrl = port + "/test/pay.html?id="+applyid;
-	var iframeUrl = port + "/bcard/pay.html?id="+applyid;
+	var portStr = port + '/bcard';
+//	var portStr = port + '/test';
 
-	console.log(window.location.search.split("=")[0])
+	var iframeUrl = portStr + "/pay.html?id="+applyid;
 
 	if(window.location.search.split("=")[0]=="?cardid"){
-//		iframeUrl = port + "/test/pay.html?cardid="+applyid;
-		iframeUrl =  port + "/bcard/pay.html?cardid=" + applyid;
+		iframeUrl =  portStr + "/pay.html?cardid=" + applyid;
 	}
 	if(window.location.search.split("=")[0]=="?mallOrderId"){
-//		iframeUrl = port + "/test/pay.html?mallOrderId="+applyid;
-		iframeUrl =  port + "/bcard/pay.html?mallOrderId=" + applyid;
+		iframeUrl =  portStr + "/pay.html?mallOrderId=" + applyid;
 	}
-
-
-
-
+//	if(window.location.search.split("=")[0]=="?bookType"){
+//		iframeUrl =  portStr + "/pay.html?bookType=" + applyid;
+//	}
 	iframe.src = iframeUrl;
+
+
 	var sss = window.top.document.getElementById("iframeId").contentWindow;	 
 	console.log(sss);
 
@@ -68,10 +67,10 @@
 				}else if(/\"code\":\"300\"/g.test(nodeArr[0].firstChild.nodeValue)){//绑定成功的处理操作，现在不知道绑定成功的提示信息,成功绑定之后执行刷新页面
 					alert("绑定成功");
 					if(lottery != "lottery"){
-						window.location.reload();	
+						window.location.reload();
 					}else{
 						window.location.href = "fareDraw.html?token="+token;
-					}									
+					}
 				}
 			}; 
 	} else { 

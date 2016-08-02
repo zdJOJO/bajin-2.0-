@@ -169,6 +169,17 @@ $(function(){
 
 
 
+
+
+    // // 书本订阅
+    // var bookIframe = document.getElementById("bookIframe");
+    // bookIframe.onload = function () {
+    //     console.log(document.getElementById("bookIframe").contentWindow.window.location.href);
+    // }
+
+
+
+
     //根据url 判断 哪一个页面
     if(window.location.href.indexOf('hot') > 0){
         $(".tab >.hot").addClass('active').siblings().removeClass('active');

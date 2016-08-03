@@ -226,8 +226,6 @@ getComment();
 
 
 
-
-
 // 获取商品 sku 详细信息
 var getGoodSkuInfo = function () {
 	$.ajax({

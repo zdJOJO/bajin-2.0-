@@ -293,6 +293,83 @@ header>.edit_{
 
 
 
+
+
+
+
+/*&********************  ↓  修改购物车 ↓   ****************************/
+
+label {
+	display: inline;
+}
+
+.regular-checkbox {
+	display: none;
+}
+
+.regular-checkbox + label {
+	background-color: #fff;
+	border: 1px solid #cacece;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	padding: 9px;
+	display: inline-block;
+	position: relative;
+	width: 4px;
+	height: 4px;
+	/*border-radius: 15px;*/
+	float: left;
+	margin: 0.123rem 0;
+}
+
+.regular-checkbox + label:active, .regular-checkbox:checked + label:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.regular-checkbox:checked + label {
+	background-color: #C1AF74;
+	border: 1px #C1AF74 solid;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	color: #fff;
+}
+
+.regular-checkbox:checked + label:after {
+	content: '\2714';
+	font-size: 17px;
+	position: absolute;
+	top: -3px;
+	left: 3px;
+	color: #fff;
+}
+
+
+
+
+.wrapper .singleBrand >img{
+	width: 0.266rem;
+	float: left;
+	height: 0.266rem;
+	margin: 7px 0.04rem 0 0.03rem;
+}
+
+footer .regular-checkbox + label{
+	margin: 0.035rem 0.02rem;
+}
+footer .regular-checkbox:checked + label:after {
+	top: -14px;
+}
+
+
+
+
+/*&********************  ↑  修改购物车 ↑   ****************************/
+
+
+
+
+
+
+
+
 @media screen and (max-width: 320px){
 	.wrapper .singleBrand .detail p.subtitle{
 		height: 23px;

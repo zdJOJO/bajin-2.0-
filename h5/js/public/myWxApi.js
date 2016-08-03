@@ -31,36 +31,34 @@ function randomString(len) {
 
 
 
-// //向 后台获取 jsapi_ticket
-// var share_Modular = function (shareObj) {
-//     $.get( port + '/card/weixin/token/get',function (result) {
-//
-//         nonceStr = randomString(16);
-//         timestamp =  String( parseInt((new Date().getTime() / 1000)) );
-//         jsapi_ticket = JSON.parse(result).wxticket;
-//         var string1 = 'jsapi_ticket=' + jsapi_ticket + '&noncestr=' + nonceStr + '&timestamp=' + timestamp + '&url=' + urlStr;
-//         signature = hex_sha1(string1);
-//         if(shareObj){
-//             wx.config({
-//                 debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-//                 appId: 'wx886a1d1acb7084a5', // 必填，公众号的唯一标识
-//                 timestamp: timestamp,// 必填，生成签名的时间戳
-//                 nonceStr: nonceStr, // 必填，生成签名的随机串
-//                 signature: signature, // 必填，签名，见附录1
-//                 jsApiList: [
-//                     'checkJsApi',
-//                     'onMenuShareTimeline',  // 分享到朋友圈
-//                     'onMenuShareAppMessage', //分享给朋友
-//                     'onMenuShareQQ',
-//                     'onMenuShareWeibo'
-//                 ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-//             });
-//         }
-//     })
-// };
-
-//先注释
-//share_Modular();
+//向 后台获取 jsapi_ticket
+var share_Modular = function (shareObj) {
+    $.get( port + '/card/weixin/token/get',function (result) {
+        if(shareObj.title){
+            nonceStr = randomString(16);
+            timestamp =  String( parseInt((new Date().getTime() / 1000)) );
+            jsapi_ticket = JSON.parse(result).wxticket;
+            var string1 = 'jsapi_ticket=' + jsapi_ticket + '&noncestr=' + nonceStr + '&timestamp=' + timestamp + '&url=' + urlStr;
+            signature = hex_sha1(string1);
+            wx.config({
+                debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: 'wx886a1d1acb7084a5', // 必填，公众号的唯一标识
+                timestamp: timestamp,// 必填，生成签名的时间戳
+                nonceStr: nonceStr, // 必填，生成签名的随机串
+                signature: signature, // 必填，签名，见附录1
+                jsApiList: [
+                    'checkJsApi',
+                    'onMenuShareTimeline',  // 分享到朋友圈
+                    'onMenuShareAppMessage', //分享给朋友
+                    'onMenuShareQQ',
+                    'onMenuShareWeibo'
+                ]
+                // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+            shareMInnit_JSSDK(shareObj);
+        }
+    })
+};
 
 
 var shareMInnit_JSSDK = function (obj) {
@@ -71,7 +69,7 @@ var shareMInnit_JSSDK = function (obj) {
             imgUrl: obj.imgUrl, // 分享图标
             success: function () {
                 // 用户确认分享后执行的回调函数
-                console.log();
+                alert(11111111111);
             },
             cancel: function () {
                 // 用户取消分享后执行的回调函数
@@ -86,6 +84,7 @@ var shareMInnit_JSSDK = function (obj) {
             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
             success: function () {
                 // 用户确认分享后执行的回调函数
+                alert(2222222222);
             },
             cancel: function () {
                 // 用户取消分享后执行的回调函数
@@ -111,8 +110,8 @@ var shareMInnit = function (obj) {
     if(!obj){
         return false;
     }
-    // 开启Api的debug模式
-    WeixinApi.enableDebugMode();
+    // // 开启Api的debug模式
+    // WeixinApi.enableDebugMode();
 
     // 需要分享的内容，请放到ready里
     WeixinApi.ready(function(Api) {

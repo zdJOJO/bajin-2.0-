@@ -71,13 +71,13 @@ $(function(){
     function getActDetail(){
         $.get(port+"/card/activity/"+activityid,function(data){
 
-            //调用分享借口
-            shareMInnit({
-                title: data.activityTitle,
-                desc: data.activitySubtitle,
-                link: window.location.href,
-                imgUrl: data.activityPic
-            });
+            // //调用分享借口
+            // shareMInnit({
+            //     title: data.activityTitle,
+            //     desc: data.activitySubtitle,
+            //     link: window.location.href,
+            //     imgUrl: data.activityPic
+            // });
 
             peopleNumber = data.peopleNumber;
             applyNumber = data.applyNumber;
@@ -126,7 +126,7 @@ $(function(){
                 $("#doEnrol>button").attr({
                     disabled: true ,
                     style:"background:#9c9c9c;"
-                }).html('已过期');
+                }).html('报名截止');
             }
 
 
@@ -135,6 +135,12 @@ $(function(){
                 'width': '100%',
                 'height': 'auto'
             })
+
+
+            //判断是会否报名
+            getEnrollStatu();
+
+
 
             //加载评论列表
             getCommentList(1);
@@ -256,6 +262,42 @@ $(function(){
 
     getActDetail();
 
+
+
+    //获取报名状态
+    // http://121.196.232.233/card/apply/status/{activityId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
+    var getEnrollStatu = function () {
+        $.get(port + '/card/apply/status/' + activityid + '?token=' + token,function (result) {
+            function statuStr (num) {
+                var statuStr = '';
+                switch (num) {
+                    case 1:
+                        statuStr = '已报名';
+                        break;
+                    case 2:
+                        statuStr = '活动结束';
+                        break;
+                    case 3:
+                        statuStr = '报名截止';
+                        break;
+                    case 4:
+                        statuStr = '人数已满';
+                        break;
+                    case 5:
+                        statuStr = '报名';
+                        break;
+                }
+                return statuStr;
+            }
+            if((JSON.parse(result)).data != 5){
+                $("#doEnrol>button").attr({
+                    disabled: true ,
+                    style:"background:#9c9c9c;"
+                });
+            }
+            $('#doEnrol >button').html( statuStr( (JSON.parse(result)).data ) );
+        })
+    };
 
 
 

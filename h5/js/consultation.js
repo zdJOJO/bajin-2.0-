@@ -78,7 +78,9 @@ var getDetail = function () {
         shareObj.imgUrl = data.pic;
 
         //调用分享借口
-        shareMInnit(shareObj);
+        share_Modular(shareObj);
+        
+        
 
         typeNum = data.type;
 
@@ -89,18 +91,6 @@ var getDetail = function () {
         $("article>.content").html(data.content).append('<span class="readNum">阅读量：' + data.viewNum + '</span>');
         isCollected(typeNum);
         getCommentList(1);
-
-
-        //如果在真实环境
-        if(port.indexOf('bcard') == -1){
-            var imgs = $('.content img');
-            for(var i = 0 ; i < imgs.length ; i ++){
-                if(imgs[i].src.indexOf('wx_fmt=jpeg') != -1);
-                var tmpSrc = imgs[i].src.split('?')[0];
-                imgs[i].src = tmpSrc;
-            }
-        }
-
     });
 }
 

@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 
 
-
+	var inpuJO = {};
 
 
 	//获取购物车的商品
@@ -44,11 +44,11 @@ $(document).ready(function(){
 							$(".dropload-down").css("height","0");
 						}
 						for(var i=0,len = data.list.length;i<len;i++){
-							str += '<div class="singleBrand"><img src="imgs/notSel.png" class="sel" data-cardid = "'+data.list[i].carModel.id+
-								'" data-cost="'+data.list[i].skuModel.skuPrice+'"/><img src="'+
-								data.list[i].goodsModel.hotPic+'" class="activityPic" data-id="'+
-								data.list[i].carModel.goodsId+'"/><div class="detail" data-id="'+
-								data.list[i].carModel.goodsId+'"><h3>'+
+							str += '<div class="singleBrand" >' +
+								'<input type="checkbox" id="checkbox-'+ i +'" value="false" data-cardid = "'+data.list[i].carModel.id+ '" data-cost="'+data.list[i].skuModel.skuPrice+'" data-num="'+data.list[i].carModel.num+'" class="regular-checkbox" />' +
+								'<label for="checkbox-'+ i +'"></label>' +
+								'<img src="'+ data.list[i].goodsModel.hotPic+'" class="activityPic" data-id="'+ data.list[i].carModel.goodsId+'"/>' +
+								'<div class="detail" data-id="'+ data.list[i].carModel.goodsId+'"><h3>'+
 								data.list[i].goodsModel.goodsTitle+'</h3><p class="subtitle">'+
 								data.list[i].skuModel.skuGague +'</p><p class="singleCost"><span>￥&nbsp;'+
 								data.list[i].skuModel.skuPrice+'</span><span>×'+
@@ -58,20 +58,49 @@ $(document).ready(function(){
 								data.list[i].carModel.num+'</span><span class="add count-i" data-cardid="'+
 								data.list[i].carModel.id+'" data-skuid="'+data.list[i].carModel.skuId+'">+</span></div></p></div></div>';
 						}
+
 						$(".content").append(str);
 						str = '';
 						myDropload.resetload();
 
-
-
 						less_q($(".singleBrand .detail p.subtitle"));
+
+
+						inpuJO = $('.singleBrand>input');
+						//单个选择事件
+						$(".singleBrand >label").click(function(){
+							if( $(this).siblings('input').attr('value') == 'false'){
+								$(this).siblings('input').attr('value','true');
+								costAll();
+							}else{
+								$(this).siblings('input').attr('value','false');
+								costAll();
+							}
+						});
+
+						//全选 按钮
+						$('#checkboxAll').click(function () {
+							if($(this).attr('value') == 'false'){
+								$(this).attr('value','true').prop('checked',true);
+								inpuJO.each(function () {
+									$(this).attr('value','true').prop('checked',true)
+								});
+								costAll()
+							}else {
+								$(this).attr('value','false').prop('checked',false);
+								inpuJO.each(function () {
+									$(this).attr('value','false').prop('checked',false)
+								});
+								costAll()
+							}
+						});
+
+
 						//点击信息与图片跳转到商品详情，点击前边选择框选中商品
-						$(".singleBrand .activityPic").bind("click",function(){
-							window.location.href = "brandDetail.html?id="+$(this).data("id");
+						$(".singleBrand>img , .detail").bind("click",function(){
+							window.location.href = "brandDetail.html?id=" + $(this).data("id");
 						});
-						$(".singleBrand .detail h3,.singleBrand .detail p.subtitle").bind("click",function(){
-							window.location.href = "brandDetail.html?id="+$(this).parent().data("id");
-						});
+
 					}else{
 						if(page > 1){
 							// 锁定
@@ -90,20 +119,6 @@ $(document).ready(function(){
 							});
 						}
 					}
-
-
-					//单个选择事件
-					$(".singleBrand .sel").bind("click",function(){
-						var selJo = $(".singleBrand .sel");
-
-						if($(this).attr("src")=="imgs/notSel.png"){
-							$(this).attr("src","imgs/sel.png");
-							costAll();
-						}else{
-							$(this).attr("src","imgs/notSel.png");
-							costAll();
-						}
-					});
 
 					//加减操作
 					var addBtn=$('.add');
@@ -143,8 +158,11 @@ $(document).ready(function(){
 	}
 
 
+
+
 	//编辑按钮切换
 	$("header > .edit_all").bind("click",function(){
+		$(".detail").unbind('click');
 		$(".edit_all").css("display","none");
 		$(".edit_").css("display","block");
 		$(".edit").css("display","block");
@@ -177,19 +195,6 @@ $(document).ready(function(){
 
 
 
-	//全选与全部取消
-	$(".done .select_all").bind("click",function(){
-		if($(this).find("img").attr("src")=="imgs/notSel.png"){
-			$(this).find("img").attr("src","imgs/sel.png");
-			$(".singleBrand .sel").attr("src","imgs/sel.png");
-			costAll();
-		}else{
-			$(this).find("img").attr("src","imgs/notSel.png");
-			$(".singleBrand .sel").attr("src","imgs/notSel.png");
-			costAll();
-		}
-	});
-
 
 
 	//编辑删除页面的全选与全取消
@@ -204,36 +209,48 @@ $(document).ready(function(){
 	});
 
 
-	//选择之后触发的事件
-	var numAll = "";//总个数
+
+
+
+	// 购物车 商品选择 选择之后触发的事件
 	function costAll(){
-		var brandList = {};
-		var sel = $(".singleBrand .sel");
-		numAll = 0;//总个数
+		var brandList = {
+			cards: [],
+			numAll: 0
+		};
 		var cost = 0;//价格
-		var number =1;//单个商品的数量
+		var number = 1;//单个商品的数量
 		var cardids=[];
 
-		for(var i=0,len=sel.length;i<len;i++){//这里的订单完全相同的并没有合并到一起，因此会出现一个问题就是skuid是相同的，在对象中就变为赋值，而不是新建。
-			if($(sel[i]).attr("src")=="imgs/sel.png"){
-				number=$(sel[i]).siblings(".detail").find(".singleCost>span:nth-child(2)").html().substring(1);
-				cost+=$(sel[i]).data("cost")*number;
-				numAll+=-(-number);
-				var cardid = $(sel[i]).data("cardid");
-				// brandList[skuid] = number;
+		for(var i=0;i<inpuJO.length;i++){
+			if( $(inpuJO[i]).attr('value') == 'true'){
+				number = $(inpuJO[i]).data('num');
+				brandList.numAll += number;
+				cost += $(inpuJO[i]).data("cost") * number;
+				var cardid = $(inpuJO[i]).data("cardid");
 				cardids.push(cardid);
 			}
 		}
-		$(".done .cost").html("￥&nbsp;"+ cost.toFixed(2));
-		$(".done .brandNum span").html('');
-		brandList.cards = cardids;//直接添加属性的时候好像不可以直接使用[]来赋值
+		$(".done .cost").html("￥ "+ cost.toFixed(2));
+		brandList.cards = cardids;
+
 		return brandList;
 	}
+
+
+
+
+
+
+
+
+
+
 	//购物车，购买商品按钮,这里如果全部信息都通过url明显是不现实的，所以需要传递改变的量，也就是确定颜色的商品的skuId，对应商品的数量
 	//然后在填写订单的页面再请求的到需要的字段,
 	$(".done .brandNum").bind("click",function(){
-		if(numAll==0){
-			alert("你还没选择商品")
+		if(costAll().numAll==0){
+			$.alert("你还没选择商品")
 		}else {
 			var skuIdStr = '';
 			var tmpArray = costAll().cards;
@@ -271,6 +288,9 @@ $(document).ready(function(){
 			}
 		});
 	}//更新数量函数结束
+
+
+
 	//删除购物车里边的东西的函数
 	function deleteDate(cardid){
 		$.ajax({
@@ -312,6 +332,10 @@ $(document).ready(function(){
 
 
 	});//删除按钮事件结束
+
+
+
+
 
 
 	//初始化  滚动

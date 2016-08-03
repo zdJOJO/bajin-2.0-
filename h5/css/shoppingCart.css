@@ -368,9 +368,20 @@ footer .regular-checkbox:checked + label:after {
 
 
 
+@media screen and (max-width: 375px){
+	.wrapper .singleBrand .detail{
+		height: 0.275rem;
+	}
+}
 
+@media screen and (max-width: 360px){
+	.wrapper .singleBrand .detail{
+		height: 0.285rem;
+	}
+}
 
 @media screen and (max-width: 320px){
+
 	.wrapper .singleBrand .detail p.subtitle{
 		height: 23px;
 	}
@@ -385,7 +396,21 @@ footer .regular-checkbox:checked + label:after {
 	footer div.delete_all{
 		left: 231px;
 	}
+
+	.regular-checkbox + label{
+		padding: 7px;
+	}
+
+	.regular-checkbox:checked + label:after{
+		top: -5px;
+		left: 1px;
+	}
+
+	footer .regular-checkbox:checked + label:after{
+		top: -11px;
+	}
 }
+
 
 
 

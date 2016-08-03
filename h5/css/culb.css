@@ -136,7 +136,7 @@ header >div>hr.active{
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	width: 95%;
+	width: 85%;
 	height: 25px;
 	line-height: 25px;
 	font-size: 17px;
@@ -146,10 +146,7 @@ header >div>hr.active{
 }
 
 .tit-content .detile{
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	width: 90%;
+	width: 85%;
 	line-height: 0.07rem;
 	color: #878787;
 	position: absolute;
@@ -229,12 +226,10 @@ footer div p{
 	color: #fff0cc;
 }
 .tit-wrap .tit-content .detile p{
-	height: 20px;
+	max-height: 40px;
 	line-height: 20px;
-	/*word-break: break-all;*/
-	/*overflow: hidden;*/
-	/*text-overflow: ellipsis;*/
-	/*white-space: nowrap;*/
+	word-break: break-all;
+	overflow: hidden;
 }
 @media screen and (min-height:737px){
 	.infoItem:nth-child(even) .tit-content{
@@ -261,6 +256,11 @@ footer div p{
 		text-overflow: ellipsis;
 		margin-top: 0.03rem;
 		font-size: 18px;
+	}
+	.tit-wrap .tit-content .detile p{
+		max-height: 22px;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 }
 

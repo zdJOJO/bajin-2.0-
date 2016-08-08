@@ -127,6 +127,8 @@ $(document).ready(function(){
 	var activities=$("#activities");
 	var actBottom=$(".act-bottom");
 	var moreCheck=true;
+
+
     //更多的操作
 	showMore.click(function(){
 		if(moreCheck){
@@ -135,7 +137,8 @@ $(document).ready(function(){
 				marginTop:"0.025rem",
 				height:"0.154rem"
 			});
-			$("#moreAct img").attr("src","imgs/top.png");   
+			$("#moreAct img").attr("src","imgs/top.png");
+			$('#moreAct > span').html('收起');
 			moreCheck=false;
 		}else{			
 			actBottom.css({
@@ -143,6 +146,7 @@ $(document).ready(function(){
 				height:"0"
 			});
 			$("#moreAct img").attr("src","imgs/bottom.png");
+			$('#moreAct > span').html('更多');
 			moreCheck=true;
 		}
 	});

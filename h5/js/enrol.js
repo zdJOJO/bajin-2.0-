@@ -120,7 +120,7 @@ $(function(){
 
 
             var str2 = $('<section class="content"><div class="content-text">' + data.activityDetail + '</div></section>');
-            $("#doEnrol").append('<span class="closeDate">'+'截止时间：'+ new Date(data.applyEndTime*1000).Formate() +'</span>');
+            $("#doEnrol").append('<span class="closeDate">'+'报名截止时间：'+ new Date(data.applyEndTime*1000).Formate() +'</span>');
 
             if(new Date().getTime() > data.endTime*1000){
                 $("#doEnrol>button").attr({

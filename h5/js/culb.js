@@ -118,17 +118,6 @@ $(function(){
                 $('.singleHot').click(function(){
                     window.location.href = "consultation.html?id=" + $(this).attr('data-id');
                 });
-
-                // if(window.location.href.indexOf('icbcServe') > 0){
-                //     $('.singleHot').click(function(){
-                //         window.location.href = "consultation.html?icbc&&id=" + $(this).attr('data-id');
-                //     });
-                // }else {
-                //     $('.singleHot').click(function(){
-                //         window.location.href = "consultation.html?id=" + $(this).attr('data-id');
-                //     });
-                // }
-
             }else {
                 // 锁定
                 dropload_consultation.lock();
@@ -165,10 +154,11 @@ $(function(){
                            '<p style="font-size:13px;  position: absolute;top: 82%;left: 13px;">'+ new Date(data.list[i].startTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
                            '</p></div></div></div>';
                    }else {
+                       var chineseStr = data.list[i].detail.replace(/<[^>]+>/g,"").replace(/[^\u4e00-\u9fa5]/gi,"");
                        actStr += '<div class="infoItem hotItem" data-type="'+data.list[i].type+'" data-i="'+ data.list[i].itemId+'" style="background: url('+data.list[i].minPic+') no-repeat #f7f7f7; background-size:39% 100%;">' +
                            '<div class="tit-wrap"><div class="tit-content"><h1>'+data.list[i].title+'</h1>' +
                            '<div class="detile">' +
-                           '<p >'+data.list[i].subtitle+'</p></div>' +
+                           '<div>'+ showThreeLine(chineseStr,55) +'</div></div>' +
                            '<p>'+ new Date(data.list[i].createTime*1000).Formate()+ '</p>' +
                            '<span class="type">' + typeJudge(data.list[i].type) + '</span>' + '</div></div></div>';
                    }
@@ -307,6 +297,7 @@ $(function(){
 
 
 
+   
 
 
 

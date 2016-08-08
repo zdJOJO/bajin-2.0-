@@ -73,7 +73,7 @@
                     success:function(data){
                         $(".activityDetail>img").attr("src",data.activityPic);
                         $(".activityDetail h3").html(data.activityTitle);
-                        $(".activityDetail .time span").html(new Date(data.startTime*1000).Formate()+"-"+new Date(data.endTime*1000).Formate());
+                        $(".activityDetail .time span").html(new Date(data.startTime*1000).Formate()+" - "+new Date(data.endTime*1000).Formate());
                         $(".activityDetail .address span").html(data.activityAddress);
                         lessAll($(".activityDetail .address span"),25);
                         $(".tips").attr("data-cost",data.activityPrice);
@@ -279,5 +279,5 @@ Date.prototype.Formate=function(){
     var d=this.getDate()>9?this.getDate():'0'+this.getDate();
     var h=this.getHours()>9?this.getHours():'0'+this.getHours();
     var f=this.getMinutes()>9?this.getMinutes():'0'+this.getMinutes();
-    return (y+'.'+m+'.'+d+' '+h+':'+f);
+    return (y+'.'+m+'.'+d);
 }

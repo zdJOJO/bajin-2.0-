@@ -11,7 +11,13 @@ var port = "http://test.winthen.com";
 
 
 
-
+// hot 更多热门 只显示3行文字
+function showThreeLine(str,num) {
+	if(str.length > num){
+		str = str.substring(0,num-1) + '...';
+	}
+	return str
+}
 
 
 //通用函数，也是可以写到zepto.js里面的   时间戳转换成 固定格式

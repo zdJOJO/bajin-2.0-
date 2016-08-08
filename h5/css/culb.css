@@ -357,14 +357,16 @@ footer div p{
 }
 
 .hotList >.lists >.hotItem .detile{
-	top: 48px;
+	top: 60px;
 	color: #b3b3b3;
 	font-size: 15px;
 }
 
-.hotList >.lists >.hotItem .detile>p{
-	height: 0.15rem;
+.hotList >.lists >.hotItem .detile>div{
+	max-height: 0.19rem;
+	line-height: 20px;
 	word-break: break-all;
+	overflow: hidden;
 	white-space: normal;
 }
 
@@ -426,18 +428,16 @@ footer div p{
 	header >div{
 		margin: 4.6% auto 0 auto;
 	}
+
+	.hotList >.lists >.hotItem h1{
+		font-size: 17px;
+		width: 60%;
+	}
+
+	.hotList >.lists >.hotItem .detile>div{
+		font-size: 15px;
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 @media only screen and (max-width: 320px){
@@ -457,6 +457,7 @@ footer div p{
 	.hotList >.lists >.hotItem .detile{
 		width: 82%;
 		font-size: 13px;
+		top: 50px;
 	}
 
 	.hotList >.lists >.hotItem .tit-content>p{

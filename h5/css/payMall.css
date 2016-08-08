@@ -66,6 +66,13 @@ div.priceBlock >input{
     color: #DFDFDF;
 }
 
+/*去除 input框 type=number时候 小箭头*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+
 
 div>li>span{
     position: absolute;

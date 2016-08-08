@@ -97,8 +97,12 @@ $(function(){
 						contentType: "application/json",
 						data:JSON.stringify(info),
 						success:function(data){
-							if($(this).attr('id') != 'myImage'){
-								$.toast('更新成功');
+							if(data.code == '202'){
+								if($(this).attr('id') != 'myImage'){
+									$.toast('更新成功');
+								}
+							}else {
+								$.toast('更新失败');
 							}
 						},
 						error:function(data){

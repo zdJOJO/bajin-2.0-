@@ -27,6 +27,8 @@ $(function(){
 
 	var isBJVip = false;
 
+
+
 	if(token != undefined){
 		//拿到pickid继续获取参数然后发送请求
 		var cardList=$(".cardList").eq(0);
@@ -40,7 +42,11 @@ $(function(){
 						window.location.href = "login.html?his="+his;
 					}else{
 						for(var i=0;i<data.list.length;i++){
-							var item=$('<div class="cardItem" data-cardId='+data.list[i].cardNumber+'><div class="card-logo" ><img src="imgs/bank.jpg"></div><div class="card-info"><div class="card-name">中国工商银行</div><div class="card-tip">尾号'+data.list[i].cardNumber+'</div><div class="card-r">&gt;</div></div></div>')
+							var item=$('<div class="cardItem" data-cardNum="'+data.list[i].cardNumber+'" data-cardId='+data.list[i].cardId+'>' +
+								'<div class="card-logo" ><img src="imgs/bank.jpg"></div>' +
+								'<div class="card-info"><div class="card-name">中国工商银行</div>' +
+								'<div class="card-tip">尾号'+data.list[i].cardNumber+'</div>' +
+								'<div class="card-r">&gt;</div></div></div>');
 							cardList.append(item);
 							if(data.list[i].bjke == 1){
 								isBJVip = true;
@@ -53,27 +59,92 @@ $(function(){
 							//alert("你还没有添加银行卡,请先添加银行卡，然后再操作！！");
 							cardList.append("<h2 class= 'alert_q'>你还没有添加银行卡</h2>");
 						}else{
-							//一定要注意，在元素出来的时候再帮定事件，不然就没效
-							$(".cardItem").click(function(){		 //点击选中银行卡事件
-								if(pickid==11 && !isBJVip){
-									$.alert('本功能仅限工行白金卡用户');
-									return
-								}else {
-									var cardItem = $(this).data("cardid");
-									$.ajax({
-										type:"GET",
-										dataType:"text",
-										url:port+"/card/bank/encryption/"+pickid+"/"+cardItem+"?token="+token,
-										success:function(data){
-											if(data.length<50){
-												window.location.href = "login.html?his="+his;
-											}else{
-												toIcbc(data);
-											}
-										},
-									});
+							// 一定要注意，在元素出来的时候再帮定事件，不然就没效
+							// $(".cardItem").click(function(){		 //点击选中银行卡事件
+							// 	if(pickid==11 && !isBJVip){
+							// 		$.alert('本功能仅限工行白金卡用户');
+							// 		return
+							// 	}else {
+							// 		var cardItem = $(this).data("cardid");
+							// 		$.ajax({
+							// 			type:"GET",
+							// 			dataType:"text",
+							// 			url:port+"/card/bank/encryption/"+pickid+"/"+cardItem+"?token="+token,
+							// 			success:function(data){
+							// 				if(data.length<50){
+							// 					window.location.href = "login.html?his="+his;
+							// 				}else{
+							// 					toIcbc(data);
+							// 				}
+							// 			},
+							// 		});
+							// 	}
+							// });
+
+							//长按 和 点击
+							var timeOutEvent = 0;
+							$(".cardItem").on({
+								touchstart: function(e){
+									var cardId = $(this).attr('data-cardId');
+									function deleteBankCard() {
+										$.modal({
+											title: "删除",
+											text: "确定删除这张银行卡吗？",
+											buttons: [
+												{ text: "删除", onClick: function(){
+													$.ajax({
+														type:"DELETE",
+														url: port+"/card/card/"+ cardId + "?token="+token,
+														contentType:"application/json",
+														success:function(data){
+															if(data.code == 203){
+																$.alert("删除成功");
+																$(this).hide();
+															}else{
+																$.alert("删除失败");
+															}
+														}
+													})
+												} },
+												{ text: "取消", className: "default", onClick: function(){} }
+											]
+										});
+									}
+									timeOutEvent = setTimeout(function(){deleteBankCard();},1000);
+									e.preventDefault();
+								},
+								touchmove: function(){
+									clearTimeout(timeOutEvent);
+									timeOutEvent = 0;
+								},
+								touchend: function(){
+									clearTimeout(timeOutEvent);
+									if(timeOutEvent!=0){
+										if(pickid==11 && !isBJVip){
+											$.alert('本功能仅限工行白金卡用户');
+											return
+										}else {
+											var cardItem = $(this).data("cardNum");
+											$.ajax({
+												type:"GET",
+												dataType:"text",
+												url:port+"/card/bank/encryption/"+pickid+"/"+cardItem+"?token="+token,
+												success:function(data){
+													if(data.length<50){
+														window.location.href = "login.html?his="+his;
+													}else{
+														toIcbc(data);
+													}
+												},
+											});
+										}
+									}
+									return false;
 								}
-							});
+							})
+
+
+
 						}
 					}
 				},
@@ -82,12 +153,22 @@ $(function(){
 				}
 			});//ajax请求结束
 		}
+
+
 		cardData();
+
+
+
+
+
 		//模拟表单提交
 		function toIcbc(str){
 			$("#merSignMsg").val(str);
 			$("#info").submit();
 		}
+
+
+
 		function fidCard(){
 			$.ajax({
 				type:"GET",

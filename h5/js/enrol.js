@@ -68,16 +68,21 @@ $(function(){
     var applyNumber = 0;    //已报名人数
 
 
+
+    //分享时候 传当前页面的url 和 对象obj
+    get_url(window.location.href);
+
+
     function getActDetail(){
         $.get(port+"/card/activity/"+activityid,function(data){
 
             // //调用分享借口
-            // shareMInnit({
-            //     title: data.activityTitle,
-            //     desc: data.activitySubtitle,
-            //     link: window.location.href,
-            //     imgUrl: data.activityPic
-            // });
+            share_Modular({
+                title: data.activityTitle,
+                desc: data.activitySubtitle,
+                link: window.location.href,
+                imgUrl: data.activityPic
+            });
 
             peopleNumber = data.peopleNumber;
             applyNumber = data.applyNumber;

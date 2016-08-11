@@ -79,8 +79,7 @@ var getDetail = function () {
 
         //调用分享借口
         share_Modular(shareObj);
-        
-        
+
 
         typeNum = data.type;
 
@@ -246,7 +245,7 @@ $("#publishCmt").click(function () {
 
 //分享
 $('#collectionShare>.share').click(function () {
-    
+
     $("#shareMask").show();
 });
 $("#shareMask").click(function () {

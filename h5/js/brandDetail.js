@@ -60,6 +60,9 @@ var url_obj = {
 };
 
 
+//分享时候 传当前页面的url 和 对象obj
+get_url(window.location.href);
+
 
 
 //判断 是否 被收藏
@@ -143,7 +146,7 @@ var getGoodDetail = function () {
 			url_obj.goodsId = data.goodsId;
 
 			//调用分享借口
-			shareMInnit({
+			share_Modular({
 				title: data.goodsTitle,
 				desc: data.goodsSubtitle,
 				link: window.location.href,

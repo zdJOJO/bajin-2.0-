@@ -32,12 +32,18 @@ $(function(){
     console.log(escape(his));
     console.log(typeof(token));
     var dataWrap=$('.content').eq(0);
+
+
+
+    //分享时候 传当前页面的url 和 对象obj
+    get_url(window.location.href);
+
     function getData(){
         $.get(port+"/card/life/"+lifeid,function(data){
             console.log(data);
 
             //调用分享借口
-            shareMInnit({
+            share_Modular({
                 title: data.lifeTitle,
                 desc: data.lifeSubtitle,
                 link: window.location.href,

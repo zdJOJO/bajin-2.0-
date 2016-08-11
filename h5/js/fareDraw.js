@@ -48,7 +48,7 @@ $(function(){
             console.log(data);
             $("#rotate").css("background","rgba(0, 0, 0, 0) url("+data.prizeSectionModel.sectionPic+") no-repeat scroll 0% 0% / 100% 100% padding-box border-box");
             $("#rotate").css('-webkit-transform','rotate(0deg)');
-            $("#tip_img").attr("src",data.prizeSectionModel.sectionBackpic);       
+            $("#tip_img").attr("src",data.prizeSectionModel.sectionBackpic); 
 
             var list = data.prizeModelList;
             console.log(list);

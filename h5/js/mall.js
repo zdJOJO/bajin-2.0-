@@ -37,6 +37,10 @@ $(document).ready(function(){
 	};
 
 
+	//分享时候 传当前页面的url 和 对象obj
+	get_url(window.location.href);
+
+
 
 
     //获取商品http://121.196.232.233/card/goods/{goodsId}	
@@ -53,11 +57,11 @@ $(document).ready(function(){
 
 
 			//调用分享借口
-			shareMInnit({
+			share_Modular({
 				title: data.data.title,
 				desc: data.data.subtitle,
 				link: window.location.href,
-				imgUrl: data.pic
+				imgUrl: data.data.pic
 			});
 
 
@@ -69,7 +73,33 @@ $(document).ready(function(){
 				"width": "100%",
 				"height": "auto"
 			});
-			$("footer a").attr("href","tel:"+data.data.phone);
+
+			//判断是否机场预约 和 是否打折
+			if(data.data.title == '即刻尊享机场贵宾服务'){
+				$('#payOnline').hide();
+				$("footer a").css({
+					'color' : '#fff',
+					'background-color' : '#b7a66e',
+					'width' : '100%'
+				});
+				$("footer p").html(' 预约');
+			}
+
+			if(data.data.currentDiscount != null){
+				$("footer a").attr("href","tel:"+data.data.phone);
+			}else {
+				$('#payOnline').hide();
+				$("footer a").attr("href","tel:"+data.data.phone).css({
+					'color' : '#fff',
+					'background-color' : '#b7a66e',
+					'width' : '100%'
+				});
+			}
+
+
+
+
+
 			$(".saveAndShare").attr("data-itemid",data.data.mallId);
 			var picList = data.data.imgList;
 			for(var i=0,len=picList.length;i<len;i++){

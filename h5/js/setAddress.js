@@ -142,10 +142,19 @@ $(function(){
 	 			}),
 	 			success:function(data){
 					//todo
+					if(isPersonNalInfo > 0){
+						window.location.href = "set.html?";
+					}
+					if(window.location.href.indexOf('fromeGift') > 0){
+						window.location.href = "birthdayGift.html?resetDefault";
+					}
 	 			},
 	 			error:function(data){
 					if(isPersonNalInfo > 0){
 						window.location.href = "set.html?";
+					}
+					if(window.location.href.indexOf('fromeGift') > 0){
+						window.location.href = "birthdayGift.html?resetDefault";
 					}
 	 			}
 	 		});

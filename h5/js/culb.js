@@ -1,11 +1,11 @@
 
 $(function(){
 
-    get_url(window.location.href);
-    if(window.location.href.indexOf('joinAct') > 0){
-        //Cookie 中 存入gps
-        jsSdkApi('position');
-    }
+    // get_url(window.location.href);
+    // if(window.location.href.indexOf('joinAct') > 0){
+    //     //Cookie 中 存入gps
+    //     jsSdkApi('position');
+    // }
 
 
     var token = "";
@@ -28,8 +28,8 @@ $(function(){
     token = getCookie("token");
 
 
-    var gpsObj = JSON.parse(getCookie("gpsObj"));
-    console.log(gpsObj);
+    // var gpsObj = JSON.parse(getCookie("gpsObj"));
+    // console.log(gpsObj);
 
 
     $(".indexPage").click(function(){
@@ -142,8 +142,10 @@ $(function(){
     //报名列表 获取
     function getPage(page,gps){
 
-        var url = !isHotDoor ? port+"/card/activity?currentPage="+page+"&size=10&type=1&lat=" + gps.latitude +'&log=' + gps.longitude :
-        port+"/card/mpage/hotpage?currentPage="+page+"&size=10" ;
+        // var url = !isHotDoor ? port+"/card/activity?currentPage="+page+"&size=10&type=1&lat=" + gps.latitude +'&log=' + gps.longitude :
+        // port+"/card/mpage/hotpage?currentPage="+page+"&size=10" ;
+
+        var url = !isHotDoor ? port+"/card/activity?currentPage="+page+"&size=10" : port+"/card/mpage/hotpage?currentPage="+page+"&size=10" ;
 
         $.get(url,function(data){
             if(data.list.length != 0){          //如果加载的是非空页面

@@ -117,7 +117,7 @@ var getGPS_JSSDK = function () {
                 latitude: res.latitude,
                 longitude: res.longitude
             }
-            setCookie('gpsObj',JSON.stringify(gpsObj));
+            // setCookie('gpsObj',JSON.stringify(gpsObj));
         },
         cancel: function (res) {
             alert('用户拒绝授权获取地理位置');

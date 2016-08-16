@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="screen-orientation"content="portrait">
+    <meta name="x5-orientation"content="portrait">
+    <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
+    <title>生日礼包</title>
+
+    <link rel="stylesheet" type="text/css" href="css/weiXin/weui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/weiXin/jquery-weui.css">
+    <link rel="stylesheet" type="text/css" href="css/birthdayGift.css">
+    <script>
+        var iWidth=document.documentElement.clientWidth;
+        document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+    </script>
+</head>
+<body>
+    <div class="topImg"></div>
+    <div id="content">
+        <section class="receiveBefore" >
+            <div class="receive">
+                <h3>白金尊享为您准备超级生日大礼包</h3>
+                <input id="birthDay" type="text" placeholder="请输入您的生日">
+                <input id="birthDayCode" placeholder="请输入生日礼包的领取码">
+                <button id="receiveNow">立即领取</button>
+                <p>温馨提示:1.先登录。2.生日礼包领取码请查询工行发给白金信用卡持卡人的生日祝福短信。</p>
+            </div>
+            <div class="giftContent">
+                <h3>礼包内容</h3>
+                <li class="giftTitle">
+                    白金臻品礼:
+                    <span class="giftSubTitle">阿卡农产业大礼包</span>
+                </li>
+                <li class="giftTitle">
+                    白金臻品礼:
+                    <span class="giftSubTitle">阿卡农产业大礼包</span>
+                </li>
+            </div>
+            <div class="giftRule">
+                <h3>礼包领取规则</h3>
+                <li>1.白金生日礼包仅限中国工商银行白金信用卡持卡人在生日当月领取</li>
+                <li>2.须凭工行浙江省分行发给白金信用卡持卡人的短信中的领取码来领取生日礼包</li>
+                <li>3.每位白金信用卡持卡人每年仅限可领取一次生日礼包</li>
+            </div>
+        </section>
+
+        <section class="receiveAfter" style="display: none">
+            <div class="gifList">
+                <img class="success" src="imgs/gift/success.png">
+                <h3>领取成功</h3>
+                <li class="gift">
+                    <img class="logo" src="">
+                    <img class="right" src="imgs/gift/right.png">
+                    <img class="success" src="imgs/gift/gift.png">
+                    <span class="title">标标题标题标题题</span>
+                    <span class="subTitle">副标题副标题</span>
+                </li>
+                <li class="gift">
+                    <img class="logo" src="">
+                    <img class="right" src="imgs/gift/right.png">
+                    <img class="success" src="imgs/gift/gift.png">
+                    <span class="title">标题标题标题标题</span>
+                    <span class="subTitle">副标题副标题副标题</span>
+                </li>
+            </div>
+            <div>
+                <h3>礼包以放至账户</h3>
+                <span class="account">1234664</span>
+            </div>
+            <div>
+                <h3>礼包将于7日内配送到</h3>
+                <p class="address">222222222fdsf</p>
+            </div>
+            <p>(电子券可至个人中心-我的权益-电子券查看使用)</p>
+        </section>
+
+
+        <div id="popPub" style="display: none">
+            <div class="defaulAddress"></div>
+        </div>
+        <div  id="orderLoading" class="spinner" style="display: none">
+            <div class="spinner-container container1">
+                <div class="circle1"></div>
+                <div class="circle2"></div>
+                <div class="circle3"></div>
+                <div class="circle4"></div>
+            </div>
+            <div class="spinner-container container2">
+                <div class="circle1"></div>
+                <div class="circle2"></div>
+                <div class="circle3"></div>
+                <div class="circle4"></div>
+            </div>
+            <div class="spinner-container container3">
+                <div class="circle1"></div>
+                <div class="circle2"></div>
+                <div class="circle3"></div>
+                <div class="circle4"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
+<script type="text/javascript" src="js/birthdayGift.js"></script>
+</html>

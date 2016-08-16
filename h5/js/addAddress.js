@@ -24,7 +24,7 @@ $(function(){
 	his = his[his.length-1];
 
 	var obj;
-	if(window.location.search!=""){
+	if(window.location.search != ""){
 		var  JSONstr = window.location.search.split("=")[1];
 		console.log(JSON.parse(unescape(JSONstr)));
 		obj = JSON.parse(unescape(JSONstr));	
@@ -62,6 +62,8 @@ $(function(){
 
 							if(window.location.href.indexOf('fromePersonNalInfo') > 0){
 								window.location.href = "setAddress.html?fromePersonNalInfo&&obj="+escape(JSON.stringify(obj));
+							}else if(window.location.href.indexOf('fromeGift') > 0){
+								window.location.href = "birthdayGift.html";
 							}else {
 								window.location.href = "setAddress.html?obj="+escape(JSON.stringify(obj));
 							}

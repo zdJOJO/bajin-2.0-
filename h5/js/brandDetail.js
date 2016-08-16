@@ -146,7 +146,7 @@ var getGoodDetail = function () {
 			url_obj.goodsId = data.goodsId;
 
 			//调用分享借口
-			share_Modular({
+			jsSdkApi('share',{
 				title: data.goodsTitle,
 				desc: data.goodsSubtitle,
 				link: window.location.href,

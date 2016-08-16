@@ -1,5 +1,13 @@
 
 $(function(){
+
+    get_url(window.location.href);
+    if(window.location.href.indexOf('joinAct') > 0){
+        //Cookie 中 存入gps
+        jsSdkApi('position');
+    }
+
+
     var token = "";
     //获取存在于cookie中的token值
     function getCookie(c_name)
@@ -18,8 +26,11 @@ $(function(){
     return undefined;
     }
     token = getCookie("token");
-    // alert(token);
-    //http://121.196.232.233:9292/card/club?currentPage={pagenum}&size={size}
+
+
+    var gpsObj = JSON.parse(getCookie("gpsObj"));
+    console.log(gpsObj);
+
 
     $(".indexPage").click(function(){
         window.location.href = "index.html";
@@ -43,6 +54,7 @@ $(function(){
         isHotDoor = true;
     }
 
+    
     if(!isHotDoor &&　window.location.pathname.indexOf('icbcServe') < 0){
         $("body").prepend('<header> <div class="joinAct active">报名<hr class="active"></div> <div class="consultation">资讯<hr></div></header>');
         $(".infoList").css('margin-top' ,'0.143rem');
@@ -87,10 +99,6 @@ $(function(){
     var consultationStr = '';
 
 
-
-
-
-
     //咨询列表获取
     function getPage_consultation(page) {
         var url = port + '/card/consult?currentPage=' + page + '&token=' + token + '&type=7';
@@ -131,12 +139,11 @@ $(function(){
 
 
 
-    
-
     //报名列表 获取
-    function getPage(page){
+    function getPage(page,gps){
 
-        var url = !isHotDoor ? port+"/card/activity?currentPage="+page+"&size=10" : port+"/card/mpage/hotpage?currentPage="+page+"&size=10" ;
+        var url = !isHotDoor ? port+"/card/activity?currentPage="+page+"&size=10&type=1&lat=" + gps.latitude +'&log=' + gps.longitude :
+        port+"/card/mpage/hotpage?currentPage="+page+"&size=10" ;
 
         $.get(url,function(data){
             if(data.list.length != 0){          //如果加载的是非空页面
@@ -205,6 +212,9 @@ $(function(){
 
     //判断
     if(window.location.href.indexOf('joinAct') > 0 || isHotDoor){
+
+        //JS-SDK接口   获取gps
+        // lat--纬度 , log--经度 . type判断是否按距离排序，1--是
         var dropload = $('#actList,#moreHot').dropload({
             scrollArea : window,
             domDown : {
@@ -215,7 +225,7 @@ $(function(){
             },
             loadDownFn : function(me){
                 pageNum++;
-                getPage(pageNum);
+                getPage(pageNum,gpsObj);
             }
         });
     }else {

@@ -1,4 +1,14 @@
-$(document).ready(function(){	
+$(document).ready(function(){
+
+
+	get_url(window.location.href);
+	if(window.location.href.indexOf('brand') > 0){
+		//Cookie 中 存入gps
+		jsSdkApi('position');
+	}
+
+	
+	
 	//获取token
 	var token = "";
 	//获取存在于cookie中的token值
@@ -17,7 +27,11 @@ $(document).ready(function(){
 	  }
 	return undefined;
 	}
+
 	token = getCookie("token");//便于本地测试
+	var gpsObj = JSON.parse(getCookie("gpsObj"));
+	console.log(gpsObj);
+
 	// token = getCookie("token");
 	//获取页面的名称
 	var his = window.location.pathname.split("/");
@@ -54,13 +68,18 @@ $(document).ready(function(){
 		}
 	});
 
+	
+	
+	
+	
+	
 	//获取 臻品列表
 	function getGoods(page,isDelete){
 		$.ajax({
 			type:"get",
 			async:true,
 			dataType:'json',
-			url:port+"/card/goods?currentPage="+page+"&isDelete="+isDelete+"&token="+token,
+			url:port+"/card/goods?currentPage="+page+"&isDelete="+isDelete,
 			success:function(data){
 				// 清空内容
 				if(data.list.length != 0){
@@ -97,10 +116,10 @@ $(document).ready(function(){
 
 
 	//获取 乐享列表
-	function getServer(currentPage,size){
+	function getServer(currentPage,size,gps){
 		$.ajax({
 			type:"get",
-			url:port+"/card/mall?currentPage="+currentPage+"&size="+size+"&token="+token,
+			url: port+"/card/mall?currentPage="+currentPage+"&size="+size + "&lat=" + gps.latitude +'&log=' + gps.longitude,
 			success:function(data){
 				if(data.data.list.length != 0 ){
 					for(var i=0,len=data.data.list.length;i<len;i++){
@@ -171,7 +190,7 @@ $(document).ready(function(){
 			},
 			loadDownFn : function(me){
 				pageNum++;
-				getServer(pageNum,10);
+				getServer(pageNum,10,gpsObj);
 				// if(pageNum == 1){
 				// 	setTimeout('$(".dropload-down").css("height","0")',1000);
 				// }

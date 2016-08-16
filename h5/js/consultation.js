@@ -78,7 +78,7 @@ var getDetail = function () {
         shareObj.imgUrl = data.pic;
 
         //调用分享借口
-        share_Modular(shareObj);
+        jsSdkApi('share',shareObj);
 
 
         typeNum = data.type;

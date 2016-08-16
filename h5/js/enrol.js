@@ -77,7 +77,7 @@ $(function(){
         $.get(port+"/card/activity/"+activityid,function(data){
 
             // //调用分享借口
-            share_Modular({
+            jsSdkApi('share',{
                 title: data.activityTitle,
                 desc: data.activitySubtitle,
                 link: window.location.href,
@@ -127,7 +127,7 @@ $(function(){
             var str2 = $('<section class="content"><div class="content-text">' + data.activityDetail + '</div></section>');
             $("#doEnrol").append('<span class="closeDate">'+'报名截止时间：'+ new Date(data.applyEndTime*1000).Formate() +'</span>');
 
-            if(new Date().getTime() > data.endTime*1000){
+            if(new Date().getTime() > data.applyEndTime*1000){
                 $("#doEnrol>button").attr({
                     disabled: true ,
                     style:"background:#9c9c9c;"
@@ -143,7 +143,9 @@ $(function(){
 
 
             //判断是会否报名
-            getEnrollStatu();
+            if(token){
+                getEnrollStatu();
+            }
 
 
 
@@ -303,6 +305,7 @@ $(function(){
             $('#doEnrol >button').html( statuStr( (JSON.parse(result)).data ) );
         })
     };
+
 
 
 

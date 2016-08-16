@@ -43,28 +43,38 @@ $(function(){
 
 										var captchabox = $("#captcha").val();
 
+										var membershipCode = $('#membershipCode').val(); //会员码
+										if(membershipCode && ( membershipCode.length != 9 || membershipCode.toString().sibling(0,3) != '120')){
+											alert('请输入正确的邀请码');
+											return;
+										}
 
 										// 发送验证码 后台验证
 										$.get( port+'/card/user/validate?captcha=' + captchabox + '&phone=' + phoneNum ,function (result) {
 											if(result.status){
 												if($("#ty").attr("checked")){
+													var data = {
+														userName: '',
+														password:pass,
+														phone:phoneNum,
+														userRole:0,
+														headPic:"",
+														gender:01,
+														signature:"",
+														openId:"",
+														clientId:""
+													};
+
+													if( membershipCode && membershipCode.length == 9 && membershipCode.toString().sibling(0,3) == '120'){
+														data.inviteCode = membershipCode;
+													}
+
 													$.ajax({
 														type:"POST",
 														dataType:"json",
 														contentType : "application/json;charset=UTF-8",
 														url:port+"/card/user?captcha="+captchabox,
-														data:JSON.stringify({
-															userName: '',
-															password:pass,
-															phone:phoneNum,
-															userRole:0,
-															headPic:"",
-															gender:01,
-															signature:"",
-															openId:"",
-															clientId:""
-
-														}),
+														data:JSON.stringify(data),
 														success:function(data){
 															if(data.code==201){
 																alert("注册成功");

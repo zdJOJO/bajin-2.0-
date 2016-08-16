@@ -57,7 +57,7 @@ $(document).ready(function(){
 
 
 			//调用分享借口
-			share_Modular({
+			jsSdkApi('share',{
 				title: data.data.title,
 				desc: data.data.subtitle,
 				link: window.location.href,

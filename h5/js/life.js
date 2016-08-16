@@ -43,7 +43,7 @@ $(function(){
             console.log(data);
 
             //调用分享借口
-            share_Modular({
+            jsSdkApi('share',{
                 title: data.lifeTitle,
                 desc: data.lifeSubtitle,
                 link: window.location.href,

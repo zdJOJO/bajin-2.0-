@@ -59,6 +59,7 @@ function getAddress() {
                 '<span class="info">' + defaulAddresObj.receiverName + '&nbsp;&nbsp;' + defaulAddresObj.receiverPhone +'</span> ' +
                 '<span class="address">' + defaulAddresObj.province + defaulAddresObj.city + defaulAddresObj.district + '</span> ' +
                 '<button id="sureReceive">确认领取</button>');
+            //默认选取地址
             $('#chooseBox').click();
             $('#right').click(function () {
                 window.location.href = 'setAddress.html?fromeGift&&obj=' + escape(JSON.stringify({}));
@@ -168,7 +169,7 @@ $('#popPub').click(function(e){
     e = window.event || e; // 兼容IE7
     var obj = $(e.srcElement || e.target);
     if ($(obj).is(".defaulAddress,.defaulAddress>span,.defaulAddress>img,#choose,#chooseBox,#sureReceive")) {
-         //('内部区域');
+         //todo  ('内部区域');
     } else {
         $('#popPub>.defaulAddress').animate({'bottom': '-150px'},200,function () {
             $('#popPub').hide();

@@ -146,7 +146,7 @@ $(function(){
 						window.location.href = "set.html?";
 					}
 					if(window.location.href.indexOf('fromeGift') > 0){
-						window.location.href = "birthdayGift.html?resetDefault";
+						window.location.href = "birthdayGift.html";
 					}
 	 			},
 	 			error:function(data){
@@ -154,7 +154,7 @@ $(function(){
 						window.location.href = "set.html?";
 					}
 					if(window.location.href.indexOf('fromeGift') > 0){
-						window.location.href = "birthdayGift.html?resetDefault";
+						window.location.href = "birthdayGift.html";
 					}
 	 			}
 	 		});

@@ -23,7 +23,7 @@ header div{
 	display: inline-block;
 	height: 0.12rem;
 	line-height: 0.12rem;
-	width: 0.16rem;
+	width: 0.2rem;
 	margin:0 0.02rem;
 	color: #3d3d3d;
 	border-bottom: 1px solid #3d3d3d;
@@ -37,7 +37,7 @@ header div{
 }
 .wrapper .singleCoupon>img{
 	width: 0.98rem;
-	margin: 0 0.01rem; 
+	/*margin: 0 0.01rem; */
 	height: 0.5rem;
 	/*使用图片作为border填充样式*/
 	border-bottom:5px solid transparent;
@@ -88,6 +88,24 @@ header div{
 	-webkit-margin-before:0.5em;
 	-webkit-margin-after:0.5em;
 }
+
+
+.wrapper .singleCoupon>.mask{
+	width: 96%;
+	margin: auto;
+	height: 0.23rem;
+	border: 1px silver solid;
+	background: url("../imgs/coupons/coupon.png") no-repeat;
+}
+
+
+
+
+
+
+
+
+
 /*蒙版*/
 /*.singleCoupon .mask{
 	position: absolute;

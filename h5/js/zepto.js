@@ -21,7 +21,7 @@ function showThreeLine(str,num) {
 
 
 //通用函数，也是可以写到zepto.js里面的   时间戳转换成 固定格式
-Date.prototype.Formate=function(){
+Date.prototype.Formate = function(){
 	var y=this.getFullYear();
 	var m=this.getMonth()+1>9?(this.getMonth()+1):'0'+(this.getMonth()+1);
 	var d=this.getDate()>9?this.getDate():'0'+this.getDate();
@@ -81,15 +81,6 @@ var typeJudge = function (type) {
 };
 
 
-
-//存储cooke
-function setCookie (name, value) {
-	//设置名称为name,值为value的Cookie
-	var expdate = new Date();   //初始化时间
-	expdate.setTime(expdate.getTime() + 30 * 60 * 1000);   //时间
-	document.cookie = name +"="+value+";expires="+expdate.toGMTString()+";path=/";
-	//即document.cookie= name+"="+value+";path=/";   时间可以不要，但路径(path)必须要填写，因为JS的默认路径是当前页，如果不填，此cookie只在当前页面生效！~
-}
 
 
 

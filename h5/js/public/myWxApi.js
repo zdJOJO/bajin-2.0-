@@ -11,6 +11,14 @@ var signature = '';
 var gpsObj = {};
 
 
+//存储cooke
+function setCookie_GPS (name, value) {
+    //设置名称为name,值为value的Cookie
+    var expdate = new Date();   //初始化时间
+    expdate.setTime(expdate.getTime() + 30 * 60 * 1000);   //时间
+    document.cookie = name +"="+value+";expires="+expdate.toGMTString()+";path=/";
+    //即document.cookie= name+"="+value+";path=/";   时间可以不要，但路径(path)必须要填写，因为JS的默认路径是当前页，如果不填，此cookie只在当前页面生效！~
+}
 
 //获取当前页面的url
 var get_url = function (url) {
@@ -34,7 +42,7 @@ function randomString(len) {
 
 
 //向 后台获取 jsapi_ticket
-var jsSdkApi = function (type,_obj) {
+var jsSdkApi = function (type,_obj,_callback) {
     $.get( port + '/card/weixin/token/get',function (result) {
         nonceStr = randomString(16);
         timestamp =  String( parseInt((new Date().getTime() / 1000)) );
@@ -117,10 +125,12 @@ var getGPS_JSSDK = function () {
                 latitude: res.latitude,
                 longitude: res.longitude
             }
-            // setCookie('gpsObj',JSON.stringify(gpsObj));
+            setCookie_GPS('gpsObj',JSON.stringify(gpsObj));
         },
         cancel: function (res) {
             alert('用户拒绝授权获取地理位置');
+            gpsObj = {};
+            window.location.href = 'culb.html?joinAct';
         }
     });
 }

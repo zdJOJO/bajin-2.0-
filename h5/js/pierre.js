@@ -1,14 +1,4 @@
 $(document).ready(function(){
-
-
-	get_url(window.location.href);
-	if(window.location.href.indexOf('brand') > 0){
-		//Cookie 中 存入gps
-		jsSdkApi('position');
-	}
-
-	
-	
 	//获取token
 	var token = "";
 	//获取存在于cookie中的token值
@@ -29,8 +19,12 @@ $(document).ready(function(){
 	}
 
 	token = getCookie("token");//便于本地测试
-	var gpsObj = JSON.parse(getCookie("gpsObj"));
-	console.log(gpsObj);
+
+	// var gpsObj = {};
+	// var gpsObjStr = getCookie("gpsObj");
+	// if(gpsObjStr.length > 0){
+	// 	gpsObj = JSON.parse(gpsObjStr);
+	// }
 
 	// token = getCookie("token");
 	//获取页面的名称
@@ -68,10 +62,6 @@ $(document).ready(function(){
 		}
 	});
 
-	
-	
-	
-	
 	
 	//获取 臻品列表
 	function getGoods(page,isDelete){
@@ -117,9 +107,14 @@ $(document).ready(function(){
 
 	//获取 乐享列表
 	function getServer(currentPage,size,gps){
+
+		//gps = JSON.parse(getCookie("gpsObj"));
+
+		var url = !gpsObj.latitude ? port+"/card/mall?currentPage="+currentPage+"&size="+size
+			: port+"/card/mall?currentPage="+currentPage+"&size="+size + "&type=1&lat=" + gps.latitude +'&log=' + gps.longitude;
 		$.ajax({
 			type:"get",
-			url: port+"/card/mall?currentPage="+currentPage+"&size="+size + "&lat=" + gps.latitude +'&log=' + gps.longitude,
+			url: url,
 			success:function(data){
 				if(data.data.list.length != 0 ){
 					for(var i=0,len=data.data.list.length;i<len;i++){
@@ -130,6 +125,7 @@ $(document).ready(function(){
 					// 每次数据加载完，必须重置
 					str = '';
 					dropload_brand.resetload();
+
 
 					$(".singleBrand_q").bind("click",function(){
 						window.location.href = "mall.html?id="+$(this).data("mallid");
@@ -209,10 +205,7 @@ $(document).ready(function(){
 	});
 
 
-
-
-
-
+	
 	//查看那购物车是有商品
 	if(token){
 		$.get(port+"/card/car?currentPage="+1+"&size="+ 10 +"&token="+token ,function (result) {

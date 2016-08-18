@@ -39,7 +39,7 @@ $(function(){
 				window.location.href = "login.html?his="+his;
 			}else{
 				for(var i=0; i<data.list.length; i++){
-					var item=$('<div class="fav_content clearfix"><div class="appo_content_cen"><img src="'+data.list[i].activity.activityPic+'"></div><div class="appo_content_ri"><h2>'+data.list[i].activity.activityTitle+'</h2><p>'+data.list[i].activity.activityBrief+'</p><div class="appo_ri_zf">'+new Date(data.list[i].createTime*1000).Formate()+'</div><div class="appo_ri_sc" data-applyid = "'+data.list[i].applyId+'" data-caid="'+data.list[i].activityId+'">查看详情</div> </div></div>')
+					var item=$('<div class="fav_content clearfix"><div class="appo_content_cen"><img src="'+data.list[i].activity.activityPic+'"></div><div class="appo_content_ri"><h2>'+data.list[i].activity.activityTitle+'</h2><p>'+data.list[i].activity.activityBrief+'</p><div class="appo_ri_zf">'+ new Date(data.list[i].createTime*1000).Formate()+'</div><div class="appo_ri_sc" data-applyid = "'+data.list[i].applyId+'" data-caid="'+data.list[i].activityId+'">查看详情</div> </div></div>')
 					fav_add.append(item);	
 					
 				}

@@ -1,13 +1,5 @@
 
 $(function(){
-
-    // get_url(window.location.href);
-    // if(window.location.href.indexOf('joinAct') > 0){
-    //     //Cookie 中 存入gps
-    //     jsSdkApi('position');
-    // }
-
-
     var token = "";
     //获取存在于cookie中的token值
     function getCookie(c_name)
@@ -28,8 +20,11 @@ $(function(){
     token = getCookie("token");
 
 
-    // var gpsObj = JSON.parse(getCookie("gpsObj"));
-    // console.log(gpsObj);
+    // var gpsObj = {};
+    // var gpsObjStr = getCookie("gpsObj");
+    // if(gpsObjStr.length > 0){
+    //     gpsObj = JSON.parse(gpsObjStr);
+    // }
 
 
     $(".indexPage").click(function(){
@@ -53,8 +48,6 @@ $(function(){
     if(window.location.pathname.indexOf('hotDoor') > 0){
         isHotDoor = true;
     }
-
-    
     if(!isHotDoor &&　window.location.pathname.indexOf('icbcServe') < 0){
         $("body").prepend('<header> <div class="joinAct active">报名<hr class="active"></div> <div class="consultation">资讯<hr></div></header>');
         $(".infoList").css('margin-top' ,'0.143rem');
@@ -144,8 +137,9 @@ $(function(){
 
         // var url = !isHotDoor ? port+"/card/activity?currentPage="+page+"&size=10&type=1&lat=" + gps.latitude +'&log=' + gps.longitude :
         // port+"/card/mpage/hotpage?currentPage="+page+"&size=10" ;
-
-        var url = !isHotDoor ? port+"/card/activity?currentPage="+page+"&size=10" : port+"/card/mpage/hotpage?currentPage="+page+"&size=10" ;
+        if(!gpsObj.latitude){
+            var url = !isHotDoor ? port+"/card/activity?currentPage="+page+"&size=10" : port+"/card/mpage/hotpage?currentPage="+page+"&size=10" ;
+        }
 
         $.get(url,function(data){
             if(data.list.length != 0){          //如果加载的是非空页面
@@ -183,6 +177,17 @@ $(function(){
                 // 每次数据加载完，必须重置
                 actStr = '';
                 dropload.resetload();
+
+                // function reload() {
+                //     if($('#actList>.lists').children().length == 0){
+                //         location.reload();
+                //     }else {
+                //         clearInterval(loop);
+                //     }
+                // }
+                // if(window.location.search == 'joinAct'){
+                //     var loop = setInterval(reload,1000);
+                // }
 
                 //整个div点击跳转
                 $('.infoItem').click(function(){
@@ -228,6 +233,11 @@ $(function(){
             loadDownFn : function(me){
                 pageNum++;
                 getPage(pageNum,gpsObj);
+                // if($('#actList>.lists').children().length == 0){
+                //     location.reload();
+                // }else {
+                //
+                // }
             }
         });
     }else {
@@ -265,7 +275,18 @@ $(function(){
           }else {
              window.location.href = jumpPage(_type).htmlStr + '?id=' + id ;
           }
-        }});
+        }
+
+    // var loop = self.setInterval("reload()",500);
+    // function reload() {
+    //     if($('#actList>.lists').children().length == 0){
+    //         location.reload();
+    //     }else {
+    //         clearInterval(loop);
+    //     }
+    // }
+
+});
 
 
 
@@ -309,13 +330,6 @@ $(function(){
 
 
 
-   
-
-
-
-
-
-
 
 
     //两行加省略
@@ -329,3 +343,7 @@ $(function(){
             }
         }
     };
+
+
+
+

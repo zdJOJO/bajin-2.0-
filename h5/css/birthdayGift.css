@@ -41,6 +41,7 @@ section h3{
     /*font-weight: 100;*/
 }
 
+
 section p{
     color: #929292;
     font-size: 0.9em;
@@ -116,6 +117,13 @@ section >.giftRule li{
 
 section.receiveAfter div{
     text-align: left;
+}
+
+section.receiveAfter div>span.account{
+    position: absolute;
+    top: 0;
+    left: 35%;
+    color: #929292;
 }
 
 section.receiveAfter div.gifList{

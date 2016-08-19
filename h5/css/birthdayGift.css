@@ -87,9 +87,10 @@ input[placeholder], [placeholder], *[placeholder] {
 
 section >.giftContent{
     text-align: left;
+    position: relative;
 }
 
-section >.giftContent>.giftTitle{
+section >.giftContent>ul>.giftTitle{
     color: #929292;
     font-size: 0.9em;
     width: 100%;
@@ -98,9 +99,9 @@ section >.giftContent>.giftTitle{
     line-height: 25px;
 }
 
-section >.giftContent>.giftTitle:last-child{
-    margin-bottom: 20px;
-}
+/*section >.giftContent>ul>.giftTitle:last-child{*/
+    /*margin-bottom: 20px;*/
+/*}*/
 
 
 section >.giftRule li{
@@ -278,7 +279,23 @@ section.receiveAfter .gift>.subTitle{
 
 
 
+#more{
+    width: 100%;
+    height: 25px;
+    border: none;
+    background: none;
+    margin: 5px 0 2px 0;
+}
 
+#giftLoading{
+    width: 20px;
+    height: auto;
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    margin-left: -10px;
+    display: none;
+}
 
 
 

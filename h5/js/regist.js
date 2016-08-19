@@ -48,6 +48,10 @@ $(function(){
 											alert('请输入正确的邀请码');
 											return;
 										}
+										if(!$('#ty').is(':checked')){
+											alert('请勾选同意用户协议');
+											return;
+										}
 
 										// 发送验证码 后台验证
 										$.get( port+'/card/user/validate?captcha=' + captchabox + '&phone=' + phoneNum ,function (result) {

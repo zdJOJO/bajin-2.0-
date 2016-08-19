@@ -1,23 +1,8 @@
 /**
  * Created by Administrator on 2016/8/16.
  */
-var token = "";
-//获取存在于cookie中的token值
-function getCookie(c_name) {
-    if (document.cookie.length>0)
-    {
-        c_start=document.cookie.indexOf(c_name + "=")
-        if (c_start!=-1)
-        {
-            c_start=c_start + c_name.length+1
-            c_end=document.cookie.indexOf(";",c_start)
-            if (c_end==-1) c_end=document.cookie.length
-            return unescape(document.cookie.substring(c_start,c_end))
-        }
-    }
-    return undefined;
-}
-token = getCookie("token");
+
+var token = window.location.search.split('=')[1];
 var his = window.location.pathname.split("/");
 his = his[his.length-1];
 
@@ -34,6 +19,10 @@ $('#birthDay').blur(function () {
 var hasBinded = false; //是否绑卡  是true
 var isCodeRight = false; //领取码是否正确   是true
 var isOverdue = true;  //领取码是否过期  过期true
+var giftId = '';
+
+var pageNum = 1;
+
 
 var defaulAddressJo = $('#popPub>.defaulAddress');
 //获取地址
@@ -79,11 +68,37 @@ getAddress();
 
 
 
+//生日礼包列表获取 
+function getGIftsList(currentPage) {
+    $.ajax({
+        type: 'get',
+        url: port + '/card/birthgift?currentPage=' + currentPage + '&token=' + token,
+        success: function (result) {
+            var giftStr = '';
+            if( currentPage==1 &&(!result || result.data.length == 0)){
+                $('#content>.receiveBefore .giftList').append('<li class="giftTitle">暂无礼包</li>');
+                $('.bottomBox').hide();
+                return;
+            }
+            for(var i=0;i<result.data.length;i++){
+                giftStr += '<li class="giftTitle">'+ result.data[i].title +'<span class="giftSubTitle">'+ result.data[i].subTitle +'</span></li>';
+            }
+            $('#content>.receiveBefore .giftList').append(giftStr);
+            setTimeout(function () {
+                $('#giftLoading').hide();
+                $('#more').show();
+            },200);
+        },
+        error: function () {
+            //todo
+        }
+    });
+}
+getGIftsList(1);
 
 
 
-
-//立即领取
+///立即领取
 // $("#receiveNow").click(function () {
 //     var birthday = $('#birthDay').val();
 //     var gifCode = $('#birthDayCode').val();
@@ -159,7 +174,7 @@ $("#receiveNow").click(function () {
 
 
 //地址弹框
-$('.giftContent').click(function () {
+$('').click(function () {
     $('#popPub').show(1,function () {
         $('#popPub>.defaulAddress').animate({'bottom': '0'},200);
     });
@@ -177,6 +192,13 @@ $('#popPub').click(function(e){
     }
 });
 
+//点击查看更多礼物
+$('#more').click(function () {
+    $('#giftLoading').show();
+    $('#more').hide();
+    pageNum++;
+    getGIftsList(pageNum);
+});
 
 
 

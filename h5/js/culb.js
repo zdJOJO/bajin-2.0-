@@ -210,6 +210,9 @@ $(function(){
                 dropload.noData();
                 setTimeout('$("#actList .dropload-down ,#moreHot .dropload-down").css("height","0")',1000);
             }
+            if(page == 1 && !data){
+                $('#actList>.lists').html('');
+            }
         });
     }
 

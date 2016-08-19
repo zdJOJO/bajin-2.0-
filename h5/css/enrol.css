@@ -487,9 +487,12 @@ footer.nav{
 
 
 
+
+
+
 @media screen and (max-width: 375px){
     #doEnrol>.closeDate{
-        left: 70px;
+        left: 68px;
     }
 }
 
@@ -501,7 +504,7 @@ footer.nav{
     }
 
     #doEnrol>.closeDate{
-        left: 60px;
+        left: 16%;
     }
 }
 
@@ -532,7 +535,7 @@ footer.nav{
     }
 
     #doEnrol>.closeDate{
-        left: 32px;
+        left: 30px;
     }
 }
 

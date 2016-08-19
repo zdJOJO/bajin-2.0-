@@ -32,7 +32,7 @@ $(document).ready(function(){
 			for(var i=0;i<result.data.length;i++){
 				str += '<div class="singleCoupon" data-ticketId="'+ result.data[i].ticketId +'"><div class="mask"></div>' +
 					'<div class="detail"><div class="reduce"><span>￥</span><span class="num">'+ result.data[i].ticketPrice +'</span></div>' +
-					'<div class="explain"><p class="tips"><img src="imgs/scope_b.png"/>满'+ result.data[i].overPrice + '元可用</p>'+
+					'<div class="explain"><p class="tips"><img src="imgs/scope_b.png"/>满'+ result.data[i].overPrice + '元减'+ result.data[i].ticketPrice+'</p>'+
 					'<p class="time"><img src="imgs/time_cb.png"/>' + new Date(result.data[i].startTime*1000).Formate() + ' 至 '
 					+ new Date(result.data[i].endTime*1000).Formate() + ' 可用 </p></div></div></div>';
 			}

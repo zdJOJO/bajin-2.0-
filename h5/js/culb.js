@@ -154,7 +154,7 @@ $(function(){
                            '<h1>'+data.list[i].activityTitle+'</h1>' +
                            '<div class="detile">' +
                            '<p >'+data.list[i].activitySubtitle+'</p></div>' +
-                           '<p style="font-size:13px;  position: absolute;top: 82%;left: 13px;">'+ new Date(data.list[i].startTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
+                           '<p style="font-size:12px;  position: absolute;top: 78%;left: 13px;">'+ new Date(data.list[i].startTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
                            '</p></div></div></div>';
                    }else {
                        var chineseStr = data.list[i].detail.replace(/<[^>]+>/g,"").replace(/[^\u4e00-\u9fa5]/gi,"");

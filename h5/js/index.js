@@ -236,7 +236,8 @@ $(document).ready(function(){
 	    $.get(port+"/card/mpage/hot",function(data){
 			for(var i=0;i<data.length;i++){
 				if(i ==0||i==1){
-				var item=$('<div class="itemLeft" ><img src='+data[i].minPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/><div class = "mask_lhq"><p class="tit_tq">'+data[i].title+'</p><p class="tit_bq">'+data[i].subtitle+'</p></div></div>');				
+				var item=$('<div class="itemLeft" ><img src='+data[i].minPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/>' +
+					'<div class = "mask_lhq"><p class="tit_tq">'+data[i].title+'</p></div>' + '<div class="gradientMask"></div></div>');
 				}else if(i==2){
 				var item=$('<div class="items_img" >' +
 					'<img src='+data[i].maxPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/>' +
@@ -253,10 +254,14 @@ $(document).ready(function(){
 			});	
 			//加载下面三张图，加载出来四个信息，只渲染前三个
 			$.get(port+"/card/mpage/new",function(data){
+				var item = ''
 				for(var i=0;i<data.length;i++){
-					var item=$('<div class="itemLeft"><img src='+data[i].minPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/><div class = "mask_lhq"><p class="tit_tq">'+data[i].title+'</p><p class="tit_bq">'+data[i].subtitle+'</p></div></div>');
-					itemWrap1.append(item);
+					 item += '<div class="itemLeft"><img src='+data[i].minPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/>' +
+						'<div class = "mask_lhq"><p class="tit_tq">'+data[i].title+'</p></div>' +
+						'<div class="gradientMask"></div></div>';
 				}
+				itemWrap1.append(item);
+
 				$(".activity-img").click(function(){
 					toActivity($(this).attr('data-type'),$(this).attr('data-itemid'));
 				})

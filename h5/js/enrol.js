@@ -502,11 +502,6 @@ $(function(){
 
 });
 
-Date.prototype.Formate=function(){
-    var y=this.getFullYear();
-    var m=this.getMonth()+1>9?(this.getMonth()+1):'0'+(this.getMonth()+1);
-    var d=this.getDate()>9?this.getDate():'0'+this.getDate();
-    return (y+'.'+m+'.'+d);
-}
+
 
 

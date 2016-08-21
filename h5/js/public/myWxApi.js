@@ -8,9 +8,6 @@ var timestamp =  '';
 var urlStr = '';
 var signature = '';
 
-var gpsObj = {};
-
-
 //存储cooke
 function setCookie_GPS (name, value) {
     //设置名称为name,值为value的Cookie

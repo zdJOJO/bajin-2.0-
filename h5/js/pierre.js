@@ -99,7 +99,7 @@ $(document).ready(function(){
 
 	//获取 乐享列表
 	function getServer(currentPage,size,gps){
-		var url = gpsObj.type==0 ? port+"/card/mall?currentPage="+currentPage+"&size="+size
+		var url = gps.type==0 ? port+"/card/mall?currentPage="+currentPage+"&size="+size
 			: port+"/card/mall?currentPage="+currentPage+"&size="+size + "&type=1&lat=" + gps.latitude +'&log=' + gps.longitude;
 		$.ajax({
 			type:"get",

@@ -51,6 +51,9 @@
     var user={};
     var activity={};
     var checkBtn=$('#checkInfo');
+    
+
+    
     if(token != undefined){
     $.ajax({
         type:"get",
@@ -82,42 +85,47 @@
 
 
                         checkBtn.click(function(){
-                            var applyName=$('#applyName').val();
-                            var applyPhone=$('#applyPhone').val();
-                            var applyNumber=$('.num').html();
-                            var applyRemark=$('.note_q').val();
-                            var email = $("#email").val();
-                            var reg_email=/^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
-                                if(applyName==''||applyPhone==''){
-                                     $.alert("请输入真实姓名和手机号");
-                                }else{
-                                var checked = checkMobile(applyPhone);
-                                    if(checked){
-                                        if(reg_email.test(email)||$("#email").val()==""){
-                                            var info={
-                                                "activityId":activityid,
-                                                "applyName":applyName,
-                                                "applyPhone":applyPhone,
-                                                "applyGender":user.gender,
-                                                "applyNumber":applyNumber,
-                                                "applyEmail":email||"",
-                                                "applyPrice":activity.activityPrice*applyNumber,
-                                                "applyRemark":applyRemark
-                                            };
-                                            var order = '';    // 微信用 applyId
-                                            $.ajax({
-                                                type:'POST',
-                                                url:port+"/card/apply?token="+token,
-                                                data:JSON.stringify(info),
-                                                contentType:'application/json',
-                                                success:function(data){
-                                                    order = data.data.applyId;
+                            //读取用户银行卡信息
+                            $.get( port + '/card/card?token=' + token ,function (result) {
+                                if(result.rowCount == 0){
+                                    $.toast("请先绑卡", "text");
+                                }else {
+                                    var applyName=$('#applyName').val();
+                                    var applyPhone=$('#applyPhone').val();
+                                    var applyNumber=$('.num').html();
+                                    var applyRemark=$('.note_q').val();
+                                    var email = $("#email").val();
+                                    var reg_email=/^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+                                    if(applyName==''||applyPhone==''){
+                                        $.alert("请输入真实姓名和手机号");
+                                    }else{
+                                        var checked = checkMobile(applyPhone);
+                                        if(checked){
+                                            if(reg_email.test(email)||$("#email").val()==""){
+                                                var info={
+                                                    "activityId":activityid,
+                                                    "applyName":applyName,
+                                                    "applyPhone":applyPhone,
+                                                    "applyGender":user.gender,
+                                                    "applyNumber":applyNumber,
+                                                    "applyEmail":email||"",
+                                                    "applyPrice":activity.activityPrice*applyNumber,
+                                                    "applyRemark":applyRemark
+                                                };
+                                                var order = '';    // 微信用 applyId
+                                                $.ajax({
+                                                    type:'POST',
+                                                    url:port+"/card/apply?token="+token,
+                                                    data:JSON.stringify(info),
+                                                    contentType:'application/json',
+                                                    success:function(data){
+                                                        order = data.data.applyId;
                                                         if(data.code=='201'){
                                                             // $('#applyName').val("");
                                                             // $('#applyPhone').val("");
                                                             // $("#email").val("");
                                                             if(activity.activityPrice == 0) {       //费用为0直接报名成功
-                                                                window.location.href="success.html?id="+activityid;
+                                                                window.location.href = "success.html?id=" + activityid;
                                                             }else {
                                                                 //费用不为0则跳转到工行支付接口 或者  微信支付
 
@@ -233,20 +241,23 @@
                                                         }else{
                                                             $.alert(data.message);
                                                         }
-                                                },
-                                                 error:function(data){
-                                                     $.alert("您的账号还未登陆");
-                                                     window.location.href="login.html?his="+escape(his);
-                                                }
-                                            });
+                                                    },
+                                                    error:function(data){
+                                                        $.alert("您的账号还未登陆");
+                                                        window.location.href="login.html?his="+escape(his);
+                                                    }
+                                                });
 
+                                            }else{
+                                                $.alert("请填写正确的邮箱");
+                                            }
                                         }else{
-                                            $.alert("请填写正确的邮箱");
+                                            $.alert("请填写正确的手机号码");
                                         }
-                                    }else{
-                                        $.alert("请填写正确的手机号码");
                                     }
                                 }
+                            });
+
                         });
                     },
                     error:function(data){

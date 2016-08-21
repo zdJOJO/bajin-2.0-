@@ -131,7 +131,7 @@ $(function(){
                 $("#doEnrol>button").attr({
                     disabled: true ,
                     style:"background:#9c9c9c;"
-                }).html('报名截止');
+                }).html('已过期');
             }
 
 
@@ -272,7 +272,6 @@ $(function(){
 
 
     //获取报名状态
-    // http://121.196.232.233/card/apply/status/{activityId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
     var getEnrollStatu = function () {
         $.get(port + '/card/apply/status/' + activityid + '?token=' + token,function (result) {
             function statuStr (num) {
@@ -296,13 +295,18 @@ $(function(){
                 }
                 return statuStr;
             }
-            if((JSON.parse(result)).data != 5){
-                $("#doEnrol>button").attr({
-                    disabled: true ,
-                    style:"background:#9c9c9c;"
-                });
+
+            if(JSON.parse(result).code == '666'){
+                $('#doEnrol >button').html('报名');
+            }else {
+                if((JSON.parse(result)).data != 5){
+                    $("#doEnrol>button").attr({
+                        disabled: true ,
+                        style:"background:#9c9c9c;"
+                    });
+                }
+                $('#doEnrol >button').html( statuStr( (JSON.parse(result)).data ) );
             }
-            $('#doEnrol >button').html( statuStr( (JSON.parse(result)).data ) );
         })
     };
 

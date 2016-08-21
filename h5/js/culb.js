@@ -150,7 +150,7 @@ $(function(){
                            '<div class="tit-wrap"><div class="tit-content"><h1>'+data.list[i].title+'</h1>' +
                            '<div class="detile">' +
                            '<div>'+ showThreeLine(chineseStr,55) +'</div></div>' +
-                           '<p>'+ new Date(data.list[i].createTime*1000).Formate()+ '</p>' +
+                           '<p>'+ new Date(data.list[i].createTime*1000).Formate_short()+ '</p>' +
                            '<span class="type">' + typeJudge(data.list[i].type) + '</span>' + '</div></div></div>';
                    }
                 }
@@ -191,6 +191,7 @@ $(function(){
             }
         });
     }
+
 
 
 
@@ -278,6 +279,8 @@ $(function(){
              window.location.href = jumpPage(_type).htmlStr + '?id=' + id ;
           }
         }
+
+
 });
 
 

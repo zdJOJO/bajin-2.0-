@@ -143,7 +143,7 @@ body{
 .msgBox>.msg-wrap>p>.head{
     display: inline-block;
     width: 70px;
-    font-size: 0.8em;
+    font-size: 1em;
     text-align: left;
     color: #AEAEAE;
 }
@@ -315,7 +315,7 @@ footer.nav{
 
 #doEnrol>.closeDate{
     position: absolute;
-    left: 23%;
+    left: 12%;
     top: 30%;
     color: #b0b0b0;
     font-size: 15px;
@@ -485,14 +485,13 @@ footer.nav{
 }
 
 
-
-
-
-
-
 @media screen and (max-width: 375px){
+    .msgBox>.msg-wrap>p{
+        font-size: 16px;
+    }
+
     #doEnrol>.closeDate{
-        left: 68px;
+        left: 26px;
     }
 }
 
@@ -503,8 +502,12 @@ footer.nav{
         width: 77%;
     }
 
+    .msgBox>.msg-wrap>p{
+        font-size: 15px;
+    }
+
     #doEnrol>.closeDate{
-        left: 16%;
+        left: 5%;
     }
 }
 
@@ -534,8 +537,16 @@ footer.nav{
         width: 70%;
     }
 
+    .msgBox>.msg-wrap>p{
+        font-size: 13px;
+    }
+    .msgBox>.msg-wrap>p>.head{
+        font-size: 14px;
+    }
+
     #doEnrol>.closeDate{
-        left: 30px;
+        left: 9px;
+        font-size: 14px;
     }
 }
 

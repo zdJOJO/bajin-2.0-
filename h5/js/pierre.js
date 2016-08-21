@@ -2,8 +2,7 @@ $(document).ready(function(){
 	//获取token
 	var token = "";
 	//获取存在于cookie中的token值
-	function getCookie(c_name)
-	{
+	function getCookie(c_name) {
 	if (document.cookie.length>0)
 	  {
 	  c_start=document.cookie.indexOf(c_name + "=")
@@ -20,13 +19,6 @@ $(document).ready(function(){
 
 	token = getCookie("token");//便于本地测试
 
-	// var gpsObj = {};
-	// var gpsObjStr = getCookie("gpsObj");
-	// if(gpsObjStr.length > 0){
-	// 	gpsObj = JSON.parse(gpsObjStr);
-	// }
-
-	// token = getCookie("token");
 	//获取页面的名称
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];
@@ -107,10 +99,7 @@ $(document).ready(function(){
 
 	//获取 乐享列表
 	function getServer(currentPage,size,gps){
-
-		//gps = JSON.parse(getCookie("gpsObj"));
-
-		var url = !gpsObj.latitude ? port+"/card/mall?currentPage="+currentPage+"&size="+size
+		var url = gpsObj.type==0 ? port+"/card/mall?currentPage="+currentPage+"&size="+size
 			: port+"/card/mall?currentPage="+currentPage+"&size="+size + "&type=1&lat=" + gps.latitude +'&log=' + gps.longitude;
 		$.ajax({
 			type:"get",
@@ -185,11 +174,38 @@ $(document).ready(function(){
 				domNoData  : '<div class="dropload-noData">已无数据</div>'
 			},
 			loadDownFn : function(me){
-				pageNum++;
-				getServer(pageNum,10,gpsObj);
-				// if(pageNum == 1){
-				// 	setTimeout('$(".dropload-down").css("height","0")',1000);
-				// }
+				var gpsObj = {};
+				if(window.navigator.geolocation){
+					navigator.geolocation.getCurrentPosition(function(position){
+						gpsObj= {
+							latitude: position.coords.latitude,
+							longitude: position.coords.longitude,
+							type: 1
+						}
+						pageNum++;
+						getServer(pageNum,10,gpsObj);
+					},function (error) {
+						//不传经纬度
+						gpsObj = {
+							type: 0
+						}
+						switch(error.code){
+							case error.PERMISSION_DENIED:
+								alert("you have denied access to your position .");
+								break;
+							case error.POSITION_UNAVAILABLE:
+								alert("there was a problem getting yout position .");
+								break;
+							case error.TIMEOUT:
+								alert("The application has timed out attempting to get your location .");
+								break;
+						}
+						pageNum++;
+						getServer(pageNum,10,gpsObj);
+					});
+				}else{
+					alert("你的浏览器不支持定位!");
+				}
 			}
 		});
 	}

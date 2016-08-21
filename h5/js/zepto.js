@@ -40,7 +40,6 @@ Date.prototype.Formate=function(){
 	}else {
 		return (y+'.'+m+'.'+d+' '+h+':'+f);
 	}
-
 }
 
 

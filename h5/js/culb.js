@@ -4,8 +4,7 @@ $(function(){
     //获取存在于cookie中的token值
     function getCookie(c_name)
     {
-    if (document.cookie.length>0)
-      {
+    if (document.cookie.length>0) {
       c_start=document.cookie.indexOf(c_name + "=")
       if (c_start!=-1)
         { 
@@ -19,14 +18,6 @@ $(function(){
     }
     token = getCookie("token");
 
-
-    // var gpsObj = {};
-    // var gpsObjStr = getCookie("gpsObj");
-    // if(gpsObjStr.length > 0){
-    //     gpsObj = JSON.parse(gpsObjStr);
-    // }
-
-
     $(".indexPage").click(function(){
         window.location.href = "index.html";
     });
@@ -38,8 +29,6 @@ $(function(){
     $(".pierrePage").click(function(){
         window.location.href = "pierre.html?good";
     });
-
-    var actWrap = $('.infoList>.lists').eq(0);
 
 
 
@@ -92,6 +81,9 @@ $(function(){
     var consultationStr = '';
 
 
+
+
+
     //咨询列表获取
     function getPage_consultation(page) {
         var url = port + '/card/consult?currentPage=' + page + '&token=' + token + '&type=7';
@@ -134,12 +126,8 @@ $(function(){
 
     //报名列表 获取
     function getPage(page,gps){
-
-        // var url = !isHotDoor ? port+"/card/activity?currentPage="+page+"&size=10&type=1&lat=" + gps.latitude +'&log=' + gps.longitude :
-        // port+"/card/mpage/hotpage?currentPage="+page+"&size=10" ;
-        if(!gpsObj.latitude){
-            var url = !isHotDoor ? port+"/card/activity?currentPage="+page+"&size=10" : port+"/card/mpage/hotpage?currentPage="+page+"&size=10" ;
-        }
+        var url = !isHotDoor ? (gps.type == 1 ? port+"/card/activity?currentPage="+page+"&size=10&type=1&lat=" + gps.latitude +'&log=' + gps.longitude :
+        port+"/card/activity?currentPage="+page+"&size=10") : port+"/card/mpage/hotpage?currentPage="+page+"&size=10" ;
 
         $.get(url,function(data){
             if(data.list.length != 0){          //如果加载的是非空页面
@@ -177,18 +165,6 @@ $(function(){
                 // 每次数据加载完，必须重置
                 actStr = '';
                 dropload.resetload();
-
-                // function reload() {
-                //     if($('#actList>.lists').children().length == 0){
-                //         location.reload();
-                //     }else {
-                //         clearInterval(loop);
-                //     }
-                // }
-                // if(window.location.search == 'joinAct'){
-                //     var loop = setInterval(reload,1000);
-                // }
-
                 //整个div点击跳转
                 $('.infoItem').click(function(){
                     if(!isHotDoor){
@@ -219,10 +195,8 @@ $(function(){
 
 
 
-
     //判断
     if(window.location.href.indexOf('joinAct') > 0 || isHotDoor){
-
         //JS-SDK接口   获取gps
         // lat--纬度 , log--经度 . type判断是否按距离排序，1--是
         var dropload = $('#actList,#moreHot').dropload({
@@ -234,13 +208,38 @@ $(function(){
                 domNoData  : '<div class="dropload-noData">已无数据</div>'
             },
             loadDownFn : function(me){
-                pageNum++;
-                getPage(pageNum,gpsObj);
-                // if($('#actList>.lists').children().length == 0){
-                //     location.reload();
-                // }else {
-                //
-                // }
+                var gpsObj = {};
+                if(window.navigator.geolocation){
+                    navigator.geolocation.getCurrentPosition(function(position){
+                        gpsObj= {
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude,
+                            type: 1
+                        }
+                        pageNum++;
+                        getPage(pageNum,gpsObj);
+                    },function (error) {
+                        //不传经纬度
+                        gpsObj = {
+                           type: 0
+                        }
+                        switch(error.code){
+                            case error.PERMISSION_DENIED:
+                                alert("you have denied access to your position .");
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                alert("there was a problem getting yout position .");
+                                break;
+                            case error.TIMEOUT:
+                                alert("The application has timed out attempting to get your location .");
+                                break;
+                        }
+                        pageNum++;
+                        getPage(pageNum,gpsObj);
+                    });
+                }else{
+                    alert("你的浏览器不支持定位!");
+                }
             }
         });
     }else {
@@ -279,16 +278,6 @@ $(function(){
              window.location.href = jumpPage(_type).htmlStr + '?id=' + id ;
           }
         }
-
-    // var loop = self.setInterval("reload()",500);
-    // function reload() {
-    //     if($('#actList>.lists').children().length == 0){
-    //         location.reload();
-    //     }else {
-    //         clearInterval(loop);
-    //     }
-    // }
-
 });
 
 

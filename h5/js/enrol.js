@@ -117,7 +117,7 @@ $(function(){
 
             var str1=$('<section class="msgBox"><div class="msg-wrap"><h1 class="msg-tit">'+data.activityTitle+'</h1><div class = "btn_q"><a href="tel:400-111-3797" class="tellNum"><img src="imgs/iconfont-kefu.png"></a>' +
                 '<span class="love-btn"><img src="imgs/iconfont-love.png"></span><span class="share-btn"><img src="imgs/iconfont-p-share.png"></span></div>' +
-                '<p class="msg-time"><span class="head">时间</span>'+new Date(data.startTime*1000).Formate()+'-'+ new Date(data.endTime*1000).Formate()+'</p> ' +
+                '<p class="msg-time"><span class="head">时间</span>'+new Date(data.startTime*1000).Formate()+' - '+ new Date(data.endTime*1000).Formate()+'</p> ' +
                 '<p class="msg-address"> <span class="head">地点</span>'+data.activityAddress+'</p>' +
                 '<p class="msg-price"><span class="head">价格</span>'+actPrice+'</p>' +
                 '<p class="msg-num"><span class="head">人数</span>'+ peopleNumberStr + '</p>' +
@@ -484,6 +484,21 @@ $(function(){
             return parseInt(preTime/3600/24/365)+"年前";
         }
     };
+
+
+    Date.prototype.Formate=function(){
+        var y=this.getFullYear();
+        var m=this.getMonth()+1>9?(this.getMonth()+1):'0'+(this.getMonth()+1);
+        var d=this.getDate()>9?this.getDate():'0'+this.getDate();
+        var h=this.getHours()>9?this.getHours():'0'+this.getHours();
+        var f=this.getMinutes()>9?this.getMinutes():'0'+this.getMinutes();
+        var s=this.getSeconds()>9?this.getSeconds():'0'+this.getSeconds();
+        if(h == '00'&& f == '00'){
+            return (y+'.'+m+'.'+d);
+        }else {
+            return (y+'.'+m+'.'+d+' '+h+':'+f);
+        }
+    }
 
 
 

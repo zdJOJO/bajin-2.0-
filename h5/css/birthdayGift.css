@@ -19,7 +19,7 @@ input::-webkit-inner-spin-button {
 
 .topImg{
     width: 100%;
-    height: 180px;
+    height: 0.5rem;
     background: none;
     border-bottom: 3px rgb(240, 240, 240) solid;
 }
@@ -31,6 +31,7 @@ input::-webkit-inner-spin-button {
 section>div{
     border-bottom: 1.5px #F0F0F0 solid;
     text-align: center;
+    position: relative;
 }
 
 section h3{
@@ -51,13 +52,37 @@ section p{
     text-align: center;
 }
 
-#birthDay,#birthDayCode{
+#birthDayCode,#birthDayChrome,#birthDaySafari{
     width: 95%;
     height: 45px;
     border: 2px #F0F0F0 solid;
     margin: 8px 0;
     padding-left: 15px;
+    z-index: 5;
 }
+#birthDayChrome,#birthDaySafari{
+    display: none;
+}
+#birthDayCtrl{
+    position: absolute;
+    z-index: -1;
+    top: 0.13rem;
+    display: none;
+}
+#birthDayChrome{
+    width: 100%;
+    text-align: left;
+    background: #fff;
+    color: darkgrey;
+    font-size: 0.9em;
+    font-family: 黑体;
+}
+#dd{
+    left: 0!important;
+    top: 0.256rem!important;
+}
+
+
 
 input[placeholder], [placeholder], *[placeholder] {
     color: #929292 !important;

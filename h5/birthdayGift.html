@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" type="text/css" href="css/weiXin/weui.min.css">
     <link rel="stylesheet" type="text/css" href="css/weiXin/jquery-weui.css">
+    <link rel="stylesheet" type="text/css" href="css/plugin/calendar.css">
     <link rel="stylesheet" type="text/css" href="css/birthdayGift.css">
     <script>
         var iWidth=document.documentElement.clientWidth;
@@ -16,13 +17,22 @@
     </script>
 </head>
 <body>
-    <div class="topImg"></div>
+    <div class="topImg"><img src="./imgs/gift/gift-head.jpg" style="width: 100%"></div>
     <div id="content">
         <section class="receiveBefore" >
             <div class="receive">
                 <h3>白金尊享为您准备超级生日大礼包</h3>
-                <input id="birthDay" type="text" placeholder="请输入您的生日">
-                <input id="birthDayCode" placeholder="请输入生日礼包的领取码">
+                <!--  chrome ↓  -->
+                <input id="birthDayCtrl" type="date">
+                <button id="birthDayChrome">请选择您的生日</button>
+                <!--  chrome ↑ -->
+
+                <!--  safari ↓-->
+                <input id="birthDaySafari" type="text" placeholder="请选择您的生日">
+                <div id="dd" style="display: none"></div>
+                <!--  safari ↑ -->
+
+                <input id="birthDayCode" type="number" placeholder="请输入生日礼包的领取码">
                 <button id="receiveNow">立即领取</button>
                 <p>温馨提示:1.先登录。2.生日礼包领取码请查询工行发给白金信用卡持卡人的生日祝福短信。</p>
             </div>
@@ -87,5 +97,6 @@
 <script type="text/javascript" src="js/zepto.js"></script>
 <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
+<script type="text/javascript" src="js/plugin/calendar.js"></script>
 <script type="text/javascript" src="js/birthdayGift.js"></script>
 </html>

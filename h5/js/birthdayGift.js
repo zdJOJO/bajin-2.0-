@@ -3,33 +3,22 @@
  */
 
 
-var token = window.location.search.split('=')[1];
-var statu = '';  //用于判断是否 已领取
+var token = window.location.search.split('&')[0].split('=')[1];
+var statu = window.location.search.split('&')[1].split('=')[1];  //用于判断是否 已领取
 var his = window.location.pathname.split("/");
 his = his[his.length-1];
 
-token = '709f8ef9-954e-497d-b221-ba29c68144ca';
+// token = 'bb8dc108-68eb-4eb3-b122-5eaafc345d4a';
 
 function setCookie(c_name,value,expiredays) {
-    var exdate=new Date()
-    exdate.setDate(exdate.getDate()+expiredays)
-    document.cookie=c_name+ "=" +escape(value)+
-        ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate()+expiredays);
+    document.cookie = c_name+ "=" +escape(value)+ ((expiredays==null) ? "" : ";expires="+exdate.toGMTString());
 }
 setCookie('token',token);
 
 
-//选择生日框 字样修改
-$('#birthDay').focus(function () {
-    $(this).attr('type','date');
-});
-$('#birthDay').blur(function () {
-    $(this).attr('type','text');
-});
-
-
 var hasBinded = false; //是否绑卡  是true
-var isCodeRight = false; //领取码是否正确   是true
 var isOverdue = true;  //领取码是否过期  过期true
 var hasRealGift = false; //是否有 实物
 var hasElec = false;     //是否有 电子券
@@ -39,6 +28,39 @@ var addressStr = '';
 
 var pageNum = 1;
 var defaulAddressJo = $('#popPub>.defaulAddress');
+
+
+
+//选择生日框 字样修改
+//由于Safari不支持 input type=date ，改用插件
+var browser = myBrowser();
+if(browser == "Safari"){
+    $('#birthDaySafari').show(1,function () {
+        $('#dd').show().calendar({
+            trigger: '#birthDaySafari',
+            zIndex: 999,
+            format: 'yyyy-mm-dd',
+            onSelected: function (view, date, data) {
+                console.log('event: onSelected');
+            },
+            onClose: function (view, date, data) {
+                console.log('event: onClose')
+                console.log('view:' + view)
+                console.log('date:' + date)
+                console.log('data:' + (data || 'None'));
+            }
+        });
+    });
+}else {
+    $('#birthDayChrome,#birthDayCtrl').show(0,function () {
+        $('#birthDayChrome').click(function () {
+            $('#birthDayCtrl').click().bind('change',function () {
+                $('#birthDayChrome').html($('#birthDayCtrl').val());
+            });
+        });
+    });
+}
+
 
 
 
@@ -53,7 +75,7 @@ function bankCard() {
 bankCard();
 
 
-//生日礼包列表获取   type = 0 --- 实物 、   isOnline = 0 --- 停用
+//生日礼包列表获取   type=0---实物  isOnline=1---停用  sum=0---领完
 function getGIftsList(currentPage) {
     $.ajax({
         type: 'get',
@@ -66,20 +88,20 @@ function getGIftsList(currentPage) {
                 return;
             }
             for(var i=0;i<result.data.list.length;i++){
-                giftStr += '<li class="giftTitle">'+ result.data.list[i].title +': <span class="giftSubTitle">'+ result.data.list[i].subTitle +'</span></li>';
-
-                //判断是否有实物
-                if(result.data.list[i].type == 0){
-                    hasRealGift = true;
-                }
-                //判断是否有电子券
-                if(result.data.list[i].type == 1){
-                    hasElec = true;
+                if(result.data.list[i].sum > 0 && result.data.list[i].isOnline == 0){
+                    giftStr += '<li class="giftTitle">'+ result.data.list[i].title +': <span class="giftSubTitle">'+ result.data.list[i].subTitle +'</span></li>';
+                    //判断是否有实物
+                    if(result.data.list[i].type == 0){
+                        hasRealGift = true;
+                    }
+                    //判断是否有电子券
+                    if(result.data.list[i].type == 1){
+                        hasElec = true;
+                    }
+                    giftArray.push(result.data.list[i]);
                 }
             }
-            giftArray = giftArray.concat(result.data.list);
             $('#content>.receiveBefore .giftList').append(giftStr);
-
             if( currentPage > 1 && result.data.list.length == 0){
                 setTimeout(function () {
                     $('#giftLoading').hide();
@@ -173,7 +195,7 @@ $("#receiveNow").click(function () {
 
 //领取 生日礼包的 ajax请求
 function giftAjax(_receiverId) {
-    var birthday = $('#birthDay').val();
+    var birthday = $('#birthDayChrome').html() || $('#birthDaySafari').val();
     var birthdayTimeStamp = new Date(birthday.replace(/-/g,'/')).getTime()/1000; //单位s
     var gifCode = $('#birthDayCode').val();
     if(!birthday || !gifCode){
@@ -195,18 +217,6 @@ function giftAjax(_receiverId) {
         });
         return
     }
-    // if(!isCodeRight){
-    //     $.modal({
-    //         title: "提示",
-    //         text: "您输入的礼包领取码有误，请核对后重新输入",
-    //         buttons: [
-    //             { text: "知道了", className: "default", onClick: function(){
-    //                 //todo
-    //             } }
-    //         ]
-    //     });
-    //     return
-    // }
     // if(isOverdue){
     //     $.modal({
     //         title: "提示",
@@ -220,9 +230,9 @@ function giftAjax(_receiverId) {
     //     return
     // }
 
-    $('.receiveBefore').hide();
-    $('#popPub').hide();
-    $('#orderLoading').show();
+    // $('.receiveBefore').hide();
+    // $('#popPub').hide();
+    // $('#orderLoading').show();
 
     //是否绑定银行卡 需要ajax请求
     //生日礼包领取码是否正确或者过期，需要ajax请求，再做判断
@@ -239,13 +249,31 @@ function giftAjax(_receiverId) {
         dataType:"json",
         contentType : "application/json;charset=UTF-8",
         success: function (result) {
-            console.log(result);
-            giftSuccess();
-            $('.receiveAfter').show();
-            $('#orderLoading').hide();
+            if(result.code == '601'){
+                $.modal({
+                    title: "提示",
+                    text: "您输入的礼包领取码有误，请重新输入",
+                    buttons: [
+                        { text: "知道了", className: "default", onClick: function(){
+                            //todo
+                            // $('.receiveBefore').show();
+                            // $('#popPub').show();
+                            // $('#orderLoading').hide();
+                        } }
+                    ]
+                });
+            }else {
+                $('.receiveBefore').hide();
+                $('#popPub').hide();
+                $('#orderLoading').show();
+               setTimeout(function () {
+                   giftSuccess();
+                   $('.receiveAfter').show();
+                   $('#orderLoading').hide();
+               },500);
+            }
         },
         error: function (e) {
-            //todo
         }
     });
 }
@@ -260,6 +288,9 @@ function giftSuccess() {
             '<span class="subTitle">'+ giftArray[i].subTitle +'</span></li>');
         if(giftArray[i].type == 0){
             str.attr('data-type','0');  //实物
+        }
+        if(str.children('img').eq(0).attr('src') == 'undefined'){
+            str.children('img').eq(0).attr('src','imgs/gift/logo.png');
         }
         $('.receiveAfter>.gifList>h3').after(str);
     }
@@ -307,6 +338,26 @@ $('#more').click(function () {
 
 
 
+//判断浏览器
+function myBrowser(){
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isOpera = userAgent.indexOf("Opera") > -1;
+    if (isOpera) {
+        return "Opera"
+    }; //判断是否Opera浏览器
+    if (userAgent.indexOf("Firefox") > -1) {
+        return "FF";
+    } //判断是否Firefox浏览器
+    if (userAgent.indexOf("Chrome") > -1){
+        return "Chrome";
+    }
+    if (userAgent.indexOf("Safari") > -1) {
+        return "Safari";
+    } //判断是否Safari浏览器
+    if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera) {
+        return "IE";
+    }; //判断是否IE浏览器
+}
 
 
 

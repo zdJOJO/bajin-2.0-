@@ -9,7 +9,6 @@
 
     <link rel="stylesheet" type="text/css" href="css/weiXin/weui.min.css">
     <link rel="stylesheet" type="text/css" href="css/weiXin/jquery-weui.css">
-    <link rel="stylesheet" type="text/css" href="css/plugin/calendar.css">
     <link rel="stylesheet" type="text/css" href="css/birthdayGift.css">
     <script>
         var iWidth=document.documentElement.clientWidth;
@@ -17,86 +16,86 @@
     </script>
 </head>
 <body>
-    <div class="topImg"><img src="./imgs/gift/gift-head.jpg" style="width: 100%"></div>
-    <div id="content">
-        <section class="receiveBefore" >
-            <div class="receive">
-                <h3>白金尊享为您准备超级生日大礼包</h3>
-                <!--  chrome ↓  -->
-                <input id="birthDayCtrl" type="date">
-                <button id="birthDayChrome">请选择您的生日</button>
-                <!--  chrome ↑ -->
+<div class="topImg"><img src="./imgs/gift/gift-head.jpg" style="width: 100%"></div>
+<div id="content">
+    <section class="receiveBefore">
+        <div class="receive">
+            <h3>白金尊享为您准备超级生日大礼包</h3>
 
-                <!--  safari ↓-->
-                <input id="birthDaySafari" type="text" placeholder="请选择您的生日">
-                <div id="dd" style="display: none"></div>
-                <!--  safari ↑ -->
+            <!--  chrome ↓  -->
+            <input id="birthDayCtrl" type="date">
+            <button id="birthDayChrome" style="display: none">请选择您的生日</button>
+            <!--  chrome ↑ -->
 
-                <input id="birthDayCode" type="number" placeholder="请输入生日礼包的领取码">
-                <button id="receiveNow">立即领取</button>
-                <p>温馨提示:1.先登录。2.生日礼包领取码请查询工行发给白金信用卡持卡人的生日祝福短信。</p>
-            </div>
-            <div class="giftContent">
-                <h3>礼包内容</h3>
-                <ul class="giftList"></ul>
-                <div class="bottomBox" style="height: 30px">
-                    <button id="more" style="display: none">点击查看更多↓</button>
-                    <img src="imgs/gift/loading.gif" id="giftLoading" >
-                </div>
-            </div>
-            <div class="giftRule">
-                <h3>礼包领取规则</h3>
-                <li>1.白金生日礼包仅限中国工商银行白金信用卡持卡人在生日当月领取</li>
-                <li>2.须凭工行浙江省分行发给白金信用卡持卡人的短信中的领取码来领取生日礼包</li>
-                <li>3.每位白金信用卡持卡人每年仅限可领取一次生日礼包</li>
-            </div>
-        </section>
+            <!--  safari ↓-->
+            <input id="birthDayCtrl_Safari" type="date">
+            <button id="birthDaySafari">请选择您的生日</button>
+            <!--  safari ↑ -->
 
-        <section class="receiveAfter" style="display: none">
-            <div class="gifList">
-                <img class="success" src="imgs/gift/success.png">
-                <h3>领取成功</h3>
-            </div>
-            <div class="toAccount" style="position: relative;display: none">
-                <h3>礼包以放至账户</h3>
-                <span class="account"></span>
-            </div>
-            <div class="toAddress" style="display: none">
-                <h3>礼包将于7日内配送到</h3>
-                <p class="address"></p>
-            </div>
-            <p>(电子券可至个人中心-我的权益-电子券查看使用)</p>
-        </section>
-
-        <div id="popPub" style="display: none">
-            <div class="defaulAddress"></div>
+            <input id="birthDayCode" type="number" placeholder="请输入生日礼包的领取码">
+            <button id="receiveNow">立即领取</button>
+            <p>温馨提示:1.先登录。2.生日礼包领取码请查询工行发给白金信用卡持卡人的生日祝福短信。</p>
         </div>
+        <div class="giftContent">
+            <h3>礼包内容</h3>
+            <ul class="giftList"></ul>
+            <div class="bottomBox" style="height: 30px">
+                <button id="more" style="display: none">点击查看更多↓</button>
+                <img src="imgs/gift/loading.gif" id="giftLoading" >
+            </div>
+        </div>
+        <div class="giftRule">
+            <h3>礼包领取规则</h3>
+            <li>1.白金生日礼包仅限中国工商银行白金信用卡持卡人在生日当月领取</li>
+            <li>2.须凭工行浙江省分行发给白金信用卡持卡人的短信中的领取码来领取生日礼包</li>
+            <li>3.每位白金信用卡持卡人每年仅限可领取一次生日礼包</li>
+        </div>
+    </section>
 
-        <div  id="orderLoading" class="spinner" style="display: none">
-            <div class="spinner-container container1">
-                <div class="circle1"></div>
-                <div class="circle2"></div>
-                <div class="circle3"></div>
-                <div class="circle4"></div>
-            </div>
-            <div class="spinner-container container2">
-                <div class="circle1"></div>
-                <div class="circle2"></div>
-                <div class="circle3"></div>
-                <div class="circle4"></div>
-            </div>
-            <div class="spinner-container container3">
-                <div class="circle1"></div>
-                <div class="circle2"></div>
-                <div class="circle3"></div>
-                <div class="circle4"></div>
-            </div>
+    <section class="receiveAfter" style="display: none">
+        <div class="gifList">
+            <img class="success" src="imgs/gift/success.png">
+            <h3>领取成功</h3>
+        </div>
+        <div class="toAccount" style="position: relative;display: none">
+            <h3>礼包以放至账户</h3>
+            <span class="account"></span>
+        </div>
+        <div class="toAddress" style="display: none">
+            <h3>礼包将于7日内配送到</h3>
+            <p class="address"></p>
+        </div>
+        <p>(电子券可至个人中心-我的权益-电子券查看使用)</p>
+    </section>
+
+    <div id="popPub" style="display: none">
+        <div class="defaulAddress"></div>
+    </div>
+
+    <div  id="orderLoading" class="spinner" style="display: none">
+        <div class="spinner-container container1">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container2">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container3">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
         </div>
     </div>
+</div>
 </body>
 <script type="text/javascript" src="js/zepto.js"></script>
 <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
-<script type="text/javascript" src="js/plugin/calendar.js"></script>
 <script type="text/javascript" src="js/birthdayGift.js"></script>
 </html>

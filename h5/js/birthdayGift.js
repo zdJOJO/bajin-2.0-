@@ -4,11 +4,11 @@
 
 
 var token = window.location.search.split('&')[0].split('=')[1];
-var statu = window.location.search.split('&')[1].split('=')[1];  //用于判断是否 已领取
+// var statu = window.location.search.split('&')[1].split('=')[1];  //用于判断是否 已领取
 var his = window.location.pathname.split("/");
 his = his[his.length-1];
 
-// token = 'bb8dc108-68eb-4eb3-b122-5eaafc345d4a';
+token = 'ea5e2d8c-2c8f-4b17-ba18-ed9f5f780f0c';
 
 function setCookie(c_name,value,expiredays) {
     var exdate = new Date();
@@ -16,6 +16,35 @@ function setCookie(c_name,value,expiredays) {
     document.cookie = c_name+ "=" +escape(value)+ ((expiredays==null) ? "" : ";expires="+exdate.toGMTString());
 }
 setCookie('token',token);
+
+
+//选择生日框 字样修改 
+// 判断浏览器
+var browser = myBrowser();
+if(browser == "Safari" || !browser){
+    $('#birthDayCtrl').hide();
+    $('#birthDaySafari').show();
+
+    $('#birthDaySafari').click(function () {
+        $('#birthDayCtrl_Safari').focus().bind('change',function () {
+            $('#birthDaySafari').html($('#birthDayCtrl_Safari').val());
+        });
+    });
+
+}
+if(browser == "Chrome"){
+    $('#birthDaySafari').hide();
+
+    $('#birthDayChrome').show().click(function () {
+        $('#birthDayCtrl').click().bind('change',function () {
+            $('#birthDayChrome').html($('#birthDayCtrl').val());
+        });
+    });
+}
+
+
+
+
 
 
 var hasBinded = false; //是否绑卡  是true
@@ -28,39 +57,6 @@ var addressStr = '';
 
 var pageNum = 1;
 var defaulAddressJo = $('#popPub>.defaulAddress');
-
-
-
-//选择生日框 字样修改
-//由于Safari不支持 input type=date ，改用插件
-var browser = myBrowser();
-if(browser == "Safari"){
-    $('#birthDaySafari').show(1,function () {
-        $('#dd').show().calendar({
-            trigger: '#birthDaySafari',
-            zIndex: 999,
-            format: 'yyyy-mm-dd',
-            onSelected: function (view, date, data) {
-                console.log('event: onSelected');
-            },
-            onClose: function (view, date, data) {
-                console.log('event: onClose')
-                console.log('view:' + view)
-                console.log('date:' + date)
-                console.log('data:' + (data || 'None'));
-            }
-        });
-    });
-}else {
-    $('#birthDayChrome,#birthDayCtrl').show(0,function () {
-        $('#birthDayChrome').click(function () {
-            $('#birthDayCtrl').click().bind('change',function () {
-                $('#birthDayChrome').html($('#birthDayCtrl').val());
-            });
-        });
-    });
-}
-
 
 
 
@@ -195,7 +191,8 @@ $("#receiveNow").click(function () {
 
 //领取 生日礼包的 ajax请求
 function giftAjax(_receiverId) {
-    var birthday = $('#birthDayChrome').html() || $('#birthDaySafari').val();
+    var birthday = (browser == "Chrome") ? $('#birthDayChrome').html() : $('#birthDaySafari').html() ;
+    alert(birthday);
     var birthdayTimeStamp = new Date(birthday.replace(/-/g,'/')).getTime()/1000; //单位s
     var gifCode = $('#birthDayCode').val();
     if(!birthday || !gifCode){
@@ -266,11 +263,11 @@ function giftAjax(_receiverId) {
                 $('.receiveBefore').hide();
                 $('#popPub').hide();
                 $('#orderLoading').show();
-               setTimeout(function () {
-                   giftSuccess();
-                   $('.receiveAfter').show();
-                   $('#orderLoading').hide();
-               },500);
+                setTimeout(function () {
+                    giftSuccess();
+                    $('.receiveAfter').show();
+                    $('#orderLoading').hide();
+                },500);
             }
         },
         error: function (e) {
@@ -319,7 +316,7 @@ $('#popPub').click(function(e){
     e = window.event || e; // 兼容IE7
     var obj = $(e.srcElement || e.target);
     if ($(obj).is(".defaulAddress,.defaulAddress>span,.defaulAddress>img,#choose,#chooseBox,#sureReceive")) {
-         //todo  ('内部区域');
+        //todo  ('内部区域');
     } else {
         $('#popPub>.defaulAddress').animate({'bottom': '-150px'},200,function () {
             $('#popPub').hide();
@@ -358,17 +355,3 @@ function myBrowser(){
         return "IE";
     }; //判断是否IE浏览器
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

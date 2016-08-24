@@ -60,26 +60,21 @@ section p{
     padding-left: 15px;
     z-index: 5;
 }
-#birthDayChrome,#birthDaySafari{
-    display: none;
-}
-#birthDayCtrl{
+
+#birthDayCtrl,#birthDayCtrl_Safari{
     position: absolute;
-    z-index: -1;
+    z-index: -10;
     top: 0.13rem;
-    display: none;
 }
-#birthDayChrome{
-    width: 100%;
+
+#birthDaySafari,#birthDayChrome{
+    display: none;
+    width: 0.94rem;
     text-align: left;
     background: #fff;
     color: darkgrey;
     font-size: 0.9em;
     font-family: 黑体;
-}
-#dd{
-    left: 0!important;
-    top: 0.256rem!important;
 }
 
 

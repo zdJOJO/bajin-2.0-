@@ -4,11 +4,10 @@
 
 
 var token = window.location.search.split('&')[0].split('=')[1];
-// var statu = window.location.search.split('&')[1].split('=')[1];  //用于判断是否 已领取
+var status = window.location.search.split('&')[1].split('=')[1];  //用于判断是否 已领取
 var his = window.location.pathname.split("/");
 his = his[his.length-1];
 
-token = 'ea5e2d8c-2c8f-4b17-ba18-ed9f5f780f0c';
 
 function setCookie(c_name,value,expiredays) {
     var exdate = new Date();
@@ -63,8 +62,10 @@ var defaulAddressJo = $('#popPub>.defaulAddress');
 //判断是否绑定了银行卡
 function bankCard() {
     $.get( port + '/card/card?token=' + token,function (result) {
-        if(result.list.length > 0){
-            hasBinded = true;
+        for(var i=0;i<result.list.length;i++){
+            if(result.list[i].bjke == 1){
+                hasBinded = true;
+            }
         }
     });
 }
@@ -191,8 +192,7 @@ $("#receiveNow").click(function () {
 
 //领取 生日礼包的 ajax请求
 function giftAjax(_receiverId) {
-    var birthday = (browser == "Chrome") ? $('#birthDayChrome').html() : $('#birthDaySafari').html() ;
-    alert(birthday);
+    var birthday = (browser == "Chrome") ? $('#birthDayChrome').html() : $('#birthDaySafari').html();
     var birthdayTimeStamp = new Date(birthday.replace(/-/g,'/')).getTime()/1000; //单位s
     var gifCode = $('#birthDayCode').val();
     if(!birthday || !gifCode){
@@ -259,6 +259,8 @@ function giftAjax(_receiverId) {
                         } }
                     ]
                 });
+            }else if(result.code == '619'){
+                $.toast("礼包已领取", "text");
             }else {
                 $('.receiveBefore').hide();
                 $('#popPub').hide();

@@ -2,25 +2,15 @@
  * Created by Administrator on 2016/8/17.
  */
 
-var ticketObjStr = window.location.search.split('=')[1];
-var ticketObj = JSON.parse(ticketObjStr);
-// ticketObj = {
-//     token: 1,
-//     staus: 0,
-//     ticketId: 0,
-//     aa: 0, //券码
-//     bb: 0  //商家简介
-// }
-
-
+var ticketArray = window.location.search.split('&');
+var ticketObj = {
+    staus: ticketArray[0].split('=')[1],
+    ticketCode: ticketArray[1].split('=')[1],
+    ticketId: ticketArray[2].split('=')[1],
+    token: ticketArray[3].split('=')[1]
+}
 var token = ticketObj.token;
-var ticketId = 44 ;
-
-var his = window.location.pathname.split("/");
-his = his[his.length-1];
-
-token = 'bdee1ec7-3b72-4a1a-8bfb-cc4f2a746108';
-
+var ticketId = ticketObj.ticketId ;
 
 function setCookie(c_name,value,expiredays) {
     var exdate = new Date();

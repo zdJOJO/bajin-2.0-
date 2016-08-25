@@ -46,6 +46,15 @@ hr{
     background: #EDEDED;
 }
 
+#content>.img>.logo{
+    width: 0.17rem;
+    height: 0.17rem;
+    border-radius: 50px;
+    top: 0.045rem;
+    left: 0.03rem;
+    border: 1px rgba(153, 153, 153, 0.19) solid;
+}
+
 #content>.img>span.benefit{
     font-size: 1.1em;
     color: #2e3133;

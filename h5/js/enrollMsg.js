@@ -17,7 +17,9 @@ $(document).ready(function(){
 	return undefined;
 	}
 	token = getCookie("token");
-	var applyid = window.location.search.split("=")[1];
+	var applyid = window.location.search.split('&')[0].split("=")[1];
+	var createTime = parseInt(window.location.search.split('&')[1].split("=")[1]);
+	var price = parseInt(window.location.search.split('&')[2].split("=")[1]);
 
 
 
@@ -34,7 +36,31 @@ $(document).ready(function(){
 	var sign = '';
 
 
+	//计时器
+	//判断是否超过30min
+	if(parseInt(price) > 0){
+		$('#timer').show();
+		var leftTime = createTime + 1800 - parseInt(new Date().getTime()/1000);
+		function timer() {
+			if(leftTime == 0){
+				$('footer').hide();
+			}
+			var minute = Math.floor(leftTime/60);
+			var second = leftTime - minute*60;
 
+			var min = minute < 10 ? '0'+ minute : minute ;
+			var sec = second < 10 ? '0' + second-- : second-- ;
+
+			$('#min').html('支付剩余时间' + min + ':');
+			$('#second').html(sec);
+			leftTime--
+		}
+		var timeP = setInterval(timer,1000);
+		if(leftTime == 0){
+			clearInterval(timeP);
+		}
+	}
+	
 	$.ajax({
 		type:"get",
 		url:port+"/card/apply/"+applyid+"?token="+token,
@@ -95,7 +121,6 @@ $(document).ready(function(){
 
 
 
-
 	//去付款的跳转
 	$("footer p").bind("click",function(){
 		$.actions({
@@ -142,58 +167,28 @@ $(document).ready(function(){
 				},
 			]
 		});
-		
-		// $("#payType").fadeIn(300);
-        //
-		// // //银行卡支付
-		// // $("#payType >.block>.bankCardPay").click(function () {
-		// // 	window.location.href = "payIFrame.html?id="+applyid;
-		// // });
-        //
-        //
-		// //微信支付
-		// $("#payType >.block>.weixinPay").click(function () {
-		// 	console.log(000000)
-		// 	console.log(appid)
-		// 	console.log(timeStamp)
-		// 	console.log(nonceStr)
-		// 	console.log(package)
-		// 	console.log(sign)
-		// 	console.log(111111)
-        //
-		// 	function onBridgeReady(){
-		// 		WeixinJSBridge.invoke(
-		// 			'getBrandWCPayRequest', {
-		// 				"appId" : appid,     //公众号名称，由商户传入
-		// 				"timeStamp": timeStamp,         //时间戳，自1970年以来的秒数
-		// 				"nonceStr" : nonceStr, //随机串
-		// 				"package" : package,
-		// 				"signType" : "MD5",         //微信签名方式：
-		// 				"paySign" : sign  //微信签名
-		// 			},
-		// 			function(res){
-		// 				if(res.err_msg == "get_brand_wcpay_request：ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
-		// 			}
-		// 		);
-		// 	}
-		// 	if (typeof WeixinJSBridge == "undefined"){
-		// 		if( document.addEventListener ){
-		// 			document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-		// 		}else if (document.attachEvent){
-		// 			document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-		// 			document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-		// 		}
-		// 	}else{
-		// 		onBridgeReady();
-		// 	}
-		// });
-		//
-		// //隐藏
-		// $("#payType >.block>.cancel").click(function () {
-		// 	$("#payType").fadeOut(300);
-		// });
 	});
-})
+
+
+
+});
+
+var t=60;
+var a=setInterval(daojishi,1000);//1000毫秒
+function daojishi(){
+	t--;
+
+//刷新时间显示
+	if(t==0){
+		clearInterval(a);
+		//倒计时结束
+
+	}
+
+}
+
+
+
 
 Date.prototype.Formate=function(){
     var y=this.getFullYear();
@@ -202,5 +197,10 @@ Date.prototype.Formate=function(){
 	var h=this.getHours()>9?this.getHours():'0'+this.getHours();
 	var f=this.getMinutes()>9?this.getMinutes():'0'+this.getMinutes();
 	var s=this.getSeconds()>9?this.getSeconds():'0'+this.getSeconds();
-    return (y+'.'+m+'.'+d+' '+h+':'+f);
+	if( (h=='00' && f=='00') || (h=='23' && f=='59')){
+		return (y+'.'+m+'.'+d);
+	}else {
+		return (y+'.'+m+'.'+d+' '+h+':'+f);
+	}
+
 }

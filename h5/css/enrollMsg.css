@@ -99,3 +99,38 @@ footer p{
 	color: #fff;
 	display: none;
 }
+
+#timer{
+	display: none;
+	font-family: Batang;
+	font-size: 1.5em;
+	width: 60%;
+	height: 0.12rem;
+	line-height: 0.12rem;
+	text-align: center;
+	color: #383838;
+}
+
+
+@media screen and (max-width: 320px){
+	.detailUrl{
+		height: 0.34rem;
+	}
+
+	.detailUrl .right>.time{
+		height: 0.12rem;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

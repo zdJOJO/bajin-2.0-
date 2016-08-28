@@ -148,8 +148,7 @@ $(function(){
                        var chineseStr = data.list[i].detail.replace(/<[^>]+>/g,"").replace(/[^\u4e00-\u9fa5]/gi,"");
                        actStr += '<div class="infoItem hotItem" data-type="'+data.list[i].type+'" data-i="'+ data.list[i].itemId+'" style="background: url('+data.list[i].minPic+') no-repeat #f7f7f7; background-size:39% 100%;">' +
                            '<div class="tit-wrap"><div class="tit-content"><h1>'+data.list[i].title+'</h1>' +
-                           '<div class="detile">' +
-                           '<div>'+ showThreeLine(chineseStr,55) +'</div></div>' +
+                           '<div class="detile">' + '<div>'+ showThreeLine(chineseStr,35) +'</div></div>' +
                            '<p>'+ new Date(data.list[i].createTime*1000).Formate_short()+ '</p>' +
                            '<span class="type">' + typeJudge(data.list[i].type) + '</span>' + '</div></div></div>';
                    }

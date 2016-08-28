@@ -28,14 +28,11 @@ $(document).ready(function(){
         mallid = mallid.split("&")[0];
     }
 
-
-
 	var mallObj = {
 		mallId: 0,
 		currentDiscount: 0,
 		title: ''
 	};
-
 
 	//分享时候 传当前页面的url 和 对象obj
 	get_url(window.location.href);
@@ -97,9 +94,6 @@ $(document).ready(function(){
 			}
 
 
-
-
-
 			$(".saveAndShare").attr("data-itemid",data.data.mallId);
 			var picList = data.data.imgList;
 			for(var i=0,len=picList.length;i<len;i++){
@@ -114,6 +108,11 @@ $(document).ready(function(){
 				scrollbar: '.swiper-scrollbar',
 				scrollbarHide: false
 		    });
+
+			//获取评论内容
+			getComment(data.data.mallId);
+
+
 		    // 进入页面检测是否收藏，如果是登录的状态
 		    if(token==undefined){
 		    	return;
@@ -235,8 +234,6 @@ $(document).ready(function(){
 
 
 
-
-
 	//在线支付
 	$('#payOnline').click(function () {
 		if(token){
@@ -258,4 +255,71 @@ $(document).ready(function(){
 		}
 	});
 
+
+	//获取评论
+	function  getComment(itemId) {
+		$.ajax({
+			type:"get",
+			url: port + '/card/comment/list?currentPage=' + 1 + '&type=' + 5 + '&itemId=' + itemId,
+			success: function (result) {
+				if(result.list.length > 0) {
+					$('#comment>.cmtNUm').html('评论 ' + result.rowCount + '条');
+					$('#moreComts').show();
+					$('#comment > .list').show().html('<img src="'+ result.list[0].user.headPic +'">' +
+						'<span>'+ result.list[0].user.userName +'</span>' +
+						'<p>' + result.list[0].commentContent + '</p>');
+
+					//查看更多评论
+					$('#moreComts').click(function () {
+						window.location.href = 'comment.html?type=' + 5 + '&itemId=' + itemId;
+					});
+
+					//发表评论
+					$('#publishCmt').click(function () {
+						publishComment(itemId);
+					});
+				}else {
+					$('#comment>.box').css({'margin-top': '0.02rem'});
+				}
+			},
+			error: function (e) {
+
+			}
+		});
+	}
+
+
+	//发表评论
+	var publishComment = function (itemId) {
+		if(!$("#commentContent").val()){
+			$.alert("请填写后再评论", "评论失败", function() {
+			});
+			return;
+		}else {
+			$.ajax({
+				type: 'post',
+				dataType: "json",
+				contentType : "application/json",
+				url: port + '/card/comment?token=' + token ,
+				data: JSON.stringify({
+					itemType: 5,
+					itemId: itemId,
+					commentContent: $("#commentContent").val()
+				}),
+				success: function (result) {
+					if(result.code == 201){
+						$.toast("发表评论成功", function() {
+							$('footer').css('height','7%');
+							$("#commentContent").val('');
+							getComment(1);
+							$('#comment>.box').css({'margin-top': '0.02rem'});
+						});
+					}
+				},
+				error: function () {
+					$.toast("发表评论失败", "cancel");
+				}
+			});
+		}
+	};
 });

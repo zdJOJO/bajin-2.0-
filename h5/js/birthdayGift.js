@@ -1,23 +1,44 @@
 /**
  * Created by Administrator on 2016/8/16.
- */
+ *///获取存在于cookie中的token值
+function getCookie(c_name) {
+    if (document.cookie.length>0)
+    {
+        c_start=document.cookie.indexOf(c_name + "=")
+        if (c_start!=-1)
+        {
+            c_start=c_start + c_name.length+1
+            c_end=document.cookie.indexOf(";",c_start)
+            if (c_end==-1) c_end=document.cookie.length
+            return unescape(document.cookie.substring(c_start,c_end))
+        }
+    }
+    return undefined;
+}
 
+var token = '';
+var status;
+var urlSearch = window.location.search;
+if(urlSearch.indexOf('token') > 0){
+    token = urlSearch.split('&')[0].split('=')[1];
+    status = urlSearch.split('&')[1].split('=')[1];  //用于判断是否 已领取
+    function setCookie(c_name,value,expiredays) {
+        var exdate = new Date();
+        exdate.setDate(exdate.getDate()+expiredays);
+        document.cookie = c_name+ "=" +escape(value)+ ((expiredays==null) ? "" : ";expires="+exdate.toGMTString());
+    }
+    setCookie('token',token);
+}else {
+    token = getCookie('token');
+}
 
-var token = window.location.search.split('&')[0].split('=')[1];
-var status = window.location.search.split('&')[1].split('=')[1];  //用于判断是否 已领取
 var his = window.location.pathname.split("/");
 his = his[his.length-1];
 
 
-function setCookie(c_name,value,expiredays) {
-    var exdate = new Date();
-    exdate.setDate(exdate.getDate()+expiredays);
-    document.cookie = c_name+ "=" +escape(value)+ ((expiredays==null) ? "" : ";expires="+exdate.toGMTString());
-}
-setCookie('token',token);
 
 
-//选择生日框 字样修改 
+//选择生日框 字样修改
 // 判断浏览器
 var browser = myBrowser();
 if(browser == "Safari" || !browser){
@@ -29,7 +50,6 @@ if(browser == "Safari" || !browser){
             $('#birthDaySafari').html($('#birthDayCtrl_Safari').val());
         });
     });
-
 }
 if(browser == "Chrome"){
     $('#birthDaySafari').hide();
@@ -44,9 +64,7 @@ if(browser == "Chrome"){
 
 
 
-
-
-var hasBinded = false; //是否绑卡  是true
+var hasBinded = false; //是否绑白金卡  是true
 var isOverdue = true;  //领取码是否过期  过期true
 var hasRealGift = false; //是否有 实物
 var hasElec = false;     //是否有 电子券
@@ -62,10 +80,20 @@ var defaulAddressJo = $('#popPub>.defaulAddress');
 //判断是否绑定了银行卡
 function bankCard() {
     $.get( port + '/card/card?token=' + token,function (result) {
-        for(var i=0;i<result.list.length;i++){
-            if(result.list[i].bjke == 1){
-                hasBinded = true;
-            }
+
+        //判断是否有白金卡
+        // if(result.list.length > 0){
+        //     for(var i=0;i<result.list.length;i++){
+        //         if(result.list[i].bjke == 1){
+        //             hasBinded = true;
+        //         }
+        //     }
+        // }
+
+
+        //判断是否有卡
+        if(result.list.length > 0){
+            hasBinded = true;
         }
     });
 }
@@ -121,8 +149,7 @@ function getAddress() {
         if(result.list.length == 0){
             defaulAddressJo.html('<a style="margin-top: 15%;text-align: center;display: inherit;">你还没有创建收货地址，赶快创建一个吧</a>');
             defaulAddressJo.click(function () {
-                var obj={};
-                window.location.href = 'addAddress.html?fromeGift&&obj=' + escape(JSON.stringify(obj));
+                window.location.href = 'addAddress.html?fromeGift&&obj=' + escape(JSON.stringify({})) + '';
             });
         }else {
             var defaulAddresObj = {};
@@ -164,6 +191,9 @@ getAddress();
 
 // （不存在事物情况下）立即领取
 $("#receiveNow").click(function () {
+    var birthday = (browser == "Chrome") ? $('#birthDayChrome').html() : $('#birthDaySafari').html();
+    var gifCode = $('#birthDayCode').val();
+
     if(!token){
         $.modal({
             title: "提示",
@@ -178,6 +208,25 @@ $("#receiveNow").click(function () {
             ]
         });
     }else {
+        if( birthday == '请选择您的生日' || !birthday || !gifCode){
+            $.alert("请输入您的生日或者生日礼包领取码", "提示");
+            return
+        }
+        if(!hasBinded){
+            $.modal({
+                title: "提示",
+                text: "生日礼包仅限工行白金信用卡用户领取，请先绑定您的白金信用卡",
+                buttons: [
+                    { text: "去绑卡", onClick: function(){
+                        window.location.href = 'bank.html'; //后面需要加几个参数
+                    } },
+                    { text: "取消", className: "default", onClick: function(){
+                        //todo
+                    } },
+                ]
+            });
+            return
+        }
         if(hasRealGift){    //有实物
             $('#popPub').show(1,function () {
                 $('#popPub>.defaulAddress').animate({'bottom': '0'},200);
@@ -194,26 +243,6 @@ $("#receiveNow").click(function () {
 function giftAjax(_receiverId) {
     var birthday = (browser == "Chrome") ? $('#birthDayChrome').html() : $('#birthDaySafari').html();
     var birthdayTimeStamp = new Date(birthday.replace(/-/g,'/')).getTime()/1000; //单位s
-    var gifCode = $('#birthDayCode').val();
-    if(!birthday || !gifCode){
-        $.alert("请输入您的生日或者生日礼包领取码", "提示");
-        return
-    }
-    if(!hasBinded){
-        $.modal({
-            title: "提示",
-            text: "生日礼包仅限工行白金信用卡用户领取，请先绑定您的白金信用卡",
-            buttons: [
-                { text: "去绑卡", onClick: function(){
-                    window.location.href = 'bank.html';
-                } },
-                { text: "取消", className: "default", onClick: function(){
-                    //todo
-                } },
-            ]
-        });
-        return
-    }
     // if(isOverdue){
     //     $.modal({
     //         title: "提示",
@@ -231,10 +260,9 @@ function giftAjax(_receiverId) {
     // $('#popPub').hide();
     // $('#orderLoading').show();
 
-    //是否绑定银行卡 需要ajax请求
     //生日礼包领取码是否正确或者过期，需要ajax请求，再做判断
     var data = {
-        code: gifCode
+        code: $('#birthDayCode').val()
     };
     if(_receiverId){
         data.receiverId = _receiverId;
@@ -243,7 +271,7 @@ function giftAjax(_receiverId) {
         type: 'post',
         url: port + '/card/usergift?birth=' + birthdayTimeStamp + '&token=' + token,
         data: JSON.stringify(data),
-        dataType:"json",
+        dataType: "json",
         contentType : "application/json;charset=UTF-8",
         success: function (result) {
             if(result.code == '601'){

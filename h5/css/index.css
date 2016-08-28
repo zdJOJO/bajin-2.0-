@@ -332,24 +332,18 @@ section.items>div:last-child .mask_lq{
 	background: #fff;
 }
 
-section.items>div:last-child .mask_lq>.tit_bq1_detail{
-	overflow: hidden;
+section.items>div:last-child .mask_lq>.tit_bq1_detail {
 	text-overflow: ellipsis;
-	white-space: nowrap;
 	font-family: 黑体;
-	font-size: 0.9em;
-	height: 64%;
+	font-size: 16px;
+	line-height: 0.075rem;
 	width: 90%;
 	margin: auto;
 	color: #7a7a7a;
-}
-
-section.items>div:last-child .mask_lq>.tit_bq1_detail p:first-child{
-	height: 0;
-}
-
-section.items>div:last-child .mask_lq>.tit_bq1_detail p span{
-	color: #7a7a7a !important;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
 }
 
 

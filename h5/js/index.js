@@ -239,9 +239,9 @@ $(document).ready(function(){
 				var item=$('<div class="itemLeft" ><img src='+data[i].minPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/>' +
 					'<div class = "mask_lhq"><p class="tit_tq">'+data[i].title+'</p></div>' + '<div class="gradientMask"></div></div>');
 				}else if(i==2){
-				var item=$('<div class="items_img" >' +
-					'<img src='+data[i].maxPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/>' +
-					'<div class = "mask_lq"><p class="tit_tq1">'+data[i].title+'</p>' + '<div class="tit_bq1_detail">'+data[i].detail+'</div></div>');
+					var item=$('<div class="items_img" >' +
+						'<img src='+data[i].maxPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/>' +
+						'<div class = "mask_lq"><p class="tit_tq1">'+data[i].title+'</p>' + '<div class="tit_bq1_detail">'+data[i].detail.replace(/<[^>]+>/g,"").replace(/[^\u4e00-\u9fa5]/gi,"")+'</div></div>');
 				}
 				itemWrap.append(item)
 			}			

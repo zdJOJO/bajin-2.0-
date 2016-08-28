@@ -219,9 +219,6 @@ var getComment = function () {
 		}
 	});
 };
-
-
-
 getComment();
 
 

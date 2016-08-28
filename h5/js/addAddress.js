@@ -27,7 +27,7 @@ $(function(){
 	if(window.location.search != ""){
 		var  JSONstr = window.location.search.split("=")[1];
 		console.log(JSON.parse(unescape(JSONstr)));
-		obj = JSON.parse(unescape(JSONstr));	
+		obj = JSON.parse(unescape(JSONstr));
 	}
 	
 	
@@ -63,7 +63,8 @@ $(function(){
 							if(window.location.href.indexOf('fromePersonNalInfo') > 0){
 								window.location.href = "setAddress.html?fromePersonNalInfo&&obj="+escape(JSON.stringify(obj));
 							}else if(window.location.href.indexOf('fromeGift') > 0){
-								window.location.href = "birthdayGift.html";
+								// window.location.href = "birthdayGift.html?" + urlSearch;
+								window.history.back();
 							}else {
 								window.location.href = "setAddress.html?obj="+escape(JSON.stringify(obj));
 							}

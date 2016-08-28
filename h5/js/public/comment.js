@@ -37,6 +37,11 @@ var isPublishCtm = false;
 
 
 
+
+
+//TYPE: 1活动  2白金人生 3商品 4抽奖 5乐享 6url 7咨询 8工会服务 9热点 10反馈
+// 身份TYPE: 用户 0 ,总管理员 1, 运营人员 2, 内容管理 3, 财务主管 4, 数据分析 5, 客户服务 6, 商户 7
+
 //分页获取 评论
 var getCommentList = function (page) {
 
@@ -65,9 +70,15 @@ var getCommentList = function (page) {
                     headPicStr = port + '/bcard/imgs/headPic_default.png';
                     nameStr = '';
                 }
-                str += '<li class="singleCmt">' +
-                    '<img src="'+ headPicStr +'">' + '<span class="userName">' + nameStr + '</span>' +
-                    '<p>'+ data.list[i].commentContent +'</p>' + '<span class="creatTime">'+ timeAgo((new Date().getTime()/1000)-data.list[i].createTime) +'</span></li>';
+                // str += '<li class="singleCmt">' +
+                //     '<img src="'+ headPicStr +'">' + '<span class="userName">' + nameStr + '</span>' +
+                //     '<p>'+ data.list[i].commentContent +'</p>' + '<span class="creatTime">'+ timeAgo((new Date().getTime()/1000)-data.list[i].createTime) +'</span></li>';
+                str += '<div class="singleCmt">' +
+                    '<div class="imgBox"><img src="'+ headPicStr +'"></div>' +
+                    '<div class="cmtContent">' +
+                    '<li class="userName">' + nameStr + '</li>' +
+                    '<li class="commentContent">'+ data.list[i].commentContent +'</li>' +
+                    '<li class="creatTime">'+ timeAgo((new Date().getTime()/1000)-data.list[i].createTime) +'</li></div></div>';
             }
             $("article>.comments>.commentList").append(str);
             $('#loading').hide();

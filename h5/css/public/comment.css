@@ -6,12 +6,14 @@ html,body{
     font-family: 黑体;
 }
 
+ul,li{
+    list-style: none;
+}
+
 
 header{
     height: 0;
 }
-
-
 
 
 article {
@@ -20,7 +22,7 @@ article {
 
 
 article >.comments{
-    position: relative;
+    /*position: relative;*/
     border-top: 1px #f1f1f1 solid;
     padding-top: 25px;
     margin-bottom: 55px;
@@ -43,52 +45,47 @@ article >.comments>.totalNum{
 
 
 article >.comments>.commentList>.singleCmt{
-    position: relative;
     width: 100%;
-    height: 0.3rem;
-    margin: 32px 0;
+    min-height: 0.3rem;
+    margin: 0.05rem 0 0.02rem 0;
+    overflow: hidden;
 }
 
-article >.comments>.commentList>.singleCmt>img{
-    position: absolute;
-    display: block;
+article >.comments>.commentList>.singleCmt>div{
+    float: left;
+    height: 100%;
+}
+article >.comments>.commentList>.singleCmt>div:first-child{
     width: 21%;
-    height: 65%;
-    border-radius: 60%;
-    top: 0;
+}
+article >.comments>.commentList>.singleCmt>div:last-child{
+    width: 70%;
 }
 
-article >.comments>.commentList>.singleCmt>.userName{
-    position: absolute;
+article >.comments>.commentList>.singleCmt img{
+    display: block;
+    width: 0.15rem;
+    height: 0.15rem;
+    border-radius: 60%;
+}
+
+article >.comments>.commentList>.singleCmt .userName{
     display: block;
     font-size: 1em;
     font-family: "黑体";
     color: #323232;
-    left: 23%;
-    top: 11px;
 }
 
-article >.comments>.commentList>.singleCmt>p{
-    position: absolute;
+article >.comments>.commentList>.singleCmt .commentContent{
     color: #808080;
     font-size: 0.9em;
-    left: 23%;
-    top: 41px;
-    width: 75%;
-    height: 50%;
-    word-break: break-all;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
+    margin: 0.02rem 0;
 }
 
-article >.comments>.commentList>.singleCmt>.creatTime{
-    position: absolute;
+article >.comments>.commentList>.singleCmt .creatTime{
     display: block;
     font-size: 0.7em;
     color: #cfcfcf;
-    left: 23%;
-    bottom: 0;
 }
 
 
@@ -136,7 +133,7 @@ footer>.box{
 
 #commentContent{
     margin-top: 13px;
-    width: 80%;
+    width: 78%;
     height: 60%;
     margin-left: 20px;
     padding-left: 10px;
@@ -156,25 +153,25 @@ footer>.box{
 
 
 
-@media screen and (max-width: 320px){
-    article >.comments>.commentList>.singleCmt{
-        position: relative;
-        width: 100%;
-        height: 0.4rem;
-        margin: 32px 0;
-    }
+/*@media screen and (max-width: 320px){*/
+    /*article >.comments>.commentList>.singleCmt{*/
+        /*position: relative;*/
+        /*width: 100%;*/
+        /*height: 0.4rem;*/
+        /*margin: 32px 0;*/
+    /*}*/
 
-    article >.comments>.commentList>.singleCmt>img{
-        position: absolute;
-        display: block;
-        width: 21%;
-        height: 50%;
-        border-radius: 60%;
-        top: 0;
-    }
+    /*article >.comments>.commentList>.singleCmt>img{*/
+        /*position: absolute;*/
+        /*display: block;*/
+        /*width: 21%;*/
+        /*height: 50%;*/
+        /*border-radius: 60%;*/
+        /*top: 0;*/
+    /*}*/
 
-    #commentContent {
-        width: 70%;
-        margin-top: 10px;
-    }
-}
+    /*#commentContent {*/
+        /*width: 70%;*/
+        /*margin-top: 10px;*/
+    /*}*/
+/*}*/

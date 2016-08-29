@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
+    <meta name="screen-orientation"content="portrait">
+    <meta name="x5-orientation"content="portrait">
+    <link rel="stylesheet" type="text/css" href="css/weiXin/weui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/weiXin/jquery-weui.css">
+    <link rel="stylesheet" type="text/css" href="js/swiper-3.3.1.min.css">
+    <link rel="stylesheet" type="text/css" href="css/ICBC_Module/ICBC_index.css">
+    <title>工行服务</title>
+</head>
+<body>
+    <div id="banner" class="swiper-container">
+        <!--ajax请求-->
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <nav>
+        <div>
+            <a href="javascript:" id="mine" class="active" data-type="index">我 的</a>
+            <img src="imgs/ICBC_service/形状.png">
+        </div>
+        <div id="menu">
+            <!--ajax请求-->
+            <div class="swiper-wrapper">
+                <li class="swiper-slide" data-type="allCards">全部卡种</li>
+                <li class="swiper-slide">商务精英</li>
+                <li class="swiper-slide">旅游达人</li>
+                <li class="swiper-slide">小资生活</li>
+                <li class="swiper-slide">全部全部</li>
+                <li class="swiper-slide">全部全部</li>
+                <li class="swiper-slide">全部全部</li>
+                <li class="swiper-slide">全部全部</li>
+            </div>
+            <div class="swiper-button-next"><img src="imgs/ICBC_service/next.png"></div>
+        </div>
+    </nav>
+
+    <section class="index">
+        <div id="service">
+            <ul class="serviceList">
+                <li class="icbcBtn" id="personalServe"><img src=""><span></span></li>
+                <li class="icbcBtn" id="phone"><img src=""><span></span></li>
+                <li class="icbcBtn"><img src=""><span></span></li>
+                <li class="icbcBtn"><img src=""><span></span></li>
+                <li class="icbcBtn"><img src=""><span></span></li>
+                <li class="icbcBtn"><img src=""><span></span></li>
+                <li class="icbcBtn"><img src=""><span></span></li>
+                <li class="icbcBtn"><img src=""><span></span></li>
+                <li class="icbcBtn"><img src=""><span></span></li>
+            </ul>
+        </div>
+        <div id="content">
+            <header>
+                <!--ajax请求-->
+                <span>我的信用卡</span>
+                <span class="cardNum"></span>
+                <span><img src="imgs/ICBC_service/形状.png"></span>
+                <span class="change">更换</span>
+            </header>
+
+            <!-- 没登陆或者没有绑卡-->
+            <div class="tip">
+                <div class="weui_msg">
+                    <div class="weui_text_area">
+                        <h2 class="weui_msg_title"></h2>
+                        <p class="weui_msg_desc"></p>
+                    </div>
+                    <div class="weui_opr_area">
+                        <p class="weui_btn_area">
+                            <a href="javascript:;" class="weui_btn weui_btn_primary"></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="allCards">
+
+    </section>
+
+    <div id="loading" style="display: none"><img src="imgs/gift/loading.gif"></div>
+
+</body>
+<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
+<script type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/ICBC_Module/ICBC_index.js"></script>
+</html>

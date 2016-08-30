@@ -1,9 +1,9 @@
 
 $(function(){
 	var token = "";
+	var pickid = '';
 	//获取存在于cookie中的token值
-	function getCookie(c_name)
-	{
+	function getCookie(c_name) {
 		if (document.cookie.length>0)
 		{
 			c_start=document.cookie.indexOf(c_name + "=")
@@ -22,8 +22,13 @@ $(function(){
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];
 
-	var pickid = window.location.search.split('=')[1];
-	var pathname = window.location.pathname.split("/")[6] == "bank.html";
+	var searchStr = window.location.search ;
+	if(searchStr.indexOf('token') > 0){
+		pickid = searchStr.split('&')[0].split('=')[1];
+		token = searchStr.split('&')[1].split('=')[1];
+	}
+
+
 
 	var isBJVip = false;
 
@@ -59,28 +64,6 @@ $(function(){
 							//alert("你还没有添加银行卡,请先添加银行卡，然后再操作！！");
 							cardList.append("<h2 class= 'alert_q'>你还没有添加银行卡</h2>");
 						}else{
-							// 一定要注意，在元素出来的时候再帮定事件，不然就没效
-							// $(".cardItem").click(function(){		 //点击选中银行卡事件
-							// 	if(pickid==11 && !isBJVip){
-							// 		$.alert('本功能仅限工行白金卡用户');
-							// 		return
-							// 	}else {
-							// 		var cardItem = $(this).data("cardid");
-							// 		$.ajax({
-							// 			type:"GET",
-							// 			dataType:"text",
-							// 			url:port+"/card/bank/encryption/"+pickid+"/"+cardItem+"?token="+token,
-							// 			success:function(data){
-							// 				if(data.length<50){
-							// 					window.location.href = "login.html?his="+his;
-							// 				}else{
-							// 					toIcbc(data);
-							// 				}
-							// 			},
-							// 		});
-							// 	}
-							// });
-
 							//长按 和 点击
 							var timeOutEvent = 0;
 							$(".cardItem").on({
@@ -124,6 +107,9 @@ $(function(){
 											$.alert('本功能仅限工行白金卡用户');
 											return
 										}else {
+											if(!pickid){
+												return
+											}
 											var cardItem = $(this).data("cardNum");
 											$.ajax({
 												type:"GET",

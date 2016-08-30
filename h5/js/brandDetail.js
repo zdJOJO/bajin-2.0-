@@ -454,15 +454,6 @@ $('#addToShoppingCart ,#buyNow, .wrapper>.stock').click(function () {
 
 
 
-//选择规格的滚动条 滚动时候不受外部滚动条印象
-$('#speList').hover(function () {
-	
-});
-
-
-
-
-
 
 //弹出层
 $('#mask').click(function () {

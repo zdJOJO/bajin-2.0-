@@ -17,6 +17,8 @@ a.active{
 
 ul,li{
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 li{
     float: left;
@@ -25,7 +27,7 @@ li{
 
 .swiper-container {
     width: 100%;
-    height: 25%;
+    height: 28%;
     background: #B0B0B0;
     border-bottom: 5px #EDEDED solid;
 }
@@ -96,7 +98,7 @@ nav > div:last-child >li{
 
 /***********************  我的 ****************************/
 #service{
-    border-bottom: 5px #EDEDED solid;
+    border-bottom: 7px #EDEDED solid;
 }
 
 #service> .serviceList{
@@ -123,7 +125,7 @@ nav > div:last-child >li{
 
 #service> .serviceList>li>img{
     width: 2.8rem;
-    height: 2.8rem;
+    height: auto;
 }
 
 #service> .serviceList>li>span{
@@ -163,30 +165,105 @@ nav > div:last-child >li{
 }
 
 #content > .tip{
-
+    text-align: center;
+    height: 16rem;
 }
 
-#content .weui_btn_primary {
-    background-color: #BDAC72;
-    border-radius: 0;
-    width: 13rem;
-}
-#content  .weui_btn_primary:not(.weui_btn_disabled):active{
-    background-color: #A59665;
-}
-
-#content .weui_msg .weui_msg_title{
+#content h2{
+    font-size: 1.35em;
+    font-weight: 100;
     color: #3f3f3f;
+    margin: 3rem 0 1rem 0;
 }
-#content .weui_msg .weui_msg_desc{
+
+#content p{
     color: #929292;
     font-size: 1em;
+    line-height: 1.7rem;
+    margin: 0 0 2rem 0;
+}
+
+#content button{
+    background-color: #BDAC72;
+    border-radius: 0;
+    width: 14rem;
+    height: 2.7rem;
+    border: none;
+    outline: hidden;
+    color: #fff;
+    font-size: 1.1em;
+    font-family: 黑体;
+}
+
+/*#content  .weui_btn_primary:not(.weui_btn_disabled):active{*/
+    /*background-color: #A59665;*/
+/*}*/
+
+
+/************************ 全部卡种 *****************************/
+section.allCards{
+    overflow-y: scroll;
+    max-height: 60%;
+}
+
+section.allCards>.singleCard{
+    width: 94%;
+    height: 6rem;
+    margin: 0 auto 0 auto;
+    padding: 1.5rem 0;
+    border-bottom: 1px #EDEDED solid;
+}
+
+section.allCards>.singleCard>div,section.allCards>.singleCard>img{
+    float: left;
+}
+
+section.allCards>.singleCard>img{
+    display: inline-block;
+    width: 40%;
+    height: 100%;
+    background: #DADADA;
+}
+
+section.allCards>.singleCard>div{
+    margin-left: 1.5rem;
+    width: 50%;
+}
+
+section.allCards>.singleCard h2{
+    margin: 0;
+    line-height: 1.4rem;
+    width: 100%;
+    clear: both;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.1em;
+    font-weight: 100;
+    color: #3f3f3f;
+}
+section.allCards>.singleCard p{
+    font-size: 0.8em;
+    color: #929292;
+    margin-bottom: 0.5rem;
+    line-height: 1.3rem;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }
 
 
 
 
 /*****************************************************/
+@media screen and (max-width: 375px){
+    #menu li{
+        font-size: 0.88em;
+    }
+}
+
 @media screen and (max-width: 360px){
     #service {
         font-size: 0.9em;

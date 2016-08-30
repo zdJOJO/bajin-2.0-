@@ -34,6 +34,8 @@ h3{
 #comment input+span{
     font-size: 16px;
     padding: 0 0 0 0.04rem;
+    display: inline-block;
+    height: 100%;
 }
 
 #comment>.list{

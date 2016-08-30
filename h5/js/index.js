@@ -288,45 +288,40 @@ $(document).ready(function(){
 
 
 
-	//工行 各个按钮
-	$(".item_q").click(function(){
-	    if(token != undefined){
-	    	if($(this).attr("id")=="phone"){
-	    		window.location.href = 'tel://' + '400-009-5588';
-	    		return;	    		
-	    	}else if($(this).attr("id")=="personalServe"){
-	    		getMessage();
-	    		return;
-	    	}else if($(this).attr("data-pickid")=="888"){
-				window.location.href = "icbcServe.html";   //跳转工行服务按钮
-			}else {
-				window.location.href = "bank.html?pickid=" + $(this).data("pickid");
-			}
-	    }else{
-	    	window.location.href = "login.html?his="+his;
-	    }
+
+	//工行的button请求数据
+	//http://121.196.232.233/card/icbcbutton
+	$.ajax({
+		type:"get",
+		url: port+"/card/icbcbutton",
+		success:function(data){
+			$('#activities>ul').append('<li class="btn" id="personalServe" data-pickid="'+ data.list[0].pickId+'"><img src="'+ data.list[0].buttonPic +'">'+ data.list[0].buttonTitle +'</li>' +
+				'<li class="btn" id="phone" data-pickid="'+ data.list[1].pickId+'"><img src="'+ data.list[1].buttonPic +'">'+ data.list[1].buttonTitle +'</li>' +
+ 				'<li class="btn" data-pickid="'+ data.list[2].pickId+'"><img src="'+ data.list[2].buttonPic +'">'+ data.list[2].buttonTitle +'</li>');
+
+			//工行 各个按钮
+			$("#activities .btn").click(function(){
+				if(token != undefined){
+					if($(this).attr("id")=="phone"){
+						window.location.href = 'tel://' + '400-009-5588';
+						return;
+					}else if($(this).attr("id")=="personalServe"){
+						getMessage();
+						return;
+					}else if($(this).attr("data-pickid")=="888"){
+						window.location.href = "icbcServe.html";   //跳转工行服务按钮
+					}else {
+						window.location.href = "bank.html?pickid=" + $(this).data("pickid");
+					}
+				}else{
+					window.location.href = "login.html?his="+his;
+				}
+			});
+		},
+		error:function(data){
+			//todo
+		}
 	});
-
-
-
-	
-	// //工行的button请求数据
-	// //http://121.196.232.233/card/icbcbutton
-	// $.ajax({
-	// 	type:"get",
-	// 	url: port+"/card/icbcbutton",
-	// 	success:function(data){
-	// 		var actList = $(".wrap .activities .fun");
-	// 		for(var i=0,len = actList.length; i<len;i++){
-	// 			$(actList[i]).attr("data-pickid",data.list[i].pickId);
-	// 			$(actList[i]).find("img").attr("src",data.list[i].buttonPic);
-	// 			$(actList[i]).children("span").html(data.list[i].buttonTitle);
-	// 		}
-	// 	},
-	// 	error:function(data){
-	// 		//todo
-	// 	}
-	// });
 
 
 	//私人预约服务
@@ -360,5 +355,11 @@ $(document).ready(function(){
 			}
 		});
 	};
+
+
+	//更多工行服务
+	$('#moreIcbc').click(function () {
+		window.location.href = 'ICBC_index.html';
+	});
 	
 });

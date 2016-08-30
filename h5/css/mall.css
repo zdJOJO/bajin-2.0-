@@ -30,7 +30,7 @@ header,.wrapper,footer{
     color:#858585;
 }
 .wrapper{
-	margin-bottom: 0.12rem;
+	margin-bottom: 0.15rem;
 	font-family: 黑体;
 }
 .wrapper>p{
@@ -46,7 +46,7 @@ header,.wrapper,footer{
 	border-bottom: 1px solid #f2f2f2;
 }
 .wrapper>p span{
-	color: #dadada;;
+	color: #000;;
  	position: absolute;
  	left: 0.2rem;
  	width: 0.76rem;
@@ -257,7 +257,7 @@ header .saveAndShare img:first-child{
 	color: #ABABAB;
 }
 .wrapper .currentCost span{
-	color: #dadada;
+	color: #000;
 }
 
 .swiper-scrollbar-drag{

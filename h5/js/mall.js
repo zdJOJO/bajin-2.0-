@@ -22,10 +22,14 @@ $(document).ready(function(){
 	//获取页面的名称
 	var his = window.location.href.split("/");
 	his = his[his.length-1];
+
+	var itemId = '';
 	//数量选择处理
     var mallid = window.location.search.split("=")[1];
+	itemId = mallid;
     if(/&/g.test(mallid)){
         mallid = mallid.split("&")[0];
+		itemId = mallid;
     }
 
 	var mallObj = {
@@ -36,8 +40,6 @@ $(document).ready(function(){
 
 	//分享时候 传当前页面的url 和 对象obj
 	get_url(window.location.href);
-
-
 
 
     //获取商品http://121.196.232.233/card/goods/{goodsId}	
@@ -273,23 +275,22 @@ $(document).ready(function(){
 					$('#moreComts').click(function () {
 						window.location.href = 'comment.html?type=' + 5 + '&itemId=' + itemId;
 					});
-
-					//发表评论
-					$('#publishCmt').click(function () {
-						publishComment(itemId);
-					});
 				}else {
 					$('#comment>.box').css({'margin-top': '0.02rem'});
 				}
 			},
 			error: function (e) {
-
+				//todo
 			}
 		});
 	}
 
 
 	//发表评论
+	$('#publishCmt').click(function () {
+		publishComment(itemId);
+	});
+
 	var publishComment = function (itemId) {
 		if(!$("#commentContent").val()){
 			$.alert("请填写后再评论", "评论失败", function() {
@@ -311,8 +312,8 @@ $(document).ready(function(){
 						$.toast("发表评论成功", function() {
 							$('footer').css('height','7%');
 							$("#commentContent").val('');
-							getComment(1);
-							$('#comment>.box').css({'margin-top': '0.02rem'});
+							getComment(itemId);
+							$('#comment>.box').css({'margin-top': '0.12rem 0 0.01rem 0;'});
 						});
 					}
 				},

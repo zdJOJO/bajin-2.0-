@@ -98,7 +98,7 @@ $(function(){
                 for(var i=0;i<data.list.length;i++){
                     consultationStr += '<div class="singleHot" data-id="'+data.list[i].id+'" style="background: url('+data.list[i].maxPic+') no-repeat 50%;background-size: 1rem 0.5rem">' +
                         '<h4 class="title">'+data.list[i].title+'</h4>' +
-                        '<span class="creatTime">'+ new Date(data.list[i].createTime*1000).Formate()+'</span>' +
+                        '<span class="creatTime">'+ new Date(data.list[i].createTime*1000).Formate_short()+'</span>' +
                         '<span class="lookNum">'+data.list[i].viewNum+' 已阅</span></div>';
                 }
 

@@ -88,14 +88,80 @@ hr{
 	width:100%;
 	overflow: hidden;
 }
-.activities{
+
+
+#activities{
 	width:100%;
-	padding: 0.025rem 0.025rem 0;
 	box-sizing:border-box;
 	flex-flow: row wrap;
 	justify-content: space-around;
 	transition: 0.1s height;
+	background: #F0F0F0;
+	padding: 0.015rem 0 0.017rem 0
 }
+
+#activities>.head{
+	height: 0.125rem;
+	line-height: 0.125rem;
+	font-size: 17px;
+	overflow: hidden;
+	background: #fff;
+	color: #3f3f3f;
+	font-family: 黑体;
+}
+
+#activities>.head>span{
+	float: right;
+	display: inline-block;
+}
+
+#activities>.head>span:first-child{
+	float: left;
+	margin-left: 0.03rem;
+}
+#activities>.head>span:first-child>img{
+	width: 0.07rem;
+	height: auto;
+	margin-right: 0.01rem;
+}
+#activities>.head>span:last-child{
+	margin-right: 0.03rem;
+}
+#activities>.head>span:last-child>img{
+	margin-left: 0.02rem;
+	width: 0.015rem;
+	height: auto;
+}
+
+
+#activities>ul{
+	width: 96%;
+	height: 0.15rem;
+	line-height: 0.15rem;
+	margin: 0.017rem auto 0 auto;
+}
+
+#activities>ul>li{
+	background: #fff;
+	border-radius: 8px;
+	width: 32%;
+	text-align: center;
+	float: left;
+}
+
+#activities>ul>li:nth-child(2){
+	margin: 0 2%;
+}
+
+#activities>ul>li>img{
+	display: inline-block;
+	width: 0.1rem;
+	height: auto;
+	margin-right: 10px;
+}
+
+
+
 .activity{
 	text-align: center;
 	height: 0.152rem;
@@ -172,13 +238,11 @@ hr{
 footer{
 	width: 1rem;
 	height: 0.12rem;
-	/*background-color:#f0f0f0;*/
+	background-color: #F0F0F0;
 	position: fixed;
 	bottom: 0;
 	z-index: 2500;
 	text-align: center;
-
-	background: -webkit-gradient(linear,0 0, 0 8%,from(#dedede),to(#fff));
 }
 footer div{
 	width: 0.25rem;
@@ -407,8 +471,24 @@ section.items1>div:last-child .mask_lq>.tit_bq1:last-child{
 
 
 }
-.brand_But h1,.latest_But h1{font-size: 20px; color: #323232; line-height:32px;}
-.brand_But h1 span,.latest_But h1 span{color:#b6a66d; }
+.brand_But h1,.latest_But h1{
+	font-size: 17px;
+	color: #323232;
+	line-height: 32px;
+	text-align: left;
+	font-family: 黑体;
+}
+.brand_But h1>img,.latest_But h1>img{
+	width: 0.06rem;
+	height: auto;
+	position: relative;
+	top: -2px;
+	left: 1.5%;
+}
+
+
+
+.brand_But h1 span,.latest_But h1 span{	color: #323232;; }
 .brand_But p,.latest_Bu{color: #909090;}
 /*侧边栏*/
 .showDiv2{

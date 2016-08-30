@@ -80,6 +80,7 @@ article >.comments>.commentList>.singleCmt .commentContent{
     color: #808080;
     font-size: 0.9em;
     margin: 0.02rem 0;
+    word-break: break-all;
 }
 
 article >.comments>.commentList>.singleCmt .creatTime{

@@ -1,0 +1,100 @@
+body,html{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 黑体;
+    font-size: 16px;
+}
+
+ul,li{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+#cardDetail{
+
+}
+
+#cardDetail >.ctg{
+    border: 1px #e0e0e0 solid;
+}
+
+#cardDetail img{
+    display: block;
+    width: 70%;
+    height: 9rem;
+    margin: 1.5rem auto 2.5rem auto;
+    background: #b2b2b2;
+}
+
+#cardDetail h3{
+    color: #5a5959;
+    font-weight: 100;
+    font-size: 1.1em;
+    text-align: center;
+    margin-bottom: 0.9rem;
+}
+
+#cardDetail >.ctg ul{
+    overflow: hidden;
+    color: #929292;
+    width: 75%;
+    margin: 0rem auto 1.2rem auto;
+}
+
+#cardDetail>.ctg li{
+    width: 25%;
+    height: 1.7rem;
+    float: left;
+    margin: 0.5rem 0;
+    font-size: 0.95em;
+}
+
+#cardDetail>.ctg li>a{
+    display: block;
+    width: 80%;
+    height: 1.6rem;
+    line-height: 1.6rem;
+    text-align: center;
+    border: 1px #bcbcbc solid;
+    border-radius: 8px;
+    margin: auto;
+    color: #929292;
+}
+
+
+#cardDetail>.content{
+    font-size: 0.95em;
+    padding: 0 1rem;
+}
+
+#cardDetail h6{
+    font-size: 0.95em;
+    color: #929292;
+    font-weight: 100;
+    margin: 1rem 0 1rem 0;
+}
+
+#cardDetail>.content ul{
+    color: #3f3f3f;
+    font-size: 1.1em;
+}
+
+#cardDetail>.content p{
+    font-size: 0.9em;
+    color: #7c7c7c;
+    line-height: 2rem;
+}
+
+
+
+
+
+

@@ -165,8 +165,8 @@ $(document).ready(function(){
 			async:true,
 			url:port +'/card/banner',
 			success:function(data){
-				
 				var arr = data.list;
+				var bannerStr = '';
 				// Array.prototype.push.apply(arr, arr);
 				var content_ = $('<div class="swiper-container"><div class="swiper-wrapper"></div><div class="swiper-pagination"></div></div>');
 	            $(".carousel").append(content_);
@@ -174,9 +174,18 @@ $(document).ready(function(){
 					if(arr[i].bannerUrl){
 						bannerUrl = arr[i].bannerUrl;
 					}
-					var str=$('<div class="swiper-slide"><p class="mask_banner">'+arr[i].bannerTitle+'</p><img src="'+arr[i].bannerPic+'" data-id="'+arr[i].bannerId+'" data-type="'+arr[i].type+'" data-itemId="'+arr[i].itemId+'" data-url="'+arr[i].bannerUrl+'" class="swiper-slide_img"/></div>');
-					$(".swiper-wrapper").append(str);
+					bannerStr += '<div class="swiper-slide">' +
+						'<p class="mask_banner">'+arr[i].bannerTitle+'</p>' +
+						'<img src="'+arr[i].bannerPic+'" data-id="'+arr[i].bannerId+'" data-type="'+arr[i].type+'" data-itemId="'+arr[i].itemId+'" data-url="'+arr[i].bannerUrl+'" class="swiper-slide_img"/>' +
+						'</div>';
+
 				}
+				$(".swiper-wrapper").append(bannerStr);
+
+
+
+
+
 				//这里区分type，
 				//		如果是0，不操作，
 				//		如果是1，拿到itemId，然后导向活动页面
@@ -227,6 +236,8 @@ $(document).ready(function(){
 		});
 	}
 	getBannerData();
+
+
 	//http://121.196.232.233:9292/card/activity?currentPage={pagenum}&size={size}
 	var itemWrap=$('.items').eq(0);
 	var itemWrap1=$('.items1').eq(0);
@@ -236,15 +247,17 @@ $(document).ready(function(){
 	    $.get(port+"/card/mpage/hot",function(data){
 			for(var i=0;i<data.length;i++){
 				if(i ==0||i==1){
-				var item=$('<div class="itemLeft" ><img src='+data[i].minPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/>' +
+				var item=$('<div class="itemLeft" >' +
+					'<img src='+data[i].minPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/>' +
 					'<div class = "mask_lhq"><p class="tit_tq">'+data[i].title+'</p></div>' + '<div class="gradientMask"></div></div>');
 				}else if(i==2){
 					var item=$('<div class="items_img" >' +
-						'<img src='+data[i].maxPic+' data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/>' +
+						'<img src="'+data[i].maxPic+'" data-itemId = "'+data[i].itemId+'" data-type = "'+data[i].type+'" class="activity-img"/>' +
 						'<div class = "mask_lq"><p class="tit_tq1">'+data[i].title+'</p>' + '<div class="tit_bq1_detail">'+data[i].detail.replace(/<[^>]+>/g,"").replace(/[^\u4e00-\u9fa5]/gi,"")+'</div></div>');
 				}
 				itemWrap.append(item)
-			}			
+			}
+
 			$(".tit_bq1").each(function(){ 
 				var maxwidth=50;   
 				if($(this).text().length>maxwidth){   

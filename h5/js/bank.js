@@ -27,13 +27,9 @@ $(function(){
 		pickid = searchStr.split('&')[0].split('=')[1];
 		token = searchStr.split('&')[1].split('=')[1];
 	}
-
-
-
+	
 	var isBJVip = false;
-
-
-
+	
 	if(token != undefined){
 		//拿到pickid继续获取参数然后发送请求
 		var cardList=$(".cardList").eq(0);

@@ -23,7 +23,12 @@ $(function(){
                 str += '<div class="swiper-slide" data-url="'+ url +'">' +
                     '<img src="'+ result.data.list[i].pic +'" data-original="'+ result.data.list[i].pic +'"></div>';
             }
-            $("#banner").children('.swiper-wrapper').append(str);
+            var banner = document.getElementById('banner');
+            var width = banner.offsetWidth;
+            var height = width/2;
+            $("#banner").css('height',height).children('.swiper-wrapper').append(str);
+
+
             //swiper滑动初始化
             var bannerSwiper = new Swiper ('#banner.swiper-container', {
                 autoplay: 3000,//可选选项，自动滑动
@@ -242,7 +247,7 @@ $(function(){
     }
 
 
-    //私人预约服务(G20 暂时失效)
+    //私人预约服务
     function getMessage(){
         $.ajax({
             type: "GET",

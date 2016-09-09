@@ -123,23 +123,40 @@ $(function(){
             if(data.list.length != 0){
                 for(var i=0;i<data.list.length;i++){
                     if(classStr.indexOf('life')>=0){
-                        str += '<div data-id='+data.list[i].lifeId+' class="vip-item"><div class="img-item"><img class="img" src="'+data.list[i].lifePic+'" /></div>' +
+                        str += '<div data-id='+data.list[i].lifeId+' class="vip-item"><div class="img-item">' +
+                            '<img class="img" data-original="'+data.list[i].lifePic+'"/></div>' +
                             '<div class="info-item"><p class="vip-name">'+data.list[i].lifePersonName+'</p>' +
                             '<p class="vip-info">'+data.list[i].lifeAbstract+'</p></div></div>';
                     }else {
-                        str += '<div class="singleHot" data-id="'+data.list[i].id+'" style="background: url('+data.list[i].maxPic+') no-repeat 50%;background-size: 1rem 0.5rem">' +
+                        str += '<div class="singleHot" data-id="'+data.list[i].id+'">' +
+                            '<img data-original="'+data.list[i].maxPic+'">' +
                             '<h4 class="title">'+data.list[i].title+'</h4>' +
-                            '<span class="creatTime">'+ new Date(data.list[i].createTime*1000).Formate()+'</span>' +
+                            '<span class="creatTime">'+ new Date(data.list[i].createTime*1000).Formate_short()+'</span>' +
                             '<span class="lookNum">'+data.list[i].viewNum+' 已阅</span></div>';
                     }
                 }
                 if(classStr.indexOf('life')>=0){
-                    $('#vip>.vipList').append(str);
+                    $('#vip').find('.vipList').append(str);
+                    //图片预加载
+                    $("#vip img").lazyload({
+                        placeholder : "",
+                        threshold: 0,
+                        effect : "fadeIn",
+                        effectspeed: 1000,
+                        event: 'scroll',
+                    });
                     // 每次数据加载完，必须重置
                     str = '';
                     dropload_life.resetload();
                 }else {
-                    $('#hot>.hotList').append(str);
+                    $('#hot').find('.hotList').append(str);
+                    $("#hot img").lazyload({
+                        placeholder : "",
+                        threshold: 0,
+                        effect : "fadeIn",
+                        effectspeed: 1000,
+                        event: 'scroll',
+                    });
                     // 每次数据加载完，必须重置
                     str = '';
                     dropload_hot.resetload();

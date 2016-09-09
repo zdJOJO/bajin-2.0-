@@ -292,6 +292,17 @@ $(document).ready(function(){
 	});
 
 	var publishComment = function (itemId) {
+		if(!token){
+			$.modal({
+				title: "评论",
+				text: "请登录后再评论",
+				buttons: [
+					{ text: "点击登录", onClick: function(){ window.location.href = "login.html?his=" + escape(his);} },
+					{ text: "确定", className: "default", onClick: function(){} },
+				]
+			});
+			return;
+		}
 		if(!$("#commentContent").val()){
 			$.alert("请填写后再评论", "评论失败", function() {
 			});

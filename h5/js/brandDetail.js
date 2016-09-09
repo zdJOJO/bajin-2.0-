@@ -136,9 +136,7 @@ var getGoodDetail = function () {
 		async: true,
 		dataType: "json",
 		success: function(data){
-
 			isCollected();
-
 			data_pic = data.hotPic;
 
 			url_obj.pic = data.hotPic;
@@ -169,15 +167,15 @@ var getGoodDetail = function () {
 			$(".brandDetail").click();
 			$(".saveAndShare").attr("data-itemid",data.goodsId);
 
-			var picArray = []
+			var picArray = [];
 			for(var i in picList){
 				picArray.push(picList[i]);
 			}
 			var str = '';
-			for(var i=0 ; i<picArray.length;i++){
+			for(var i=0;i<picArray.length;i++){
 				str += '<div class="swiper-slide"><img src="'+ picArray[i] +'"/></div>' ;
 			}
-			$(".swiper-wrapper").append($(str));
+			$(".swiper-wrapper").append(str);
 			//保存当前的商品的图片地址到立即购买按钮上
 			if(picArray.length > 1){
 				var mySwiper = new Swiper('.swiper-container', {

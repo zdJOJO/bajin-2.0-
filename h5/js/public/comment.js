@@ -17,6 +17,9 @@ function getCookie(c_name)
 }
 token = getCookie("token");
 
+//获取页面的名称
+var his = window.location.href.split("/");
+his = his[his.length-1];
 
 // 判断 是否  安卓  IOS
 var u = navigator.userAgent;
@@ -95,13 +98,23 @@ getCommentList(1);
 
 //发表评论
 var publishComment = function () {
+    if(!token){
+        $.modal({
+            title: "提示",
+            text: "请登录后再评论",
+            buttons: [
+                { text: "点击登录", onClick: function(){ window.location.href = "login.html?his=" + escape(his);} },
+                { text: "确定", className: "default", onClick: function(){} },
+            ]
+        });
+        return;
+    }
     if(!$("#commentContent").val()){
         $.alert("请填写后再评论", "评论失败", function() {
         });
         return;
     }
-
-    if($("#commentContent").val().length > 140){
+    if($("#commentContent").val().length > 200){
         $.alert("评论内容过长，请重新填写", "评论失败", function() {
         });
         return;
@@ -151,23 +164,6 @@ $('#moreComts').click(function () {
     }
     getCommentList(pageNum);
 });
-
-
-
-// //滚动加载数据  声明
-// var dropload_comment = $('.comments').dropload({
-//     scrollArea : window,
-//     domDown : {
-//         domClass   : 'dropload-down',
-//         domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
-//         domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
-//         domNoData  : '<div class="dropload-noData">已无数据</div>'
-//     },
-//     loadDownFn : function(me){
-//
-//     }
-// });
-
 
 
 

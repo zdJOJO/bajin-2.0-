@@ -169,14 +169,13 @@ $(function(){
                        case 'cardtype':
                            for (var i=0;i<len;i++){
                                str += '<div class="singleCard" data-cardId="'+ result.data.list[i].id +'">' +
-                                   '<img src="'+ result.data.list[i].pic +'" data-original="'+ result.data.list[i].pic +'">' +
+                                   '<img data-original="'+ result.data.list[i].pic +'">' +
                                    '<div><h2>'+ result.data.list[i].name +'</h2>' +
                                    '<p>'+ result.data.list[i].description +'</p></div></div>';
                            }
                            $('section.allCards').html(str);
                            //图片预加载
                            $("section.allCards img").lazyload({
-                               container: $('section.allCards'),
                                placeholder : "", //用图片提前占位
                                effect: "fadeIn", // 载入使用何种效果
                                event: 'scroll'

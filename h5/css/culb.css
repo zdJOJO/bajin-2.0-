@@ -272,6 +272,15 @@ footer div p{
 
 
 
+/* ----------------  活动   ----------------  */
+.lists>.infoItem img{
+	width: 39%;
+	height: 100%;
+	float: left;
+	background: #d7d7d7;
+}
+
+
 
 /* ----------------  资讯   ----------------  */
 
@@ -288,6 +297,14 @@ footer div p{
 	height: 0.68rem;
 	border-bottom: 1px #f2f2f2 solid;
 	position: relative;
+}
+
+#consultationList>.lists>.singleHot img{
+	width: 100%;
+	height: 0.5rem;
+	position: absolute;
+	top: 0.092rem;
+	background: #d7d7d7;
 }
 
 #consultationList>.hotList>.singleHot>h4.title{

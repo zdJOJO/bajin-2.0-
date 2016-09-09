@@ -24,7 +24,7 @@ $(function(){
       }
     return undefined;
     }
-    token = getCookie("token")?getCookie("token"):window.location.search.split("&")[1].split("=")[1];
+    token = getCookie("token") || window.location.search.split("&")[1].split("=")[1]
     // token = window.location.search.split("&")[1].split("=")[1];
     //用于设置抽奖的地方
     var sectionId = window.location.search.split('=')[1];
@@ -86,10 +86,9 @@ $(function(){
                                 alert(data_.message); 
                                 window.location.href = "https://baidu.com";
                                 isClick=true;
-                            }else if(data_.code == 208){  
+                            } else if(data_.code == 208){
                                 prizeId = objArr[objArr.length-1].prizeId;
-                            }
-                            else{                             
+                            } else{
                                 prizeId = data_.data.prizeId;                                  
                             }
                             for(var k=0,len=objArr.length;k<len;k++){

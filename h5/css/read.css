@@ -213,6 +213,15 @@ input{
     position: relative;
 }
 
+.hotList>.singleHot img{
+    width: 100%;
+    height: 0.5rem;
+    position: absolute;
+    top: 0.092rem;
+    background: #d7d7d7;
+}
+
+
 .hotList>.singleHot>h4.title{
     color: #343434;
     font-size: 18px;

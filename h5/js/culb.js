@@ -72,15 +72,11 @@ $(function(){
     }
 
 
-
-
     //使用 滑动ajax插件 进行加载  (先声明 dropload )
     var pageNum = 0;   //第一页
     var actStr = '' ;
     var pageNum_consultation = 0 ;
     var consultationStr = '';
-
-
 
 
 
@@ -96,13 +92,22 @@ $(function(){
         $.get(url,function(data){
             if(data.list.length != 0){
                 for(var i=0;i<data.list.length;i++){
-                    consultationStr += '<div class="singleHot" data-id="'+data.list[i].id+'" style="background: url('+data.list[i].maxPic+') no-repeat 50%;background-size: 1rem 0.5rem">' +
+                    consultationStr += '<div class="singleHot" data-id="'+data.list[i].id+'">' +
+                        '<img data-original="'+data.list[i].maxPic+'">' +
                         '<h4 class="title">'+data.list[i].title+'</h4>' +
                         '<span class="creatTime">'+ new Date(data.list[i].createTime*1000).Formate_short()+'</span>' +
                         '<span class="lookNum">'+data.list[i].viewNum+' 已阅</span></div>';
                 }
 
                 $('#consultationList>.lists').append(consultationStr);
+                //图片预加载
+                $("#consultationList img").lazyload({
+                    placeholder : "",
+                    threshold: 0,
+                    effect : "fadeIn",
+                    effectspeed: 1000,
+                    event: 'scroll',
+                });
 
                 // 每次数据加载完，必须重置
                 consultationStr = '';
@@ -137,7 +142,8 @@ $(function(){
                         activityTypeStr = '<span class="type">' + data.list[i].activityType + '</span>';
                     }
                    if(!isHotDoor){
-                       actStr += '<div class="infoItem" data-i="'+data.list[i].activityId+'" style="background: url('+data.list[i].activityPic+') no-repeat; background-size:39% 100%;">' +
+                       actStr += '<div class="infoItem" data-i="'+data.list[i].activityId+'" >' +
+                           '<img data-original="'+data.list[i].activityPic+'">' +
                            '<div class="tit-wrap"><div class="tit-content"> ' + activityTypeStr +
                            '<h1>'+data.list[i].activityTitle+'</h1>' +
                            '<div class="detile">' +
@@ -146,7 +152,8 @@ $(function(){
                            '</p></div></div></div>';
                    }else {
                        var chineseStr = data.list[i].detail.replace(/<[^>]+>/g,"").replace(/[^\u4e00-\u9fa5]/gi,"");
-                       actStr += '<div class="infoItem hotItem" data-type="'+data.list[i].type+'" data-i="'+ data.list[i].itemId+'" style="background: url('+data.list[i].minPic+') no-repeat #f7f7f7; background-size:39% 100%;">' +
+                       actStr += '<div class="infoItem hotItem" data-type="'+data.list[i].type+'" data-i="'+ data.list[i].itemId+'">' +
+                           '<img data-original="'+data.list[i].minPic+'">' + 
                            '<div class="tit-wrap"><div class="tit-content"><h1>'+data.list[i].title+'</h1>' +
                            '<div class="detile">' + '<div>'+ showThreeLine(chineseStr,35) +'</div></div>' +
                            '<p>'+ new Date(data.list[i].createTime*1000).Formate_short()+ '</p>' +
@@ -160,6 +167,15 @@ $(function(){
                 }else {
                     $('.lists').append(actStr);
                 }
+
+                //图片预加载
+                $(".lists img").lazyload({
+                    placeholder : "",
+                    threshold: 0,
+                    effect : "fadeIn",
+                    effectspeed: 1000,
+                    event: 'scroll',
+                });
 
                 // 每次数据加载完，必须重置
                 actStr = '';

@@ -54,7 +54,7 @@ $(document).ready(function(){
 		}
 	});
 
-	
+
 	//获取 臻品列表
 	function getGoods(page,isDelete){
 		$.ajax({
@@ -66,12 +66,20 @@ $(document).ready(function(){
 				// 清空内容
 				if(data.list.length != 0){
 					for(var i=0,len=data.list.length;i<len;i++){
-						str_good += '<div class="lar" data-id="'+data.list[i].goodsId+'"><img src="'+data.list[i].hotPic+'"/>' +
+						str_good += '<div class="lar" data-id="'+data.list[i].goodsId+'">' +
+							'<img data-original="'+data.list[i].hotPic+'"/>' +
 							'<div class="detail"><p class="title" style="margin: 5px 0 5px 0;">'+data.list[i].goodsTitle+'</p>' +
 							'<p class="subTitle">'+data.list[i].goodsSubtitle+'</p><p class="pirce">￥&nbsp;'+data.list[i].goodsPrice.toFixed(2)+'</p></div></div>' ;
 					}
-					$("#good >.content").append(str_good);
-
+					$("#good").find('.content').append(str_good);
+					//图片预加载
+					$("#good img").lazyload({
+						placeholder : "",
+						threshold: 0,
+						effect : "fadeIn",
+						effectspeed: 1000,
+						event: 'scroll',
+					});
 					// 每次数据加载完，必须重置
 					str_good = '';
 					dropload_good.resetload();
@@ -107,10 +115,21 @@ $(document).ready(function(){
 			success:function(data){
 				if(data.data.list.length != 0 ){
 					for(var i=0,len=data.data.list.length;i<len;i++){
-						str += '<div class="singleBrand_q" data-mallid ="'+data.data.list[i].mallId+'"><img src="'+data.data.list[i].pic+'"/><div class="detail_q"><h3>'+data.data.list[i].title+'<span>'+data.data.list[i].discount+'</span></h3><p>'+data.data.list[i].subtitle+'</p><div><p><img src="imgs/position_qq.png"/><span>'+data.data.list[i].address+'<span></p></div></div></div>' ;
+						str += '<div class="singleBrand_q" data-mallid ="'+data.data.list[i].mallId+'">' +
+							'<img data-original="'+data.data.list[i].pic+'"/>' +
+							'<div class="detail_q"><h3>'+data.data.list[i].title+'<span>'+data.data.list[i].discount+'</span></h3>' +
+							'<p>'+data.data.list[i].subtitle+'</p><div>' +
+							'<p><img src="imgs/position_qq.png"/><span>'+data.data.list[i].address+'<span></p></div></div></div>' ;
 					}
-					$("#brand >.newBrandList").append(str);
-
+					$("#brand").find('.newBrandList').append(str);
+					//图片预加载
+					$("#brand img").lazyload({
+						placeholder : "",
+						threshold: 0,
+						effect : "fadeIn",
+						effectspeed: 1000,
+						event: 'scroll',
+					});
 					// 每次数据加载完，必须重置
 					str = '';
 					dropload_brand.resetload();

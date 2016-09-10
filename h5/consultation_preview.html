@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
+    <meta name="screen-orientation"content="portrait">
+    <meta name="x5-orientation"content="portrait">
+    <title></title>
+
+    <link rel="stylesheet" href="css/weiXin/weui.min.css">
+    <link rel="stylesheet" href="css/weiXin/jquery-weui.css">
+    <link rel="stylesheet" href="css/plugin/dropload.css">
+
+    <link rel="stylesheet" href="css/enrol.css">
+    <link rel="stylesheet" href="css/consultation.css">
+</head>
+<body>
+<header>
+    <h3></h3>
+    <span class="abstr"></span>
+    <span class="time"></span>
+</header>
+
+<article style="position: relative">
+    <section class="content" style="position: relative"></section>
+</article>
+
+<div id="shareMask"><img src="imgs/shareImg.png"/></div>
+
+</body>
+
+<script>var IS_WX_LOADED=0;</script>
+<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript" src="js/plugin/dropload.min.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
+
+<script type="text/javascript" src="js/public/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="js/public/sha1.js"></script>
+<script type="text/javascript" src="js/public/myWxApi.js"></script>
+
+<script type="text/javascript" src="js/consultation.js"></script>
+<script>
+    var iWidth=document.documentElement.clientWidth;
+    document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+</script>
+<script type="text/javascript">
+    function judgeContent_cmt() {
+        if($('#commentContent').val().length > 0){
+            $("#publishCmt").css('color','#000');
+        }else {
+            $("#publishCmt").css('color','#ccc');
+        }
+    }
+</script>
+</html>

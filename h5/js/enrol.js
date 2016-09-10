@@ -9,8 +9,6 @@ $(function(){
 
 
 
-
-
     //此页面逻辑：进入页面加载活动内容，然后判断用户是否收藏该活动，如果收藏就要现实收藏的图标，否则就是没有收藏
     var data;
     var token = "";
@@ -36,10 +34,15 @@ $(function(){
     if(/&/g.test(activityid)){
         activityid = activityid.split("&")[0];
     }
+
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
     his = his + window.location.search;
 
+    //跳转预览界面
+    if(window.location.search.indexOf('cms') > 0 ){
+        window.location.href = 'enrol_preview.html?id=' +  activityid;
+    }
 
     //设置为1s
     $.toast.prototype.defaults.duration = 1000;
@@ -50,11 +53,11 @@ $(function(){
         isHotDoor = true;
     }
 
-
     var itemId = window.location.href.split("=")[1];
     var commentStr = '';
     var pageNum = 1;
 
+    
 
     // alert(his);
     $("#culb_But").click(function(){			
@@ -71,6 +74,7 @@ $(function(){
 
     //分享时候 传当前页面的url 和 对象obj
     get_url(window.location.href);
+
 
 
     function getActDetail(){
@@ -146,7 +150,6 @@ $(function(){
             if(token){
                 getEnrollStatu();
             }
-
 
 
             //加载评论列表

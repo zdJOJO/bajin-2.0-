@@ -22,6 +22,13 @@ $(function(){
     if(/&/g.test(lifeid)){
         lifeid = lifeid.split("&")[0];
     }
+
+    //跳转预览界面
+    if(window.location.search.indexOf('cms') > 0 ){
+        window.location.href = 'life_preview.html?id=' +  lifeid;
+    }
+
+
     $("#read_But").click(function(){
 		window.location.href="read.html?tocken="+token;
 	})
@@ -49,8 +56,6 @@ $(function(){
                 link: window.location.href,
                 imgUrl: data.lifePic
             });
-
-
             var str=$('<h1 class="msg-tit">'+data.lifeTitle+'</h1>' +
                 '<div class="btn_q"><span class="love-btn">' +
                 '<img src="imgs/iconfont-love.png"></span><span class="share-btn">' +
@@ -183,81 +188,6 @@ $(function(){
     }
     getData();
 
-// //微信部分   
-//     loadwx(function(){
-//         alert('获取微信接口成功');
-//     });
-//     wx.onMenuShareTimeline({
-//         title: sharetit, // 分享标题
-//         link: shareurl, // 分享链接
-//         imgUrl: shareimg, // 分享图标
-//         success: function () { 
-//             // 用户确认分享后执行的回调函数
-//             alert('分享到朋友圈成功');
-//         },
-//         cancel: function () { 
-//             // 用户取消分享后执行的回调函数
-//             alert('取消分享到朋友圈成功');
-//         }
-//     });
-//     wx.onMenuShareAppMessage({
-//         title: sharetit, // 分享标题
-//         desc: sharedesc, // 分享描述
-//         link: shareurl, // 分享链接
-//         imgUrl: shareimg, // 分享图标
-//         type: 'link', // 分享类型,music、video或link，不填默认为link
-//         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-//         success: function () { 
-//             // 用户确认分享后执行的回调函数
-//             alert('分享给朋友成功');
-//         },
-//         cancel: function () { 
-//             // 用户取消分享后执行的回调函数
-//             alert('取消分享给朋友成功');
-//         }
-//     });
-//     wx.onMenuShareQQ({
-//         title: sharetit, // 分享标题
-//         desc: sharedesc, // 分享描述
-//         link: shareurl, // 分享链接
-//         imgUrl: shareimg, // 分享图标
-//         success: function () { 
-//             // 用户确认分享后执行的回调函数
-//             alert('分享到QQ成功');
-//         },
-//         cancel: function () { 
-//             // 用户取消分享后执行的回调函数
-//             alert('取消分享到QQ成功');
-//         }
-//     });
-//     wx.onMenuShareWeibo({
-//         title: sharetit, // 分享标题
-//         desc: sharedesc, // 分享描述
-//         link: shareurl, // 分享链接
-//         imgUrl: shareimg, // 分享图标
-//         success: function () { 
-//             // 用户确认分享后执行的回调函数
-//             alert('分享到腾讯微博成功');
-//         },
-//         cancel: function () { 
-//             // 用户取消分享后执行的回调函数
-//             alert('取消分享到腾讯微博成功');
-//         }
-//     });
-//     wx.onMenuShareQZone({
-//         title: sharetit, // 分享标题
-//         desc: sharedesc, // 分享描述
-//         link: shareurl, // 分享链接
-//         imgUrl: shareimg, // 分享图标
-//         success: function () { 
-//             // 用户确认分享后执行的回调函数
-//             alert('分享到QQ空间成功');
-//         },
-//         cancel: function () { 
-//             // 用户取消分享后执行的回调函数
-//             alert('取消分享到QQ空间成功');
-//         }
-//     });
     $("body").prepend($('<div id ="urlToDownload" style="width:1rem;height:0.12rem;position: fixed;z-index: 2000;"><img style="width:0.8rem;height:0.12rem;" src="imgs/bg-baoming.png"/><div style="background-color:#fafafa; float:right;text-align:center;width:0.2rem;height:0.12rem;line-height:0.12rem;"><p style="width:0.08rem;margin-top: 0.02rem;height:0.08rem;line-height:0.08rem;margin-left:0.06rem;background-color:#ccc;border-radius:0.08rem;font-size:0.06rem;">×</p></div></div>'));
     $("#urlToDownload>img").bind("click",function(){
         window.location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.kting.baijinka";

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
+    <meta name="screen-orientation"content="portrait">
+    <meta name="x5-orientation"content="portrait">
+    <title></title>
+    <link rel="stylesheet" href="css/weiXin/weui.min.css">
+    <link rel="stylesheet" href="css/weiXin/jquery-weui.css">
+    <link rel="stylesheet" href="css/plugin/dropload.css">
+
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/enrol.css">
+    <script>var IS_WX_LOADED=0;</script>
+    <script>
+        var iWidth=document.documentElement.clientWidth;
+        document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+    </script>
+</head>
+<body>
+<div class="swiper-container">
+    <div class="swiper-wrapper"></div>
+    <div class="swiper-scrollbar"></div>
+</div>
+
+
+<div class="main"></div>
+
+<div id="share-mask"><img src="imgs/shareImg.png"/></div>
+</body>
+<script src="js/zepto.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
+<script type="text/javascript" src="js/plugin/dropload.min.js"></script>
+<script src="js/swiper.min.js"></script>
+<script src="js/loadwx.js"></script>
+
+<script type="text/javascript" src="js/public/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="js/public/sha1.js"></script>
+<script type="text/javascript" src="js/public/myWxApi.js"></script>
+
+<script src="js/enrol.js"></script>
+<script type="text/javascript">
+    function judgeContent() {
+        if($('#commentContent').val().length > 0){
+            $("#publishCmt").css('color','#000');
+        }else {
+            $("#publishCmt").css('color','#ccc');
+        }
+    }
+</script>
+</html>

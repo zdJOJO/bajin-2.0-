@@ -49,8 +49,13 @@ var shareObj = {
 
 
 //  咨询/工行服务/热点    id是唯一的,根据type区别 三个模块判断
-
 var itemId = window.location.href.split("=")[1];
+
+//跳转预览界面
+if(window.location.search.indexOf('cms') > 0 ){
+    window.location.href = 'consultation_preview.html?id=' +  itemId;
+}
+
 //分享时候，为新手机打开会在URL后面多一串字符串，
 //比如： test.winthen.com/bcard/consultation.html?id=18&from=groupmessage&isappinstalled=0
 if(itemId.indexOf("&") > 0){

@@ -32,6 +32,11 @@ $(document).ready(function(){
 		itemId = mallid;
     }
 
+	//跳转预览界面
+	if(window.location.search.indexOf('cms') > 0 ){
+		window.location.href = 'mall_preview.html?id=' +  mallid;
+	}
+
 	var mallObj = {
 		mallId: 0,
 		currentDiscount: 0,

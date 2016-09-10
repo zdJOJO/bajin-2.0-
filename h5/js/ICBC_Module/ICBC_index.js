@@ -19,8 +19,7 @@ $(function(){
         success:function(result){
             var str = '' , url='';
             for(var i=0;i<result.data.list.length;i++){
-                url = result.data.list[i].url.split('?')[0] + '?' + result.data.list[i].url.split('?')[1].split('&')[1];
-                str += '<div class="swiper-slide" data-url="'+ url +'">' +
+                str += '<div class="swiper-slide" data-url="'+ result.data.list[i].url +'">' +
                     '<img src="'+ result.data.list[i].pic +'" data-original="'+ result.data.list[i].pic +'"></div>';
             }
             var banner = document.getElementById('banner');

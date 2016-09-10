@@ -39,6 +39,12 @@ var itemId = window.location.search.split("=")[1];
 // var type = -1;
 
 
+//跳转预览界面
+if(window.location.search.indexOf('cms') > 0 ){
+	window.location.href = 'brandDetail_preview.html?id=' +  goodsid;
+}
+
+
 var data_pic = '';
 var buyNum = 1;
 
@@ -62,7 +68,6 @@ var url_obj = {
 
 //分享时候 传当前页面的url 和 对象obj
 get_url(window.location.href);
-
 
 
 //判断 是否 被收藏

@@ -36,6 +36,7 @@ $.toast.prototype.defaults.duration = 500;
 
 
 var itemId = window.location.search.split("=")[1];
+itemId = goodsid;
 // var type = -1;
 
 
@@ -449,9 +450,15 @@ $('#addToShoppingCart ,#buyNow, .wrapper>.stock').click(function () {
 
 	$('footer').hide();
 	$('#mask').fadeIn(150);
-	$("#goodDetail").show().animate({
-		height:'65%'
-	});
+	if(window.screen.height <=480){
+		$("#goodDetail").show().animate({
+			height:'77%'
+		});
+	}else {
+		$("#goodDetail").show().animate({
+			height:'65%'
+		});
+	}
 });
 
 

@@ -369,6 +369,9 @@ footer{
 	left: 44%;
 	font-size: 0.9em;
 	color: #b5b5b5;
+	word-break: break-all;
+	max-height: 0.15rem;
+	overflow: hidden;
 }
 #goodDetail>.name>.spe>span{
 	color: #525252;
@@ -423,6 +426,7 @@ footer{
 	color: #8a8a8a;
 	min-width: 30px;
 	margin: 0 15px 13px 0;
+	font-size: 0.9em;
 }
 
 
@@ -480,8 +484,12 @@ footer{
 	color: #fff;
 	font-size: 1em;
 	font-family: 黑体;
-	position: relative;
-	bottom: 30px;
+	/*position: relative;*/
+	/*bottom: 30px;*/
+	position: absolute;
+	bottom: 0.02rem;
+	left: 50%;
+	margin-left: -45%;
 }
 
 .weui_mask.weui_mask_visible{
@@ -526,9 +534,9 @@ footer{
 
 
 @media screen and (max-width: 850px){
-	#goodDetail>div{
-		min-height: 0.22rem;
-	}
+	/*#goodDetail>div{*/
+		/*min-height: 0.22rem;*/
+	/*}*/
 
 	#goodDetail>.name>.goodHeadPic{
 		width: 0.22rem;
@@ -549,6 +557,7 @@ footer{
 
 
 @media screen and (max-width: 320px){
+
 	#goodDetail>.name>.goodHeadPic{
 		width: 90px;
 		height: 90px;

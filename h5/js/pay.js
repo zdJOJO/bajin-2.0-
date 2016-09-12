@@ -139,7 +139,7 @@ $(function(){
 			}
 
 	}else{
-		//alert("您的账号还未登陆,请登陆后操作！");
+		//alert("您的账号还未登录,请登录后操作！");
 		window.location.href = "login.html?his="+escape(his);
 	}
 });

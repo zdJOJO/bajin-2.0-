@@ -88,7 +88,7 @@ var isCollected = function () {
 $(".saveAndShare img.love").click(function () {
 
 	if(!token){
-		$.alert("登陆后再收藏", "收藏失败", function() {
+		$.alert("登录后再收藏", "收藏失败", function() {
 			window.location.href = "login.html?his=" + escape(his);
 		});
 		return;
@@ -395,7 +395,7 @@ $('#goodDetail>button').click(function () {
 		if (token){
 			addToShoppingCartFn();
 		}else {
-			$.alert("登陆后再收藏", "收藏失败", function() {
+			$.alert("登录后再收藏", "收藏失败", function() {
 				window.location.href = "login.html?his=" + escape(his);
 			});
 		}
@@ -403,7 +403,7 @@ $('#goodDetail>button').click(function () {
 		if (token){
 			sureBuyNowFn();
 		}else {
-			$.alert("登陆后再购买", "购买失败", function() {
+			$.alert("登录后再购买", "购买失败", function() {
 				window.location.href = "login.html?his=" + escape(his);
 			});
 		}
@@ -414,7 +414,7 @@ $('#sureAdd').click(function () {
 	if (token){
 		addToShoppingCartFn();
 	}else {
-		$.alert("登陆后再收藏", "收藏失败", function() {
+		$.alert("登录后再收藏", "收藏失败", function() {
 			window.location.href = "login.html?his=" + escape(his);
 		});
 	}
@@ -423,7 +423,7 @@ $('#sureBuyNow').click(function () {
 	if (token){
 		sureBuyNowFn();
 	}else {
-		$.alert("登陆后再购买", "购买失败", function() {
+		$.alert("登录后再购买", "购买失败", function() {
 			window.location.href = "login.html?his=" + escape(his);
 		});
 	}

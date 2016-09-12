@@ -4,63 +4,143 @@ html,body{
     margin: 0;
     padding: 0;
     font-size: 16px;
-    font-family: heiti;
+    font-family: 黑体;
 }
 
 body{
     /*background: url("../imgs/bg_p.png") repeat-y;*/
 }
 
+hr{
+    background: rgb(247, 230, 184);
+    height: 12px;
+    border: none;
+}
+
 h3{
     text-align: center;
-    margin: 25px 0 0 0;
     font-weight: 100;
+    background: red;
+    width: 90%;
+    height: 1px;
+    margin: 35px auto 5px auto;
+    position: relative;
+    color: red;
 }
 
-#u12{
-    margin-top: 25px;
+h3>span{
+    display: inline-block;
+    background: #FFF7D3;
+    font-size: 0.8em;
+    width: 80px;
+    position: absolute;
+    left: 50%;
+    margin-left: -40px;
+    top: -10px;
 }
 
-#u12 p{
-    text-align: center;
-    font-size: 0.9em;
+.up{
+
+}
+
+.down{
+    background: #F7E6B8;
+}
+
+.down-next{
+    background: #FFF7D3;
+    width: 92%;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    top: -3.5rem;
 }
 
 
+
+
+#rule{
+    min-height: 200px;
+    width: 95%;
+    margin: 25px auto 0 auto ;
+}
+
+#rule p{
+    width: 92%;
+    text-align: left;
+    font-size: 0.85em;
+    margin: 25px auto 20px auto;
+    color: #63615F;
+    line-height: 1.5rem;
+}
+
+
+
+/****************************************************/
 #winner {
-    background: #FFF;
     overflow: hidden;
     width: 95%;
+    height: 18rem;
     margin: 20px auto 10px auto;
-    font-size: 0.9em;
+    position: relative;
 }
 #winner img {
     border: 3px solid #F2F2F2;
 }
-#indemo {
-    float: left;
-    width: 800%;
-}
-#demo1 {
-    float: left;
-}
-#demo1 a,#demo2 a{
-    padding: 0 5px;
-    color: #000;
-}
-#demo1 a>span{
+
+#winner>.box{
+    width: 90%;
+    height: 2rem;
+    display: block;
+    margin: 20px auto 20px auto;
 }
 
-#demo2 {
-    float: left;
+#nameList{
+    overflow: hidden;
+    width: 76%;
+    height: 14rem;
+    position: absolute;
+    left: 50%;
+    top: 70px;
+    margin-left: -38%;
+}
+
+#nameList li{
+    height: 44px;
+    background: url("../imgs/lottery_midAutumn/itemPre.png") no-repeat;
+    background-size: 100% 100%;
+    color: #fff;
+    font-size: 0.7rem;
+    position: relative;
+}
+
+#nameList li>span{
+    position: absolute;
+    display: block;
+    top: 13px
+}
+
+#nameList li>span:first-child{
+    width: 100px;
+    left: 10px;
+}
+#nameList li>span:last-child{
+    text-align: right;
+    width: 100px;
+    height: 13px;
+    word-break: break-all;
+    right: 15px;
+    top: 12px;
+    line-height: 15px;
 }
 
 
 
+/****************************************************/
 .turntable-bg {
-    width: 16rem;
-    height: 15rem;
-    background: url("../images/turntable-bg.jpg") no-repeat;
+    width: 100%;
+    height: 45rem;
+    background: url("../imgs/lottery_midAutumn/bg.jpg") no-repeat;
     background-size: 100% 100%;
     margin: 0 auto;
     overflow: hidden;
@@ -75,22 +155,38 @@ h3{
     /*z-index:9;*/
 }
 .turntable-bg .pointer {
-    width: 4rem;
-    height: auto;
+    width: 101px;
+    height: 101px;
     position: absolute;
-    left: 41%;
-    top: 27%;
+    margin-left: -3rem;
+    left: 49%;
+    top: 311px;
     z-index: 8;
 }
 .turntable-bg .rotate {
-    width: 11rem;
-    height: 11rem;
+    width: 360px;
+    height: 360px;
     position: absolute;
-    left: 18%;
-    top: 29px;
+    margin-left: -180px;
+    left: 50%;
+    top: 180px;
 }
 
-.turntable-bg .pointer>img,.turntable-bg .rotate>img{
+.turntable-bg .text {
+    width: 100%;
+    height: 120px;
+}
+
+.turntable-bg .next {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    margin-left: -10px;
+}
+
+.turntable-bg .pointer>img,.turntable-bg .rotate>img,.turntable-bg .text>img,.turntable-bg .next>img{
     width: 100%;
     height: auto;
 }
@@ -98,24 +194,68 @@ h3{
 
 
 
+/**********************************************/
 #poPub{
     width: 100%;
     height: 100%;
     z-index: 100;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     display: none;
-    background: radial-gradient(circle,rgba(0,0,0,0),rgba(0,0,0,.5))
+    background: radial-gradient(circle,rgba(0,0,0,0),rgba(0,0,0,.5));
+    z-index: 100;
 }
 #poPub>.content{
     width: 0;
     height: 0;
-    background: #fff;
+    color: #1A1B33;
+    background: #E7DF0C;
+    border-radius: 5px;
     position: relative;
-    margin: -15% auto 0 auto;
-    top: 50%;
+    margin: 0 auto 0 auto;
+    top: 20%;
+    padding-top: 25px;
 }
+
+#poPub img{
+    width: 50%;
+    display: block;
+    margin: auto;
+}
+
+#poPub h3{
+    height: 35px;
+    background: none;
+    color: #303030;
+    margin: 10px auto 0 auto;
+}
+
+#poPub span{
+    display: block;
+    width: 82%;
+    margin: 5px auto 20px auto;
+    text-align: center;
+    font-size: 0.9em;
+    color: #5a5959;
+}
+#poPub button{
+    width: 80%;
+    height: 2rem;
+    border-radius: 4px;
+    border: none;
+    background: rgb(62, 106, 160);
+    color: #fff;
+    font-size: 1em;
+    position: absolute;
+    left: 50%;
+    margin-left: -40%;
+    bottom: 20px;
+}
+
+
+
+
 
 
 .bounceIn {
@@ -132,32 +272,82 @@ h3{
 }
 
 .detail>ul{
-    width: 100%;
+    width: 95%;
+    margin: auto;
     font-size: 0.9em;
+    list-style: none;
 }
 
 .detail>ul>li{
     margin: 20px 0;
-    border-bottom: 1px rgb(181, 175, 175) solid
+    border-bottom: 1px rgb(160, 160, 160) dashed;
+    color: #63615F;
 }
 
 .detail>ul img{
-    width: 100%;
+    width: 50%;
     height: auto;
+    margin: auto;
+    display: block;
 }
 
 .detail>ul p{
     margin: 10px 0;
+    font-size: 0.9em;
+    line-height: 1.4rem;
+}
+.detail>ul p.price{
+    text-align: right;
+    font-size: 1.1em;
 }
 
 h5{
-    font-size: 1.1em;
+    font-size: 1.2em;
+    color: #363938;
     font-weight: 100;
     margin: 10px 0;
 }
 
 
+/*适配*/
+@media screen and (max-width: 375px) {
+}
 
+@media screen and (max-width: 360px) {
+    .turntable-bg .rotate{
+        width: 330px;
+        height: 330px;
+        position: absolute;
+        margin-left: -165px;
+        left: 50%;
+        top: 188px;
+    }
+    .turntable-bg .pointer{
+        top: 305px;
+    }
+}
+
+@media screen and (max-width: 320px) and (min-height: 568px){
+}
+
+@media screen and (max-width: 320px) and (min-height: 480px){
+    #poPub button{
+        bottom: 15px;
+    }
+
+    .turntable-bg .rotate{
+        width: 320px;
+        height: 320px;
+        position: absolute;
+        margin-left: -160px;
+        left: 50%;
+        top: 189px;
+    }
+
+    .turntable-bg .next{
+        bottom: 160px;
+    }
+}
 
 
 

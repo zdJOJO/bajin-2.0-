@@ -197,9 +197,9 @@ $("#receiveNow").click(function () {
     if(!token){
         $.modal({
             title: "提示",
-            text: "您还未登陆白金尊享",
+            text: "您还未登录白金尊享",
             buttons: [
-                { text: "去登陆", onClick: function(){
+                { text: "去登录", onClick: function(){
                     window.location.href = "login.html?his=" + escape(his);
                 } },
                 { text: "取消", className: "default", onClick: function(){

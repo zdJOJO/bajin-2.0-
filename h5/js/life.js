@@ -94,7 +94,7 @@ $(function(){
                         }
                    } },
                     error:function(data){
-                        //alert("请求出错，重新登陆")
+                        //alert("请求出错，重新登录")
                         window.location.href = "login.html?his="+escape(his);
                     }
                 });
@@ -144,7 +144,7 @@ $(function(){
 								//alert("收藏成功")
                             } },
                             error:function(data){
-                                //alert("请求出错，重新登陆")
+                                //alert("请求出错，重新登录")
                                 window.location.href = "login.html?his="+escape(his);
                             }
                         });    					
@@ -177,12 +177,12 @@ $(function(){
                     }
                 },
                 error:function(data){
-                    //alert("请求出错，重新登陆")
+                    //alert("请求出错，重新登录")
                     window.location.href = "login.html?his="+escape(his);
                 }
             });
                 
-			}//登陆判断结束为止
+			}//登录判断结束为止
         })       
         });
     }

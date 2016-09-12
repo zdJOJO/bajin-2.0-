@@ -116,8 +116,8 @@ $(function(){
     }else {
         $('#content').find('header').hide();
 
-        $('#content').find('.title').html('您还未登陆');
-        $('#content').find('p').html('登陆白金尊享，'+'<br>'+'查看所有工行信用卡服务和权益。');
+        $('#content').find('.title').html('您还未登录');
+        $('#content').find('p').html('登录白金尊享，'+'<br>'+'查看所有工行信用卡服务和权益。');
         $('#content').find('button').html('登录').click(function () {
             window.location.href = "login.html?his="+his;
         });

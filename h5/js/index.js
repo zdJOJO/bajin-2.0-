@@ -23,7 +23,7 @@ $(document).ready(function(){
 	console.log(token);
 	var activityid= window.location.search.split('=')[2];
 	// console.log(token);
-	//历史页面的记录用于登陆成功或者注册、更改密码成功后跳回的页面
+	//历史页面的记录用于登录成功或者注册、更改密码成功后跳回的页面
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];
 
@@ -35,7 +35,7 @@ $(document).ready(function(){
 		// $("body").css("overflow", "hidden")
 		// $("body,html").css({"overflow":"hidden"});
 		$(".showDiv1").css("position","fixed")
-		//侧边栏登陆
+		//侧边栏登录
 		if(token!=undefined){
 			$.get(port +"/card/user?token="+token,function(data){
 				//当token过期的时候会出错，code：666,这个时候需要
@@ -57,7 +57,7 @@ $(document).ready(function(){
 			// window.location.href = "login.html?his=" + his;
 			var item=$('<div class="pic"><img src="imgs/defaultPic.png"></div><div class="user_But">未登录</div>');
 			$(".pic_but").append(item);
-		}//侧边栏登陆结束
+		}//侧边栏登录结束
 		if(token!=undefined){
 			$.get(port+'/card/car/sum?token='+token,function(data){
 				if(typeof(data) == "string"){

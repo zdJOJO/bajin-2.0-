@@ -180,14 +180,14 @@ footer ul li a{ color:#FFF; text-decoration:none;}
 #logo_dl{position:absolute; width:30%; left:35%; top:14%;}
 #logo_dl img{ width:100%;}
 #content{ width:80%; position:relative; top:38%; left:10%;}
-.yhm_dl { /*更改了一下样式，登陆注册的输入框的内外间距*/
+.yhm_dl { /*更改了一下样式，登录注册的输入框的内外间距*/
 	width:100%; 
 	height:10%; 
 	background: rgba(255,255,255,0.2);    
 	padding: 1.5% 0;
     margin: 3% 0;
 }
-.yhm_login { /*更改了一下样式，登陆注册的输入框的内外间距*/
+.yhm_login { /*更改了一下样式，登录注册的输入框的内外间距*/
 	width:100%; 
 	height:10%; 
 	background: rgba(255,255,255,0.2);    

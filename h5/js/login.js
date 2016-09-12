@@ -2,7 +2,7 @@
 
 
 // JavaScript Document
-// 登陆页面，登陆成功，保存token到window.name中
+// 登录页面，登录成功，保存token到window.name中
 // 结合使用window.name和window.location
 $(function(){
     var his = window.location.search.split("=")[1];

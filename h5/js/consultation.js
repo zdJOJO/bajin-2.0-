@@ -186,7 +186,7 @@ $("#publishCmt").click(function () {
     if(!token){
         $.modal({
             title: "评论失败",
-            text: "登陆之后才能评论",
+            text: "登录之后才能评论",
             buttons: [
                 {text: "点击登录", onClick: function(){
                     window.location.href = "login.html?his=" + escape(his);

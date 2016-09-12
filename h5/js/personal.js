@@ -36,7 +36,7 @@ $(document).ready(function() {
 	if(token != undefined){
 		$("#djdl_But").html("已登录");		
 	}else{
-		$("#djdl_But").html("点击登陆");
+		$("#djdl_But").html("点击登录");
 	}
 	$("#favorite").click(function(){
 		if(token == undefined){

@@ -2,21 +2,6 @@
  * Created by Administrator on 2016/9/11.
  */
 $(function (){
-    var speed= 15; //数字越大速度越慢
-    var tab=document.getElementById("winner");
-    var tab1=document.getElementById("demo1");
-    var tab2=document.getElementById("demo2");
-    tab2.innerHTML=tab1.innerHTML;
-    function Marquee(){
-        if(tab2.offsetWidth-tab.scrollLeft<=0)
-            tab.scrollLeft-=tab1.offsetWidth
-        else{
-            tab.scrollLeft++;
-        }
-    }
-    var MyMar = setInterval(Marquee,speed);
-
-
 
     var token = "";
     //获取存在于cookie中的token值
@@ -35,16 +20,26 @@ $(function (){
         }
         return undefined;
     }
-    token = getCookie("token")
+    token = getCookie("token");
     if((window.location.search.indexOf('token') > 0)){
-        token = window.location.search.split("&")[1].split("=")[1]
+        token = window.location.search.split("&")[0].split("=")[1];
     }
+    console.log(token)
 
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
 
     var hasBankCard = false;  //判断是否绑有信用卡  是--true
     var isBJVip = false; //判断是否为白金卡用户  是--true
+
+
+
+    //获奖用户滚动
+    $("#nameList").kxbdMarquee({
+        direction:"down",
+        scrollAmount: 1,
+        scrollDelay: 30
+    });
 
     var rotateTimeOut = function (){
         $('#rotate').rotate({
@@ -59,6 +54,8 @@ $(function (){
     var bRotate = false;
 
     var rotateFn = function (awards, angles, txt){
+        var resultStr = awards==0 ? '您没抽中' : '恭喜！您抽中了';
+        var presentStr = awards==0 ? '【谢谢参与】' : '您的奖品【'+ txt+'】，我们再与您核实信息后发放到您的手中!' ;
         bRotate = !bRotate;
         $('#rotate').stopRotate();
         $('#rotate').rotate({
@@ -67,23 +64,43 @@ $(function (){
             duration:8000,
             callback:function (){
                 var $content = $('#poPub').find('.content');
-//					alert(txt);
                 $('#poPub').fadeIn(200,function () {
                     $content.css({
-                        'width': '85%',
-                        'height': '15rem',
-                    }).addClass('bounceIn').html(txt).click(function () {
+                        'width': '75%',
+                        'height': '55%',
+                    }).addClass('bounceIn').find('button').before('<img src="'+ getPresentPic(awards) +'">' +
+                        '<h3>'+ resultStr +'</h3><span class="present">'+ presentStr +'</span>');
+                });
+
+                var $sure = $('#poPub').find('.sure');
+                $sure.click(function () {
+                    $sure.css({
+                        'color' : 'rgba(255, 255, 255, 0.5)',
+                        'background' : 'rgb(43, 72, 108)'
+                    });
+                    setTimeout(function () {
                         $('#poPub').fadeOut(300);
-                        $content.css({
+                        $content.html('').css({
                             'width': 0,
                             'height': 0
                         });
-                    });
+                    },150)
                 });
                 bRotate = !bRotate;
             }
         })
     };
+
+
+    //图片预加载
+    $(".detail img").lazyload({
+        placeholder : "",
+        threshold: 0,
+        effect : "fadeIn",
+        effectspeed: 500,
+        event: 'scroll'
+    });
+
 
     //是否为白金卡用户
     if(token){
@@ -116,9 +133,9 @@ $(function (){
         if(!token){
             $.modal({
                 title: "提示",
-                text: "您还未登陆白金尊享",
+                text: "您还未登录白金尊享",
                 buttons: [
-                    { text: "去登陆", onClick: function(){
+                    { text: "去登录", onClick: function(){
                         window.location.href = "login.html?his=" + escape(his);
                     } },
                     { text: "取消", className: "default", onClick: function(){
@@ -158,39 +175,44 @@ $(function (){
                             return
                         }
                         if(bRotate)return;
-                        var item = transFormPrizeIdToItem(result.data.prizeId);
+                        var item;
+                        if(result.code == '208'){
+                            item = 0;
+                        }else {
+                            item = transFormPrizeIdToItem(result.data.prizeId);
+                        }
                         switch (item) {
                             case 0:
                                 //var angle = [26, 88, 137, 185, 235, 287, 337];
-                                rotateFn(0, 337, '谢谢参与');
+                                rotateFn(0, 338, '谢谢参与');
                                 break;
                             case 1:
                                 //var angle = [88, 137, 185, 235, 287];
-                                rotateFn(1, 26, '20元话费');
+                                rotateFn(1, 203, '20元话费');
                                 break;
                             case 2:
                                 //var angle = [137, 185, 235, 287];
-                                rotateFn(2, 88, '50元话费');
+                                rotateFn(2, 113, '50元话费');
                                 break;
                             case 3:
                                 //var angle = [137, 185, 235, 287];
-                                rotateFn(3, 137, '阳澄湖大杂蟹');
+                                rotateFn(3, 158, '阳澄湖大杂蟹');
                                 break;
                             case 4:
                                 //var angle = [185, 235, 287];
-                                rotateFn(4, 185, '1280元护理疗程体验券');
+                                rotateFn(4, 23, '1280元护理疗程体验券');
                                 break;
                             case 5:
                                 //var angle = [185, 235, 287];
-                                rotateFn(5, 185, '550元的云上清风现金抵用券');
+                                rotateFn(5, 293, '550元的云上清风现金抵用券');
                                 break;
                             case 6:
                                 //var angle = [235, 287];
-                                rotateFn(6, 235, '108元的阿卡有机蔬菜一箱');
+                                rotateFn(6, 68, '108元的阿卡有机蔬菜一箱');
                                 break;
                             case 7:
                                 //var angle = [287];
-                                rotateFn(7, 287, '红羲红果礼盒');
+                                rotateFn(7, 248, '红羲红果礼盒');
                                 break;
                         }
 
@@ -205,10 +227,6 @@ $(function (){
     });
 
 
-    //取整数
-    function rnd(n, m){
-        return Math.floor(Math.random()*(m-n+1)+n)
-    }
 
     //奖品 prizeId 对应的 item
     function transFormPrizeIdToItem(prizeId) {
@@ -248,6 +266,49 @@ $(function (){
                 break;
         }
         return item;
+    }
+
+    //获取奖品图片
+    function  getPresentPic(item) {
+        var portStr = port + '/bcard';  //测试
+        // var portStr = port + '/test';   //真实
+
+        var picPathStr = '';
+        switch (item) {
+            case 0:
+                // rotateFn(0, 338, '谢谢参与');
+                picPathStr = portStr + '/imgs/lottery_midAutumn/presents/thanks.png';
+                break;
+            case 1:
+                // rotateFn(1, 203, '20元话费');
+                picPathStr = portStr + '/imgs/lottery_midAutumn/presents/20yuan.png';
+                break;
+            case 2:
+                // rotateFn(2, 113, '50元话费');
+                picPathStr = portStr + '/imgs/lottery_midAutumn/presents/50yuan.png';
+                break;
+            case 3:
+                // rotateFn(3, 158, '阳澄湖大杂蟹');
+                picPathStr = portStr + '/imgs/lottery_midAutumn/presents/dzx.png';
+                break;
+            case 4:
+                // rotateFn(4, 23, '1280元护理疗程体验券');
+                picPathStr = portStr + '/imgs/lottery_midAutumn/presents/hl.png';
+                break;
+            case 5:
+                // rotateFn(5, 293, '550元的云上清风现金抵用券');
+                picPathStr = portStr + '/imgs/lottery_midAutumn/presents/qf.png';
+                break;
+            case 6:
+                // rotateFn(6, 68, '108元的阿卡有机蔬菜一箱');
+                picPathStr = portStr + '/imgs/lottery_midAutumn/presents/sc.png';
+                break;
+            case 7:
+                // rotateFn(7, 248, '红羲红果礼盒');
+                picPathStr = portStr + '/imgs/lottery_midAutumn/presents/hg.png';
+                break;
+        }
+        return picPathStr;
     }
 });
 

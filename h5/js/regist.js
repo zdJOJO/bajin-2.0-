@@ -82,7 +82,7 @@ $(function(){
 														success:function(data){
 															if(data.code==201){
 																alert("注册成功");
-																//逻辑就是这样，我要修改完密码的时候，顺便直接登陆再获取token，不懂为何要这样，反正现在只能这样
+																//逻辑就是这样，我要修改完密码的时候，顺便直接登录再获取token，不懂为何要这样，反正现在只能这样
 																$.ajax({
 																	type:"POST",
 																	url:port+"/card/login",

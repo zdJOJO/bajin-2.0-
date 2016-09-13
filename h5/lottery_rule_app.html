@@ -7,7 +7,16 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
 	<title>抽奖规则</title>
 	<link rel="stylesheet" href="css/reset.css">
+	<!---->
+	<link type="text/css" rel="stylesheet" href="css/lottery_midAutumn.css">
+
 	<link rel="stylesheet" href="css/lottery_rule.css">
+	<style>
+		.detail>ul p{
+			line-height: 25px;
+		}
+	</style>
+
 	<script src="js/zepto.js"></script>
 	<script src="js/lottery_rule.js"></script>
 	<script>
@@ -16,8 +25,8 @@
 	</script>
 </head>
 <body>
-	<header>
-		<img src="images/lottery_rule_banner.png"/>
+	<div class="header" style="overflow:hidden">
+		<img src="imgs/lottery_midAutumn/midFall.png"/>
 		<div class="detail">
 			<div class="name">
 				<p>名称</p>
@@ -33,9 +42,87 @@
 				<p>浙江</p>
 			</div>
 		</div>
-	</header>
-	<div class="lottery_rule_detail" style="margin-bottom: 40px">
-		<img src="images/lottery_rule_detail.jpg"/>
+	</div>
+
+	<div class="lottery_rule_detail">
+		<div class="down">
+			<div class="down-next" style="top: 0">
+				<div class="detail">
+					<h3><span>奖品介绍</span></h3>
+					<ul class="present">
+						<li>
+							<img src="imgs/lottery_midAutumn/presents/hl.png">
+							<h5>观苏胶原蛋白守护护理疗程体验券</h5>
+							<p>
+								美国REJUVEN生物制药实验室定制的全进口观苏胶原守护护理疗程，
+								蕴含抑制胶原蛋白流失的PLA技术，持续适用可让使用者面部的轮廓、紧致度及光泽度都得到提升，皱纹减淡，弹性提升，肌肤恢复健康年轻的状态！
+							</p>
+							<p class="price">价值￥1280.00</p>
+						</li>
+						<li>
+							<img src="imgs/lottery_midAutumn/presents/qf.png">
+							<h5>云上清风现金抵用券</h5>
+							<p>
+								云上清风私人订制小别墅家宴（餐标550元/人，须四人以上用餐）
+								赠送干白/干红/老台门黄酒（任选其一）、网红棉点甜品（每人一份）、武夷山私房红茶一泡、小源流花道课一节
+							</p>
+							<p class="price">价值￥550.00</p>
+						</li>
+						<li>
+							<img src="imgs/lottery_midAutumn/presents/dzx.png">
+							<h5>阳澄湖品蟹之旅</h5>
+							<p>
+								自行驱车前往阳澄湖，参观阳澄湖蟹坊，由专人陪同讲解大闸蟹的生长环境，跟蟹坊师傅学习如何绑蟹，
+								并参加一场绑蟹大比拼游戏，随后享受一顿以大闸蟹为主菜的蟹宴。（若携带朋友同行，加收150元/人）
+							</p>
+							<p class="price">价值￥180.00</p>
+						</li>
+						<li>
+							<img src="imgs/lottery_midAutumn/presents/hg.png">
+							<h5>龙羲红果礼盒</h5>
+							<p>
+								伏羲诞生地——甘肃天水的花牛有机苹果，富含苹果酚、花青素及可溶性果胶，具有多种保健作用。
+								本次甘怡科技公司出品的龙羲红果礼盒装为9月上旬-下旬采摘，原产地直接发货，新鲜绿色有保障。
+							</p>
+							<p class="price">价值￥128.00</p>
+						</li>
+						<li>
+							<img src="imgs/lottery_midAutumn/presents/sc.png">
+							<h5>阿卡有机蔬菜1箱（仅配送杭州主城区）</h5>
+							<p>
+								阿卡农庄余杭径山智能农场直供的当季有机蔬菜，种植全过程电脑智能化控制蔬，保证了蔬菜在适宜的温度和气候下自然无污染地生长。为保障新鲜度，
+								有机蔬菜从采摘到配送将在24小时完成并送达您家。<strong>（因阿卡有机蔬菜仅配送杭州主城区，若中奖者收货地址超出配送范围，可换成50元话费）</strong>
+							</p>
+							<p class="price">价值￥108.00</p>
+						</li>
+						<li>
+							<img src="imgs/lottery_midAutumn/presents/20yuan.png">
+							<h5>20元话费</h5>
+							<p>中奖后直接充20元话费至注册预留的手机号，移动/联通/电信号码不限</p>
+						</li>
+						<li>
+							<img src="imgs/lottery_midAutumn/presents/50yuan.png">
+							<h5>50元话费</h5>
+							<p>中奖后直接充50元话费至注册预留的手机号，移动/联通/电信号码不限</p>
+						</li>
+
+					</ul>
+				</div>
+				<hr>
+				<div id="rule">
+					<h3><span>活动规则</span></h3>
+					<p style="line-height: 25px">
+						1.  活动时间：9月12日-10月7日<br>
+						2.  本次活动仅限浙江省内中国工商银行信用卡持卡人参加（宁波除外）<br>
+						3.  新用户通过下载/注册“白金尊享”APP并绑定工商银行信用卡，可获得一次抽奖机会<br>
+						4.  已参与过“绑卡抽话费”的老用户，无法参与此次抽奖<br>
+						5.  话费奖品将直接返至注册预留的手机号<br>
+						6.  实物奖品和电子券奖品，后续将有客服联系中奖者告知具体的领取方式<br>
+						7.  本活动的最终解释权归杭州圆臻科技有限公司所有
+					</p>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

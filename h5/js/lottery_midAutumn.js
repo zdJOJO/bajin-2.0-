@@ -2,7 +2,7 @@
  * Created by Administrator on 2016/9/11.
  */
 $(function (){
-
+    
     var token = "";
     //获取存在于cookie中的token值
     function getCookie(c_name)
@@ -21,7 +21,7 @@ $(function (){
         return undefined;
     }
     token = getCookie("token");
-    if((window.location.search.indexOf('token') > 0)){
+    if( window.location.search.indexOf('token')>0 && !token){
         token = window.location.search.split("&")[0].split("=")[1];
     }
     console.log(token)
@@ -167,7 +167,7 @@ $(function (){
                         if(result.code == '207'){
                             $.modal({
                                 title: "提示",
-                                text: "您已经抽过奖了",
+                                text: "本活动仅限新注册用户参与每个用户仅限一次抽奖机会）",
                                 buttons: [
                                     { text: "知道了", onClick: function(){} },
                                 ]
@@ -212,7 +212,7 @@ $(function (){
                                 break;
                             case 7:
                                 //var angle = [287];
-                                rotateFn(7, 248, '红羲红果礼盒');
+                                rotateFn(7, 248, '龙羲红果礼盒');
                                 break;
                         }
 
@@ -261,7 +261,7 @@ $(function (){
                 item = 6;
                 break;
             case 84:
-                //红羲红果礼盒
+                //龙羲红果礼盒
                 item = 7;
                 break;
         }
@@ -304,7 +304,7 @@ $(function (){
                 picPathStr = portStr + '/imgs/lottery_midAutumn/presents/sc.png';
                 break;
             case 7:
-                // rotateFn(7, 248, '红羲红果礼盒');
+                // rotateFn(7, 248, '龙羲红果礼盒');
                 picPathStr = portStr + '/imgs/lottery_midAutumn/presents/hg.png';
                 break;
         }

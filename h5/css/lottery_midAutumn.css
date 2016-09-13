@@ -191,6 +191,16 @@ h3>span{
     height: auto;
 }
 
+.turntable-bg .rule {
+    display: block;
+    width: 254px;
+    color: #fff;
+    font-size: 0.9em;
+    position: absolute;
+    bottom: 150px;
+    left: 50%;
+    margin-left: -127px;
+}
 
 
 
@@ -346,6 +356,9 @@ h5{
 
     .turntable-bg .next{
         bottom: 160px;
+    }
+    .turntable-bg .rule{
+        bottom: 180px;
     }
 }
 

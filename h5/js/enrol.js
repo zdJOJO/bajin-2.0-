@@ -141,9 +141,13 @@ $(function(){
 
             dataWrap.append(str1).append(str2);
             $(".content-text img").css({
-                'width': '100%',
+                'width': '100%!important',
                 'height': 'auto'
-            })
+            });
+            $(".content-text").find('p').find('img').css({
+                'width': '100%!important',
+                'height': 'auto'
+            });
 
 
             //判断是会否报名

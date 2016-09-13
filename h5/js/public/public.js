@@ -1,9 +1,6 @@
 /**
  * Created by Administrator on 2016/8/30.
  */
-// var port = "http://www.winthen.com";
-var port = "http://test.winthen.com";
-
 
 //获取存在于cookie中的token值
 function getCookie(c_name) {

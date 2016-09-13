@@ -212,8 +212,8 @@ $(document).ready(function(){
 			        }else if(type == 4){
 			        	if(token != undefined){
 			        		//调到抽奖中间页
-			        		window.location.href="lottery_rule.html?lottery=lottery";
-			        		// window.location.href = "fareDraw.html?token="+token;
+			        		// window.location.href="lottery_rule.html?lottery=lottery";
+							window.location.href = "fareDraw.html?token="+token;
 			        		// window.location.href = "lottery.html?itemId="+$(this).data("itemid");
 			        	}else{
 			        		window.location.href = "login.html?his=" + his;

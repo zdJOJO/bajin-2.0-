@@ -24,7 +24,6 @@ $(function (){
     if( window.location.search.indexOf('token')>0 && !token){
         token = window.location.search.split("&")[0].split("=")[1];
     }
-    console.log(token)
 
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
@@ -32,6 +31,16 @@ $(function (){
     var hasBankCard = false;  //判断是否绑有信用卡  是--true
     var isBJVip = false; //判断是否为白金卡用户  是--true
 
+
+    //分享时候 传当前页面的url 和 对象obj
+    get_url(window.location.href);
+    //调用分享借口
+    jsSdkApi('share',{
+        title: '贺中秋,迎国庆',
+        desc: ' 新用户通过下载/注册“白金尊享”APP并绑定工商银行信用卡，可获得一次抽奖机会',
+        link: 'http://www.winthen.com/test/fareDraw.html',
+        imgUrl: 'http://www.winthen.com/test/imgs/lottery_midAutumn/share.png'
+    });
 
 
     //获奖用户滚动
@@ -136,7 +145,7 @@ $(function (){
                 text: "您还未登录白金尊享",
                 buttons: [
                     { text: "去登录", onClick: function(){
-                        window.location.href = "login.html?his=" + escape(his);
+                        window.location.href = "login.html?his=" + escape('fareDraw.html');
                     } },
                     { text: "取消", className: "default", onClick: function(){
                         //todo

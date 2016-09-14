@@ -82,12 +82,12 @@ a{
     margin: 1rem 0 1rem 0;
 }
 
-#cardDetail>.content ul{
+#cardDetail>.content .ul{
     color: #3f3f3f;
     font-size: 1.1em;
 }
 
-#cardDetail>.content p{
+#cardDetail>.content .p{
     font-size: 0.9em;
     color: #7c7c7c;
     line-height: 2rem;

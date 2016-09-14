@@ -257,6 +257,7 @@ section.allCards>.singleCard p{
     color: #929292;
     margin-bottom: 0.5rem;
     line-height: 1.3rem;
+    word-break: break-all;
 
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -297,6 +298,8 @@ section.allCards>.singleCard p{
     display: inline-block;
     width: 1.5rem;
     height: 1.5rem;
+    position: fixed;
+    bottom: 33%;
 }
 
 

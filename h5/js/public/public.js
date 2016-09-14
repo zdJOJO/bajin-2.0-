@@ -2,6 +2,17 @@
  * Created by Administrator on 2016/8/30.
  */
 
+
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+        if($('body').children('span').length > 0 ){
+            $(this).hide();
+        }
+    }
+};
+
+
 //获取存在于cookie中的token值
 function getCookie(c_name) {
     if (document.cookie.length>0)
@@ -171,3 +182,18 @@ $.fn.extend({
         })
     }
 });
+
+
+//点击属性 平滑滚动
+function scrollSmoothSlib(idStr) {
+    $("#"+idStr).find('a').click(function() {
+        $("html, body").animate({
+            scrollTop: $($(this).attr("href")).offset().top + "px"
+        }, {
+            duration: 500,
+            easing: "swing"
+        });
+        return false;
+    });
+}
+

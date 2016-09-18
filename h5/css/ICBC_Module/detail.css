@@ -19,7 +19,7 @@ a{
 
 
 #cardDetail{
-
+    min-height: 200px;
 }
 
 #cardDetail >.ctg{
@@ -74,6 +74,13 @@ a{
     font-size: 0.95em;
     padding: 0 1rem;
 }
+
+#cardDetail>.content img{
+    width: 100%!important;
+    height: 100%!important;
+}
+
+
 
 #cardDetail h6{
     font-size: 0.95em;

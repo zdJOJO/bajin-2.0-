@@ -3,6 +3,11 @@
  */
 
 
+var port = "http://www.winthen.com";
+//var port = "http://test.winthen.com";
+
+
+
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
@@ -28,6 +33,15 @@ function getCookie(c_name) {
     }
     return undefined;
 }
+//保存cookie函数
+function setCookie(c_name,value,expiredays) {
+    var exdate=new Date()
+    exdate.setDate(exdate.getDate()+expiredays)
+    document.cookie=c_name+ "=" +escape(value)+
+        ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+}
+
+
 
 // hot 更多热门 只显示3行文字
 function showThreeLine(str,num) {
@@ -110,10 +124,6 @@ var typeJudge = function (type) {
     }
     return typeStr;
 };
-
-
-
-
 
 
 

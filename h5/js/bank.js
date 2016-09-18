@@ -17,16 +17,23 @@ $(function(){
 		}
 		return undefined;
 	}
+	
 	token = getCookie("token");
 	//没有绑定银行卡的时候提示添加银行卡
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];
 
+	var changeCard = false; //判断是否来工行服务模块的换卡操作，是--true，否--false
 	var searchStr = window.location.search ;
-	if(searchStr.indexOf('token') > 0){
-		pickid = searchStr.split('&')[0].split('=')[1];
-		token = searchStr.split('&')[1].split('=')[1];
+	if(searchStr.indexOf('changeCard') > 0){
+		changeCard = true;
+	}else {
+		if(searchStr.indexOf('token') > 0){
+			pickid = searchStr.split('&')[0].split('=')[1];
+			token = searchStr.split('&')[1].split('=')[1];
+		}
 	}
+
 	
 	var isBJVip = false;
 	
@@ -43,7 +50,7 @@ $(function(){
 						window.location.href = "login.html?his="+his;
 					}else{
 						for(var i=0;i<data.list.length;i++){
-							var item=$('<div class="cardItem" data-cardNum="'+data.list[i].cardNumber+'" data-cardId='+data.list[i].cardId+'>' +
+							var item=$('<div class="cardItem" data-cardNum="'+data.list[i].cardNumber+'" data-cardId="'+data.list[i].cardId+'" data-kabin="'+data.list[i].kabin+'" >' +
 								'<div class="card-logo" ><img src="imgs/bank.jpg"></div>' +
 								'<div class="card-info"><div class="card-name">中国工商银行</div>' +
 								'<div class="card-tip">尾号'+data.list[i].cardNumber+'</div>' +
@@ -98,27 +105,31 @@ $(function(){
 								},
 								touchend: function(){
 									clearTimeout(timeOutEvent);
-									if(timeOutEvent!=0){
-										if(pickid==11 && !isBJVip){
-											$.alert('本功能仅限工行白金卡用户');
-											return
-										}else {
-											if(!pickid){
+									if(changeCard){
+										window.location.href = 'ICBC_index.html?cardnum='+$(this).attr('data-cardnum')+'&kabin='+$(this).attr('data-kabin');
+									}else {
+										if(timeOutEvent!=0){
+											if(pickid==11 && !isBJVip){
+												$.alert('本功能仅限工行白金卡用户');
 												return
+											}else {
+												if(!pickid){
+													return
+												}
+												var cardItem = $(this).data("cardNum");
+												$.ajax({
+													type:"GET",
+													dataType:"text",
+													url:port+"/card/bank/encryption/"+pickid+"/"+cardItem+"?token="+token,
+													success:function(data){
+														if(data.length<50){
+															window.location.href = "login.html?his="+his;
+														}else{
+															toIcbc(data);
+														}
+													},
+												});
 											}
-											var cardItem = $(this).data("cardNum");
-											$.ajax({
-												type:"GET",
-												dataType:"text",
-												url:port+"/card/bank/encryption/"+pickid+"/"+cardItem+"?token="+token,
-												success:function(data){
-													if(data.length<50){
-														window.location.href = "login.html?his="+his;
-													}else{
-														toIcbc(data);
-													}
-												},
-											});
 										}
 									}
 									return false;

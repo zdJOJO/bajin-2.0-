@@ -4,10 +4,11 @@ var Zepto=function(){function L(t){return null==t?String(t):j[S.call(t)]||"objec
 
 
 
-
-
-   // var port = "http://www.winthen.com";
 var port = "http://test.winthen.com";
+var portStr = port + '/bcard';
+
+//var port = "http://www.winthen.com";
+//var portStr = port + '/test';
 
 
 //获取存在于cookie中的token值

@@ -341,10 +341,10 @@ $(function(){
                 var nameStr = '';
                 for(var i=0 ;i<data.list.length;i++){
                     if(data.list[i].user){
-                        headPicStr = data.list[i].user.headPic || port + '/bcard/imgs/headPic_default.png' ;
+                        headPicStr = data.list[i].user.headPic || portStr + '/imgs/headPic_default.png' ;
                         nameStr = data.list[i].user.userName || '';
                     }else {
-                        headPicStr = port + '/bcard/imgs/headPic_default.png';
+                        headPicStr = portStr + '/imgs/headPic_default.png';
                         nameStr = '';
                     }
                     commentStr += '<li class="singleCmt">' +

@@ -2,7 +2,6 @@
  * Created by Administrator on 2016/9/11.
  */
 $(function (){
-    
     var token = "";
     //获取存在于cookie中的token值
     function getCookie(c_name)
@@ -279,9 +278,6 @@ $(function (){
 
     //获取奖品图片
     function  getPresentPic(item) {
-        var portStr = port + '/bcard';  //测试
-        // var portStr = port + '/test';   //真实
-
         var picPathStr = '';
         switch (item) {
             case 0:

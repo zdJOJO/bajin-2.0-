@@ -2,10 +2,11 @@
  * Created by Administrator on 2016/8/30.
  */
 
+var port = "http://test.winthen.com";
+var portStr = port + '/bcard';
 
-var port = "http://www.winthen.com";
-//var port = "http://test.winthen.com";
-
+//var port = "http://www.winthen.com";
+//var portStr = port + '/test';
 
 
 var xmlhttp = new XMLHttpRequest();

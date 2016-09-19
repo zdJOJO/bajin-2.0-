@@ -43,8 +43,6 @@ $(function(){
 				      	//alert("你还没有添加银行卡,请先添加银行卡，然后再操作！！");
 				      	cardList.append("<h2 class= 'alert_q'>你还没有添加银行卡</h2>");
 			        }else{
-
-
 			        	//一定要注意，在元素出来的时候再帮定事件，不然就没效
 						$(".cardItem").click(function(){
 

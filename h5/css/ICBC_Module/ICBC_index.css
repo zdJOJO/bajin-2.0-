@@ -311,3 +311,15 @@ section.allCards>.singleCard p{
 }
 
 
+
+#moreCard{
+    height: 4rem;
+    text-align: center;
+    line-height: 4rem;
+}
+
+#moreCard img{
+    height: 40%;
+    display: inline-block;
+    margin-top: 1%;
+}

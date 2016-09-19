@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="screen-orientation"content="portrait">
+    <meta name="x5-orientation"content="portrait">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>绑卡</title>
+</head>
+<body>
+    <iframe src="" width="100%" height="720" id="iFrame" frameBorder=0 scrolling=no></iframe>
+</body>
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script>
+    var bindCardIFrame = document.getElementById("iFrame");
+    var iFrameUrl = portStr + '/bank.html';
+    bindCardIFrame.src = iFrameUrl;
+    var iFrameContent = window.top.document.getElementById("iFrame").contentWindow;
+    var resultObj = {};
+
+    if (bindCardIFrame.attachEvent){
+        bindCardIFrame.onload = function(){
+            var msg = iFrameContent.document.getElementsByTagName("pre");
+            if(msg.length == 0){
+                return;
+            }
+            resultObj = JSON.parse(msg[0].firstChild.nodeValue);
+            if(resultObj.code == '300') {  //绑卡成功
+                alert('绑卡成功');
+                window.location.href="ICBC_index.html";
+            }else if(resultObj.code == '612' ){
+               alert('该卡已被别的用户绑定');
+                window.location.href="index.html";
+            }else {
+                //todo
+            }
+        };
+    } else {
+        bindCardIFrame.onload = function(){
+            var msg = iFrameContent.document.getElementsByTagName("pre");
+            if(msg.length == 0){
+                return;
+            }
+            resultObj = JSON.parse(msg[0].firstChild.nodeValue);
+            if(resultObj.code == '300') {  //绑卡成功
+                alert('绑卡成功');
+                window.location.href="ICBC_index.html";
+            }else if(resultObj.code == '612' ){
+                alert('该卡已被别的用户绑定');
+                window.location.href="index.html";
+            }else {
+                //todo
+            }
+        };
+    }
+</script>
+</html>

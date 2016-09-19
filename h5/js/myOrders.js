@@ -230,6 +230,12 @@ $(document).ready(function(){
 			var scrollTop = $(this).scrollTop();
 			var scrollHeight = $(document).height();
 			var windowHeight = $(this).height();
+
+			console.log(scrollTop)
+			console.log(windowHeight)
+			console.log(scrollHeight)
+			console.log('aaaaaaaaaaaa')
+
 			if (scrollTop + windowHeight == scrollHeight) {
 				page++;
 				getOrders(page, 10, orderState );

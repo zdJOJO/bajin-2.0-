@@ -112,7 +112,7 @@ $(function(){
                             if(data_.code == 207){
                                 alert(data_.message);
                                 // window.location.href =  port + "/test/index.html";    //正式环境
-                                window.location.href =  port + "/bcard/index.html";   //测试环境
+                                window.location.href =  portStr + "/index.html";   //测试环境
                                 isClick = true;
                             }else if(data_.code == 208){  
                                 prizeId = objArr[objArr.length-1].prizeId;
@@ -130,7 +130,7 @@ $(function(){
                                     setTimeout(function(){ 
                                         alert(objArr[m].message);
                                         // window.location.href =  port + "/test/index.html";    //正式环境
-                                        window.location.href =  port + "/bcard/index.html";   //测试环境
+                                        window.location.href =  portStr + "/index.html";   //测试环境
                                     },3000);
                                 }
                             }                                                          

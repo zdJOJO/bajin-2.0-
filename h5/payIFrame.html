@@ -31,13 +31,6 @@
 	//这个地方要注意，在不同环境下，要更改对应的路径
 	//http://121.196.232.233/test/pay.html?id="+applyid;
 
-
-
-	//test为真实环境    bcard为测试环境
-
-	var portStr = port + '/bcard';
-//	var portStr = port + '/test';
-
 	var iframeUrl = portStr + "/pay.html?id="+applyid;
 
 	if(window.location.search.split("=")[0]=="?cardid"){
@@ -49,9 +42,13 @@
 //	if(window.location.search.split("=")[0]=="?bookType"){
 //		iframeUrl =  portStr + "/pay.html?bookType=" + applyid;
 //	}
+
+	//绑卡操作
+//	if(window.location.href.indexOf('bindCard') > 0){
+//		iframeUrl =  portStr + "/bank.html?mallOrderId=" + applyid;
+//	}
+
 	iframe.src = iframeUrl;
-
-
 	var sss = window.top.document.getElementById("iframeId").contentWindow;	 
 	console.log(sss);
 
@@ -64,7 +61,7 @@
 				console.log(nodeArr[0].firstChild.nodeValue);
 				if(nodeArr[0].firstChild.nodeValue == '{"code":"222","message":"支付成功"}') {
 					window.location.href="success.html";
-				}else if(/\"code\":\"300\"/g.test(nodeArr[0].firstChild.nodeValue)){//绑定成功的处理操作，现在不知道绑定成功的提示信息,成功绑定之后执行刷新页面
+				}else if(/\"code\":\"300\"/g.test(nodeArr[0].firstChild.nodeValue)){   //绑定成功的处理操作，现在不知道绑定成功的提示信息,成功绑定之后执行刷新页面
 					alert("绑定成功");
 					if(lottery != "lottery"){
 						window.location.reload();
@@ -75,9 +72,6 @@
 			}; 
 	} else { 
 			iframe.onload = function(){
-
-//				console.log( sss.document.getElementsByTagName("pre"));
-
 			  var nodeArr = sss.document.getElementsByTagName("pre");
 			  if(nodeArr.length == 0){
 			  	return;

@@ -3,9 +3,6 @@
  */
 
 $(function () {
-
-    var port = "http://test.winthen.com";
-
     var searchStr = window.location.search;
     var cardId = searchStr.split('=')[1];
 

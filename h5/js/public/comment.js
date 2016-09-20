@@ -73,11 +73,8 @@ var getCommentList = function (page) {
                     headPicStr = portStr + '/imgs/headPic_default.png';
                     nameStr = '';
                 }
-                // str += '<li class="singleCmt">' +
-                //     '<img src="'+ headPicStr +'">' + '<span class="userName">' + nameStr + '</span>' +
-                //     '<p>'+ data.list[i].commentContent +'</p>' + '<span class="creatTime">'+ timeAgo((new Date().getTime()/1000)-data.list[i].createTime) +'</span></li>';
                 str += '<div class="singleCmt">' +
-                    '<div class="imgBox"><img src="'+ headPicStr +'"></div>' +
+                    '<div class="imgBox"><img data-original="'+ headPicStr +'"></div>' +
                     '<div class="cmtContent">' +
                     '<li class="userName">' + nameStr + '</li>' +
                     '<li class="commentContent">'+ data.list[i].commentContent +'</li>' +
@@ -86,6 +83,15 @@ var getCommentList = function (page) {
             $("article>.comments>.commentList").append(str);
             $('#loading').hide();
             $('#moreComts').show();
+
+            //图片预加载
+            $(".commentList img").lazyload({
+                placeholder : portStr + '/imgs/headPic_default.png', //用图片提前占位
+                effect: "fadeIn", // 载入使用何种效果
+                effectspeed: 1000,
+                threshold: 800,
+                event: 'scroll'
+            });
         }else {
             setTimeout('$("#loading").hide()',700);
         }

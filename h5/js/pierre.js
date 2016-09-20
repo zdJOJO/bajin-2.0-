@@ -210,13 +210,13 @@ $(document).ready(function(){
 						}
 						switch(error.code){
 							case error.PERMISSION_DENIED:
-								alert("you have denied access to your position .");
+								// alert("you have denied access to your position .");
 								break;
 							case error.POSITION_UNAVAILABLE:
-								alert("there was a problem getting yout position .");
+								// alert("there was a problem getting yout position .");
 								break;
 							case error.TIMEOUT:
-								alert("The application has timed out attempting to get your location .");
+								// alert("The application has timed out attempting to get your location .");
 								break;
 						}
 						pageNum++;

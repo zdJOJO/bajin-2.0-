@@ -66,13 +66,13 @@ $(function(){
         type:"get",
         url: port+"/card/icbcbutton",
         success:function(result){
-            var actList = $("#service>.serviceList>li");
-            var len = $("#service").children('.serviceList').children('li').length;
+            var len = result.list.length;
+            var buttonStr = '';
             for(var i=0;i<len;i++){
-                $(actList[i]).attr("data-pickid",result.list[i].pickId);
-                $(actList[i]).find("img").attr("data-original",result.list[i].buttonPic);
-                $(actList[i]).find("span").html(result.list[i].buttonTitle);
+                buttonStr += '<li class="icbcBtn" data-pickid="'+result.list[i].pickId+'">' +
+                    '<img data-original="'+result.list[i].buttonPic+'"><span>'+ result.list[i].buttonTitle +'</span></li>'
             }
+            $('#service').find('.serviceList').html(buttonStr);
             //图片预加载
             $("#service").find('img').lazyload({
                 placeholder : "./imgs/gift/pic-loading.gif", //用图片提前占位
@@ -82,10 +82,10 @@ $(function(){
             //工行 各个按钮
             $("#service").find('li.icbcBtn').click(function(){
                 if(token){
-                    if(this.id == "phone"){
+                    if($(this).attr("data-pickid")=="998"){
                         window.location.href = 'tel://' + '400-009-5588';
                         return;
-                    }else if( this.id == "personalServe"){
+                    }else if( $(this).attr("data-pickid")=="999"){
                         getMessage();
                         return;
                     }else if($(this).attr("data-pickid")=="888"){
@@ -227,9 +227,9 @@ $(function(){
                                 return
                             }else {
                                 $(this).addClass('active').siblings('li').removeClass('active');
-                                if(!token){
-                                    return;
-                                }
+                                // if(!token){
+                                //     return;
+                                // }
                                 $('section.allCards').html('');
                                 menuClickFn(match($(this).attr('data-groupId')),$(this).attr('data-groupId'));
                             }
@@ -274,6 +274,19 @@ $(function(){
                         });
 
                     }
+                }else {
+                    $('#menu').children('.swiper-wrapper').append('<li class="swiper-slide" data-groupid="-1" data-type="allCards">全部卡种</li>');
+                    //菜单点击
+                    $('#menu li').click(function () {
+                        $('#mine').removeClass('active');
+                        if($(this).hasClass('active')){
+                            return
+                        }else {
+                            $(this).addClass('active').siblings('li').removeClass('active');
+                            $('section.allCards').html('');
+                            menuClickFn(match($(this).attr('data-groupId')),$(this).attr('data-groupId'));
+                        }
+                    });
                 }
             },
             error: function (e) {

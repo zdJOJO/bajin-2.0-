@@ -3,14 +3,35 @@
  */
 
 $(function () {
+    var href = window.location.href;
     var searchStr = window.location.search;
+
+    //微信分享时候 会在url后面带参数
     var cardId = searchStr.split('=')[1];
+    if(searchStr.indexOf('isappinstalled') > 0){
+        cardId = searchStr.split('&')[0].split('=')[1];
+    }
+    console.log(cardId)
+
+
+    //分享时候 传当前页面的url 和 对象obj
+    get_url(href);
 
     //请求卡详情
     $.ajax({
         type: 'get',
         url: port + '/card/cardtype/' + cardId,
         success: function (result) {
+
+            var shareDesc = result.data.cardMapModelList[0].description.replace(/<[^>]+>/g,"").replace(/[^\u4e00-\u9fa5]/gi,"");
+            // //调用分享借口
+            jsSdkApi('share',{
+                title: result.data.name,
+                desc: shareDesc,
+                link: href,
+                imgUrl: result.data.pic
+            });
+
             var cardTypeLen = result.data.cardMapModelList.length;
             var $propertyUl = $('#cardDetail').children('.ctg').find('ul');
             var $detailUl = $('#cardDetail').children('.content').find('.ul');

@@ -56,16 +56,16 @@ article >.comments>.commentList>.singleCmt>div{
     height: 100%;
 }
 article >.comments>.commentList>.singleCmt>div:first-child{
-    width: 21%;
+    width: 17%;
 }
 article >.comments>.commentList>.singleCmt>div:last-child{
-    width: 70%;
+    width: 80%;
 }
 
 article >.comments>.commentList>.singleCmt img{
     display: block;
-    width: 0.15rem;
-    height: 0.15rem;
+    width: 0.12rem;
+    height: 0.12rem;
     border-radius: 60%;
 }
 

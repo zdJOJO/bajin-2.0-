@@ -1,11 +1,12 @@
-@font-face{
-	font-family:"微软雅黑";
+@font-face {
+	font-family: droid;
+	src: url('fontFace/Droid Sans Fallback.ttf'); /*这里是字体文件路径*/
 }
 h1,h2,h3{
 	font-weight: normal;
 }
 body{
-	font-family:"微软雅黑" !important;
+	font-family: droid !important;
 	background: #fafafa;
 }
 #header{/*index页面的header部分修改*/

@@ -1,12 +1,13 @@
 
 @font-face{
-	font-family:"黑体"
+	font-family: droid;
+	src: url('fontFace/Droid Sans Fallback.ttf'); /*这里是字体文件路径*/
 }
 h1,h2,h3{
 	font-weight: normal;
 }
 body{
-	font-family: "黑体";
+	font-family: droid;
 }
 
 

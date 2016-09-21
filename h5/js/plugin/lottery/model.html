@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> New_Document </title>
+	<meta name="Generator" content="EditPlus">
+	<meta name="Author" content="">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+
+    <link rel="stylesheet" type="text/css" href="style.css" />
+ </head>
+ <body>
+
+
+	<div class="myBox">
+		<ul class="cj1">
+			<li>1</li>
+		</ul>
+		<div class='text'>
+			<div class="bt bt1">点我抽奖</div>
+			<div class='jg jg1'>中奖者为"<em></em>"号</div>
+		</div>
+	</div>
+
+
+	<!--<div class="myBox">-->
+		<!--<ul class="cj2">-->
+			<!--<li>1</li>-->
+		<!--</ul>-->
+		<!--<div class='text'>-->
+			<!--<div class="bt bt2">点我抽奖</div>-->
+			<!--<div class='jg jg2'>中奖者为"<em></em>"号</div>-->
+		<!--</div>-->
+	<!--</div>-->
+
+ </body>
+ <script type="text/javascript" src="../../jquery/jquery.min.js"></script>
+ <script type="text/javascript" src="luckDraw.js"></script>
+<script>
+	$(function(){
+		var tar = 5;
+		$('.cj1').myLuckDraw({
+			row : 3, //行
+			column : 3, //列
+			spacing: 5, //空隙
+			click : '.bt1', //点击触发
+			time: 3 ,//匀速运动的时间
+			end:function(e){
+				//抽奖执行完毕的回调函数,参数e为获奖编号
+				//因为这里是指定的，所以e == 12
+				$('.jg1 em').text(e);
+			}
+		},tar); //这里tar是确定想要抽奖的目标是几号
+	});
+</script>
+ </html>

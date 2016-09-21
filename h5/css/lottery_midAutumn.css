@@ -181,7 +181,7 @@ h3>span{
     top: 180px;
 }
 
-.turntable-bg .text {
+.turntable-bg .textTitle {
     width: 100%;
     height: 120px;
 }
@@ -195,7 +195,7 @@ h3>span{
     margin-left: -10px;
 }
 
-.turntable-bg .pointer>img,.turntable-bg .rotate>img,.turntable-bg .text>img,.turntable-bg .next>img{
+.turntable-bg .pointer>img,.turntable-bg .rotate>img,.turntable-bg .textTitle>img,.turntable-bg .next>img{
     width: 100%;
     height: auto;
 }

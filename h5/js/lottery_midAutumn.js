@@ -4,8 +4,7 @@
 $(function (){
     var token = "";
     //获取存在于cookie中的token值
-    function getCookie(c_name)
-    {
+    function getCookie(c_name) {
         if (document.cookie.length>0)
         {
             c_start=document.cookie.indexOf(c_name + "=")
@@ -38,7 +37,7 @@ $(function (){
         title: '贺中秋,迎国庆',
         desc: ' 新用户通过下载/注册“白金尊享”APP并绑定工商银行信用卡，可获得一次抽奖机会',
         link: 'http://www.winthen.com/test/fareDraw.html',
-        imgUrl: 'http://www.winthen.com/test/imgs/lottery_midAutumn/share.png'
+        imgUrl: 'http://www.winthen.com/test/imgs/lottery_midAutumn/share.jpg'
     });
 
 

@@ -20,7 +20,6 @@ $(document).ready(function(){
 	return undefined;
 	}
 	token = getCookie("token");
-	console.log(token);
 	var activityid= window.location.search.split('=')[2];
 	// console.log(token);
 	//历史页面的记录用于登录成功或者注册、更改密码成功后跳回的页面
@@ -199,7 +198,7 @@ $(document).ready(function(){
 			        loop : true,
 				});
 				$(".swiper-slide img").click(function(){
-					var type = $(this).data("type");
+					var type = $(this).attr("data-type");
 			        if(type == 0){
 			        	return;
 			        }else if(type == 1){
@@ -208,19 +207,13 @@ $(document).ready(function(){
 			        	window.location.href = "life.html?id="+ $(this).data("itemid");
 			        }else if(type == 3){
 			        	window.location.href = "brandDetail.html?id="+$(this).data("itemid");
-			        	return;
 			        }else if(type == 4){
 			        	if(token != undefined){
-			        		//调到抽奖中间页
-			        		// window.location.href="lottery_rule.html?lottery=lottery";
 							window.location.href = "fareDraw.html?token="+token;
-			        		// window.location.href = "lottery.html?itemId="+$(this).data("itemid");
 			        	}else{
 			        		window.location.href = "login.html?his=" + his;
 			        	}		        	
 			        }else if(type == 6){
-			            // window.location.href = $(this).data("url");
-			            // return;
 						if(token != undefined){
 							//调到抽奖中间页
 							window.location.href = bannerUrl;
@@ -230,7 +223,9 @@ $(document).ready(function(){
 					}else if(type == 5){
 			        	window.location.href = "mall.html?id="+$(this).data("itemid");
 			        	return;
-			        }
+			        }else if(type == 12){
+						window.location.href = $(this).attr('data-url');
+					}
 				});
 			}
 		});

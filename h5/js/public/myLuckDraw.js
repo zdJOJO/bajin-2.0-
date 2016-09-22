@@ -1,49 +1,61 @@
-//by zyp
 ;(function($, window, document, undefined) {
-    var LuckDraw = function(ele, opt) {
-        this.$element = ele,
-        this.defaults = {
-			row:4, //行
-			column:4, //列
-			spacing:0,
-			click :null,
-			time : 3,
-            end:function(e){}
-        },
-		this.target,
-        this.options = $.extend({},this.defaults, opt);
-    }
-    LuckDraw.prototype = {
-        init: function() {
+	var LuckDraw = function(ele, opt) {
+		this.$element = ele,
+			this.defaults = {
+				row:4, //行
+				column:4, //列
+				spacing:0,
+				conditionObj: {},
+				click :null,
+				time : 3,
+				end:function(e){}
+			},
+			this.target,
+			this.options = $.extend({},this.defaults, opt);
+	}
+	LuckDraw.prototype = {
+		init: function() {
 			var $this = this.$element;
 			var row = this.options.row;
 			var col = this.options.column;
 			var spacing = this.options.spacing;
+			var conditionObj = this.options.conditionObj;
 			var click = this.options.click;
 			var allNumber = 2 * (row + col) - 4;
 			var line = row-2;//除去上下de行数
 			var length = $this.children('li').length;
 			var options = this.options;
-			
+
 			if(length < allNumber){
 				for(var i=length;i<=(allNumber-length);i++){
-					$this.append("<li>"+(i+1)+"</li>");
+					// $this.append("<li><span>"+(i+1)+"</span></li>");
+					$this.append("<li><span></span></li>");
 				}
 			}
+
 			var children = $this.children('li');
 			var width = children.eq(0).width() || 0;
 			var height = children.eq(0).height() || 0;
 
+			//赋值 奖品
+			for (var i=0;i<conditionObj.prizeModelList.length;i++){
+				$('.presentList').children('li').eq(i).css({
+					'background' : 'url('+ conditionObj.prizeModelList[i].prizePic+') no-repeat',
+					'background-size' : 'auto 100%'
+				});
+			}
+
+
 			//元素初始化
 			$this.css({
 				position:'relative',
-				width:col * width + (col-1) * spacing,
-				height:row * height + (row-1) * spacing
+				width: col * width + (col-1) * spacing,
+				height: row * height + (row-1) * spacing
 			});
 			children.css({
 				position:'absolute'
 			});
-			
+
 
 			if(line == 0){
 				initOne();
@@ -59,7 +71,7 @@
 			//左： else
 			//如果只有两行
 			//此时分成4个部分，上、右、下、左
-			
+
 			function initOne(){
 				children.each(function(index){
 					if(index >=0 && index <= (col-1)){
@@ -103,31 +115,64 @@
 			}
 
 
-			var target = $this.target || Math.floor(Math.random()*allNumber+1); //目标，指定或随机
+			// var target = $this.target || Math.floor(Math.random()*allNumber+1); //目标，指定或随机
+			var target = $this.target; //目标，指定或随机
+
+			var presentObj = {};  //抽奖结果的奖品对象
+
 			var ix = 0; //位置
 			var stop ;
 			var flg = false; //抽奖是否正在运行
 			/*
-				加速度公式
-				v1 = v0 + a*t;注意加速度的v代表时间
-				此时的t可以我们自己定义，所以是常量，所以只需要求a的值
-			*/
+			 加速度公式
+			 v1 = v0 + a*t;注意加速度的v代表时间
+			 此时的t可以我们自己定义，所以是常量，所以只需要求a的值
+			 */
 			var a = -25.0;
 			var v0 = 500.0;
 			var t = 0.0 , v ;
 			var time = this.options.time*1000;//匀速运行的时间，单位秒
-			
+
 			$(click).on('click',function(){
 				if(!flg){
 					flg = true;
-					target = $this.target || Math.floor(Math.random()*allNumber+1);
-					speedUp();
+					// target = $this.target || Math.floor(Math.random()*allNumber+1);
+					//通过ajax获取概率target
+					$.ajax({
+						type: 'post',
+						dataType: "json",
+						contentType : "application/json",
+						url: conditionObj.lotteryAjaxUrl,
+						data: {},
+						success: function (result) {
+							if(result.code == '207'){
+								$('.real').hide().siblings('.maskBox').show();
+								$('.pointer').attr('data-state','207');
+								$.modal({
+									title: "提示",
+									text: "本活动仅限新注册用户参与每个用户仅限一次抽奖机会）",
+									buttons: [
+										{ text: "知道了", onClick: function(){} },
+									]
+								});
+								return
+							}
+							if(result.code == '206'){
+								presentObj = result.data;
+								target = result.data.position;
+								children.find('span').addClass('on');
+								speedUp();
+							}
+						},
+						error: function (e) {
+							//todo
+						}
+					});
 				}else{
 					return ;
 				}
 			});
 
-			
 
 			//加速
 			function speedUp(){
@@ -162,7 +207,7 @@
 					v = 500;
 					if(ix == target-1){
 						clearTimeout(stop3);
-						options.end(target);
+						options.end(presentObj);
 						flg = false;
 					}
 				}else{
@@ -173,7 +218,8 @@
 			}
 			//ix++
 			function runner(i){
-				children.removeClass('on').eq(ix).addClass('on');
+				// children.removeClass('on').eq(ix).addClass('on');
+				children.find('span').addClass('on').eq(ix).removeClass('on');
 				i++;
 				if(i == allNumber){
 					ix = 0;
@@ -186,11 +232,11 @@
 			var $this = this.$element;
 			$this.target = options;
 		}
-    }
-    $.fn.myLuckDraw = function(options,target) {
-        var Ld = new LuckDraw(this,options);
+	}
+	$.fn.myLuckDraw = function(options,target) {
+		var Ld = new LuckDraw(this,options);
 		Ld.setTarget(target);
 		Ld.init();
-        return this;
-    }
+		return this;
+	}
 })(jQuery,window,document);

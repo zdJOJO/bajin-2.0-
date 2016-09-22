@@ -1,22 +1,18 @@
 
-@font-face{
-	font-family: droid;
-	src: url('fontFace/Droid Sans Fallback.ttf'); /*这里是字体文件路径*/
-}
 h1,h2,h3{
 	font-weight: normal;
-	font-family: droid;
+	font-family: SimHei;
 }
 body{
-	font-family: droid;
+	font-family: SimHei;
 	/*background: #eeeeee;*/
-	font: 12px/150% droid, "\5b8b\4f53";
+	font: 12px/150% SimHei, "\5b8b\4f53";
 	margin: 0;
 	padding: 0;
 }
 header ,section ,footer{
 	font-size: 15px;
-	font-family: droid;
+	font-family: SimHei;
 	background-color:#fff;
 }
 header{

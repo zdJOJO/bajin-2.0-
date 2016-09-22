@@ -19,6 +19,16 @@ xmlhttp.onreadystatechange = function() {
 };
 
 
+// 获取 min 到 max 的随机整数   如： var random = getRandom(0, 100);
+function getRandom(min, max){
+    var r = Math.random() * (max - min);
+    var re = Math.round(r + min);
+    re = Math.max(Math.min(re, max), min)
+    return re;
+}
+
+
+
 //获取存在于cookie中的token值
 function getCookie(c_name) {
     if (document.cookie.length>0)
@@ -54,7 +64,6 @@ function showThreeLine(str,num) {
 
 
 //通用函数，也是可以写到zepto.js里面的   时间戳转换成 固定格式
-
 Date.prototype.Formate_short = function(){
     var y=this.getFullYear();
     var m=this.getMonth()+1>9?(this.getMonth()+1):'0'+(this.getMonth()+1);

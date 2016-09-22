@@ -9,113 +9,28 @@
     <link type="text/css" rel="stylesheet" href="css/weiXin/weui.min.css">
     <link type="text/css" rel="stylesheet" href="css/weiXin/jquery-weui.css">
     <link type="text/css" rel="stylesheet" href="js/plugin/lottery/style.css">
-    <link type="text/css" rel="stylesheet" href="css/lottery_midAutumn.css">
-
-
-    <style>
-        ul{
-            border: 1rem rgb(25, 68, 121) solid;
-        }
-        .myBox{
-            position: relative;
-            margin: 5rem auto 0;
-        }
-
-        .myBox li{
-            width: 7rem;
-            height: 5.9rem;
-            text-align: center;
-            line-height: 5.9rem;
-            font-size: 2em;
-            color: #fff;
-            background-color: rgb(246, 192, 0);
-        }
-
-        .myBox li>span{
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
-        .myBox li:nth-child(odd){
-            background: rgb(246, 192, 0);
-        }
-        .myBox li:nth-child(even){
-            background: rgb(243, 218, 89);
-        }
-
-        .myBox li>span.on{
-            background:rgba(0, 0, 0, 0.4);
-        }
-
-
-        .text{
-            width: 7rem;
-            height: 5.9rem;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            margin: -2.95rem 0 0 -3.5rem;
-        }
-
-        .bt1{
-            width: 100%;
-            height: 100%;
-        }
-
-        .text img{
-            width: 100%;
-            height: 100%;
-        }
-
-
-        @media screen and (max-width: 360px){
-            .myBox li{
-                width: 6rem;
-                height: 5.1rem;
-                line-height: 5.1rem;
-            }
-
-            .text{
-                width: 6rem;
-                height: 5.1rem;
-                margin: -2.55rem 0 0 -3rem;
-            }
-        }
-
-        @media screen and (max-width: 320px){
-            .myBox li{
-                width: 5rem;
-                height: 4.2rem;
-                line-height: 4.2rem;
-            }
-
-            .text{
-                width: 5rem;
-                height: 4.2rem;
-                margin: -2.1rem 0 0 -2.5rem;
-            }
-        }
-
-
-    </style>
+    <link type="text/css" rel="stylesheet" href="css/lottery/lottery_new.css">
 </head>
 <script>
 
 </script>
 <body>
+<!--imgs/lottery_midAutumn/text.png-->
 <div class="up turntable-bg">
-    <div class="textTitle"><img src="imgs/lottery_midAutumn/text.png"></div>
-    <!--<div class="pointer"><img src="imgs/lottery_midAutumn/start.png" alt="pointer"/></div>-->
+    <div class="textTitle"><img src=""></div>
     <div class="myBox">
         <ul class="presentList">
-            <li>
-                <span>1</span>
-            </li>
+            <li><span></span></li>
         </ul>
-        <div class="text">
-            <div class="bt bt1">
-                <img src="imgs/lottery_midAutumn/start.png" alt="pointer"></div>
+        <div class="text maskBox">
+            <div class="bt bt1 pointer">
+                <img src="imgs/lottery_midAutumn/start.png" alt="pointer">
+            </div>
+        </div>
+        <div class="text real" style="display: none">
+            <div class="bt bt1 pointer" id="realStart">
+                <img src="imgs/lottery_midAutumn/start.png" alt="pointer">
+            </div>
         </div>
     </div>
     <span class="rule">注册白金尊享并绑卡 就能免费抽奖1次</span>
@@ -129,119 +44,16 @@
             <h3><span>中奖用户</span></h3>
             <img class="box" src="./imgs/lottery_midAutumn/box.png">
             <div id="nameList">
-                <ul>
-                    <li>
-                        <span>139****3415</span>
-                        <span>观苏胶原蛋白守护护理疗程体验券</span>
-                    </li>
-                    <li>
-                        <span>158****0000</span>
-                        <span>云上清风现金抵用券</span>
-                    </li>
-                    <li>
-                        <span>131****3995</span>
-                        <span>50元话费</span>
-                    </li>
-                    <li>
-                        <span>189****5613</span>
-                        <span>阿卡有机蔬菜1箱</span>
-                    </li>
-                    <li>
-                        <span>157****5779</span>
-                        <span>50元话费</span>
-                    </li>
-                    <li>
-                        <span>182****2235</span>
-                        <span>阳澄湖品蟹之旅</span>
-                    </li>
-                    <li>
-                        <span>131****5809</span>
-                        <span>龙羲红果礼盒</span>
-                    </li>
-                    <li>
-                        <span>156****2175</span>
-                        <span>20元话费</span>
-                    </li>
-                    <li>
-                        <span>136****5889</span>
-                        <span>50元话费</span>
-                    </li>
-                </ul>
+                <ul></ul>
             </div>
         </div>
         <div id="rule">
             <h3><span>活动规则</span></h3>
-            <p>
-                1.  活动时间：9月12日-10月7日<br>
-                2.  本次活动仅限浙江省内中国工商银行信用卡持卡人参加（宁波除外）<br>
-                3.  新用户通过下载/注册“白金尊享”APP并绑定工商银行信用卡，可获得一次抽奖机会<br>
-                4.  已参与过“绑卡抽话费”的老用户，无法参与此次抽奖<br>
-                5.  话费奖品将直接返至注册预留的手机号<br>
-                6.  实物奖品和电子券奖品，后续将有客服联系中奖者告知具体的领取方式<br>
-                7.  本活动的最终解释权归杭州圆臻科技有限公司所有
-            </p>
         </div>
         <hr>
         <div class="detail">
             <h3><span>奖品介绍</span></h3>
-            <ul class="present">
-                <li>
-                    <img data-original="imgs/lottery_midAutumn/presents/hl.png">
-                    <h5>观苏胶原蛋白守护护理疗程体验券</h5>
-                    <p>
-                        美国REJUVEN生物制药实验室定制的全进口观苏胶原守护护理疗程，
-                        蕴含抑制胶原蛋白流失的PLA技术，持续适用可让使用者面部的轮廓、紧致度及光泽度都得到提升，皱纹减淡，弹性提升，肌肤恢复健康年轻的状态！
-                    </p>
-                    <p class="price">价值￥1280.00</p>
-                </li>
-                <li>
-                    <img data-original="imgs/lottery_midAutumn/presents/qf.png">
-                    <h5>云上清风现金抵用券</h5>
-                    <p>
-                        云上清风私人订制小别墅家宴（餐标550元/人，须四人以上用餐）
-                        赠送干白/干红/老台门黄酒（任选其一）、网红棉点甜品（每人一份）、武夷山私房红茶一泡、小源流花道课一节
-                    </p>
-                    <p class="price">价值￥550.00</p>
-                </li>
-                <li>
-                    <img data-original="imgs/lottery_midAutumn/presents/dzx.png">
-                    <h5>阳澄湖品蟹之旅</h5>
-                    <p>
-                        自行驱车前往阳澄湖，参观阳澄湖蟹坊，由专人陪同讲解大闸蟹的生长环境，跟蟹坊师傅学习如何绑蟹，
-                        并参加一场绑蟹大比拼游戏，随后享受一顿以大闸蟹为主菜的蟹宴。（若携带朋友同行，加收150元/人）
-                    </p>
-                    <p class="price">价值￥180.00</p>
-                </li>
-                <li>
-                    <img data-original="imgs/lottery_midAutumn/presents/hg.png">
-                    <h5>龙羲红果礼盒</h5>
-                    <p>
-                        伏羲诞生地——甘肃天水的花牛有机苹果，富含苹果酚、花青素及可溶性果胶，具有多种保健作用。
-                        本次甘怡科技公司出品的龙羲红果礼盒装为9月上旬-下旬采摘，原产地直接发货，新鲜绿色有保障。
-                    </p>
-                    <p class="price">价值￥128.00</p>
-                </li>
-                <li>
-                    <img data-original="imgs/lottery_midAutumn/presents/sc.png">
-                    <h5>阿卡有机蔬菜1箱（仅配送杭州主城区）</h5>
-                    <p>
-                        阿卡农庄余杭径山智能农场直供的当季有机蔬菜，种植全过程电脑智能化控制蔬，保证了蔬菜在适宜的温度和气候下自然无污染地生长。为保障新鲜度，
-                        有机蔬菜从采摘到配送将在24小时完成并送达您家。<strong>（因阿卡有机蔬菜仅配送杭州主城区，若中奖者收货地址超出配送范围，可换成50元话费）</strong>
-                    </p>
-                    <p class="price">价值￥108.00</p>
-                </li>
-                <li>
-                    <img data-original="imgs/lottery_midAutumn/presents/20yuan.png">
-                    <h5>20元话费</h5>
-                    <p>中奖后直接充20元话费至注册预留的手机号，移动/联通/电信号码不限</p>
-                </li>
-                <li>
-                    <img data-original="imgs/lottery_midAutumn/presents/50yuan.png">
-                    <h5>50元话费</h5>
-                    <p>中奖后直接充50元话费至注册预留的手机号，移动/联通/电信号码不限</p>
-                </li>
-
-            </ul>
+            <ul class="present"></ul>
         </div>
     </div>
 </div>
@@ -259,33 +71,14 @@
 
 <script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
 <script type="text/javascript" src="js/public/jweixin-1.0.0.js"></script>
-
 <script type="text/javascript" src="js/plugin/jquery.kxbdmarquee.js"></script>
-<script type="text/javascript" src="js/plugin/lottery/luckDraw.js"></script>
 <script type="text/javascript" src="js/plugin/jquery.lazyload.js"></script>
 
 <script type="text/javascript" src="js/public/sha1.js"></script>
 <script type="text/javascript" src="js/public/myWxApi.js"></script>
+<script type="text/javascript" src="js/public/myLuckDraw.js"></script>
+
 
 <script type="text/javascript" src="js/public/public.js"></script>
-<script type="text/javascript" src="js/lottery_midAutumn.js"></script>
-<script>
-    $(function(){
-        //这里tar是确定想要抽奖的目标是几号
-        var tar = 1;
-        $('.presentList').myLuckDraw({
-            width: 100,
-            height: 100,
-            row : 3, //行
-            column : 3, //列
-            spacing: 3, //空隙
-            click : '.bt1', //点击触发
-            time: 3 ,//匀速运动的时间
-            end:function(e){
-                //抽奖执行完毕的回调函数,参数e为获奖编号
-
-            }
-        },tar);
-    });
-</script>
+<script type="text/javascript" src="js/lottery_new.js"></script>
 </html>

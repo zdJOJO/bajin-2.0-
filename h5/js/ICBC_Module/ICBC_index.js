@@ -208,7 +208,9 @@ $(function(){
                         for(var i=0;i<len;i++){
                             groupStr_copy += ' <li class="swiper-slide" data-groupId="'+ result.data.list[i].id +'">'+ result.data.list[i].title +'</li>';
                         }
-                        var groupStr = ' <li class="swiper-slide" data-groupid="-1" data-type="allCards">全部卡种</li>' + groupStr_copy;
+                        // var groupStr = ' <li class="swiper-slide" data-groupid="-1" data-type="allCards">全部卡种</li>' + groupStr_copy;
+                        var groupStr = groupStr_copy;
+
                         $('#menu').children('.swiper-wrapper').append(groupStr);
                         if(len >= 4){
                             var menuSwiper = new Swiper ('#menu', {
@@ -275,7 +277,10 @@ $(function(){
 
                     }
                 }else {
-                    $('#menu').children('.swiper-wrapper').append('<li class="swiper-slide" data-groupid="-1" data-type="allCards">全部卡种</li>');
+
+                    // $('#menu').children('.swiper-wrapper').append('<li class="swiper-slide" data-groupid="-1" data-type="allCards">全部卡种</li>');
+
+
                     //菜单点击
                     $('#menu li').click(function () {
                         $('#mine').removeClass('active');

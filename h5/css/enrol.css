@@ -8,6 +8,7 @@ body{
     font-family: "黑体";
     background: #eee;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 #header{
     width:100%;

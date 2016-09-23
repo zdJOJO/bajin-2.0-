@@ -17,48 +17,61 @@ function getCookie(c_name) {
 }
 
 var token = '';
-var status;
+var status = -1; //0-- 正常  , 1-- 过期
 var urlSearch = window.location.search;
+var localStorage = window.localStorage;   //用于存储生日日期和礼包领取码
 if(urlSearch.indexOf('token') > 0){
     token = urlSearch.split('&')[0].split('=')[1];
-    status = urlSearch.split('&')[1].split('=')[1];  //用于判断是否 已领取
-    function setCookie(c_name,value,expiredays) {
-        var exdate = new Date();
-        exdate.setDate(exdate.getDate()+expiredays);
-        document.cookie = c_name+ "=" +escape(value)+ ((expiredays==null) ? "" : ";expires="+exdate.toGMTString());
-    }
     setCookie('token',token);
 }else {
     token = getCookie('token');
 }
+if(urlSearch.indexOf('status') > 0){
+    status = urlSearch.split('&')[1].split('=')[1];  //用于判断是否 已领取
+    localStorage.setItem("status",status);
+}else {
+    status = localStorage.status;
+}
+
+
 
 var his = window.location.pathname.split("/");
 his = his[his.length-1];
 
 
-
-
 //选择生日框 字样修改
 // 判断浏览器
 var browser = myBrowser();
-if(browser == "Safari" || !browser){
-    $('#birthDayCtrl').hide();
-    $('#birthDaySafari').show();
-
-    $('#birthDaySafari').click(function () {
-        $('#birthDayCtrl_Safari').focus().bind('change',function () {
-            $('#birthDaySafari').html($('#birthDayCtrl_Safari').val());
-        });
-    });
-}
 if(browser == "Chrome"){
-    $('#birthDaySafari').hide();
-
+    $('#birthDayCtrl_Safari').hide();
     $('#birthDayChrome').show().click(function () {
         $('#birthDayCtrl').click().bind('change',function () {
             $('#birthDayChrome').html($('#birthDayCtrl').val());
+            localStorage.setItem("birthDay",$('#birthDayChrome').html());
         });
     });
+}else if(browser == "Safari" || !browser){
+    $('#birthDayCtrl').hide();
+    $('#birthDaySafari').show().click(function () {
+        $('#birthDayCtrl_Safari').focus().bind('change',function () {
+            $('#birthDaySafari').html($('#birthDayCtrl_Safari').val());
+            localStorage.setItem("birthDay",$('#birthDaySafari').html());
+        });
+    });
+}else {
+    //todo
+}
+
+
+$('#birthDayCode').on('change',function () {
+    localStorage.setItem("birthDayCode",$(this).val());
+});
+
+if(localStorage.birthDay){
+    $('#birthDaySafari').html(localStorage.birthDay);
+}
+if(localStorage.birthDayCode){
+    $('#birthDayCode').val(localStorage.birthDayCode);
 }
 
 
@@ -76,11 +89,9 @@ var pageNum = 1;
 var defaulAddressJo = $('#popPub>.defaulAddress');
 
 
-
 //判断是否绑定了银行卡
 function bankCard() {
     $.get( port + '/card/card?token=' + token,function (result) {
-
         //判断是否有白金卡
         // if(result.list.length > 0){
         //     for(var i=0;i<result.list.length;i++){
@@ -89,8 +100,6 @@ function bankCard() {
         //         }
         //     }
         // }
-
-
         //判断是否有卡
         if(result.list.length > 0){
             hasBinded = true;
@@ -98,50 +107,6 @@ function bankCard() {
     });
 }
 bankCard();
-
-
-//生日礼包列表获取   type=0---实物  isOnline=1---停用  sum=0---领完
-function getGIftsList(currentPage) {
-    $.ajax({
-        type: 'get',
-        url: port + '/card/birthgift?currentPage=' + currentPage + '&token=' + token,
-        success: function (result) {
-            var giftStr = '';
-            if( currentPage==1 &&(!result || result.data.list.length == 0)){
-                $('#content>.receiveBefore .giftList').append('<li class="giftTitle">暂无礼包</li>');
-                $('.bottomBox').hide();
-                return;
-            }
-            for(var i=0;i<result.data.list.length;i++){
-                if(result.data.list[i].sum > 0 && result.data.list[i].isOnline == 0){
-                    giftStr += '<li class="giftTitle">'+ result.data.list[i].title +': <span class="giftSubTitle">'+ result.data.list[i].subTitle +'</span></li>';
-                    //判断是否有实物
-                    if(result.data.list[i].type == 0){
-                        hasRealGift = true;
-                    }
-                    //判断是否有电子券
-                    if(result.data.list[i].type == 1){
-                        hasElec = true;
-                    }
-                    giftArray.push(result.data.list[i]);
-                }
-            }
-            $('#content>.receiveBefore .giftList').append(giftStr);
-            if( currentPage > 1 && result.data.list.length == 0){
-                setTimeout(function () {
-                    $('#giftLoading').hide();
-                    $('#more').show();
-                },300);
-            }
-
-        },
-        error: function () {
-            //todo
-        }
-    });
-}
-getGIftsList(1);
-
 
 //获取地址
 function getAddress() {
@@ -167,12 +132,12 @@ function getAddress() {
                 '<button id="sureReceive">确认领取</button>');
             addressStr = '<span class="address">' + defaulAddresObj.province + defaulAddresObj.city + defaulAddresObj.district + '</span><br>'+
                 '<span class="info">' + defaulAddresObj.receiverName + '&nbsp;&nbsp;' + defaulAddresObj.receiverPhone +'</span>';
+
             //默认选取地址
             $('#chooseBox').click();
             $('#right').click(function () {
                 window.location.href = 'setAddress.html?fromeGift&&obj=' + escape(JSON.stringify({}));
             });
-
             //（存在事物情况下） 确认领取
             $('#sureReceive').click(function () {
                 if(!$('#choose').is(':checked')){
@@ -187,6 +152,48 @@ function getAddress() {
 }
 getAddress();
 
+//生日礼包列表获取   type=0---实物  isOnline=1---停用  sum=0---领完
+function getGIftsList(currentPage) {
+    $.ajax({
+        type: 'get',
+        url: port + '/card/birthgift?currentPage=' + currentPage + '&token=' + token,
+        success: function (result) {
+            var giftStr = '';
+            if( currentPage==1 &&(!result || result.data.list.length == 0)){
+                $('#content>.receiveBefore .giftList').append('<li class="giftTitle">暂无礼包</li>');
+                $('.bottomBox').hide();
+                return;
+            }
+            for(var i=0;i<result.data.list.length;i++){
+                if(result.data.list[i].sum > 0 && result.data.list[i].isOnline == 0){
+                    giftStr += '<li class="giftTitle">'+ result.data.list[i].title +': ' +
+                        '<span class="giftSubTitle">'+ result.data.list[i].subTitle +'</span></li>';
+                    //判断是否有实物
+                    if(result.data.list[i].type == 0){
+                        hasRealGift = true;
+                    }
+                    //判断是否有电子券
+                    if(result.data.list[i].type == 1){
+                        hasElec = true;
+                    }
+                    giftArray.push(result.data.list[i]);
+                }
+            }
+            $('#content').find('.giftList').append(giftStr);
+            if( currentPage > 1 && result.data.list.length == 0){
+                setTimeout(function () {
+                    $('#giftLoading').hide();
+                    $('#more').show();
+                },300);
+            }
+
+        },
+        error: function () {
+            //todo
+        }
+    });
+}
+getGIftsList(1);
 
 
 // （不存在事物情况下）立即领取
@@ -243,23 +250,6 @@ $("#receiveNow").click(function () {
 function giftAjax(_receiverId) {
     var birthday = (browser == "Chrome") ? $('#birthDayChrome').html() : $('#birthDaySafari').html();
     var birthdayTimeStamp = new Date(birthday.replace(/-/g,'/')).getTime()/1000; //单位s
-    // if(isOverdue){
-    //     $.modal({
-    //         title: "提示",
-    //         text: "您输入的礼包领取码已超过30天有效日期",
-    //         buttons: [
-    //             { text: "知道了", className: "default", onClick: function(){
-    //                 //todo
-    //             } }
-    //         ]
-    //     });
-    //     return
-    // }
-
-    // $('.receiveBefore').hide();
-    // $('#popPub').hide();
-    // $('#orderLoading').show();
-
     //生日礼包领取码是否正确或者过期，需要ajax请求，再做判断
     var data = {
         code: $('#birthDayCode').val()
@@ -277,13 +267,19 @@ function giftAjax(_receiverId) {
             if(result.code == '601'){
                 $.modal({
                     title: "提示",
-                    text: "您输入的礼包领取码有误，请重新输入",
+                    text: result.message,
                     buttons: [
-                        { text: "知道了", className: "default", onClick: function(){
-                            //todo
-                            // $('.receiveBefore').show();
-                            // $('#popPub').show();
-                            // $('#orderLoading').hide();
+                        {text: "知道了", className: "default", onClick: function(){
+                            localStorage.clear();
+                        } },
+                        { text: "点击查看礼包", className: "primary", onClick: function(){
+                            //跳到领取成功页面
+                            giftSuccess();
+                            if(hasRealGift){
+                                $('.receiveAfter .toAccount').show();
+                                $('.receiveAfter .address').html(addressStr);
+                            }
+                            $('#content').children('.receiveBefore').hide().siblings('.receiveAfter').show();
                         } }
                     ]
                 });
@@ -297,7 +293,8 @@ function giftAjax(_receiverId) {
                     giftSuccess();
                     $('.receiveAfter').show();
                     $('#orderLoading').hide();
-                },500);
+                },300);
+                localStorage.clear();
             }
         },
         error: function (e) {

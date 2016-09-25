@@ -241,7 +241,7 @@ $(function(){
                         var cardList = result.data.list || result.data;
                         for (var i=0;i<len;i++){
                             str += '<div class="singleCard" data-cardId="'+ cardList[i].id +'" data-kabin="'+ cardList[i].kabin +'">' +
-                                '<img src="'+ cardList[i].pic +'">' +
+                                '<div class="cardBox"><img src="'+ cardList[i].pic +'"></div>' +
                                 '<div><h2>'+ cardList[i].name +'</h2>' +
                                 '<p>'+ cardList[i].description +'</p></div></div>';
                         }

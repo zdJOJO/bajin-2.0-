@@ -23,13 +23,15 @@ $(function(){
 
 
     //用于判断从哪里跳进这个页面
-	var isPersonNalInfo = window.location.href.indexOf('fromePersonNalInfo') ;
+	var isPersonNalInfo = window.location.href.indexOf('fromePersonNalInfo');
 
 
 
 	//获取页面的名称
 	$(".add_add").click(function(){
-		window.location.href = isPersonNalInfo > 0 ? window.location.href="addAddress.html?fromePersonNalInfo&&obj="+escape(JSON.stringify(obj)) : window.location.href="addAddress.html?obj="+escape(JSON.stringify(obj));
+		window.location.href = isPersonNalInfo > 0 ? window.location.href="addAddress.html?fromePersonNalInfo&&obj="+escape(JSON.stringify(obj)) :
+			(window.location.search.indexOf('fromeGift')>0 ? window.location.href="addAddress.html?fromeGift&obj="+escape(JSON.stringify({})) :
+				window.location.href="addAddress.html?obj="+escape(JSON.stringify(obj)));
 	});
 
 
@@ -69,14 +71,13 @@ $(function(){
 	//获取上个页面的url
 	var Add=$("#add");
 	$.get(port+"/card/receiver?token="+token+"&currentPage=1",function(data){
-		console.log(data);
 		if(data.list.length==0){
 			var str=$('<h3 class="noneAds">你还没有创建收货地址，赶快创建一个吧</h3>');
 			$("#add").html(str);
 		}
 		for(var i=0,len=data.list.length;i<len;i++) {
 			var item;
-			var districtStr = ''
+			var districtStr = '';
 			if(!data.list[i].district){
 				districtStr = '';
 			}else {
@@ -95,18 +96,17 @@ $(function(){
 		//选择地址跳转
 		$(".reg_But,.ad_But").bind("click",function(){
 			obj.receiveId = $(this).data("id");
-
 			if(isPersonNalInfo > 0){
 				return;
 			}else {
 				if(window.location.search.indexOf("isShoppingCart=false") > 0){
 					window.location.href = "fillInOrder.html?cost="+ obj.cost + "&&goodsId="+obj.goodsId+ "&&num=" +obj.num+ "&&pic=" +obj.pic+ "&&skuId="+obj.skuId+ "&&subTitle="+obj.subTitle + "&&title="+obj.title + "&&receiveId="+obj.receiveId;
+				}else if(window.location.href.search('fromeGift') > 0){
+					window.location.href = "birthdayGift.html?token=" +  token + "&status=0&receiveId="+obj.receiveId;
 				}else {
 					window.location.href = "fillInOrder.html?obj=" + escape(JSON.stringify(obj));
 				}
 			}
-
-
 		});
 
 
@@ -183,7 +183,12 @@ $(function(){
 
 		//编辑地址
 		$(".add_editor,.font_set").bind("click",function(){
-			window.location.href = isPersonNalInfo > 0 ?  window.location.href = "editAddress.html?fromePersonNalInfo&&id="+$(this).data("id") : window.location.href = "editAddress.html?id="+$(this).data("id");
-		});	
+			// window.location.href = isPersonNalInfo > 0 ? window.location.href = "editAddress.html?fromePersonNalInfo&&id="+$(this).data("id") :
+			// 	window.location.href = "editAddress.html?id="+$(this).data("id");
+			
+			window.location.href = isPersonNalInfo > 0 ? window.location.href="editAddress.html?fromePersonNalInfo&id="+$(this).data("id") :
+				(window.location.search.indexOf('fromeGift')>0 ? window.location.href="editAddress.html?fromeGift&id="+$(this).data("id") :
+					window.location.href = "editAddress.html?id="+$(this).data("id"));
+		});
 	})//ajax请求结束
 });

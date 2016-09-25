@@ -33,13 +33,19 @@ a{
     border: 1px #e0e0e0 solid;
 }
 
+#cardDetail .cardBox{
+    width: 373px;
+    height: 176px;
+}
+
 #cardDetail img{
     display: block;
-    width: 70%;
-    height: 9rem;
+    /*width: 70%;*/
+    height: 11rem;
     margin: 1.5rem auto 2.5rem auto;
     background: #b2b2b2;
 }
+
 
 #cardDetail h3{
     color: #5a5959;
@@ -108,21 +114,15 @@ a{
 }
 
 @media screen and (max-width: 375px){
-    #cardDetail img{
-        width: 77%;
-    }
+
 }
 
 @media screen and (max-width: 360px){
-    #cardDetail img{
-        width: 85%;
-    }
+
 }
 
 @media screen and (max-width: 320px){
-    #cardDetail img{
-        width: 93%;
-    }
+
 }
 
 

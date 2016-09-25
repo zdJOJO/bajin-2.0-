@@ -24,6 +24,7 @@ $(function(){
 
 	//获取页面的名称
 	var isPersonNalInfo = window.location.href.indexOf('fromePersonNalInfo') ;
+	var isfromeGift = window.location.href.indexOf('fromeGift') ;
 
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];	
@@ -73,7 +74,8 @@ $(function(){
 					// alert("编辑保存成功！");
 					alert_replace("test.winthen.com","编辑保存成功",2);
 
-					window.location.href = isPersonNalInfo > 0 ? "setAddress.html?fromePersonNalInfo" : "setAddress.html" ;
+					window.location.href = isPersonNalInfo > 0 ? "setAddress.html?fromePersonNalInfo" :
+						( isfromeGift > 0 ? "setAddress.html?fromeGift&obj="+escape(JSON.stringify({})) : "setAddress.html") ;
 				},
 				error:function(data){
 					console.log(data);

@@ -243,13 +243,16 @@ section.receiveAfter .gift>.subTitle{
 
 #popPub > .defaulAddress{
     background: #fff;
-    position: absolute;
     width: 100%;
     height: 150px;
-    bottom: -180px;
     z-index: 21;
+
+    position: absolute;
+    bottom: -180px;
 }
 
+
+/*** checkBox * */
 #choose{
     display: none;
 }
@@ -263,19 +266,19 @@ section.receiveAfter .gift>.subTitle{
     height: 20px;
 }
 
-#chooseBox:after{
+#choose:checked + label{
+    background-color: #C1AF74;
+    border: 1px #C1AF74 solid;
+    color: #fff;
+}
+
+#choose:checked + label:after{
     content: '\2714';
     color: #fff;
     font-size: 17px;
     position: absolute;
     top: -4px;
     left: 2px;
-}
-
-#choose:checked + label{
-    background-color: #C1AF74;
-    border: 1px #C1AF74 solid;
-    color: #fff;
 }
 
 

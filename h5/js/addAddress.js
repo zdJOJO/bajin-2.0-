@@ -63,8 +63,7 @@ $(function(){
 							if(window.location.href.indexOf('fromePersonNalInfo') > 0){
 								window.location.href = "setAddress.html?fromePersonNalInfo&&obj="+escape(JSON.stringify(obj));
 							}else if(window.location.href.indexOf('fromeGift') > 0){
-								// window.location.href = "birthdayGift.html?" + urlSearch;
-								window.history.back();
+								window.location.href = 'setAddress.html?fromeGift&obj='+escape(JSON.stringify({}));
 							}else {
 								window.location.href = "setAddress.html?obj="+escape(JSON.stringify(obj));
 							}

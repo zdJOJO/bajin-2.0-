@@ -18,6 +18,7 @@ function getCookie(c_name) {
 
 var token = '';
 var status = -1; //0-- 正常  , 1-- 过期
+var receiveId = ''; //根据id去请求 实物的收获地址
 var urlSearch = window.location.search;
 var localStorage = window.localStorage;   //用于存储生日日期和礼包领取码
 if(urlSearch.indexOf('token') > 0){
@@ -32,6 +33,9 @@ if(urlSearch.indexOf('status') > 0){
 }else {
     status = localStorage.status;
 }
+if(urlSearch.indexOf('receiveId') > 0){
+    receiveId = urlSearch.split('&')[2].split('=')[1];  //用于判断是否 已领取
+}
 
 
 
@@ -45,6 +49,7 @@ var browser = myBrowser();
 if(browser == "Chrome"){
     $('#birthDayCtrl_Safari').hide();
     $('#birthDayChrome').show().click(function () {
+        $('#birthDayChrome').html('1980-01-01');
         $('#birthDayCtrl').click().bind('change',function () {
             $('#birthDayChrome').html($('#birthDayCtrl').val());
             localStorage.setItem("birthDay",$('#birthDayChrome').html());
@@ -53,6 +58,7 @@ if(browser == "Chrome"){
 }else if(browser == "Safari" || !browser){
     $('#birthDayCtrl').hide();
     $('#birthDaySafari').show().click(function () {
+        $('#birthDaySafari').html('1980-01-01');
         $('#birthDayCtrl_Safari').focus().bind('change',function () {
             $('#birthDaySafari').html($('#birthDayCtrl_Safari').val());
             localStorage.setItem("birthDay",$('#birthDaySafari').html());
@@ -86,7 +92,7 @@ var giftArray = [];
 var addressStr = '';
 
 var pageNum = 1;
-var defaulAddressJo = $('#popPub>.defaulAddress');
+var $defaultAddress = $("#popPub").find('.defaulAddress');
 
 
 //判断是否绑定了银行卡
@@ -110,45 +116,65 @@ bankCard();
 
 //获取地址
 function getAddress() {
-    $.get( port + '/card/receiver?token=' + token + '&currentPage=1',function (result) {
-        if(result.list.length == 0){
-            defaulAddressJo.html('<a style="margin-top: 15%;text-align: center;display: inherit;">你还没有创建收货地址，赶快创建一个吧</a>');
-            defaulAddressJo.click(function () {
-                window.location.href = 'addAddress.html?fromeGift&&obj=' + escape(JSON.stringify({})) + '';
+    var defaultAddressObj = {};
+    if(receiveId){
+        $.get( port + '/card/receiver/' + receiveId + '?token=' + token,function (result) {
+            defaultAddressObj = result;
+            setAdressFn(defaultAddressObj);
+            $('#popPub').show(1,function () {
+                $(this).children('.defaulAddress').animate({'bottom': '0'},200,function () {
+                    $('#chooseBox').click();
+                });
             });
-        }else {
-            var defaulAddresObj = {};
-            for(var i =0;i<result.list.length;i++){
-                if(result.list[i].isDefault == 0){
-                    defaulAddresObj = result.list[0];
-                }else {
-                    defaulAddresObj = result.list[i];
-                }
-            };
-            defaulAddressJo.html(' <img id="right" src="imgs/gift/right.png">' +
-                '<input id="choose" type="checkbox"><label id="chooseBox" for="choose"></label>' +
-                '<span class="info">' + defaulAddresObj.receiverName + '&nbsp;&nbsp;' + defaulAddresObj.receiverPhone +'</span> ' +
-                '<span class="address">' + defaulAddresObj.province + defaulAddresObj.city + defaulAddresObj.district + '</span> ' +
-                '<button id="sureReceive">确认领取</button>');
-            addressStr = '<span class="address">' + defaulAddresObj.province + defaulAddresObj.city + defaulAddresObj.district + '</span><br>'+
-                '<span class="info">' + defaulAddresObj.receiverName + '&nbsp;&nbsp;' + defaulAddresObj.receiverPhone +'</span>';
+        })
+    }else {
+        $.get( port + '/card/receiver?token=' + token + '&currentPage=1',function (result) {
+            if(result.list.length == 0){
+                $defaultAddress.html('<a style="margin-top: 11%;text-align: center;display: inherit;">你还没有创建收货地址，赶快创建一个吧</a>' +
+                    '<button id="sureReceive">新建地址</button>');
+                //（存在实物情况下） 确认领取
+                $('#sureReceive').click(function () {
+                    window.location.href = 'addAddress.html?fromeGift&obj=' + escape(JSON.stringify({})) + '';
+                });
+            }else {
+                for(var i =0;i<result.list.length;i++){
+                    if(result.list[i].isDefault == 0){
+                        defaultAddressObj = result.list[0];
+                    }else {
+                        defaultAddressObj = result.list[i];
+                    }
+                };
+                setAdressFn(defaultAddressObj);
+            }
+        });
+    }
 
-            //默认选取地址
+    function setAdressFn(defaulAddresObj) {
+        $defaultAddress.html(' <img id="right" src="imgs/gift/right.png">' +
+            '<input id="choose" type="checkbox"><label id="chooseBox" for="choose"></label>' +
+            '<span class="info">' + defaulAddresObj.receiverName + '&nbsp;&nbsp;' + defaulAddresObj.receiverPhone +'</span> ' +
+            '<span class="address">' + defaulAddresObj.province + defaulAddresObj.city + defaulAddresObj.district + '</span> ' +
+            '<button id="sureReceive">确认领取</button>');
+        addressStr = '<span class="address">' + defaulAddresObj.province + defaulAddresObj.city + defaulAddresObj.district + '</span><br>'+
+            '<span class="info">' + defaulAddresObj.receiverName + '&nbsp;&nbsp;' + defaulAddresObj.receiverPhone +'</span>';
+
+        //选取地址
+        if(!receiveId){
             $('#chooseBox').click();
-            $('#right').click(function () {
-                window.location.href = 'setAddress.html?fromeGift&&obj=' + escape(JSON.stringify({}));
-            });
-            //（存在事物情况下） 确认领取
-            $('#sureReceive').click(function () {
-                if(!$('#choose').is(':checked')){
-                    $('#popPub').attr('z-index','-1');
-                    $.alert("请选择收货地址", "提示");
-                }else {
-                    giftAjax(defaulAddresObj.receiveId);
-                }
-            });
         }
-    });
+        $('#right').click(function () {
+            window.location.href = 'setAddress.html?fromeGift&obj=' + escape(JSON.stringify({}));
+        });
+        //（存在实物情况下） 确认领取
+        $('#sureReceive').click(function () {
+            if(!$('#choose').is(':checked')){
+                $('#popPub').attr('z-index','-1');
+                $.alert("请选择收货地址", "提示");
+            }else {
+                giftAjax(defaulAddresObj.receiveId);
+            }
+        });
+    }
 }
 getAddress();
 
@@ -196,11 +222,11 @@ function getGIftsList(currentPage) {
 getGIftsList(1);
 
 
+
 // （不存在事物情况下）立即领取
 $("#receiveNow").click(function () {
     var birthday = (browser == "Chrome") ? $('#birthDayChrome').html() : $('#birthDaySafari').html();
     var gifCode = $('#birthDayCode').val();
-
     if(!token){
         $.modal({
             title: "提示",
@@ -236,7 +262,7 @@ $("#receiveNow").click(function () {
         }
         if(hasRealGift){    //有实物
             $('#popPub').show(1,function () {
-                $('#popPub>.defaulAddress').animate({'bottom': '0'},200);
+                $(this).children('.defaulAddress').animate({'bottom': '0'},200);
             });
         }else {
             giftAjax();
@@ -245,12 +271,10 @@ $("#receiveNow").click(function () {
 });
 
 
-
 //领取 生日礼包的 ajax请求
 function giftAjax(_receiverId) {
     var birthday = (browser == "Chrome") ? $('#birthDayChrome').html() : $('#birthDaySafari').html();
     var birthdayTimeStamp = new Date(birthday.replace(/-/g,'/')).getTime()/1000; //单位s
-    //生日礼包领取码是否正确或者过期，需要ajax请求，再做判断
     var data = {
         code: $('#birthDayCode').val()
     };
@@ -264,24 +288,35 @@ function giftAjax(_receiverId) {
         dataType: "json",
         contentType : "application/json;charset=UTF-8",
         success: function (result) {
-            if(result.code == '601'){
+             if(result.code == '601'){
+                 var msgObj = [];
+                 if(result.message == '该用户已经领取过该礼包'){
+                     msgObj = [
+                         { text: "查看", className: "primary", onClick: function(){
+                             //跳到领取成功页面
+                             $('#popPub').hide();
+                             giftSuccess();
+                             if(hasRealGift){
+                                 $('.receiveAfter .toAccount').show();
+                                 $('.receiveAfter .address').html(addressStr);
+                             }
+                             $('#content').children('.receiveBefore').hide().siblings('.receiveAfter').show();
+                         } },
+                         {text: "取消", className: "default", onClick: function(){
+                             window.localStorage.clear();
+                         } }
+                     ]
+                 }else {
+                     msgObj = [
+                         {text: '取消', className: "default", onClick: function(){
+                             window.localStorage.clear();
+                         } }
+                     ]
+                 }
                 $.modal({
                     title: "提示",
                     text: result.message,
-                    buttons: [
-                        {text: "知道了", className: "default", onClick: function(){
-                            localStorage.clear();
-                        } },
-                        { text: "点击查看礼包", className: "primary", onClick: function(){
-                            //跳到领取成功页面
-                            giftSuccess();
-                            if(hasRealGift){
-                                $('.receiveAfter .toAccount').show();
-                                $('.receiveAfter .address').html(addressStr);
-                            }
-                            $('#content').children('.receiveBefore').hide().siblings('.receiveAfter').show();
-                        } }
-                    ]
+                    buttons: msgObj
                 });
             }else if(result.code == '619'){
                 $.toast("礼包已领取", "text");
@@ -294,13 +329,16 @@ function giftAjax(_receiverId) {
                     $('.receiveAfter').show();
                     $('#orderLoading').hide();
                 },300);
-                localStorage.clear();
+                 window.localStorage.clear();
             }
         },
         error: function (e) {
         }
     });
 }
+
+
+
 
 
 //领取成功页面
@@ -339,13 +377,13 @@ function giftSuccess() {
 
 
 //地址弹框点击 事件范围监听
-$('#popPub').click(function(e){
+$('#popPub').on('click',function(e){
     e = window.event || e; // 兼容IE7
     var obj = $(e.srcElement || e.target);
     if ($(obj).is(".defaulAddress,.defaulAddress>span,.defaulAddress>img,#choose,#chooseBox,#sureReceive")) {
         //todo  ('内部区域');
     } else {
-        $('#popPub>.defaulAddress').animate({'bottom': '-150px'},200,function () {
+        $('#popPub').find('.defaulAddress').animate({'bottom': '-150px'},200,function () {
             $('#popPub').hide();
         });
     }

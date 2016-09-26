@@ -306,6 +306,7 @@ header .saveAndShare img:first-child{
 
 body{
 	font-family: "黑体";
+	font-size: 16px;
 }
 
 footer{
@@ -420,6 +421,7 @@ footer{
 	display: block;
 	height: 110px;
 	overflow-y: scroll;
+	font-size: 0.5em;
 }
 
 #goodDetail>.specifications>.speList li{
@@ -582,6 +584,11 @@ footer{
 
 	#goodDetail>.num img.plus{
 		left: 42.5%;
+	}
+
+	#goodDetail>button{
+		height: 30px;
+		font-size: 0.5em;
 	}
 }
 

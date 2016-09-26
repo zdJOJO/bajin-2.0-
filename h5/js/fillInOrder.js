@@ -123,6 +123,11 @@ $(document).ready(function(){
 			contentType : "application/json;charset=UTF-8",
 			success:function(data){
 				console.log(data);
+				if(data.code == '666'){
+					alert('用户登陆异常，请重新登录');
+					window.location.href = "login.html?his="+escape(his);
+					return;
+				}
 				if(data.list.length==0){
 					var str=$('<h3 class="noneAddress">请选择收货地址<img src="imgs/go.png"/></h3>');
 					$(".message").html(str);
@@ -212,11 +217,20 @@ $(document).ready(function(){
 				num: obj.num // 购买数量
 			}
 
-
-			if(!data.receiveId || !data.skuId || !data.num){
-				alert('订单生成失败！ 请重新下订单');
+			if(!data.receiveId){
+				alert('订单生成失败！请填写收货地址后重新下订单。');
 				return;
 			}
+			if(!data.skuId){
+				alert('订单生成失败！请选择商品型号后重新下订单。');
+				return;
+			}
+			if(!data.num){
+				alert('订单生成失败！请选择商品数量后重新下订单。');
+				return;
+			}
+
+
 
 			$.ajax({
 				type:"post",

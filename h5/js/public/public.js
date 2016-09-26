@@ -25,9 +25,17 @@ function share_Android_Ios(title,subTitle,imgPath,url) {
     try {
         show(title,subTitle,imgPath,url);   //IOS
     }catch (e){
+        //todo
+    }
+    try {
         javascript:  window.handler.show(title,subTitle,imgPath,url);    //Android
+    }catch (e){
+        //todo
     }
 };
+
+
+
 
 // 获取 min 到 max 的随机整数   如： var random = getRandom(0, 100);
 function getRandom(min, max){

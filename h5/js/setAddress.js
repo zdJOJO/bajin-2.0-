@@ -1,14 +1,23 @@
 $(function(){
 
-	//安卓原生取消分享
+	//原生取消分享
 	function showAndroidToast() {
-		javascript:  window.handler.dissmissForward();
+		try{
+			dissmissForward();  //ios
+		}catch (e){
+			//todo
+		};
+		try{
+			javascript:  window.handler.dissmissForward();  //android
+		}catch (e){
+			//todo
+		};
 	}
 	showAndroidToast();
 
 
 
-
+	
 	var token = "";
 	//获取存在于cookie中的token值
 	function getCookie(c_name)
@@ -154,7 +163,8 @@ $(function(){
 						window.location.href = "set.html?";
 					}
 					if(window.location.href.indexOf('fromeGift') > 0){
-						window.location.href = "birthdayGift.html";
+						//window.location.href = "birthdayGift.html";
+						window.location.href = "birthdayGift.html?token=" +  token + "&status=0&receiveId="+receiverid;
 					}
 	 			},
 	 			error:function(data){
@@ -162,7 +172,8 @@ $(function(){
 						window.location.href = "set.html?";
 					}
 					if(window.location.href.indexOf('fromeGift') > 0){
-						window.location.href = "birthdayGift.html";
+						//window.location.href = "birthdayGift.html";
+						window.location.href = "birthdayGift.html?token=" +  token + "&status=0&receiveId="+receiverid;
 					}
 	 			}
 	 		});

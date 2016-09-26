@@ -74,7 +74,7 @@ $('#birthDayCode').on('change',function () {
 });
 
 if(localStorage.birthDay){
-    $('#birthDaySafari').html(localStorage.birthDay);
+    $('#birthDayChrome,#birthDaySafari').html(localStorage.birthDay);
 }
 if(localStorage.birthDayCode){
     $('#birthDayCode').val(localStorage.birthDayCode);
@@ -155,8 +155,6 @@ function getAddress() {
             '<span class="info">' + defaulAddresObj.receiverName + '&nbsp;&nbsp;' + defaulAddresObj.receiverPhone +'</span> ' +
             '<span class="address">' + defaulAddresObj.province + defaulAddresObj.city + defaulAddresObj.district + '</span> ' +
             '<button id="sureReceive">确认领取</button>');
-        addressStr = '<span class="address">' + defaulAddresObj.province + defaulAddresObj.city + defaulAddresObj.district + '</span><br>'+
-            '<span class="info">' + defaulAddresObj.receiverName + '&nbsp;&nbsp;' + defaulAddresObj.receiverPhone +'</span>';
 
         //选取地址
         if(!receiveId){
@@ -295,21 +293,21 @@ function giftAjax(_receiverId) {
                          { text: "查看", className: "primary", onClick: function(){
                              //跳到领取成功页面
                              $('#popPub').hide();
-                             giftSuccess();
-                             if(hasRealGift){
-                                 $('.receiveAfter .toAccount').show();
-                                 $('.receiveAfter .address').html(addressStr);
-                             }
+                             giftSuccess(result.data[0].receiverId,true);
+                             // if(hasRealGift){
+                             //     $('.receiveAfter .toAccount').show();
+                             //     $('.receiveAfter .address').html(addressStr);
+                             // }
                              $('#content').children('.receiveBefore').hide().siblings('.receiveAfter').show();
                          } },
                          {text: "取消", className: "default", onClick: function(){
-                             window.localStorage.clear();
+                             // window.localStorage.clear();
                          } }
                      ]
                  }else {
                      msgObj = [
                          {text: '取消', className: "default", onClick: function(){
-                             window.localStorage.clear();
+                             // window.localStorage.clear();
                          } }
                      ]
                  }
@@ -325,7 +323,7 @@ function giftAjax(_receiverId) {
                 $('#popPub').hide();
                 $('#orderLoading').show();
                 setTimeout(function () {
-                    giftSuccess();
+                    giftSuccess(result.data[0].receiverId);
                     $('.receiveAfter').show();
                     $('#orderLoading').hide();
                 },300);
@@ -342,7 +340,7 @@ function giftAjax(_receiverId) {
 
 
 //领取成功页面
-function giftSuccess() {
+function giftSuccess(id,_hasRealGift) {
     var str = '';
     for(var i=0;i<giftArray.length;i++){
         str = $('<li class="gift"><img class="logo" src="'+giftArray[i].pic+'"><img class="right" src="imgs/gift/right.png">' +
@@ -357,15 +355,13 @@ function giftSuccess() {
         $('.receiveAfter>.gifList>h3').after(str);
     }
 
-    $('.receiveAfter .gift').click(function () {
-        if($(this).attr('data-type') == '0'){
-            window.location.href = "myOrders.html?havePaidApo";   //havePaidApo
-        }
-    });
-
-    if(hasRealGift){
-        $('.receiveAfter .toAccount').show();
-        $('.receiveAfter .address').html(addressStr);
+    if(hasRealGift || _hasRealGift){
+        $.get( port + '/card/receiver/' + id + '?token=' + token,function (result) {
+            addressStr = '<span class="address">' + result.province + result.city + result.district + '</span><br>'+
+                '<span class="info">' + result.receiverName + '&nbsp;&nbsp;' + result.receiverPhone +'</span>';
+            $('.receiveAfter .toAccount').show();
+            $('.receiveAfter .address').html(addressStr);
+        });
     }
     if(hasElec){
         $('.receiveAfter .toAddress').show();
@@ -420,3 +416,17 @@ function myBrowser(){
         return "IE";
     }; //判断是否IE浏览器
 }
+
+//微信分享
+get_url(portStr+'/birthdayGift.html');
+//调用分享借口
+jsSdkApi('share',{
+    title: '白金尊享送您生日礼包',
+    desc: '白金用户生日当月可以领取为您精心准备的礼包',
+    link: portStr+'/birthdayGift.html',
+    imgUrl: portStr+'/imgs/gift/gift-head.jpg'
+});
+
+//调用安卓、 IOS 的原生分享功能
+share_Android_Ios('白金尊享送您生日礼包' ,'白金用户生日当月可以领取为您精心准备的礼包' ,portStr+'/imgs/gift/gift-head.jpg',portStr+'/birthdayGift.html');
+

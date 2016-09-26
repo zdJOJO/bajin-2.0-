@@ -1,6 +1,14 @@
-
-
 $(function(){
+
+	//安卓原生取消分享
+	function showAndroidToast() {
+		javascript:  window.handler.dissmissForward();
+	}
+	showAndroidToast();
+
+
+
+
 	var token = "";
 	//获取存在于cookie中的token值
 	function getCookie(c_name)

@@ -105,7 +105,7 @@ $(function(){
                     placeholder : "",
                     threshold: 0,
                     effect : "fadeIn",
-                    effectspeed: 1000,
+                    effectspeed: 500,
                     event: 'scroll',
                 });
 
@@ -173,7 +173,7 @@ $(function(){
                     placeholder : "",
                     threshold: 0,
                     effect : "fadeIn",
-                    effectspeed: 1000,
+                    effectspeed: 500,
                     event: 'scroll',
                 });
 

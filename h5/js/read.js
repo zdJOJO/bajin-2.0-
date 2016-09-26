@@ -142,7 +142,7 @@ $(function(){
                         placeholder : "",
                         threshold: 0,
                         effect : "fadeIn",
-                        effectspeed: 1000,
+                        effectspeed: 500,
                         event: 'scroll',
                     });
                     // 每次数据加载完，必须重置

@@ -6,15 +6,12 @@ html,body{
     padding: 0;
     overflow-x: hidden;
     background: #fff;
+    -webkit-overflow-scrolling: touch;
 }
 
 ul li{
     list-style: none;
 }
-
-
-
-
 
 header{
     position: relative;

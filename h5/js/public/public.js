@@ -19,6 +19,16 @@ xmlhttp.onreadystatechange = function() {
 };
 
 
+// 调用原生的分享接口
+// showAndroidToast(giftArray[0].title,giftArray[0].subTitle,giftArray[0].pic,window.location.href);
+function share_Android_Ios(title,subTitle,imgPath,url) {
+    try {
+        show(title,subTitle,imgPath,url);   //IOS
+    }catch (e){
+        javascript:  window.handler.show(title,subTitle,imgPath,url);    //Android
+    }
+};
+
 // 获取 min 到 max 的随机整数   如： var random = getRandom(0, 100);
 function getRandom(min, max){
     var r = Math.random() * (max - min);

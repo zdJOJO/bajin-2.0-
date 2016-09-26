@@ -76,7 +76,6 @@ $(function(){
     get_url(window.location.href);
 
 
-
     function getActDetail(){
         $.get(port+"/card/activity/"+activityid,function(data){
 
@@ -204,76 +203,86 @@ $(function(){
             }            
         
             //这里需要加判断用户是否登录
-            $(".btn_q .love-btn").click(function(target){              
-			if(token == undefined){
-                   //alert("用户未登录，请登录后再操作！！！！");
-                   window.location.href="login.html?his="+escape(his);
-            }else{
-                var info ={
-                    //"userId":data.userId,
-                    "itemId": data.activityId,
-                    "itemType":"1",   //1表示收藏活动，2表示收藏白金人生
-                }				
-				$.get(url,function(data){
-                if(data.message == "该项目未被收藏"){					 
-					$(".btn_q .love-btn img").attr("src","imgs/iconfont-love_save.png")
-                    $.ajax({
-                        type:"POST",
-                        url:port+"/card/collect?token="+token+"",
-                        dataType:"json",
-                        contentType : "application/json;charset=UTF-8",  
-                        data:JSON.stringify(info),
-                        success:function(data){
-                            if(typeof(data) == "string"){
-                                window.location.href = "login.html?his="+escape(his);
-                            }else{
-							//alert("收藏成功")
-                        } },                            
-                        error:function(data){
-                            //alert("请求出错，重新登录")
-                            window.location.href = "login.html?his="+escape(his);
-                        }
-                    });
-                }else{
-					$(".btn_q .love-btn img").attr("src","imgs/iconfont-love.png")                        
-                        //http://121.196.232.233:9292/card/collect/{collectId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
-                        //这里删除的话，需要先请求查询是否存在,然后拿到data.data.collectId进行删除操作
-                        $.ajax({
-                            type:"get",
-                            url:url,
-                            success:function(data){
-                            //alert("删除查询成功");
+            $(".btn_q .love-btn").click(function(target){
+                if(token){
+                    var info ={
+                        //"userId":data.userId,
+                        "itemId": data.activityId,
+                        "itemType":"1",   //1表示收藏活动，2表示收藏白金人生
+                    }
+                    $.get(url,function(data){
+                        if(data.message == "该项目未被收藏"){
+                            $(".btn_q .love-btn img").attr("src","imgs/iconfont-love_save.png")
                             $.ajax({
-                                type:"DELETE",
-                                url:port+"/card/collect/"+data.data.collectId+"?token="+token+"",
+                                type:"POST",
+                                url:port+"/card/collect?token="+token+"",
                                 dataType:"json",
-                                contentType : "application/json;charset=UTF-8",  
-                                success:function(data){
-                                    //alert("删除操作成功");
-                                if(typeof(data) == "string"){
-                                    window.location.href = "login.html?his="+escape(his);
-                                }else{
-                                    //todo
-                                } },
-                                error:function(data){
-                                    //alert("请求出错，重新登录")
-                                    window.location.href = "login.html?his="+escape(his);
-                                }
-                                }); 
+                                contentType : "application/json;charset=UTF-8",
+                                data:JSON.stringify(info),
+                                success: function(data){
+                                    if(typeof(data) == "string"){
+                                        window.location.href = "login.html?his="+escape(his);
+                                    }else{
+                                        $.toast("收藏成功");
+                                    }
                                 },
                                 error:function(data){
                                     //alert("请求出错，重新登录")
                                     window.location.href = "login.html?his="+escape(his);
+                                }
+                            });
+                        }else{
+                            $(".btn_q .love-btn img").attr("src","imgs/iconfont-love.png")
+                            //http://121.196.232.233:9292/card/collect/{collectId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
+                            //这里删除的话，需要先请求查询是否存在,然后拿到data.data.collectId进行删除操作
+                            $.ajax({
+                                type:"get",
+                                url:url,
+                                success:function(data){
+                                    //alert("删除查询成功");
+                                    $.ajax({
+                                        type:"DELETE",
+                                        url:port+"/card/collect/"+data.data.collectId+"?token="+token+"",
+                                        dataType:"json",
+                                        contentType : "application/json;charset=UTF-8",
+                                        success:function(data){
+                                            //alert("删除操作成功");
+                                            if(typeof(data) == "string"){
+                                                window.location.href = "login.html?his="+escape(his);
+                                            }else{
+                                                //todo
+                                                $.toast("取消收藏成功");
+                                            } },
+                                        error:function(data){
+                                            //alert("请求出错，重新登录")
+                                            window.location.href = "login.html?his="+escape(his);
+                                        }
+                                    });
+                                },
+                                error:function(data){
+                                    //alert("请求出错，重新登录")
+                                    window.location.href = "login.html?his="+escape(his);
+                                }
+                            });
                         }
                     });
-                }
-            });			
-		}//登录判断结束为止
-     })
+                }else {
+                    $.modal({
+                        title: "提示",
+                        text: "您还未登录白金尊享",
+                        buttons: [
+                            { text: "去登录", onClick: function(){
+                                window.location.href = "login.html?his=" + escape(his);
+                            } },
+                            { text: "取消", className: "default", onClick: function(){
+                                //todo
+                            } },
+                        ]
+                    });
+                };
+            });
         });
     }
-
-
     getActDetail();
 
 

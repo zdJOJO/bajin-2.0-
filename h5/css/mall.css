@@ -9,6 +9,7 @@ body{
 	/*background: #eeeeee;*/
 	margin: 0;
 	padding: 0;
+	-webkit-overflow-scrolling: touch;
 }
 header,.wrapper,footer{
 	font-size: 16px;

@@ -88,7 +88,7 @@ var getCommentList = function (page) {
             $(".commentList img").lazyload({
                 placeholder : portStr + '/imgs/headPic_default.png', //用图片提前占位
                 effect: "fadeIn", // 载入使用何种效果
-                effectspeed: 1000,
+                effectspeed: 500,
                 threshold: 800,
                 event: 'scroll'
             });

@@ -305,7 +305,7 @@ var sureGoodInfo = function (data_sku) {
 var oneSpe = function (sku_info) {
 
 	$('#goodDetail>.name>.price').html('￥ ' + sku_info.skuPrice.toFixed(2));
-	$('#goodDetail>.name>.count').html('库存' + sku_info.stockNumber + ' 件');
+	$('#goodDetail>.name>.count').html('限量' + sku_info.stockNumber + ' 件');
 	$('#goodDetail>.name>.spe>span').html(sku_info.skuGague);
 
 }
@@ -315,7 +315,7 @@ var oneSpe = function (sku_info) {
 //加减
 $('#plus').click(function () {
 	if( $('#goodNum').val() == stockNum){
-		$.alert("数量不能大于库存");
+		$.alert("数量不能大于限量");
 		return;
 	}
 	if(buyNum < stockNum){
@@ -325,7 +325,7 @@ $('#plus').click(function () {
 
 		url_obj.num = buyNum ;
 	}else {
-		$.alert("数量不能大于库存");
+		$.alert("数量不能大于限量");
 		return;
 	}
 });

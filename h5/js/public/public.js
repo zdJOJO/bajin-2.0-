@@ -28,7 +28,7 @@ function share_Android_Ios(title,subTitle,imgPath,url) {
         //todo
     }
     try {
-        javascript:  window.handler.show(title,subTitle,imgPath,url);    //Android
+        javascript: window.handler.show(title,subTitle,imgPath,url);    //Android
     }catch (e){
         //todo
     }

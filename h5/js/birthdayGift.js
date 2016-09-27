@@ -200,7 +200,6 @@ function getGIftsList(currentPage) {
                     if(result.data.list[i].type == 1){
                         hasElec = true;
                     }
-                    giftArray.push(result.data.list[i]);
                 }
             }
             $('#content').find('.giftList').append(giftStr);
@@ -293,7 +292,20 @@ function giftAjax(_receiverId) {
                          { text: "查看", className: "primary", onClick: function(){
                              //跳到领取成功页面
                              $('#popPub').hide();
-                             giftSuccess(result.data[0].receiverId,true);
+                             var len = result.data.length;
+                             var deleteLen = 0;
+                             for(var i=0;i<len;i++){
+                                $.get( port + '/card/birthgift/'+result.data[i].giftId+'?token='+token ,function (gift) {
+                                    if(gift.data){
+                                        giftArray.push(gift.data);
+                                    }else {
+                                        deleteLen++;
+                                    }
+                                    if(i == giftArray.length + deleteLen){
+                                        giftSuccess(result.data[0].receiverId,true,giftArray);
+                                    }
+                                })
+                             }
                              // if(hasRealGift){
                              //     $('.receiveAfter .toAccount').show();
                              //     $('.receiveAfter .address').html(addressStr);
@@ -340,13 +352,19 @@ function giftAjax(_receiverId) {
 
 
 //领取成功页面
-function giftSuccess(id,_hasRealGift) {
+function giftSuccess(id,_hasRealGift,_giftArray) {
     var str = '';
-    for(var i=0;i<giftArray.length;i++){
-        str = $('<li class="gift"><img class="logo" src="'+giftArray[i].pic+'"><img class="right" src="imgs/gift/right.png">' +
-            '<img class="success" src="imgs/gift/gift.png">' + '<span class="title">'+ giftArray[i].title +'</span>' +
-            '<span class="subTitle">'+ giftArray[i].subTitle +'</span></li>');
-        if(giftArray[i].type == 0){
+    var imgStr = '';
+    for(var i=0;i<_giftArray.length;i++){
+        if(_giftArray[i].type == 1){
+            imgStr = portStr+'/imgs/gift/logo.png';
+        }else {
+            imgStr = _giftArray[i].pic
+        }
+        str = $('<li class="gift"><img class="logo" src="'+imgStr+'">' +
+            '<img class="success" src="imgs/gift/gift.png">' + '<span class="title">'+ _giftArray[i].title +'</span>' +
+            '<span class="subTitle">'+ _giftArray[i].subTitle +'</span></li>');
+        if(_giftArray[i].type == 0){
             str.attr('data-type','0');  //实物
         }
         if(str.children('img').eq(0).attr('src') == 'undefined'){

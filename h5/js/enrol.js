@@ -313,7 +313,7 @@ $(function(){
             }
 
             if(JSON.parse(result).code == '666'){
-                $('#doEnrol >button').html('报名');
+                $('#doEnrol').children('button').html('报名');
             }else {
                 if((JSON.parse(result)).data != 5){
                     $("#doEnrol>button").attr({

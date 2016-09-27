@@ -35,7 +35,6 @@ $(function(){
 										}
 									},1000);
 
-
 									regBtn.click(function(){
 										var phoneNum = $("#phoneNum").val();
 
@@ -103,9 +102,8 @@ $(function(){
 																		}
 																		//设置cookie
 																		setCookie("token",data.message,365);
-																		// window.name = data.message;
-																		// window.location.href="index.html";
-																		window.location.href=unescape(his);
+																		// window.location.href=unescape(his);
+																		window.location.href = 'login.html?his=index.html';
 																	}
 																});
 															}else{

@@ -49,8 +49,8 @@ $(function (){
     jsSdkApi('share',{
         title: '贺中秋,迎国庆',
         desc: ' 新用户通过下载/注册“白金尊享”APP并绑定工商银行信用卡，可获得一次抽奖机会',
-        link: 'http://www.winthen.com/test/fareDraw.html?id=' + sectionId,
-        imgUrl: 'http://www.winthen.com/test/imgs/lottery_midAutumn/midFall.png'
+        link: portStr + '/fareDraw.html?id=' + sectionId,
+        imgUrl: portStr + '/imgs/lottery_midAutumn/midFall.png'
     });
 
 

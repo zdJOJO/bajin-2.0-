@@ -77,7 +77,7 @@ $(document).ready(function(){
 						placeholder : "",
 						threshold: 0,
 						effect : "fadeIn",
-						effectspeed: 500,
+						effectspeed: 250,
 						event: 'scroll',
 					});
 					// 每次数据加载完，必须重置
@@ -127,7 +127,7 @@ $(document).ready(function(){
 						placeholder : "",
 						threshold: 0,
 						effect : "fadeIn",
-						effectspeed: 500,
+						effectspeed: 250,
 						event: 'scroll',
 					});
 					// 每次数据加载完，必须重置

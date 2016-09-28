@@ -11,7 +11,6 @@ $(function () {
     if(searchStr.indexOf('isappinstalled') > 0){
         cardId = searchStr.split('&')[0].split('=')[1];
     }
-    console.log(cardId)
 
 
     //分享时候 传当前页面的url 和 对象obj

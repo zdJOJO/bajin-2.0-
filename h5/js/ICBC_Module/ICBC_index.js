@@ -10,6 +10,7 @@ $(function(){
     var kabin = ''; //前六位
     var cardNum = ''; //尾号
     var loadingPaht = portStr + '/imgs/gift/loading.gif';
+    var uniqueCardNum = '';  //当只有一张银行卡时候，直接跳结果，不出现银行卡列表
 
     if(window.location.href.indexOf('token') > 0 ){
         token = searchStr.split('=')[1];
@@ -91,7 +92,12 @@ $(function(){
                     }else if($(this).attr("data-pickid")=="888"){
                         window.location.href = "icbcServe.html";   //跳转工行服务按钮
                     }else {
-                        window.location.href = "bank.html?pickid=" + $(this).data("pickid") + '&token=' + token;
+                        //只有1张信用卡的时候
+                        if(uniqueCardNum){
+                            submiyInfoToIcbc($(this).data("pickid"),uniqueCardNum)
+                        }else {
+                            window.location.href = "bank.html?pickid=" + $(this).data("pickid") + '&token=' + token;
+                        }
                     }
                 }else{
                     window.location.href = "login.html?his="+his;
@@ -122,6 +128,10 @@ $(function(){
                     window.location.href = "bindCardIFrame.html?pickid=''&token=" + token + '&android=true';
                 });
             }else {
+                if(result.rowCount == 1){
+                    uniqueCardNum = result.list[0].cardNumber;
+                }
+
                 $('#cardDetail').show();
                 $('#content').find('.tip').hide();
                 if(cardNum){
@@ -131,7 +141,6 @@ $(function(){
                     $('#content').find('.cardNum').html('尾号' + result.list[0].cardNumber);
                     myCardDeatil(result.list[0].kabin);
                 }
-
 
                 //更换银行卡
                 changeCardJO.click(function () {
@@ -379,6 +388,23 @@ $(function(){
             }
         });
     };
+
+    //只存在一张卡的时候， 点击银行服务按钮提交表单
+    function submiyInfoToIcbc(pickid,cardItem) {
+        $.ajax({
+            type:"GET",
+            dataType:"text",
+            url:port+"/card/bank/encryption/"+pickid+"/"+cardItem+"?token="+token,
+            success:function(data){
+                if(data.length<50){
+                    window.location.href = "login.html?his="+his;
+                }else{
+                    $("#merSignMsg").val(data);
+                    $("#info").submit();
+                }
+            },
+        });
+    }
 
 
 

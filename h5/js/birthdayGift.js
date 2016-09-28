@@ -318,7 +318,7 @@ function giftAjax(_receiverId) {
                      ]
                  }else {
                      msgObj = [
-                         {text: '取消', className: "default", onClick: function(){
+                         {text: '知道了', className: "default", onClick: function(){
                              // window.localStorage.clear();
                          } }
                      ]
@@ -335,7 +335,22 @@ function giftAjax(_receiverId) {
                 $('#popPub').hide();
                 $('#orderLoading').show();
                 setTimeout(function () {
-                    giftSuccess(result.data[0].receiverId);
+                    var len = result.data.length;
+                    var deleteLen = 0;
+                    for(var i=0;i<len;i++){
+                        $.get( port + '/card/birthgift/'+result.data[i].giftId+'?token='+token ,function (gift) {
+                            if(gift.data){
+                                giftArray.push(gift.data);
+                            }else {
+                                deleteLen++;
+                            }
+                            if(i == giftArray.length + deleteLen){
+                                giftSuccess(result.data[0].receiverId,false,giftArray);
+                            }
+                        })
+                    }
+
+
                     $('.receiveAfter').show();
                     $('#orderLoading').hide();
                 },300);
@@ -359,6 +374,7 @@ function giftSuccess(id,_hasRealGift,_giftArray) {
         if(_giftArray[i].type == 1){
             imgStr = portStr+'/imgs/gift/logo.png';
         }else {
+            _hasRealGift = true; //判断有无实物
             imgStr = _giftArray[i].pic
         }
         str = $('<li class="gift"><img class="logo" src="'+imgStr+'">' +
@@ -377,12 +393,12 @@ function giftSuccess(id,_hasRealGift,_giftArray) {
         $.get( port + '/card/receiver/' + id + '?token=' + token,function (result) {
             addressStr = '<span class="address">' + result.province + result.city + result.district + '</span><br>'+
                 '<span class="info">' + result.receiverName + '&nbsp;&nbsp;' + result.receiverPhone +'</span>';
-            $('.receiveAfter .toAccount').show();
+            $('.receiveAfter .toAddress').show();
             $('.receiveAfter .address').html(addressStr);
         });
     }
     if(hasElec){
-        $('.receiveAfter .toAddress').show();
+        $('.receiveAfter .toAccount').show();
         $.get( port + '/card/user?token=' + token ,function (result) {
             $('.receiveAfter .account').html(result.phone);
         });

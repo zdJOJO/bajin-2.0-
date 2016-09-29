@@ -11,6 +11,7 @@ $(function(){
     var cardNum = ''; //尾号
     var loadingPaht = portStr + '/imgs/gift/loading.gif';
     var uniqueCardNum = '';  //当只有一张银行卡时候，直接跳结果，不出现银行卡列表
+    var pgId = window.location.href.split('#')[1];   //从卡详情也跳回来时候判断显示
 
     if(window.location.href.indexOf('token') > 0 ){
         token = searchStr.split('=')[1];
@@ -181,7 +182,7 @@ $(function(){
 
     //菜单栏 (我的)  点击
     $('#mine').click(function () {
-        $('#menu').find('li').removeClass('active');
+        $('#menu').find('a').removeClass('active');
         if($(this).hasClass('active')){
             return
         }else{
@@ -215,9 +216,11 @@ $(function(){
                     if(typeStr=='pgroup'){   //人群
                         var groupStr_copy = '';
                         for(var i=0;i<len;i++){
-                            groupStr_copy += ' <li class="swiper-slide" data-groupId="'+ result.data.list[i].id +'">'+ result.data.list[i].title +'</li>';
+                            //groupStr_copy += ' <li class="swiper-slide" data-groupId="'+ result.data.list[i].id +'">'+ result.data.list[i].title +'</li>';
+                            groupStr_copy += ' <li class="swiper-slide" data-groupId="'+ result.data.list[i].id +'" id="pg'+ result.data.list[i].id +'">' +
+                                '<a href="#pg'+ result.data.list[i].id +'">'+ result.data.list[i].title +'</a></li>';
+
                         }
-                        // var groupStr = ' <li class="swiper-slide" data-groupid="-1" data-type="allCards">全部卡种</li>' + groupStr_copy;
                         var groupStr = groupStr_copy;
 
                         $('#menu').children('.swiper-wrapper').append(groupStr);
@@ -234,20 +237,21 @@ $(function(){
                         //菜单点击
                         $('#menu li').click(function () {
                             $('#mine').removeClass('active');
-                            if($(this).hasClass('active')){
+                            if($(this).children('a').hasClass('active')){
                                 return
                             }else {
-                                $(this).addClass('active').siblings('li').removeClass('active');
-                                // if(!token){
-                                //     return;
-                                // }
+                                $(this).children('a').addClass('active');
+                                $(this).siblings('li').children('a').removeClass('active');
                                 $('section.allCards').html('');
                                 menuClickFn(match($(this).attr('data-groupId')),$(this).attr('data-groupId'));
                             }
                         });
+                        if(pgId){
+                            $('#'+pgId).click();
+                        }
                     }else {  //卡
                         var str = '';
-                        var cardList = result.data.list || result.data;
+                        var cardList = result.data;
                         for (var i=0;i<len;i++){
                             str += '<div class="singleCard" data-cardId="'+ cardList[i].id +'" data-kabin="'+ cardList[i].kabin +'">' +
                                 '<div class="cardBox"><img src="'+ cardList[i].pic +'"></div>' +
@@ -286,10 +290,6 @@ $(function(){
 
                     }
                 }else {
-
-                    // $('#menu').children('.swiper-wrapper').append('<li class="swiper-slide" data-groupid="-1" data-type="allCards">全部卡种</li>');
-
-
                     //菜单点击
                     $('#menu li').click(function () {
                         $('#mine').removeClass('active');
@@ -318,26 +318,28 @@ $(function(){
     //我的信用卡详情
     function  myCardDeatil(kabin) {
         $.get( port + '/card/cardtype/kinds?kabin=' + kabin ,function (result) {
-            if( result.data == '未匹配到卡信息'){
-                $('#cardDetail').html('<p style="text-align: center;margin: 100px 0 0 0;">'+ result.data +'</p>');
+            // var len = result.data.length;
+            // var cardStr = '<div class="singleCard" data-cardi="" data-kabin="">' +
+            //     '<div class="cardBox"></div>' +
+            //     '<div><h2>我的银行卡</h2><p>首付贷款首付加快垄断郭德纲</p></div></div>';
+            // for(var i=0;i<2;i++){
+            //     cardStr += cardStr;
+            // }
+            // $('#cardDetail').html(cardStr);
+
+            var cardList = result.data;
+            if( result.data == '未匹配到卡信息' || result.data.length == 0){
+                $('#cardDetail').html('<p class="none">未匹配到卡信息</p>');
             }else {
-                var cardTypeLen = result.data.cardMapModelList.length;
-                var $propertyUl = $('#cardDetail').children('.ctg').find('ul');
-                var $detailUl = $('#cardDetail').children('.content').find('.ul');
-                $propertyUl.before('<img src="'+result.data.pic+'"><h3>'+ result.data.name +'</h3>');
-                for(var i=0;i<cardTypeLen;i++){
-                    $detailUl.append('<div class="li">' +
-                        '<span id="property'+ result.data.cardMapModelList[i].cardPropertyId +'"></span>' +
-                        '<div class="p">'+ result.data.cardMapModelList[i].description +'</div></div>');
-
-                    $.get( port + '/card/property/' + result.data.cardMapModelList[i].cardPropertyId ,function (result_property) {
-                        $propertyUl.append('<li><a href="#property'+ result_property.data.id +'">'+ result_property.data.title +'</a></li>');
-                        $('#property' + result_property.data.id).html('| ' + result_property.data.title);
-
-                        //点击属性 平滑滚动
-                        scrollSmoothSlib('cardDetail');
-                    });
+                var len = result.data.length;
+                var cardStr = '<div class="singleCard" data-cardId="'+ cardList[i].id +'" data-kabin="'+ cardList[i].kabin +'">' +
+                    '<div class="cardBox"><img src="'+ cardList[i].pic +'"></div>' +
+                    '<div><h2>'+ cardList[i].name +'</h2>' +
+                    '<p>'+ cardList[i].description +'</p></div></div>';
+                for(var i=0;i<len;i++){
+                    //todo
                 }
+                $('#cardDetail').html(cardStr)
             }
         });
     }

@@ -463,6 +463,7 @@ footer{
 }
 
 #goodDetail>.num input{
+	font-size: 1em;
 	border: none;
 	width: 70px;
 	height: 30px;

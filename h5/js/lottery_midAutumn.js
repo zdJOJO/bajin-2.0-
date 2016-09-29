@@ -21,6 +21,7 @@ $(function (){
     token = getCookie("token");
     if( window.location.search.indexOf('token')>0 && !token){
         token = window.location.search.split("&")[0].split("=")[1];
+        setCookie('token',token);
     }
 
     var his = window.location.pathname.split("/");

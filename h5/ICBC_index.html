@@ -7,7 +7,6 @@
     <meta name="x5-orientation"content="portrait">
     <link rel="stylesheet" type="text/css" href="js/swiper-3.3.1.min.css">
     <link rel="stylesheet" type="text/css" href="css/ICBC_Module/ICBC_index.css">
-    <link rel="stylesheet" type="text/css" href="css/ICBC_Module/detail.css">
     <title>工行服务</title>
 </head>
 <body>
@@ -21,7 +20,7 @@
     <div class="nav" style="height: 3rem">
         <nav>
             <div>
-                <a href="javascript:" id="mine" class="active" data-type="index">我 的</a>
+                <a href="#first" id="mine" class="active" data-type="index">我 的</a>
                 <!--<img src="imgs/ICBC_service/separator.png">-->
             </div>
             <div id="menu">
@@ -45,15 +44,7 @@
             </header>
 
             <!--信用卡详情-->
-            <div id="cardDetail" style="overflow: hidden; display: none">
-                <div class="ctg">
-                    <ul></ul>
-                </div>
-                <div class="content">
-                    <h6>尊享特权，优惠折扣</h6>
-                    <div class="ul propertyUl"></div>
-                </div>
-            </div>
+            <div id="cardDetail" class="allCards" style="overflow: hidden; display: none"></div>
 
             <!-- 没登录或者没有绑卡-->
             <div class="tip" style="display: none">
@@ -78,7 +69,5 @@
 <script type="text/javascript" src="js/public/public.js"></script>
 <script type="text/javascript" src="js/plugin/jquery.lazyload.js"></script>
 <script type="text/javascript" src="js/swiper-3.3.1.min.js"></script>
-
-<!--<script type="text/javascript" src="js/ICBC_Module/detail.js"></script>-->
 <script type="text/javascript" src="js/ICBC_Module/ICBC_index.js"></script>
 </html>

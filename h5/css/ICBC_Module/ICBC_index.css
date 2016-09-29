@@ -61,7 +61,7 @@ nav{
     width: 100%;
 }
 
-nav a{
+#mine{
     display: inline-block;
     width: 100%;
     height: 16px;
@@ -101,7 +101,8 @@ nav > div:last-child{
 nav > div:last-child >li{
     display:inline-block;
 }
-#menu li.active{
+
+#menu li>a.active{
     color: #BCAB72;
 }
 
@@ -225,14 +226,14 @@ nav > div:last-child >li{
 /*}*/
 
 
-/************************ 全部卡种 *****************************/
-section.allCards{
+/************************ 卡种列表 *****************************/
+.allCards{
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     max-height: 60%;
 }
 
-section.allCards>.singleCard{
+.allCards>.singleCard{
     width: 94%;
     height: 6rem;
     margin: 0 auto 0 auto;
@@ -241,27 +242,27 @@ section.allCards>.singleCard{
 }
 
 
-section.allCards>.singleCard>div{
+.allCards>.singleCard>div{
     float: left;
     height: 100%;
 }
 
-section.allCards>.singleCard>.cardBox{
+.allCards>.singleCard>.cardBox{
     width: 40%;
 }
 
-section.allCards>.singleCard>.cardBox>img{
+.allCards>.singleCard>.cardBox>img{
     width: 100%;
     height: 100%;
     background: #DADADA;
 }
 
-section.allCards>.singleCard>div:last-child{
+.allCards>.singleCard>div:last-child{
     margin-left: 0.7rem;
     width: 55.5%;
 }
 
-section.allCards>.singleCard h2{
+.allCards>.singleCard h2{
     margin: 0;
     line-height: 1.4rem;
     width: 100%;
@@ -273,7 +274,7 @@ section.allCards>.singleCard h2{
     font-weight: 100;
     color: #3f3f3f;
 }
-section.allCards>.singleCard p{
+.allCards>.singleCard p{
     font-size: 0.8em;
     color: #929292;
     margin-bottom: 0.5rem;
@@ -285,6 +286,39 @@ section.allCards>.singleCard p{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
+}
+
+#cardDetail h2{
+    margin: 0;
+    line-height: 1.4rem;
+    width: 100%;
+    clear: both;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.1em;
+    font-weight: 100;
+    color: #3f3f3f;
+}
+
+#cardDetail p{
+    font-size: 0.8em;
+    color: #929292;
+    margin-bottom: 0.5rem;
+    margin-top: 0.3rem;
+    line-height: 1.3rem;
+    word-break: break-all;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+#cardDetail p.none{
+    text-align: center;
+    margin: 40px 0 40px 0;
+    font-size: 1.1em;
 }
 
 

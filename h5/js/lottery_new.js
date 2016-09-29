@@ -9,7 +9,7 @@ $(function (){
     var sectionId = ''; //抽奖期数
 
     var searchStr = window.location.search;
-    var phoneNumArray = ['139****3415','131****3995','189****5613','157****5779','182****2235','131****5809','156****2175','136****5889','187****4779']
+    var phoneNumArray = ['139****3415','131****3995','189****5613','157****5779','182****2235','131****5809','156****2175','136****5889','187****4779'];
 
     //获取存在于cookie中的token值
     function getCookie(c_name) {
@@ -28,6 +28,7 @@ $(function (){
     token = getCookie("token");
     if(searchStr.indexOf('token')>0 && !token){
         token = searchStr.split("&")[1].split("=")[1];
+        setCookie('token',token);
     }
     if( searchStr.indexOf('id')>0){
         sectionId = searchStr.split("&")[0].split("=")[1]
@@ -109,7 +110,7 @@ $(function (){
                 text: "您还未登录白金尊享",
                 buttons: [
                     { text: "去登录", onClick: function(){
-                        window.location.href = "login.html?his=" + escape('fareDraw_new.html');
+                        window.location.href = "login.html?his=" + escape('fareDraw_new.html?id=' + sectionId);
                     } },
                     { text: "取消", className: "default", onClick: function(){
                         //todo

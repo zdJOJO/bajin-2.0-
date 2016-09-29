@@ -41,7 +41,6 @@ $(function () {
                     '<div class="p">'+ result.data.cardMapModelList[i].description +'</div></div>');
 
                 $.get( port + '/card/property/' + result.data.cardMapModelList[i].cardPropertyId ,function (result_property) {
-                    $propertyUl.append('<li><a href="#property'+ result_property.data.id +'">'+ result_property.data.title +'</a></li>');
                     $('#property' + result_property.data.id).html( '| ' + result_property.data.title);
 
                     //点击属性 平滑滚动

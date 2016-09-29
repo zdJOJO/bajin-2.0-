@@ -126,7 +126,6 @@ $(function(){
                 '<p class="msg-num"><span class="head">人数</span>'+ peopleNumberStr + '</p>' +
                 '<p class="msg-num"><span class="head">已报名</span>'+data.applyNumber+'人'+'</p></div></section>');
 
-
             var str2 = $('<section class="content"><div class="content-text">' + data.activityDetail + '</div></section>');
             $("#doEnrol").append('<span class="closeDate">'+'报名截止时间：'+ new Date(data.applyEndTime*1000).Formate() +'</span>');
 
@@ -524,7 +523,10 @@ $(function(){
 
 
 
-    $("body").prepend($('<div id ="urlToDownload" style="width:1rem;height:0.12rem;position: fixed;z-index: 2000;"><img style="width:0.8rem;height:0.12rem;" src="imgs/bg-baoming.png"/><div style="background-color:#fafafa; float:right;text-align:center;width:0.2rem;height:0.12rem;line-height:0.12rem;"><p style="width:0.08rem;margin-top: 0.02rem;height:0.08rem;line-height:0.08rem;margin-left:0.06rem;background-color:#ccc;border-radius:0.08rem;font-size:0.06rem;">×</p></div></div>'));
+    $("body").prepend($('<div id ="urlToDownload" style="width:1rem;height:0.12rem;position: fixed;z-index: 2000;">' +
+        '<img style="width:0.8rem!important;height:0.12rem!important;" src="imgs/bg-baoming.png"/>' +
+        '<div style="background-color:#fafafa; float:right;text-align:center;width:0.2rem;height:0.12rem;line-height:0.12rem;">' +
+        '<p style="width:0.08rem;margin-top: 0.02rem;height:0.08rem;line-height:0.08rem;margin-left:0.06rem;background-color:#ccc;border-radius:0.08rem;font-size:0.06rem;">×</p></div></div>'));
     $("#urlToDownload>img").bind("click",function(){
         window.location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.kting.baijinka";
     });

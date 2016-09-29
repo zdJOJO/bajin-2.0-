@@ -38,7 +38,7 @@ body{
 	margin: 7px 0.04rem 0 0.03rem;
 }
 .wrapper .singleBrand .detail{
-	height: 0.266rem;
+	/*height: 0.266rem;*/
 	width: 0.55rem;
 	float: left;
 	box-sizing:border-box;
@@ -235,24 +235,34 @@ footer div.delete_all img{
 
 /*加减操作按钮*/
 .count{
+	width: 0.25rem;
+	height: 0.075rem;
+
 	font-size: 12px;
 	text-align: center;
 	float: right;
-	border: 1px solid #333333;
+	/*border: 1px solid #333333;*/
 	margin-top: 8px;
+	background: rgb(242, 242, 242);
 }
 .count-i{
-    float: left;
-    padding:0 0.01rem;
-    /*height:0.05rem;*/
+	display: block;
+	float: left;
+	padding: 0 0.01rem;
+	width: 25%;
+	height: 100%;
+	line-height: 30px;
+	font-size: 1.5em;
 }
 .add{
-    background: #000000;
+    background: #D5D5D5;
     color: #fff;
+	font-size: 2em;
 }
 .reduce{
-    background: #A2A2A2;
-    color: #ffffff;
+    background: #D5D5D5;
+    color: #fff;
+	font-size: 2em;
 }
 
 .singleBrand .count{
@@ -369,18 +379,32 @@ footer .regular-checkbox:checked + label:after {
 
 
 @media screen and (max-width: 375px){
+	.count{
+		margin-top: 5px;
+	}
 	.wrapper .singleBrand .detail{
-		height: 0.275rem;
+		/*height: 0.275rem;*/
 	}
 }
 
 @media screen and (max-width: 360px){
+	.count{
+		margin-top: 0;
+	}
+	.count-i{
+		line-height: 26px;
+	}
 	.wrapper .singleBrand .detail{
-		height: 0.285rem;
+		/*height: 0.285rem;*/
 	}
 }
 
 @media screen and (max-width: 320px){
+
+	.count-i{
+		line-height: 21px;
+		font-size: 1.2em
+	}
 
 	.wrapper .singleBrand .detail p.subtitle{
 		height: 23px;

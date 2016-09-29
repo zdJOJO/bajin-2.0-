@@ -213,7 +213,6 @@ $(function(){
 
     //判断
     if(window.location.href.indexOf('joinAct') > 0 || isHotDoor){
-        //JS-SDK接口   获取gps
         // lat--纬度 , log--经度 . type判断是否按距离排序，1--是
         var dropload = $('#actList,#moreHot').dropload({
             scrollArea : window,
@@ -224,38 +223,45 @@ $(function(){
                 domNoData  : '<div class="dropload-noData">已无数据</div>'
             },
             loadDownFn : function(me){
-                var gpsObj = {};
-                if(window.navigator.geolocation){
-                    navigator.geolocation.getCurrentPosition(function(position){
-                        gpsObj= {
-                            latitude: position.coords.latitude,
-                            longitude: position.coords.longitude,
-                            type: 1
-                        }
-                        pageNum++;
-                        getPage(pageNum,gpsObj);
-                    },function (error) {
-                        //不传经纬度
-                        gpsObj = {
-                           type: 0
-                        }
-                        switch(error.code){
-                            case error.PERMISSION_DENIED:
-                                //alert("you have denied access to your position .");
-                                break;
-                            case error.POSITION_UNAVAILABLE:
-                                //alert("there was a problem getting yout position .");
-                                break;
-                            case error.TIMEOUT:
-                               // alert("The application has timed out attempting to get your location .");
-                                break;
-                        }
-                        pageNum++;
-                        getPage(pageNum,gpsObj);
-                    });
-                }else{
-                    alert("你的浏览器不支持定位!");
-                }
+                var gpsObj = {
+                    type: 0
+                };
+                pageNum++;
+                getPage(pageNum,gpsObj);
+
+
+                // ******  GPS功能先注释******
+                // if(window.navigator.geolocation){
+                //     navigator.geolocation.getCurrentPosition(function(position){
+                //         gpsObj= {
+                //             latitude: position.coords.latitude,
+                //             longitude: position.coords.longitude,
+                //             type: 1
+                //         }
+                //         pageNum++;
+                //         getPage(pageNum,gpsObj);
+                //     },function (error) {
+                //         //不传经纬度
+                //         gpsObj = {
+                //            type: 0
+                //         }
+                //         switch(error.code){
+                //             case error.PERMISSION_DENIED:
+                //                 //alert("you have denied access to your position .");
+                //                 break;
+                //             case error.POSITION_UNAVAILABLE:
+                //                 //alert("there was a problem getting yout position .");
+                //                 break;
+                //             case error.TIMEOUT:
+                //                // alert("The application has timed out attempting to get your location .");
+                //                 break;
+                //         }
+                //         pageNum++;
+                //         getPage(pageNum,gpsObj);
+                //     });
+                // }else{
+                //     alert("你的浏览器不支持定位!");
+                // }
             }
         });
     }else {

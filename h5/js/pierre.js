@@ -193,38 +193,45 @@ $(document).ready(function(){
 				domNoData  : '<div class="dropload-noData">已无数据</div>'
 			},
 			loadDownFn : function(me){
-				var gpsObj = {};
-				if(window.navigator.geolocation){
-					navigator.geolocation.getCurrentPosition(function(position){
-						gpsObj= {
-							latitude: position.coords.latitude,
-							longitude: position.coords.longitude,
-							type: 1
-						}
-						pageNum++;
-						getServer(pageNum,10,gpsObj);
-					},function (error) {
-						//不传经纬度
-						gpsObj = {
-							type: 0
-						}
-						switch(error.code){
-							case error.PERMISSION_DENIED:
-								// alert("you have denied access to your position .");
-								break;
-							case error.POSITION_UNAVAILABLE:
-								// alert("there was a problem getting yout position .");
-								break;
-							case error.TIMEOUT:
-								// alert("The application has timed out attempting to get your location .");
-								break;
-						}
-						pageNum++;
-						getServer(pageNum,10,gpsObj);
-					});
-				}else{
-					alert("你的浏览器不支持定位!");
-				}
+				var gpsObj = {
+					type:0
+				};
+				pageNum++;
+				getServer(pageNum,10,gpsObj);
+
+
+				// ******  GPS功能先注释******
+				// if(window.navigator.geolocation){
+				// 	navigator.geolocation.getCurrentPosition(function(position){
+				// 		gpsObj= {
+				// 			latitude: position.coords.latitude,
+				// 			longitude: position.coords.longitude,
+				// 			type: 1
+				// 		}
+				// 		pageNum++;
+				// 		getServer(pageNum,10,gpsObj);
+				// 	},function (error) {
+				// 		//不传经纬度
+				// 		gpsObj = {
+				// 			type: 0
+				// 		}
+				// 		switch(error.code){
+				// 			case error.PERMISSION_DENIED:
+				// 				// alert("you have denied access to your position .");
+				// 				break;
+				// 			case error.POSITION_UNAVAILABLE:
+				// 				// alert("there was a problem getting yout position .");
+				// 				break;
+				// 			case error.TIMEOUT:
+				// 				// alert("The application has timed out attempting to get your location .");
+				// 				break;
+				// 		}
+				// 		pageNum++;
+				// 		getServer(pageNum,10,gpsObj);
+				// 	});
+				// }else{
+				// 	alert("你的浏览器不支持定位!");
+				// }
 			}
 		});
 	}

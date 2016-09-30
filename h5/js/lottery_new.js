@@ -30,7 +30,7 @@ $(function (){
         token = searchStr.split("&")[1].split("=")[1];
         setCookie('token',token);
     }
-    if( searchStr.indexOf('id')>0){
+    if( searchStr.indexOf('id')>0 || searchStr.indexOf('sectionId')>0){
         sectionId = searchStr.split("&")[0].split("=")[1]
     }else {
         sectionId = -1;
@@ -48,7 +48,7 @@ $(function (){
     get_url(window.location.href);
     //调用分享借口
     jsSdkApi('share',{
-        title: '贺中秋,迎国庆',
+        title: '白金尊享绑卡有礼',
         desc: ' 新用户通过下载/注册“白金尊享”APP并绑定工商银行信用卡，可获得一次抽奖机会',
         link: portStr + '/fareDraw.html?id=' + sectionId,
         imgUrl: portStr + '/imgs/lottery_midAutumn/midFall.png'
@@ -148,10 +148,13 @@ $(function (){
             $('body').find('.turntable-bg').css({
                 'background' : 'url('+ result.prizeSectionModel.bgPic+') no-repeat',
                 'background-size' : '100% 100%'
-            }).children('.textTitle').children('img').attr('src',result.prizeSectionModel.sectionAdpic)
+            }).children('.textTitle').children('img').attr('src',result.prizeSectionModel.sectionAdpic);
+            $('head>title').html(result.prizeSectionModel.sectionName);
 
+
+            $('body>.turntable-bg').children('.rule').html('注册白金尊享并绑卡 就能免费抽奖'+result.prizeSectionModel.times+'次');
             $('#rule').children('h3').after(result.prizeSectionModel.ruleDescription);
-            prizeModelList = result.prizeModelList;
+            prizeModelList = result.prizeModelList.slice(0,8);
             var len = prizeModelList.length;
             var winnerStr = '';
             var detailStr = '';
@@ -196,7 +199,7 @@ $(function (){
                     $('#poPub').fadeIn(200,function () {
                         $content.css({
                             'width': '75%',
-                            'height': '55%',
+                            'height': '55%'
                         }).addClass('bounceIn').find('button').before('<img src="'+ e.prizePic +'">' +
                             '<h3>'+ resultStr +'</h3><span class="present">'+ presentStr +'</span>');
                     });

@@ -318,28 +318,23 @@ $(function(){
     //我的信用卡详情
     function  myCardDeatil(kabin) {
         $.get( port + '/card/cardtype/kinds?kabin=' + kabin ,function (result) {
-            // var len = result.data.length;
-            // var cardStr = '<div class="singleCard" data-cardi="" data-kabin="">' +
-            //     '<div class="cardBox"></div>' +
-            //     '<div><h2>我的银行卡</h2><p>首付贷款首付加快垄断郭德纲</p></div></div>';
-            // for(var i=0;i<2;i++){
-            //     cardStr += cardStr;
-            // }
-            // $('#cardDetail').html(cardStr);
-
             var cardList = result.data;
             if( result.data == '未匹配到卡信息' || result.data.length == 0){
                 $('#cardDetail').html('<p class="none">未匹配到卡信息</p>');
             }else {
                 var len = result.data.length;
-                var cardStr = '<div class="singleCard" data-cardId="'+ cardList[i].id +'" data-kabin="'+ cardList[i].kabin +'">' +
-                    '<div class="cardBox"><img src="'+ cardList[i].pic +'"></div>' +
-                    '<div><h2>'+ cardList[i].name +'</h2>' +
-                    '<p>'+ cardList[i].description +'</p></div></div>';
+                var cardStr = '';
                 for(var i=0;i<len;i++){
-                    //todo
+                    cardStr += '<div class="singleCard" data-cardId="'+ cardList[i].id +'" data-kabin="'+ cardList[i].kabin +'">' +
+                        '<div class="cardBox"><img src="'+ cardList[i].pic +'"></div>' +
+                        '<div><h2>'+ cardList[i].name +'</h2>' +
+                        '<p>'+ cardList[i].description +'</p></div></div>';
                 }
-                $('#cardDetail').html(cardStr)
+                $('#cardDetail').html(cardStr);
+                $(".singleCard").click(function () {
+                    window.location.href = 'ICBC_cardDetail.html?cardId=' + $(this).attr('data-cardid');
+                });
+
             }
         });
     }

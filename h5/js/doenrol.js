@@ -28,6 +28,7 @@
     var personNum=$('.num').eq(0);
     var reduceBtn=$('.reduce').eq(0);
     var curNum=1;
+    var tmpNum = 1;  //作为标记提示
 
     // addBtn.click(function(){
     //     setNum(true);
@@ -39,9 +40,20 @@
     function setNum(type,_num){
         if(type){
             curNum = ++curNum>_num ? _num : curNum;
+            tmpNum++;
+            if(tmpNum > _num){
+                $.modal({
+                    title: "提示",
+                    text: "本活动最多允许"+_num+"人报名",
+                    buttons: [
+                        { text: "知道了", className: "default", onClick: function(){}},
+                    ]
+                });
+            }
         }else{
+            tmpNum = 1;
             curNum=--curNum<1?1:curNum;
-        }            
+        }
         personNum.html(curNum);
         var Cost = curNum*$(".tips").data("cost");
         var cost=Cost.toFixed(2);
@@ -240,7 +252,23 @@
                                                         // window.location.href = "pay.html?id="+data.data.applyId;
                                                     }
                                                 }else{
-                                                    $.alert(data.message);
+                                                    if(data.message == '您还未绑定工行信用卡'){
+                                                        $.modal({
+                                                            title: "提示",
+                                                            text: data.message,
+                                                            buttons: [
+                                                                { text: "去绑卡", onClick: function(){
+                                                                    window.location.href="bank.html?his="+escape(his);
+                                                                }},
+                                                                { text: "取消", className: "default", onClick: function(){
+                                                                    //todo
+                                                                },
+                                                                }
+                                                            ]
+                                                        });
+                                                    }else {
+                                                        $.alert(data.message);
+                                                    }
                                                 }
                                             },
                                             error:function(data){

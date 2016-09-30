@@ -42,12 +42,13 @@
                 return;
             }
             resultObj = JSON.parse(msg[0].firstChild.nodeValue);
+            alert(resultObj);
             if(resultObj.code == '300') {  //绑卡成功
                 alert('绑卡成功');
                 window.location.href="ICBC_index.html";
             }else if(resultObj.code == '612' ){
                 alert('该卡已被别的用户绑定');
-                window.location.href="index.html";
+                window.location.href="ICBC_index.html";
             }else {
                 //todo
             }

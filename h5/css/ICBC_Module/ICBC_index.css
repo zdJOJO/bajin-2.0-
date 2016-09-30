@@ -168,7 +168,7 @@ nav > div:last-child >li{
     text-align: right;
     height: 3rem;
     line-height: 3rem;
-    border-bottom: 3px #EDEDED solid;
+    border-bottom: 1px #EDEDED solid;
 }
 
 #content >header>span{
@@ -288,6 +288,10 @@ nav > div:last-child >li{
     overflow: hidden;
 }
 
+#cardDetail{
+    overflow: hidden;
+}
+
 #cardDetail h2{
     margin: 0;
     line-height: 1.4rem;
@@ -316,8 +320,9 @@ nav > div:last-child >li{
 }
 
 #cardDetail p.none{
+    min-height: 5rem;
+    padding-top: 4rem;
     text-align: center;
-    margin: 40px 0 40px 0;
     font-size: 1.1em;
 }
 

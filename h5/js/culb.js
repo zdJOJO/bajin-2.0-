@@ -132,7 +132,7 @@ $(function(){
     //报名列表 获取
     function getPage(page,gps){
         var url = !isHotDoor ? (gps.type == 1 ? port+"/card/activity?currentPage="+page+"&size=10&type=1&lat=" + gps.latitude +'&log=' + gps.longitude :
-        port+"/card/activity?currentPage="+page+"&size=10") : port+"/card/mpage/hotpage?currentPage="+page+"&size=10" ;
+        port+"/card/activity?currentPage="+page+"&size=10") : port+"/card/mpage/hotpage?currentPage="+page+"&size=10";
 
         $.get(url,function(data){
             if(data.list.length != 0){          //如果加载的是非空页面

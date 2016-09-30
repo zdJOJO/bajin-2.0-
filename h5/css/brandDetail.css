@@ -126,6 +126,7 @@ header,.wrapper,footer{
 	color: #a6a6a6;
 	-webkit-margin-after: 0;
 	padding-bottom: 1em;
+	margin-top: 0.08rem;
 }
 
 .wrapper .details p.active{
@@ -534,6 +535,8 @@ footer{
 	float: left;
 	font-size: 1em;
 	font-family: 黑体;
+	position: absolute;
+	top: 3px;
 }
 
 #sureAdd{
@@ -544,6 +547,7 @@ footer{
 #sureBuyNow{
 	background: #B7A66E;
 	color: #FAFAFA;
+	right: 0;
 }
 
 
@@ -568,6 +572,10 @@ footer{
 
 	#goodDetail>.num img.plus{
 		left: 41%;
+	}
+
+	#goodDetail > .btnBox > button{
+		top: 30%;
 	}
 }
 
@@ -598,6 +606,10 @@ footer{
 	#goodDetail>button{
 		height: 30px;
 		font-size: 0.8em;
+	}
+
+	#goodDetail > .btnBox > button{
+		top: 30%;
 	}
 }
 

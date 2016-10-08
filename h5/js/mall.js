@@ -47,7 +47,7 @@ $(document).ready(function(){
 	get_url(window.location.href);
 
 
-    //获取商品http://121.196.232.233/card/goods/{goodsId}	
+    //获取商品详情
 	$.ajax({
 		type:"get",
 		url:port+"/card/mall/" + mallid,
@@ -58,7 +58,6 @@ $(document).ready(function(){
 			mallObj.mallId = data.data.mallId;
 			mallObj.currentDiscount = data.data.currentDiscount;
 			mallObj.title = data.data.title;
-
 
 			//调用分享借口
 			jsSdkApi('share',{

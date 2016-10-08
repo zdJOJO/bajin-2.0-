@@ -114,12 +114,15 @@ $(document).ready(function(){
 			url: url,
 			success:function(data){
 				if(data.data.list.length != 0 ){
+					var discountStr = '';
 					for(var i=0,len=data.data.list.length;i<len;i++){
+						if(data.data.list[i].discount.trim().length > 0){
+							discountStr = '<span class="discount">'+data.data.list[i].discount+'</span>' ;
+						}
 						str += '<div class="singleBrand_q" data-mallid ="'+data.data.list[i].mallId+'">' +
-							'<img data-original="'+data.data.list[i].pic+'"/>' +
-							'<div class="detail_q"><h3>'+data.data.list[i].title+'<span>'+data.data.list[i].discount+'</span></h3>' +
-							'<p>'+data.data.list[i].subtitle+'</p><div>' +
-							'<p><img src="imgs/position_qq.png"/><span>'+data.data.list[i].address+'<span></p></div></div></div>' ;
+							'<img data-original="'+data.data.list[i].pic+'"/>' + discountStr +
+							'<div class="detail_q"><h3>'+data.data.list[i].title+'</h3>' +
+							'<p>地址：'+data.data.list[i].address+'</p><p>'+data.data.list[i].subtitle+'</p></div></div>';
 					}
 					$("#brand").find('.newBrandList').append(str);
 					//图片预加载

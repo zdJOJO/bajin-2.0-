@@ -302,73 +302,155 @@ section .content .uad .buy{
 	font-size: 18px;
 	background: url("../imgs/bc-2.png") no-repeat;
 }
-/*改版的店铺页面，不知道以后还会不会叫店铺页面*/
-.newBrandList{
-	width:1rem;
-	box-sizing:border-box;
+
+
+/**********************旧版 乐享********************/
+/*.newBrandList{*/
+	/*width:1rem;*/
+	/*box-sizing:border-box;*/
+/*}*/
+/*.newBrandList .singleBrand_q{*/
+	/*height: 0.3rem;*/
+	/*width: 1rem;*/
+	/*border-bottom: rgba(172, 172, 172, 0.24) solid 1px;*/
+	/*margin-bottom: 0.01rem;*/
+	/*box-sizing:border-box;*/
+	/*color: #B5B5B5;*/
+/*}*/
+/*.newBrandList .singleBrand_q>img{*/
+	/*width: 0.3rem;*/
+	/*height: 0.3rem;*/
+	/*margin-right: 0.04rem;*/
+	/*background: #d7d7d7;*/
+/*}*/
+/*.newBrandList .singleBrand_q .detail_q{*/
+	/*float: right;*/
+	/*width: .66rem;*/
+	/*box-sizing:border-box;*/
+	/*height: 0.3rem;*/
+	/*padding-right: 0.04rem;*/
+	/*position: relative;*/
+/*}*/
+/*.newBrandList .singleBrand_q .detail_q h3{*/
+	/*-webkit-margin-before:0.5em;*/
+	/*-webkit-margin-after:0em;*/
+	/*color: #3f3f3f;*/
+	/*font-size: 16px;*/
+/*}*/
+/*.newBrandList .singleBrand_q .detail_q h3 span{*/
+	/*color: #cd9f00;*/
+	/*float: right;*/
+/*}*/
+/*.newBrandList .singleBrand_q .detail_q>p{*/
+	/*-webkit-margin-before:0.2em;*/
+	/*-webkit-margin-after:3px;*/
+	/*width: 0.62rem;*/
+	/*font-size: 14px;*/
+/*}*/
+/*@media screen and (min-width:370px){*/
+	/*.newBrandList .singleBrand_q .detail_q>p{*/
+		/*-webkit-margin-before:1.4em;*/
+		/*-webkit-margin-after:0.6em;*/
+	/*}*/
+/*}*/
+/*.newBrandList .singleBrand_q .detail_q div{*/
+	/*font-size: 12px;*/
+	/*position: absolute;*/
+	/*bottom: 0.02rem;*/
+	/*left: 0;*/
+/*}*/
+/*.newBrandList .singleBrand_q .detail_q div img{*/
+	/*height: 19px;*/
+	/*vertical-align: middle;*/
+	/*margin-right: 0.02rem;*/
+/*}*/
+/*.newBrandList .singleBrand_q .detail_q div span{*/
+	/*margin-top: 1px;*/
+/*}*/
+/*.newBrandList .singleBrand_q .detail_q div p{*/
+	/*-webkit-margin-before:0;*/
+	/*-webkit-margin-after:0;*/
+/*}*/
+
+
+/**********************新版 乐享********************/
+#brand>div>h3{
+	height: 0.12rem;
+	line-height: 0.12rem;
+	color: #3f3f3f;
+	font-size: 1.3em;
 }
+
+#brand>div>h3>img{
+	width: 0.05rem;
+	margin: 0 0.03rem 0.01rem 0.05rem;
+}
+
 .newBrandList .singleBrand_q{
-	height: 0.3rem;
+	height: 0.6rem;
 	width: 1rem;
 	border-bottom: rgba(172, 172, 172, 0.24) solid 1px;
 	margin-bottom: 0.01rem;
 	box-sizing:border-box;
 	color: #B5B5B5;
-}
-.newBrandList .singleBrand_q>img{
-	width: 0.3rem;
-	height: 0.3rem;
-	margin-right: 0.04rem;
-	background: #d7d7d7;
-}
-.newBrandList .singleBrand_q .detail_q{
-	float: right;
-	width: .66rem;
-	box-sizing:border-box;
-	height: 0.3rem;
-	padding-right: 0.04rem;
 	position: relative;
 }
-.newBrandList .singleBrand_q .detail_q h3{
-	-webkit-margin-before:0.5em;
-	-webkit-margin-after:0em;
-	color: #3f3f3f;
-	font-size: 16px;
+
+.newBrandList .singleBrand_q>img{
+	height: 0.6rem;
+	width: 1rem;
 }
-.newBrandList .singleBrand_q .detail_q h3 span{
-	color: #cd9f00;
-	float: right;
-}
-.newBrandList .singleBrand_q .detail_q>p{
-	-webkit-margin-before:0.2em;
-	-webkit-margin-after:3px;
-	width: 0.62rem;
-	font-size: 14px;
-}
-@media screen and (min-width:370px){
-	.newBrandList .singleBrand_q .detail_q>p{
-		-webkit-margin-before:1.4em;
-		-webkit-margin-after:0.6em;
-	}
-}
-.newBrandList .singleBrand_q .detail_q div{
-	font-size: 12px;
+
+.newBrandList .singleBrand_q .detail_q{
+	width: 0.8rem;
+	height: 0.3rem;
+	box-sizing: border-box;
+	text-align: center;
+	z-index: 10;
 	position: absolute;
-	bottom: 0.02rem;
-	left: 0;
+	top: 50%;
+	left: 50%;
+	margin: -0.15rem 0 0 -0.4rem;
 }
-.newBrandList .singleBrand_q .detail_q div img{
-	height: 19px;
-	vertical-align: middle;
-	margin-right: 0.02rem;
+
+.newBrandList .singleBrand_q .detail_q h3{
+	-webkit-margin-before: 0.5em;
+	-webkit-margin-after: 0;
+	color: #fff;
+	font-size: 1.6em;
+	margin: 0.04rem 0 0.07rem 0;
 }
-.newBrandList .singleBrand_q .detail_q div span{
-	margin-top: 1px;
+
+.newBrandList .singleBrand_q .detail_q p{
+	color: #fff;
+	font-size: 1.2em;
+	margin: 10px 0;
 }
-.newBrandList .singleBrand_q .detail_q div p{
-	-webkit-margin-before:0;
-	-webkit-margin-after:0;
+
+.newBrandList .singleBrand_q >.discount{
+	display: block;
+	text-align: center;
+	background: #D7C381;
+	color: #fafafa;
+	min-width: 0.13rem;
+	height: 0.12rem;
+	line-height: 0.12rem;
+	padding: 0 5px;
+	position: absolute;
+	top: 0;
+	right: 25px;
+	z-index: 10;
+	font-family: "Microsoft New Tai Lue";
 }
+
+
+
+
+
+
+
+
+
 section .brandList{
 	padding-top: 0.01rem;
 }
@@ -421,6 +503,10 @@ section .brandList{
 
 	header div> span{
 		top: 15px;
+	}
+
+	#brand>div>h3{
+		font-size: 1.1em;
 	}
 }
 

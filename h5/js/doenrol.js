@@ -145,7 +145,26 @@
                                                         // $("#payType").fadeIn(300);
                                                         $.actions({
                                                             title: "请选择支付方式",
-                                                            onClose: function() {},
+                                                            onClose: function() {
+                                                                //关闭弹层的回调函数
+                                                                $.modal({
+                                                                    title: "确认要放弃付款？",
+                                                                    text: "订单会保留一段时间，请尽快支付",
+                                                                    buttons: [
+                                                                        { text: "继续支付", onClick: function(){
+                                                                            window.location.href = "payIFrame.html?id=" + data.data.applyId;
+                                                                            $('#applyName').val("");
+                                                                            $('#applyPhone').val("");
+                                                                            $("#email").val("");
+                                                                        }
+                                                                        },
+                                                                        { text: "确认离开",className: "default",onClick: function(){
+                                                                            window.location.href = "myOrders.html";
+                                                                        }
+                                                                        },
+                                                                    ]
+                                                                });
+                                                            },
                                                             actions: [
                                                                 {
                                                                     text: "银行卡支付",

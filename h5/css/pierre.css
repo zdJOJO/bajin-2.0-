@@ -390,7 +390,7 @@ section .content .uad .buy{
 	height: 0.6rem;
 	width: 1rem;
 	border-bottom: rgba(172, 172, 172, 0.24) solid 1px;
-	margin-bottom: 0.01rem;
+	margin-bottom: 0.018rem;
 	box-sizing:border-box;
 	color: #B5B5B5;
 	position: relative;
@@ -417,13 +417,13 @@ section .content .uad .buy{
 	-webkit-margin-before: 0.5em;
 	-webkit-margin-after: 0;
 	color: #fff;
-	font-size: 1.6em;
+	font-size: 1.3em;
 	margin: 0.04rem 0 0.07rem 0;
 }
 
 .newBrandList .singleBrand_q .detail_q p{
 	color: #fff;
-	font-size: 1.2em;
+	font-size: 1em;
 	margin: 10px 0;
 }
 
@@ -443,7 +443,40 @@ section .content .uad .buy{
 	font-family: "Microsoft New Tai Lue";
 }
 
+#brand .local>.itemLocal img{
+	width: 1rem;
+	height: 0.45rem;
+}
 
+#brand .local>.itemLocal{
+	position: relative;
+	margin-bottom: 0.02rem;
+}
+
+#brand .local>.itemLocal>.information{
+	color: #fff;
+	width: 0.8rem;
+	height: 0.2rem;
+	text-align: center;
+	z-index: 10;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -0.1rem 0 0 -0.4rem;
+	padding-top: 0.04rem;
+}
+
+#brand .local>.itemLocal h3{
+	font-size: 1.3em;
+	margin-bottom: 14px;
+}
+
+#brand .local>.itemLocal p{
+	font-size:  1em;
+}
+
+
+/******************************************/
 
 
 
@@ -513,7 +546,81 @@ section .brandList{
 
 
 
+/**********************localDiscount.html  本地优惠列表********************/
+.localTitle{
+	text-align: center;
+	line-height: 0.14rem;
+	font-size: 1.3em;
+}
 
+#localList{
+	margin-top: 0.14rem;
+}
+
+#localList>.itemCell{
+	width: 1rem;
+	height: 0.28rem;
+	margin-bottom: 0.008rem;
+	position: relative;
+}
+
+#localList>.itemCell .second{
+	float: left;
+	margin-top: 10px;
+}
+
+#localList>.itemCell img.second{
+	display: inline-block;
+	width: 0.23rem;
+	margin: 10px 15px 10px 10px;
+}
+
+#localList>.itemCell div.second{
+	width: 0.67rem;
+}
+
+#localList>.itemCell div.second>h3{
+	color: #323232;
+	font-size: 1.5em;
+	margin-bottom: 5px;
+}
+
+#localList>.itemCell div.second>p{
+	color: #808080;
+	font-size: 1.25em;
+	margin: 5px 0;
+}
+
+#localList>.itemCell div.second>span{
+	display: inline-block;
+	font-size: 1.8em;
+	color: #D7BC64;
+	float: right;
+	margin: 0 10px 0 0;
+}
+
+#localList>.itemCell .mask.active{
+	width: 100%;
+	height: 100%;
+	background: #1a1a1a;
+	opacity: 0.6;
+	position: relative;
+}
+
+#localList>.itemCell .none{
+	display: inline-block;
+	padding: 0 10px 0 20px;
+	background: #D7BC64;
+	color: #fff;
+	height: 0.08rem;
+	line-height: 0.08rem;
+	position: absolute;
+	top: 17px;
+	right: 0;
+	border-radius: 0 0 0 10px;
+	font-family: serif;
+}
+/*****************************************/
 
 
 

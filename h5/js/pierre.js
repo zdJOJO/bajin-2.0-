@@ -105,7 +105,42 @@ $(document).ready(function(){
 	}
 
 
-	//获取 乐享列表
+
+	//获取 乐享（本地优惠）列表
+	function  getLocalDiscountList() {
+		$.ajax({
+			type: 'get',
+			url: port + '/card/subject',
+			success: function (result) {
+				var len = result.data.length;
+				var listStr = '';
+				if(len == 0){
+					$('#brand').children('.local').hide();
+				}else {
+					for(var i=0;i<len;i++){
+						listStr += '<div class="itemLocal" data-mallid="'+result.data[i].id+'"><img data-original="'+result.data[i].pic+'">' +
+							'<div class="information"><h3>'+result.data[i].title+'</h3><p>'+result.data[i].subtitle+'</p></div></div>';
+					}
+					$('#brand').children('.local').append(listStr);
+					$(".itemLocal img").lazyload({
+						placeholder : "",
+						threshold: 0,
+						effect : "fadeIn",
+						effectspeed: 250,
+						event: 'scroll',
+					});
+					$('.itemLocal').click(function () {
+						window.location.href = 'localDiscount.html?id=' + $(this).attr('data-mallid');
+					});
+				}
+			},
+			error: function (e) {
+				//todo
+			}
+		});
+	}
+
+	//获取 乐享（特约商户）列表
 	function getServer(currentPage,size,gps){
 		var url = gps.type==0 ? port+"/card/mall?currentPage="+currentPage+"&size="+size
 			: port+"/card/mall?currentPage="+currentPage+"&size="+size + "&type=1&lat=" + gps.latitude +'&log=' + gps.longitude;
@@ -136,7 +171,6 @@ $(document).ready(function(){
 					// 每次数据加载完，必须重置
 					str = '';
 					dropload_brand.resetload();
-
 
 					$(".singleBrand_q").bind("click",function(){
 						window.location.href = "mall.html?id="+$(this).data("mallid");
@@ -187,6 +221,8 @@ $(document).ready(function(){
 		str = '';
 		$('header .brand').addClass('active').siblings().removeClass('active');
 		$('#brand').show().siblings('section').hide();
+
+		getLocalDiscountList();
 		var dropload_brand = $('#brand').dropload({
 			scrollArea : window,
 			domDown : {

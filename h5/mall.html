@@ -1,79 +1,63 @@
 <!doctype html>
 <html>
 <head>
-<title></title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
-<meta name="screen-orientation"content="portrait">
-<meta name="x5-orientation"content="portrait">
-    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <meta name="screen-orientation"content="portrait">
+    <meta name="x5-orientation"content="portrait">
+    <link rel="stylesheet" href="css/swiper.min.css">
+
     <link rel="stylesheet" type="text/css" href="css/weiXin/weui.min.css">
     <link rel="stylesheet" type="text/css" href="css/weiXin/jquery-weui.css">
     <link rel="stylesheet" type="text/css" href="css/public/commentIn.css">
     <link rel="stylesheet" type="text/css" href="css/mall.css">
+
+    <script>
+        var iWidth=document.documentElement.clientWidth;
+        document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+    </script>
 </head>
 <body>
 <header>
-      <div class="swiper-container">
-          <div class="swiper-wrapper"></div>
-          <!-- 如果需要滚动条 -->
-          <div class="swiper-scrollbar"></div>
-      </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!--        <div class="swiper-slide">Slide 1</div>
+                        <div class="swiper-slide">Slide 2</div>
+                        <div class="swiper-slide">Slide 3</div>
+                        <div class="swiper-slide">Slide 4</div> -->
+        </div>
+        <!-- 如果需要滚动条 -->
+        <div class="swiper-scrollbar"></div>
+    </div>
     <div class="saveAndShare">
-      <img class="love" src="imgs/iconfont-love.png"/>
-      <img class="share" src="imgs/iconfont-p-share.png"/>
+        <img class="love" src="imgs/iconfont-love.png"/>
+        <img class="share" src="imgs/iconfont-p-share.png"/>
     </div>
 </header>
-
-<div id="mallDetail" class="wrapper">
-    <div class="list" style="text-align: center">
-        <p class="title">星巴克咖啡(买一份低两分)</p>
-        <p class="subtitle">体验油画乐趣</p>
-        <p class="price">￥360.00</p>
-        <p class="disPrice">￥480.00</p>
-        <p class="num">已售345份</p>
-    </div>
-    <div class="information">
-        <p>
-            <img src="imgs/enjoy/time.png">
-            <span>使用有效期：7月18日 14:00-7月19日 17:00</span>
-        </p>
-        <p>
-            <img src="imgs/enjoy/tip.png">
-            <span>限3000份，限工行白金卡用户</span>
-        </p>
-        <p>
-            <img src="imgs/enjoy/phone.png">
-            <span>咨询白金尊享</span>
-            <img src="imgs/enjoy/right.png">
-        </p>
-    </div>
-
+<div class="wrapper">
+    <center>
+        <p class="title"></p>
+        <p class="subtitle"></p>
+    </center>
+    <p class="primeCost">名称<span></span></p>
+    <p class="currentCost">地点<span></span></p>
+    <p class="stock">折扣<span></span></p>
     <div class="message">
-        <div>
-            <p class="title_sub">适用门店</p>
-        </div>
-        <div>
-            <p class="title_sub">详情介绍</p>
-        </div>
-    </div>
-    <div class="tips">
-        <P>&#10036 温馨提示</P>
-        <p>- 使用有效期，依据此变换该页面的状态购买</p>
+        <p class="title_sub">店铺亮点</p>
+        <div></div>
     </div>
 
 
-
-    <!--评论暂时不需要 先注释-->
-    <!--<div id="comment">-->
-        <!--<h3 class="cmtNUm">评论 0条</h3>-->
-        <!--<div class="list" style="display: none"></div>-->
-        <!--<span id="moreComts" style="display: none">查看更多 >></span>-->
-        <!--<div class="box">-->
-            <!--<input type="text"  id="commentContent"  placeholder="发表评论"  onkeyup="judgeContent()" >-->
-            <!--<span id="publishCmt">评论</span>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div id="comment">
+        <h3 class="cmtNUm">评论 0条</h3>
+        <div class="list" style="display: none"></div>
+        <span id="moreComts" style="display: none">查看更多 >></span>
+        <div class="box">
+            <input type="text"  id="commentContent"  placeholder="发表评论"  onkeyup="judgeContent()" >
+            <span id="publishCmt">评论</span>
+        </div>
+    </div>
 </div>
 
 
@@ -85,20 +69,16 @@
 </footer>
 <div id="share-mask"><img src="imgs/shareImg.png"/></div>
 </body>
-<script>
-    var iWidth=document.documentElement.clientWidth;
-    document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
-</script>,
+<script src="js/zepto.js"></script>
 <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="js/public/public.js"></script>
 <script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
-<script type="text/javascript" src="js/swiper.min.js"></script>
+<script src="js/swiper.min.js"></script>
 
 <script type="text/javascript" src="js/public/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="js/public/sha1.js"></script>
 <script type="text/javascript" src="js/public/myWxApi.js"></script>
 
-<!--<script src="js/mall.js"></script>-->
+<script src="js/mall.js"></script>
 
 <script type="text/javascript">
     function judgeContent() {

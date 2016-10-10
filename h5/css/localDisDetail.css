@@ -141,7 +141,7 @@ header,.wrapper,footer{
 .message{
     width:1rem;
     box-sizing:border-box;
-    padding:0.04rem 0;
+    padding:0.04rem 15px;
 }
 .message img{
     width: 0.92rem;
@@ -153,6 +153,11 @@ header,.wrapper,footer{
     line-height: 0.1rem;
     padding-left: 10px;
 }
+
+.message>div:first-child{
+    border-bottom: 10px #FAFAFA solid;
+}
+
 /***********************************************/
 
 
@@ -166,18 +171,10 @@ footer{
 }
 
 footer a{
-    width: 0.33rem;
-    height: 0.12rem;
-    text-align: center;
-    width: 50%;
-    float: right;
-    color: #b7a66e;
-    text-decoration: none;
-}
-footer a>p{
     width: 100%;
-    -webkit-margin-before: 0;
-    -webkit-margin-after: 0;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
 }
 
 
@@ -189,7 +186,7 @@ footer a>p{
     float: right;
     -webkit-margin-before: 0;
     -webkit-margin-after: 0;
-    background-color:#b7a66e;
+    background-color: #D7C381;
     color: #fff;
     font-size: 1em;
     font-family: 微软雅黑;
@@ -221,6 +218,7 @@ header .saveAndShare img{
     height: 22px;
 }
 header .saveAndShare img:first-child{
+    float: right;
     margin-right: 10px;
 }
 /*分享*/
@@ -259,13 +257,13 @@ header .saveAndShare img:first-child{
 
 .message img{
     width: 100%;
-
 }
 
 
 /************** 产品 详情 ***************/
 #mallDetail>.list{
     border-bottom: 1px #F0F0F0 solid;
+    padding-bottom: 0.02rem;
 }
 
 #mallDetail>.list>p{
@@ -283,6 +281,7 @@ header .saveAndShare img:first-child{
 #mallDetail>.list>.price{
     font-size: 1.3em;
     color: #bba76f;
+    margin-top: 10px;
 }
 #mallDetail>.list>.disPrice{
     text-decoration:line-through;
@@ -315,29 +314,37 @@ header .saveAndShare img:first-child{
     border-bottom: 10px #FAFAFA solid;
 }
 
+#mallDetail>.information>p:last-child>a{
+    color: #323232;
+    display: inline-block;
+    width: 80%;
+}
+
 #mallDetail>.information>p>img{
-    width: 0.04rem;
+    width: 0.035rem;
     margin: 0 10px;
     position: relative;
-    top: 3px;
+    top: 2px;
 }
 
 #mallDetail>.information>p:last-child>img:last-child{
     width: 0.02rem;
-    float: right;
     margin-top: 15px;
+    float: right;
 }
 
 #mallDetail .message .title_sub{
     color: #323232;
     border-bottom: 1px #F0F0F0 solid;
+    margin-bottom: 10px;
 }
 
 #mallDetail>.tips{
     color: #9f9f9f;
     background: #fafafa;
     padding-left: 10px;
-    height: 0.3rem;
+    height: 0.1rem;
+    font-size: 0.5em;
 }
 #mallDetail>.tips>p {
     height: 25px;
@@ -345,8 +352,135 @@ header .saveAndShare img:first-child{
 }
 
 
+#mallDetail>.headImg{
+    width: 100%;
+    height: 0.6rem;
+    margin-bottom: 0.05rem;
+}
+
+#mallDetail>.headImg>img{
+    width: 100%;
+    height: 100%;
+}
 
 
 
+
+/**********************主题产品订单***************************/
+#order{
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+#order>header{
+    width: 100%;
+    line-height: 0.13rem;
+    font-size: 1.1em;
+    text-align: center;
+    border-bottom: 1px #EDEDEC solid;
+}
+
+#order>.proInfo{
+    height: 0.3rem;
+    border-top: 10px #FAFAFA solid;
+    border-bottom: 1px #EDEDEC solid;
+    padding: 0 15px;
+}
+
+#order>.proInfo>img{
+    float: left;
+    display: inline-block;
+    width: 0.3rem;
+    height: 0.2rem;
+    margin-top: 0.05rem;
+}
+
+#order>.proInfo>.name{
+    float: left;
+    width: 0.56rem;
+    height: 0.2rem;
+    margin: 0.05rem 0 0 0.04rem;
+    position: relative;
+}
+
+#order>.proInfo>.name>p{
+    font-size: 1.1em;
+}
+
+#order>.proInfo>.name>span{
+    color: #7E7E7E;
+    position: absolute;
+    bottom: 0;
+}
+
+#order>ul{
+    border-top: 10px #FAFAFA solid;
+    font-size: 0.9em;
+}
+
+#order>ul>li{
+    height: 0.13rem;
+    line-height: 0.13rem;
+    padding: 0 15px;
+}
+
+#order>ul>li:first-child{
+    border-bottom: 8px #FAFAFA solid;
+}
+
+#order>ul>li:last-child{
+    border-top: 1px #EDEDEC solid;
+    border-bottom: 8px #FAFAFA solid;
+}
+
+#order>ul>li>span{
+    float: right;
+}
+
+#order>ul>li:first-child>span{
+    display: inline-block;
+    width: 0.07rem;
+    height: 0.07rem;
+    line-height: 0.07rem;
+    text-align: center;
+    color: #7E7E7E;
+    font-size: 1.5em;
+    background: #F0F0F0;
+    margin: 12px 0 0 5px;
+}
+
+#order>ul>li:first-child>span:nth-child(2){
+    width: 0.15rem;
+}
+
+#order>.foot{
+    width: 100%;
+    height: 0.12rem;
+    line-height: 0.12rem;
+    background: #F0F0F0;
+    position: absolute;
+    bottom: 0;
+    padding-left: 15px;
+}
+
+#order>.foot button{
+    float: right;
+    width: 0.37rem;
+    height: 100%;
+    color: #fff;
+    font-size: 1em;
+    border: none;
+    background: #bba76f;
+}
+
+#order>.foot .totalPrice{
+    color: #bba76f;
+    font-size: 1.1em;
+}
 
 

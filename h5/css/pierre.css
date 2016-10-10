@@ -571,7 +571,7 @@ section .brandList{
 
 #localList>.itemCell img.second{
 	display: inline-block;
-	width: 0.23rem;
+	width: 0.2rem;
 	margin: 10px 15px 10px 10px;
 }
 

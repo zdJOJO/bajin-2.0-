@@ -54,15 +54,15 @@ $(function(){
 							var orderId = window.location.search.split("=")[1];
 
 							if(window.location.search.split("=")[0] == "?cardid"){
-								//商品支付http://121.196.232.233/card/bank/goods/pay/{cardno}/{orderId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
+								//商品支付 http://121.196.232.233/card/bank/goods/pay/{cardno}/{orderId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
 								url = port+"/card/bank/goods/pay/"+cardItem+"/"+orderId+"?token="+token;
 							}
 							if(window.location.search.split("=")[0] == "?mallOrderId"){
 								url = port+"/card/bank/mall/pay/"+cardItem+"/"+orderId+"?token="+token;
 							}
-							if(window.location.search.split("=")[0] == "?mallOrderId"){
-								// http://121.196.232.233/card/bank/book/pay/{cardno}/{typeId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
-								url = port+"/card/bank/book/pay/"+cardItem+"/"+orderId+"?token="+token;
+							if(window.location.search.split("=")[0] == "?productId"){
+							//主题产品支付	http://121.196.232.233/card/bank/subject/pay/{cardno}/{productOrderId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
+								url = port+"/card/bank/subject/pay/"+cardItem+"/"+orderId+"?token="+token;
 							}
 
 

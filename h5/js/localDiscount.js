@@ -30,26 +30,28 @@ $(document).ready(function(){
             type: 'get',
             url: port + '/card/product/page?currentPage=' + pageNum + '&subjectId=' + subjectId,
             success: function (result) {
-                var str = '',tmpStr = '';
+                var $tmpStr = '';
                 var len = result.data.list.length;
-                var difference = 0;
                 for(var i=0;i<len;i++){
-                    tmpStr = '<div class="itemCell" data-productId="'+result.data.list[i].id+'" data-starttime="'+result.data.list[i].startTime+'">' +
-                        '<div><img class="second" data-original="'+result.data.list[i].imgList[0].pic+'">' +
+                    $tmpStr = $('<div class="itemCell" data-productId="'+result.data.list[i].id+'" data-starttime="'+result.data.list[i].startTime+'" data-num="'+result.data.list[i].sum+'">' +
+                        '<div><img class="second" data-original="'+result.data.list[i].pic+'">' +
                         '<div class="second"><h3>'+result.data.list[i].title+'</h3><p>'+result.data.list[i].subtitle+'</p>' +
                         '<span>￥ '+result.data.list[i].costPrice+'</span></div></div>' +
-                        '<div class="mask"></div><span class="none"></span></div>';
-                    str += tmpStr;
+                        '<div class="mask"></div><span class="none">距开抢 00天00时00分00秒</span></div>' );
+                    //计时器
+                    var difference = Math.round( parseInt( $tmpStr.attr('data-starttime'))-new Date().getTime()/1000 );
+                    if(difference < 0){
+                        if($tmpStr.attr('data-num')==0){
+                            $tmpStr.find('.none').html('已抢光');
+                        }else {
+                            $tmpStr.find('.none').hide();
+                        }
+                    }else {
+                        $tmpStr.find('.mask').addClass('active');
+                        leftTimer(difference,$tmpStr);
+                    }
+                    $('#localList').append($tmpStr);
                 }
-                $('#localList').append(str);
-
-                //计时器
-                var $itemCell = $('#localList').children('.itemCell');
-                for(var i=0;i<len;i++){
-                    var difference = Math.round(parseInt( $($itemCell[i]).attr('data-starttime'))-new Date().getTime()/1000);
-                    leftTimer(difference,$($itemCell[i]));
-                }
-
 
                 //图片预加载
                 $("#localList img").lazyload({
@@ -63,7 +65,7 @@ $(document).ready(function(){
                 dropload.resetload();
 
                 $('#localList').children('.itemCell').click(function () {
-                    window.location.href = 'localDisDetail.html?data-productId=' + $(this).attr('data-productId');
+                    window.location.href = 'localDisDetail.html?productId=' + $(this).attr('data-productId');
                 });
             },
             error: function (e) {
@@ -95,22 +97,21 @@ $(document).ready(function(){
             clearInterval(timeP);
         }
         function timer() {
-            if(difference < 0 && dom.attr('data-num') == 0){
-                dom.find('.mask').addClass('active');
-                $time.html('已抢光');
-            }else if(difference == 0){
+            if(difference == 0){
                 dom.find('.mask').removeClass('active');
                 $time.hide()
             }
-            var hour = Math.floor(difference/3600);
-            var minute = Math.floor((difference-hour*3600)/60);
-            var second = difference - hour*3600 - minute*60;
 
+            var day = Math.floor(difference/(3600*24));
+            var hour = Math.floor((difference-day*3600*24)/3600);
+            var minute = Math.floor((difference-day*3600*24-hour*3600)/60);
+            var second = difference - day*3600*24 - hour*3600 - minute*60;
+
+            var da = day < 10 ? '0' + day : day;
             var hou = hour < 10 ? '0' + hour : hour;
             var min = minute < 10 ? '0'+ minute : minute ;
             var sec = second < 10 ? '0' + second-- : second-- ;
-            $time.html('距开抢 ' + hou + '时' + min + '分' + sec + '秒');
-            dom.find('.mask').addClass('active');
+            $time.html('距开抢 ' + da + '天' + hou + '时' + min + '分' + sec + '秒');
             difference--;
         }
     }

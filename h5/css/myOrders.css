@@ -9,6 +9,7 @@ body{
 	/*background: #eeeeee;*/
 	margin: 0;
 	padding: 0;
+	font-size: 16px;
 }
 header,.wrapper{
 	font-size: 16px;
@@ -49,7 +50,7 @@ header div>.tab{
 
 
 /*内容部分*/
-.wrapper{
+.wrapper,.enjoyer{
 	position: absolute;
 	top: 0.14rem;
 	width: 1rem;
@@ -113,32 +114,35 @@ header div>.tab{
     line-height: 14px;
     display: inline-block;
 }
+
+
 /*商品订单选项卡*/
-.wrapper .header{
+.wrapper >.header ,.enjoyer>.header {
 	width: 1rem;
 	height: 0.12rem;
 	color: #9f9f9f;
 	border-top: rgba(178, 178, 178, 0.17) 1px solid;
-	/*position: absolute;*/
 	top: 0.14rem;
 	text-align: center;
 	position: fixed;
     background-color: #fff;
     z-index: 20;
+	padding: 0 10%;
 }
-.wrapper .header>div{
-	display:inline-block;
+.wrapper>.header>div , .enjoyer>.header>div{
+	/*display:inline-block;*/
+	font-size: 15px;
 	width: 0.15rem;
-	margin:0 0.01rem;
 	height: 0.06rem;
-	margin-top: 0.02rem;
-	/*color:#fff;*/
+	line-height: 0.06rem;
+	/*margin-top: 0.02rem;*/
+	margin: 0.02rem 0.03rem 0 auto;
 	color: #9f9f9f;
 	padding: 0.01rem 0.02rem;
-	/*background-color: #b7a66e;*/
 	background-color: #fff;
+	float: left;
 }
-.wrapper .container{
+.wrapper .container , .enjoyer>.enjoyList{
 	position: absolute;
 	top: 0.12rem;
 	color: #000;
@@ -228,7 +232,7 @@ header div>.tab{
 .wrapper .container .singleMsg .msg>div h3{
 	-webkit-margin-before:0;
 	-webkit-margin-after:0;
-	float: left;	
+	float: left;
 	color: #6c6c6c;
 	font-size: 17px;
 	margin-right: 0.04rem;
@@ -237,7 +241,7 @@ header div>.tab{
 	-webkit-margin-before:0;
 	-webkit-margin-after:0;
 	float: left;
-	color: #9f9f9f;	
+	color: #9f9f9f;
 }
 .wrapper .container .singleMsg .msg>div p.status{
 	color: #b7a66e;
@@ -249,7 +253,7 @@ header div>.tab{
 .wrapper .container .singleMsg .msg>p.what{
 	-webkit-margin-before:0.1em;
 	-webkit-margin-after:1em;
-	clear: left;	
+	clear: left;
 	font-size: 14px;
 	color: #9b9b9b;
 }

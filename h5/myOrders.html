@@ -7,32 +7,28 @@
 <meta name="screen-orientation"content="portrait">
 <meta name="x5-orientation"content="portrait">
     <link  rel="stylesheet" type="text/css" href="css/myOrders.css">
-
-    <script>
-        var iWidth=document.documentElement.clientWidth;
-        document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
-    </script>
 </head>
 <body>
 <header>
   <center>
     <div class="appointments"><span class="tab">活动预约</span></div>
     <div class="commodityOrder"><span class="tab">商品订单</span></div>
+      <div class="enjoyOrder"><span class="tab">乐享订单</span></div>
   </center>
 </header>
-
 
 <div class="appointment"></div>
 
 <div class="wrapper">
-  <div class="header">
-    <div class="allApo" data-orderstate="0">全部</div>
-    <div class="waittingForApo" data-orderstate="1">待付款</div>
-    <div class="havePaidApo" data-orderstate="2">已付款</div>
-    <div class="havePostApo" data-orderstate="3">已发货</div>
-  </div>
-  <div class="container"></div>
+    <div class="header">
+        <div class="allApo" data-orderstate="0">全部</div>
+        <div class="waittingForApo" data-orderstate="1">待付款</div>
+        <div class="havePaidApo" data-orderstate="2">已付款</div>
+        <div class="havePostApo" data-orderstate="3">已发货</div>
+    </div>
 
+    <!--商品订单-->
+    <div class="container"></div>
     <!-- loading  图 -->
     <div  id="orderLoading" class="spinner" style="display: none">
         <div class="spinner-container container1">
@@ -56,8 +52,41 @@
     </div>
 </div>
 
-
-
+<div class="enjoyer" style="display: none">
+    <div class="header">
+        <div class="allApo" data-orderstate="0">待付款</div>
+        <div class="waittingForApo" data-orderstate="1">待使用</div>
+        <div class="havePaidApo" data-orderstate="2">已完成</div>
+        <div class="havePostApo" data-orderstate="3">已取消</div>
+    </div>
+    <!--乐享订单-->
+    <div class="enjoyList"></div>
+    <!-- loading  图 -->
+    <div  id="orderLoading" class="spinner" style="display: none">
+        <div class="spinner-container container1">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container2">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container3">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+    </div>
+</div>
+<script>
+    var iWidth=document.documentElement.clientWidth;
+    document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+</script>
 <script src="js/jquery/jquery.min.js"></script>
 <script src="js/public/public.js"></script>
 <script src="js/myOrders.js"></script>

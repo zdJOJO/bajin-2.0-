@@ -25,6 +25,31 @@ $(document).ready(function(){
 
 
 
+	//点击活动预约    主要 切换选项卡，活动预约与商品订单切换按钮
+	$(".appointments").click(function(){
+		doCss(this);
+		$(".appointment").show().siblings('div').hide();
+	});
+
+	//点击商品订单
+	$(".commodityOrder").click(function(){
+		doCss(this);
+		$(".wrapper").show().siblings('div').hide();
+		$(".wrapper").children('.header').children('div').attr('data-classstr','commodityOrder');
+		isDeleteAction = 0;
+		to_OrderTab(whereLocationHere(isDeleteAction),0,'commodityOrder');
+	});
+
+	//点击乐享订单
+	$(".enjoyOrder").click(function(){
+		doCss(this);
+		$(".enjoyer").show().siblings('div').hide();
+		$(".enjoyer").children('.header').children('div').attr('data-classstr','enjoyOrder');
+		isDeleteAction = 0;
+		to_OrderTab(whereLocationHere(isDeleteAction),0,'enjoyOrder');
+	});
+
+
 	// 判断 从哪里跳转此页面
 	var isDeleteAction = -1;
 	if(window.location.search.indexOf('allApo') > 0){
@@ -70,82 +95,84 @@ $(document).ready(function(){
 		$(".appointments").css("border-bottom", "3px solid #6b6b6b");
 	}
 
-
-
 	var page = 1;
 
 	//对Tab进行渲染
-	var to_OrderTab = function (str,orderState) {
+	var to_OrderTab = function (str,orderState,classStr) {
 		//选择第一级
-		$(".commodityOrder").css("border-bottom", "3px solid #6b6b6b").css("color", "#6b6b6b").siblings().css("border-bottom", "3px solid #fff").css("color", "#b2b2b2");
+		$('.'+ classStr).css({
+			"border-bottom": "3px solid #6b6b6b",
+			"color": "#6b6b6b",
+		}).siblings().css({
+			"border-bottom": "3px solid #fff",
+			"color": "#b2b2b2"
+		});
+		$(".appointment").hide();
 
 
-		$(".appointment").css("display", "none");
-		$(".wrapper").css("display", "block");
-
+		if($(this).hasClass('commodityOrder')){
+			$(".wrapper").show();
+		}else if($(this).hasClass('enjoyOrder')){
+			$(".enjoyer").show();
+		}
 
 		//选择第二级
-		$("." + str).css("background-color", "#b7a66e").css("color", "#fff").siblings().css("background-color", "#fff").css("color", "#9f9f9f");
+		$("." + str).css({
+			"background-color": "#b7a66e",
+			"color": "#fff"
+		}).siblings().css({
+			"background-color": "#fff",
+			"color": "#9f9f9f"
+		});
 
-		getOrders(1, 10, orderState);
+		if(classStr == 'commodityOrder'){
+			getOrders(1, 10,orderState);
+		}else if( classStr== 'enjoyOrder'){
+			getEnjorOrders(1,orderState)
+		}
 
 		$(window).unbind("scroll");    //为了防止当前列表的 滚动条 影响 另外一个页面的滚动条
 		page = 1;
 		try {
-			scrollLoadOrder(orderState);
+			scrollLoadOrder(orderState,classStr);
 		} catch (e) {
 			//todo
 		}
 
 	}
 
-
 	if(isDeleteAction >= 0){
-		to_OrderTab(whereLocationHere(isDeleteAction),isDeleteAction);
+		to_OrderTab(whereLocationHere(isDeleteAction),isDeleteAction,'commodityOrder');
 	}
-
-
-
-
-	//点击活动预约    主要 切换选项卡，活动预约与商品订单切换按钮
-	$(".appointments").click(function(){
-		window.location.href = 'myOrders.html';
-	});
-
-
-	//点击商品订单
-	$(".commodityOrder").click(function(){
-		// getMessage(2);
-		doCss(this);
-		$(".wrapper").css("display","block");
-		$(".appointment").css("display","none");
-		isDeleteAction = 0;
-		to_OrderTab(whereLocationHere(isDeleteAction),0);
-	});
 
 
 	//处理选项卡公共的事件
 	function doCss(self){
-		$(self).css("border-bottom","3px solid #6b6b6b;").css("color","#6b6b6b");
-		$(self).siblings().css("border-bottom","3px solid #fff;").css("color","#b2b2b2");
+		$(self).css({
+			'border-bottom': '3px solid #6b6b6b',
+			"color": "#6b6b6b"
+		}).siblings().css({
+			"border-bottom": "3px solid #fff",
+			"color": "#b2b2b2"
+		});
 	}
 
 	function doCss2(self){
-		self.css("background-color","#b7a66e").css("color","#fff");
-		self.siblings().css("background-color","#fff").css("color","#9f9f9f");
+		$(self).css({
+			"background-color": "#b7a66e",
+			"color": "#fff"
+		}).siblings().css({
+			"background-color": "#fff",
+			"color": "#9f9f9f"
+		});
 	}
 
 
-
-
-
-
 	//二级 商品订单下的切换按钮
-	$(".wrapper>.header>div").bind("click",function () {
+	$(".header>div").bind("click",function () {
 		var num;
 		orderTab = $(this).attr("class");
-		switch(orderTab)
-		{
+		switch(orderTab) {
 			case 'allApo':
 				num  = 0 ;
 				break;
@@ -160,7 +187,8 @@ $(document).ready(function(){
 				break;
 		}
 		$(".container").html("");
-		to_OrderTab(whereLocationHere(isDeleteAction),num);
+		$(".enjoyList").html("");
+		to_OrderTab(whereLocationHere(isDeleteAction),num,$(this).attr('data-classstr'));
 		doCss2($(this));
 	});
 
@@ -225,7 +253,7 @@ $(document).ready(function(){
 
 
 	//滚动加载 订单
-	var scrollLoadOrder = function (orderState ) {
+	var scrollLoadOrder = function (orderState,classStr) {
 		$(window).bind("scroll",function(){
 			var scrollTop = $(this).scrollTop();
 			var scrollHeight = $(document).height();
@@ -238,7 +266,12 @@ $(document).ready(function(){
 
 			if (scrollTop + windowHeight == scrollHeight) {
 				page++;
-				getOrders(page, 10, orderState );
+
+				if(classStr == 'commodityOrder'){
+					getOrders(page, 10, orderState);
+				}else if(classStr == 'enjoyOrder'){
+					getEnjorOrders(page, 10, orderState);
+				}
 			}
 		});
 	};
@@ -347,13 +380,95 @@ $(document).ready(function(){
 	}
 
 
+	//获取 乐享 订单  http://121.196.232.233/card/productorder/all?currentPage={currentPage}&status={status}&token={token}
+	//  0待付款1待使用2已完成3已取消
+	function getEnjorOrders(currentPage,orderState) {
+		if(currentPage == 1){
+			$('#orderLoading').css('bottom','75%').show();
+		}else {
+			$('#orderLoading').css('bottom','6px').show();
+		}
+
+		$.ajax({
+			type: "get",
+			aysnc: true,
+			dataType: "json",
+			contentType: "application/json;charset=UTF-8",
+			url: port+"/card/productorder/all?currentPage="+currentPage+"&status="+orderState+"&token="+token,
+			success:function(res){
+				if(currentPage == 1 && res.data.list.length==0){
+					var strEmpty = '<center><img src="imgs/save_.png"/><h2>该分类里没有商品</h2><p>再去看看吧</p><p class="turnPage">再去看看</p></center>';
+					$(".enjoyList").html(strEmpty);
+					$(".enjoyList .turnPage").click(function(){
+						window.location.href = "pierre.html?good";
+					});
+					$(window).unbind('scroll');
+					$('#orderLoading').hide();
+					return;
+				}
+
+				if(currentPage > 1 && res.data.list.length == 0){
+					$(window).unbind('scroll');
+					setTimeout(function () {
+						$('#orderLoading').hide();
+						$(".enjoyList >div:last-child").css('margin-bottom','0');
+					},1500);
+					return;
+				}
+
+				for(var i=0;i<res.data.list.length;i++){
+					var str= "";
+					var state = "";
+					var url;
+
+					for(var j=0; j<res.data.list[i].detailOrderModels.length;j++){
+						str +='<img src="'+res.data.list[i].detailOrderModels[j].hotPic+'"/>' +
+							'<div class="msg"><h3>'+res.data.list[i].detailOrderModels[j].goodsTitle+'</h3>' +
+							'<p class="what">'+res.data.list[i].detailOrderModels[j].skuGague+'</p>' +
+							'<p class="cost">￥'+formatePrice(res.data.list[i].detailOrderModels[j].skuPrice)+'</p>' +
+							'<p class="number">×'+res.data.list[i].detailOrderModels[j].count+'</p></div>';
+					}
+
+
+					if(res.data.list[i].orderModel.orderState == 1){
+						state = "待付款";
+						url = +res.data.list[i].orderModel.orderId;
+					}else if(res.data.list[i].orderModel.orderState == 2){
+						state = "已付款";
+						url = res.data.list[i].orderModel.orderId;
+					}else if(res.data.list[i].orderModel.orderState == 3){
+						state = "已发货";
+						url = res.data.list[i].orderModel.orderId;
+					}
+
+					var html = $('<div class="singleMsg" data-url="'+url+'">'+str+'<div class="totleMsg">' +
+						'<p class="status">'+state+'</p><p class="detail">' +
+						'共'+data.list[i].orderModel.orderNumber+'件商品&nbsp;合计:￥'+ data.list[i].orderModel.orderCount.toFixed(2) + '</p></div></div>');
+
+					$(".enjoyList").append(html);
+
+					$(".enjoyList >div:last-child").css('margin-bottom','30px');
+				}
+
+				$('#orderLoading').hide();
+
+				//绑定点击跳转事件
+				$(".singleMsg").bind("click",function(){
+					//todo
+				});
+			},
+			error:function(data){
+				//todo
+			}
+		});
+	}
+
+
 	$(window).unload(function(){
 		window.location.href = 'index.html';
 	});
+
 });
-
-
-
 
 
 

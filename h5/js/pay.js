@@ -60,7 +60,7 @@ $(function(){
 							if(window.location.search.split("=")[0] == "?mallOrderId"){
 								url = port+"/card/bank/mall/pay/"+cardItem+"/"+orderId+"?token="+token;
 							}
-							if(window.location.search.split("=")[0] == "?productId"){
+							if(window.location.search.split("=")[0] == "?productOrderId"){
 							//主题产品支付	http://121.196.232.233/card/bank/subject/pay/{cardno}/{productOrderId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
 								url = port+"/card/bank/subject/pay/"+cardItem+"/"+orderId+"?token="+token;
 							}

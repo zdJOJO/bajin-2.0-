@@ -138,100 +138,105 @@ $(function (){
 
     //点击 抽奖
     $('.pointer').click(function (){
-        if(!token){
-            $.modal({
-                title: "提示",
-                text: "您还未登录白金尊享",
-                buttons: [
-                    { text: "去登录", onClick: function(){
-                        window.location.href = "login.html?his=" + escape('fareDraw.html');
-                    } },
-                    { text: "取消", className: "default", onClick: function(){
-                        //todo
-                    } },
-                ]
-            });
-        }else {
-            if(!hasBankCard){
-                $.modal({
-                    title: "提示",
-                    text: "您还未绑定工商银行信用卡",
-                    buttons: [
-                        { text: "去绑卡", onClick: function(){
-                            window.location.href = "bank.html?his=" + escape(his);
-                        } },
-                        { text: "取消", className: "default", onClick: function(){
-                            //todo
-                        } },
-                    ]
-                });
-            }else {
-                $.ajax({
-                    type: 'post',
-                    dataType: "json",
-                    contentType : "application/json",
-                    url: port + '/card/prize?token=' + token + '&sectionId=7',
-                    success: function (result) {
-                        if(result.code == '207'){
-                            $.modal({
-                                title: "提示",
-                                text: "本活动仅限新注册用户参与每个用户仅限一次抽奖机会）",
-                                buttons: [
-                                    { text: "知道了", onClick: function(){} },
-                                ]
-                            });
-                            return
-                        }
-                        if(bRotate)return;
-                        var item;
-                        if(result.code == '208'){
-                            item = 0;
-                        }else {
-                            item = transFormPrizeIdToItem(result.data.prizeId);
-                        }
-                        switch (item) {
-                            case 0:
-                                //var angle = [26, 88, 137, 185, 235, 287, 337];
-                                rotateFn(0, 338, '谢谢参与');
-                                break;
-                            case 1:
-                                //var angle = [88, 137, 185, 235, 287];
-                                rotateFn(1, 203, '20元话费');
-                                break;
-                            case 2:
-                                //var angle = [137, 185, 235, 287];
-                                rotateFn(2, 113, '50元话费');
-                                break;
-                            case 3:
-                                //var angle = [137, 185, 235, 287];
-                                rotateFn(3, 158, '阳澄湖大杂蟹');
-                                break;
-                            case 4:
-                                //var angle = [185, 235, 287];
-                                rotateFn(4, 23, '1280元护理疗程体验券');
-                                break;
-                            case 5:
-                                //var angle = [185, 235, 287];
-                                rotateFn(5, 293, '550元的云上清风现金抵用券');
-                                break;
-                            case 6:
-                                //var angle = [235, 287];
-                                rotateFn(6, 68, '108元的阿卡有机蔬菜一箱');
-                                break;
-                            case 7:
-                                //var angle = [287];
-                                rotateFn(7, 248, '龙羲红果礼盒');
-                                break;
-                        }
 
-                        console.log(item);
-                    },
-                    error: function () {
+        $.alert("该抽奖活动已经结束", "提示", function() {
+            return
+        });
 
-                    }
-                });
-            }
-        }
+        // if(!token){
+        //     $.modal({
+        //         title: "提示",
+        //         text: "您还未登录白金尊享",
+        //         buttons: [
+        //             { text: "去登录", onClick: function(){
+        //                 window.location.href = "login.html?his=" + escape('fareDraw.html');
+        //             } },
+        //             { text: "取消", className: "default", onClick: function(){
+        //                 //todo
+        //             } },
+        //         ]
+        //     });
+        // }else {
+        //     if(!hasBankCard){
+        //         $.modal({
+        //             title: "提示",
+        //             text: "您还未绑定工商银行信用卡",
+        //             buttons: [
+        //                 { text: "去绑卡", onClick: function(){
+        //                     window.location.href = "bank.html?his=" + escape(his);
+        //                 } },
+        //                 { text: "取消", className: "default", onClick: function(){
+        //                     //todo
+        //                 } },
+        //             ]
+        //         });
+        //     }else {
+        //         $.ajax({
+        //             type: 'post',
+        //             dataType: "json",
+        //             contentType : "application/json",
+        //             url: port + '/card/prize?token=' + token + '&sectionId=7',
+        //             success: function (result) {
+        //                 if(result.code == '207'){
+        //                     $.modal({
+        //                         title: "提示",
+        //                         text: "本活动仅限新注册用户参与每个用户仅限一次抽奖机会）",
+        //                         buttons: [
+        //                             { text: "知道了", onClick: function(){} },
+        //                         ]
+        //                     });
+        //                     return
+        //                 }
+        //                 if(bRotate)return;
+        //                 var item;
+        //                 if(result.code == '208'){
+        //                     item = 0;
+        //                 }else {
+        //                     item = transFormPrizeIdToItem(result.data.prizeId);
+        //                 }
+        //                 switch (item) {
+        //                     case 0:
+        //                         //var angle = [26, 88, 137, 185, 235, 287, 337];
+        //                         rotateFn(0, 338, '谢谢参与');
+        //                         break;
+        //                     case 1:
+        //                         //var angle = [88, 137, 185, 235, 287];
+        //                         rotateFn(1, 203, '20元话费');
+        //                         break;
+        //                     case 2:
+        //                         //var angle = [137, 185, 235, 287];
+        //                         rotateFn(2, 113, '50元话费');
+        //                         break;
+        //                     case 3:
+        //                         //var angle = [137, 185, 235, 287];
+        //                         rotateFn(3, 158, '阳澄湖大杂蟹');
+        //                         break;
+        //                     case 4:
+        //                         //var angle = [185, 235, 287];
+        //                         rotateFn(4, 23, '1280元护理疗程体验券');
+        //                         break;
+        //                     case 5:
+        //                         //var angle = [185, 235, 287];
+        //                         rotateFn(5, 293, '550元的云上清风现金抵用券');
+        //                         break;
+        //                     case 6:
+        //                         //var angle = [235, 287];
+        //                         rotateFn(6, 68, '108元的阿卡有机蔬菜一箱');
+        //                         break;
+        //                     case 7:
+        //                         //var angle = [287];
+        //                         rotateFn(7, 248, '龙羲红果礼盒');
+        //                         break;
+        //                 }
+        //
+        //                 console.log(item);
+        //             },
+        //             error: function () {
+        //
+        //             }
+        //         });
+        //     }
+        // }
     });
 
 

@@ -7,6 +7,7 @@ $(document).ready(function(){
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
     var productId = window.location.search.split('&')[0].split('=')[1];
+    var productOrderId;
     var productObj = {};
     var totalPrice = 0;
 
@@ -16,7 +17,7 @@ $(document).ready(function(){
         url: port + '/card/product/' + productId ,
         success: function (result) {
             productObj = result.data;
-            $('#mallDetail').children('.headImg').html('<img src="'+result.data.imgList[0].pic+'">')
+            $('#mallDetail').children('.headImg').html('<img src="'+result.data.pic+'">')
             $('#mallDetail').children('.list').html('<p class="title">'+result.data.title+'</p>' +
                 '<p class="subtitle">'+result.data.subtitle+'</p><p class="price">￥'+result.data.costPrice.toFixed(2)+'</p>' +
                 '<p class="disPrice">￥'+result.data.price.toFixed(2)+'</p><p class="num">已售'+result.data.soldSum+'份</p>');
@@ -73,31 +74,44 @@ $(document).ready(function(){
                     sumPrice: sumPrice
                 }),
                 success: function (result) {
-                    //todo
-                    $.actions({
-                        title: "请选择支付方式",
-                        onClose: function() {
-                            // 关闭弹层的回调函数
-                            $.modal({
-                                title: "确认要放弃付款？",
-                                text: "订单会保留一段时间，请尽快支付",
-                                buttons: [
-                                    { text: "继续支付", onClick: function(){
-                                        window.location.href = "payIFrame.html?productId=" + productId;
-                                    }
-                                    },
-                                    { text: "确认离开",className: "default",onClick: function(){
-                                        // window.location.href = "myOrders.html";
-                                    }
-                                    },
-                                ]
-                            });
-                        },
-                        actions: [{
+                    //生成订单不成功的状态
+                    if(result.code == '601'){
+                        $.modal({
+                            title: "提示",
+                            text: result.message,
+                            buttons: [
+                                { text: "去绑卡", onClick: function(){
+                                    window.location.href="bank.html?his="+escape(his);
+                                } },
+                                { text: "知道了", className: "default", onClick: function(){ console.log(3)} },
+                            ]
+                        });
+                    }else if(result.code == '201'){
+                        productOrderId = result.data.id;
+                        $.actions({
+                            title: "请选择支付方式",
+                            onClose: function() {
+                                // 关闭弹层的回调函数
+                                $.modal({
+                                    title: "确认要放弃付款？",
+                                    text: "订单会保留一段时间，请尽快支付",
+                                    buttons: [
+                                        { text: "继续支付", onClick: function(){
+                                            window.location.href = "payIFrame.html?productOrderId=" + productOrderId;
+                                        }
+                                        },
+                                        { text: "确认离开",className: "default",onClick: function(){
+                                            //todo
+                                        }
+                                        },
+                                    ]
+                                });
+                            },
+                            actions: [{
                                 text: "银行卡支付",
                                 className: "color-warning",
                                 onClick: function() {  //跳转 银行卡支付
-                                    window.location.href = "payIFrame.html?id=" + productId;
+                                    window.location.href = "payIFrame.html?productOrderId=" + productOrderId;
                                     $('#applyName').val("");
                                     $('#applyPhone').val("");
                                     $("#email").val("");
@@ -110,8 +124,10 @@ $(document).ready(function(){
                                     // arouseWeixinPay();  //点击  微信支付
                                 }
                             }
-                        ]
-                    });
+                            ]
+                        });
+                    }
+
                 },
                 error: function (e) {
                     //todo

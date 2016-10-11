@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <meta name="screen-orientation"content="portrait">
+    <meta name="x5-orientation"content="portrait">
+    <link rel="stylesheet" type="text/css" href="css/weiXin/weui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/weiXin/jquery-weui.css">
+    <link rel="stylesheet" type="text/css" href="css/enjoyOrderDetail.css">
+    <title>订单详情</title>
+</head>
+<body>
+<div id="detailInfo">
+    <!--<ul >-->
+        <!--<li>-->
+            <!--订单编号：5664646144646<br>下单时间：2016-78-878 12:14-->
+        <!--</li>-->
+        <!--<li class="bold-btn">待付款-->
+            <!--<span class="cancelOrder">取消订单</span>-->
+        <!--</li>-->
+    <!--</ul>-->
+    <!--<ul>-->
+        <!--<li class="product">-->
+            <!--<img src="">-->
+            <!--<span>大股东个地方的个大富大贵发滚动给我</span>-->
+        <!--</li>-->
+        <!--<li class="bold-btn tell">-->
+            <!--<img src="imgs/enjoy/phone.png">-->
+            <!--<a href="tel:15164646">联系白金尊享</a>-->
+            <!--<span>></span>-->
+        <!--</li>-->
+    <!--</ul>-->
+    <!--<ul>-->
+        <!--<li>-->
+            <!--用户信息<br>购买人-->
+            <!--<span>刘德华</span>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--手机号码-->
+            <!--<span>1354897564</span>-->
+        <!--</li>-->
+        <!--<li class="bold-btn">-->
+            <!--份数-->
+            <!--<span>3</span>-->
+        <!--</li>-->
+    <!--</ul>-->
+    <!--<ul>-->
+        <!--<li>-->
+            <!--消费总金额-->
+            <!--<span class="price">￥1313.00</span>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<span class="price">￥1313.00</span><span>实付款: </span>-->
+        <!--</li>-->
+    <!--</ul>-->
+</div>
+<footer>
+    总额：<span >￥1313.00</span>
+    <button id="pay">付款</button>
+</footer>
+
+<div id="leftTime"> 支付剩余时间: 00:00</div>
+
+
+<div id="poPub">
+    <div class="content">
+        <div class="head">请选择使用的消费券</div>
+        <ul class="list"></ul>
+        <div class="foot">
+            <button class="sure" id="useNext">使用</button>
+        </div>
+        <img id="close1" src="imgs/enjoy/close.png">
+    </div>
+
+    <div class="content verification" style="display: none">
+        <div class="head"><span>消费券为您个人的私人财产，为了确保安全，需要对您手机进行验证</span></div>
+        <div class="main">
+            <input id="verificationCode" type="number" placeholder="请输入验证码">
+            <button class="vCode">重发验证码(60s)</button>
+        </div>
+        <div class="foot">
+            <button class="sure" id="verif">验证</button>
+        </div>
+        <img id="close2" src="imgs/enjoy/close.png">
+    </div>
+</div>
+
+</body>
+<script  id="ip" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/public/public.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
+<script type="text/javascript" src="js/public/md5.js"></script>
+<script type="text/javascript" src="js/enjoyOrderDetail.js"></script>
+</html>

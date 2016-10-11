@@ -23,8 +23,6 @@ $(document).ready(function(){
 	var his = hisStr[hisStr.length-1];
 
 
-
-
 	//点击活动预约    主要 切换选项卡，活动预约与商品订单切换按钮
 	$(".appointments").click(function(){
 		doCss(this);
@@ -42,11 +40,12 @@ $(document).ready(function(){
 
 	//点击乐享订单
 	$(".enjoyOrder").click(function(){
+		$(".enjoyList").html("");
 		doCss(this);
 		$(".enjoyer").show().siblings('div').hide();
 		$(".enjoyer").children('.header').children('div').attr('data-classstr','enjoyOrder');
 		isDeleteAction = 0;
-		to_OrderTab(whereLocationHere(isDeleteAction),0,'enjoyOrder');
+		to_OrderTab(whereLocationHere(isDeleteAction),-2,'enjoyOrder');
 	});
 
 
@@ -165,6 +164,20 @@ $(document).ready(function(){
 			"background-color": "#fff",
 			"color": "#9f9f9f"
 		});
+
+		//乐享订单
+		if($(self).hasClass('active')){
+			return
+		}else {
+			$(self).addClass('active').siblings().removeClass('active');
+		}
+		if($(self).children('a').hasClass('active')){
+			return
+		}else {
+			$(self).children('a').addClass('active');
+			$(self).siblings().children('a').removeClass('active');
+		}
+
 	}
 
 
@@ -172,27 +185,22 @@ $(document).ready(function(){
 	$(".header>div").bind("click",function () {
 		var num;
 		orderTab = $(this).attr("class");
-		switch(orderTab) {
-			case 'allApo':
-				num  = 0 ;
-				break;
-			case 'waittingForApo':
-				num  = 1;
-				break;
-			case 'havePaidApo':
-				num  = 2;
-				break;
-			case 'havePostApo':
-				num  = 3;
-				break;
+		if(orderTab=='allApo' || orderTab=='unPaid'){
+			num  = 0 ;
+		}else if(orderTab=='waittingForApo' || orderTab=='unUse'){
+			num  = 1;
+		}else if(orderTab=='havePaidApo' || orderTab=='finished'){
+			num  = 2;
+		}else if(orderTab=='havePostApo'){
+			num = 3;
+		}else {
+			num  = -2 ;  //  乐享订单全部，num 不传
 		}
 		$(".container").html("");
 		$(".enjoyList").html("");
 		to_OrderTab(whereLocationHere(isDeleteAction),num,$(this).attr('data-classstr'));
 		doCss2($(this));
 	});
-
-
 
 
 	//活动加载
@@ -380,27 +388,28 @@ $(document).ready(function(){
 	}
 
 
-	//获取 乐享 订单  http://121.196.232.233/card/productorder/all?currentPage={currentPage}&status={status}&token={token}
-	//  0待付款1待使用2已完成3已取消
+	//获取 乐享 订单
+	//  -2全部  0待付款 1待使用 2已完成
 	function getEnjorOrders(currentPage,orderState) {
 		if(currentPage == 1){
 			$('#orderLoading').css('bottom','75%').show();
 		}else {
 			$('#orderLoading').css('bottom','6px').show();
 		}
-
+		var urlStr = (orderState >=0) ? port+"/card/productorder/all?currentPage="+currentPage+"&status="+orderState+"&token="+token
+			:  port+"/card/productorder/all?currentPage="+currentPage+"&token="+token ;
 		$.ajax({
 			type: "get",
 			aysnc: true,
 			dataType: "json",
 			contentType: "application/json;charset=UTF-8",
-			url: port+"/card/productorder/all?currentPage="+currentPage+"&status="+orderState+"&token="+token,
+			url: urlStr,
 			success:function(res){
 				if(currentPage == 1 && res.data.list.length==0){
 					var strEmpty = '<center><img src="imgs/save_.png"/><h2>该分类里没有商品</h2><p>再去看看吧</p><p class="turnPage">再去看看</p></center>';
 					$(".enjoyList").html(strEmpty);
 					$(".enjoyList .turnPage").click(function(){
-						window.location.href = "pierre.html?good";
+						window.location.href = "pierre.html?brand";
 					});
 					$(window).unbind('scroll');
 					$('#orderLoading').hide();
@@ -415,46 +424,44 @@ $(document).ready(function(){
 					},1500);
 					return;
 				}
-
 				for(var i=0;i<res.data.list.length;i++){
-					var str= "";
+					var str = "";
 					var state = "";
-					var url;
 
-					for(var j=0; j<res.data.list[i].detailOrderModels.length;j++){
-						str +='<img src="'+res.data.list[i].detailOrderModels[j].hotPic+'"/>' +
-							'<div class="msg"><h3>'+res.data.list[i].detailOrderModels[j].goodsTitle+'</h3>' +
-							'<p class="what">'+res.data.list[i].detailOrderModels[j].skuGague+'</p>' +
-							'<p class="cost">￥'+formatePrice(res.data.list[i].detailOrderModels[j].skuPrice)+'</p>' +
-							'<p class="number">×'+res.data.list[i].detailOrderModels[j].count+'</p></div>';
-					}
-
-
-					if(res.data.list[i].orderModel.orderState == 1){
+					if(res.data.list[i].status == 0){
 						state = "待付款";
-						url = +res.data.list[i].orderModel.orderId;
-					}else if(res.data.list[i].orderModel.orderState == 2){
-						state = "已付款";
-						url = res.data.list[i].orderModel.orderId;
-					}else if(res.data.list[i].orderModel.orderState == 3){
-						state = "已发货";
-						url = res.data.list[i].orderModel.orderId;
+					}else if(res.data.list[i].status == 1){
+						state = "待使用";
+					}else if(res.data.list[i].status == 2){
+						state = "已完成";
+					}else if(res.data.list[i].status == 3){
+						state = "已取消";
+					} else if(!res.data.list[i].status){
+						state = "全部";
 					}
 
-					var html = $('<div class="singleMsg" data-url="'+url+'">'+str+'<div class="totleMsg">' +
-						'<p class="status">'+state+'</p><p class="detail">' +
-						'共'+data.list[i].orderModel.orderNumber+'件商品&nbsp;合计:￥'+ data.list[i].orderModel.orderCount.toFixed(2) + '</p></div></div>');
+					if(res.data.list[i].status == 0){
+						var timerStr = '<li class="timer">支付倒计时 00:00</li>'
+					}else {
+						timerStr = '<li class="timer" style="height: 0"></li>';
+					}
+					str = $('<div class="itemOrder" data-orderid="'+res.data.list[i].id+'"><ul>' +
+						'<li><span class="orderNum">订单编号:'+res.data.list[i].number+'</span><span class="state">'+state+'</span></li> ' +
+						'<li><img src="'+res.data.list[i].productModel.pic+'"><span class="title">'+res.data.list[i].title+'</span></li>' +
+						'<li><span>￥'+res.data.list[i].sumPrice.toFixed(2)+'</span><span class="pay">去付款</span></li>'+timerStr+'</ul> </div>');
 
-					$(".enjoyList").append(html);
-
-					$(".enjoyList >div:last-child").css('margin-bottom','30px');
+					if( ((new Date().getTime()/1000 - res.data.list[i].createTime)< 60*30) && res.data.list[i].status == 0){
+						enjoyTimer(res.data.list[i].createTime,str);
+					}
+					$(".enjoyList").append(str);
 				}
+				$(".enjoyList >div:last-child").css('margin-bottom','30px');
 
 				$('#orderLoading').hide();
 
 				//绑定点击跳转事件
-				$(".singleMsg").bind("click",function(){
-					//todo
+				$(".itemOrder").bind("click",function(){
+					window.location.href = 'enjoyOrderDetail.html?orderId=' + $(this).attr('data-orderid');
 				});
 			},
 			error:function(data){
@@ -470,6 +477,28 @@ $(document).ready(function(){
 
 });
 
+
+//计时器
+function enjoyTimer(creatTime,dom) {
+	var leftTime = creatTime + 30*60 - parseInt(new Date().getTime()/1000);
+	function timer() {
+		// if(leftTime == 0){
+		// 	$('#leftTime').hide();
+		// }
+		var minute = Math.floor(leftTime/60);
+		var second = leftTime - minute*60;
+
+		var min = minute < 10 ? '0'+ minute : minute ;
+		var sec = second < 10 ? '0' + second-- : second-- ;
+
+		dom.find('.timer').html('支付剩余时间: ' + min + ':' + sec);
+		leftTime--
+	}
+	var timeP = setInterval(timer,1000);
+	if(leftTime == 0){
+		clearInterval(timeP);
+	}
+}
 
 
 //格式化两行换行

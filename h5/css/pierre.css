@@ -559,20 +559,22 @@ section .brandList{
 
 #localList>.itemCell{
 	width: 1rem;
-	height: 0.28rem;
+	height: 0.29rem;
 	margin-bottom: 0.008rem;
 	position: relative;
+	border-bottom: 1px #EAEAEA solid;
 }
 
 #localList>.itemCell .second{
 	float: left;
-	margin-top: 10px;
+	margin-top: 0.045rem;
 }
 
 #localList>.itemCell img.second{
 	display: inline-block;
 	width: 0.2rem;
-	margin: 10px 15px 10px 10px;
+	height: 0.2rem;
+	margin: 0.045rem 15px 0 10px;
 }
 
 #localList>.itemCell div.second{
@@ -582,7 +584,7 @@ section .brandList{
 #localList>.itemCell div.second>h3{
 	color: #323232;
 	font-size: 1.5em;
-	margin-bottom: 5px;
+	margin: 0.05rem 0 0.01rem 0 ;
 }
 
 #localList>.itemCell div.second>p{
@@ -620,6 +622,16 @@ section .brandList{
 	border-radius: 0 0 0 10px;
 	font-family: serif;
 }
+
+
+@media screen and (max-width: 320px){
+	#localList>.itemCell div.second>h3{
+		margin-top: 0.03rem;
+		font-size: 1.3em;
+	}
+}
+
+
 /*****************************************/
 
 

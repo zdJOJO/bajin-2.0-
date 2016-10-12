@@ -450,7 +450,16 @@ center p:last-child{
 	color: #C1AF74;
 }
 
-.enjoyList>.itemOrder .pay{
+.enjoyList>.itemOrder .state.cancel{
+	color: #989898;
+}
+
+.enjoyList>.itemOrder .state.finished{
+	color: #323232;
+}
+
+
+.enjoyList>.itemOrder .pay ,.enjoyList>.itemOrder .payAgain ,.enjoyList>.itemOrder .deleteOrder{
 	color: #fff;
 	background: #C1AF74;
 	display: inline-block;
@@ -460,8 +469,13 @@ center p:last-child{
 	text-align: center;
 	font-size: 13px;
 	margin-top: 0.035rem;
+	float: right;
 }
 
+.enjoyList>.itemOrder .deleteOrder{
+	background: #B1B1B1;
+	margin-right: 0.02rem;
+}
 
 
 

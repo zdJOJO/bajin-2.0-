@@ -33,13 +33,13 @@ $(document).ready(function(){
                 var $tmpStr = '';
                 var len = result.data.list.length;
                 for(var i=0;i<len;i++){
-                    $tmpStr = $('<div class="itemCell" data-productId="'+result.data.list[i].id+'" data-starttime="'+result.data.list[i].startTime+'" data-num="'+result.data.list[i].sum+'">' +
+                    $tmpStr = $('<div class="itemCell" data-productId="'+result.data.list[i].id+'" data-presold="'+result.data.list[i].preSold+'" data-num="'+result.data.list[i].sum+'">' +
                         '<div><img class="second" data-original="'+result.data.list[i].pic+'">' +
                         '<div class="second"><h3>'+result.data.list[i].title+'</h3><p>'+result.data.list[i].subtitle+'</p>' +
-                        '<span>￥ '+result.data.list[i].costPrice+'</span></div></div>' +
+                        '<span>￥ '+result.data.list[i].costPrice.toFixed(2)+'</span></div></div>' +
                         '<div class="mask"></div><span class="none">距开抢 00天00时00分00秒</span></div>' );
                     //计时器
-                    var difference = Math.round( parseInt( $tmpStr.attr('data-starttime'))-new Date().getTime()/1000 );
+                    var difference = Math.round( parseInt( $tmpStr.attr('data-presold'))-new Date().getTime()/1000 );
                     if(difference < 0){
                         if($tmpStr.attr('data-num')==0){
                             $tmpStr.find('.none').html('已抢光');

@@ -48,6 +48,7 @@ $(function(){
 						}
 						//设置cookie
 						setCookie("token",data.message,365);
+						setCookie("phone",$("#user").val(),365);
 						// setCookie("isgfhghg",data.message,365);
 						function getCookie(c_name)
 						{

@@ -389,7 +389,7 @@ $(document).ready(function(){
 
 
 	//获取 乐享 订单
-	//  -2全部  0待付款 1待使用 2已完成
+	//  -2全部  0待付款 1待使用 2已完成  3已取消
 	function getEnjorOrders(currentPage,orderState) {
 		if(currentPage == 1){
 			$('#orderLoading').css('bottom','75%').show();
@@ -426,16 +426,21 @@ $(document).ready(function(){
 				}
 				for(var i=0;i<res.data.list.length;i++){
 					var str = "";
-					var state = "";
+					var state = '<span class="state"></span>';
+					var orderHandle  = '<span></span>';
 
 					if(res.data.list[i].status == 0){
-						state = "待付款";
+						state = '<span class="state">未付款</span>';
+						orderHandle = '<span class="pay">去付款</span>'
 					}else if(res.data.list[i].status == 1){
-						state = "待使用";
+						state = '<span class="state">待使用</span>';
+						orderHandle = '<span class="pay">使用</span>'
 					}else if(res.data.list[i].status == 2){
-						state = "已完成";
+						state = '<span class="state finished">已完成</span>';
+						orderHandle = '<span class="pay">评价</span>'
 					}else if(res.data.list[i].status == 3){
-						state = "已取消";
+						state = '<span class="state cancel">已取消</span>';
+						orderHandle = '<span class="deleteOrder" data-orderid="'+res.data.list[i].id+'">删除订单</span>';
 					} else if(!res.data.list[i].status){
 						state = "全部";
 					}
@@ -445,10 +450,10 @@ $(document).ready(function(){
 					}else {
 						timerStr = '<li class="timer" style="height: 0"></li>';
 					}
-					str = $('<div class="itemOrder" data-orderid="'+res.data.list[i].id+'"><ul>' +
-						'<li><span class="orderNum">订单编号:'+res.data.list[i].number+'</span><span class="state">'+state+'</span></li> ' +
-						'<li><img src="'+res.data.list[i].productModel.pic+'"><span class="title">'+res.data.list[i].title+'</span></li>' +
-						'<li><span>￥'+res.data.list[i].sumPrice.toFixed(2)+'</span><span class="pay">去付款</span></li>'+timerStr+'</ul> </div>');
+					str = $('<div class="itemOrder" data-orderid="'+res.data.list[i].id+'">' +
+						'<ul><li><span class="orderNum">订单编号:'+res.data.list[i].number+'</span>'+state+'</li> ' +
+						'<li class="content"><img src="'+res.data.list[i].productModel.pic+'"><span class="title">'+res.data.list[i].title+'</span></li>' +
+						'<li><span>￥'+res.data.list[i].sumPrice.toFixed(2)+'</span>'+orderHandle+'</li>'+timerStr+'</ul> </div>');
 
 					if( ((new Date().getTime()/1000 - res.data.list[i].createTime)< 60*30) && res.data.list[i].status == 0){
 						enjoyTimer(res.data.list[i].createTime,str);
@@ -459,23 +464,58 @@ $(document).ready(function(){
 
 				$('#orderLoading').hide();
 
+				//点击删除订单按钮
+				var deleteOrderBtn = $(".itemOrder").find('.deleteOrder');
+				deleteOrderBtn.bind("click",function(event){
+					var $thisParent = $(this).parent().parent().parent();
+					event.stopPropagation();
+					$.modal({
+						title: "提示",
+						text: '确认是删除订单吗?',
+						buttons: [
+							{ text: "确定", onClick: function(){
+								deleteOrderFn($thisParent);
+							} },
+							{ text: "取消", className: "default", onClick: function(){ console.log(3)} },
+						]
+					});
+				});
 				//绑定点击跳转事件
 				$(".itemOrder").bind("click",function(){
 					window.location.href = 'enjoyOrderDetail.html?orderId=' + $(this).attr('data-orderid');
 				});
+
 			},
 			error:function(data){
 				//todo
 			}
 		});
-	}
+	};
 
 
 	$(window).unload(function(){
 		window.location.href = 'index.html';
 	});
 
+
+	//删除订单
+	function deleteOrderFn(dom) {
+		$.ajax({
+			type: 'delete',
+			url: port + '/card/productorder/force/' + dom.attr('data-orderid') + '?token=' + token,
+			success: function (res) {
+				$.toast('删除成功',function () {
+					dom.hide();
+				});
+			},
+			error: function (e) {
+				//todo
+			}
+		})
+	};
+
 });
+
 
 
 //计时器
@@ -492,12 +532,12 @@ function enjoyTimer(creatTime,dom) {
 		var sec = second < 10 ? '0' + second-- : second-- ;
 
 		dom.find('.timer').html('支付剩余时间: ' + min + ':' + sec);
-		leftTime--
+		leftTime-- ;
+		if(leftTime == 0){
+			clearInterval(timeP);
+		}
 	}
 	var timeP = setInterval(timer,1000);
-	if(leftTime == 0){
-		clearInterval(timeP);
-	}
 }
 
 

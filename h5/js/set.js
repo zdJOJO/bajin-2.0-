@@ -47,6 +47,9 @@ $(function(){
 				$("#setAgx").val(data.gender);
 				// $("#setGx").val(data.signature==undefined?"":data.signature);
 				$("#setEmail").val(data.email==undefined?"":data.email);
+
+				//将用户的手机号存入cookie
+				setCookie('phone',data.phone);
 			}
 		},
 		error:function(data){

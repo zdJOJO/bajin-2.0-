@@ -2,7 +2,7 @@
  * Created by Administrator on 2016/10/9.
  */
 $(document).ready(function(){
-    token = getCookie("token");//便于本地测试
+    var token = getCookie("token");//便于本地测试
     //获取页面的名称
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
@@ -11,21 +11,34 @@ $(document).ready(function(){
     var productObj = {};
     var totalPrice = 0;
 
+
     //获取单个产品的详细信息
     $.ajax({
         type: 'get',
         url: port + '/card/product/' + productId ,
         success: function (result) {
             productObj = result.data;
-            $('#mallDetail').children('.headImg').html('<img src="'+result.data.pic+'">')
+            $('#mallDetail').children('.headImg').html('<img src="'+result.data.imgList[0].pic+'">')
             $('#mallDetail').children('.list').html('<p class="title">'+result.data.title+'</p>' +
                 '<p class="subtitle">'+result.data.subtitle+'</p><p class="price">￥'+result.data.costPrice.toFixed(2)+'</p>' +
                 '<p class="disPrice">￥'+result.data.price.toFixed(2)+'</p><p class="num">已售'+result.data.soldSum+'份</p>');
             $('#mallDetail').children('.information').html('<p><img src="imgs/enjoy/time.png"><span>'+result.data.timeDescription+'</span></p>' +
                 '<p><img src="imgs/enjoy/tip.png"><span>'+result.data.sumDescription+'</span></p>' +
-                '<p class="tell"><img src="imgs/enjoy/phone.png"><a href="tel:'+result.data.phone+'">咨询白金尊享</a><img src="imgs/enjoy/right.png"></p>');
+                '<p class="tell"><img src="imgs/enjoy/phone.png"><a href="tel:'+result.data.phone+'">'+result.data.connectName+'</a><img src="imgs/enjoy/right.png"></p>');
             $('#mallDetail').children('.message').children('div:first-child').append(result.data.storeInfo);
-            $('#mallDetail').children('.message').children('div:last-child').append(result.data.reminder);
+            $('#mallDetail').children('.message').children('div:nth-child(2)').append(result.data.description);
+            $('#mallDetail').children('.message').children('div:last-child').html(result.data.reminder);
+            
+
+            //分享时候 传当前页面的url 和 对象obj
+            get_url(window.location.href);
+            //调用分享借口
+            jsSdkApi('share',{
+                title: result.data.title,
+                desc: result.data.subtitle,
+                link: portStr + 'localDisDetail.html?productId=' + result.data.id ,
+                imgUrl: result.data.imgList[0].pic
+            });
         },
         error: function (e) {
             //todo
@@ -33,7 +46,25 @@ $(document).ready(function(){
     });
     
     //跳转订单
-    $('#payOnline').click(function () { 
+    $('#payOnline').click(function () {
+        if(!token){
+            $.modal({
+                title: "提示",
+                text: "您还未登陆，请先登录",
+                buttons: [
+                    { text: "去登陆", onClick: function(){
+                        window.location.href = "login.html?his=" + escape('localDisDetail.html?productId=' + productId);
+                    } },
+                    { text: "取消", className: "default", onClick: function(){ console.log(3)} },
+                ]
+            });
+            return;
+        }
+        if(productObj.preSold - new Date().getTime()/1000 > 0){
+            $.toast("购买时间未到", "cancel");
+            return;
+        };
+
         $('#order').show();
         var reduceBtn = $('#order').find('.reduce');
         var plusBtn = $('#order').find('.plus');
@@ -62,7 +93,6 @@ $(document).ready(function(){
             //提交订单  http://121.196.232.233/card/productorder?token=e7120d7a-456b-4471-8f86-ac638b348a53
             var count = $('#order').find('.valueNum').html();
             var sumPrice = count * productObj.costPrice;
-
             $.ajax({
                 type: 'post',
                 dataType: "json",
@@ -76,16 +106,26 @@ $(document).ready(function(){
                 success: function (result) {
                     //生成订单不成功的状态
                     if(result.code == '601'){
-                        $.modal({
-                            title: "提示",
-                            text: result.message,
-                            buttons: [
-                                { text: "去绑卡", onClick: function(){
-                                    window.location.href="bank.html?his="+escape(his);
-                                } },
-                                { text: "知道了", className: "default", onClick: function(){ console.log(3)} },
-                            ]
-                        });
+                        if(result.message == '您已达到购买上限'){
+                            $.modal({
+                                title: "提示",
+                                text: result.message,
+                                buttons: [
+                                    { text: "知道了", className: "default", onClick: function(){ console.log(3)} },
+                                ]
+                            });
+                        }else {
+                            $.modal({
+                                title: "提示",
+                                text: result.message,
+                                buttons: [
+                                    { text: "去绑卡", onClick: function(){
+                                        window.location.href="bank.html?his="+escape(his);
+                                    } },
+                                    { text: "知道了", className: "default", onClick: function(){ console.log(3)} },
+                                ]
+                            });
+                        }
                     }else if(result.code == '201'){
                         productOrderId = result.data.id;
                         $.actions({

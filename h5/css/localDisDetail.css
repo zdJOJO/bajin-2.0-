@@ -364,6 +364,11 @@ header .saveAndShare img:first-child{
 }
 
 
+#mallDetail .reminder{
+    color: #959595;
+    font-size: 0.8em;
+    background: #FAFAFA;
+}
 
 
 /**********************主题产品订单***************************/

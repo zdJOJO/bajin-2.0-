@@ -124,7 +124,7 @@ $(document).ready(function(){
 			success:function(data){
 				console.log(data);
 				if(data.code == '666'){
-					alert('用户登陆异常，请重新登录');
+					alert('用户登录异常，请重新登录');
 					window.location.href = "login.html?his="+escape(his);
 					return;
 				}

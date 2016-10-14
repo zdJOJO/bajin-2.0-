@@ -119,7 +119,8 @@ $(document).ready(function(){
 				}else {
 					for(var i=0;i<len;i++){
 						listStr += '<div class="itemLocal" data-mallid="'+result.data[i].id+'"><img data-original="'+result.data[i].pic+'">' +
-							'<div class="information"><h3>'+result.data[i].title+'</h3><p>'+result.data[i].subtitle+'</p></div></div>';
+							'<div class="information"><h3>'+result.data[i].title+'</h3><p>'+result.data[i].subtitle+'</p></div>' +
+							'<div class="mask"></div></div>';
 					}
 					$('#brand').children('.local').append(listStr);
 					$(".itemLocal img").lazyload({
@@ -157,7 +158,8 @@ $(document).ready(function(){
 						str += '<div class="singleBrand_q" data-mallid ="'+data.data.list[i].mallId+'">' +
 							'<img data-original="'+data.data.list[i].pic+'"/>' + discountStr +
 							'<div class="detail_q"><h3>'+data.data.list[i].title+'</h3>' +
-							'<p>地址：'+data.data.list[i].address+'</p><p>'+data.data.list[i].subtitle+'</p></div></div>';
+							'<p>地址：'+data.data.list[i].address+'</p><p>'+data.data.list[i].subtitle+'</p></div>' +
+							'<div class="mask"></div></div>';
 					}
 					$("#brand").find('.newBrandList').append(str);
 					//图片预加载

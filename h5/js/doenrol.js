@@ -141,60 +141,55 @@
                                                         window.location.href = "success.html?id=" + activityid;
                                                     }else {
                                                         //费用不为0则跳转到工行支付接口 或者  微信支付
+                                                        popPay();
 
-                                                        // $("#payType").fadeIn(300);
-                                                        $.actions({
-                                                            title: "请选择支付方式",
-                                                            onClose: function() {
-                                                                //关闭弹层的回调函数
-                                                                $.modal({
-                                                                    title: "确认要放弃付款？",
-                                                                    text: "订单会保留一段时间，请尽快支付",
-                                                                    buttons: [
-                                                                        { text: "继续支付", onClick: function(){
+
+                                                        //弹出支付层
+                                                        function popPay() {
+                                                            $.actions({
+                                                                title: "请选择支付方式",
+                                                                onClose: function() {
+                                                                    //关闭弹层的回调函数
+                                                                    $.modal({
+                                                                        title: "确认要放弃付款？",
+                                                                        text: "订单会保留一段时间，请尽快支付",
+                                                                        buttons: [
+                                                                            { text: "继续支付", onClick: function(){
+                                                                                popPay();
+                                                                                $('#applyName').val("");
+                                                                                $('#applyPhone').val("");
+                                                                                $("#email").val("");
+                                                                            }
+                                                                            },
+                                                                            { text: "确认离开",className: "default",onClick: function(){
+                                                                                window.location.href = "myOrders.html";
+                                                                            }
+                                                                            },
+                                                                        ]
+                                                                    });
+                                                                },
+                                                                actions: [
+                                                                    {
+                                                                        text: "银行卡支付",
+                                                                        className: "color-warning",
+                                                                        onClick: function() {  //跳转 银行卡支付
                                                                             window.location.href = "payIFrame.html?id=" + data.data.applyId;
                                                                             $('#applyName').val("");
                                                                             $('#applyPhone').val("");
                                                                             $("#email").val("");
                                                                         }
-                                                                        },
-                                                                        { text: "确认离开",className: "default",onClick: function(){
-                                                                            window.location.href = "myOrders.html";
+                                                                    },
+                                                                    {
+                                                                        text: "微信支付",
+                                                                        className: "color-primary",
+                                                                        onClick: function() {
+                                                                            $.showLoading('支付请求中');
+                                                                            arouseWeixinPay();  //点击  微信支付
                                                                         }
-                                                                        },
-                                                                    ]
-                                                                });
-                                                            },
-                                                            actions: [
-                                                                {
-                                                                    text: "银行卡支付",
-                                                                    className: "color-warning",
-                                                                    onClick: function() {  //跳转 银行卡支付
-                                                                        window.location.href = "payIFrame.html?id=" + data.data.applyId;
-                                                                        $('#applyName').val("");
-                                                                        $('#applyPhone').val("");
-                                                                        $("#email").val("");
-                                                                    }
-                                                                },
-                                                                {
-                                                                    text: "微信支付",
-                                                                    className: "color-primary",
-                                                                    onClick: function() {
-                                                                        $.showLoading('支付请求中');
-                                                                        arouseWeixinPay();  //点击  微信支付
-                                                                    }
-                                                                },
-                                                            ]
-                                                        });
-
-                                                        // //跳转 银行卡支付
-                                                        // $("#payType >.block>.bankCardPay").click(function () {
-                                                        //     window.location.href = "payIFrame.html?id="+data.data.applyId;
-                                                        //     $('#applyName').val("");
-                                                        //     $('#applyPhone').val("");
-                                                        //     $("#email").val("");
-                                                        // });
-
+                                                                    },
+                                                                ]
+                                                            });
+                                                        };
 
                                                         //点击  微信支付  时候的函数
                                                         var arouseWeixinPay = function () {
@@ -257,18 +252,6 @@
                                                                 }
                                                             },2000);
                                                         };
-
-
-
-                                                        // $("#payType >.block>.weixinPay").click(function () {
-                                                        //
-                                                        // });
-                                                        // //隐藏
-                                                        // $("#payType >.block>.cancel").click(function () {
-                                                        //     $("#payType").fadeOut(300);
-                                                        // });
-
-                                                        // window.location.href = "pay.html?id="+data.data.applyId;
                                                     }
                                                 }else{
                                                     if(data.message == '您还未绑定工行信用卡'){

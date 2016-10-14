@@ -11,7 +11,7 @@ ul,li{
 
 #leftTime{
     display: none;
-    font-family: cursive;
+    font-family: "Microsoft New Tai Lue";
     width: 100%;
     height: 30px;
     font-size: 0.9em;
@@ -102,10 +102,12 @@ ul,li{
 
 #detailInfo ul:last-child{
     border-bottom: none;
+    margin-bottom: 60px;
 }
 
 #detailInfo ul:last-child>li:last-child{
     border-bottom: none;
+    height: 50px;
 }
 
 #detailInfo ul:last-child span.price{
@@ -265,6 +267,10 @@ footer>span{
     height: 65px;
     line-height: 65px;
     border-bottom: 1px #E0E0E0 solid;
+}
+
+#poPub>.content>ul>li:last-child{
+    border-bottom: none;
 }
 
 #poPub>.content>ul>li>input{

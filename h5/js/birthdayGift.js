@@ -190,7 +190,7 @@ function getGIftsList(currentPage) {
             }
             for(var i=0;i<result.data.list.length;i++){
                 if(result.data.list[i].sum > 0 && result.data.list[i].isOnline == 0){
-                    giftStr += '<li class="giftTitle">'+ result.data.list[i].title +': ' +
+                    giftStr += '<li class="giftTitle">'+ result.data.list[i].title +' ' +
                         '<span class="giftSubTitle">'+ result.data.list[i].subTitle +'</span></li>';
                     //判断是否有实物
                     if(result.data.list[i].type == 0){
@@ -463,4 +463,7 @@ jsSdkApi('share',{
 
 //调用安卓、 IOS 的原生分享功能
 share_Android_Ios('白金尊享送您生日礼包' ,'白金用户生日当月可以领取为您精心准备的礼包' ,portStr+'/imgs/gift/gift-head.jpg',portStr+'/birthdayGift.html');
+
+
+
 

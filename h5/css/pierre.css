@@ -378,7 +378,7 @@ section .content .uad .buy{
 	height: 0.12rem;
 	line-height: 0.12rem;
 	color: #3f3f3f;
-	font-size: 1.3em;
+	font-size: 1.2em;
 }
 
 #brand>div>h3>img{
@@ -427,6 +427,16 @@ section .content .uad .buy{
 	margin: 10px 0;
 }
 
+.newBrandList .singleBrand_q .mask{
+	height: 0.6rem;
+	width: 1rem;
+	background: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	top: 0;
+}
+
+
+
 .newBrandList .singleBrand_q >.discount{
 	display: block;
 	text-align: center;
@@ -464,6 +474,14 @@ section .content .uad .buy{
 	left: 50%;
 	margin: -0.1rem 0 0 -0.4rem;
 	padding-top: 0.04rem;
+}
+
+#brand .local>.itemLocal>.mask{
+	width: 1rem;
+	height: 0.45rem;
+	background: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	top: 0;
 }
 
 #brand .local>.itemLocal h3{
@@ -554,7 +572,7 @@ section .brandList{
 }
 
 #localList{
-	margin-top: 0.14rem;
+
 }
 
 #localList>.itemCell{
@@ -565,16 +583,22 @@ section .brandList{
 	border-bottom: 1px #EAEAEA solid;
 }
 
+#localList>.itemCell>div:first-child{
+	padding-top: 0.05rem;
+}
+
+
 #localList>.itemCell .second{
 	float: left;
-	margin-top: 0.045rem;
+	/*margin-top: 0.045rem;*/
 }
 
 #localList>.itemCell img.second{
 	display: inline-block;
 	width: 0.2rem;
 	height: 0.2rem;
-	margin: 0.045rem 15px 0 10px;
+	/*margin: 0.045rem 15px 0 10px;*/
+	margin: 0 15px 0 10px;
 }
 
 #localList>.itemCell div.second{
@@ -584,7 +608,7 @@ section .brandList{
 #localList>.itemCell div.second>h3{
 	color: #323232;
 	font-size: 1.5em;
-	margin: 0.05rem 0 0.01rem 0 ;
+	margin: 0 0 0.01rem 0 ;
 }
 
 #localList>.itemCell div.second>p{
@@ -607,6 +631,7 @@ section .brandList{
 	background: #1a1a1a;
 	opacity: 0.6;
 	position: relative;
+	top: -0.05rem;
 }
 
 #localList>.itemCell .none{
@@ -625,8 +650,17 @@ section .brandList{
 
 
 @media screen and (max-width: 320px){
+	#localList>.itemCell div.second>h3 {
+		font-size: 1.4em;
+	}
+}
+
+
+@media screen and (max-width: 320px){
+	#localList>.itemCell{
+		height: 0.33rem;
+	}
 	#localList>.itemCell div.second>h3{
-		margin-top: 0.03rem;
 		font-size: 1.3em;
 	}
 }

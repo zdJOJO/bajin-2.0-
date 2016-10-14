@@ -102,6 +102,7 @@ $(function(){
 																		}
 																		//设置cookie
 																		setCookie("token",data.message,365);
+																		setCookie("phone",phoneNum,365);
 
 																		//测试  环境
 																		window.location.href = 'login.html?his=index.html';

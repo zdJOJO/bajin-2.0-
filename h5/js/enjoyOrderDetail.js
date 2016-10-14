@@ -31,15 +31,20 @@ $(document).ready(function(){
 
             var orderInfoStr1 = '<ul ><li>订单编号: '+res.data.number+'<br>下单时间: '+new Date(res.data.createTime*1000).Formate()+'</li>' +
                 '<li class="bold-btn state">'+stateStrFn(status) + statusHandel +'</li></ul>';
-            var orderInfoStr2 = '<ul><li class="product"><img src="'+res.data.productModel.pic+'"><span>'+res.data.productModel.title+'</span></li>' +
+            var orderInfoStr2 = '<ul><li class="product" data-id="'+res.data.productModel.id+'" ><img src="'+res.data.productModel.pic+'"><span>'+res.data.productModel.title+'</span></li>' +
                 '<li class="bold-btn tell"><img src="imgs/enjoy/phone.png"><a href="tel:'+res.data.phone+'">'+res.data.productModel.connectName+'</a><span>></span></li></ul>';
-            var orderInfoStr3 = '<ul><li>用户信息<br>购买人<span>'+res.data.productModel.connectName+'</span></li>' +
-                '<li>手机号码<span>'+res.data.productModel.phone+'</span></li><li class="bold-btn">份数<span>'+res.data.count+'</span></li></ul>';
+            var orderInfoStr3 = '<ul><li>用户信息<br>购买人<span>'+res.data.userName+'</span></li>' +
+                '<li>手机号码<span>'+res.data.phone+'</span></li><li class="bold-btn">份数<span>'+res.data.count+'</span></li></ul>';
             var orderInfoStr4 = '<ul><li>消费总金额<span class="price">￥'+res.data.sumPrice.toFixed(2)+'</span></li>' +
                 '<li><span class="price">￥'+res.data.sumPrice.toFixed(2)+'</span><span>实付款: </span></li></ul>';
 
             $('#detailInfo').html(orderInfoStr1 + orderInfoStr2 + orderInfoStr3 + orderInfoStr4);
             $('footer span').html('￥' + res.data.sumPrice.toFixed(2));
+            
+            //点击 跳转详情
+            $('#detailInfo').find('.product').click(function () {
+                window.location.href = 'localDisDetail.html?productId=' + $(this).attr('data-id');
+            });
 
             if( ((new Date().getTime()/1000 - res.data.createTime)< 60*30)&& res.data.status == 0){
                 enjoyTimer(res.data.createTime);
@@ -149,10 +154,7 @@ $(document).ready(function(){
                        window.location.href = 'myOrders.html#all';
                    });
                }else {
-                   $state.html('已取消');
-                   $('#detailInfo').css('margin-top','0');
-                   $('footer').hide();
-                   $('#leftTime').hide();
+                   location.reload();
                }
             },
             error: function (e) {
@@ -273,14 +275,15 @@ $(document).ready(function(){
                 onClick: function() {  //跳转 银行卡支付
                     window.location.href = "payIFrame.html?productOrderId=" + productOrderId;
                 }
-            },{
-                text: "微信支付",
-                className: "color-primary",
-                onClick: function() {
-                    $.showLoading('支付请求中');
-                    // arouseWeixinPay();  //点击  微信支付
-                }
-            }
+            },
+            //     {
+            //     text: "微信支付",
+            //     className: "color-primary",
+            //     onClick: function() {
+            //         $.showLoading('支付请求中');
+            //         // arouseWeixinPay();  //点击  微信支付
+            //     }
+            // }
             ]
         });
     });

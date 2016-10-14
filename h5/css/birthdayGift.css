@@ -90,7 +90,7 @@ input[placeholder], [placeholder], *[placeholder] {
 
 #receiveNow,#sureReceive{
     color: #fff;
-    background: #2e3133;
+    background: #BCAD72;
     width: 100%;
     height: 55px;
     border: none;
@@ -124,6 +124,10 @@ section >.giftContent>ul>.giftTitle{
 /*section >.giftContent>ul>.giftTitle:last-child{*/
     /*margin-bottom: 20px;*/
 /*}*/
+
+section >.giftContent>ul>.giftTitle span{
+    padding-left: 10px;
+}
 
 
 section >.giftRule li{

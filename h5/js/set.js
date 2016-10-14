@@ -49,7 +49,7 @@ $(function(){
 				$("#setEmail").val(data.email==undefined?"":data.email);
 
 				//将用户的手机号存入cookie
-				setCookie('phone',data.phone);
+				setCookie('phone',data.phone,365);
 			}
 		},
 		error:function(data){

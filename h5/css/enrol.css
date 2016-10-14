@@ -288,7 +288,7 @@ footer.nav{
 }
 
 .content img{
-    width: 100%;
+    width: 100%!important;
     height: auto;
     /*margin: 0.02rem 0 0.02rem -0.06rem;*/
 }

@@ -43,6 +43,7 @@ $(document).ready(function(){
                     if(difference < 0){
                         if($tmpStr.attr('data-num')==0){
                             $tmpStr.find('.none').html('已抢光');
+                            $tmpStr.find('.mask').addClass('active');
                         }else {
                             $tmpStr.find('.none').hide();
                         }
@@ -85,6 +86,9 @@ $(document).ready(function(){
         loadDownFn : function(me){
             page++;
             getLocalDisList(page,0);
+            if(page == 1){
+            	setTimeout('$(".dropload-down").css("height","0")',200);
+            }
         }
     });
 

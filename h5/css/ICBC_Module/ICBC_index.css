@@ -228,7 +228,7 @@ nav > div:last-child >li{
 
 /************************ 卡种列表 *****************************/
 .allCards{
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
     -webkit-overflow-scrolling: touch;
     max-height: 60%;
 }

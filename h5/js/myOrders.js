@@ -228,7 +228,7 @@ $(document).ready(function(){
 							state = "免费";
 						}else{
 							if(data.list[i].isPay==0){
-								state = "未付款";
+								state = "待付款";
 							}else if(data.list[i].isPay==1){
 								state = "已付款";
 							}
@@ -288,7 +288,7 @@ $(document).ready(function(){
 
 
 	//获取订单详情
-	// 备注:orderState 订单状态，0:全部,1：未付款，2：已付款，3：已发货，4：已退款，5：交易关闭，6：已收货
+	// 备注:orderState 订单状态，0:全部,1：待付款，2：已付款，3：已发货，4：已退款，5：交易关闭，6：已收货
 	function getOrders(currentPage,size,orderState){
 		if(orderState == 0){
 			orderTab = 'allApo';
@@ -430,7 +430,7 @@ $(document).ready(function(){
 					var orderHandle  = '<span></span>';
 
 					if(res.data.list[i].status == 0){
-						state = '<span class="state">未付款</span>';
+						state = '<span class="state">待付款</span>';
 						orderHandle = '<span class="pay">去付款</span>'
 					}else if(res.data.list[i].status == 1){
 						state = '<span class="state">待使用</span>';

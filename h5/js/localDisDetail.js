@@ -6,11 +6,12 @@ $(document).ready(function(){
     //获取页面的名称
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
+    console.log(his);
     var productId = window.location.search.split('&')[0].split('=')[1];
     var productOrderId;
     var productObj = {};
     var totalPrice = 0;
-
+    var leftTime = 0;
 
     //获取单个产品的详细信息
     $.ajax({
@@ -18,27 +19,39 @@ $(document).ready(function(){
         url: port + '/card/product/' + productId ,
         success: function (result) {
             productObj = result.data;
-            $('#mallDetail').children('.headImg').html('<img src="'+result.data.imgList[0].pic+'">')
-            $('#mallDetail').children('.list').html('<p class="title">'+result.data.title+'</p>' +
-                '<p class="subtitle">'+result.data.subtitle+'</p><p class="price">￥'+result.data.costPrice.toFixed(2)+'</p>' +
-                '<p class="disPrice">￥'+result.data.price.toFixed(2)+'</p><p class="num">已售'+result.data.soldSum+'份</p>');
-            $('#mallDetail').children('.information').html('<p><img src="imgs/enjoy/time.png"><span>'+result.data.timeDescription+'</span></p>' +
-                '<p><img src="imgs/enjoy/tip.png"><span>'+result.data.sumDescription+'</span></p>' +
-                '<p class="tell"><img src="imgs/enjoy/phone.png"><a href="tel:'+result.data.phone+'">'+result.data.connectName+'</a><img src="imgs/enjoy/right.png"></p>');
-            $('#mallDetail').children('.message').children('div:first-child').append(result.data.storeInfo);
-            $('#mallDetail').children('.message').children('div:nth-child(2)').append(result.data.description);
-            $('#mallDetail').children('.message').children('div:last-child').html(result.data.reminder);
-            
+            leftTime = Math.round( parseInt(result.data.preSold - new Date().getTime()/1000) );
+            if(his == 'localDisDetail.html'){
+                //分享时候 传当前页面的url 和 对象obj
+                get_url(window.location.href);
+                //调用分享借口
+                jsSdkApi('share',{
+                    title: result.data.title,
+                    desc: result.data.subtitle,
+                    link: portStr + '/localDisDetail.html?productId=' + result.data.id ,
+                    imgUrl: result.data.imgList[0].pic
+                });
 
-            //分享时候 传当前页面的url 和 对象obj
-            get_url(window.location.href);
-            //调用分享借口
-            jsSdkApi('share',{
-                title: result.data.title,
-                desc: result.data.subtitle,
-                link: portStr + 'localDisDetail.html?productId=' + result.data.id ,
-                imgUrl: result.data.imgList[0].pic
-            });
+                if(result.data.sum == 0){
+                    $('#payOnline').html('已抢光').css('background','#8A8A8A').attr('disabled','true');
+                }
+                if(leftTime >= 0){
+                    $("#payOnline").css('background','#8A8A8A').attr('disabled','true');
+                    leftTimer(leftTime,$('#payOnline'));
+            }
+
+                $('#mallDetail').children('.headImg').html('<img src="'+result.data.imgList[0].pic+'">')
+                $('#mallDetail').children('.list').html('<p class="title">'+result.data.title+'</p>' +
+                    '<p class="subtitle">'+result.data.subtitle+'</p><p class="price">￥'+result.data.costPrice.toFixed(2)+'</p>' +
+                    '<p class="disPrice">￥'+result.data.price.toFixed(2)+'</p><p class="num">已售'+result.data.soldSum+'份</p>');
+                $('#mallDetail').children('.information').html('<p><img src="imgs/enjoy/time.png"><span>'+result.data.timeDescription+'</span></p>' +
+                    '<p><img src="imgs/enjoy/tip.png"><span>'+result.data.sumDescription+'</span></p>' +
+                    '<p class="tell"><img src="imgs/enjoy/phone.png"><a href="tel:'+result.data.phone+'">'+result.data.connectName+'</a><img src="imgs/enjoy/right.png"></p>');
+                $('#mallDetail').children('.message').children('div:first-child').append(result.data.storeInfo);
+                $('#mallDetail').children('.message').children('div:nth-child(2)').append(result.data.description);
+                $('#mallDetail').children('.message').children('div:last-child').html(result.data.reminder);
+            }else if(his == 'localDisDetail_order.html'){
+                submitOrderFn(productObj);
+            }
         },
         error: function (e) {
             //todo
@@ -50,29 +63,39 @@ $(document).ready(function(){
         if(!token){
             $.modal({
                 title: "提示",
-                text: "您还未登陆，请先登录",
+                text: "您还未登录",
                 buttons: [
-                    { text: "去登陆", onClick: function(){
+                    { text: "去登录", onClick: function(){
                         window.location.href = "login.html?his=" + escape('localDisDetail.html?productId=' + productId);
                     } },
                     { text: "取消", className: "default", onClick: function(){ console.log(3)} },
                 ]
             });
             return;
+        }else {
+            if(productObj.preSold - new Date().getTime()/1000 > 0){
+                $.toast("购买时间未到", "cancel");
+                return;
+            }else {
+                window.location.href = 'localDisDetail_order.html?productId=' + productId;
+            }
         }
-        if(productObj.preSold - new Date().getTime()/1000 > 0){
-            $.toast("购买时间未到", "cancel");
-            return;
-        };
+    });
 
-        $('#order').show();
+
+    //提交订单页面
+    function submitOrderFn(productObj) {
         var reduceBtn = $('#order').find('.reduce');
         var plusBtn = $('#order').find('.plus');
-        $('#order').find('.proInfo').html('<img src="'+productObj.pic+'"><div class="name"><p>'+productObj.title+'</p>' +
-            '<span class="itemPrice">￥'+productObj.costPrice.toFixed(2)+'</span></div>');
-        $('#order').find('.totalPrice').html('￥' + productObj.costPrice.toFixed(2));
-        $('#order').find('ul').append(' <li class="name">购买人<span>'+productObj.connectName+'</span></li>' +
-            '<li class="phone">手机号码<span>'+productObj.phone+'</span></li>')
+
+        $.get(port + '/card/user?token=' + token ,function (res) {
+            $('#order').find('.proInfo').html('<img src="'+productObj.pic+'"><div class="name"><p>'+productObj.title+'</p>' +
+                '<span class="itemPrice">￥'+productObj.costPrice.toFixed(2)+'</span></div>');
+            $('#order').find('.totalPrice').html('￥' + productObj.costPrice.toFixed(2));
+            $('#order').find('ul').append(' <li class="name">购买人<span>'+res.userName+'</span></li>' +
+                '<li class="phone">手机号码<span>'+res.phone+'</span></li>');
+        });
+
         reduceBtn.click(function () {
             var num = $('#order').find('.valueNum').html();
             if(num == 1){
@@ -87,7 +110,7 @@ $(document).ready(function(){
             // }
             productNum('plus',num,productObj.costPrice);
         });
-        
+
         //提交订单并且支付
         $('#submitOrder').click(function () {
             //提交订单  http://121.196.232.233/card/productorder?token=e7120d7a-456b-4471-8f86-ac638b348a53
@@ -106,15 +129,7 @@ $(document).ready(function(){
                 success: function (result) {
                     //生成订单不成功的状态
                     if(result.code == '601'){
-                        if(result.message == '您已达到购买上限'){
-                            $.modal({
-                                title: "提示",
-                                text: result.message,
-                                buttons: [
-                                    { text: "知道了", className: "default", onClick: function(){ console.log(3)} },
-                                ]
-                            });
-                        }else {
+                        if(result.message == '您还未绑定工行信用卡' || result.message.indexOf('暂不支持') > 0 ){
                             $.modal({
                                 title: "提示",
                                 text: result.message,
@@ -125,47 +140,18 @@ $(document).ready(function(){
                                     { text: "知道了", className: "default", onClick: function(){ console.log(3)} },
                                 ]
                             });
+                        }else {
+                            $.modal({
+                                title: "提示",
+                                text: result.message,
+                                buttons: [
+                                    { text: "知道了", className: "default", onClick: function(){ console.log(3)} },
+                                ]
+                            });
                         }
                     }else if(result.code == '201'){
                         productOrderId = result.data.id;
-                        $.actions({
-                            title: "请选择支付方式",
-                            onClose: function() {
-                                // 关闭弹层的回调函数
-                                $.modal({
-                                    title: "确认要放弃付款？",
-                                    text: "订单会保留一段时间，请尽快支付",
-                                    buttons: [
-                                        { text: "继续支付", onClick: function(){
-                                            window.location.href = "payIFrame.html?productOrderId=" + productOrderId;
-                                        }
-                                        },
-                                        { text: "确认离开",className: "default",onClick: function(){
-                                            //todo
-                                        }
-                                        },
-                                    ]
-                                });
-                            },
-                            actions: [{
-                                text: "银行卡支付",
-                                className: "color-warning",
-                                onClick: function() {  //跳转 银行卡支付
-                                    window.location.href = "payIFrame.html?productOrderId=" + productOrderId;
-                                    $('#applyName').val("");
-                                    $('#applyPhone').val("");
-                                    $("#email").val("");
-                                }
-                            },{
-                                text: "微信支付",
-                                className: "color-primary",
-                                onClick: function() {
-                                    $.showLoading('支付请求中');
-                                    // arouseWeixinPay();  //点击  微信支付
-                                }
-                            }
-                            ]
-                        });
+                        popPay(productOrderId);
                     }
 
                 },
@@ -174,9 +160,55 @@ $(document).ready(function(){
                 }
             });
         });
+    }
 
-    });
 
+    
+    //获取用户信息
+    function getUserMsg() {
+
+    };
+    
+    
+    //弹出支付层
+    function popPay(productOrderId) {
+        $.actions({
+            title: "请选择支付方式",
+            onClose: function() {
+                // 关闭弹层的回调函数
+                $.modal({
+                    title: "确认要放弃付款？",
+                    text: "订单会保留一段时间，请尽快支付",
+                    buttons: [
+                        { text: "继续支付", onClick: function(){
+                            popPay(productOrderId);
+                        }
+                        },
+                        { text: "确认离开",className: "default",onClick: function(){
+                            window.location.href = 'enjoyOrderDetail.html?orderId=' + productOrderId
+                        }
+                        },
+                    ]
+                });
+            },
+            actions: [{
+                text: "银行卡支付",
+                className: "color-warning",
+                onClick: function() {  //跳转 银行卡支付
+                    window.location.href = "payIFrame.html?productOrderId=" + productOrderId;
+                }
+            },
+            //     {
+            //     text: "微信支付",
+            //     className: "color-primary",
+            //     onClick: function() {
+            //         $.showLoading('支付请求中');
+            //         // arouseWeixinPay();  //点击  微信支付
+            //     }
+            // }
+            ]
+        });
+    };
 
     //订单数目加减
     function productNum(type,num,price) {
@@ -251,5 +283,29 @@ $(document).ready(function(){
             }
         },2000);
     };
+
+
+    //倒计时
+    function leftTimer(difference,dom) {
+        var timeP = setInterval(timer,1000);
+        function timer() {
+            if(difference == 0){
+                dom.css('background','#D7C381').removeAttr('disabled').html('立即购买');
+                clearInterval(timeP);
+                return;
+            }
+            var day = Math.floor(difference/(3600*24));
+            var hour = Math.floor((difference-day*3600*24)/3600);
+            var minute = Math.floor((difference-day*3600*24-hour*3600)/60);
+            var second = difference - day*3600*24 - hour*3600 - minute*60;
+
+            var da = day < 10 ? '0' + day : day;
+            var hou = hour < 10 ? '0' + hour : hour;
+            var min = minute < 10 ? '0'+ minute : minute ;
+            var sec = second < 10 ? '0' + second-- : second-- ;
+            dom.html('距开抢 ' + da + '天' + hou + '时' + min + '分' + sec + '秒');
+            difference--;
+        }
+    }
 
 });

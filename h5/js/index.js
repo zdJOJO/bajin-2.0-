@@ -207,9 +207,9 @@ $(document).ready(function(){
 			        	window.location.href = "life.html?id="+ $(this).data("itemid");
 			        }else if(type == 3){
 			        	window.location.href = "brandDetail.html?id="+$(this).data("itemid");
-			        }else if(type == 4){
+			        }else if(type == 4 || type == 12){
 			        	if(token != undefined){
-							window.location.href = "fareDraw.html?token="+token;
+							window.location.href = $(this).attr('data-url');//抽奖
 			        	}else{
 			        		window.location.href = "login.html?his=" + his;
 			        	}		        	

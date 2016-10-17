@@ -46,14 +46,6 @@ $(function (){
 
     //分享时候 传当前页面的url 和 对象obj
     get_url(window.location.href);
-    //调用分享借口
-    jsSdkApi('share',{
-        title: '白金尊享绑卡有礼',
-        desc: ' 新用户通过下载/注册“白金尊享”APP并绑定工商银行信用卡，可获得一次抽奖机会',
-        link: portStr + '/fareDraw.html?id=' + sectionId,
-        imgUrl: portStr + '/imgs/lottery_midAutumn/midFall.png'
-    });
-
 
 
     //图片预加载
@@ -145,6 +137,14 @@ $(function (){
         type: 'get',
         url: port + '/card/prizes/section/' + sectionId ,
         success: function (result) {
+            //调用分享借口
+            jsSdkApi('share',{
+                title: '白金尊享绑卡有礼',
+                desc: ' 新用户通过下载/注册“白金尊享”APP并绑定工商银行信用卡，可获得一次抽奖机会',
+                link: portStr + '/fareDraw_new.html?sectionId=' + sectionId,
+                imgUrl: result.prizeSectionModel.sectionAdpic
+            });
+
             $('body').find('.turntable-bg').css({
                 'background' : 'url('+ result.prizeSectionModel.bgPic+') no-repeat',
                 'background-size' : '100% 100%'
@@ -159,9 +159,14 @@ $(function (){
             var winnerStr = '';
             var detailStr = '';
             for(var i=0;i<len;i++){
-                detailStr += '<li>'+ prizeModelList[i].prizeDescription +'</li>';
+                var liStr = '<li>'+ prizeModelList[i].prizeDescription +'</li>';
+                if(!prizeModelList[i].prizeDescription){
+                    liStr = '';
+                }
+                detailStr += liStr;
             }
             $('.detail .present').append(detailStr);
+
 
             // 随机赋值中奖用户
             for(var i=0;i<len;i++){

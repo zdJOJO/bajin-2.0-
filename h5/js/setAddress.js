@@ -16,8 +16,6 @@ $(function(){
 	showAndroidToast();
 
 
-
-	
 	var token = "";
 	//获取存在于cookie中的token值
 	function getCookie(c_name)
@@ -38,33 +36,29 @@ $(function(){
 	token = getCookie("token");
 
 
-
-    //用于判断从哪里跳进这个页面
-	var isPersonNalInfo = window.location.href.indexOf('fromePersonNalInfo');
-
-
-
 	//获取页面的名称
 	$(".add_add").click(function(){
 		window.location.href = isPersonNalInfo > 0 ? window.location.href="addAddress.html?fromePersonNalInfo&&obj="+escape(JSON.stringify(obj)) :
 			(window.location.search.indexOf('fromeGift')>0 ? window.location.href="addAddress.html?fromeGift&obj="+escape(JSON.stringify({})) :
 				window.location.href="addAddress.html?obj="+escape(JSON.stringify(obj)));
+
+
+		if(isPersonNalInfo > 0 ){
+			window.location.href=window.location.href="addAddress.html?fromePersonNalInfo&&obj="+escape(JSON.stringify(obj));
+		}else if(window.location.search.indexOf('fromeGift')>0){
+			window.location.href=window.location.href="addAddress.html?fromeGift&obj="+escape(JSON.stringify({}));
+		}else if(window.location.search.indexOf("isShoppingCart=false") > 0){
+			window.location.href = "addAddress.html?isShoppingCart=false&obj="+escape(JSON.stringify(obj));
+		}else {
+			window.location.href = "addAddress.html?obj="+escape(JSON.stringify(obj));
+		}
 	});
 
 
+    //用于判断从哪里跳进这个页面
+	var isPersonNalInfo = window.location.href.indexOf('fromePersonNalInfo');
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];
-	
-	// //获取从fillInOrder页面传递来的obj
-	// if(window.location.search != ""){
-	// 	if(window.location.search.indexOf("isShoppingCart=false") > 0){
-	// 		var  JSONstr = window.location.search.split("=")[1].split("&&")[0];
-	// 	}else {
-	// 		var  JSONstr = window.location.search.split("=")[1];
-	// 	}
-	// 	var obj = JSON.parse(unescape(JSONstr));
-	// }
-
 
 
 	//获取从上个（fillInOrder.html 或者 set.html）页面传递来的obj
@@ -74,15 +68,12 @@ $(function(){
 		// JSONstr = window.location.search.split("=")[1];
 	}else {
 		if(window.location.search.indexOf("isShoppingCart=false") > 0){
-			  JSONstr = window.location.search.split("=")[1].split("&&")[0];
+			JSONstr = window.location.search.split("=")[1].split("&&")[0];
 		}else {
-			  JSONstr = window.location.search.split("=")[1];
+			JSONstr = window.location.search.split("=")[1];
 		}
 		obj = JSON.parse(unescape(JSONstr));
 	}
-
-
-
 
 
 	//获取上个页面的url
@@ -110,6 +101,7 @@ $(function(){
 			}			
 		}
 
+
 		//选择地址跳转
 		$(".reg_But,.ad_But").bind("click",function(){
 			obj.receiveId = $(this).data("id");
@@ -117,11 +109,11 @@ $(function(){
 				return;
 			}else {
 				if(window.location.search.indexOf("isShoppingCart=false") > 0){
-					window.location.href = "fillInOrder.html?cost="+ obj.cost + "&&goodsId="+obj.goodsId+ "&&num=" +obj.num+ "&&pic=" +obj.pic+ "&&skuId="+obj.skuId+ "&&subTitle="+obj.subTitle + "&&title="+obj.title + "&&receiveId="+obj.receiveId;
+					window.location.href = 'fillInOrder.html?isShoppingCart=false'+'&goodsId='+obj.goodsId+'&skuId='+obj.skuId+'&num='+obj.num+'&receiveId='+obj.receiveId;
 				}else if(window.location.href.search('fromeGift') > 0){
 					window.location.href = "birthdayGift.html?token=" +  token + "&status=0&receiveId="+obj.receiveId;
 				}else {
-					window.location.href = "fillInOrder.html?obj=" + escape(JSON.stringify(obj));
+					window.location.href = "fillInOrder.html?isShoppingCart=true&cards&obj=" + escape(JSON.stringify(obj));
 				}
 			}
 		});
@@ -202,12 +194,21 @@ $(function(){
 
 		//编辑地址
 		$(".add_editor,.font_set").bind("click",function(){
-			// window.location.href = isPersonNalInfo > 0 ? window.location.href = "editAddress.html?fromePersonNalInfo&&id="+$(this).data("id") :
-			// 	window.location.href = "editAddress.html?id="+$(this).data("id");
-			
-			window.location.href = isPersonNalInfo > 0 ? window.location.href="editAddress.html?fromePersonNalInfo&id="+$(this).data("id") :
-				(window.location.search.indexOf('fromeGift')>0 ? window.location.href="editAddress.html?fromeGift&id="+$(this).data("id") :
-					window.location.href = "editAddress.html?id="+$(this).data("id"));
+			// window.location.href = isPersonNalInfo > 0 ? window.location.href="editAddress.html?fromePersonNalInfo&id="+$(this).data("id") :
+			// 	(window.location.search.indexOf('fromeGift')>0 ? window.location.href="editAddress.html?fromeGift&id="+$(this).data("id") :
+			// 		window.location.href = "editAddress.html?id="+$(this).data("id")+'&obj='+escape(JSON.stringify(obj)));
+
+			if(isPersonNalInfo > 0 ){
+				window.location.href="editAddress.html?fromePersonNalInfo&id="+$(this).data("id");
+			}else if(window.location.search.indexOf('fromeGift')>0){
+				window.location.href="editAddress.html?fromeGift&id="+$(this).data("id");
+			}else if(window.location.search.indexOf("isShoppingCart=false") > 0){
+				window.location.href = "editAddress.html?isShoppingCart=false&id="+$(this).data("id")+'&obj='+escape(JSON.stringify(obj));
+			}else {
+				window.location.href = "editAddress.html?isShoppingCart=true&id="+$(this).data("id")+'&obj='+escape(JSON.stringify(obj));
+			}
+
 		});
+
 	})//ajax请求结束
 });

@@ -50,27 +50,21 @@ var shareObj = {
 
 //  咨询/工行服务/热点    id是唯一的,根据type区别 三个模块判断
 var itemId = window.location.href.split("=")[1];
+//分享时候，为新手机打开会在URL后面多一串字符串，
+//比如： test.winthen.com/bcard/consultation.html?id=18&from=groupmessage&isappinstalled=0
+if(itemId.indexOf("&") > 0){
+    itemId = itemId.split("&")[0];
+}
 
 //跳转预览界面
 if(window.location.search.indexOf('cms') > 0 ){
     window.location.href = 'consultation_preview.html?id=' +  itemId;
 }
 
-//分享时候，为新手机打开会在URL后面多一串字符串，
-//比如： test.winthen.com/bcard/consultation.html?id=18&from=groupmessage&isappinstalled=0
-if(itemId.indexOf("&") > 0){
-    itemId = itemId.split("&")[0];
-}
 var typeNum = -1;
-
-
-var pageNum = 1;
 var commentStr = '';
-
 // 分享的id  唯一
 var collectId = 0;
-
-
 
 
 //获取内容
@@ -85,7 +79,6 @@ var getDetail = function () {
         //调用分享借口
         jsSdkApi('share',shareObj);
 
-
         typeNum = data.type;
 
         $('title').html(data.title)
@@ -94,20 +87,12 @@ var getDetail = function () {
         $("header>.time").html( new Date(data.createTime*1000).Formate());
         $("article>.content").html(data.content).append('<span class="readNum">阅读量：' + data.viewNum + '</span>');
         isCollected(typeNum);
-        getCommentList(1);
+        // getCommentList(1);
+        getComment(itemId)
     });
 }
 
-
 getDetail();
-
-
-
-
-
-
-
-
 
 
 //判断是否已被收藏
@@ -125,126 +110,154 @@ var isCollected = function (type) {
 };
 
 
-
 //每一页评论默认返回10条数据
 var isPublishCtm = false;
-var getCommentList = function (page) {
+// var getCommentList = function (page) {
+//
+//     $('#loading').show();
+//     $('#loading span').show();
+//     $('#moreComts').hide();
+//
+//     if(isPublishCtm){
+//         $("article>.comments>.commentList").html('');
+//     }
+//
+//     commentStr = '' ;
+//
+//     var url = port + '/card/comment/list?currentPage=' + page + '&type=' + typeNum + '&itemId=' + itemId ;
+//     $.get(url ,function (data) {
+//         $("article>.comments>.totalNum").html('共' + data.rowCount + '条评论');
+//         if(data.list.length !=0){
+//             var headPicStr = '';
+//             var nameStr = '';
+//             for(var i=0 ;i<data.list.length;i++){
+//                 if(data.list[i].user){
+//                     headPicStr = data.list[i].user.headPic || portStr + '/imgs/headPic_default.png' ;
+//                     nameStr = data.list[i].user.userName || '';
+//                 }else {
+//                     headPicStr = portStr + '/imgs/headPic_default.png';
+//                     nameStr = '';
+//                 }
+//                 commentStr += '<li class="singleCmt">' +
+//                     '<img src="'+ headPicStr +'">' + '<span class="userName">' + nameStr + '</span>' +
+//                     '<p>'+ data.list[i].commentContent +'</p>' + '<span class="creatTime">'+ timeAgo((new Date().getTime()/1000)-data.list[i].createTime) +'</span></li>';
+//             }
+//             $("article>.comments>.commentList").append(commentStr);
+//             $('#loading').hide();
+//             $('#moreComts').show();
+//         }else {
+//             setTimeout('$("#loading").hide()',1000);
+//         }
+//     });
+// };
 
-    $('#loading').show();
-    $('#loading span').show();
-    $('#moreComts').hide();
 
-    if(isPublishCtm){
-        $("article>.comments>.commentList").html('');
-    }
 
-    commentStr = '' ;
+//获取评论
+function  getComment(itemId) {
+    $.ajax({
+        type:"get",
+        url: port + '/card/comment/list?currentPage=' + 1 + '&type=' + typeNum + '&itemId=' + itemId,
+        success: function (result) {
+            if(result.list.length > 0) {
+                $("#comment").find('.cmtNUm').html('评论 ' + result.rowCount + '条');
+                $('#moreComts').show();
+                var headPicStr = result.list[0].user.headPic || portStr + '/imgs/headPic_default.png';
+                $('#comment').find('.list').show().html('<img src="'+ headPicStr +'">' +
+                    '<span>'+ result.list[0].user.userName +'</span>' +
+                    '<p>' + result.list[0].commentContent + '</p>');
 
-    var url = port + '/card/comment/list?currentPage=' + page + '&type=' + typeNum + '&itemId=' + itemId ;
-    $.get(url ,function (data) {
-        $("article>.comments>.totalNum").html('共' + data.rowCount + '条评论');
-        if(data.list.length !=0){
-            var headPicStr = '';
-            var nameStr = '';
-            for(var i=0 ;i<data.list.length;i++){
-                if(data.list[i].user){
-                    headPicStr = data.list[i].user.headPic || portStr + '/imgs/headPic_default.png' ;
-                    nameStr = data.list[i].user.userName || '';
-                }else {
-                    headPicStr = portStr + '/imgs/headPic_default.png';
-                    nameStr = '';
-                }
-                commentStr += '<li class="singleCmt">' +
-                    '<img src="'+ headPicStr +'">' + '<span class="userName">' + nameStr + '</span>' +
-                    '<p>'+ data.list[i].commentContent +'</p>' + '<span class="creatTime">'+ timeAgo((new Date().getTime()/1000)-data.list[i].createTime) +'</span></li>';
+                //查看更多评论
+                $('#moreComts').click(function () {
+                    window.location.href = 'comment.html?type=' + typeNum + '&itemId=' + itemId;
+                });
+            }else {
+                $('#comment>.box').css({'margin-top': '0.02rem'});
             }
-            $("article>.comments>.commentList").append(commentStr);
-            $('#loading').hide();
-            $('#moreComts').show();
-        }else {
-            setTimeout('$("#loading").hide()',1000);
+        },
+        error: function (e) {
+            //todo
         }
     });
 };
 
 
-
-
-//点击查看更多评论
-$('#moreComts').click(function () {
-    isPublishCtm = false;
-    if(pageNum >= 1){
-        pageNum++;
-    }
-    getCommentList(pageNum);
-});
+// //点击查看更多评论
+// $('#moreComts').click(function () {
+//     isPublishCtm = false;
+//     if(pageNum >= 1){
+//         pageNum++;
+//     }
+//     getCommentList(pageNum);
+// });
 
 
 
-//发表评论
-$("#publishCmt").click(function () {
-    if(!token){
-        $.modal({
-            title: "评论失败",
-            text: "登录之后才能评论",
-            buttons: [
-                {text: "点击登录", onClick: function(){
-                    window.location.href = "login.html?his=" + escape(his);
-                }},
-                { text: "取消", className: "default", onClick: function(){return;} },
-            ]
-        });
-    }else {
-        if(!$("#commentContent").val()){
-            $.alert("请填写后再评论", "评论失败", function() {
-            });
-            return;
-        }
-
-        if($("#commentContent").val().length > 140){
-            $.alert("评论内容过长，请重新填写", "评论失败", function() {
-            });
-            return;
-        }else {
-            $.ajax({
-                type: 'post',
-                dataType: "json",
-                contentType : "application/json",
-                url: port + '/card/comment?token=' + token ,
-                data: JSON.stringify({
-                    itemType: typeNum,
-                    itemId: itemId,
-                    commentContent: $("#commentContent").val()
-                }),
-                success: function (result) {
-                    if(result.code == 201){
-                        $.toast("发表评论成功", function() {
-                            $('footer').css('height','7%');
-                            $("#commentContent").val('');
-                            isPublishCtm = true;
-                            getCommentList(1);
-                        });
-                    }
-                    if(result.code == 666){
-                        $.modal({
-                            title: "评论失败",
-                            text: "当前用户错误，请重新登录",
-                            buttons: [
-                                {text: "点击登录", onClick: function(){
-                                    window.location.href = "login.html?his=" + escape(his);
-                                }},
-                                { text: "取消", className: "default", onClick: function(){return;} },
-                            ]
-                        });
-                    }
-                },
-                error: function () {
-                    $.toast("发表评论失败", "cancel");
-                }
-            });
-        }
-    }
-});
+// //发表评论
+// $("#publishCmt").click(function () {
+//     if(!token){
+//         $.modal({
+//             title: "评论失败",
+//             text: "登录之后才能评论",
+//             buttons: [
+//                 {text: "点击登录", onClick: function(){
+//                     window.location.href = "login.html?his=" + escape(his);
+//                 }},
+//                 { text: "取消", className: "default", onClick: function(){return;} },
+//             ]
+//         });
+//     }else {
+//         if(!$("#commentContent").val()){
+//             $.alert("请填写后再评论", "评论失败", function() {
+//             });
+//             return;
+//         }
+//
+//         if($("#commentContent").val().length > 140){
+//             $.alert("评论内容过长，请重新填写", "评论失败", function() {
+//             });
+//             return;
+//         }else {
+//             $.ajax({
+//                 type: 'post',
+//                 dataType: "json",
+//                 contentType : "application/json",
+//                 url: port + '/card/comment?token=' + token ,
+//                 data: JSON.stringify({
+//                     itemType: typeNum,
+//                     itemId: itemId,
+//                     commentContent: $("#commentContent").val()
+//                 }),
+//                 success: function (result) {
+//                     if(result.code == 201){
+//                         $.toast("发表评论成功", function() {
+//                             $('footer').css('height','7%');
+//                             $("#commentContent").val('');
+//                             isPublishCtm = true;
+//                             // getCommentList(1);
+//                             getComment(itemId)
+//                         });
+//                     }
+//                     if(result.code == 666){
+//                         $.modal({
+//                             title: "评论失败",
+//                             text: "当前用户错误，请重新登录",
+//                             buttons: [
+//                                 {text: "点击登录", onClick: function(){
+//                                     window.location.href = "login.html?his=" + escape(his);
+//                                 }},
+//                                 { text: "取消", className: "default", onClick: function(){return;} },
+//                             ]
+//                         });
+//                     }
+//                 },
+//                 error: function () {
+//                     $.toast("发表评论失败", "cancel");
+//                 }
+//             });
+//         }
+//     }
+// });
 
 
 
@@ -303,22 +316,22 @@ $('#collectionShare>.love').click(function () {
 
 
 
-// time ago
-var timeAgo = function (preTime) {
-    if(preTime<60){
-        return parseInt(preTime)+"秒前";
-    }else if((preTime/60)<60){
-        return parseInt(preTime/60)+"分钟前";
-    }else if((preTime/3600)<24){
-        return parseInt(preTime/3600)+"小时前";
-    }else if((preTime/3600/24)<30){
-        return parseInt(preTime/3600/24)+"天前";
-    }else if((preTime/3600/24/30)<12){
-        return parseInt(preTime/3600/24/30)+"月前";
-    }else{
-        return parseInt(preTime/3600/24/365)+"年前";
-    }
-};
+// // time ago
+// var timeAgo = function (preTime) {
+//     if(preTime<60){
+//         return parseInt(preTime)+"秒前";
+//     }else if((preTime/60)<60){
+//         return parseInt(preTime/60)+"分钟前";
+//     }else if((preTime/3600)<24){
+//         return parseInt(preTime/3600)+"小时前";
+//     }else if((preTime/3600/24)<30){
+//         return parseInt(preTime/3600/24)+"天前";
+//     }else if((preTime/3600/24/30)<12){
+//         return parseInt(preTime/3600/24/30)+"月前";
+//     }else{
+//         return parseInt(preTime/3600/24/365)+"年前";
+//     }
+// };
 
 
 

@@ -22,7 +22,7 @@ article {
 
 
 article >.comments{
-    /*position: relative;*/
+    position: relative;
     border-top: 1px #f1f1f1 solid;
     padding-top: 25px;
     margin-bottom: 55px;
@@ -58,8 +58,39 @@ article >.comments>.commentList>.singleCmt>div{
 article >.comments>.commentList>.singleCmt>div:first-child{
     width: 17%;
 }
-article >.comments>.commentList>.singleCmt>div:last-child{
+
+article >.comments>.commentList>.singleCmt>div.cmtContent{
     width: 80%;
+}
+
+article >.comments>.commentList>.singleCmt>div.customerService{
+    margin: 10px 0 0 17%;
+    width: 75%;
+}
+
+article >.comments>.commentList>.singleCmt>div.customerService h3{
+    font-size: 1em;
+    font-family: "黑体";
+    color: #323232;
+    font-weight: 100;
+    border-left: 5px rgb(70, 179, 80) solid;
+    padding-left: 5px;
+}
+
+article >.comments>.commentList>.singleCmt>div.customerService span{
+    display: inline-block;
+    width: 100%;
+    color: #808080;
+    font-size: 0.9em;
+    margin-top: 0.02rem;
+    padding-left: 0.06rem;
+    word-break: break-all;
+}
+article >.comments>.commentList>.singleCmt>div.customerService span.time{
+    width: auto;
+    float: right;
+    color: #cfcfcf;
+    font-size: 0.7em;
 }
 
 article >.comments>.commentList>.singleCmt img{
@@ -88,6 +119,7 @@ article >.comments>.commentList>.singleCmt .creatTime{
     font-size: 0.7em;
     color: #cfcfcf;
 }
+
 
 
 

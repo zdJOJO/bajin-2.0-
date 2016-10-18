@@ -22,14 +22,14 @@ $(function(){
 	console.log(token);
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];
-
-	var obj;
-	if(window.location.search != ""){
-		var  JSONstr = window.location.search.split("=")[1];
-		console.log(JSON.parse(unescape(JSONstr)));
-		obj = JSON.parse(unescape(JSONstr));
-	}
 	
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r!=null)return  unescape(r[2]);
+		return null;
+	}
+	var obj = JSON.parse(GetQueryString('obj'));
 	
 	//返回页面的操作，添加链接地址，返回过程中依然要传递参数token，如果合并js就不用如此操作
 	$(".add_save").click(function(){
@@ -64,6 +64,8 @@ $(function(){
 								window.location.href = "setAddress.html?fromePersonNalInfo&&obj="+escape(JSON.stringify(obj));
 							}else if(window.location.href.indexOf('fromeGift') > 0){
 								window.location.href = 'setAddress.html?fromeGift&obj='+escape(JSON.stringify({}));
+							}else if(window.location.href.indexOf('isShoppingCart=false') > 0){
+								window.location.href = "setAddress.html?obj="+escape(JSON.stringify(obj)) + '&&isShoppingCart=false';
 							}else {
 								window.location.href = "setAddress.html?obj="+escape(JSON.stringify(obj));
 							}

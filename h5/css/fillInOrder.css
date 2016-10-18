@@ -142,6 +142,31 @@ body{
 	height: 0.04rem;
 	margin-top: 0.01rem;
 }
+
+.good>.buyNum{
+	height: 0.15rem;
+	line-height: 0.15rem;
+	padding: 0 0.04rem;
+	color: #808080;
+}
+
+.good>.buyNum>span{
+	display: inline-block;
+	width: 0.08rem;
+	height: 0.08rem;
+	line-height: 0.08rem;
+	text-align: center;
+	background: #f2f2f2;
+	float: right;
+	font-size: 25px;
+	margin: 15px 0 0 15px;
+}
+
+#numValue{
+	width: 0.16rem;
+}
+
+
 /*底部确认按钮*/
 footer{
 	height: 0.12rem;
@@ -165,9 +190,8 @@ footer p{
 }
 
 footer>div.total{
-	position: absolute;
-	top: 32%;
-	left: 27%;
+	float: right;
+	margin: 0.04rem 0.4rem 0 0;
 }
 
 footer>div.total>span{

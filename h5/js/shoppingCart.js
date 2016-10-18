@@ -259,7 +259,7 @@ $(document).ready(function(){
 			}
 			//cards 用于判读
 			if(tmpArray.length > 0){
-				window.location.href = "fillInOrder.html?isShopCart&&cards&&obj=" + escape(JSON.stringify(costAll()));
+				window.location.href = "fillInOrder.html?isShoppingCart=true&cards&obj=" + escape(JSON.stringify(costAll()));
 			}else {
 				alert('请选择商品');
 			}

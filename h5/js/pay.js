@@ -36,7 +36,8 @@ $(function(){
 					window.location.href = "login.html?his="+his;
 				}else{
 				 	for(var i=0;i<data.list.length;i++){
-						var item=$('<div class="cardItem"  id="cardItem" data-cardId='+data.list[i].cardNumber+'><div class="card-logo" ><img src="imgs/bank.jpg"></div><div class="card-info"><div class="card-name">中国工商银行</div><div class="card-tip">尾号'+data.list[i].cardNumber+'</div><div class="card-r">&gt;</div></div></div>')
+						var item=$('<div class="cardItem"  id="cardItem" data-cardId='+data.list[i].cardNumber+'><div class="card-logo" >' +
+							'<img src="imgs/bank.jpg"></div><div class="card-info"><div class="card-name">中国工商银行</div><div class="card-tip">尾号'+data.list[i].cardNumber+'</div><div class="card-r">&gt;</div></div></div>')
 					cardList.append(item);
 					}
 				    if($(".cardList").children().length == 0){

@@ -1,7 +1,6 @@
 
 
 //这个页面数据接入太傻逼了，这里需要处理三个页面的数据进来，
-
 ////  ↑老子 二次开发 ，你个臭煞笔 你他妈的还好意思说？？？ 蠢狗，代码写得跟屎一样！
 
 //应该使用一个obj来保存数据，进入页面再请求得到相对应的数据，
@@ -12,12 +11,12 @@
 //skuId:1,//商品的skuid
 //num:3//直接添加的时候的购买数量
 //}
+
 $(document).ready(function(){
 	//获取token
 	var token = "";
 	//获取存在于cookie中的token值
-	function getCookie(c_name)
-	{
+	function getCookie(c_name) {
 	if (document.cookie.length>0)
 	  {
 	  c_start=document.cookie.indexOf(c_name + "=")
@@ -32,7 +31,14 @@ $(document).ready(function(){
 	return undefined;
 	}
 
-	// token = getCookie("token") || "527224cd-4e00-4145-aadf-5e25115087f4";//便于本地测试
+
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r!=null)return  unescape(r[2]);
+		return null;
+	}
+
 	token = getCookie("token");
 	//获取页面的名称
 	var his = window.location.pathname.split("/");
@@ -41,63 +47,67 @@ $(document).ready(function(){
 
 	//解析前一个页面传递的对象，包含汉字
 	var obj = {};
-
-	try{
-		var str =  window.location.search.split("?")[1];
-		var arry = str.split("&&");
-
-		obj.cost = (arry[0].split("=")[1].indexOf(";") > 0) ? arry[0].split("=")[1].split(";")[1] : arry[0].split("=")[1];
-
-		obj.goodsId = arry[1].split("=")[1];
-		obj.num = arry[2].split("=")[1];
-		obj.pic = arry[3].split("=")[1];
-		obj.skuId = arry[4].split("=")[1];
-		obj.subTitle = arry[5].split("=")[1];
-		obj.title = arry[6].split("=")[1];
-		if(arry[7]){
-			obj.receiveId = arry[7].split("=")[1];
-		}
-	}catch(e){
-		var  str = window.location.search.split("=")[1];
-		obj = JSON.parse(unescape(str));
-	}
-
-
-
-	//备份一份  防止用户返回而丢失数据
-	var tempObj = {}
-
-	function clone3(obj){
-		function Clone(){}
-		Clone.prototype = obj;
-		var o = new Clone();
-		for(var a in o){
-			if(typeof o[a] == "object") {
-				o[a] = clone3(o[a]);
+	if(window.location.search.indexOf('isShoppingCart=true') > 0){
+		//从 购物车进来
+		obj = JSON.parse(obj.num = GetQueryString('obj'));
+	}else{
+		try{
+			obj.goodsId = GetQueryString('goodsId');
+			obj.num = GetQueryString('num');
+			obj.skuId = GetQueryString('skuId');
+			if( window.location.search.indexOf('receiveId')>0){
+				obj.receiveId = GetQueryString('receiveId');
 			}
+		}catch(e){
+			var  str = window.location.search.split("=")[1];
+			obj = JSON.parse(unescape(str));
 		}
-		return o;
 	}
-
-	clone3(obj);
-
-
 
 
 
 	//填入数据
-	if(obj.cost!=undefined){
-		var str =$('<div class="singleBrand"><img src="" class="activityPic"/><div class="detail"><h3></h3><p class="subtitle"></p><p class="singleCost"><span class="price"></span><span class="num"></span></p></div></div>');
+	if(window.location.search.indexOf('isShoppingCart=false') > 0){
+		var numStr = '<div class="buyNum">购买数量<span class="plus">+</span><span id="numValue">'+obj.num+'</span><span class="reduce">-</span></div>';
+		$.get( port + '/card/goods/'+obj.goodsId ,function (res) {
+			$(".good").append('<div class="singleBrand" data-id="'+obj.skuId+'"><img class="activityPic" src="'+res.hotPic+'"/>' +
+				'<div class="detail"><h3>'+res.goodsTitle+'</h3><p class="subtitle"></p>' +
+				'<p class="singleCost"><span class="price"></span><span class="num"></span></p></div></div>' + numStr);
 
+			$.get( port + '/card/goods/sku/'+obj.skuId ,function (result) {
+				$(".good .detail .subtitle").html(result.skuGague);
+				$(".good .detail .singleCost span.price").html("￥" +  parseInt(result.skuPrice).toFixed(2));
+				$('footer .totalPrice').html( '￥' + (parseInt(obj.num)* result.skuPrice).toFixed(2));
+				obj.cost = result.skuPrice;
 
-		$(".good").append(str);
-		$(".good .activityPic").attr("src",obj.pic);
-		$(".good .detail h3").html(decodeURIComponent(obj.title));
-		$(".good .detail .subtitle").html(decodeURIComponent(obj.subTitle));
-		$(".good .detail .singleCost span.price").html("￥" +  parseInt(obj.cost).toFixed(2));
-		$(".good .detail .singleCost span.num").html("×"+obj.num);
-		$(".good .detail .currentNum").html(obj.num);
-		$(".singleBrand").attr("data-id",obj.skuId);		
+				$('.good').find('.reduce').click(function () {
+					numChangeFn( 'reduce',parseInt($('#numValue').html()),result.skuPrice);
+				});
+				$('.good').find('.plus').click(function () {
+					numChangeFn('plus',parseInt($('#numValue').html()),result.skuPrice,result.stockNumber);
+				});
+			});
+
+			function numChangeFn(type,num,skuPrice,_maxNum) {
+				if(type=='reduce'){
+					if(num == 1){
+						return
+					}else {
+						num--;
+						$('#numValue').html(num);
+						$('footer .totalPrice').html( '￥' + (num*skuPrice).toFixed(2));
+					}
+				}else {
+					if(num == _maxNum){
+						return
+					}else {
+						num++;
+						$('#numValue').html(num);
+						$('footer .totalPrice').html( '￥' + (num*skuPrice).toFixed(2));
+					}
+				}
+			};
+		});
 	}
 
 	$(".message").bind("click",function(){
@@ -122,7 +132,6 @@ $(document).ready(function(){
 			async:true,
 			contentType : "application/json;charset=UTF-8",
 			success:function(data){
-				console.log(data);
 				if(data.code == '666'){
 					alert('用户登录异常，请重新登录');
 					window.location.href = "login.html?his="+escape(his);
@@ -152,7 +161,7 @@ $(document).ready(function(){
 				}
 			},
 			error:function(data){
-				console.log(data);
+				//todo
 			}
 		});		
 	}else{			//有地址的id，就会去请求得到地址的id，然后填写到页面上边
@@ -163,7 +172,6 @@ $(document).ready(function(){
 			async:true,
 			contentType:"application/json;charset=UTF-8",
 			success:function(data){
-				console.log(data);
 				$("footer p").attr("data-id",data.receiveId);
 				$(".userName span").html(data.receiverName);
 				$(".phone span").html(data.receiverPhone);
@@ -174,15 +182,11 @@ $(document).ready(function(){
 			}
 		});
 	}
-	
-	
-	
-	var cards = obj.cards;
-	console.log(cards);
 
 
 	//获取购物车物品，根据id来显示出物品
-	if(cards != undefined){
+	var cards = obj.cards;
+	if(cards){
 		$.ajax({
 			type:"get",
 			url:port+"/card/car?currentPage=1&size="+1000+"&token="+token,
@@ -196,7 +200,11 @@ $(document).ready(function(){
 						if(data.list[i].carModel.id==cards[j]){
 							console.log(data.list[i].carModel.id);
 							console.log(cards[j]);
-							var str=$('<div class="singleBrand"><img src="'+data.list[i].goodsModel.hotPic+'" class="activityPic"/><div class="detail"><h3>'+data.list[i].goodsModel.goodsTitle+'</h3><p class="subtitle">'+data.list[i].goodsModel.goodsSubtitle+'</p><p class="singleCost">￥&nbsp;'+data.list[i].carModel.price+'<span class="num">×'+data.list[i].carModel.num+'</span></p></div></div>');
+							var str=$('<div class="singleBrand">' +
+								'<img src="'+data.list[i].goodsModel.hotPic+'" class="activityPic"/>' +
+								'<div class="detail"><h3>'+data.list[i].goodsModel.goodsTitle+'</h3>' +
+								'<p class="subtitle">'+data.list[i].goodsModel.goodsSubtitle+'</p>' +
+								'<p class="singleCost">￥&nbsp;'+data.list[i].carModel.price+'<span class="num">×'+data.list[i].carModel.num+'</span></p></div></div>');
 							$(".good").append(str);
 						}
 					}
@@ -210,11 +218,10 @@ $(document).ready(function(){
 	//这里处理确认订单按钮的事件，区分添加的来源
 	$("footer p").bind("click",function(){
 		if(obj.cost!=undefined){			//直接购买的地方
-
 			var data = {
 				receiveId: $("footer p").data("id"), // 收货地址
 				skuId: obj.skuId, // 商品SKUID
-				num: obj.num // 购买数量
+				num: $('#numValue').html()// 购买数量
 			}
 
 			if(!data.receiveId){
@@ -229,8 +236,6 @@ $(document).ready(function(){
 				alert('订单生成失败！请选择商品数量后重新下订单。');
 				return;
 			}
-
-
 
 			$.ajax({
 				type:"post",
@@ -264,7 +269,7 @@ $(document).ready(function(){
 					carIds:cards // 购物车ID列表
 				}),
 				success:function(data){
-					window.location.href = "unpaid.html?isShopCart&&cardid=" + data.data.orderModel.orderId;
+					window.location.href = "unpaid.html?isShoppingCart&&cardid=" + data.data.orderModel.orderId;
 				},
 				error:function(data){
 					console.log(data);

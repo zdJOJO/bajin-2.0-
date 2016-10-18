@@ -1,8 +1,7 @@
 $(function(){
 	var token = "";
 	//获取存在于cookie中的token值
-	function getCookie(c_name)
-	{
+	function getCookie(c_name) {
 	if (document.cookie.length>0)
 	  {
 	  c_start=document.cookie.indexOf(c_name + "=")
@@ -16,10 +15,14 @@ $(function(){
 	  }
 	return undefined;
 	}
-	// token = getCookie("token") ||"56ec9682-6180-4672-9ab2-3ac12604fab9";//便于本地测试
-	token = getCookie("token")
+	token = getCookie("token");
 
-
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r!=null)return  unescape(r[2]);
+		return null;
+	}
 
 
 	//获取页面的名称
@@ -30,7 +33,8 @@ $(function(){
 	his = his[his.length-1];	
 	//返回页面的操作，添加链接地址，返回过程中依然要传递参数token，如果合并js就不用如此操作
 	
-	var addressId = window.location.search.split("=")[1];
+	var addressId = GetQueryString('id');
+	var obj = JSON.parse(GetQueryString('obj'));
 	$.ajax({
 		type:"get",
 		url:port+"/card/receiver/"+addressId+"?token="+token,
@@ -70,12 +74,21 @@ $(function(){
 					detilAddress:$("#addressDetail").val()
 				}),
 				success:function(data){
-					console.log(data);
-					// alert("编辑保存成功！");
-					alert_replace("test.winthen.com","编辑保存成功",2);
+					// window.location.href = isPersonNalInfo > 0 ? "setAddress.html?fromePersonNalInfo" :
+					// 	( isfromeGift > 0 ? "setAddress.html?fromeGift&obj="+escape(JSON.stringify({})) :
+					// 		"setAddress.html?obj=" + escape(JSON.stringify(obj)) + '&&isShoppingCart=false') ;
 
-					window.location.href = isPersonNalInfo > 0 ? "setAddress.html?fromePersonNalInfo" :
-						( isfromeGift > 0 ? "setAddress.html?fromeGift&obj="+escape(JSON.stringify({})) : "setAddress.html") ;
+					if(isPersonNalInfo > 0){
+						window.location.href = "setAddress.html?fromePersonNalInfo";
+					}else if(isfromeGift > 0){
+						window.location.href = "setAddress.html?fromeGift&obj="+escape(JSON.stringify({}));
+					}else if(window.location.search.indexOf("isShoppingCart=false") > 0){
+						window.location.href = "setAddress.html?obj=" + escape(JSON.stringify(obj)) + '&&isShoppingCart=false' ;
+					}else {
+						window.location.href = "setAddress.html?obj=" + escape(JSON.stringify(obj));
+					}
+
+
 				},
 				error:function(data){
 					console.log(data);

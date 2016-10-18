@@ -269,9 +269,9 @@ $(document).ready(function(){
 			url: port + '/card/comment/list?currentPage=' + 1 + '&type=' + 5 + '&itemId=' + itemId,
 			success: function (result) {
 				if(result.list.length > 0) {
-					$('#comment>.cmtNUm').html('评论 ' + result.rowCount + '条');
+					$("#comment").find('.cmtNUm').html('评论 ' + result.rowCount + '条');
 					$('#moreComts').show();
-					$('#comment > .list').show().html('<img src="'+ result.list[0].user.headPic +'">' +
+					$('#comment').find('.list').show().html('<img src="'+ result.list[0].user.headPic +'">' +
 						'<span>'+ result.list[0].user.userName +'</span>' +
 						'<p>' + result.list[0].commentContent + '</p>');
 
@@ -287,7 +287,7 @@ $(document).ready(function(){
 				//todo
 			}
 		});
-	}
+	};
 
 
 	//发表评论

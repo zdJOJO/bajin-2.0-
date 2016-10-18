@@ -1,4 +1,7 @@
 /**
+ * Created by Administrator on 2016/10/17.
+ */
+/**
  * Created by Administrator on 2016/9/22.
  */
 /**
@@ -11,31 +14,14 @@ $(function (){
     var searchStr = window.location.search;
     var phoneNumArray = ['139****3415','131****3995','189****5613','157****5779','182****2235','131****5809','156****2175','136****5889','187****4779'];
 
-    //获取存在于cookie中的token值
-    function getCookie(c_name) {
-        if (document.cookie.length>0) {
-            c_start=document.cookie.indexOf(c_name + "=")
-            if (c_start!=-1)
-            {
-                c_start=c_start + c_name.length+1
-                c_end=document.cookie.indexOf(";",c_start)
-                if (c_end==-1) c_end=document.cookie.length
-                return unescape(document.cookie.substring(c_start,c_end))
-            }
-        }
-        return undefined;
-    }
-    token = getCookie("token");
-    if(searchStr.indexOf('token')>0 && !token){
-        token = searchStr.split("&")[1].split("=")[1];
-        setCookie('token',token);
-    }
-    if( searchStr.indexOf('id')>0 || searchStr.indexOf('sectionId')>0){
-        sectionId = searchStr.split("&")[0].split("=")[1]
-    }else {
-        sectionId = -1;
-    }
+    //http://www.winthen.com/test/fareDraw_new.html?id=7?token=374a906a-2056-4c40-999a-cbed31419512&status=0
+     // ["", "id=7", "token=374a906a-2056-4c40-999a-cbed31419512&status=0"]
 
+    token = getCookie("token");
+
+    token = searchStr.split('?')[2].split('&')[0].split('=')[1];
+    sectionId = searchStr.split('?')[1].split('=')[1];
+    setCookie('token',token);
 
     var his = window.location.pathname.split("/");
     his = his[his.length-1];

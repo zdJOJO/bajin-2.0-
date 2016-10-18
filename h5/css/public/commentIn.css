@@ -8,8 +8,9 @@ html,body{
 #comment{
     font-size: 13px;
     color: #A5A2A2;
+    background: #fff;
     width: 92%;
-    margin: auto;
+    margin: 0 auto 0.3rem auto;
     position: relative;
 }
 

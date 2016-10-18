@@ -65,6 +65,7 @@ var getCommentList = function (page) {
         if(data.list.length != 0){
             var headPicStr = '';
             var nameStr = '';
+            var customerServiceStr = '';
             for(var i=0 ;i<data.list.length;i++){
                 if(data.list[i].user){
                     headPicStr = data.list[i].user.headPic || portStr + '/imgs/headPic_default.png' ;
@@ -73,12 +74,17 @@ var getCommentList = function (page) {
                     headPicStr = portStr + '/imgs/headPic_default.png';
                     nameStr = '';
                 }
+                if(data.list[i].commentModelList.length > 0){
+                    customerServiceStr = '<div class="customerService">' +
+                        '<h3>客服回复</h3><span class="cmt">'+ data.list[i].commentModelList[0].commentContent +'</span>' +
+                        '<span class="time">'+ timeAgo((new Date().getTime()/1000)-data.list[i].commentModelList[0].createTime) +'</span></div>';
+                }
                 str += '<div class="singleCmt">' +
                     '<div class="imgBox"><img data-original="'+ headPicStr +'"></div>' +
                     '<div class="cmtContent">' +
                     '<li class="userName">' + nameStr + '</li>' +
                     '<li class="commentContent">'+ data.list[i].commentContent +'</li>' +
-                    '<li class="creatTime">'+ timeAgo((new Date().getTime()/1000)-data.list[i].createTime) +'</li></div></div>';
+                    '<li class="creatTime">'+ timeAgo((new Date().getTime()/1000)-data.list[i].createTime) +'</li></div>'+customerServiceStr+'</div>';
             }
             $("article>.comments>.commentList").append(str);
             $('#loading').hide();

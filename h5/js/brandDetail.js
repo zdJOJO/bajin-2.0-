@@ -20,7 +20,6 @@ function getCookie(c_name)
 	return undefined;
 }
 token = getCookie("token");//便于本地测试
-// token = getCookie("token");
 //获取页面的名称
 var his = window.location.pathname.split("/");
 his = his[his.length-1];
@@ -376,13 +375,11 @@ var addToShoppingCartFn = function () {
 //确认购买
 var sureBuyNowFn = function () {
 	//brandDetail 用于判断从哪里进行支付， 以便于删除点但之后返回哪里去
-	window.location.href = "fillInOrder.html?brandDetail&cost=" + url_obj.cost + "&&goodsId="+ url_obj.goodsId+ "&&num=" +url_obj.num+ "&&pic=" +url_obj.pic+ "&&skuId="+url_obj.skuId+ "&&subTitle="+url_obj.subTitle + "&&title="+url_obj.title ;
+	// window.location.href = "fillInOrder.html?brandDetail&cost=" + url_obj.cost + "&&goodsId="+
+	// 	url_obj.goodsId+ "&&num=" +url_obj.num+ "&&pic=" +url_obj.pic+ "&&skuId="+url_obj.skuId+
+	// 	"&&subTitle="+url_obj.subTitle + "&&title="+url_obj.title ;
+	window.location.href = 'fillInOrder.html?isShoppingCart=false'+'&goodsId='+goodsid+'&skuId='+url_obj.skuId+'&num='+url_obj.num;
 }
-
-
-
-
-
 
 
 

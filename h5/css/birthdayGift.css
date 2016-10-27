@@ -8,6 +8,10 @@ html,body{
     -webkit-overflow-scrolling: touch;
 }
 
+body>span{
+    display: none;
+}
+
 ul,li{
   list-style: none;
 }

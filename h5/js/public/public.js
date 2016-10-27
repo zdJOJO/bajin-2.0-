@@ -71,6 +71,16 @@ function setCookie(c_name,value,expiredays) {
 }
 
 
+//解析url 中的参数
+//  例子： GetQueryString('num')
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]);
+    return null;
+}
+
+
 
 // hot 更多热门 只显示3行文字
 function showThreeLine(str,num) {

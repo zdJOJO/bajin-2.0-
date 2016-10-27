@@ -49,7 +49,8 @@ $(document).ready(function(){
 	var obj = {};
 	if(window.location.search.indexOf('isShoppingCart=true') > 0){
 		//从 购物车进来
-		obj = JSON.parse(obj.num = GetQueryString('obj'));
+		obj = JSON.parse(GetQueryString('obj'));
+		console.log(obj)
 	}else{
 		try{
 			obj.goodsId = GetQueryString('goodsId');
@@ -76,8 +77,8 @@ $(document).ready(function(){
 
 			$.get( port + '/card/goods/sku/'+obj.skuId ,function (result) {
 				$(".good .detail .subtitle").html(result.skuGague);
-				$(".good .detail .singleCost span.price").html("￥" +  parseInt(result.skuPrice).toFixed(2));
-				$('footer .totalPrice').html( '￥' + (parseInt(obj.num)* result.skuPrice).toFixed(2));
+				$(".good .detail .singleCost span.price").html("￥" +  result.skuPrice.toFixed(2));
+				$('footer .totalPrice').html( '￥' + (obj.num * result.skuPrice).toFixed(2));
 				obj.cost = result.skuPrice;
 
 				$('.good').find('.reduce').click(function () {
@@ -185,6 +186,7 @@ $(document).ready(function(){
 
 
 	//获取购物车物品，根据id来显示出物品
+	// 购物车
 	var cards = obj.cards;
 	if(cards){
 		$.ajax({
@@ -195,6 +197,7 @@ $(document).ready(function(){
 			success:function(data){
 				$(".good").html("");
 				console.log(data);
+				var totalPrice = 0;
 				for(var i=0,len=data.list.length;i<len;i++){
 					for(var j=0,len_=cards.length;j<len_;j++){
 						if(data.list[i].carModel.id==cards[j]){
@@ -204,11 +207,13 @@ $(document).ready(function(){
 								'<img src="'+data.list[i].goodsModel.hotPic+'" class="activityPic"/>' +
 								'<div class="detail"><h3>'+data.list[i].goodsModel.goodsTitle+'</h3>' +
 								'<p class="subtitle">'+data.list[i].goodsModel.goodsSubtitle+'</p>' +
-								'<p class="singleCost">￥&nbsp;'+data.list[i].carModel.price+'<span class="num">×'+data.list[i].carModel.num+'</span></p></div></div>');
+								'<p class="singleCost">￥&nbsp;'+data.list[i].skuModel.skuPrice.toFixed(2)+'<span class="num">×'+data.list[i].carModel.num+'</span></p></div></div>');
 							$(".good").append(str);
+							totalPrice += data.list[i].skuModel.skuPrice*data.list[i].carModel.num;
 						}
 					}
 				}
+				$('footer .totalPrice').html('￥' + totalPrice.toFixed(2));
 			},
 			error:function(data){
 				console.log(data);

@@ -120,10 +120,8 @@ $(function(){
 							url: port+"/card/bank/encryption/register?token="+token,
 							success:function(data){
 								//alert("没有银行卡的时候");
-
 								var str='<input type="hidden" id="merSignMsg" name="merSignMsg" value="'+data+'"/> '+
 									'<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/> ';
-
 								addForm.innerHTML = str;
 								addForm.submit();
 							},

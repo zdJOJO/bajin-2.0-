@@ -70,7 +70,11 @@ $(document).ready(function(){
 
 			$(".primeCost span").html(data.data.title);
 			$(".currentCost span").html(data.data.address);
-			$(".stock span").html( (data.data.discount) + '折');
+			if(data.data.discount == ' '){
+				$(".stock span").html( (data.data.discount));
+			}else {
+				$(".stock span").html( (data.data.discount) + '折');
+			}
 			$(".message div").html(data.data.detail);
 			$(".message div img").css({
 				"width": "100%",

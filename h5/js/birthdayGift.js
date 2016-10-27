@@ -84,15 +84,15 @@ if(localStorage.birthDayCode){
 
 
 var hasBinded = false; //是否绑白金卡  是true
-var isOverdue = true;  //领取码是否过期  过期true
 var hasRealGift = false; //是否有 实物
 var hasElec = false;     //是否有 电子券
-
 var giftArray = [];
 var addressStr = '';
-
 var pageNum = 1;
 var $defaultAddress = $("#popPub").find('.defaulAddress');
+var hasGifts = false ;   // 判断生日礼包是否存在    存在-true  不存在-false
+var isGiftDisabled = true ;  //判断礼包是否全部停用  是-true  否-false
+
 
 
 //判断是否绑定了银行卡
@@ -184,7 +184,8 @@ function getGIftsList(currentPage) {
         success: function (result) {
             var giftStr = '';
             if( currentPage==1 &&(!result || result.data.list.length == 0)){
-                $('#content>.receiveBefore .giftList').append('<li class="giftTitle">暂无礼包</li>');
+                hasGifts = false;
+                $('#content>.receiveBefore .giftList').html('<li class="giftTitle">暂无礼包</li>');
                 $('.bottomBox').hide();
                 return;
             }
@@ -200,8 +201,22 @@ function getGIftsList(currentPage) {
                     if(result.data.list[i].type == 1){
                         hasElec = true;
                     }
+                    //判断 是否全部停用
+                    if(result.data.list[i].isOnline == 0){
+                        isGiftDisabled = false;
+                    }else {
+                        isGiftDisabled = true;
+                    }
                 }
             }
+
+            if(isGiftDisabled){
+                $('#content>.receiveBefore .giftList').html('<li class="giftTitle">暂无礼包</li>');
+                $('.bottomBox').hide();
+                hasGifts = false;
+                return;
+            }
+
             $('#content').find('.giftList').append(giftStr);
             if( currentPage > 1 && result.data.list.length == 0){
                 setTimeout(function () {
@@ -220,7 +235,7 @@ getGIftsList(1);
 
 
 
-// （不存在事物情况下）立即领取
+// （不存在实物情况下）立即领取
 $("#receiveNow").click(function () {
     var birthday = (browser == "Chrome") ? $('#birthDayChrome').html() : $('#birthDaySafari').html();
     var gifCode = $('#birthDayCode').val();
@@ -331,6 +346,20 @@ function giftAjax(_receiverId) {
             }else if(result.code == '619'){
                 $.toast("礼包已领取", "text");
             }else {
+                 //生日礼包为空 且 用户未领取
+                 if(!hasGifts){
+                     $.modal({
+                         title: "提示",
+                         text: "礼包正在紧急筹备中，请稍后领取",
+                         buttons: [
+                             { text: "知道了", className: "default", onClick: function(){
+                                 //todo
+                             } },
+                         ]
+                     });
+                     return;
+                 }
+
                 $('.receiveBefore').hide();
                 $('#popPub').hide();
                 $('#orderLoading').show();
@@ -349,8 +378,6 @@ function giftAjax(_receiverId) {
                             }
                         })
                     }
-
-
                     $('.receiveAfter').show();
                     $('#orderLoading').hide();
                 },300);

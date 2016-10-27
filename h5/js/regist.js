@@ -62,7 +62,7 @@ $(function(){
 														phone:phoneNum,
 														userRole:0,
 														headPic:"",
-														gender:01,
+														gender: 0,
 														signature:"",
 														openId:"",
 														clientId:""

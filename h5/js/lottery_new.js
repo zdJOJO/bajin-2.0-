@@ -25,11 +25,15 @@ $(function (){
         }
         return undefined;
     }
-    token = getCookie("token");
-    if(searchStr.indexOf('token')>0 && !token){
-        token = searchStr.split("&")[1].split("=")[1];
+
+
+    if(searchStr.indexOf('token')>0){
+        token = searchStr.split("&")[1].split("=").length == 2 ? searchStr.split("&")[1].split("=")[1] : '';
         setCookie('token',token);
     }
+    token = getCookie("token");
+
+
     if( searchStr.indexOf('id')>0 || searchStr.indexOf('sectionId')>0){
         sectionId = searchStr.split("&")[0].split("=")[1]
     }else {

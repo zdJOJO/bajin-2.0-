@@ -6,6 +6,9 @@ body{
 	font-family: SimHei;
 }
 
+body>span{
+	display: none!important;
+}
 
 header{
 	color: #8B8B8B;

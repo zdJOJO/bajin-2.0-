@@ -192,6 +192,9 @@ header div>.tab{
 }
 .wrapper .container .singleMsg .msg p{
 	font-size: 14px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 .wrapper .container .singleMsg .msg p.cost{
 	position: absolute;

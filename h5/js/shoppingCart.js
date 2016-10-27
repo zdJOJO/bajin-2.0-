@@ -51,7 +51,7 @@ $(document).ready(function(){
 								'<div class="detail" data-id="'+ data.list[i].carModel.goodsId+'"><h3>'+
 								data.list[i].goodsModel.goodsTitle+'</h3><p class="subtitle">'+
 								data.list[i].skuModel.skuGague +'</p><p class="singleCost"><span>￥&nbsp;'+
-								data.list[i].skuModel.skuPrice+'</span><span>×'+
+								data.list[i].skuModel.skuPrice.toFixed(2)+'</span><span>×'+
 								data.list[i].carModel.num+'</span><div class="count"><span class="reduce count-i" data-cardid="'+
 								data.list[i].carModel.id+'" data-skuid="'+
 								data.list[i].carModel.skuId+'">-</span><span class="num count-i">'+
@@ -191,8 +191,8 @@ $(document).ready(function(){
 		$(this).siblings().find(".select_all_ p img").attr("src","imgs/notSel.png");
 		$(".singleBrand .singleCost").css("display","block");
 		$(".singleBrand .count").css("display","none");
+		location.reload();
 	});
-
 
 
 
@@ -207,7 +207,6 @@ $(document).ready(function(){
 			$(".singleBrand .sel").attr("src","imgs/notSel.png");
 		}
 	});
-
 
 
 
@@ -236,13 +235,6 @@ $(document).ready(function(){
 
 		return brandList;
 	}
-
-
-
-
-
-
-
 
 
 
@@ -307,30 +299,33 @@ $(document).ready(function(){
 			}
 		});
 	}//删除购物车里边的东西的函数结束
+
+
 	//删除按钮事件
 	$(".delete_all").bind("click",function(){
-
-		$.modal({
-			title: "提示",
-			text: "确认删除所选商品？",
-			buttons: [
-				{ text: "确认", onClick: function(){
-					var obj = costAll();
-					// for(var i in obj){
-					// 	deleteDate(obj[i]);
-					// }
-					var cards = obj.cards;
-					for(var i=0,len=cards.length;i<len;i++){
-						deleteDate(cards[i]);
-					}
-					//删除成功，然后重新请求数据，再点击一下编辑按钮。
-					$(".done .edit_all").click();
-				} },
-				{ text: "取消", className: "default", onClick: function(){ console.log(3)} },
-			]
-		});
-
-
+		if(costAll().numAll==0){
+			$.alert("你还没选择商品")
+		}else {
+			$.modal({
+				title: "提示",
+				text: "确认删除所选商品？",
+				buttons: [
+					{ text: "确认", onClick: function(){
+						var obj = costAll();
+						// for(var i in obj){
+						// 	deleteDate(obj[i]);
+						// }
+						var cards = obj.cards;
+						for(var i=0,len=cards.length;i<len;i++){
+							deleteDate(cards[i]);
+						}
+						//删除成功，然后重新请求数据，再点击一下编辑按钮。
+						$(".done .edit_all").click();
+					} },
+					{ text: "取消", className: "default", onClick: function(){ console.log(3)} },
+				]
+			});
+		}
 	});//删除按钮事件结束
 
 

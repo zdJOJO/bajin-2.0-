@@ -392,7 +392,7 @@ $('#goodDetail>button').click(function () {
 		if (token){
 			addToShoppingCartFn();
 		}else {
-			$.alert("登录后再收藏", "收藏失败", function() {
+			$.alert("登录后再加入购物车", "加入失败", function() {
 				window.location.href = "login.html?his=" + escape(his);
 			});
 		}

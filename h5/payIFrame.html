@@ -18,9 +18,17 @@
 <script>
 	var applyid="",
 	    lottery="";
+	var oriented = ''
+
 	var iframe = document.getElementById("iframeId");	
 	if(window.location.search.split('=')[0]!="lottery"){
-		applyid = window.location.search.split('=')[1];
+		if(window.location.search.indexOf('productOrderId') >0){
+			applyid = window.location.search.split('&')[0].split('=')[1];
+			oriented = window.location.search.split('&')[1].split('=')[1];
+		}else {
+			applyid = window.location.search.split('=')[1];
+		}
+
 	}else{
 		lottery = window.location.search.split('=')[1];
 	}
@@ -40,7 +48,7 @@
 		iframeUrl =  portStr + "/pay.html?mallOrderId=" + applyid;
 	}
 	if(window.location.search.split("=")[0]=="?productOrderId"){
-		iframeUrl =  portStr + "/pay.html?productOrderId=" + applyid;
+		iframeUrl =  portStr + "/pay.html?productOrderId=" + applyid + '&oriented=' + oriented;
 	}
 
 	//绑卡操作

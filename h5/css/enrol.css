@@ -355,13 +355,13 @@ footer.nav{
 }
 
 .content-text>p>img{
-    float: left;
+    /*float: left;*/
     width: 100%;
     height: auto;
 }
 
 .content img{
-    float: left;
+    /*float: left;*/
     width: 100%;
 }
 

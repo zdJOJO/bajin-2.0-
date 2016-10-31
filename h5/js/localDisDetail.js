@@ -151,7 +151,7 @@ $(document).ready(function(){
                         }
                     }else if(result.code == '201'){
                         productOrderId = result.data.id;
-                        popPay(productOrderId);
+                        popPay(productOrderId,productObj.oriented);
                     }
 
                 },
@@ -163,15 +163,8 @@ $(document).ready(function(){
     }
 
 
-    
-    //获取用户信息
-    function getUserMsg() {
-
-    };
-    
-    
     //弹出支付层
-    function popPay(productOrderId) {
+    function popPay(productOrderId,oriented) {
         $.actions({
             title: "请选择支付方式",
             onClose: function() {
@@ -185,7 +178,7 @@ $(document).ready(function(){
                         }
                         },
                         { text: "确认离开",className: "default",onClick: function(){
-                            window.location.href = 'enjoyOrderDetail.html?orderId=' + productOrderId
+                            window.location.href = 'enjoyOrderDetail.html?orderId=' + productOrderId ;
                         }
                         },
                     ]
@@ -195,7 +188,7 @@ $(document).ready(function(){
                 text: "银行卡支付",
                 className: "color-warning",
                 onClick: function() {  //跳转 银行卡支付
-                    window.location.href = "payIFrame.html?productOrderId=" + productOrderId;
+                    window.location.href = "payIFrame.html?productOrderId=" + productOrderId + '&oriented=' + oriented;
                 }
             },
             //     {

@@ -9,43 +9,6 @@ var portStr = port + '/bcard';
 //var portStr = port + '/test';
 
 
-var xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-        if($('body').children('span').length > 0 ){
-            $(this).hide();
-        }
-    }
-};
-
-
-// 调用原生的分享接口
-// showAndroidToast(giftArray[0].title,giftArray[0].subTitle,giftArray[0].pic,window.location.href);
-function share_Android_Ios(title,subTitle,imgPath,url) {
-    try {
-        show(title,subTitle,imgPath,url);   //IOS
-    }catch (e){
-        //todo
-    }
-    try {
-        javascript: window.handler.show(title,subTitle,imgPath,url);    //Android
-    }catch (e){
-        //todo
-    }
-};
-
-
-
-
-// 获取 min 到 max 的随机整数   如： var random = getRandom(0, 100);
-function getRandom(min, max){
-    var r = Math.random() * (max - min);
-    var re = Math.round(r + min);
-    re = Math.max(Math.min(re, max), min)
-    return re;
-}
-
-
 
 //获取存在于cookie中的token值
 function getCookie(c_name) {
@@ -71,6 +34,46 @@ function setCookie(c_name,value,expiredays) {
 }
 
 
+//统计点击量 公共函数
+function hitsOnFn(token,type,subType,typeId) {
+    $.ajax({
+        type: 'post',
+        url: port + '/card/count?token=' + token + '&type=' + type + '&typeId=' + typeId + '&subType=' + subType,
+        success: function (res) {
+            //todo
+        },
+        error: function (e) {
+            //todo
+        }
+    })
+};
+
+
+// 调用原生的分享接口
+// showAndroidToast(giftArray[0].title,giftArray[0].subTitle,giftArray[0].pic,window.location.href);
+function share_Android_Ios(title,subTitle,imgPath,url) {
+    try {
+        show(title,subTitle,imgPath,url);   //IOS
+    }catch (e){
+        //todo
+    }
+    try {
+        javascript: window.handler.show(title,subTitle,imgPath,url);    //Android
+    }catch (e){
+        //todo
+    }
+};
+
+
+// 获取 min 到 max 的随机整数   如： var random = getRandom(0, 100);
+function getRandom(min, max){
+    var r = Math.random() * (max - min);
+    var re = Math.round(r + min);
+    re = Math.max(Math.min(re, max), min)
+    return re;
+}
+
+
 //解析url 中的参数
 //  例子： GetQueryString('num')
 function GetQueryString(name) {
@@ -79,7 +82,6 @@ function GetQueryString(name) {
     if(r!=null)return  unescape(r[2]);
     return null;
 }
-
 
 
 // hot 更多热门 只显示3行文字
@@ -113,7 +115,6 @@ Date.prototype.Formate=function(){
 }
 
 
-
 //判断是否在微信客户端打开
 var is_weixin = function () {
     var ua = navigator.userAgent.toLowerCase();
@@ -124,7 +125,6 @@ var is_weixin = function () {
         window.location.href = 'isWeiXin.html';
     }
 }
-
 
 
 //type判断   1活动 2 白金人生 3商品 4抽奖 5c 6url 7咨询 8工会服务 9热点
@@ -164,7 +164,6 @@ var typeJudge = function (type) {
 };
 
 
-
 //多行显示省略号的方法
 function lessAll(text,length){
     // var text = $('.tit-wrap .detile p');
@@ -188,7 +187,6 @@ function checkMobile(str){
 }
 
 
-
 //格式化金钱数
 function formatePrice(price){
     // 处理金钱数后边的.00
@@ -206,7 +204,6 @@ function formatePrice(price){
     }
     return costFormate;
 }
-
 
 
 //元素内部滚动条滚动时候不影响外部滚动条

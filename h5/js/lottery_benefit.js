@@ -7,6 +7,8 @@
 /**
  * Created by Administrator on 2016/9/11.
  */
+//  当初 从我的权益 进入 抽奖
+
 $(function (){
     var token = "";
     var sectionId = ''; //抽奖期数

@@ -6,16 +6,11 @@
     <meta name="screen-orientation"content="portrait">
 	<meta name="x5-orientation"content="portrait">
 	<meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
-    <title>支付</title> 
+    <title>支付</title>
+	<link rel="stylesheet" href="css/weiXin/weui.min.css">
+	<link rel="stylesheet" href="css/weiXin/jquery-weui.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bank.css">
-	<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
-    <script src="js/zepto.js"></script>
-    <script src="js/pay.js"></script>        
-<script>
-		var iWidth=document.documentElement.clientWidth;
-		document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
-	</script>
 </head> 
 
 <body>  
@@ -27,5 +22,13 @@
 	<div class="cardList"></div>
 	<form id="infoFormSubmit" name="info" method="post" action="http://web.zj.icbc.com.cn/mobile/Pay.do?scene=pay"></form>
 	<form id="addFormButton"   method="post" action="http://web.zj.icbc.com.cn/mobile/Bjzx.do?scene=bjzx"></form>
-</body> 
+</body>
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
+<script type="text/javascript" src="js/public/public.js"></script>
+<script type="text/javascript" src="js/pay.js"></script>
+<script>
+	var iWidth=document.documentElement.clientWidth;
+	document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+</script>
 </html> 

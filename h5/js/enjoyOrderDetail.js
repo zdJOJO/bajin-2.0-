@@ -7,6 +7,7 @@ $(document).ready(function(){
     var userPhoneNum = getCookie("phone");
     var productOrderId = window.location.search.split('=')[1];
     var time = 60;  //验证码获取时间  60s倒计时
+    var oriented = '';
 
     //获取订单信息
     // 0待付款 1待使用 2已完成  3已取消
@@ -14,6 +15,7 @@ $(document).ready(function(){
         type: 'get',
         url: port + '/card/productorder/' + productOrderId + '?&token=' + token,
         success: function (res) {
+            oriented = res.data.productModel.oriented;
             var status = (res.data.status>=0 ) ? res.data.status : -2 ; //-2表示全部订单
             var statusHandel = '<span class="cancelOrder"></span>';
             if(res.data.status == 0){
@@ -273,7 +275,7 @@ $(document).ready(function(){
                 text: "银行卡支付",
                 className: "color-warning",
                 onClick: function() {  //跳转 银行卡支付
-                    window.location.href = "payIFrame.html?productOrderId=" + productOrderId;
+                    window.location.href = "payIFrame.html?productOrderId=" + productOrderId + '&oriented=' + oriented;
                 }
             },
             //     {

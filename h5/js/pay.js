@@ -109,7 +109,6 @@ $(function(){
 									}
 								}
 
-
 								console.log(window.location.href)
 								console.log(window.location.search.split("=")[0])
 								console.log(url);
@@ -184,7 +183,7 @@ $(function(){
 		window.location.href = "login.html?his="+escape(his);
 	}
 
-	
+
 	var  bankCardTypeMsgStr = '';
 	var msg = [];
 	function bankCardTypeMsg(oriented) {

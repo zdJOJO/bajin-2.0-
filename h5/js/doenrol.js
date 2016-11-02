@@ -148,6 +148,28 @@
                                                         function popPay() {
                                                             $.actions({
                                                                 title: "请选择支付方式",
+                                                                actions: [
+                                                                    {
+                                                                        text: "银行卡支付",
+                                                                        className: "color-warning",
+                                                                        onClick: function() {  //跳转 银行卡支付
+                                                                           // window.location.href = "payIFrame.html?id=" + data.data.applyId;
+                                                                            window.location.href = "pay.html?id=" + data.data.applyId;
+                                                                            $('#applyName').val("");
+                                                                            $('#applyPhone').val("");
+                                                                            $("#email").val("");
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        text: "微信支付",
+                                                                        className: "color-primary",
+                                                                        onClick: function() {
+                                                                            $('.weui_dialog_visible').hide();
+                                                                            $.showLoading('支付请求中');
+                                                                            arouseWeixinPay();  //点击  微信支付
+                                                                        }
+                                                                    },
+                                                                ],
                                                                 onClose: function() {
                                                                     //关闭弹层的回调函数
                                                                     $.modal({
@@ -167,27 +189,7 @@
                                                                             },
                                                                         ]
                                                                     });
-                                                                },
-                                                                actions: [
-                                                                    {
-                                                                        text: "银行卡支付",
-                                                                        className: "color-warning",
-                                                                        onClick: function() {  //跳转 银行卡支付
-                                                                            window.location.href = "payIFrame.html?id=" + data.data.applyId;
-                                                                            $('#applyName').val("");
-                                                                            $('#applyPhone').val("");
-                                                                            $("#email").val("");
-                                                                        }
-                                                                    },
-                                                                    {
-                                                                        text: "微信支付",
-                                                                        className: "color-primary",
-                                                                        onClick: function() {
-                                                                            $.showLoading('支付请求中');
-                                                                            arouseWeixinPay();  //点击  微信支付
-                                                                        }
-                                                                    },
-                                                                ]
+                                                                }
                                                             });
                                                         };
 

@@ -32,6 +32,7 @@ $(function(){
 				}else{			 		
 			 		if(data.list.length == 0){//没绑卡的时候，调到绑卡页面，并且给定一个标识，绑定成功后是要跳到抽奖页面的
 				    	location.href = "payIFrame.html?lottery=lottery";
+						
 				    }else{//已经绑定银行卡的时候，直接跳到抽奖页面
 				    	window.location.href = "fareDraw.html?token="+token;
 				    }

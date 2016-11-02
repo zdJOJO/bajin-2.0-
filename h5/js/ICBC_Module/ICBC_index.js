@@ -25,8 +25,6 @@ $(function(){
         kabin=  searchStr.split('&')[1].split('=')[1];
     }
 
-
-
     //二级广告
     // isAudit 表示是否审核  0 为审核  1已审核  (默认获取已审核) isDelete 表示是否删除的数据 0正常  1删除 (默认获取未删除的数据)
     $.ajax({
@@ -35,7 +33,7 @@ $(function(){
         success:function(result){
             var str = '' , url='';
             for(var i=0;i<result.data.list.length;i++){
-                str += '<div class="swiper-slide" data-url="'+ result.data.list[i].url +'">' +
+                str += '<div class="swiper-slide" data-id="'+ result.data.list[i].id +'" data-url="'+ result.data.list[i].url +'">' +
                     '<img src="'+ result.data.list[i].pic +'"></div>';
             }
             var banner = document.getElementById('banner');
@@ -55,6 +53,7 @@ $(function(){
             //点击banner跳转
             var $itemBanner = $("#banner").find('.swiper-slide');
             $itemBanner.click(function () {
+                hitsOnFn(token,19,1,$(this).attr('data-id'));
                 window.location.href = $(this).attr('data-url');
             });
         },
@@ -83,6 +82,7 @@ $(function(){
 
             //工行 各个按钮
             $("#service").find('li.icbcBtn').click(function(){
+                hitsOnFn(token,20,1,$(this).attr('data-pickid'));
                 if(token){
                     if($(this).attr("data-pickid")=="998"){
                         window.location.href = 'tel://' + '400-009-5588';
@@ -285,6 +285,7 @@ $(function(){
                         });
 
                         $(".singleCard").click(function () {
+                            hitsOnFn(token,22,1,$(this).attr('data-cardid'));
                             window.location.href = 'ICBC_cardDetail.html?cardId=' + $(this).attr('data-cardid');
                         });
 

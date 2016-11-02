@@ -275,7 +275,8 @@ $(document).ready(function(){
                 text: "银行卡支付",
                 className: "color-warning",
                 onClick: function() {  //跳转 银行卡支付
-                    window.location.href = "payIFrame.html?productOrderId=" + productOrderId + '&oriented=' + oriented;
+                   // window.location.href = "payIFrame.html?productOrderId=" + productOrderId + '&oriented=' + oriented;
+                    window.location.href = "pay.html?productOrderId=" + productOrderId + '&oriented=' + oriented;
                 }
             },
             //     {

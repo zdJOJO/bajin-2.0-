@@ -37,7 +37,7 @@ function setCookie(c_name,value,expiredays) {
 //统计点击量 公共函数
 function hitsOnFn(token,type,subType,typeId) {
     $.ajax({
-        type: 'post',
+        type: 'put',
         url: port + '/card/count?token=' + token + '&type=' + type + '&typeId=' + typeId + '&subType=' + subType,
         success: function (res) {
             //todo
@@ -71,7 +71,7 @@ function getRandom(min, max){
     var re = Math.round(r + min);
     re = Math.max(Math.min(re, max), min)
     return re;
-}
+};
 
 
 //解析url 中的参数
@@ -176,6 +176,8 @@ function lessAll(text,length){
         }
     }
 }
+
+
 // 验证手机号的方法
 function checkMobile(str){
     var re = /^[1][35847][0-9]{9}$/;

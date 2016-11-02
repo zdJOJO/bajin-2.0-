@@ -84,7 +84,7 @@ var isCollected = function () {
 };
 
 // 收藏
-$(".saveAndShare img.love").click(function () {
+$(".saveAndShare img.love").unbind('click').click(function () {
 
 	if(!token){
 		$.alert("登录后再收藏", "收藏失败", function() {
@@ -112,6 +112,7 @@ $(".saveAndShare img.love").click(function () {
 				$(".saveAndShare img.love").attr("src","imgs/iconfont-love_save.png")
 				$.toast("收藏成功",function () {
 					isCollected();
+					hitsOnFn(token,3,2,itemId);
 				});
 			}else if(result.code == 203){
 				$(".saveAndShare img.love").attr("src","imgs/iconfont-love.png");
@@ -154,7 +155,15 @@ var getGoodDetail = function () {
 				desc: data.goodsSubtitle,
 				link: window.location.href,
 				imgUrl: data.hotPic
+			},{
+				token: token,
+				type: 3,
+				subType: 4,
+				typeId: itemId
 			});
+
+
+
 
 			$(".buyNow").attr("data-goodsid",data.goodsId);
 			$(".wrapper .title").html(data.goodsTitle);

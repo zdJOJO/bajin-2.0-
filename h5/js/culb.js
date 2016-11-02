@@ -293,13 +293,20 @@ $(function(){
 
 
     // 更多热门单个元素 的跳转  函数
+    // hitsOnFn(token,type,subType,typeId)
     function toActivity(id,_type){
-          if(!isHotDoor){
-              window.location.href = "enrol.html?id=" + id;
-          }else {
-             window.location.href = jumpPage(_type).htmlStr + '?id=' + id ;
-          }
+        if(!isHotDoor){
+            if(token){
+                hitsOnFn(token,1,1,id);
+            }
+            window.location.href = "enrol.html?id=" + id;
+        }else {
+            if(token){
+                hitsOnFn(token,_type,1,id);
+            }
+            window.location.href = jumpPage(_type).htmlStr + '?id=' + id ;
         }
+    }
 
 
 });

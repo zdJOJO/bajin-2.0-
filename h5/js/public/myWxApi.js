@@ -39,7 +39,7 @@ function randomString(len) {
 
 
 //向 后台获取 jsapi_ticket
-var jsSdkApi = function (type,_obj,_callback) {
+var jsSdkApi = function (type,_obj,hitObj) {
     $.get( port + '/card/weixin/token/get',function (result) {
         nonceStr = randomString(16);
         timestamp =  String( parseInt((new Date().getTime() / 1000)) );
@@ -75,7 +75,7 @@ var jsSdkApi = function (type,_obj,_callback) {
         wx.ready(function () {
             switch (type){
                 case 'share' :
-                    shareMInnit_JSSDK(_obj);
+                    shareMInnit_JSSDK(_obj,hitObj);
                     break;
                 case 'position' :
                     getGPS_JSSDK();
@@ -88,13 +88,14 @@ var jsSdkApi = function (type,_obj,_callback) {
 
 
 //分享
-var shareMInnit_JSSDK = function (obj) {
+var shareMInnit_JSSDK = function (obj,hitObj) {
     wx.onMenuShareTimeline({
         title: obj.title, // 分享标题
         link: obj.link, // 分享链接
         imgUrl: obj.imgUrl, // 分享图标
         success: function () {
             // 用户确认分享后执行的回调函数
+            hitsOnFn(hitObj.token,hitObj.type,hitObj.subType,hitObj.typeId);
         },
         cancel: function () {
             // 用户取消分享后执行的回调函数
@@ -109,6 +110,7 @@ var shareMInnit_JSSDK = function (obj) {
         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
         success: function () {
             // 用户确认分享后执行的回调函数
+            hitsOnFn(hitObj.token,hitObj.type,hitObj.subType,hitObj.typeId);
         },
         cancel: function () {
             // 用户取消分享后执行的回调函数

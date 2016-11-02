@@ -29,6 +29,11 @@ $(document).ready(function(){
                     desc: result.data.subtitle,
                     link: portStr + '/localDisDetail.html?productId=' + result.data.id ,
                     imgUrl: result.data.imgList[0].pic
+                },{
+                    token: token,
+                    type: 17,
+                    subType: 4,
+                    typeId: productId
                 });
 
                 if(result.data.sum == 0){
@@ -173,23 +178,24 @@ $(document).ready(function(){
                     title: "确认要放弃付款？",
                     text: "订单会保留一段时间，请尽快支付",
                     buttons: [
-                        { text: "继续支付", onClick: function(){
+                        {
+                            text: "继续支付", onClick: function(){
                             popPay(productOrderId);
                         }
-                        },
-                        { text: "确认离开",className: "default",onClick: function(){
-                            window.location.href = 'enjoyOrderDetail.html?orderId=' + productOrderId ;
-                        }
+                        }, {
+                            text: "确认离开",className: "default",onClick: function(){
+                                window.location.href = 'enjoyOrderDetail.html?orderId=' + productOrderId ;
+                            }
                         },
                     ]
-                });
+                })
             },
             actions: [{
                 text: "银行卡支付",
                 className: "color-warning",
                 onClick: function() {  //跳转 银行卡支付
-                    // window.location.href = "payIFrame.html?productOrderId=" + productOrderId + '&oriented=' + oriented;
-                    window.location.href = 'pay.html?productOrderId=' + productOrderId + '&oriented=' + oriented;
+                    //window.location.href = "payIFrame.html?productOrderId=" + productOrderId + '&oriented=' + oriented;
+                   window.location.href = 'pay.html?productOrderId=' + productOrderId + '&oriented=' + oriented;
                 }
             },
             //     {

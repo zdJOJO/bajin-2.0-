@@ -19,7 +19,7 @@ $(document).ready(function(){
 	token = getCookie("token");
 	var applyid = window.location.search.split('&')[0].split("=")[1];
 	var createTime = parseInt(window.location.search.split('&')[1].split("=")[1]);
-	var price = parseInt(window.location.search.split('&')[2].split("=")[1]);
+	var price = parseFloat(window.location.search.split('&')[2].split("=")[1]);
 
 
 
@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 	//计时器
 	//判断是否超过30min
-	if(parseInt(price) > 0){
+	if(price> 0){
 		$('#timer').show();
 		var leftTime = createTime + 1800 - parseInt(new Date().getTime()/1000);
 		function timer() {
@@ -131,7 +131,9 @@ $(document).ready(function(){
 					text: "银行卡支付",
 					className: "color-warning",
 					onClick: function() {  //跳转 银行卡支付
-						window.location.href = "payIFrame.html?id="+applyid;
+					//	window.location.href = "payIFrame.html?id="+applyid;
+						window.location.href = "pay.html?id="+applyid;
+
 					}
 				},
 				{

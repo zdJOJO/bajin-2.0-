@@ -175,15 +175,11 @@ $(document).ready(function(){
 					}
 					bannerStr += '<div class="swiper-slide">' +
 						'<p class="mask_banner">'+arr[i].bannerTitle+'</p>' +
-						'<img src="'+arr[i].bannerPic+'" data-id="'+arr[i].bannerId+'" data-type="'+arr[i].type+'" data-itemId="'+arr[i].itemId+'" data-url="'+arr[i].bannerUrl+'" class="swiper-slide_img"/>' +
+						'<img src="'+arr[i].bannerPic+'" data-id="'+arr[i].bannerId+'" data-type="'+arr[i].type+'" data-url="'+arr[i].bannerUrl+'" class="swiper-slide_img"/>' +
 						'</div>';
 
 				}
 				$(".swiper-wrapper").append(bannerStr);
-
-
-
-
 
 				//这里区分type，
 				//		如果是0，不操作，
@@ -199,21 +195,22 @@ $(document).ready(function(){
 				});
 				$(".swiper-slide img").click(function(){
 					var type = $(this).attr("data-type");
-			        if(type == 0){
+					hitsOnFn(token,type,1, $(this).attr("data-id"));
+                    if(type == 0){
 			        	return;
-			        }else if(type == 1){
-			        	window.location.href = "enrol.html?id=" + $(this).data("itemid");
-			        }else if(type == 2){
-			        	window.location.href = "life.html?id="+ $(this).data("itemid");
-			        }else if(type == 3){
-			        	window.location.href = "brandDetail.html?id="+$(this).data("itemid");
-			        }else if(type == 4 || type == 12){
+                    }else if(type == 1){
+			        	window.location.href = "enrol.html?id=" + $(this).data("id");
+                    }else if(type == 2){
+			        	window.location.href = "life.html?id="+ $(this).data("id");
+                    }else if(type == 3){
+			        	window.location.href = "brandDetail.html?id="+$(this).data("id");
+                    }else if(type == 4 || type == 12){
 			        	if(token != undefined){
 							window.location.href = $(this).attr('data-url');//抽奖
 			        	}else{
 			        		window.location.href = "login.html?his=" + his;
-			        	}		        	
-			        }else if(type == 6){
+			        	}
+                    }else if(type == 6){
 						if(token != undefined){
 							//调到抽奖中间页
 							window.location.href = bannerUrl;
@@ -221,9 +218,9 @@ $(document).ready(function(){
 							window.location.href = "login.html?his=" + his;
 						}
 					}else if(type == 5){
-			        	window.location.href = "mall.html?id="+$(this).data("itemid");
+			        	window.location.href = "mall.html?id="+$(this).data("id");
 			        	return;
-			        }else if(type == 12){
+                    }else if(type == 12){
 						window.location.href = $(this).attr('data-url');
 					}
 				});
@@ -275,6 +272,7 @@ $(document).ready(function(){
 				})
 			});
 			function toActivity(type,id){
+				hitsOnFn(token,type,1,id);
 				if(type == 1)
 					window.location.href="enrol.html?id="+id;
 				else if(type == 2)
@@ -310,6 +308,7 @@ $(document).ready(function(){
 			//工行 各个按钮
 			$("#activities .btn").click(function(){
 				if(token != undefined){
+					hitsOnFn(token,20,1,$(this).data("pickid"));
 					if($(this).attr("id")=="phone"){
 						window.location.href = 'tel://' + '400-009-5588';
 						return;

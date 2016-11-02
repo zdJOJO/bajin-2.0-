@@ -66,6 +66,7 @@ $(document).ready(function(){
                 dropload.resetload();
 
                 $('#localList').children('.itemCell').click(function () {
+                    hitsOnFn(token,17,1,$(this).attr('data-productId'));
                     window.location.href = 'localDisDetail.html?productId=' + $(this).attr('data-productId');
                 });
             },

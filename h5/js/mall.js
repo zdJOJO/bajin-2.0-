@@ -65,6 +65,11 @@ $(document).ready(function(){
 				desc: data.data.subtitle,
 				link: window.location.href,
 				imgUrl: data.data.pic
+			},{
+				token: token,
+				type: 5,
+				subType: 4,
+				typeId: itemId
 			});
 
 
@@ -167,6 +172,7 @@ $(document).ready(function(){
 		      			itemType:5,
 					}),
 					success:function(data){
+						hitsOnFn(token,5,2,itemId);
 						//todo
 					},
 					error:function(data){

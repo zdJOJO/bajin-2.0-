@@ -78,13 +78,17 @@ $(function(){
 
     function getActDetail(){
         $.get(port+"/card/activity/"+activityid,function(data){
-
-            // //调用分享借口
+            //调用分享借口 和 传递统计数据
             jsSdkApi('share',{
                 title: data.activityTitle,
                 desc: data.activitySubtitle,
                 link: window.location.href,
                 imgUrl: data.activityPic
+            }, {
+                token: token,
+                type: 1,
+                subType: 4,
+                typeId: activityid
             });
 
             peopleNumber = data.peopleNumber;
@@ -203,7 +207,7 @@ $(function(){
             }            
         
             //这里需要加判断用户是否登录
-            $(".btn_q .love-btn").click(function(target){
+            $(".btn_q .love-btn").unbind('click').click(function(target){
                 if(token){
                     var info ={
                         //"userId":data.userId,
@@ -224,6 +228,7 @@ $(function(){
                                         window.location.href = "login.html?his="+escape(his);
                                     }else{
                                         $.toast("收藏成功");
+                                        hitsOnFn(token,1,2,activityid);
                                     }
                                 },
                                 error:function(data){

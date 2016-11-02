@@ -301,10 +301,11 @@ header .saveAndShare img:first-child{
 
 #mallDetail>.information>p{
     border-top: 10px #FAFAFA solid;
-    height: 0.08rem;
+    /*height: 0.08rem;*/
     line-height: 0.08rem;
     color: #323232;
     font-size: 15px;
+    overflow: hidden;
 }
 
 #mallDetail>.information>p:nth-child(2){
@@ -335,6 +336,13 @@ header .saveAndShare img:first-child{
     margin-top: 15px;
     float: right;
 }
+
+#mallDetail>.information>p>span{
+    display: inline-block;
+    float: right;
+    width: 0.87rem;
+}
+
 
 #mallDetail .message .title_sub{
     color: #323232;

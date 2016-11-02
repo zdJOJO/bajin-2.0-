@@ -107,7 +107,8 @@ $('#sure').click(function () {
             success: function (result) {
                 if(result.code == 201){
                     mallOrderId = result.data.id;
-                    window.location.href = "payIFrame.html?mallOrderId=" + mallOrderId;
+                   // window.location.href = "payIFrame.html?mallOrderId=" + mallOrderId;
+                    window.location.href = "pay.html?mallOrderId=" + mallOrderId;
                     $('#hasDisAmount_1 ,#unDisAmount_1').val('');
                 }else {
                     $.alert('创建订单失败');

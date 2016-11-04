@@ -233,7 +233,7 @@ $(document).ready(function(){
 								state = "已付款";
 							}
 						}
-						var str = $('<div class="singleAppointment" data-id="'+data.list[i].applyId+'" data-timeStamp="'+data.list[i].createTime+'" data-price="'+data.list[i].applyPrice+'">' +
+						var str = $('<div class="singleAppointment" data-id="'+data.list[i].applyId+'" data-timeStamp="'+data.list[i].createTime+'" data-price="'+data.list[i].applyPrice+'" data-isPay="'+data.list[i].isPay+'">' +
 							'<img src="'+data.list[i].activity.maxPic+'"/><div class="detail">' +
 							'<h4>'+data.list[i].activity.activityTitle+'</h4>' +
 							'<span>'+state+'</span><p class="time">' +
@@ -244,8 +244,8 @@ $(document).ready(function(){
 					//添加事件，到详细    enrollMsg.html
 					$(".singleAppointment").bind("click",function(){
 						var currentTime = new Date().getTime()/1000;
-						if((currentTime - $(this).attr('data-timeStamp') >= 1800) && $(this).attr('data-price') != 0){
-							alert('您没在规定时间内付款，活动预约已经取消');
+						if((currentTime - $(this).attr('data-timeStamp') >= 1800) && $(this).attr('data-price') != 0 && $(this).attr('data-isPay')==0){
+							$.alert('您没在规定时间内付款，活动预约已经取消');
 							$(this).hide();
 							return
 						}else {

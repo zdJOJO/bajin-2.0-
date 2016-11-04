@@ -53,10 +53,9 @@ $(document).ready(function(){
 								data.list[i].skuModel.skuGague +'</p><p class="singleCost"><span>￥&nbsp;'+
 								data.list[i].skuModel.skuPrice.toFixed(2)+'</span><span>×'+
 								data.list[i].carModel.num+'</span><div class="count"><span class="reduce count-i" data-cardid="'+
-								data.list[i].carModel.id+'" data-skuid="'+
-								data.list[i].carModel.skuId+'">-</span><span class="num count-i">'+
-								data.list[i].carModel.num+'</span><span class="add count-i" data-cardid="'+
-								data.list[i].carModel.id+'" data-skuid="'+data.list[i].carModel.skuId+'">+</span></div></p></div></div>';
+								data.list[i].carModel.id+'" data-skuid="'+data.list[i].carModel.skuId+'" data-stockNumber="'+data.list[i].skuModel.stockNumber+'">-</span>' +
+								'<span class="num count-i">'+data.list[i].carModel.num+'</span><span class="add count-i" data-cardid="'+
+								data.list[i].carModel.id+'" data-skuid="'+data.list[i].carModel.skuId+'" data-stockNumber="'+data.list[i].skuModel.stockNumber+'">+</span></div></p></div></div>';
 						}
 
 						$(".content").append(str);
@@ -132,15 +131,25 @@ $(document).ready(function(){
 					reduceBtn.click(function(){
 						setNum(false,this);
 					});
-					//设置报名人数，true为++，false为--
+					//true为++，false为--
 					function setNum(type,self){
 						var cardid = $(self).data("cardid");
 						var skuId = $(self).data("skuid");
+						var stockNumber = $(self).data("stockNumber");
 						curNum = $(self).siblings(".num").html();
 						if(type){
-							curNum++;
+							if(curNum == stockNumber){
+								$.alert('数量不能超过限量哦');
+								return;
+							}else {
+								curNum++
+							}
 						}else{
-							curNum=--curNum<1?1:curNum;
+							if(curNum==1){
+								return
+							}else {
+								curNum--;
+							}
 						}
 						$(self).siblings(".num").html(curNum);
 						$(self).parent().siblings(".singleCost").find("span:nth-child(2)").html("×"+curNum);

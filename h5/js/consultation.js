@@ -81,8 +81,8 @@ var getDetail = function () {
 
         typeNum = data.type;
 
-        $('title').html(data.title)
-        $("h3").html(data.title);
+        $('title').html(data.title);
+        $("header h3").html(data.title);
         $("header>.abstr").html(data.abstr);
         $("header>.time").html( new Date(data.createTime*1000).Formate());
         $("article>.content").html(data.content).append('<span class="readNum">阅读量：' + data.viewNum + '</span>');
@@ -161,19 +161,18 @@ function  getComment(itemId) {
         success: function (result) {
             if(result.list.length > 0) {
                 $("#comment").find('.cmtNUm').html('评论 ' + result.rowCount + '条');
-                $('#moreComts').show();
                 var headPicStr = result.list[0].user.headPic || portStr + '/imgs/headPic_default.png';
                 $('#comment').find('.list').show().html('<img src="'+ headPicStr +'">' +
                     '<span>'+ result.list[0].user.userName +'</span>' +
                     '<p>' + result.list[0].commentContent + '</p>');
-
-                //查看更多评论
-                $('#moreComts').click(function () {
-                    window.location.href = 'comment.html?type=' + typeNum + '&itemId=' + itemId;
-                });
             }else {
                 $('#comment>.box').css({'margin-top': '0.02rem'});
             }
+            //查看更多评论
+            $('#moreComts').show();
+            $('#moreComts').click(function () {
+                window.location.href = 'comment.html?type=' + typeNum + '&itemId=' + itemId;
+            });
         },
         error: function (e) {
             //todo

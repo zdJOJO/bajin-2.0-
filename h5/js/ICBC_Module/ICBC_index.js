@@ -70,7 +70,7 @@ $(function(){
             var len = result.list.length;
             var buttonStr = '';
             for(var i=0;i<len;i++){
-                buttonStr += '<li class="icbcBtn" data-pickid="'+result.list[i].pickId+'">' +
+                buttonStr += '<li class="icbcBtn" data-pickid="'+result.list[i].pickId+'" data-buttonId="'+result.list[i].buttonId+'">' +
                     '<img data-original="'+result.list[i].buttonPic+'"><span>'+ result.list[i].buttonTitle +'</span></li>'
             }
             $('#service').find('.serviceList').html(buttonStr);
@@ -82,7 +82,7 @@ $(function(){
 
             //工行 各个按钮
             $("#service").find('li.icbcBtn').click(function(){
-                hitsOnFn(token,20,1,$(this).attr('data-pickid'));
+                hitsOnFn(token,20,1,$(this).attr('data-buttonId'));
                 if(token){
                     if($(this).attr("data-pickid")=="998"){
                         window.location.href = 'tel://' + '400-009-5588';

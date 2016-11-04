@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 	//计时器
 	//判断是否超过30min
-	if(price> 0){
+	if(price > 0){
 		$('#timer').show();
 		var leftTime = createTime + 1800 - parseInt(new Date().getTime()/1000);
 		function timer() {
@@ -65,6 +65,9 @@ $(document).ready(function(){
 		type:"get",
 		url:port+"/card/apply/"+applyid+"?token="+token,
 		success:function(data){
+			if(data.isPay == 1){
+				$('footer').hide();
+			}
 			$(".detailUrl .left img").attr("src",data.activity.activityPic);
 			$(".detailUrl .right h2").html(data.activity.activityTitle)
 			$(".detailUrl .right .time span").html(new Date(data.activity.startTime*1000).Formate() + "-" +new Date(data.activity.endTime*1000).Formate());

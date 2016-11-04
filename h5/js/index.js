@@ -301,9 +301,12 @@ $(document).ready(function(){
 		type:"get",
 		url: port+"/card/icbcbutton",
 		success:function(data){
-			$('#activities>ul').append('<li class="btn" id="personalServe" data-pickid="'+ data.list[0].pickId+'"><img src="'+ data.list[0].buttonPic +'">'+ data.list[0].buttonTitle +'</li>' +
-				'<li class="btn" id="phone" data-pickid="'+ data.list[1].pickId+'"><img src="'+ data.list[1].buttonPic +'">'+ data.list[1].buttonTitle +'</li>' +
- 				'<li class="btn" data-pickid="'+ data.list[2].pickId+'"><img src="'+ data.list[2].buttonPic +'">'+ data.list[2].buttonTitle +'</li>');
+			var str = '';
+			for(var i=0;i<3;i++){
+				str += '<li class="btn" id="personalServe" data-pickid="'+ data.list[i].pickId+'" data-buttonId="'+data.list[i].buttonId+'">' +
+					'<img src="'+ data.list[i].buttonPic +'">'+ data.list[i].buttonTitle +'</li>';
+			}
+			$('#activities>ul').append(str);
 
 			//工行 各个按钮
 			$("#activities .btn").click(function(){

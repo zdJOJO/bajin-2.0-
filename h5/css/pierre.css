@@ -608,13 +608,23 @@ section .brandList{
 #localList>.itemCell div.second>h3{
 	color: #323232;
 	font-size: 1.5em;
-	margin: 0 0 0.01rem 0 ;
+	margin: 0 0 0.01rem 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 }
 
 #localList>.itemCell div.second>p{
 	color: #808080;
 	font-size: 1.25em;
 	margin: 5px 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
 }
 
 #localList>.itemCell div.second>span{

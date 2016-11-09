@@ -46,6 +46,7 @@ $(function (){
 
     var hasBankCard = false;  //判断是否绑有信用卡  是--true
     var isBJVip = false; //判断是否为白金卡用户  是--true
+    var ifzjs = false; // 判断是否有 浙江省的卡 是-true
     var prizeModelList = []; //奖品列表
 
     //分享时候 传当前页面的url 和 对象obj
@@ -78,8 +79,15 @@ $(function (){
                         }else {
                             isBJVip = false;
                         }
+                        if(result.list[i].ifzjs == 1){
+                            ifzjs = true;
+                        }
                     }
-                    $('.maskBox').hide().siblings('.real').show();
+
+                    // 如果符合抽奖就去掉第一层
+                    if(ifzjs){
+                        $('.maskBox').hide().siblings('.real').show();
+                    }
                 }
             },
             error: function (e) {
@@ -89,7 +97,7 @@ $(function (){
     }
 
 
-    //点击 抽奖
+    //点击抽奖(第一层)
     $('.pointer').click(function (){
         if($(this).attr('data-state') == '207'){
             $.modal({
@@ -108,9 +116,7 @@ $(function (){
                     { text: "去登录", onClick: function(){
                         window.location.href = "login.html?his=" + escape('fareDraw_new.html?id=' + sectionId);
                     } },
-                    { text: "取消", className: "default", onClick: function(){
-                        //todo
-                    } },
+                    { text: "取消", className: "default", onClick: function(){} },
                 ]
             });
         }else {
@@ -125,12 +131,27 @@ $(function (){
                         }
                         },
                         {
-                            text: "取消", className: "default", onClick: function () {
-                            //todo
-                        }
+                            text: "取消", className: "default", onClick: function () {}
                         },
                     ]
                 });
+            }else {
+                if(!ifzjs){
+                    $.modal({
+                        title: "提示",
+                        text: "本活动仅限工商银行浙江省分行信用卡用户参与",
+                        buttons: [
+                            {
+                                text: "去绑卡", onClick: function () {
+                                window.location.href = "bank.html?his=" + escape('fareDraw_new.html');
+                            }
+                            },
+                            {
+                                text: "取消", className: "default", onClick: function () {}
+                            },
+                        ]
+                    });
+                }
             }
         }
     });
@@ -229,8 +250,6 @@ $(function (){
                     });
                 }
             },targetNum);
-
-
         },
         error: function (e) {
             //todo

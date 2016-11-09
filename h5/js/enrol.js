@@ -95,7 +95,7 @@ $(function(){
             applyNumber = data.applyNumber;
             var actPrice = '￥'+ data.activityPrice.toFixed(2);
             if(data.activityPrice == 0){
-                actPrice = '免费';
+                actPrice = '会员专享';
             }
 
             var picStr =  '';

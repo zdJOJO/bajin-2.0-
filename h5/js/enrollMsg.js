@@ -82,7 +82,7 @@ $(document).ready(function(){
 			// $(".cost").html("0");//字段不明
 			$(".remark").html(data.applyRemark);
 			var cost = data.applyPrice*data.applyNumber;
-			cost = cost==0?"免费活动":"￥"+cost;
+			cost = cost==0?"会员专享":"￥"+cost;
 			console.log(cost);
 			$(".cost").html(formatePrice(cost));
 			console.log(data.isPay);

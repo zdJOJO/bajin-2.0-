@@ -138,6 +138,7 @@
 					flg = true;
 					// target = $this.target || Math.floor(Math.random()*allNumber+1);
 					//通过ajax获取概率target
+
 					$.ajax({
 						type: 'post',
 						dataType: "json",

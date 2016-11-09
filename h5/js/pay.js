@@ -59,11 +59,8 @@ $(function(){
 							//alert("你还没有添加银行卡,请先添加银行卡，然后再操作！！");
 							cardList.append("<h2 class= 'alert_q'>你还没有添加银行卡</h2>");
 						}else{
-							//一定要注意，在元素出来的时候再帮定事件，不然就没效
 							$(".cardItem").click(function(){
-
 								var cardItem = $(this).data("cardid");  //哪张银行卡
-
 								//活动支付http://121.196.232.233/card/bank/encryption/pay/{cardno}/{applyId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
 								var url = port+"/card/bank/encryption/pay/"+cardItem+"/"+applyid+"?token="+token;
 
@@ -117,8 +114,15 @@ $(function(){
 									type: "GET",
 									dataType: "text",
 									url: url,
-									success: function(data){
-										var str='<input type="hidden" id="merSignMsg" name="merSignMsg" value="'+data+'"/> '+
+									success: function(res){
+										if(res.indexOf('code') > 0){
+											var data = JSON.parse(res);
+											if(oriented && data.code == '601'){
+												$.alert(data.message);
+												return
+											}
+										}
+										var str='<input type="hidden" id="merSignMsg" name="merSignMsg" value="'+res+'"/> '+
 											'<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/> ';
 										infoForm.innerHTML = str;
 										infoForm.submit();
@@ -135,14 +139,13 @@ $(function(){
 				error:function(data){
 					window.location.href = "login.html?his="+his;
 				}
-			});//ajax请求结束
+		  });//ajax请求结束
 
-
+		//添加银行卡
 		$(".addCard").click(function(){
 			fidCard();
 		});
-
-		  function fidCard(){
+		function fidCard(){
 				$.ajax({
 					type:"GET",
 			        dataType:"text",
@@ -156,7 +159,7 @@ $(function(){
 							addForm.innerHTML = str;
 							addForm.submit();
 					},
-					error:function(data){
+					error:function(e){
 						$.ajax({
 							type:"GET",
 							dataType:"string",
@@ -174,10 +177,8 @@ $(function(){
 
 						});
 					}
-
-				});
-			}
-
+				})
+			};
 	}else{
 		//alert("您的账号还未登录,请登录后操作！");
 		window.location.href = "login.html?his="+escape(his);
@@ -198,5 +199,7 @@ $(function(){
 		}
 		bankCardTypeMsgStr = '该商品仅限'+msg.join('、')+'购买，请您选择'+msg.join('、')+'支付该订单';
 	};
-	bankCardTypeMsg(oriented);
+	if(oriented){
+		bankCardTypeMsg(oriented);
+	}
 });

@@ -45,7 +45,8 @@ section h3{
     font-size: 1em;
     text-align: left;
     margin: 14px 0 7px 0;
-    font-weight: 100;
+    font-family: 黑体;
+    /*font-weight: 100;*/
 }
 
 

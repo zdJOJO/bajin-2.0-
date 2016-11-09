@@ -121,6 +121,9 @@ $(document).ready(function(){
             //提交订单  http://121.196.232.233/card/productorder?token=e7120d7a-456b-4471-8f86-ac638b348a53
             var count = $('#order').find('.valueNum').html();
             var sumPrice = count * productObj.costPrice;
+
+            console.log(count);
+
             $.ajax({
                 type: 'post',
                 dataType: "json",

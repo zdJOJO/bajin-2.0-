@@ -1,14 +1,6 @@
 
 $(function(){
 
-
-    // 判断 是否安卓  IOS
-    var u = navigator.userAgent;
-    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;  //android终端
-    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);     //ios终端
-
-
-
     //此页面逻辑：进入页面加载活动内容，然后判断用户是否收藏该活动，如果收藏就要现实收藏的图标，否则就是没有收藏
     var data;
     var token = "";
@@ -125,7 +117,7 @@ $(function(){
             var str1=$('<section class="msgBox"><div class="msg-wrap"><h1 class="msg-tit">'+data.activityTitle+'</h1><div class = "btn_q"><a href="tel:400-111-3797" class="tellNum"><img src="imgs/iconfont-kefu.png"></a>' +
                 '<span class="love-btn"><img src="imgs/iconfont-love.png"></span><span class="share-btn"><img src="imgs/iconfont-p-share.png"></span></div>' +
                 '<p class="msg-time"><span class="head">时间</span>'+new Date(data.startTime*1000).Formate()+' - '+ new Date(data.endTime*1000).Formate()+'</p> ' +
-                '<p class="msg-address"> <span class="head">地点</span>'+data.activityAddress+'</p>' +
+                '<p class="msg-address" id="address"> <span class="head">地点</span>'+data.activityAddress+'<i>></i></p>' +
                 '<p class="msg-price"><span class="head">价格</span>'+actPrice+'</p>' +
                 '<p class="msg-num"><span class="head">人数</span>'+ peopleNumberStr + '</p>' +
                 '<p class="msg-num"><span class="head">已报名</span>'+data.applyNumber+'人'+'</p></div></section>');
@@ -140,7 +132,6 @@ $(function(){
                 }).html('已过期');
             }
 
-
             dataWrap.append(str1).append(str2);
             $(".content-text img").css({
                 'width': '100%!important',
@@ -151,6 +142,11 @@ $(function(){
                 'height': 'auto'
             });
 
+
+            //点击 地址 生成地图
+            $('#address').click(function () {
+                window.location.href = './gaodeMap/index.html?log=' + data.log + '&lat=' + data.lat;
+            })
 
             //判断是会否报名
             if(token){

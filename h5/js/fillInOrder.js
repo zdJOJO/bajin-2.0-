@@ -21,12 +21,12 @@ $(document).ready(function(){
 	  {
 	  c_start=document.cookie.indexOf(c_name + "=")
 	  if (c_start!=-1)
-	    { 
-	    c_start=c_start + c_name.length+1 
+	    {
+	    c_start=c_start + c_name.length+1
 	    c_end=document.cookie.indexOf(";",c_start)
 	    if (c_end==-1) c_end=document.cookie.length
 	    return unescape(document.cookie.substring(c_start,c_end))
-	    } 
+	    }
 	  }
 	return undefined;
 	}
@@ -69,22 +69,26 @@ $(document).ready(function(){
 
 	//填入数据
 	if(window.location.search.indexOf('isShoppingCart=false') > 0){
-		var numStr = '<div class="buyNum">购买数量<span class="plus">+</span><span id="numValue">'+obj.num+'</span><span class="reduce">-</span></div>';
+		//<li><i>金额:</i><span>'+$('footer .totalPrice').html()+'</span></li>
+		var totalPrice = '';
+		var numStr = '<li><i>购买数量:</i><span class="reduce">-</span><span id="numValue">'+obj.num+'</span><span class="plus">+</span></li>';
 		$.get( port + '/card/goods/'+obj.goodsId ,function (res) {
 			$(".good").append('<div class="singleBrand" data-id="'+obj.skuId+'"><img class="activityPic" src="'+res.hotPic+'"/>' +
 				'<div class="detail"><h3>'+res.goodsTitle+'</h3><p class="subtitle"></p>' +
-				'<p class="singleCost"><span class="price"></span><span class="num"></span></p></div></div>' + numStr);
-
+				'<p class="singleCost"><span class="price"></span><span class="num"></span></p></div></div>');
+			$(".moreInfo").html(numStr);
 			$.get( port + '/card/goods/sku/'+obj.skuId ,function (result) {
 				$(".good .detail .subtitle").html(result.skuGague);
 				$(".good .detail .singleCost span.price").html("￥" +  result.skuPrice.toFixed(2));
 				$('footer .totalPrice').html( '￥' + (obj.num * result.skuPrice).toFixed(2));
 				obj.cost = result.skuPrice;
 
-				$('.good').find('.reduce').click(function () {
+				totalPrice = '￥' + (obj.num * result.skuPrice).toFixed(2);
+				$('.moreInfo').html('<h5>补充信息</h5><ul class="buyNum">'+numStr+'<li><i>金额:</i><span class="totalPrice">'+totalPrice+'</span></li></ul>');
+				$('.moreInfo').find('.reduce').click(function () {
 					numChangeFn( 'reduce',parseInt($('#numValue').html()),result.skuPrice);
 				});
-				$('.good').find('.plus').click(function () {
+				$('.moreInfo').find('.plus').click(function () {
 					numChangeFn('plus',parseInt($('#numValue').html()),result.skuPrice,result.stockNumber);
 				});
 			});
@@ -97,6 +101,7 @@ $(document).ready(function(){
 						num--;
 						$('#numValue').html(num);
 						$('footer .totalPrice').html( '￥' + (num*skuPrice).toFixed(2));
+						$(".moreInfo").find('.totalPrice').html('￥' + (num*skuPrice).toFixed(2));
 					}
 				}else {
 					if(num == _maxNum){
@@ -105,6 +110,7 @@ $(document).ready(function(){
 						num++;
 						$('#numValue').html(num);
 						$('footer .totalPrice').html( '￥' + (num*skuPrice).toFixed(2));
+						$(".moreInfo").find('.totalPrice').html('￥' + (num*skuPrice).toFixed(2));
 					}
 				}
 			};
@@ -119,13 +125,13 @@ $(document).ready(function(){
 		}
 	});
 	// 拿到cardid来请求的到商品的信息
-	
+
 	// 地址处理
 	// 地址处理要区分两种情况，
 	// 有地址：有地址肯定有默认地址一个，所以直接显示的地址就是默认的地址，点击地址栏的时候要跳到地址管理页面
 	// 没有地址的时候需要显示没有地址的情况，文字提示，点击跳转到添加新地址的页面。
 	var receiveId = obj.receiveId;
-	if(receiveId == undefined){
+	if(!receiveId){
 		$.ajax({
 			type:"get",
 			url:port+"/card/receiver?token="+token+"&currentPage=1",
@@ -139,32 +145,31 @@ $(document).ready(function(){
 					return;
 				}
 				if(data.list.length==0){
-					var str=$('<h3 class="noneAddress">请选择收货地址<img src="imgs/go.png"/></h3>');
+					var str=$('<h5>收货地址</h5><h3 class="noneAddress">请选择收货地址<img src="imgs/go.png"/></h3>');
 					$(".message").html(str);
 				}else{
 					for(var i=0,len=data.list.length;i<len;i++){
 						if(data.list[i].isDefault==1){
-							var str = $('<p class="userName"><span></span></p>' +
-								'<p class="phone"><span></span><img src="imgs/go.png"/></p>' +
-								'<p class="address"></p>');
+							var str = '<h5>收货地址</h5><ul>' +
+								'<li class="userName"><i>收件人:</i><span>'+data.list[i].receiverName+'</span></li>' +
+								'<li class="phone"><i>联系电话:</i><span>'+data.list[i].receiverPhone+'</span></li>' +
+								'<li class="address"><i>地址:</i><span>'+data.list[i].province+data.list[i].city+data.list[i].district+data.list[i].detilAddress+'</span></li>' +
+								'<img src="imgs/go.png"/></ul>'
 
 							$(".message").html(str);
-							$(".userName span").html(data.list[i].receiverName);
-							$(".phone span").html(data.list[i].receiverPhone);
-							$("p.address").html(data.list[i].province+data.list[i].city+data.list[i].district+data.list[i].detilAddress);
 							$("footer p").attr("data-id",data.list[i].receiveId);
 							return;
 						}else{
-							var str=$('<h3 class="noneAddress">请选择收货地址<img src="imgs/go.png"/></h3>');
+							var str=$('<h5>收货地址</h5><h3 class="noneAddress">请选择收货地址<img src="imgs/go.png"/></h3>');
 							$(".message").html(str);
 						}
-					}	
+					}
 				}
 			},
 			error:function(data){
 				//todo
 			}
-		});		
+		});
 	}else{			//有地址的id，就会去请求得到地址的id，然后填写到页面上边
 		$.ajax({
 			type:"get",
@@ -173,10 +178,16 @@ $(document).ready(function(){
 			async:true,
 			contentType:"application/json;charset=UTF-8",
 			success:function(data){
+				var str = '<h5>收货地址</h5><ul>' +
+					'<li class="userName"><i>收件人:</i><span>'+data.receiverName+'</span></li>' +
+					'<li class="phone"><i>联系电话:</i><span>'+data.receiverPhone+'</span></li>' +
+					'<li class="address"><i>地址:</i><span>'+data.province+data.city+data.district+data.detilAddress+'</span></li>' +
+					'<img src="imgs/go.png"/></ul>'
+
+				$(".message").html(str);
 				$("footer p").attr("data-id",data.receiveId);
-				$(".userName span").html(data.receiverName);
-				$(".phone span").html(data.receiverPhone);
-				$("p.address").html(data.province+data.city+data.district+data.detilAddress);
+
+
 			},
 			error:function(data){
 				console.log(data);
@@ -196,7 +207,6 @@ $(document).ready(function(){
 			async:true,
 			success:function(data){
 				$(".good").html("");
-				console.log(data);
 				var totalPrice = 0;
 				for(var i=0,len=data.list.length;i<len;i++){
 					for(var j=0,len_=cards.length;j<len_;j++){
@@ -219,7 +229,22 @@ $(document).ready(function(){
 				console.log(data);
 			}
 		});
-	}//这里跟单个物品立即购买处理的不同。
+	}
+
+
+	//判断留言自长度
+	$('textarea').keyup(function () {
+		var msg = $(this).val();
+		var len = msg.length;
+		$('.wordNum span').html(len);
+		if(len > 60){
+			$(this).val(msg.substring(0,60));
+			$('.wordNum span').html(60);
+		}
+	});
+
+
+	//这里跟单个物品立即购买处理的不同。
 	//这里处理确认订单按钮的事件，区分添加的来源
 	$("footer p").bind("click",function(){
 		if(obj.cost!=undefined){			//直接购买的地方
@@ -241,6 +266,9 @@ $(document).ready(function(){
 				alert('订单生成失败！请选择商品数量后重新下订单。');
 				return;
 			}
+			if($('textarea').val().length>0){
+				data.remark = $('textarea').val();
+			}
 
 			$.ajax({
 				type:"post",
@@ -250,7 +278,6 @@ $(document).ready(function(){
 				contentType:"application/json;charset=UTF-8",
 				data:JSON.stringify(data),
 				success:function(data){
-
 					if(window.location.search.indexOf('brandDetail')> 0){
 						window.location.href = "unpaid.html?brandDetail&&cardid=" + data.data.orderModel.orderId ;
 					}else {
@@ -263,18 +290,23 @@ $(document).ready(function(){
 				}
 			});
 		}else{							//购物车购买
+			var data = {
+				receiveId:$("footer p").data("id"), // 收货地址
+				carIds:cards // 购物车ID列表
+			}
+			if($('textarea').val().length>0){
+				data.remark = $('textarea').val();
+			}
+
 			$.ajax({
 				type:"post",
 				async:true,
 				url:port+"/card/order?token="+token,
 				dataType:"json",
 				contentType:"application/json;charset=UTF-8",
-				data:JSON.stringify({
-					receiveId:$("footer p").data("id"), // 收货地址
-					carIds:cards // 购物车ID列表
-				}),
+				data:JSON.stringify(data),
 				success:function(data){
-					window.location.href = "unpaid.html?isShoppingCart&&cardid=" + data.data.orderModel.orderId;
+					//window.location.href = "unpaid.html?isShoppingCart&&cardid=" + data.data.orderModel.orderId;
 				},
 				error:function(data){
 					console.log(data);

@@ -11,7 +11,7 @@ body{
 	box-sizing:border-box;
 	position: fixed;
 	top:0;
-	z-index: 100;
+	z-index: 950;
 }
 #header div{
 	float:left;
@@ -34,9 +34,8 @@ body{
 	right: 0;
 }
 #header .vip img{
-	/*width:70%;*/
-	margin-top: 0.012rem;
-	width: 0.12rem;
+	width: 0.1rem;
+	margin: 0.012rem 0 0 0.012rem;
 }
 
 .wrap{

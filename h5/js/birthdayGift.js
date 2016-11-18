@@ -338,11 +338,13 @@ function giftAjax(_receiverId) {
                          } }
                      ]
                  }
+
                 $.modal({
                     title: "提示",
                     text: result.message,
                     buttons: msgObj
                 });
+
             }else if(result.code == '619'){
                 $.toast("礼包已领取", "text");
             }else {

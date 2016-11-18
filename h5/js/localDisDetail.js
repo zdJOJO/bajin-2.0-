@@ -39,6 +39,9 @@ $(document).ready(function(){
                 if(result.data.sum == 0){
                     $('#payOnline').html('已抢光').css('background','#8A8A8A').attr('disabled','true');
                 }
+                if(result.data.isAudit == 1){
+                    $('#payOnline').html('已下架').css('background','#8A8A8A').attr('disabled','true');
+                }
                 if(leftTime >= 0){
                     $("#payOnline").css('background','#8A8A8A').attr('disabled','true');
                     leftTimer(leftTime,$('#payOnline'));

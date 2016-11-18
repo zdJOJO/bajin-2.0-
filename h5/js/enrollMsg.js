@@ -82,11 +82,8 @@ $(document).ready(function(){
 			// $(".cost").html("0");//字段不明
 			$(".remark").html(data.applyRemark);
 			var cost = data.applyPrice*data.applyNumber;
-			cost = cost==0?"会员专享":"￥"+cost;
-			console.log(cost);
-			$(".cost").html(formatePrice(cost));
-			console.log(data.isPay);
-			console.log(data.applyPrice);			
+			cost = cost==0 ? "会员专享" : "￥"+cost.toFixed(2);
+			$(".cost").html(cost);
 			if(data.isPay==0){
 				$("footer p").css("display","block");
 			}

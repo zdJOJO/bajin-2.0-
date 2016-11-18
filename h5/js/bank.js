@@ -38,7 +38,7 @@ $(function(){
 
 	var isBJVip = false;
 
-	if(token != undefined){
+	if(token){
 		//拿到pickid继续获取参数然后发送请求
 		var cardList=$(".cardList").eq(0);
 		function cardData(){
@@ -47,7 +47,6 @@ $(function(){
 				url:port+"/card/card?token="+token,
 				success:function(data){
 					var bankTypeStr = '';
-
 					if(typeof(data) == "string"){
 						window.location.href = "login.html?his="+his;
 					}else{
@@ -59,7 +58,7 @@ $(function(){
 							if(data.list[i].ctkh==1){
 								bankTypeStr = '中国工商银行畅通卡';
 							}
-							var item=$('<div class="cardItem" data-cardNum="'+data.list[i].cardNumber+'" data-cardId="'+data.list[i].cardId+'" data-kabin="'+data.list[i].kabin+'" >' +
+							var item=$('<div class="cardItem" data-bjke="'+data.list[i].bjke+'" data-cardNum="'+data.list[i].cardNumber+'" data-cardId="'+data.list[i].cardId+'" data-kabin="'+data.list[i].kabin+'" >' +
 								'<div class="card-logo" ><img src="imgs/bank.jpg"></div>' +
 								'<div class="card-info"><div class="card-name">'+bankTypeStr+'</div>' +
 								'<div class="card-tip">尾号'+data.list[i].cardNumber+'</div>' +
@@ -67,10 +66,7 @@ $(function(){
 							cardList.append(item);
 							if(data.list[i].bjke == 1){
 								isBJVip = true;
-							}else {
-								isBJVip = false;
 							}
-
 						}
 						if($(".cardList").children().length == 0){
 							//alert("你还没有添加银行卡,请先添加银行卡，然后再操作！！");
@@ -118,7 +114,7 @@ $(function(){
 										window.location.href = 'ICBC_index.html?cardnum='+$(this).attr('data-cardnum')+'&kabin='+$(this).attr('data-kabin');
 									}else {
 										if(timeOutEvent!=0){
-											if(pickid==11 && !isBJVip){
+											if(pickid==11 && $(this).attr('data-bjke')==0){
 												$.alert('本功能仅限工行白金卡用户');
 												return
 											}else {
@@ -152,11 +148,7 @@ $(function(){
 				}
 			});//ajax请求结束
 		}
-
-
 		cardData();
-
-
 
 
 

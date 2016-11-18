@@ -397,6 +397,10 @@ var sureBuyNowFn = function () {
 
 // 弹出层 确认 操作，  从  立即购买/加入购物车/选择 三个按钮进入至此弹出层
 $('#goodDetail>button').click(function () {
+	if( $('#goodDetail').find('.count').html() == '限量0 件'){
+		$.alert('该臻品已售罄');
+		return
+	}
 	if($(this).html() == '确认加入'){
 		if (token){
 			addToShoppingCartFn();

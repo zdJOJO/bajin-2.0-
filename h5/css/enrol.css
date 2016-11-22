@@ -11,7 +11,7 @@ body{
     -webkit-overflow-scrolling: touch;
 }
 
-i{
+#address i{
     float: right;
     padding-right: 20px;
 }

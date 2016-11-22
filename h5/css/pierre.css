@@ -1,18 +1,14 @@
 
 h1,h2,h3{
 	font-weight: normal;
-	font-family: SimHei;
 }
 body{
-	font-family: SimHei;
-	/*background: #eeeeee;*/
-	font: 12px/150% SimHei, "\5b8b\4f53";
 	margin: 0;
 	padding: 0;
+	font-size: 13px;
 }
 header ,section ,footer{
 	font-size: 15px;
-	font-family: SimHei;
 	background-color:#fff;
 }
 header{
@@ -72,7 +68,7 @@ header>center>div.active{
 footer{
 	width: 1rem;
 	height: 0.12rem;
-	background-color:#f0f0f0;
+	background-color:#252525;
 	position: fixed;
 	bottom: 0;
 	text-align: center;
@@ -94,11 +90,12 @@ footer div p{
 	-webkit-margin-before: 0;
 	-webkit-margin-after: 0;
 	font-size: 9px;
-	line-height: 18px;
+	/*line-height: 18px;*/
 	margin-top: 4px;
+	color: #a7a7a7;
 }
 footer div.pierrePage{
-	background-color: #2E3133;
+	/*background-color: #2E3133;*/
 	color: #fff0cc;
 	height: 0.12rem;
 }

@@ -44,7 +44,6 @@ var {
     padding: 0;
 }
 h2, h3 {
-    font-family: "微软雅黑";
     font-weight: 400;
 }
 article,
@@ -175,7 +174,7 @@ u {
 }
 
 body {
-    font: 12px/150% "微软雅黑", "\5b8b\4f53";
+    font: 12px/150% '', "\5b8b\4f53";
     background: #fff;
 }
 

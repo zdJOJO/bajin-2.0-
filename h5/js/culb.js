@@ -138,17 +138,17 @@ $(function(){
             if(data.list.length != 0){          //如果加载的是非空页面
                 for(var i=0;i<data.list.length;i++){
                     var activityTypeStr = '';
-                    if(data.list[i].activityType){
-                        activityTypeStr = '<span class="type">' + data.list[i].activityType + '</span>';
-                    }
+                    // if(data.list[i].activityType){
+                    //     activityTypeStr = '<span class="type">' + data.list[i].activityType + '</span>';
+                    // }
                    if(!isHotDoor){
                        actStr += '<div class="infoItem" data-i="'+data.list[i].activityId+'" >' +
                            '<img data-original="'+data.list[i].activityPic+'">' +
                            '<div class="tit-wrap"><div class="tit-content"> ' + activityTypeStr +
                            '<h1>'+data.list[i].activityTitle+'</h1>' +
                            '<div class="detile">' +
-                           '<p >'+data.list[i].activitySubtitle+'</p></div>' +
-                           '<p style="font-size:12px;  position: absolute;top: 78%;left: 13px;">'+ new Date(data.list[i].startTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
+                           '<p>'+data.list[i].activityAddress+'</p></div>' +
+                           '<p>'+ new Date(data.list[i].startTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
                            '</p></div></div></div>';
                    }else {
                        var chineseStr = data.list[i].detail.replace(/<[^>]+>/g,"").replace(/[^\u4e00-\u9fa5]/gi,"");

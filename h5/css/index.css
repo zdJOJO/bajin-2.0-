@@ -36,6 +36,9 @@ body{
 #header .vip img{
 	width: 0.1rem;
 	margin: 0.012rem 0 0 0.012rem;
+	border-radius: 100%;
+	-webkit-box-shadow: 0 4px 5px 0px rgba(0,0,0,0.7);
+	-moz-box-shadow: 0 4px 5px 0px rgba(0, 0, 0, 0.7);
 }
 
 .wrap{
@@ -228,9 +231,10 @@ hr{
 
 
 footer{
+	font-family: serif;
 	width: 1rem;
 	height: 0.12rem;
-	background-color: #F0F0F0;
+	background-color: #252525;
 	position: fixed;
 	bottom: 0;
 	z-index: 2500;
@@ -254,10 +258,11 @@ footer div p{
 	-webkit-margin-after: 0;
 	margin-top: 4px;
 	font-size: 9px;
+	color: #a7a7a7;
 }
 
 .indexPage{
-	background: #2e3133;
+	/*background: #2e3133;*/
 	display: block;
 	height: 0.12rem;
 	color: #fff0cc;

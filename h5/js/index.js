@@ -28,51 +28,54 @@ $(document).ready(function(){
 
 
 	//侧边栏切换
-	$("#vip").click(function(){
-		$(".showDiv2").show();
-		$(".showDiv3").show();
-		// $("body").css("overflow", "hidden")
-		// $("body,html").css({"overflow":"hidden"});
-		$(".showDiv1").css("position","fixed")
-		//侧边栏登录
-		if(token!=undefined){
-			$.get(port +"/card/user?token="+token,function(data){
+	$.get(port +"/card/user?token="+token,function(data){
+		if(token){
+			$('#vip').children('img').attr('src',data.headPic);
+		}
+		$("#vip").click(function(){
+			$(".showDiv2").show();
+			$(".showDiv3").show();
+			$(".showDiv1").css("position","fixed");
+			//侧边栏登录
+			if(token){
 				//当token过期的时候会出错，code：666,这个时候需要
 				if(typeof(data) == "string"){
 					$(".pic_but").html("");
 					// window.location.href = "login.html?his=" + his;
 					var item=$('<div class="pic"><img src="imgs/headPic_default.png"></div><div class="user_But">未登录</div>');
-					$(".pic_but").append(item);	
-					return;				
+					$(".pic_but").append(item);
+					return;
 				}
 				$(".pic_but").html("");
 				var headPic = data.headPic==""?"imgs/headPic_default.png":data.headPic;
 				var userName = data.userName==""?"已登录":data.userName;
 				var item=$('<div class="pic"><img src='+headPic+'></div><div class="user_But">'+userName+'</div>');
 				$(".pic_but").append(item);
-			});			
-		}else{
-			$(".pic_but").html("");
-			// window.location.href = "login.html?his=" + his;
-			var item=$('<div class="pic"><img src="imgs/headPic_default.png"></div><div class="user_But">未登录</div>');
-			$(".pic_but").append(item);
-		}//侧边栏登录结束
-		if(token!=undefined){
-			$.get(port+'/card/car/sum?token='+token,function(data){
-				if(typeof(data) == "string"){
-					$(".order_tj").css("display","none");
-					return;
-				}
-				if(data.data.sum==undefined || data.data.sum == 0){
-					$(".order_tj").css("display","none");
-				}else{
-					$(".order_tj").val(data.data.sum);
-				}
-			});			
-		}else{
-			$(".order_tj").css("display","none");
-		}
+			}else{
+				$(".pic_but").html("");
+				// window.location.href = "login.html?his=" + his;
+				var item=$('<div class="pic"><img src="imgs/headPic_default.png"></div><div class="user_But">未登录</div>');
+				$(".pic_but").append(item);
+			}//侧边栏登录结束
+			if(token!=undefined){
+				$.get(port+'/card/car/sum?token='+token,function(data){
+					if(typeof(data) == "string"){
+						$(".order_tj").css("display","none");
+						return;
+					}
+					if(data.data.sum==undefined || data.data.sum == 0){
+						$(".order_tj").css("display","none");
+					}else{
+						$(".order_tj").val(data.data.sum);
+					}
+				});
+			}else{
+				$(".order_tj").css("display","none");
+			}
+		});
 	});
+
+
 	//页面跳转统一处理
 	function turnUrl(point,url){
 		point.bind("click",function(){

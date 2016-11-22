@@ -1,6 +1,3 @@
-
-
-
 // JavaScript Document
 // 登录页面，登录成功，保存token到window.name中
 // 结合使用window.name和window.location
@@ -9,7 +6,39 @@ $(function(){
     if(his=="changePassword.html"){
     	his = "index.html";
     }
-	
+
+	function focusFn(inputId) {
+		var imgPath = inputId=='user' ? 'images/login/phone.png' : 'images/login/pwd.png';
+		var $this = $('#'+inputId);
+		$this.prev('img').attr('src',imgPath);
+		$this.next('.cancel').show();
+	}
+
+	function blurFn(inputId) {
+		var imgPath = inputId=='user' ? 'images/login/unphone.png' : 'images/login/unpwd.png';
+		var $this = $('#'+inputId);
+		if(!$this.val()){
+			$this.prev('img').attr('src',imgPath);
+			$this.next('.cancel').hide();
+		}
+	}
+
+	$('#user').focus(function () {
+		focusFn('user');
+	}).blur(function () {
+		blurFn('user');
+	});
+
+	$('#pass').focus(function () {
+		focusFn('pass');
+	}).blur(function () {
+		blurFn('pass');
+	});
+
+	$('#content').find('.cancel').click(function () {
+		$(this).prev('input').val('');
+	});
+
 
 	var Butlog=$("#login");
 	//点击叉号的时候直接导向到index页面

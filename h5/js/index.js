@@ -41,12 +41,12 @@ $(document).ready(function(){
 				if(typeof(data) == "string"){
 					$(".pic_but").html("");
 					// window.location.href = "login.html?his=" + his;
-					var item=$('<div class="pic"><img src="imgs/defaultPic.png"></div><div class="user_But">未登录</div>');
+					var item=$('<div class="pic"><img src="imgs/headPic_default.png"></div><div class="user_But">未登录</div>');
 					$(".pic_but").append(item);	
 					return;				
 				}
 				$(".pic_but").html("");
-				var headPic = data.headPic==""?"imgs/defaultPic.png":data.headPic;
+				var headPic = data.headPic==""?"imgs/headPic_default.png":data.headPic;
 				var userName = data.userName==""?"已登录":data.userName;
 				var item=$('<div class="pic"><img src='+headPic+'></div><div class="user_But">'+userName+'</div>');
 				$(".pic_but").append(item);
@@ -54,7 +54,7 @@ $(document).ready(function(){
 		}else{
 			$(".pic_but").html("");
 			// window.location.href = "login.html?his=" + his;
-			var item=$('<div class="pic"><img src="imgs/defaultPic.png"></div><div class="user_But">未登录</div>');
+			var item=$('<div class="pic"><img src="imgs/headPic_default.png"></div><div class="user_But">未登录</div>');
 			$(".pic_but").append(item);
 		}//侧边栏登录结束
 		if(token!=undefined){
@@ -77,7 +77,10 @@ $(document).ready(function(){
 	function turnUrl(point,url){
 		point.bind("click",function(){
 			if(token){
-				window.location.href = url;
+				$(this).addClass('active').find('span.text').addClass('active');
+				if($(this).find('span.text').hasClass('active') || url=='set.html'){
+					window.location.href = url;
+				}
 			}else{
 				window.location.href = "login.html?his=" + escape(url);
 			}
@@ -96,18 +99,15 @@ $(document).ready(function(){
 	turnUrl($("#order_But"),"myOrders.html");
 	turnUrl($("#bank_But"),"bank.html");
 	turnUrl($(".pic_but"),"set.html");
-
-
-
-	$(".feed_But").click(function(){
-		window.location.href="feedback.html";
-		
-	});
-	$(".set_But").bind("click",function(){
+	
+	$("#set_But").bind("click",function(){
 		if(!token){
 			window.location.href = "login.html";
 		}else {
-			window.location.href = "changePassword.html";
+			$(this).addClass('active').find('span.text').addClass('active');
+			if($(this).find('span.text').hasClass('active')){
+				window.location.href = "changePassword.html";
+			}
 		}
 	});
 	

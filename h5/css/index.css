@@ -486,7 +486,7 @@ section.items1>div:last-child .mask_lq>.tit_bq1:last-child{
 /*侧边栏*/
 .showDiv2{
 	width: 0.78rem;
-	background: #3a3d41;
+	background: #000;
 	height: 100%;
 	position:fixed;
 	z-index: 3000;
@@ -495,59 +495,67 @@ section.items1>div:last-child .mask_lq>.tit_bq1:last-child{
 
 .pic{
 	position: relative;
-	top: 0.08rem;
+	top: 0.16rem;
 	width: 0.28rem;
 	height:0.28rem;
 	margin: 0 auto;
 	border-radius: 100%;
-	/*border: 1px solid #fff;*/
+	text-align: center;
 }
-.pic img{width: 0.28rem;height:0.28rem; border-radius: 100%;background-color:#fff;}
+.pic img{width: 0.2rem;height:0.2rem; border-radius: 100%;background-color:#fff;}
 .user_But{
 	text-align: center;
 	position: relative;
-	top:0.12rem;
-	font-size: 18px;
+	top: 0.11rem;
+	font-size: 12px;
 	color: #cdcecf;
-	letter-spacing:0.005rem
+	letter-spacing: 0.005rem;
 }
 .left_nav{
 	margin-top: 0.16rem;
 }
 .left_nav ul li{
-	color: #cdcecf;
-	height: 0.15rem;
-	font-size: 16px;
-	line-height: 0.15rem;
-	letter-spacing:0.005rem
+	color: #fafafa;
+	height: 0.13rem;
+	font-size: 13px;
+	line-height: 0.13rem;
+	letter-spacing: 0.005rem;
 }
 
-.left_nav ul li span{
-	margin-left: 0.06rem;
-	margin-right: 0.05rem;
+.left_nav ul li.active{
+	background: rgba(150, 150, 150, 0.4);
+	opacity: 0.4;
 }
+
+.left_nav ul li span:first-child{
+	margin-left: 0.06rem;
+	margin-right: 0.04rem;
+}
+
+.left_nav ul li span:last-child.active{
+	color: #fff;
+}
+
+
+
+
 .left_nav ul li span img{
-	width: 7%;
+	width: 0.09rem;
 	position: relative;
-	top: -0.004rem;
+	top: -3px;
 }
 .active_new img{
 	width: 5.5% !important;
 	margin-left: 0.01rem;
 	margin-right:0.007rem;
 }
-.active img{
-	width: 4.5% !important;
-	margin-left: 0.01rem;
-}
+
 .active_bank img{
 	width: 5.5% !important;
 	margin-left: 0.005rem;
 	margin-right: 0.01rem;
 }
-.active span{
-	margin-right: 0.06rem !important;
-}
+
 .footer{
 	position:absolute;
 	bottom: 0.09rem;
@@ -567,14 +575,16 @@ section.items1>div:last-child .mask_lq>.tit_bq1:last-child{
 	top: -0.004rem;
 }
 
-.set_But{
-	float: right;
-	width: 0.35rem;
-}
+/*.set_But{*/
+	/*float: right;*/
+	/*width: 0.35rem;*/
+/*}*/
+
+
 .icbc_But{
 	width: 0.78rem;
 	height: 0.13rem;
-	background: #343839;
+	background: #242424;
 	display: block;
 	position: absolute;
 	bottom: 0;

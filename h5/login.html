@@ -14,21 +14,30 @@
 </head>
 <body>
 <div id="ld_bj">
-	<!-- <div id="gb_but"><a id="index_But"><img src="images/gb_but.png"></a></div> -->
-    <div id="logo_dl"><img src="images/logo.png"></div>
+    <div id="logo_dl"><img src="images/login/logo.png"></div>
     <div id="content">
-    	<div class="yhm_login"><img src="images/yhm_dl.png"><input type="text" id="user" placeholder="请输入手机号" ></div>
-        <div class="yhm_login"><img src="images/ma_gl.png"><input type="password" id="pass" placeholder="请输入密码" ></div>
+    	<div class="yhm_login">
+            <img src="images/login/unphone.png">
+            <input type="tel" id="user" placeholder="请输入手机号" >
+            <img class="cancel" style="display: none" src="images/login/cancel.png">
+        </div>
+        <div class="yhm_login">
+            <img src="images/login/unpwd.png">
+            <input type="password" id="pass" placeholder="请输入登录密码" >
+            <img class="cancel" style="display: none" src="images/login/cancel.png">
+        </div>
+
         <div class="but_dl" id="login">登录</div>
-        <!-- <input type="checkbox"  /><span class="repass">记住密码</span> -->
-<!--         <p><a href="registered.html">注册账户</a></p> -->
-        <div class="pass_reg"><span class = "forget_password">忘记密码?</span> <span class = "register">注册账户</span></div>
-		
-        
-    </div>	
+        <div class="pass_reg"><span class = "forget_password">忘记密码?</span> <span class = "register">免费注册</span></div>
+    </div>
+    <footer class="icbc"><img src="images/login/icbc.png"></footer>
 </div>
 <script src="js/zepto.js"></script>
-<script src="js/login.js"></script>
 <script src="js/md5.js"></script>
+<script src="js/login.js"></script>
+<script type="text/javascript">
+
+
+</script>
 </body>
 </html>

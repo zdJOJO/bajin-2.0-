@@ -31,9 +31,12 @@ $(function(){
 		his="index.html";
 	}
 
+	//意见反馈
+	$("#feedBack").click(function(){
+		window.location.href="feedback.html";
+	});
 
 	//用户协议
-
 	$('#userAgreement').click(function () {
 		window.location.href = 'http://www.winthen.com/test/agreement.html';
 	});

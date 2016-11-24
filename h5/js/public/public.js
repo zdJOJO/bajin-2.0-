@@ -93,7 +93,7 @@ function showThreeLine(str,num) {
 }
 
 
-//通用函数，也是可以写到zepto.js里面的   时间戳转换成 固定格式
+//通用函数 时间戳转换成 固定格式
 Date.prototype.Formate_short = function(){
     var y=this.getFullYear();
     var m=this.getMonth()+1>9?(this.getMonth()+1):'0'+(this.getMonth()+1);
@@ -107,7 +107,7 @@ Date.prototype.Formate=function(){
     var h=this.getHours()>9?this.getHours():'0'+this.getHours();
     var f=this.getMinutes()>9?this.getMinutes():'0'+this.getMinutes();
     var s=this.getSeconds()>9?this.getSeconds():'0'+this.getSeconds();
-    if((h == '00' || h == '23')&&( f == '00' ||  f == '59')){
+    if((h == '00' || h == '23')&&( f == '00' || f == '59')){
         return (y+'.'+m+'.'+d);
     }else {
         return (y+'.'+m+'.'+d+' '+h+':'+f);

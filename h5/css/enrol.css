@@ -1,19 +1,15 @@
-@font-face{
-    font-family:"微软雅黑";
-}
 h1,h2,h3{
     font-weight: normal;
 }
 body{
-    font-family: "黑体";
-    /*background: #eee;*/
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
 }
 
 #address i{
-    float: right;
     padding-right: 20px;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 #header{
@@ -147,14 +143,30 @@ body{
     font-size: 17px;
 }
 
+.msgBox>.msg-wrap>p.msg-address{
+    display: table;
+}
+
 .msgBox>.msg-wrap>p>.head{
-    display: inline-block;
-    width: 70px;
+    width: 18%;
     font-size: 1em;
     text-align: left;
     color: #AEAEAE;
+    display: inline-block;
 }
 
+.msgBox>.msg-wrap>p.msg-address>.head{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.msgBox>.msg-wrap>p.msg-address>.address{
+    width: 75%;
+    line-height: 20px;
+    margin-top: 0.03rem;
+    display: table-cell;
+    vertical-align: middle;
+}
 
 .msgBox>.msg-wrap>p.msg-price{
     color: #c2b075;

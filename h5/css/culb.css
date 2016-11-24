@@ -115,18 +115,43 @@ header >div>hr.active{
 	-webkit-box-orient: vertical;
 }
 
+.tit-content{
+	position: relative;
+	height: 100%;
+}
+
 .tit-content .detile{
 	width: 90%;
-	line-height: 0.07rem;
+	line-height: 0.05rem;
 	color: #909090;
 	margin-bottom: 0.015rem;
 	font-size: 14px;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
 }
 
-.tit-content .detile+p{
+.tit-content .time{
 	font-size: 14px;
 	color: #909090;
 }
+
+.tit-content .price{
+	display: inline-block;
+	min-width: 0.09rem;
+	line-height: 0.052rem;
+	text-align: center;
+	border: 1px #be9f56 solid;
+	border-radius: 10px;
+	color: #be9f56;
+	position: absolute;
+	right: 10%;
+	bottom: 0.005rem;
+	padding: 0.001rem 0.013rem;
+}
+
 
 .tit-content .jump{
 	margin-left: 0.03rem;
@@ -373,17 +398,6 @@ footer div p{
 }
 
 
-
-@media screen and (min-width:415px){
-}
-
-@media screen and (min-width:424px){
-}
-
-@media screen and (min-width: 737px	){
-}
-
-
 @media screen and (max-width: 400px	){
 	.hotItem >.tit-wrap .type{
 		width: 0.15rem;
@@ -436,6 +450,10 @@ footer div p{
 		width: 0.16rem;
 		left: 67%;
 		top: 82%;
+	}
+
+	.tit-content .detile{
+		-webkit-line-clamp: 1;
 	}
 }
 

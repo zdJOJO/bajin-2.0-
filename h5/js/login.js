@@ -40,6 +40,14 @@ $(function(){
 	});
 
 
+	// 登录绑定enter按键
+	$('body').keydown(function (e) {
+		if(e.keyCode == 13){
+			$('#login').click();
+		}
+	});
+
+
 	var Butlog=$("#login");
 	//点击叉号的时候直接导向到index页面
 	$("#index_But").click(function(){
@@ -62,8 +70,6 @@ $(function(){
 				success:function(data){
 					if(data.code==101){
 						alert("用户名未注册或密码错误");
-						$("#user").val(""),
-						$("#pass").val("");
 					}else{					
 						console.log(data.message);
 						// window.name=data.message;

@@ -87,7 +87,7 @@ $(function(){
             applyNumber = data.applyNumber;
             var actPrice = '￥'+ data.activityPrice.toFixed(2);
             if(data.activityPrice == 0){
-                actPrice = '会员专享';
+                actPrice = '免费';
             }
 
             var picStr =  '';
@@ -113,11 +113,10 @@ $(function(){
             }else {
                 peopleNumberStr = data.peopleNumber + '人';
             }
-
             var str1=$('<section class="msgBox"><div class="msg-wrap"><h1 class="msg-tit">'+data.activityTitle+'</h1><div class = "btn_q"><a href="tel:400-111-3797" class="tellNum"><img src="imgs/iconfont-kefu.png"></a>' +
                 '<span class="love-btn"><img src="imgs/iconfont-love.png"></span><span class="share-btn"><img src="imgs/iconfont-p-share.png"></span></div>' +
                 '<p class="msg-time"><span class="head">时间</span>'+new Date(data.startTime*1000).Formate()+' - '+ new Date(data.endTime*1000).Formate()+'</p> ' +
-                '<p class="msg-address" id="address"> <span class="head">地点</span>'+data.activityAddress+'<i>></i></p>' +
+                '<p class="msg-address" id="address"><span class="head">地点</span><span class="address">'+data.activityAddress+'</span><i>></i></p>' +
                 '<p class="msg-price"><span class="head">价格</span>'+actPrice+'</p>' +
                 '<p class="msg-num"><span class="head">人数</span>'+ peopleNumberStr + '</p>' +
                 '<p class="msg-num"><span class="head">已报名</span>'+data.applyNumber+'人'+'</p></div></section>');
@@ -328,48 +327,6 @@ $(function(){
     };
 
 
-
-
-
-
-
-    //获取评论列表
-    // var isPublishCtm = false;
-    // function getCommentList(page) {
-    //     $('#loading').show();
-    //     $('#loading span').show();
-    //     $('#moreComts').hide();
-    //
-    //     if(isPublishCtm){
-    //         $("#comment>.commentList").html('');
-    //     }
-    //     commentStr = '' ;
-    //     $.get( port + '/card/comment/list?currentPage=' + page + '&type=1&itemId=' + itemId,function (data) {
-    //         $("#comment>h3.cmtNUm").html('评论' + '<span>'+ data.rowCount + ' 条</span>');
-    //         if(data.list.length !=0){
-    //             var headPicStr = '';
-    //             var nameStr = '';
-    //             for(var i=0 ;i<data.list.length;i++){
-    //                 if(data.list[i].user){
-    //                     headPicStr = data.list[i].user.headPic || portStr + '/imgs/headPic_default.png' ;
-    //                     nameStr = data.list[i].user.userName || '';
-    //                 }else {
-    //                     headPicStr = portStr + '/imgs/headPic_default.png';
-    //                     nameStr = '';
-    //                 }
-    //                 commentStr += '<li class="singleCmt">' +
-    //                     '<img src="'+ headPicStr +'">' + '<span class="userName">' + nameStr + '</span>' +
-    //                     '<p>'+ data.list[i].commentContent +'</p>' + '<span class="creatTime">'+ timeAgo((new Date().getTime()/1000)-data.list[i].createTime) +'</span></li>';
-    //             }
-    //             $("#comment>.commentList").append(commentStr);
-    //             $('#loading').hide();
-    //             $('#moreComts').show();
-    //         }else {
-    //             setTimeout('$("#loading").hide()',1000);
-    //         }
-    //     });
-    // };
-
     function  getComment(itemId) {
         $.ajax({
             type:"get",
@@ -377,10 +334,12 @@ $(function(){
             success: function (result) {
                 if(result.list.length > 0) {
                     $("#comment").find('.cmtNUm').html('评论 ' + result.rowCount + '条');
-
-                    $('#comment').find('.list').show().html('<img src="'+ result.list[0].user.headPic +'">' +
-                        '<span>'+ result.list[0].user.userName +'</span>' +
-                        '<p>' + result.list[0].commentContent + '</p>');
+                    var customerServeStr = result.list[0].commentModelList.length > 0 ?
+                        '<div class="customerService"><h3>白金尊享客服回复</h3><span class="cmt">'+result.list[0].commentModelList[0].commentContent +'</span></div>'
+                        : '';
+                    var commentStr = '<img src="'+ result.list[0].user.headPic +'">' +
+                        '<div class="customerCmt"><span>'+ result.list[0].user.userName +'</span><p>' + result.list[0].commentContent + '</p></div>' + customerServeStr;
+                    $('#comment').find('.list').show().html(commentStr);
                 }else {
                     $('#comment>.box').css({'margin-top': '0.02rem'});
                 }
@@ -396,105 +355,6 @@ $(function(){
         });
     };
 
-
-    // //点击查看更多评论
-    // $('#moreComts').click(function () {
-    //     isPublishCtm = false;
-    //     if(pageNum >= 1){
-    //         pageNum++;
-    //     }
-    //     getCommentList(pageNum);
-    // });
-
-
-
-    //发表评论
-    // $("#publishCmt").click(function () {
-    //     if(!token){
-    //         $.modal({
-    //             title: "评论失败",
-    //             text: "登录之后才能评论",
-    //             buttons: [
-    //                 {text: "点击登录", onClick: function(){
-    //                     window.location.href = "login.html?his=" + escape(his);
-    //                 }},
-    //                 { text: "取消", className: "default", onClick: function(){
-    //                     return;
-    //                 }},
-    //             ]
-    //         });
-    //     }else {
-    //         if(!$("#commentContent").val()){
-    //             $.alert("请填写后再评论", "评论失败", function() {
-    //             });
-    //             return;
-    //         }
-    //
-    //         if($("#commentContent").val().length > 140){
-    //             $.alert("评论内容过长，请重新填写", "评论失败", function() {
-    //             });
-    //             return;
-    //         }else {
-    //             $.ajax({
-    //                 type: 'post',
-    //                 dataType: "json",
-    //                 contentType : "application/json",
-    //                 url: port + '/card/comment?token=' + token ,
-    //                 data: JSON.stringify({
-    //                     itemType: 1,
-    //                     itemId: itemId,
-    //                     commentContent: $("#commentContent").val()
-    //                 }),
-    //                 success: function (result) {
-    //                     if(result.code == 201){
-    //                         $.toast("发表评论成功", function() {
-    //                             $("#commentContent").val('');
-    //                             isPublishCtm = true;
-    //                             getCommentList(1);
-    //                         });
-    //                     }
-    //                     if(result.code == 666){
-    //                         $.modal({
-    //                             title: "评论失败",
-    //                             text: "当前用户错误，请重新登录",
-    //                             buttons: [
-    //                                 {text: "点击登录", onClick: function(){
-    //                                     window.location.href = "login.html?his=" + escape(his);
-    //                                 }},
-    //                                 { text: "取消", className: "default", onClick: function(){return;} },
-    //                             ]
-    //                         });
-    //                     }
-    //                 },
-    //                 error: function () {
-    //                     $.toast("发表评论失败", "cancel");
-    //                 }
-    //             });
-    //         }
-    //     }
-    // });
-
-
-
-
-    // 评论时候 IOS 安卓 不同, 在这里做判断
-    // $("#commentContent").focus(function () {
-    //     if(isAndroid > -1 ){
-    //         $('#comment').css('margin-bottom','5%');
-    //         $('footer.nav').hide();
-    //     }
-    // }).blur(function () {
-    //     $('#comment').css('margin-bottom','10%')
-    //     $("#publishCmt").css('color','#ccc');
-    //     $('footer.nav').show();
-    // });
-    //
-    // if(isAndroid > -1 ){
-    //     $('footer.nav').css('height','8%');
-    // }
-
-    
-    
     function doEnrol(){
         if(token != undefined){
             if(applyNumber >= peopleNumber ){
@@ -512,44 +372,7 @@ $(function(){
     enrolBtn.click(function(){
         doEnrol();
     });
-
-
-
-// time ago
-    var timeAgo = function (preTime) {
-        if(preTime<60){
-            return parseInt(preTime)+"秒前";
-        }else if((preTime/60)<60){
-            return parseInt(preTime/60)+"分钟前";
-        }else if((preTime/3600)<24){
-            return parseInt(preTime/3600)+"小时前";
-        }else if((preTime/3600/24)<30){
-            return parseInt(preTime/3600/24)+"天前";
-        }else if((preTime/3600/24/30)<12){
-            return parseInt(preTime/3600/24/30)+"月前";
-        }else{
-            return parseInt(preTime/3600/24/365)+"年前";
-        }
-    };
-
-
-    Date.prototype.Formate=function(){
-        var y=this.getFullYear();
-        var m=this.getMonth()+1>9?(this.getMonth()+1):'0'+(this.getMonth()+1);
-        var d=this.getDate()>9?this.getDate():'0'+this.getDate();
-        var h=this.getHours()>9?this.getHours():'0'+this.getHours();
-        var f=this.getMinutes()>9?this.getMinutes():'0'+this.getMinutes();
-        var s=this.getSeconds()>9?this.getSeconds():'0'+this.getSeconds();
-        if(h == '00'&& f == '00'){
-            return (y+'.'+m+'.'+d);
-        }else {
-            return (y+'.'+m+'.'+d+' '+h+':'+f);
-        }
-    }
-
-
-
-
+    
 
     $("body").prepend($('<div id ="urlToDownload" style="width:1rem;height:0.12rem;position: fixed;z-index: 2000;">' +
         '<img style="width:0.8rem!important;height:0.12rem!important;" src="imgs/bg-baoming.png"/>' +

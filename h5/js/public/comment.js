@@ -76,7 +76,7 @@ var getCommentList = function (page) {
                 }
                 if(data.list[i].commentModelList.length > 0){
                     customerServiceStr = '<div class="customerService">' +
-                        '<h3>客服回复</h3><span class="cmt">'+ data.list[i].commentModelList[0].commentContent +'</span>' +
+                        '<h3>白金尊享客服回复</h3><span class="cmt">'+ data.list[i].commentModelList[0].commentContent +'</span>' +
                         '<span class="time">'+ timeAgo((new Date().getTime()/1000)-data.list[i].commentModelList[0].createTime) +'</span></div>';
                 }
                 str += '<div class="singleCmt">' +

@@ -142,14 +142,15 @@ $(function(){
                     //     activityTypeStr = '<span class="type">' + data.list[i].activityType + '</span>';
                     // }
                    if(!isHotDoor){
+                       var activityPrice = data.list[i].activityPrice==0 ? '免费' : '￥' + data.list[i].activityPrice.toFixed(2);
                        actStr += '<div class="infoItem" data-i="'+data.list[i].activityId+'" >' +
                            '<img data-original="'+data.list[i].activityPic+'">' +
                            '<div class="tit-wrap"><div class="tit-content"> ' + activityTypeStr +
                            '<h1>'+data.list[i].activityTitle+'</h1>' +
-                           '<div class="detile">' +
-                           '<p>'+data.list[i].activityAddress+'</p></div>' +
-                           '<p>'+ new Date(data.list[i].startTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+
-                           '</p></div></div></div>';
+                           '<p class="detile">'+data.list[i].activityAddress+'</p>' +
+                           '<p class="time">'+ new Date(data.list[i].startTime*1000).Formate()+'-'+new Date(data.list[i].endTime*1000).Formate()+'</p>' +
+                           '<p class="price">'+activityPrice+'</p>' +
+                           '</div></div></div>';
                    }else {
                        var chineseStr = data.list[i].detail.replace(/<[^>]+>/g,"").replace(/[^\u4e00-\u9fa5]/gi,"");
                        actStr += '<div class="infoItem hotItem" data-type="'+data.list[i].type+'" data-i="'+ data.list[i].itemId+'">' +

@@ -176,19 +176,32 @@ $(function(){
 
 		$(".font_del,.add_delete").click(function(){	//删除地址
 		 	var receiverId = $(this).data('id');
-		 	$.ajax({
-		 		type:"DELETE",
-		 		url:port+"/card/receiver/"+receiverId+"?token="+token,
-		 		contentType:"application/json",
-		 		success:function(data){
-		 			if(data.code==203){
-						$.alert("删除成功");
-						window.location.reload();
-					}else{	
-						$.alert("删除失败");
-					}	
-		 		}
-		 	})
+			$.modal({
+				title: "确定删除？",
+				text: data.message,
+				buttons: [
+					{ text: "确定", onClick: function(){
+						$.ajax({
+							type:"DELETE",
+							url:port+"/card/receiver/"+receiverId+"?token="+token,
+							contentType:"application/json",
+							success:function(data){
+								if(data.code==203){
+									$.alert("删除成功",function () {
+										window.location.reload();
+									});
+								}else{
+									$.alert("删除失败");
+								}
+							}
+						})
+					}},
+					{ text: "取消", className: "default", onClick: function(){
+						//todo
+					},
+					}
+				]
+			});
 		})//删除地址结束
 
 

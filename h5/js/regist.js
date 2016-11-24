@@ -105,7 +105,7 @@ $(function(){
 																		setCookie("phone",phoneNum,365);
 
 																		//测试  环境
-																		window.location.href = 'login.html?his=index.html';
+																		//window.location.href = 'login.html?his=index.html';
 
 																		// //正式环境  微信授权
 																		// var token = getCookie("token");

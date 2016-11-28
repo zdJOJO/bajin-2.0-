@@ -34,9 +34,9 @@ $(document).ready(function(){
                 var len = result.data.list.length;
                 for(var i=0;i<len;i++){
                     $tmpStr = $('<div class="itemCell" data-productId="'+result.data.list[i].id+'" data-presold="'+result.data.list[i].preSold+'" data-num="'+result.data.list[i].sum+'">' +
-                        '<div><img class="second" data-original="'+result.data.list[i].pic+'">' +
+                        '<div><div class="imgBox"><img data-original="'+result.data.list[i].pic+'"></div>' +
                         '<div class="second"><h3>'+result.data.list[i].title+'</h3><p>'+result.data.list[i].subtitle+'</p>' +
-                        '<span>￥ '+result.data.list[i].costPrice.toFixed(2)+'</span></div></div>' +
+                        '<span>￥'+result.data.list[i].costPrice.toFixed(2)+'</span></div></div>' +
                         '<div class="mask"></div><span class="none">距开抢 00天00时00分00秒</span></div>' );
                     //计时器
                     var difference = Math.round( parseInt( $tmpStr.attr('data-presold'))-new Date().getTime()/1000 );

@@ -1,5 +1,4 @@
 
-
 //这个页面数据接入太傻逼了，这里需要处理三个页面的数据进来，
 ////  ↑老子 二次开发 ，你个臭煞笔 你他妈的还好意思说？？？ 蠢狗，代码写得跟屎一样！
 
@@ -11,7 +10,6 @@
 //skuId:1,//商品的skuid
 //num:3//直接添加的时候的购买数量
 //}
-
 $(document).ready(function(){
 	//获取token
 	var token = "";
@@ -31,6 +29,7 @@ $(document).ready(function(){
 	return undefined;
 	}
 
+	var localStorage = window.localStorage;   //用于存储生日日期和礼包领取码
 
 	function GetQueryString(name) {
 		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
@@ -211,8 +210,6 @@ $(document).ready(function(){
 				for(var i=0,len=data.list.length;i<len;i++){
 					for(var j=0,len_=cards.length;j<len_;j++){
 						if(data.list[i].carModel.id==cards[j]){
-							console.log(data.list[i].carModel.id);
-							console.log(cards[j]);
 							var str=$('<div class="singleBrand">' +
 								'<img src="'+data.list[i].goodsModel.hotPic+'" class="activityPic"/>' +
 								'<div class="detail"><h3>'+data.list[i].goodsModel.goodsTitle+'</h3>' +
@@ -232,17 +229,22 @@ $(document).ready(function(){
 	}
 
 
-	//判断留言自长度
-	$('textarea').keyup(function () {
-		var msg = $(this).val();
-		var len = msg.length;
+	//判断留言长度
+	var msg = '';
+	var len = 0;
+	if(localStorage.remark){
+		$("textarea").val(localStorage.remark);
+	}
+	$("textarea").bind("input", function() {
+		msg = $(this).val();
+		len = msg.length;
 		$('.wordNum span').html(len);
+		localStorage.setItem("remark",msg);
 		if(len > 60){
 			$(this).val(msg.substring(0,60));
 			$('.wordNum span').html(60);
 		}
 	});
-
 
 	//这里跟单个物品立即购买处理的不同。
 	//这里处理确认订单按钮的事件，区分添加的来源
@@ -278,6 +280,7 @@ $(document).ready(function(){
 				contentType:"application/json;charset=UTF-8",
 				data:JSON.stringify(data),
 				success:function(data){
+					localStorage.clear();
 					if(window.location.search.indexOf('brandDetail')> 0){
 						window.location.href = "unpaid.html?brandDetail&&cardid=" + data.data.orderModel.orderId ;
 					}else {
@@ -306,7 +309,8 @@ $(document).ready(function(){
 				contentType:"application/json;charset=UTF-8",
 				data:JSON.stringify(data),
 				success:function(data){
-					//window.location.href = "unpaid.html?isShoppingCart&&cardid=" + data.data.orderModel.orderId;
+					localStorage.clear();
+					window.location.href = "unpaid.html?isShoppingCart&&cardid=" + data.data.orderModel.orderId;
 				},
 				error:function(data){
 					console.log(data);

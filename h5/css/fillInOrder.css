@@ -179,6 +179,7 @@ h5{
 	text-align: center;
 	padding-bottom: 0.01rem ;
 	margin: 0.04rem 0 0 0.02rem;
+	font-weight: bold;
 }
 
 .moreInfo{
@@ -224,8 +225,10 @@ h5{
 	border: 1px #f7f7f7 solid;
 	width: 94%;
 	height: 0.2rem;
+	line-height: 0.06rem;
 	margin: auto;
 	display: block;
+	font-size: 14px;
 }
 
 .buyerMsg .wordNum{

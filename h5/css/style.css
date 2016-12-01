@@ -12,17 +12,10 @@ h3{-webkit-margin-before:0.1em;
     -webkit-margin-after:0.1em; font-weight:100;font-size:16px; margin-bottom:2%}
 a:link{ color:#000000; text-decoration:none;}
 p{ line-height:20px;}
-/*header*/
-/*#header{ width:100%; height:11%;position:fixed; box-sizing:border-box; z-index:1000; background:#FFF;}
-.fh{ width:20%;position:absolute; left:3%; z-index:1000;font-size:16px;}
-.fh a{color:#000000; text-decoration:none;}
-*/
 .fh,.home,.send,.search{ padding-top:6.5%}
 .home{
-	/*width:6%; */
 	position: 
 	absolute;
-/*	left:83%; */
 	z-index:1000;
 }
 .home img{ width:100%}
@@ -76,31 +69,26 @@ p{ line-height:20px;}
 		height: 50%;
 		width: 100%;
 		word-wrap:break-word;
-		text-overflow:ellipsis; 
-		/*white-space:nowrap; */
+		text-overflow:ellipsis;
 		overflow:hidden;
 	}
 	.fav_content_ri_zf{ 
 		width:100%; 
 		font-size:12px; 
 		height: 23%;
-		/*text-align:right;    */
-		/*margin-top: 20px;*/
 	}
 /* appointment  */
 .appo_content_cen{width:20%; float:left;height: 86%;}
 .appo_content_cen img{ width:100%;height: 100%;}
 .appo_ri_zf{ width:60%; line-height:20px; float:left; font-size:12px;
-	height: 23%; 
-	/*margin-top:3%; */
+	height: 23%;
 	color:#878787}
 .appo_ri_sc{ 
-	width:30%; 
-	/*line-height:23%;*/
-	/*box-sizing:border-box;*/
-	float:right; color:#c8a569;
-	/*padding-bottom: 1px;*/
-	font-size:16; border-radius:5px; 
+	width:30%;
+	float:right;
+	color:#c8a569;
+	font-size:16px;
+	border-radius:5px;
 	border: 1px solid #c8a569;
 	height: 21%;
  	text-align:center;}
@@ -113,11 +101,8 @@ p{ line-height:20px;}
 	-webkit-margin-before:0; 
 	-webkit-margin-after:0; 
 	height: 50%;
-	/*width: 100%;*/
 	color:#878787;
-	/*word-wrap:break-word;*/
-	text-overflow:ellipsis; 
-	/*white-space:nowrap; */
+	text-overflow:ellipsis;
 	overflow:hidden;}
 
 /* feedback  */	
@@ -189,12 +174,13 @@ footer ul li a{ color:#FFF; text-decoration:none;}
 	margin: auto;
 }
 
-.yhm_dl { /*更改了一下样式，登录注册的输入框的内外间距*/
-	width:100%; 
-	height:10%; 
-	background: rgba(255,255,255,0.2);    
-	padding: 1.5% 0;
-    margin: 3% 0;
+.yhm_dl{   /*更改了一下样式，登录注册的输入框的内外间距*/
+	width: 100%;
+	height: 20%;
+	background: rgba(178,178,178,0.08);
+	padding: 4% 0;
+	margin: 7% 0;
+	border-radius: 4px;
 }
 .yhm_login { /*更改了一下样式，登录注册的输入框的内外间距*/
 	width: 100%;
@@ -209,7 +195,6 @@ footer ul li a{ color:#FFF; text-decoration:none;}
 	height:10%;  
 	padding: 3px 0;
     margin: 14px 0;
-    font-family: "微软雅黑"
 }
 .yhm_dl input,.yhm_login input{
 	box-sizing: border-box;
@@ -266,7 +251,20 @@ footer.icbc>img{
 }
 
 .yhm_fs{float:right;}
-.yhm_sr{ width: 60%; box-sizing: border-box; background:rgba(255,255,255,0.2); height:10%;  border:none; line-height:36px; padding-top: 2% 0;  margin:2% 0; padding-bottom: 3%; color:#c1c1c1; font-size:24px; padding-left:2%; float: left;}
+.yhm_sr{
+	width: 60%;
+	height: 20%;
+	line-height: 36px;
+	box-sizing: border-box;
+	border: none;
+	margin: 2% 0;
+	color: #c1c1c1;
+	font-size: 24px;
+	float: left;
+	background: rgba(178,178,178,0.08);
+	padding: 4% 0;
+	border-radius: 4px;
+}
 .yhm_sr input{ width:70%; background:none; border:none;  color:#c1c1c1; font-size:14px;  }
 #ld_bj p{margin: 0; padding:0.04rem 0;font-size:16px; color:#FFF; }
 #ld_bj p a{ color:#FFF;  text-decoration:none;  }
@@ -293,21 +291,36 @@ span{color:#fff}
 /*registered*/
 #zc_content{width:80%; position:absolute; top:20%; left:10%;}
 #zc_content2{width:80%; position:absolute; top:20%; left:10%; display:none;}
-#getCaptcha{ background: #af904a;
-    text-align: center;
-    height: 10%;
-    color: #FFF;
-    width: 35%;
-    border: none;
-    font-size: 12px;
-    /* line-height: 37px; */
-    line-height: 44px;
-    margin-left: 0;
-    cursor: pointer;
-    margin-bottom: 2%;
-    margin: 2% 0 5% 0;}
-#captcha{  font-family: "微软雅黑"}
-.yhm_sr img{margin-right:5%;width: 9%;opacity: 0.6}
+#getCaptcha{
+	background: #af904a;
+	text-align: center;
+	height: 0.15rem;
+	color: #FFF;
+	width: 35%;
+	border: none;
+	font-size: 12px;
+	line-height: 44px;
+	cursor: pointer;
+	margin-top: 0.02rem;
+	border-radius: 4px;
+}
+.yhm_sr input{
+	box-sizing: border-box;
+	width: 70%;
+	height: 30px;
+	background: none;
+	border: none;
+	line-height: 30px;
+	margin-left: 3%;
+	color: #fafafa;
+	font-size: 14px;
+	outline: none;
+}
+.yhm_sr img{
+	margin: 0 0.01rem 0 0.04rem;
+	width: 9%;
+	opacity: 0.6;
+}
 #xy_zc{ padding-top:6%; color:#FFF;font-size:14px }
 #xy_zc span{opacity:0.6}
 #ty_zc{ padding-left:1%; color:#f8e195;}

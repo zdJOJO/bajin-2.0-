@@ -1,8 +1,6 @@
 
-
 //此页面的问题很多，留到最后处理
 $(document).ready(function(){
-
 	var token = "";
 	//获取存在于cookie中的token值
 	function getCookie(c_name) {
@@ -96,6 +94,7 @@ $(document).ready(function(){
 		// $("body").css("overflow", "visible")
 
 	});
+	turnUrl($("#QRCode"),"qrCode.html");
 	turnUrl($("#fav_But"),"favorites.html");
 	turnUrl($("#myMessage_But"),"myMessage.html");
 	turnUrl($("#shop_But"),"shoppingCart.html");

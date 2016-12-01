@@ -164,20 +164,6 @@ var typeJudge = function (type) {
 };
 
 
-//多行显示省略号的方法
-function lessAll(text,length){
-    // var text = $('.tit-wrap .detile p');
-    var textLen = length;
-    for(var k=0,len=text.length;k<len;k++){
-        // console.log($(text[k]).html());
-        if($(text[k]).html().length>textLen){
-            var str = $(text[k]).html().substring(0,textLen)+"..."
-            $(text[k]).html(str);
-        }
-    }
-}
-
-
 // 验证手机号的方法
 function checkMobile(str){
     var re = /^[1][35847][0-9]{9}$/;

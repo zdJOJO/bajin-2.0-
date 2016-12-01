@@ -15,55 +15,37 @@
     <link rel="stylesheet" href="css/doenrol.css">
 </head>
 <body>
-<!-- <header id="header">
-    <div class="msg">
-        <a href="javascript:;" id="enrol_But">&lt; 返回</a>
-        <span>报名</span>
-    </div>
-</header> -->
-<section class="activityDetail">
+<div class="activityDetail">
     <img src=""/>
     <div>
         <h3></h3>
+        <p class="address"><img src="imgs/address.png"><span></span></p>
         <p class="time"><img src="imgs/time.png"><span></span></p>
-        <p class="address"><img src="imgs/address.png"><span></span></p>    
     </div>
-</section>
-<section class="infoBox">
-    <!-- <div class="tip">联系人</div> -->
-    <div class="listItem">
-        <span>报名登记：</span><input placeholder="姓名不能为空" id="applyName" type="text">
-    </div>
-    <div class="listItem">
-        <span>联系电话：</span><input placeholder="电话不能为空" id="applyPhone" type="text">
-    </div>
-    <div class="listItem">
-        <span>电子邮箱：</span><input type="email" placeholder="邮箱可以为空" id="email">
-    </div>
-</section>
-<section class="personNum">
-    <span>报名人数</span>
-    <div class="count">
-<!--         <span class="reduce count-i">-</span>
-        <span class="num count-i">1</span>
-        <span class="add count-i">+</span> --> 
-        <img class="reduce" src="imgs/buyGood/sub.png">
-        <span class="currentNum num">1</span>
-        <img class="add" src="imgs/buyGood/plus.png">
-    </div>
-</section>
-<p class="tips">活动费用</p>
-<p class="cost"></p>
-<!-- <section class="messageBox" contenteditable="true">
-    如有其他需求请在此备注
-</section> -->
+</div>
+<div class="infoBox">
+    <ul>
+        <li class="listItem"><span>报名登记：</span><input placeholder="姓名不能为空" id="applyName" type="text"></li>
+        <li class="listItem"><span>联系电话：</span><input placeholder="电话不能为空" id="applyPhone" type="text"></li>
+        <li class="listItem">
+            <span>报名人数:</span>
+            <div class="count">
+                <img class="reduce" src="imgs/buyGood/sub.png">
+                <span class="currentNum num">1</span>
+                <img class="add" src="imgs/buyGood/plus.png">
+            </div>
+        </li>
+        <li class="listItem"><span>报名费用:</span><span class="cost">￥0.00</span></li>
+    </ul>
+</div>
+<div class="jobNum">
+    <h3>邀约用户填写以下信息：</h3>
+    <input type="tel" id="jobNum" placeholder="请填写邀请您的客户经理工号">
+</div>
 <p class="note">备注</p>
 <textarea class="note_q" type="text" placeholder="如有其他需求请在此备注"></textarea>
-
-
 <footer class="nav">
-    <!--<p id="checkInfo">确认信息</p>-->
-    <a href="javascript:;" id='checkInfo' class="weui_btn weui_btn_primary">确认信息</a>
+    <a href="javascript:;" id='checkInfo' class="weui_btn weui_btn_primary">确认</a>
 </footer>
 </body>
 <script type="text/javascript" src="js/jquery/jquery.min.js"></script>

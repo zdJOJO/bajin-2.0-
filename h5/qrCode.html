@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
+    <meta name="screen-orientation"content="portrait">
+    <meta name="x5-orientation"content="portrait">
+    <title>我的二维码</title>
+    <style>
+        body{
+            color: #323232;
+            background: #f0f0f0;
+            font-size: 14px;
+        }
+        header{
+            text-align: center;
+            margin-top: 10%;
+        }
+        #headPic{
+            width: 100px;
+            height: 100px;
+            border-radius: 100%;
+        }
+        h2{
+            text-align: center;
+            margin-bottom: 45px;
+        }
+        h4{
+            text-align: center;
+            letter-spacing: 3px;
+            font-size: 1.2em;
+        }
+        .box{
+            margin: auto;
+            width: 220px;
+            height: 220px;
+        }
+        #qrCode{
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<header><img id="headPic" src=""></header>
+<h2></h2>
+<div style="text-align: center">
+    <h4>供商家扫码核销</h4>
+    <div class="box">
+        <img id="qrCode" src="">
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/public/public.js"></script>
+<script type="text/javascript">
+    var token = getCookie("token");
+    $.get(port + '/card/user?token=' + token,function (res) {
+        $('h2').html(res.userName);
+        $('#headPic').attr('src',res.headPic);
+        $('#qrCode').attr('src',res.qrcode);
+    })
+</script>
+</html>

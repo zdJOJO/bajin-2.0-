@@ -192,7 +192,7 @@ footer div{
 footer div img{
 	height: 0.04rem;
 	width: 0.04rem;
-	margin-top: 0.015rem;
+	margin-top: 0.02rem;
 }
 footer div p{
 	-webkit-margin-before: 0;
@@ -343,18 +343,28 @@ footer div p{
 .hotList >.lists >.hotItem{
 	border: 1px #e8e8e8 solid;
 	margin-bottom: 5%;
+	height: 0.35rem;
 }
 
-/*.hotList >.lists:last-child{*/
-/*margin-bottom: 0;*/
-/*}*/
+.hotItem .tit-wrap{
+	width: 0.63rem;
+	height: 0.3rem;
+}
+
+.hotList>.lists>.hotItem img{
+	width: 0.3rem;
+	height: 0.3rem;
+	float: left;
+	background: #d7d7d7;
+	margin: 0.02rem 0 0 0.015rem;
+	border-radius: 0px;
+}
 
 .hotList >.lists >.hotItem h1{
 	color: #7b7b7b;
 	top: 10%;
-	font-family: '黑体';
-	font-size: 20px;
-	width: 65%;
+	font-size: 16px;
+	width: 70%;
 }
 
 .hotList >.lists >.hotItem .detile{
@@ -384,7 +394,6 @@ footer div p{
 	position: absolute;
 	display: block;
 	width: 0.12rem;
-	text-align: center;
 	color: #b3b3b3;
 	text-align: right;
 	background: none;
@@ -416,7 +425,7 @@ footer div p{
 	}
 
 	.hotList >.lists >.hotItem .detile>div{
-		font-size: 15px;
+		font-size: 14px;
 	}
 }
 
@@ -431,7 +440,7 @@ footer div p{
 	}
 
 	.hotList >.lists >.hotItem h1{
-		font-size: 16px;
+		font-size: 15px;
 		width: 54%;
 	}
 
@@ -442,7 +451,7 @@ footer div p{
 	}
 
 	.hotList >.lists >.hotItem .tit-content>p{
-		top: 19%;
+		top: 10%;
 		right: 10px;
 	}
 

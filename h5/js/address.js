@@ -35,7 +35,6 @@ $(function(){
  			 //     $(".set_But").css("color","#b7a66e")
  			 // $(".checkbox").attr("type").css("background","url(../imgs/add_pic4.png)");
  			 console.log($(".checkbox").attr("type"));
-
  			     console.log("default = "+i);
 			}else{
 				console.log("not default = "+i);
@@ -55,17 +54,9 @@ $(function(){
 
 		var Set_id = $(this).siblings(".set_But").data("id");
 		var Check_id = $(this).data("id");
-		
-		
 		 		$(this).find("img").attr("src","imgs/add_pic4.png");
 				$(this).siblings(".set_But").html("默认地址");
 		 		$(this).siblings(".set_But").css("color","#b7a66e");
-
-
-		
-
-
-
 		})
 	})
 })

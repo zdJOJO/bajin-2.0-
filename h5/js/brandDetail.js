@@ -131,9 +131,6 @@ $(".saveAndShare img.love").unbind('click').click(function () {
 
 
 
-
-
-
 //获取商品详细信息
 var getGoodDetail = function () {
 	$.ajax({
@@ -161,10 +158,7 @@ var getGoodDetail = function () {
 				subType: 4,
 				typeId: itemId
 			});
-
-
-
-
+			
 			$(".buyNow").attr("data-goodsid",data.goodsId);
 			$(".wrapper .title").html(data.goodsTitle);
 			$(".wrapper .subtitle").html(data.goodsSubtitle);
@@ -213,9 +207,6 @@ var getGoodDetail = function () {
 getGoodDetail();
 
 
-
-
-
 //获取评论列表
 var getComment = function () {
 	$.get(port + '/card/comment/list?currentPage=' + 1 + '&type=' + 3 + '&itemId=' + itemId,function (result) {
@@ -232,10 +223,6 @@ var getComment = function () {
 	});
 };
 getComment();
-
-
-
-
 
 
 // 获取商品 sku 详细信息
@@ -282,8 +269,8 @@ var sureGoodInfo = function (data_sku) {
 	url_obj.cost = data_sku[0].skuPrice;
 
 	oneSpe(data_sku[0]);
-
-
+	
+	
 	//每个型号选择
 	$('#goodDetail>.specifications li').click(function () {
 		
@@ -491,10 +478,6 @@ $("#goodDetail>.name>.close").click(function () {
 });
 
 
-
-
-
-
 //分享
 $('.saveAndShare>.share').click(function () {
 	$("#share-mask").show();
@@ -502,7 +485,6 @@ $('.saveAndShare>.share').click(function () {
 $("#share-mask").click(function () {
 	$("#share-mask").hide();
 });
-
 
 
 

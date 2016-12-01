@@ -142,7 +142,7 @@ $(function(){
                     //     activityTypeStr = '<span class="type">' + data.list[i].activityType + '</span>';
                     // }
                    if(!isHotDoor){
-                       var activityPrice = data.list[i].activityPrice==0 ? '免费' : '￥' + data.list[i].activityPrice.toFixed(2);
+                       var activityPrice = data.list[i].activityPrice==0 ? '会员专享' : '￥' + data.list[i].activityPrice.toFixed(2);
                        actStr += '<div class="infoItem" data-i="'+data.list[i].activityId+'" >' +
                            '<img data-original="'+data.list[i].activityPic+'">' +
                            '<div class="tit-wrap"><div class="tit-content"> ' + activityTypeStr +

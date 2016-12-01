@@ -176,7 +176,7 @@ body{
     float: left;
 }
 .activityDetail>div{
-    /*width: 0.6rem;*/
+    width: 0.6rem;
     float: left;
 }
 .activityDetail>div h3{

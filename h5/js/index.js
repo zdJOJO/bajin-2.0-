@@ -177,7 +177,7 @@ $(document).ready(function(){
 					}
 					bannerStr += '<div class="swiper-slide">' +
 						'<p class="mask_banner">'+arr[i].bannerTitle+'</p>' +
-						'<img src="'+arr[i].bannerPic+'" data-id="'+arr[i].bannerId+'" data-type="'+arr[i].type+'" data-url="'+arr[i].bannerUrl+'" class="swiper-slide_img"/>' +
+						'<img src="'+arr[i].bannerPic+'" data-id="'+arr[i].itemId+'" data-type="'+arr[i].type+'" data-url="'+arr[i].bannerUrl+'" class="swiper-slide_img"/>' +
 						'</div>';
 
 				}

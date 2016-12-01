@@ -16,15 +16,7 @@ $(function(){
 	return undefined;
 	}
 	token = getCookie("token");
-
-	function GetQueryString(name) {
-		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-		var r = window.location.search.substr(1).match(reg);
-		if(r!=null)return  unescape(r[2]);
-		return null;
-	}
-
-
+	
 	//获取页面的名称
 	var isPersonNalInfo = window.location.href.indexOf('fromePersonNalInfo') ;
 	var isfromeGift = window.location.href.indexOf('fromeGift') ;

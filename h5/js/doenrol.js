@@ -29,7 +29,7 @@
         }
         personNum.html(curNum);
         var cost = (curNum*$(".cost").data("cost"));
-        cost = cost==0?"免费活动":"￥"+cost.toFixed(2);
+        cost = cost==0?"会员专享":"￥"+cost.toFixed(2);
         $(".cost").html(cost);
     }
     var user = {};
@@ -37,7 +37,7 @@
     var checkBtn = $('#checkInfo');
     
 
-    if(token != undefined){
+    if(token){
     $.ajax({
         type:"get",
         url:port+"/card/user?token="+token,
@@ -46,8 +46,22 @@
                 window.location.href = "login.html?his="+his;
             }else{
                 user = data;
-                $('#applyName').val(user.userName);
+                // $('#applyName').val(user.userName);
                 $('#applyPhone').val(user.phone);
+                if(data.description == 'BJCARD'){
+                    //白金卡用户
+                    $('.jobNum').hide();
+                }
+                // if(data.description=="NONE"){
+                //     //未绑卡用户
+                // }else if(data.description=='BJCARD'){
+                //     //白金卡用户
+                //     $('.jobNum').hide();
+                // }else if(data.description=='CTCARD'){
+                //     //畅通卡用户
+                // }else {
+                //     //普通卡用户
+                // }
                 $.ajax({
                     type:"get",
                     url:port+"/card/activity/"+activityid,
@@ -55,9 +69,10 @@
                         var actStr = '<img src="'+data.activityPic+'">' +
                             '<div><h3>'+data.activityTitle+'</h3>' +
                             '<p class="address"><img src="imgs/address.png"><span>'+data.activityAddress+'</span></p>' +
-                            '<p class="time"><img src="imgs/time.png"><span>'+new Date(data.startTime*1000).Formate()+" - "+new Date(data.endTime*1000).Formate()+'</span></p></div>';
+                            '<p class="time"><img src="imgs/time.png">' +
+                            '<span>'+new Date(data.startTime*1000).Formate()+" - "+new Date(data.endTime*1000).Formate()+'</span></p></div>';
                         $(".activityDetail").html(actStr);
-                        $(".cost").html(data.activityPrice==0?"免费活动":"￥"+data.activityPrice).attr("data-cost",data.activityPrice);
+                        $(".cost").html(data.activityPrice==0?"会员专享":"￥"+data.activityPrice).attr("data-cost",data.activityPrice);
 
                         //判断加减人数
                         addBtn.click(function(){
@@ -104,12 +119,10 @@
                                     if(data.code=='201'){
                                         order = data.data.applyId;
                                         if(activity.activityPrice == 0) {       //费用为0直接报名成功
-                                            window.location.href = "success.html?id=" + activityid;
+                                            window.location.href = "success.html?activityid=" + activityid + '&isActivity=true';
                                         }else {
                                             //费用不为0则跳转到工行支付接口 或者  微信支付
                                             popPay();
-
-
                                             //弹出支付层
                                             function popPay() {
                                                 $.actions({
@@ -221,7 +234,7 @@
                                             };
                                         }
                                     }else{
-                                        if(data.message == '您还未绑定工行信用卡'){
+                                        if(data.message == '您还未绑定工行信用卡' || data.message=='输入的客户经理柜员号错误或请绑定白金信用卡'){
                                             $.modal({
                                                 title: "提示",
                                                 text: data.message,

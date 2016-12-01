@@ -37,11 +37,8 @@ $(function(){
 
 									regBtn.click(function(){
 										var phoneNum = $("#phoneNum").val();
-
 										var pass=hex_md5($("#passWord").val());
-
 										var captchabox = $("#captcha").val();
-
 										var membershipCode = $('#membershipCode').val(); //会员码
 										if(membershipCode && ( membershipCode.length != 9 || membershipCode.toString().sibling(0,3) != '120')){
 											alert('请输入正确的邀请码');
@@ -57,7 +54,7 @@ $(function(){
 											if(result.status){
 												if($("#ty").attr("checked")){
 													var data = {
-														userName: '',
+														userName: 'bjzx'+ parseInt(new Date().getTime()/1000),
 														password:pass,
 														phone:phoneNum,
 														userRole:0,
@@ -105,7 +102,7 @@ $(function(){
 																		setCookie("phone",phoneNum,365);
 
 																		//测试  环境
-																		//window.location.href = 'login.html?his=index.html';
+																		window.location.href = 'login.html?his=index.html';
 
 																		// //正式环境  微信授权
 																		// var token = getCookie("token");

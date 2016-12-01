@@ -87,7 +87,7 @@ $(function(){
             applyNumber = data.applyNumber;
             var actPrice = '￥'+ data.activityPrice.toFixed(2);
             if(data.activityPrice == 0){
-                actPrice = '免费';
+                actPrice = '会员专享';
             }
 
             var picStr =  '';
@@ -121,7 +121,8 @@ $(function(){
                 '<p class="msg-num"><span class="head">人数</span>'+ peopleNumberStr + '</p>' +
                 '<p class="msg-num"><span class="head">已报名</span>'+data.applyNumber+'人'+'</p></div></section>');
 
-            var str2 = $('<section class="content"><div class="content-text">' + data.activityDetail + '</div></section>');
+            var str2 = $('<section class="content"><h3 style="color: #c8a971;width: 96%;margin: 0 0.035rem">活动亮点</h3>' +
+                '<div class="content-text">' + data.activityDetail + '</div></section>');
             $("#doEnrol").append('<span class="closeDate">'+'报名截止时间：'+ new Date(data.applyEndTime*1000).Formate() +'</span>');
 
             if(new Date().getTime() > data.applyEndTime*1000){
@@ -363,6 +364,7 @@ $(function(){
                 window.location.href = "doenrol.html?id=" + activityid;
             };
         }else{
+            console.log(his);
             window.location.href = "login.html?his="+escape(his);
         }
 

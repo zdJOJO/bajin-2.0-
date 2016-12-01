@@ -31,13 +31,6 @@ $(document).ready(function(){
 
 	var localStorage = window.localStorage;   //用于存储生日日期和礼包领取码
 
-	function GetQueryString(name) {
-		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-		var r = window.location.search.substr(1).match(reg);
-		if(r!=null)return  unescape(r[2]);
-		return null;
-	}
-
 	token = getCookie("token");
 	//获取页面的名称
 	var his = window.location.pathname.split("/");
@@ -68,7 +61,6 @@ $(document).ready(function(){
 
 	//填入数据
 	if(window.location.search.indexOf('isShoppingCart=false') > 0){
-		//<li><i>金额:</i><span>'+$('footer .totalPrice').html()+'</span></li>
 		var totalPrice = '';
 		var numStr = '<li><i>购买数量:</i><span class="reduce">-</span><span id="numValue">'+obj.num+'</span><span class="plus">+</span></li>';
 		$.get( port + '/card/goods/'+obj.goodsId ,function (res) {

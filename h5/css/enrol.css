@@ -262,12 +262,12 @@ body{
 }
 footer.nav{
     background: #000;
-    width:  1rem;
+    width: 1rem;
     height: 0.12rem;
     position: fixed;
     bottom: 0;
-    left: 0;
     color: #fff;
+    z-index: 2500;
 }
 .nav p{
     background: #C8A971;

@@ -8,21 +8,50 @@
     <title>付款成功</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/success.css">
-    <script>
-        var iWidth=document.documentElement.clientWidth;
-        document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
-    </script>
 </head>
 <body>
 <div class="main">
     <div class="view-box">
         <img class="img" src="imgs/iconfont-gouxuan.png" />
-        <p class="tip">您已付款成功</p>
+        <p id="result" class="tip">您已付款成功</p>
     </div>
     <div class="return-box">
-        <!--<p id="appointment_But"><a>我的预约</a></p>-->
         <p id="index_But"><a href="index.html">返回首页</a></p>
     </div>
 </div>
+
+<div class="main activitySuccess">
+    <div class="view-box">
+        <img class="img" src="imgs/index/success.png" />
+    </div>
+    <div class="return-box">
+        <p id="index_But" class="activity"><a href="index.html">返回首页</a></p>
+        <p id="appointment_But"><a>查看订单</a></p>
+    </div>
+</div>
+<a href="http://www.winthen.com/test/brandDetail.html?id=33" style="display: none">
+    <img id="wuxiaobo" src="imgs/index/wuxiaobo.jpg" style="position: fixed;bottom: 0; width: 100%;height: auto">
+</a>
+
 </body>
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/public/public.js"></script>
+<script type="text/javascript">
+    var iWidth=document.documentElement.clientWidth;
+    document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+
+    var isActivity = GetQueryString('isActivity');  //判断是活动支付成功 还是 臻品付款成功
+    var activityid = GetQueryString('activityid');
+    var price = parseFloat(GetQueryString('activityPrice'));
+    if(isActivity){
+        $('title').html('报名成功');
+        $('.activitySuccess').show().siblings('.main').hide();
+        $('#appointment_But').children('a').click(function () {
+            window.location.href = 'myOrders.html';
+        });
+        if(activityid=='263'){
+            $('a').show();
+        }
+    }
+</script>
 </html>

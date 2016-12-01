@@ -57,6 +57,7 @@ input,textarea{
 	font-size:16px;
 }
 .infoBox{
+    font-size: 1.2em;
     width:1rem;
     position: relative;
     -webkit-box-sizing: border-box;
@@ -87,12 +88,13 @@ input,textarea{
     color: #323232;
 }
 .listItem span:last-child{
-    font-size: 1.1em;
-    color: #909090;
+    font-size: 0.9em;
+    color: #caad77;
 }
 
 .listItem input{
     font-size: 0.9em;
+    width: 60%;
 }
 
 .personNum{
@@ -109,7 +111,6 @@ input,textarea{
     line-height: 0.06rem;
     display: inline-block;
     text-align: left;
-    margin-left: 0.03rem;
 }
 
 .messageBox{
@@ -175,7 +176,7 @@ body{
     float: left;
 }
 .activityDetail>div{
-    width: 0.6rem;
+    /*width: 0.6rem;*/
     float: left;
 }
 .activityDetail>div h3{
@@ -183,7 +184,7 @@ body{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 1.1em;
+    font-size: 1.2em;
     color: #323232;
 }
 @media screen and (max-width:320px){
@@ -195,12 +196,24 @@ body{
     }
 }
 .activityDetail>div .time{
-    width: 0.6rem;
+    width: 0.65rem;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     margin: 0.01rem 0 0.03rem 0;
 }
+
+.activityDetail>div .free{
+    display: inline-block;
+    width: 0.09rem;
+    text-align: center;
+    border: 1px #be9f56 solid;
+    border-radius: 10px;
+    color: #be9f56;
+    float: right;
+    padding: 0.001rem;
+}
+
 .activityDetail>div .time img{
     width: 0.03rem;
     height: 0.03rem;
@@ -216,7 +229,7 @@ body{
 
 .activityDetail>div>p{
     color: #909090;
-    font-size: 0.9em;
+    font-size: 1em;
 }
 
 .activityDetail>div>.address span{
@@ -262,6 +275,7 @@ body{
     height: 0.3rem;
     background: none;
     padding-left: 0.04rem;
+    line-height: 0.06rem;
 }
 
 
@@ -272,7 +286,7 @@ body{
 
 .jobNum h3{
     color: #323232;
-    font-size: 1em;
+    font-size: 1.2em;
     margin: 0.03rem 0 0.01rem 0;
     padding-left: 0.04rem;
 }

@@ -48,10 +48,10 @@ $(function(){
 	});
 
 
-	var Butlog=$("#login");
+	var Butlog = $("#login");
 	//点击叉号的时候直接导向到index页面
 	$("#index_But").click(function(){
-		window.location.href=unescape(his);
+		window.location.href = unescape(his);
 	})
 	Butlog.click(function(){
 		window.name = "";

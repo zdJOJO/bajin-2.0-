@@ -27,16 +27,13 @@ body{
 }
 /*空值个人的图片的位置问题*/
 #header .vip{
-	/*width:20%;*/
-	/*position: absolute;*/
-	/*left:80%;*/
 	text-align: center;
 	right: 0;
 }
 #header .vip img{
 	width: 0.1rem;
 	height: 0.1rem;
-	margin: 0.012rem 0 0 0.012rem;
+	margin: 0.02rem 0 0 0.025rem;
 	border-radius: 100%;
 	-webkit-box-shadow: 0 4px 5px 0px rgba(0,0,0,0.7);
 	-moz-box-shadow: 0 4px 5px 0px rgba(0, 0, 0, 0.7);

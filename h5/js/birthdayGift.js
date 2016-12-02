@@ -81,8 +81,6 @@ if(localStorage.birthDayCode){
 }
 
 
-
-
 var hasBinded = false; //是否绑白金卡  是true
 var hasRealGift = false; //是否有 实物
 var hasElec = false;     //是否有 电子券

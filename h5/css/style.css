@@ -160,7 +160,15 @@ footer ul li  img{ display:block; margin-bottom:10%; margin-left:3%; text-align:
 footer ul li a{ color:#FFF; text-decoration:none;}
 #culb_img img{ padding-left:7%}
 /*login,registered,password*/
-#ld_bj{ width:100%; font-size:16px; font-weight:100;background:url(../images/login/dl_bj.png) top center;background-size:100%; height:100%; overflow:hidden; }
+#ld_bj{
+	width: 100%;
+	font-size: 16px;
+	font-weight: 100;
+	background: url(../images/login/dl_bj.png) top center no-repeat;
+	background-size: 100% 100%;
+	height: 100%;
+	overflow: hidden;
+}
 #gb_but{ position:absolute; top:8%; left:6.4%;}
 
 #logo_dl{
@@ -212,18 +220,6 @@ footer ul li a{ color:#FFF; text-decoration:none;}
 ::-webkit-input-placeholder {
 	color: #FAFAFA;
 	opacity: 0.4;
-}
-
-footer.icbc{
-	width: 70%;
-	margin: 0 auto 0.03rem -35%;
-	text-align: center;
-	left: 50%;
-	position: absolute;
-}
-
-footer.icbc>img{
-	width: 100%;
 }
 
 .but_dl{

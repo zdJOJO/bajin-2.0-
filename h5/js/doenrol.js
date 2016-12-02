@@ -35,7 +35,18 @@
     var user = {};
     var activity = {};
     var checkBtn = $('#checkInfo');
-    
+
+
+    //获取报名状态
+    // 1-已报名  2-活动结束  3-报名截止 4-人数已满  5-报名
+    function getEnrollStatu(token) {
+        $.get(port + '/card/apply/status/' + activityid + '?token=' + token, function (res) {
+            if(JSON.parse(res).data == 1){
+                window.location.href = "success.html?activityid=" + activityid + '&isActivity=true';
+            }
+        })
+    };
+
 
     if(token){
     $.ajax({
@@ -45,6 +56,7 @@
             if(typeof(data) =="string"){
                 window.location.href = "login.html?his="+his;
             }else{
+                getEnrollStatu(token);
                 user = data;
                 // $('#applyName').val(user.userName);
                 $('#applyPhone').val(user.phone);

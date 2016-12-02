@@ -4,6 +4,7 @@ h1,h2,h3{
 body{
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+    position: fixed;
 }
 
 #address i{
@@ -277,7 +278,6 @@ footer.nav{
 }
 #share-mask{
     background: rgba(255,255,255,0.5);
-    z-index: 101;
     display: none;
     position: fixed;
     top:0;
@@ -313,7 +313,6 @@ footer.nav{
 
 #doEnrol{
     background: #eee;
-    /*position: relative;*/
     height:	100%;
 }
 
@@ -321,12 +320,10 @@ footer.nav{
     height: 100%;
     width: 30%;
     border: none;
-    position: absolute;
-    right: 0px;
     color: #fff;
     background: #C8A971;
     font-size: 1.1em;
-    font-family: '微软雅黑';
+    float: right;
 }
 
 #doEnrol>.closeDate{

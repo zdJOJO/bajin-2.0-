@@ -2,7 +2,7 @@
  * Created by Administrator on 2016/8/29.
  */
 $(function(){
-    var  searchStr = window.location.search;
+    var searchStr = window.location.search;
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
 
@@ -193,6 +193,15 @@ $(function(){
     });
 
 
+    //监听url的hash
+    $(window).hashchange(function () {
+        pgId = location.hash.substring(1);
+        if(pgId == 'first' || !pgId){
+            $('#mine').click();
+        }else {
+            $('#'+pgId).click();
+        }
+    });
 
 
     //  卡种 、人群  列表获取

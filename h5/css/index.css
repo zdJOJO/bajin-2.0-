@@ -11,7 +11,7 @@ body{
 	box-sizing:border-box;
 	position: fixed;
 	top:0;
-	z-index: 950;
+	z-index: 1000;
 }
 #header div{
 	float:left;
@@ -488,7 +488,7 @@ section.items1>div:last-child .mask_lq>.tit_bq1:last-child{
 .brand_But p,.latest_Bu{color: #909090;}
 /*侧边栏*/
 .showDiv2{
-	width: 0.78rem;
+	width: 0.65rem;
 	background: #000;
 	height: 100%;
 	position:fixed;
@@ -585,17 +585,16 @@ section.items1>div:last-child .mask_lq>.tit_bq1:last-child{
 
 
 .icbc_But{
-	width: 0.78rem;
+	width: 0.65rem;
 	height: 0.13rem;
-	background: #242424;
 	display: block;
 	position: absolute;
 	bottom: 0;
+	text-align: center;
 }
 .icbc_But img{
 	margin-top: 0.03rem;
-	width:0.6rem;
-	margin-left: 0.09rem;
+	width: 0.6rem;
 }
 .footer span{
 	margin-left: 0.06rem;
@@ -621,9 +620,10 @@ section.items1>div:last-child .mask_lq>.tit_bq1:last-child{
 	background: #b6a66d;
 	border: none;
 	border-radius: 2px;
-	margin-left: 0.20rem;
 	color: #fff;
 	text-align: center;
+	float: right;
+	margin: 0.04rem 0.03rem 0 0;
 }
 /*.showDiv1{
 	position:fixed;

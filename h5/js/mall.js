@@ -1,24 +1,5 @@
-$(document).ready(function(){	
-	//获取token
-	var token = "";
-	//获取存在于cookie中的token值
-	function getCookie(c_name)
-	{
-	if (document.cookie.length>0)
-	  {
-	  c_start=document.cookie.indexOf(c_name + "=")
-	  if (c_start!=-1)
-	    {
-	    c_start=c_start + c_name.length+1
-	    c_end=document.cookie.indexOf(";",c_start)
-	    if (c_end==-1) c_end=document.cookie.length
-	    return unescape(document.cookie.substring(c_start,c_end))
-	    }
-	  }
-	return undefined;
-	}
-	token = getCookie("token");//便于本地测试
-	// token = getCookie("token");
+$(document).ready(function(){
+	var token = getCookie("token");
 	//获取页面的名称
 	var his = window.location.href.split("/");
 	his = his[his.length-1];
@@ -280,9 +261,11 @@ $(document).ready(function(){
 			success: function (result) {
 				if(result.list.length > 0) {
 					$("#comment").find('.cmtNUm').html('评论 ' + result.rowCount + '条');
-					$('#comment').find('.list').show().html('<img src="'+ result.list[0].user.headPic +'">' +
-						'<span>'+ result.list[0].user.userName +'</span>' +
-						'<p>' + result.list[0].commentContent + '</p>');
+					var headPicStr = result.list[0].user.headPic || './imgs/headPic_default.png';
+					var commentStr = '<img src="'+ headPicStr +'">' +
+						'<div class="customerCmt"><span>'+ result.list[0].user.userName +'</span>' +
+						'<p>' + result.list[0].commentContent + '</p></div>';
+					$('#comment').find('.list').show().html(commentStr);
 				}else {
 					$('#comment>.box').css({'margin-top': '0.02rem'});
 				}

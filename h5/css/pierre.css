@@ -620,7 +620,7 @@ section .brandList{
 #localList>.itemCell div.second>p{
 	color: #808080;
 	font-size: 1.1em;
-	margin: 10px 0;
+	margin: 0.02rem 0 0.02rem 0;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;

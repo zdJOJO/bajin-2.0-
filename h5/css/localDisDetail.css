@@ -264,6 +264,13 @@ header .saveAndShare img:first-child{
 
 
 /************** 产品 详情 ***************/
+#mallDetail{
+    position: fixed;
+    overflow: scroll;
+    top: 0;
+    bottom: 0;
+}
+
 #mallDetail>.list{
     border-bottom: 1px #F0F0F0 solid;
     padding-bottom: 0.02rem;

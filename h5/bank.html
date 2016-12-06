@@ -17,26 +17,21 @@
 	</script>
 </head>
 <body>
-<!-- 	<header id="header">
-		<div class="msg">
-			<a href="javascript:;" id="personal_But">&lt; 返回</a>
-			<span>我的银行卡</span>
-		</div>
-	</header> -->
-	<div class="addCard">
-		<div class="wrap">
-			<h2><a>添加信用卡 <span>+</span></a></h2>
-		</div>
+<div class="cardList" style="display: none"></div>
+<div class="addCard" style="display: none">
+	<div class="wrap">
+		<h2><a href="#"><span></span>添加银行卡</a></h2>
 	</div>
-
-	<div class="cardList"></div>
-	<!-- <a href = "lottery.html" >抽奖页面测试入口</a> -->
-
-	<form name="info" id="info" method="post" action="http://web.zj.icbc.com.cn/mobile/Bjzx.do?scene=bjzx"> 
-		<input type="hidden" id="merSignMsg" name="merSignMsg" value=""/> 
-		<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/> 
-	</form>
-
+</div>
+<div class="noList">
+	<img src="imgs/bankList/none.png">
+	<h3>您还未绑定银行卡</h3>
+	<a class="addCard">立即绑定>></a>
+</div>
+<form name="info" id="info" method="post" action="http://web.zj.icbc.com.cn/mobile/Bjzx.do?scene=bjzx">
+	<input type="hidden" id="merSignMsg" name="merSignMsg" value=""/>
+	<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/>
+</form>
 </body>
 <script src="js/jquery/jquery.min.js"></script>
 <script src="js/public/public.js"></script>

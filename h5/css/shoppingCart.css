@@ -1,28 +1,26 @@
-@font-face{
-	font-family:"微软雅黑";
-}
+
 h1,h2,h3{
 	font-weight: normal;
 }
-body{
-	font-family:"微软雅黑";
-	/*background: #eeeeee;*/
+html,body{
+	width: 100%;
+	height: 100%;
 	margin: 0;
 	padding: 0;
+	color: #323232;
+	background: #fafafa;
+	font-size: 14px;
 }
+
 /*中间内容区域*/
 .wrapper{
-	font-size: 16px;
 	width: 1rem;
 	padding-top: 0.05rem;	
 	margin-bottom: 0.12rem;
 }
 .wrapper .singleBrand{
 	height: 0.3rem;
-	padding-bottom: 0.01rem;
-	vertical-align: middle;
-	padding-left: 0.02rem;
-	padding-right: 0.02rem;
+	padding: 0 0.02rem 0.01rem 0.02rem;
 	border-bottom: 1px rgba(182, 182, 182, 0.23) solid;
 }
 .wrapper .singleBrand img:first-child{
@@ -48,32 +46,29 @@ body{
 
 }
 .wrapper .singleBrand .detail h3{
-	-webkit-margin-before: 0.025rem;
-    -webkit-margin-after: 0.018rem;
+	margin: 0.04rem 0 0 0;
+	font-size: 1.2em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .wrapper .singleBrand .detail p.subtitle{
-	-webkit-margin-before: 0;
-    -webkit-margin-after: 0;
-    font-size: 12px;
-    height:32px;
-    word-wrap: break-word;
-    overflow: hidden;
-}
-.wrapper .singleBrand .detail p.singleCost{
-	-webkit-margin-before: 0.5em;
-    -webkit-margin-after: 0;
-    font-size: 14px;
+	font-size: 1em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .wrapper .singleBrand .detail .singleCost{
-	font-size: 16px;
+	font-size: 1em;
+	margin-top: 0.05rem;
 }
 .wrapper .singleBrand .subtitle{
-	color:#b9b9b9;
+	color:#909090;
 }
 
 .wrapper .singleBrand .detail .singleCost span:first-child{
-	color: #b9b9b9;
+	color: #c1af74;
 }
 
 .wrapper .singleBrand .singleCost span:nth-child(2){
@@ -216,7 +211,6 @@ footer div.select_all_ span{
 }
 
 footer div.delete_all{
-	/*width: 0.33rem;宽度自适应，两端固定的布局，nice*/
 	width: auto;
 	height: 0.12rem;
 	line-height: 0.12rem;
@@ -224,7 +218,7 @@ footer div.delete_all{
 	left: 277px;
 	right: 0;
 	color: #f0f0f0;
-	background-color: #2e3131;
+	background-color: #c1af74;
 }
 footer div.delete_all img{
 	width: 0.066rem;
@@ -326,7 +320,7 @@ label {
 	position: relative;
 	width: 4px;
 	height: 4px;
-	/*border-radius: 15px;*/
+	border-radius: 100%;
 	float: left;
 	margin: 0.123rem 0;
 }
@@ -351,14 +345,13 @@ label {
 	color: #fff;
 }
 
-
-
-
 .wrapper .singleBrand >img{
-	width: 0.266rem;
+	width: 0.24rem;
+	height: 0.24rem;
 	float: left;
-	height: 0.266rem;
-	margin: 7px 0.04rem 0 0.03rem;
+	margin: 0.03rem 0.04rem 0 0.03rem;
+	border: 1px #e6e6e6 solid;
+	border-radius: 5px;
 }
 
 footer .regular-checkbox + label{
@@ -372,11 +365,6 @@ footer .regular-checkbox:checked + label:after {
 
 
 /*&********************  ↑  修改购物车 ↑   ****************************/
-
-
-
-
-
 
 @media screen and (max-width: 375px){
 	.count{
@@ -394,8 +382,12 @@ footer .regular-checkbox:checked + label:after {
 	.count-i{
 		line-height: 26px;
 	}
-	.wrapper .singleBrand .detail{
-		/*height: 0.285rem;*/
+	.wrapper .singleBrand .detail .singleCost{
+		margin-top: 0.035rem;
+	}
+
+	footer .regular-checkbox:checked + label:after{
+		top: -11px;
 	}
 }
 
@@ -408,6 +400,10 @@ footer .regular-checkbox:checked + label:after {
 
 	.wrapper .singleBrand .detail p.subtitle{
 		height: 23px;
+	}
+
+	.wrapper .singleBrand .detail .singleCost{
+		margin-top: 0.03rem;
 	}
 
 	.wrapper .singleBrand .detail h3{

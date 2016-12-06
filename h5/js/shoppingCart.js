@@ -239,7 +239,7 @@ $(document).ready(function(){
 				cardids.push(cardid);
 			}
 		}
-		$(".done .cost").html("￥ "+ cost.toFixed(2));
+		$(".done .cost").html("总计:"+ '<span style="color: #c1af74">￥'+cost.toFixed(2)+'</span>');
 		brandList.cards = cardids;
 
 		return brandList;

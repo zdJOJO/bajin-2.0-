@@ -225,7 +225,7 @@ $(document).ready(function(){
 					}
 					for(var i=0,len=data.list.length;i<len;i++){
 						if(data.list[i].applyPrice == 0){//付款与否的状态确定
-							state = "免费";
+							state = "会员专享";
 						}else{
 							if(data.list[i].isPay==0){
 								state = "待付款";

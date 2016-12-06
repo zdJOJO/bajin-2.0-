@@ -91,12 +91,29 @@ $(function(){
 			}else {
 				districtStr = '-' + data.list[i].district;
 			}
-
 			if(data.list[i].isDefault==1){
-				item=$('<div class="ad_But clearfix" data-id="'+data.list[i].receiveId+'"><span class="user_But">'+data.list[i].receiverName+'</span><span class="phone_But">'+data.list[i].receiverPhone+'</span></div><div class="reg_But" data-id="'+data.list[i].receiveId+'">'+data.list[i].province+'-'+data.list[i].city+ districtStr +'<span style="padding: 0.05rem;">'+data.list[i].detilAddress+'</span>'+'</div><div class="fr clearfix" data-id="'+data.list[i].receiveId+'" data-name="'+data.list[i].receiverName+'" data-phone="'+data.list[i].receiverPhone+'" data-address="'+data.list[i].province+','+data.list[i].city+','+data.list[i].district+','+data.list[i].detilAddress+'"><div class="Check_But" data-id='+data.list[i].receiveId+'><img src="imgs/add_pic4.png"></div><div class="set_But" data-id='+data.list[i].receiveId+' style="color:#b7a66e">默认地址</div><div class="add_editor" data-id='+data.list[i].receiveId+'><img src="imgs/add_pic1.png"></div><div class="font_set" data-id='+data.list[i].receiveId+'>编辑</div><div class="add_delete" data-id='+data.list[i].receiveId+'><img src="imgs/add_pic2.png"></div><div class="font_del" data-id='+data.list[i].receiveId+'>删除</div></div>');
+				item=$('<div class="itemAddress"><div class="ad_But clearfix" data-id="'+data.list[i].receiveId+'">' +
+					'<span class="user_But">'+data.list[i].receiverName+'</span><span class="phone_But">'+data.list[i].receiverPhone+'</span></div>' +
+					'<div class="reg_But" data-id="'+data.list[i].receiveId+'">'+data.list[i].province+'-'+data.list[i].city+ districtStr +'<span style="padding: 0.05rem;">'+data.list[i].detilAddress+'</span>'+'</div>' +
+					'<div class="fr clearfix" data-id="'+data.list[i].receiveId+'" data-name="'+data.list[i].receiverName+'" data-phone="'+data.list[i].receiverPhone+'" data-address="'+data.list[i].province+','+data.list[i].city+','+data.list[i].district+','+data.list[i].detilAddress+'">' +
+					'<div class="Check_But" data-id='+data.list[i].receiveId+'><img src="imgs/address/choose.png"></div>' +
+					'<div class="set_But" data-id='+data.list[i].receiveId+' style="color:#b7a66e">默认地址</div>' +
+					'<div class="add_editor" data-id='+data.list[i].receiveId+'><img src="imgs/address/edit.png"></div>' +
+					'<div class="font_set" data-id='+data.list[i].receiveId+'>编辑</div>' +
+					'<div class="add_delete" data-id='+data.list[i].receiveId+'><img src="imgs/address/delete.png"></div>' +
+					'<div class="font_del" data-id='+data.list[i].receiveId+'>删除</div></div></div>');
 				Add.prepend(item);
 			}else{
-				item=$('<div class="ad_But clearfix" data-id="'+data.list[i].receiveId+'"><span class="user_But">'+data.list[i].receiverName+'</span><span class="phone_But">'+data.list[i].receiverPhone+'</span></div><div class="reg_But" data-id="'+data.list[i].receiveId+'">'+data.list[i].province+'-'+data.list[i].city+ districtStr +'<span style="padding: 0.05rem;">'+data.list[i].detilAddress+'</span>'+'</div><div class="fr clearfix" data-id="'+data.list[i].receiveId+'" data-name="'+data.list[i].receiverName+'" data-phone="'+data.list[i].receiverPhone+'" data-address="'+data.list[i].province+','+data.list[i].city+','+data.list[i].district+','+data.list[i].detilAddress+'"><div class="Check_But" data-id='+data.list[i].receiveId+'><img src="imgs/add_pic3.png"></div><div class="set_But" data-id='+data.list[i].receiveId+'>设为默认</div><div class="add_editor" data-id='+data.list[i].receiveId+'><img src="imgs/add_pic1.png"></div><div class="font_set" data-id='+data.list[i].receiveId+'>编辑</div><div class="add_delete" data-id='+data.list[i].receiveId+'><img src="imgs/add_pic2.png"></div><div class="font_del" data-id='+data.list[i].receiveId+'>删除</div></div>');
+				item=$('<div class="itemAddress"><div class="ad_But clearfix" data-id="'+data.list[i].receiveId+'">' +
+					'<span class="user_But">'+data.list[i].receiverName+'</span><span class="phone_But">'+data.list[i].receiverPhone+'</span></div>' +
+					'<div class="reg_But" data-id="'+data.list[i].receiveId+'">'+data.list[i].province+'-'+data.list[i].city+ districtStr +'<span style="padding: 0.05rem;">'+data.list[i].detilAddress+'</span>'+'</div>' +
+					'<div class="fr clearfix" data-id="'+data.list[i].receiveId+'" data-name="'+data.list[i].receiverName+'" data-phone="'+data.list[i].receiverPhone+'" data-address="'+data.list[i].province+','+data.list[i].city+','+data.list[i].district+','+data.list[i].detilAddress+'">' +
+					'<div class="Check_But" data-id='+data.list[i].receiveId+'><img src="imgs/address/no-choose.png"></div>' +
+					'<div class="set_But" data-id='+data.list[i].receiveId+'>设为默认</div>' +
+					'<div class="add_editor" data-id='+data.list[i].receiveId+'><img src="imgs/address/edit.png"></div>' +
+					'<div class="font_set" data-id='+data.list[i].receiveId+'>编辑</div>' +
+					'<div class="add_delete" data-id='+data.list[i].receiveId+'><img src="imgs/address/delete.png"></div>' +
+					'<div class="font_del" data-id='+data.list[i].receiveId+'>删除</div></div></div>');
 				Add.append(item);
 			}			
 		}
@@ -120,12 +137,12 @@ $(function(){
 
 
 		$(".Check_But,.set_But").click(function(){			//切换默认地址，接口还没写好
-			$(".Check_But").find("img").attr("src","imgs/add_pic3.png")
+			$(".Check_But").find("img").attr("src","imgs/address/no-choose.png")
 			$(".set_But").html("设为默认");
 			$(".set_But").css("color","#acacac");
 			var Set_id = $(this).siblings(".set_But").data("id");
 			var Check_id = $(this).data("id");
-	 		$(this).parent().children(".Check_But").find("img").attr("src","imgs/add_pic4.png");
+	 		$(this).parent().children(".Check_But").find("img").attr("src","imgs/address/choose.png");
 			$(this).parent().children(".set_But").html("默认地址");
 	 		$(this).parent().children(".set_But").css("color","#b7a66e");
 	 		//更新默认地址

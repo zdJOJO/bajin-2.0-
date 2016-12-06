@@ -183,7 +183,7 @@ a {
     text-decoration: none;
 }
 
-a:hover,.style-red {
+.style-red {
     color: #fff;
 }
 

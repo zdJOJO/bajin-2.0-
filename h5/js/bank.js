@@ -47,30 +47,38 @@ $(function(){
 				url:port+"/card/card?token="+token,
 				success:function(data){
 					var bankTypeStr = '';
+					var classStr = 'cardItem pu';
+					var picStr = 'imgs/bankList/pu-Card.png';
 					if(typeof(data) == "string"){
 						window.location.href = "login.html?his="+his;
 					}else{
-						for(var i=0;i<data.list.length;i++){
-							bankTypeStr = '中国工商银行信用卡';
-							if(data.list[i].bjke==1){
-								bankTypeStr = '中国工商银行白金卡';
-							}
-							if(data.list[i].ctkh==1){
-								bankTypeStr = '中国工商银行畅通卡';
-							}
-							var item=$('<div class="cardItem" data-bjke="'+data.list[i].bjke+'" data-cardNum="'+data.list[i].cardNumber+'" data-cardId="'+data.list[i].cardId+'" data-kabin="'+data.list[i].kabin+'" >' +
-								'<div class="card-logo" ><img src="imgs/bank.jpg"></div>' +
-								'<div class="card-info"><div class="card-name">'+bankTypeStr+'</div>' +
-								'<div class="card-tip">尾号'+data.list[i].cardNumber+'</div>' +
-								'<div class="card-r">&gt;</div></div></div>');
-							cardList.append(item);
-							if(data.list[i].bjke == 1){
-								isBJVip = true;
+						if(data.list.length > 0){
+							$('.addCard,.cardList').show().siblings('.noList').hide();
+							for(var i=0;i<data.list.length;i++){
+								bankTypeStr = '信用卡';
+								if(data.list[i].bjke==1){
+									bankTypeStr = '白金卡';
+									classStr = 'cardItem bj';
+									picStr = 'imgs/bankList/bj-Card.png';
+								}
+								if(data.list[i].ctkh==1){
+									bankTypeStr = '畅通卡';
+									classStr = 'cardItem ct';
+									picStr = 'imgs/bankList/ct-Card.png';
+								}
+								var item = $('<div class="'+classStr+'" data-bjke="'+data.list[i].bjke+'" data-cardNum="'+data.list[i].cardNumber+'" data-cardId="'+data.list[i].cardId+'" data-kabin="'+data.list[i].kabin+'" >' +
+									'<div class="left"><img src="'+picStr+'"></div><div class="bg"></div>' +
+									'<div class="right"><h2>中国工商银行</h2><p class="type">'+bankTypeStr+'</p>' +
+									'<p class="number"><span>**** **** **** </span>'+data.list[i].cardNumber+'</p></div></div>');
+
+								cardList.append(item);
+								if(data.list[i].bjke == 1){
+									isBJVip = true;
+								}
 							}
 						}
-						if($(".cardList").children().length == 0){
-							//alert("你还没有添加银行卡,请先添加银行卡，然后再操作！！");
-							cardList.append("<h2 class= 'alert_q'>你还没有添加银行卡</h2>");
+						if(data.list.length == 0){
+							$('.noList').show().siblings('.addCard').hide();
 						}else {
 							//长按 和 点击
 							var timeOutEvent = 0;
@@ -174,7 +182,7 @@ $(function(){
 						toIcbc(data);
 					}
 				},
-				error:function(data){
+				error:function(e){
 					window.location.href = "login.html?his="+his;
 				}
 

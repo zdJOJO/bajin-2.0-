@@ -8,15 +8,27 @@
 	<link rel="stylesheet" href="css/weiXin/jquery-weui.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bank.css">
-</head> 
-
+</head>
 <body>  
- 	<div class="addCard">
+ 	<!--<div class="addCard">-->
+		<!--<div class="wrap">-->
+			<!--<h2><a>请添加工行信用卡<span>+</span></a></h2>-->
+		<!--</div>-->
+	<!--</div>-->
+	<!--<div class="cardList"></div>-->
+
+	<div class="cardList" style="display: none"></div>
+	<div class="addCard" style="display: none">
 		<div class="wrap">
-			<h2><a>请添加工行信用卡<span>+</span></a></h2>
+			<h2><a><span></span>添加银行卡</a></h2>
 		</div>
 	</div>
-	<div class="cardList"></div>
+	<div class="noList">
+		<img src="imgs/bankList/none.png">
+		<h3>您还未绑定银行卡</h3>
+		<a class="addCard">立即绑定>></a>
+	</div>
+
 	<form id="infoFormSubmit" name="info" method="post" action="http://web.zj.icbc.com.cn/mobile/Pay.do?scene=pay"></form>
 	<form id="addFormButton"   method="post" action="http://web.zj.icbc.com.cn/mobile/Bjzx.do?scene=bjzx"></form>
 </body>

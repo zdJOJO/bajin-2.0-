@@ -203,7 +203,7 @@ $(document).ready(function(){
 					className: "color-warning",
 					onClick: function() {  //跳转 银行卡支付
 						//window.location.href = "payIFrame.html?cardid=" + cardid;
-						window.location.href = 'pay.html?cardid=' + cardid ;
+						window.location.href = 'pay.html?cardid=' + cardid;
 					}
 				},
 				{

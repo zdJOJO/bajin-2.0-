@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="css/swiper.min.css">
     <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/public/commentIn.css">
     <link rel="stylesheet" href="css/enrol.css">
     <script>var IS_WX_LOADED=0;</script>
     <script>
@@ -20,35 +21,36 @@
     </script>
 </head>
 <body>
-<div class="swiper-container">
-    <div class="swiper-wrapper"></div>
-    <div class="swiper-scrollbar"></div>
+<div class="mainBox">
+    <div class="swiper-container">
+        <div class="swiper-wrapper"></div>
+        <div class="swiper-scrollbar"></div>
+    </div>
+    <div class="main"></div>
+    <div id="comment">
+        <h3 class="cmtNUm">评论 0条</h3>
+        <div class="list" style="display: none"></div>
+        <span id="moreComts" style="display: none">查看更多 >></span>
+    </div>
 </div>
 
-
-<div class="main"></div>
-
+<footer class="nav">
+    <p id="doEnrol">
+        <button>报名</button>
+    </p>
+</footer>
 <div id="share-mask"><img src="imgs/shareImg.png"/></div>
+<div id="container" tabindex="0"></div>
 </body>
-<script src="js/zepto.js"></script>
 <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/public/public.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
 <script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
 <script type="text/javascript" src="js/plugin/dropload.min.js"></script>
-<script src="js/swiper.min.js"></script>
-<script src="js/loadwx.js"></script>
-
+<script type="text/javascript" src="js/loadwx.js"></script>
 <script type="text/javascript" src="js/public/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="js/public/sha1.js"></script>
 <script type="text/javascript" src="js/public/myWxApi.js"></script>
 
-<script src="js/enrol.js"></script>
-<script type="text/javascript">
-    function judgeContent() {
-        if($('#commentContent').val().length > 0){
-            $("#publishCmt").css('color','#000');
-        }else {
-            $("#publishCmt").css('color','#ccc');
-        }
-    }
-</script>
+<script type="text/javascript" src="js/enrol.js"></script>
 </html>

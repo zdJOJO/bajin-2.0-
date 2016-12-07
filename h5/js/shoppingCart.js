@@ -170,7 +170,7 @@ $(document).ready(function(){
 
 
 	//编辑按钮切换
-	$("header > .edit_all").bind("click",function(){
+	$("header .edit_all").bind("click",function(){
 		$(".detail").unbind('click');
 		$(".edit_all").css("display","none");
 		$(".edit_").css("display","block");
@@ -222,7 +222,8 @@ $(document).ready(function(){
 
 	// 购物车 商品选择 选择之后触发的事件
 	function costAll(){
-		var brandList = {
+		var checkNum = 0;  //被勾选的数量，用于底部小括号的数字
+		var brandObj = {
 			cards: [],
 			numAll: 0
 		};
@@ -233,16 +234,24 @@ $(document).ready(function(){
 		for(var i=0;i<inpuJO.length;i++){
 			if( $(inpuJO[i]).attr('value') == 'true'){
 				number = $(inpuJO[i]).data('num');
-				brandList.numAll += number;
+				brandObj.numAll += number;
 				cost += $(inpuJO[i]).data("cost") * number;
 				var cardid = $(inpuJO[i]).data("cardid");
 				cardids.push(cardid);
+				checkNum++;
 			}
 		}
-		$(".done .cost").html("总计:"+ '<span style="color: #c1af74">￥'+cost.toFixed(2)+'</span>');
-		brandList.cards = cardids;
+		$(".done").find('.cost').html("总计:"+ '<span style="color: #c1af74">￥'+cost.toFixed(2)+'</span>');
 
-		return brandList;
+		if($('.done').is(':hidden')){
+			$(".delete_all").children('span').html('删除 ('+checkNum+')');
+		}else  {
+			$(".done").find('.brandNum p').html('结算 ('+checkNum+')');
+		}
+
+		brandObj.cards = cardids;
+
+		return brandObj;
 	}
 
 
@@ -262,7 +271,7 @@ $(document).ready(function(){
 			if(tmpArray.length > 0){
 				window.location.href = "fillInOrder.html?isShoppingCart=true&cards&obj=" + escape(JSON.stringify(costAll()));
 			}else {
-				alert('请选择商品');
+				$.alert('请选择商品');
 			}
 		}
 

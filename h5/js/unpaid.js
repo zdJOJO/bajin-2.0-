@@ -5,21 +5,6 @@ $(document).ready(function(){
 	//获取token
 	var token = "";
 	//获取存在于cookie中的token值
-	function getCookie(c_name)
-	{
-	if (document.cookie.length>0)
-	  {
-	  c_start=document.cookie.indexOf(c_name + "=")
-	  if (c_start!=-1)
-	    { 
-	    c_start=c_start + c_name.length+1 
-	    c_end=document.cookie.indexOf(";",c_start)
-	    if (c_end==-1) c_end=document.cookie.length
-	    return unescape(document.cookie.substring(c_start,c_end))
-	    } 
-	  }
-	return undefined;
-	}
 	token = getCookie("token");//便于本地测试
 	//获取页面的名称
 	var hrefStr = window.location.search;
@@ -29,7 +14,6 @@ $(document).ready(function(){
 
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];
-
 
 
 	//给url 设置tab标志，方便返回到哪里去
@@ -48,9 +32,8 @@ $(document).ready(function(){
 	//查询物流详情的 物流订单号
 	var  expressId = 0;
 
-	
 	//请求微信支付所需的参数
-	var ip = String(returnCitySN["cip"]);;
+	var ip = String(returnCitySN["cip"]);
 	var applyid = '';
 
 	var appid =  '';
@@ -62,50 +45,91 @@ $(document).ready(function(){
 	var stringSignTemp = '';
 	var sign = '';
 
-	
 
 	//获取页面数据
+	// 备注:orderState 订单状态，0:全部,1：待付款，2：已付款，3：已发货，4：已退款，5：交易关闭，6：已收货
 	$.ajax({
 		type:"get",
 		url:port+"/card/order/v2/"+cardid+"?token="+token,
 		success:function(data){
-
 			expressId = data.orderModel.expressId ;
-
 			var str= "";
-			var num = 1;
-
 			if(!data){
 				window.location.href = 'index.html'
 			}
-
-			for(var i=0;i<data.detailOrderModels.length;i++){
-				str += '<div class="goodBox" data-goodId="'+ data.detailOrderModels[i].goodsId +'"><img src="'+ data.detailOrderModels[i].hotPic+'"/><div>' +
-					'<div class="title">'+data.detailOrderModels[i].goodsTitle+'</div>' +
-					'<div class="subtitle">'+data.detailOrderModels[i].skuGague+'</div>' +
-					'<div class="cost"><p>￥&nbsp;'+formatePrice(data.detailOrderModels[i].skuPrice.toFixed(2))+'</p>' +
-					'<p>×'+ data.detailOrderModels[i].count+'</p></div></div></div>';
+			var orderState = '';
+			if(data.orderModel.orderState==1){
+				orderState = '待付款';
+			}else if(data.orderModel.orderState==2){
+				orderState = '已付款';
+			}else if(data.orderModel.orderState==3){
+				orderState = '已发货';
+			}else if(data.orderModel.orderState==4){
+				orderState = '已退款';
+			}else if(data.orderModel.orderState==5){
+				orderState = '交易关闭';
+			}else if(data.orderModel.orderState==6){
+				orderState = '已收货';
+			}else {
+				orderState = '全部';
 			}
+			var orderInfoStr = '<h3>订单信息</h3>' +
+				'<ul><li><span>订单编号:</span><span>'+data.orderModel.orderId+'</span></li>' +
+				'<li><span>下单时间:</span><span>'+new Date(data.orderModel.createTime*1000).Formate()+'</span></li>' +
+				'<li><span>订单状态:</span><i id="cancelOrder">取消订单</i><span>'+orderState+'</span></li></ul>';
+			$('#info').children('.orderInfo').html(orderInfoStr);
+			$("#cancelOrder").bind("click",function(){
+				cancelOrderFn($("#cancelOrder"));
+			});
+
+			var goodInfoStr = '';
+			for(var i=0;i<data.detailOrderModels.length;i++){
+				goodInfoStr += '<div class="itemGood" data-goodId="'+ data.detailOrderModels[i].goodsId +'">' +
+					'<img src="'+data.detailOrderModels[i].hotPic+'">' +
+					'<div><h4>'+data.detailOrderModels[i].goodsTitle+'</h4><p>'+data.detailOrderModels[i].skuGague+'</p>' +
+					'<p><span class="price">￥'+data.detailOrderModels[i].skuPrice.toFixed(2)+'</span>' +
+					'<span class="num">×'+ data.detailOrderModels[i].count+'</span></p></div></div><div></div>';
+			}
+			var tellStr = '<div class="tell"><a href="tel:'+111+'">联系白金尊享</a><span><img src="imgs/enjoy/right.png" style="width: 0.02rem"></span></div>';
+			$('#info').children('.goodInfo').append(goodInfoStr).append(tellStr);
 
 			if(window.location.href.indexOf('brandDetail') > 0 ){
 				goodId = data.detailOrderModels[0].goodsId;
 			}
-			
-			//插入商品信息
-			$(".good").append(str);
+
 			//总价格
-		    $(".cost_unpaid span").html('总额：  ￥ ' + formatePrice(data.orderModel.orderCount));
+		    $('#info').find('.totalPay').html('￥'+data.orderModel.orderCount);
+			$('#info').find('.realPay').html('实付款: ￥'+data.orderModel.orderCount);
+			
 			//保存id到删除按钮
-			$(".f_1").attr("data-receiveid",data.orderModel.orderId);
+			$("#cancelOrder").attr("data-receiveid",data.orderModel.orderId);
 			$(".f_2").attr("data-cardid",data.orderModel.orderId);
+			
+			//备注
+			$('#info').find('.remarkCnt').html(data.orderModel.orderRemark || '暂无备注');
+			$('#info').find('.remark').click(function () {
+				if($(this).hasClass('active')){
+					$(this).removeClass('active');
+					$('#info').find('.remarkCnt').show();
+				}else {
+					$(this).addClass('active');
+					$('#info').find('.remarkCnt').hide();
+				}
+
+			});
+			
 			//这里需要拿到收货人的receiveId再来请求收货地址以及相关的东西
 			$.ajax({
 				type:"get",
 				url:port+"/card/receiver/"+data.orderModel.receiveId+"?token="+token,
 				success:function(data){
-					//插入收货人的地址和收货人的姓名
-					$(".person").html(data.receiverName+"<span>收</span>");
-					$(".adr").html(data.province+data.city+data.district+"&nbsp;"+data.detilAddress)
+					var addressStr = '<h3>配送信息</h3><ul>' +
+						'<li><span>收货人:</span><span>'+data.receiverName+'</span></li>' +
+						'<li><span>联系电话:</span><span>'+data.receiverPhone+'</span></li>' +
+						'<li class="adderDetail"><span>收货地址:</span>' +
+						'<span>'+data.province+data.city+data.district+data.detilAddress+'</span>' +
+						'</li></ul>';
+					$('#info').children('.addressInfo').html(addressStr);
 				},
 				error:function(data){
 					//todo
@@ -113,22 +137,16 @@ $(document).ready(function(){
 			});
 
 			//点击跳转到相应的商品页面
-			$('.goodBox').click(function () {
+			$('.itemGood').click(function () {
 				window.location.href = 'brandDetail.html?id=' + $(this).attr('data-goodId')
 			});
 
 			applyid = data.orderModel.orderId;   //微信请求参数时候用到
-
-			//插入订单编号
-			$(".time p:nth-child(1) span").html(data.orderModel.orderId);
-			//插入时间
-			$(".time p.createTime span:nth-child(1)").html(new Date(data.orderModel.createTime*1000).Formate().split(" ")[0]);
 		},
 		error:function(data){
 			//todo
 		}
 	});
-
 
 
 	var isWxParam = true;   //为true时候表示 参数请求成功，可以唤起微信支付。
@@ -158,13 +176,9 @@ $(document).ready(function(){
 	};
 
 
-
-
-
 	//取消订单事件操作
-	//http://121.196.232.233/card/order/{id}
-	$(".f_1").bind("click",function(){
-		var f_1Jo = $(".f_1");
+	function cancelOrderFn($btn) {
+		var f_1Jo = $btn;
 		$.confirm("确定取消该订单？", function() {
 			$.ajax({
 				type:"DELETE",
@@ -189,7 +203,7 @@ $(document).ready(function(){
 		}, function() {
 			//点击取消后的回调函数
 		});
-	});
+	};
 
 
 	//去支付
@@ -256,7 +270,6 @@ $(document).ready(function(){
 	});
 
 
-
 	//已付款  订单的 详情页面
 	if(window.location.href.indexOf('havePostApo') > 0){
 		$('.logistical').show();
@@ -266,8 +279,6 @@ $(document).ready(function(){
 		});
 	}
 });
-
-
 
 
 //格式化时间，在date原形上边添加方法

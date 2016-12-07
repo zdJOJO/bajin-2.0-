@@ -270,6 +270,7 @@ a{
 	}
 }
 
+
 @media screen and (max-width: 320px){
 	#info>.goodInfo>.itemGood p {
 		font-size: 0.8em;

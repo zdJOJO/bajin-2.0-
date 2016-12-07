@@ -211,14 +211,12 @@ footer div.select_all_ span{
 }
 
 footer div.delete_all{
-	width: auto;
+	width: 0.26rem;
 	height: 0.12rem;
 	line-height: 0.12rem;
-	position: absolute;
-	left: 277px;
-	right: 0;
 	color: #f0f0f0;
 	background-color: #c1af74;
+	float: right;
 }
 footer div.delete_all img{
 	width: 0.066rem;
@@ -229,34 +227,34 @@ footer div.delete_all img{
 
 /*加减操作按钮*/
 .count{
-	width: 0.25rem;
-	height: 0.075rem;
-
-	font-size: 12px;
+	width: 0.3rem;
+	height: 0.06rem;
+	font-size: 0.8em;
 	text-align: center;
 	float: right;
-	/*border: 1px solid #333333;*/
-	margin-top: 8px;
-	background: rgb(242, 242, 242);
+	margin-top: 0.05rem;
 }
 .count-i{
 	display: block;
 	float: left;
-	padding: 0 0.01rem;
-	width: 25%;
+	width: 0.14rem;
 	height: 100%;
-	line-height: 30px;
+	line-height: 0.06rem;
 	font-size: 1.5em;
+	color: #323232;
+	background: #f5f5f5;
 }
 .add{
-    background: #D5D5D5;
-    color: #fff;
+	width: 0.06rem;
 	font-size: 2em;
+	float: right;
+	margin-left: 0.02rem;
 }
 .reduce{
-    background: #D5D5D5;
-    color: #fff;
+	width: 0.06rem;
 	font-size: 2em;
+	float: left;
+	margin-right: 0.02rem;
 }
 
 .singleBrand .count{
@@ -355,7 +353,7 @@ label {
 }
 
 footer .regular-checkbox + label{
-	margin: 0.035rem 0.02rem;
+	margin: 0.03rem 0.02rem;
 }
 footer .regular-checkbox:checked + label:after {
 	top: -14px;
@@ -367,21 +365,12 @@ footer .regular-checkbox:checked + label:after {
 /*&********************  ↑  修改购物车 ↑   ****************************/
 
 @media screen and (max-width: 375px){
-	.count{
-		margin-top: 5px;
-	}
-	.wrapper .singleBrand .detail{
-		/*height: 0.275rem;*/
-	}
+	/*.count{*/
+		/*margin-top: 5px;*/
+	/*}*/
 }
 
 @media screen and (max-width: 360px){
-	.count{
-		margin-top: 0;
-	}
-	.count-i{
-		line-height: 26px;
-	}
 	.wrapper .singleBrand .detail .singleCost{
 		margin-top: 0.035rem;
 	}
@@ -392,7 +381,9 @@ footer .regular-checkbox:checked + label:after {
 }
 
 @media screen and (max-width: 320px){
-
+	.count{
+		margin-top: 0.03rem;
+	}
 	.count-i{
 		line-height: 21px;
 		font-size: 1.2em

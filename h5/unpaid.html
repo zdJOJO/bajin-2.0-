@@ -2,62 +2,52 @@
 <html>
 <head>
 <title>待付款</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
     <meta name="screen-orientation"content="portrait">
     <meta name="x5-orientation"content="portrait">
-
+    <meta name="format-detection" content="telephone=no" />
     <link rel="stylesheet" href="css/weiXin/weui.min.css">
     <link rel="stylesheet" href="css/weiXin/jquery-weui.css">
-
     <link  rel="stylesheet" href="css/index.css">
-    <!--<link  rel="stylesheet" type="text/css" href="css/ordersDetail.css">-->
     <link  rel="stylesheet" type="text/css" href="css/ordersDetail.css">
-    <script>
-        var iWidth=document.documentElement.clientWidth;
-        document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
-    </script>
 </head>
 <body>
-<div class="wrapper">
-  <div class="good">
-  </div>
-  <div class="address">
-    <img src="imgs/detailAddress.png"/>
-    <p class="adr"></p>
-    <p class="person">
-        <span></span>
-    </p>
-  </div>
-  <div class="time unpaid_margin_bottom">
-     <p class="num">订单编号&nbsp;:&nbsp;<span></span></p>
-    <p class="createTime">创建时间&nbsp;:&nbsp;<span></span>
-    <!-- <span>10天后过期</span> -->
-    </p>
-  </div>
-
-  <div class="logistical" style="display: none">
-      <div class="detailAddress">
-          <img src="imgs/logistical.png"/>
-          <a style="color: #B2B2B2" href="#">查看物流信息</a>
-      </div>
-  </div>
-
-
+<div id="info" class="wrapper">
+    <div class="orderInfo"></div>
+    <div class="addressInfo"></div>
+    <div class="goodInfo">
+        <h3>商品详情</h3>
+    </div>
+    <div class="otherInfo">
+        <h3 class="remark active">
+            <span>备注</span>
+            <span><img src="imgs/enjoy/right.png" style="width: 0.02rem"></span>
+        </h3>
+        <p class="remarkCnt" style="display: none">
+            反对思考的是；攻击力的看法根据劳动法几个领导分管领导
+        </p>
+        <h3>
+            <span>臻品总额:</span>
+            <span class="totalPay">￥0.00</span>
+        </h3>
+        <div style="margin-bottom: 0.13rem;">
+            <span class="realPay">实付款: ￥0.00</span>
+        </div>
+    </div>
 </div>
-<div class="cost_unpaid">
-    <span></span>
-</div>
-
 <footer>
   <p class="f_2">去付款</p>
-  <p class="f_1">取消订单</p>
 </footer>
 <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/public/public.js"></script>
 <script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
 <script type="text/javascript" src="js/public/md5.js"></script>
-<script src="js/zepto.js"></script>
-<script src="js/unpaid.js"></script>
-<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+<script type="text/javascript" src="js/unpaid.js"></script>
+<script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+<script>
+    var iWidth=document.documentElement.clientWidth;
+    document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+</script>
 </body>
 </html>

@@ -5,7 +5,6 @@ body{
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     position: fixed;
-    font-size: 16px;
 }
 
 body>.mainBox{

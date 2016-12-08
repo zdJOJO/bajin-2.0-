@@ -31,9 +31,12 @@ $(document).ready(function(){
 			$('#vip').children('img').attr('src',data.headPic);
 		}
 		$("#vip").click(function(){
-			$(".showDiv2").show();
-			$(".showDiv3").show();
-			$(".showDiv1").css("position","fixed");
+
+			$(".showDiv3").show(1,function () {
+				$(".showDiv2").addClass('showDiv2In').removeClass('showDiv2Out');
+			});
+
+
 			//侧边栏登录
 			if(token){
 				//当token过期的时候会出错，code：666,这个时候需要
@@ -88,11 +91,9 @@ $(document).ready(function(){
 		});
 	}
 	$(".showDiv3").click(function(){
-		$(".showDiv2").hide();
-		$(".showDiv3").hide();
-		$(".showDiv1").css("position","static")
-		// $("body").css("overflow", "visible")
-
+		$(".showDiv3").hide(1,function () {
+			$(".showDiv2").addClass('showDiv2Out').removeClass('showDiv2In');
+		});
 	});
 	turnUrl($("#QRCode"),"qrCode.html");
 	turnUrl($("#fav_But"),"favorites.html");

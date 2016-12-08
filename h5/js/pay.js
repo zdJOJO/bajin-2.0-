@@ -61,11 +61,7 @@ $(function(){
 									'<div class="left"><img src="'+picStr+'"></div><div class="bg"></div>' +
 									'<div class="right"><h2>中国工商银行</h2><p class="type">'+bankTypeStr+'</p>' +
 									'<p class="number"><span>**** **** **** </span>'+data.list[i].cardNumber+'</p></div></div>');
-
 								cardList.append(item);
-								if(data.list[i].bjke == 1){
-									isBJVip = true;
-								}
 							}
 						}
 						if($(".cardList").children().length == 0){
@@ -118,10 +114,6 @@ $(function(){
 									}
 								}
 
-								console.log(window.location.href)
-								console.log(window.location.search.split("=")[0])
-								console.log(url);
-
 								$.ajax({
 									type: "GET",
 									dataType: "text",
@@ -134,10 +126,11 @@ $(function(){
 												return
 											}
 										}
-										var str='<input type="hidden" id="merSignMsg" name="merSignMsg" value="'+res+'"/> '+
-											'<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/> ';
-										infoForm.innerHTML = str;
-										infoForm.submit();
+										console.log(res)
+										// var str='<input type="hidden" id="merSignMsg" name="merSignMsg" value="'+res+'"/> '+
+										// 	'<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/> ';
+										// infoForm.innerHTML = str;
+										// infoForm.submit();
 									},
 									error: function(){
 										//请求出错处理

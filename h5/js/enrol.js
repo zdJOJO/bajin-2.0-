@@ -335,10 +335,10 @@ $(function(){
             success: function (result) {
                 if(result.list.length > 0) {
                     $("#comment").find('.cmtNUm').html('评论 ' + result.rowCount + '条');
+                    var headPicStr = result.list[0].user.headPic || './imgs/headPic_default.png';
                     var customerServeStr = result.list[0].commentModelList.length > 0 ?
-                        '<div class="customerService"><h3>白金尊享客服回复</h3><span class="cmt">'+result.list[0].commentModelList[0].commentContent +'</span></div>'
-                        : '';
-                    var commentStr = '<img src="'+ result.list[0].user.headPic +'">' +
+                        '<div class="customerService"><h3>白金尊享客服回复</h3><span class="cmt">'+result.list[0].commentModelList[0].commentContent +'</span></div>' : '';
+                    var commentStr = '<img src="'+ headPicStr +'">' +
                         '<div class="customerCmt"><span>'+ result.list[0].user.userName +'</span><p>' + result.list[0].commentContent + '</p></div>' + customerServeStr;
                     $('#comment').find('.list').show().html(commentStr);
                 }else {

@@ -308,25 +308,7 @@ footer div p{
 	margin-top: 10px;
 	text-align: center;
 }
-/*.mask_lhq p:last-child{*/
-	/*color: #fff;*/
-	/*font-size: 14px;*/
-	/*margin-top: 8px;*/
-	/*width: 0.4rem;*/
-	/*margin-left: 0.05rem;*/
-	/*white-space: nowrap;*/
-	/*overflow: hidden;*/
-	/*text-overflow: ellipsis;*/
-/*}*/
-/*.mask_lq p:last-child{*/
-	/*height: 57%;*/
-	/*color: #666;*/
-	/*font-size: 14px;*/
-	/*margin: 8px 0 0 18px;*/
-	/*word-break: break-all;*/
-	/*overflow: hidden;*/
-	/*text-overflow: ellipsis;*/
-/*}*/
+
 .mask_lq{
 	position: relative;
 	z-index: 999;
@@ -424,8 +406,6 @@ section.items1>div:last-child .mask_lq>.tit_bq1:last-child{
 
 
 
-
-
 .mask_lq img{
 	display: none;
 }
@@ -494,6 +474,8 @@ section.items1>div:last-child .mask_lq>.tit_bq1:last-child{
 	position:fixed;
 	z-index: 3000;
 	top: 0;
+	left: -0.65rem;
+	overflow-y: hidden;
 }
 
 .pic{
@@ -600,10 +582,7 @@ section.items1>div:last-child .mask_lq>.tit_bq1:last-child{
 	margin-left: 0.06rem;
 	margin-right: 0.03rem;
 }
-.showDiv2{
-	display: none;
-	overflow-y: hidden;
-}
+
 .showDiv3{
 	height:100%;
 	width: 100%;
@@ -730,10 +709,72 @@ section.items1>div:last-child .mask_lq>.tit_bq1:last-child{
 }
 
 
+/*******动画****/
+.showDiv2.showDiv2In{
+	display: block;
+	left: 0;
+	animation:showDiv2In 0.5s;
+	-moz-animation:showDiv2In 0.5s; /* Firefox */
+	-webkit-animation:showDiv2In 0.5s; /* Safari and Chrome */
+	-o-animation:showDiv2In 0.5s; /* Opera */
+}
+
+.showDiv2.showDiv2Out{
+	left: -0.65rem;
+	animation:showDiv2Out 0.5s;
+	-moz-animation:showDiv2Out 0.5s; /* Firefox */
+	-webkit-animation:showDiv2Out 0.5s; /* Safari and Chrome */
+	-o-animation:showDiv2Out 0.5s; /* Opera */
+}
+
+@keyframes showDiv2In
+{
+	0%   {left: -0.65rem;}
+	100% {left: 0;}
+}
+
+@-moz-keyframes showDiv2In /* Firefox */
+{
+	0%   {left: -0.65rem;}
+	100% {left: 0;}
+}
+
+@-webkit-keyframes showDiv2In /* Safari 和 Chrome */
+{
+	0%   {left: -0.65rem;}
+	100% {left: 0;}
+}
+
+@-o-keyframes showDiv2In /* Opera */
+{
+	0%   {left: -0.65rem;}
+	100% {left: 0;}
+}
 
 
+@keyframes showDiv2Out
+{
+	0%   {left: 0;}
+	100% {left: -0.65rem;}
+}
 
+@-moz-keyframes showDiv2Out /* Firefox */
+{
+	0%   {left: 0;}
+	100% {left: -0.65rem;}
+}
 
+@-webkit-keyframes showDiv2Out /* Safari 和 Chrome */
+{
+	0%   {left: 0;}
+	100% {left: -0.65rem;}
+}
+
+@-o-keyframes showDiv2Out /* Opera */
+{
+	0%   {left: 0;}
+	100% {left: -0.65rem;}
+}
 
 
 

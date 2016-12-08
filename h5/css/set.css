@@ -107,12 +107,14 @@ select#setAgx{
 	margin-left: -0.15rem;
 	padding: 0;
 }
-.wrap div:last-child{
-	border-bottom: none;
-}
 .wrap div input:disabled{
 	color:#888;
 }
 .wrap div input#setAddress{
 	background-color: #fff;
+}
+
+#setAddress{
+	width: 0.6rem;
+	text-overflow: ellipsis;
 }

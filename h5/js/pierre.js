@@ -182,8 +182,6 @@ $(document).ready(function(){
 						hitsOnFn(token,5,1,$(this).attr('data-mallid'));
 						window.location.href = "mall.html?id="+$(this).data("mallid");
 					});
-
-					lessAll($(".singleBrand_q .detail_q > p"),25);
 				}else {
 					// 锁定
 					dropload_brand.lock();

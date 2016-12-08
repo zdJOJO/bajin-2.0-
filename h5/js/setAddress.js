@@ -84,7 +84,7 @@ $(function(){
 			$("#add").html(str);
 		}
 		for(var i=0,len=data.list.length;i<len;i++) {
-			var item;
+			var item = '';
 			var districtStr = '';
 			if(!data.list[i].district){
 				districtStr = '';
@@ -92,7 +92,7 @@ $(function(){
 				districtStr = '-' + data.list[i].district;
 			}
 			if(data.list[i].isDefault==1){
-				item=$('<div class="itemAddress"><div class="ad_But clearfix" data-id="'+data.list[i].receiveId+'">' +
+				item='<div class="itemAddress"><div class="ad_But clearfix" data-id="'+data.list[i].receiveId+'">' +
 					'<span class="user_But">'+data.list[i].receiverName+'</span><span class="phone_But">'+data.list[i].receiverPhone+'</span></div>' +
 					'<div class="reg_But" data-id="'+data.list[i].receiveId+'">'+data.list[i].province+'-'+data.list[i].city+ districtStr +'<span style="padding: 0.05rem;">'+data.list[i].detilAddress+'</span>'+'</div>' +
 					'<div class="fr clearfix" data-id="'+data.list[i].receiveId+'" data-name="'+data.list[i].receiverName+'" data-phone="'+data.list[i].receiverPhone+'" data-address="'+data.list[i].province+','+data.list[i].city+','+data.list[i].district+','+data.list[i].detilAddress+'">' +
@@ -101,10 +101,10 @@ $(function(){
 					'<div class="add_editor" data-id='+data.list[i].receiveId+'><img src="imgs/address/edit.png"></div>' +
 					'<div class="font_set" data-id='+data.list[i].receiveId+'>编辑</div>' +
 					'<div class="add_delete" data-id='+data.list[i].receiveId+'><img src="imgs/address/delete.png"></div>' +
-					'<div class="font_del" data-id='+data.list[i].receiveId+'>删除</div></div></div>');
+					'<div class="font_del" data-id='+data.list[i].receiveId+'>删除</div></div></div>';
 				Add.prepend(item);
 			}else{
-				item=$('<div class="itemAddress"><div class="ad_But clearfix" data-id="'+data.list[i].receiveId+'">' +
+				item +='<div class="itemAddress"><div class="ad_But clearfix" data-id="'+data.list[i].receiveId+'">' +
 					'<span class="user_But">'+data.list[i].receiverName+'</span><span class="phone_But">'+data.list[i].receiverPhone+'</span></div>' +
 					'<div class="reg_But" data-id="'+data.list[i].receiveId+'">'+data.list[i].province+'-'+data.list[i].city+ districtStr +'<span style="padding: 0.05rem;">'+data.list[i].detilAddress+'</span>'+'</div>' +
 					'<div class="fr clearfix" data-id="'+data.list[i].receiveId+'" data-name="'+data.list[i].receiverName+'" data-phone="'+data.list[i].receiverPhone+'" data-address="'+data.list[i].province+','+data.list[i].city+','+data.list[i].district+','+data.list[i].detilAddress+'">' +
@@ -113,7 +113,7 @@ $(function(){
 					'<div class="add_editor" data-id='+data.list[i].receiveId+'><img src="imgs/address/edit.png"></div>' +
 					'<div class="font_set" data-id='+data.list[i].receiveId+'>编辑</div>' +
 					'<div class="add_delete" data-id='+data.list[i].receiveId+'><img src="imgs/address/delete.png"></div>' +
-					'<div class="font_del" data-id='+data.list[i].receiveId+'>删除</div></div></div>');
+					'<div class="font_del" data-id='+data.list[i].receiveId+'>删除</div></div></div>';
 				Add.append(item);
 			}			
 		}
@@ -121,9 +121,9 @@ $(function(){
 
 		//选择地址跳转
 		$(".reg_But,.ad_But").bind("click",function(){
-			obj.receiveId = $(this).data("id");
+			obj.receiveId = $(this).attr("data-id");
 			if(isPersonNalInfo > 0){
-				return;
+				window.location.href="editAddress.html?fromePersonNalInfo&id="+$(this).data("id");
 			}else {
 				if(window.location.search.indexOf("isShoppingCart=false") > 0){
 					window.location.href = 'fillInOrder.html?isShoppingCart=false'+'&goodsId='+obj.goodsId+'&skuId='+obj.skuId+'&num='+obj.num+'&receiveId='+obj.receiveId;
@@ -136,7 +136,7 @@ $(function(){
 		});
 
 
-		$(".Check_But,.set_But").click(function(){			//切换默认地址，接口还没写好
+		$(".Check_But,.set_But").click(function(){
 			$(".Check_But").find("img").attr("src","imgs/address/no-choose.png")
 			$(".set_But").html("设为默认");
 			$(".set_But").css("color","#acacac");
@@ -152,7 +152,6 @@ $(function(){
 	 		$.ajax({
 	 			type: "put",
 	 			url: port+"/card/receiver/"+receiverid+"?token="+token,
-	 			dataType: "str",
 	 			contentType: "application/json",
 	 			async:true,
 	 			data:JSON.stringify({
@@ -167,9 +166,9 @@ $(function(){
 					isDefault: 1
 	 			}),
 	 			success:function(data){
-					//todo
 					if(isPersonNalInfo > 0){
-						window.location.href = "set.html?";
+						//window.location.href = "set.html?";
+						return
 					}
 					if(window.location.href.indexOf('fromeGift') > 0){
 						//window.location.href = "birthdayGift.html";
@@ -177,13 +176,7 @@ $(function(){
 					}
 	 			},
 	 			error:function(data){
-					if(isPersonNalInfo > 0){
-						window.location.href = "set.html?";
-					}
-					if(window.location.href.indexOf('fromeGift') > 0){
-						//window.location.href = "birthdayGift.html";
-						window.location.href = "birthdayGift.html?token=" +  token + "&status=0&receiveId="+receiverid;
-					}
+					//todo
 	 			}
 	 		});
 

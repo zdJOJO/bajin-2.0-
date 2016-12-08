@@ -1,29 +1,9 @@
 
 $(function(){
-	var token = "";
-	//获取存在于cookie中的token值
-	function getCookie(c_name)
-	{
-		if (document.cookie.length>0)
-		{
-			c_start=document.cookie.indexOf(c_name + "=")
-			if (c_start!=-1)
-			{
-				c_start=c_start + c_name.length+1
-				c_end=document.cookie.indexOf(";",c_start)
-				if (c_end==-1) c_end=document.cookie.length
-				return unescape(document.cookie.substring(c_start,c_end))
-			}
-		}
-		return undefined;
-	}
-	token = getCookie("token");
+	var token = getCookie("token");
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];
-
-
-	$.toast.prototype.defaults.duration = 1300;
-
+	$.toast.prototype.defaults.duration = 1000;
 	$.ajax({
 		type:"GET",
 		url:port+"/card/user?token="+token,
@@ -123,11 +103,6 @@ $(function(){
 
 
 
-	$(".btn").bind("click",function(){
-		window.location.href = "index.html";
-	});
-
-	//尼玛的，set竟然也要加载默认地址，我还要把所有的地址加载出来，然后筛选出来默认的地址
 	var str = '';
 	$.ajax({
 		type:"get",
@@ -142,9 +117,9 @@ $(function(){
 				for(var i=0,len = data.list.length;i<len;i++){
 					if(data.list[i].isDefault == 1){
 						if(data.list[i].province=="北京市"||data.list[i].province=="上海市"||data.list[i].province=="重庆市"||data.list[i].province=="天津市"){
-							str = data.list[i].province + "-" + data.list[i].city;
+							str = data.list[i].province + "-" + data.list[i].city+'-'+data.list[i].detilAddress;
 						}else{
-							str = data.list[i].province+"-"+data.list[i].city+"-"+data.list[i].district;
+							str = data.list[i].province+"-"+data.list[i].city+"-"+data.list[i].district+'-'+data.list[i].detilAddress;
 						}
 						$("#setAddress").val(str);
 					}

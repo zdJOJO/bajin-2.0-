@@ -90,4 +90,16 @@ $(function(){
 			alert("请输入正确的手机号码！！");
 		}
 	});
+
+	$("#addressDetail").each(function(){
+		this.style.height=this.scrollHeight+'px';
+	});
+	$("#addressDetail").bind({
+		input:function(){
+			this.style.height=this.scrollHeight + 'px';
+		},
+		propertychange:function(){
+			this.style.height=this.scrollHeight + 'px';
+		}
+	});
 })

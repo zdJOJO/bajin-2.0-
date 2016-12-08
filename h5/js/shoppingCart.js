@@ -1,34 +1,10 @@
 $(document).ready(function(){
 	//获取token
-	var token = "";
-	//获取存在于cookie中的token值
-	function getCookie(c_name)
-	{
-		if (document.cookie.length>0)
-		{
-			c_start=document.cookie.indexOf(c_name + "=")
-			if (c_start!=-1)
-			{
-				c_start=c_start + c_name.length+1
-				c_end=document.cookie.indexOf(";",c_start)
-				if (c_end==-1) c_end=document.cookie.length
-				return unescape(document.cookie.substring(c_start,c_end))
-			}
-		}
-		return undefined;
-	}
-	// token = getCookie("token") || "527224cd-4e00-4145-aadf-5e25115087f4";//便于本地测试
-	token = getCookie("token");
+	var token = getCookie("token");
 	//获取页面的名称
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];
-
-
-
-
 	var inpuJO = {};
-
-
 	//获取购物车的商品
 	function getShoppingCart(page) {
 		if(token != undefined){
@@ -111,10 +87,12 @@ $(document).ready(function(){
 							if(page == 1){
 								$(".dropload-down").css("height","0");
 							}
-							var emptyPage = $('<center><img src="imgs/shoppingCart.png"/><h2>你的购物车空空如也</h2><p>快去逛逛吧</p><p class="turnPage">再去逛逛</p></center>');
+							var emptyPage = '<center><img class="shopping" src="imgs/shoppingCar.png" />' +
+								'<h3>您的购物车空空如也</h3><a class="turnPage">再去逛逛吧>></a></center>';
 							$(".content").append(emptyPage);
+							$('header,footer').hide();
 							$(".content .turnPage").click(function(){
-								window.location.href = "pierre.html";
+								window.location.href = "pierre.html?good";
 							});
 						}
 					}

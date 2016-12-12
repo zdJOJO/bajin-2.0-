@@ -2,24 +2,7 @@
  * Created by Administrator on 2016/7/24.
  */
 //获取token
-var token = "";
-//获取存在于cookie中的token值
-function getCookie(c_name)
-{
-	if (document.cookie.length>0)
-	{
-		c_start=document.cookie.indexOf(c_name + "=")
-		if (c_start!=-1)
-		{
-			c_start=c_start + c_name.length+1
-			c_end=document.cookie.indexOf(";",c_start)
-			if (c_end==-1) c_end=document.cookie.length
-			return unescape(document.cookie.substring(c_start,c_end))
-		}
-	}
-	return undefined;
-}
-token = getCookie("token");//便于本地测试
+var token = getCookie("token") || 0;
 //获取页面的名称
 var his = window.location.pathname.split("/");
 his = his[his.length-1];
@@ -36,18 +19,14 @@ $.toast.prototype.defaults.duration = 500;
 
 var itemId = window.location.search.split("=")[1];
 itemId = goodsid;
-// var type = -1;
-
 
 //跳转预览界面
 if(window.location.search.indexOf('cms') > 0 ){
 	window.location.href = 'brandDetail_preview.html?id=' +  goodsid;
 }
 
-
 var data_pic = '';
 var buyNum = 1;
-
 var stockNum = 0;  //加减时候 用到
 var chooseSpeStr = '' ; // 用于赋值给 弹框外部的 ‘已选择’的值
 var current_skuId = 0;  // 用于‘已选择’的商品型号的 skuId
@@ -68,6 +47,7 @@ var url_obj = {
 
 //分享时候 传当前页面的url 和 对象obj
 get_url(window.location.href);
+hitsOnFn(token,3,1,itemId);
 
 
 //判断 是否 被收藏

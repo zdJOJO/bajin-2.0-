@@ -2,7 +2,7 @@
  * Created by Administrator on 2016/10/9.
  */
 $(document).ready(function(){
-    var token = getCookie("token");//便于本地测试
+    var token = getCookie("token") || 0;//便于本地测试
     //获取页面的名称
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
@@ -13,6 +13,10 @@ $(document).ready(function(){
     var totalPrice = 0;
     var leftTime = 0;
 
+    //分享时候 传当前页面的url 和 对象obj
+    get_url(window.location.href);
+
+    hitsOnFn(token,17,1,productId);
     //获取单个产品的详细信息
     $.ajax({
         type: 'get',
@@ -21,8 +25,6 @@ $(document).ready(function(){
             productObj = result.data;
             leftTime = Math.round( parseInt(result.data.preSold - new Date().getTime()/1000) );
             if(his == 'localDisDetail.html'){
-                //分享时候 传当前页面的url 和 对象obj
-                get_url(window.location.href);
                 //调用分享借口
                 jsSdkApi('share',{
                     title: result.data.title,

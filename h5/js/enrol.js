@@ -3,25 +3,7 @@ $(function(){
 
     //此页面逻辑：进入页面加载活动内容，然后判断用户是否收藏该活动，如果收藏就要现实收藏的图标，否则就是没有收藏
     var data;
-    var token = "";
-    //获取存在于cookie中的token值
-    function getCookie(c_name)
-    {
-    if (document.cookie.length>0)
-      {
-      c_start=document.cookie.indexOf(c_name + "=")
-      if (c_start!=-1)
-        { 
-        c_start=c_start + c_name.length+1 
-        c_end=document.cookie.indexOf(";",c_start)
-        if (c_end==-1) c_end=document.cookie.length
-        return unescape(document.cookie.substring(c_start,c_end))
-        } 
-      }
-    return undefined;
-    }
-    token = getCookie("token");
-
+    var token = getCookie("token") || 0;
     var activityid = window.location.search.split("=")[1];
     if(/&/g.test(activityid)){
         activityid = activityid.split("&")[0];
@@ -49,9 +31,6 @@ $(function(){
     var commentStr = '';
     var pageNum = 1;
 
-    
-
-    // alert(his);
     $("#culb_But").click(function(){			
         window.location.href="index.html";
 	})		
@@ -62,11 +41,11 @@ $(function(){
     var peopleNumber = 0;   //总允许报名人数
     var applyNumber = 0;    //已报名人数
 
-
-
     //分享时候 传当前页面的url 和 对象obj
     get_url(window.location.href);
 
+    //浏览数目统计
+    hitsOnFn(token,1,1,activityid);
 
     function getActDetail(){
         $.get(port+"/card/activity/"+activityid,function(data){

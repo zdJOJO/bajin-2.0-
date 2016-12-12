@@ -297,14 +297,8 @@ $(function(){
     // hitsOnFn(token,type,subType,typeId)
     function toActivity(id,_type){
         if(!isHotDoor){
-            if(token){
-                hitsOnFn(token,1,1,id);
-            }
             window.location.href = "enrol.html?id=" + id;
         }else {
-            if(token){
-                hitsOnFn(token,_type,1,id);
-            }
             window.location.href = jumpPage(_type).htmlStr + '?id=' + id ;
         }
     }

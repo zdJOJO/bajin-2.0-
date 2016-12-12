@@ -9,90 +9,46 @@
     <meta name = "format-detection" content = "telephone=no">
     <link rel="stylesheet" type="text/css" href="css/weiXin/weui.min.css">
     <link rel="stylesheet" type="text/css" href="css/weiXin/jquery-weui.css">
+    <!--<link  rel="stylesheet" type="text/css" href="css/myOrders.css">-->
     <link  rel="stylesheet" type="text/css" href="css/myOrders.css">
 </head>
 <body>
 <header>
-  <center>
-    <div class="appointments"><span class="tab">活动预约</span></div>
-    <div class="commodityOrder"><span class="tab">商品订单</span></div>
-      <div class="enjoyOrder"><span class="tab">乐享订单</span></div>
-  </center>
+    <nav class="nav">
+        <a href="#activityOrder" id="activityOrder" class="active">活动</a>
+        <a href="#goodsOrder" id="goodsOrder">臻品</a>
+        <a href="#enjoyOrder" id="enjoyOrder">乐享</a>
+    </nav>
+    <div>
+        <nav class="subNav goodsOrder" style="display: none">
+            <a class="active good" data-state="0"><span>全部</span></a>
+            <a class="good" data-state="1"><span>待付款</span></a>
+            <a class="good" data-state="2"><span>已付款</span></a>
+            <a class="good" data-state="3"><span>已发货</span></a>
+        </nav>
+        <nav class="subNav enjoyOrder" style="display: none">
+            <a class="active" data-state="-2"><span>全部</span></a>
+            <a data-state="0"><span>待付款</span></a>
+            <a data-state="1"><span>待使用</span></a>
+            <a data-state="2"><span>已完成</span></a>
+        </nav>
+    </div>
 </header>
 
-<div class="appointment"></div>
-
-<div class="wrapper">
-    <div class="header">
-        <div class="allApo" data-orderstate="0">全部</div>
-        <div class="waittingForApo" data-orderstate="1">待付款</div>
-        <div class="havePaidApo" data-orderstate="2">已付款</div>
-        <div class="havePostApo" data-orderstate="3">已发货</div>
-    </div>
-
-    <!--商品订单-->
-    <div class="container"></div>
-    <!-- loading  图 -->
-    <div  id="orderLoading" class="spinner" style="display: none">
-        <div class="spinner-container container1">
-            <div class="circle1"></div>
-            <div class="circle2"></div>
-            <div class="circle3"></div>
-            <div class="circle4"></div>
-        </div>
-        <div class="spinner-container container2">
-            <div class="circle1"></div>
-            <div class="circle2"></div>
-            <div class="circle3"></div>
-            <div class="circle4"></div>
-        </div>
-        <div class="spinner-container container3">
-            <div class="circle1"></div>
-            <div class="circle2"></div>
-            <div class="circle3"></div>
-            <div class="circle4"></div>
-        </div>
-    </div>
+<div id="list">
+    <div class="activityOrder"></div>
+    <div class="goodsOrder" style="display: none"></div>
+    <div class="enjoyOrder" style="display: none"></div>
 </div>
-
-<div class="enjoyer" style="display: none">
-    <div class="header">
-        <div class="all active" data-orderstate="-2"><a class="active" href="#all">全部</a></div>
-        <div class="unPaid" data-orderstate="0"><a href="#unPaid">待付款</a></div>
-        <div class="unUse" data-orderstate="1"><a href="#unUse">待使用</a></div>
-        <div class="finished" data-orderstate="2"><a href="#finished">已完成</a></div>
-    </div>
-    <!--乐享订单-->
-    <div class="enjoyList"></div>
-    <!-- loading  图 -->
-    <div  id="orderLoading" class="spinner" style="display: none">
-        <div class="spinner-container container1">
-            <div class="circle1"></div>
-            <div class="circle2"></div>
-            <div class="circle3"></div>
-            <div class="circle4"></div>
-        </div>
-        <div class="spinner-container container2">
-            <div class="circle1"></div>
-            <div class="circle2"></div>
-            <div class="circle3"></div>
-            <div class="circle4"></div>
-        </div>
-        <div class="spinner-container container3">
-            <div class="circle1"></div>
-            <div class="circle2"></div>
-            <div class="circle3"></div>
-            <div class="circle4"></div>
-        </div>
-    </div>
-</div>
+<div id="loading" style="display: none;"><img src="imgs/gift/loading.gif"></div>
 <script>
     var iWidth=document.documentElement.clientWidth;
     document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
 </script>
-<script src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/jquery-hashchange/1.3/jquery.ba-hashchange.min.js"></script> <!-- hash -->
 <script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
-<script src="js/public/public.js"></script>
-<script src="js/myOrders.js"></script>
+<script type="text/javascript" src="js/public/public.js"></script>
+<script type="text/javascript" src="js/myOrders.js"></script>
 </body>
 </html>

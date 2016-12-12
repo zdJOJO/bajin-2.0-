@@ -134,7 +134,6 @@ $(document).ready(function(){
 						event: 'scroll',
 					});
 					$('.itemLocal').click(function () {
-						hitsOnFn(token,16,1,$(this).attr('data-mallid'));
 						window.location.href = 'localDiscount.html?id=' + $(this).attr('data-mallid');
 					});
 				}
@@ -179,7 +178,6 @@ $(document).ready(function(){
 					dropload_brand.resetload();
 
 					$(".singleBrand_q").bind("click",function(){
-						hitsOnFn(token,5,1,$(this).attr('data-mallid'));
 						window.location.href = "mall.html?id="+$(this).data("mallid");
 					});
 				}else {

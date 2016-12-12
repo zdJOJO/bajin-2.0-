@@ -99,7 +99,7 @@ $(document).ready(function(){
 	turnUrl($("#fav_But"),"favorites.html");
 	turnUrl($("#myMessage_But"),"myMessage.html");
 	turnUrl($("#shop_But"),"shoppingCart.html");
-	turnUrl($("#order_But"),"myOrders.html");
+	turnUrl($("#order_But"),"myOrders.html#activityOrder");
 	turnUrl($("#bank_But"),"bank.html");
 	turnUrl($(".pic_but"),"set.html");
 	

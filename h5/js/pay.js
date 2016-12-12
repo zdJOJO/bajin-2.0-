@@ -57,7 +57,8 @@ $(function(){
 									classStr = 'cardItem ct';
 									picStr = 'imgs/bankList/ct-Card.png';
 								}
-								var item = $('<div class="'+classStr+'" data-bjke="'+data.list[i].bjke+'" data-cardNum="'+data.list[i].cardNumber+'" data-cardId="'+data.list[i].cardId+'" data-kabin="'+data.list[i].kabin+'" >' +
+								var item = $('<div class="'+classStr+'" data-ctkh="'+data.list[i].ctkh+'" data-bjke="'+data.list[i].bjke+'" ' +
+									'data-cardNum="'+data.list[i].cardNumber+'" data-cardId="'+data.list[i].cardId+'" data-kabin="'+data.list[i].kabin+'" >' +
 									'<div class="left"><img src="'+picStr+'"></div><div class="bg"></div>' +
 									'<div class="right"><h2>中国工商银行</h2><p class="type">'+bankTypeStr+'</p>' +
 									'<p class="number"><span>**** **** **** </span>'+data.list[i].cardNumber+'</p></div></div>');
@@ -68,7 +69,7 @@ $(function(){
 							$('.noList').show().siblings('.addCard').hide();
 						}else{
 							$(".cardItem").click(function(){
-								var cardItem = $(this).data("cardid");  //哪张银行卡
+								var cardItem = $(this).data("cardnum");  //银行卡后四位
 								//活动支付http://121.196.232.233/card/bank/encryption/pay/{cardno}/{applyId}?token=e7120d7a-456b-4471-8f86-ac638b348a53
 								var url = port+"/card/bank/encryption/pay/"+cardItem+"/"+applyid+"?token="+token;
 
@@ -126,11 +127,11 @@ $(function(){
 												return
 											}
 										}
-										console.log(res)
-										// var str='<input type="hidden" id="merSignMsg" name="merSignMsg" value="'+res+'"/> '+
-										// 	'<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/> ';
-										// infoForm.innerHTML = str;
-										// infoForm.submit();
+										var str='<input type="hidden" id="merSignMsg" name="merSignMsg" value="'+res+'"/> '+
+											'<input type="hidden" id="companyCis" name="companyCis" value="bjzx"/> ';
+
+										infoForm.innerHTML = str;
+										infoForm.submit();
 									},
 									error: function(){
 										//请求出错处理

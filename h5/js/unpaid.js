@@ -9,25 +9,11 @@ $(document).ready(function(){
 	//获取页面的名称
 	var hrefStr = window.location.search;
 	var cardid = hrefStr.split("=")[1];
-
 	var goodId = hrefStr.split("=")[2];   //goodId
+	var orderState = GetQueryString('orderState');
 
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];
-
-
-	//给url 设置tab标志，方便返回到哪里去
-	var tabStr = 'allApo';
-	if( hrefStr.indexOf('waittingForApo') > 0){
-		tabStr = 'waittingForApo';
-	}
-	if(hrefStr.indexOf('havePaidApo') > 0){
-		tabStr = 'havePaidApo';
-	}
-	if(hrefStr.indexOf('havePostApo') > 0){
-		tabStr = 'havePostApo';
-	}
-
 
 	//查询物流详情的 物流订单号
 	var  expressId = 0;
@@ -62,6 +48,7 @@ $(document).ready(function(){
 				orderState = '待付款';
 			}else if(data.orderModel.orderState==2){
 				orderState = '已付款';
+				$('footer').hide();
 			}else if(data.orderModel.orderState==3){
 				orderState = '已发货';
 			}else if(data.orderModel.orderState==4){
@@ -73,10 +60,11 @@ $(document).ready(function(){
 			}else {
 				orderState = '全部';
 			}
+			var cancelOrderStr = data.orderModel.orderState==1 ? '<i id="cancelOrder">取消订单</i>' : '' ;
 			var orderInfoStr = '<h3>订单信息</h3>' +
 				'<ul><li><span>订单编号:</span><span>'+data.orderModel.orderId+'</span></li>' +
 				'<li><span>下单时间:</span><span>'+new Date(data.orderModel.createTime*1000).Formate()+'</span></li>' +
-				'<li><span>订单状态:</span><i id="cancelOrder">取消订单</i><span>'+orderState+'</span></li></ul>';
+				'<li><span>订单状态:</span>'+cancelOrderStr+'<span>'+orderState+'</span></li></ul>';
 			$('#info').children('.orderInfo').html(orderInfoStr);
 			$("#cancelOrder").bind("click",function(){
 				cancelOrderFn($("#cancelOrder"));
@@ -90,7 +78,7 @@ $(document).ready(function(){
 					'<p><span class="price">￥'+data.detailOrderModels[i].skuPrice.toFixed(2)+'</span>' +
 					'<span class="num">×'+ data.detailOrderModels[i].count+'</span></p></div></div><div></div>';
 			}
-			var tellStr = '<div class="tell"><a href="tel:'+111+'">联系白金尊享</a><span><img src="imgs/enjoy/right.png" style="width: 0.02rem"></span></div>';
+			var tellStr = '<div class="tell"><a href="tel:">联系白金尊享</a><span><img src="imgs/enjoy/right.png" style="width: 0.02rem"></span></div>';
 			$('#info').children('.goodInfo').append(goodInfoStr).append(tellStr);
 
 			if(window.location.href.indexOf('brandDetail') > 0 ){
@@ -192,7 +180,7 @@ $(document).ready(function(){
 						}else if(window.location.search.indexOf('isShopCart') > 0){
 							window.location.href = "shoppingCart.html";
 						}else {
-							window.location.href = "myOrders.html?" + tabStr;   //waittingForApo
+							window.location.href = "myOrders.html?";
 						}
 					});
 				},
@@ -224,9 +212,7 @@ $(document).ready(function(){
 					text: "微信支付",
 					className: "color-primary",
 					onClick: function() {
-
 						requestWxParam();
-
 						setTimeout(function () {
 							$.hideLoading();
 							if(isWxParam){
@@ -271,7 +257,7 @@ $(document).ready(function(){
 
 
 	//已付款  订单的 详情页面
-	if(window.location.href.indexOf('havePostApo') > 0){
+	if(orderState == '3'){
 		$('.logistical').show();
 		$('footer').html('').append('<p class="confirmReceipt">确认收货</p>');
 		$('.logistical a').click(function () {

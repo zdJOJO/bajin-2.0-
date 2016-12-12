@@ -18,7 +18,7 @@ $(function(){
         //设置cookie
         setCookie("token",token,365);
     }else {
-        token = getCookie("token");
+        token = getCookie("token") || 0;
     }
     if(searchStr.indexOf('cardnum') > 0){
         cardNum = searchStr.split('&')[0].split('=')[1];

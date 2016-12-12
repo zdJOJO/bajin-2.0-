@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	var token = getCookie("token");
+	var token = getCookie("token")||0;
 	//获取页面的名称
 	var his = window.location.href.split("/");
 	his = his[his.length-1];
@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 	//分享时候 传当前页面的url 和 对象obj
 	get_url(window.location.href);
-
+	hitsOnFn(token,5,1,mallid);
 
     //获取商品详情
 	$.ajax({

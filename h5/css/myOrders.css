@@ -1,607 +1,367 @@
-@font-face{
-	font-family:"黑体";
+h1,h2,h3,h4{
+    font-weight: normal;
 }
-h1,h2,h3{
-	font-weight: normal;
+html,body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    background: #fafafa;
 }
-body{
-	font-family:"黑体";
-	/*background: #eeeeee;*/
-	margin: 0;
-	padding: 0;
-	font-size: 16px;
-}
-header,.wrapper{
-	font-size: 16px;
-}
+
 header{
-	height: 0.14rem;
-	width: 1rem;
-	line-height: 0.12rem;
-	box-sizing:border-box;
-	/*margin-bottom:0.02rem;*/
-	font-size: 14px;
-	position: fixed;
-	top: 0;
+    text-align: center;
+    width: 1rem;
+    line-height: 0.12rem;
+    box-sizing: border-box;
+    font-size: 14px;
+    position: fixed;
+    top: 0;
     background-color: #fff;
     z-index: 20;
-}
-header div{
-	display: inline-block;
-	/*width: 0.2rem;*/
-	width: 0.05rem;
-	margin:0 0.08rem;
-	border-bottom: 1px solid #b2b2b2;
-	color:#b2b2b2;
-	font-weight: bold;
-	position: relative;
-	top: 0.05rem;
+    border-bottom: 0.03rem #f5f5f5 solid;
 }
 
-header div>.tab{
-	display: block;
-	position: absolute;
-	width: 76px;
-	height: 45px;
-	top: -0.11rem;
-	left: 50%;
-	margin-left: -38px;
+header nav{
+    background: #fafafa;
 }
 
-
-/*内容部分*/
-.wrapper,.enjoyer{
-	position: absolute;
-	top: 0.14rem;
-	width: 1rem;
-}
-.wrapper .singleOrders{
-	border-top:#b2b2b2 1px solid;
-	height: 0.28rem;
-	width: 1rem;
-	box-sizing:border-box;
-	padding: 0.03rem 0.04rem;
-}
-.wrapper .singleOrders>img{
-	height: 0.22rem;
-	width: 0.22rem;
-	margin-right: 0.04rem;
-	float: left;
-}
-.wrapper .singleOrders .detail{
-	width: 0.66rem;
-	float: right;
-	height: 0.18rem;
-}
-.wrapper .singleOrders .detail h3{
-	-webkit-margin-before:0;
-	-webkit-margin-after:0.2em;
-	font-size: 16px;
-}
-@media screen and (min-width:375px){
-	.wrapper .singleOrders .detail h3{
-		-webkit-margin-after:1em;
-	}
-}
-.wrapper .singleOrders .detail .address .pic_1{
-	background: url("../imgs/adr-18.png") no-repeat;
-	width:13px;
-	height:18px;
-    font-size: 0;
-    margin-right: 6px;
+header a{
+    color: #909090;
     display: inline-block;
-    vertical-align: middle;
+    width: 16%;
 }
-.wrapper .singleOrders .detail .address .adr{
+
+header a.active{
+    color: #323232;
+}
+
+header .subNav>a{
+    width: 20%;
+}
+
+header .subNav>a.active{
+    color: #b9984f;
+}
+
+header .subNav>a>span{
     display: inline-block;
-    /*zoom: 1;兼容IE6、IE7、IE8浏览器，经常会遇到一些问题，可以使用zoom:1来解决*/
-    vertical-align: middle;
-    line-height: 18px;
-    font-size: 12px;
+    width: 100%;
+    height: 0.04rem;
+    line-height: 0.04rem;
+    border-right: 1px #f0f0f0 solid;
 }
-.wrapper .singleOrders .detail .time .pic_2{
-	background: url("../imgs/time_2.png") no-repeat;
-	width:14px;
-	height:14px;
-    font-size: 0;
-    margin-right: 5px;
-    display:inline-block;
-    vertical-align: middle;
-}
-.wrapper .singleOrders .detail .time .tim{
-	font-size: 12px;
-    vertical-align: middle;
-    line-height: 14px;
-    display: inline-block;
+header .subNav>a:last-child>span{
+    border: none;
 }
 
 
-/*商品订单选项卡*/
-.wrapper >.header ,.enjoyer>.header {
-	width: 1rem;
-	height: 0.12rem;
-	color: #9f9f9f;
-	border-top: rgba(178, 178, 178, 0.17) 1px solid;
-	top: 0.14rem;
-	text-align: center;
-	position: fixed;
-    background-color: #fff;
-    z-index: 20;
-	padding: 0 10%;
-	border-bottom: 1px #E7E6E5 solid;
+#list{
+    margin-top: 0.15rem;
 }
-.wrapper>.header>div , .enjoyer>.header>div{
-	/*display:inline-block;*/
-	font-size: 15px;
-	width: 0.15rem;
-	height: 0.06rem;
-	line-height: 0.06rem;
-	/*margin-top: 0.02rem;*/
-	margin: 0.02rem 0.03rem 0 auto;
-	color: #9f9f9f;
-	padding: 0.01rem 0.02rem;
-	background-color: #fff;
-	float: left;
-}
-.wrapper .container , .enjoyer>.enjoyList{
-	position: absolute;
-	top: 0.12rem;
-	color: #000;
-}
-.wrapper .container .singleMsg{
-	border-top: rgba(178, 178, 178, 0.17) 1px solid;
-	/*height: 0.36rem;*/
-	width: 1rem;
-	box-sizing:border-box;
-	padding-top: 0.03rem;
-	background-color: #fafafa;
-}
-.wrapper .container .singleMsg>img{
-	height: 0.22rem;
-	width: 0.22rem;
-	margin-right: 0.04rem;
-	margin-left: 0.04rem;
-	float: left;	
-    margin-bottom: 0.01rem;
-}
-.wrapper .container .singleMsg .msg{
-	width: 0.68rem;
-	height: 0.22rem;
-	float: right;
-	padding-right: 0.03rem;
-	position: relative;
-	box-sizing:border-box;
-	margin-bottom: 0.01rem;
 
-	/*background-color: #eee;*/
-}
-.wrapper .container .singleMsg .msg h3,.wrapper .container .singleMsg .msg p{
-	-webkit-margin-before:0;
-	-webkit-margin-after:0;
-}
-.wrapper .container .singleMsg .msg h3{
-	font-size: 16px;
-	line-height: 0.06rem;
-	height: 0.06rem;
-	-webkit-margin-before:0.5em;
-	-webkit-margin-after:0.5em;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	color: #0D0D0D;
-}
-.wrapper .container .singleMsg .msg p{
-	font-size: 14px;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-}
-.wrapper .container .singleMsg .msg p.cost{
-	position: absolute;
-	bottom: 0;
-	left: 0;
-}
-.wrapper .container .singleMsg .msg p.number{
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	margin-right: 0.03rem;
-	color: #0D0D0D;
-}
-.wrapper .totleMsg{
-	clear: left;
-	height: 0.109rem;
-	line-height: 0.109rem;	
-	box-sizing:border-box;
-	background-color: #ffffff;
-}
-.wrapper .totleMsg p{
-	-webkit-margin-before:0;
-	-webkit-margin-after:0;
-}
-.wrapper .totleMsg p.status{
-	float: left;
-	margin-left: 0.2rem;
-	color:#c1af74;
-}
-.wrapper .totleMsg p.detail{
-	float: right;
-	margin-right: 0.03rem;
-	color: #0D0D0D;
-}
-/*.wrapper .container .singleMsg .msg>div{
-	width: 0.68rem;
-	height: 0.06rem;
-}
-.wrapper .container .singleMsg .msg>div h3{
-	-webkit-margin-before:0;
-	-webkit-margin-after:0;
-	float: left;
-	color: #6c6c6c;
-	font-size: 17px;
-	margin-right: 0.04rem;
-}
-.wrapper .container .singleMsg .msg>div p{
-	-webkit-margin-before:0;
-	-webkit-margin-after:0;
-	float: left;
-	color: #9f9f9f;
-}
-.wrapper .container .singleMsg .msg>div p.status{
-	color: #b7a66e;
-	float: right;
-}
-.wrapper .container .singleMsg .msg>div p.number{
-	font-size: 17px;
-}
-.wrapper .container .singleMsg .msg>p.what{
-	-webkit-margin-before:0.1em;
-	-webkit-margin-after:1em;
-	clear: left;
-	font-size: 14px;
-	color: #9b9b9b;
-}
-.wrapper .container .singleMsg .msg>p.cost{
-	color: #5b5b5b;
-	-webkit-margin-before:0;
-	-webkit-margin-after:0;
-	font-size: 18px;
-}
-@media screen and (max-width: 320px){
-	.wrapper .container .singleMsg .msg>p.cost{
-		font-size: 16px;
-	}
-	.wrapper .container .singleMsg .msg>p.what{
-		-webkit-margin-before:0.1em;
-		-webkit-margin-after:0.5em;
-	}
-}*/
+#list>div>.subNav{
 
-/*预约重做的样式*/
-.appointment{
-	font-size: 16px;
-	position: absolute;
-	top: 0.14rem;
 }
-.appointment .singleAppointment h4,.appointment .singleAppointment p{
-	-webkit-margin-before:0;
-	-webkit-margin-after:0;
-}
-.appointment .singleAppointment{
-	width: 1rem;
-	box-sizing:border-box;
-	padding:0.03rem 0.03rem 0 0.03rem;
-}
-.appointment .singleAppointment>img{
-	width: 0.25rem;
-	height: 0.25rem;
-	margin-right: 0.04rem;
-}
-.appointment .singleAppointment .detail{
-	width: .65rem;
-	height: 0.25rem;
-	float: right;
-	position: relative;
-}
-.appointment .singleAppointment .detail h4{
-	color: #161616;
-	margin:0.03rem 0 0.04rem 0;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	width: 0.53rem
-}
-.appointment .singleAppointment .detail  span{
-	float: right;
-	font-size: 14px;
-	color: #c1af74;
-	position: relative;
-	top: -0.115rem
-}
-.appointment .singleAppointment .detail .time{
-	font-size: 12px;
-	position: absolute;
-	bottom: 0.06rem;
-	width: 0.65rem;
-	color: #9f9f9f;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
-.appointment .singleAppointment .detail .time img{
-	height: 0.03rem;
-	vertical-align:middle;
-	margin-bottom: 2px;
-	margin-right: 0.03rem;
-}
-.appointment .singleAppointment .detail .address{
-	font-size: 12px;
-	position: absolute;
-	bottom: 0;
-	color: #9f9f9f;
-	width: 0.65rem;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
-.appointment .singleAppointment .detail .address img{
-	height: 0.04rem;
-	vertical-align: middle;
-	margin-right: 0.03rem;
-}
-.strEmpty{
-	width: 1rem;
-}
-center{
-	width: 1rem;
-}
+
+
 /*空页面的样式*/
+center{
+    width: 1rem;
+    color: #323232;
+}
+
 center img{
-	margin-top: 0.2rem;
+    width: 0.3rem;
+    margin: 0.2rem 0 0.08rem 0;
 }
 center p:last-child{
-	width: 0.5rem;
-	height: 0.1rem;
-	line-height: 0.1rem;
-	margin-top: 0.2rem;
-	background-color: #c1b02b;
-	color: #fff;
+    width: 0.5rem;
+    height: 0.1rem;
+    line-height: 0.1rem;
+    margin-top: 0.2rem;
+    background-color: #c1b02b;
+    color: #fff;
+}
+
+center a{
+    text-decoration: none;
+    font-size: 1em;
+    height: 0.05rem;
+    line-height: 0.05rem;
+    color: #b9984f;
+    border-bottom: none;
+    margin: 0.03rem 0 0.04rem 0;
+    display: inline-block;
 }
 
 
-
-.appointment,.container{
-	width: 100%;
+/************活动****************/
+.activityOrder .singleAppointment h4,.appointment .singleAppointment p{
+    -webkit-margin-before:0;
+    -webkit-margin-after:0;
 }
+.activityOrder .singleAppointment{
+    width: 1rem;
+    box-sizing:border-box;
+    padding:0.03rem 0.03rem 0 0.03rem;
+}
+.activityOrder .singleAppointment>img{
+    width: 0.25rem;
+    height: 0.25rem;
+    margin-right: 0.04rem;
+}
+.activityOrder .singleAppointment .detail{
+    width: .65rem;
+    height: 0.25rem;
+    float: right;
+    position: relative;
+}
+.activityOrder .singleAppointment .detail h4{
+    color: #161616;
+    margin:0.01rem 0 0.04rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 0.53rem
+}
+.activityOrder .singleAppointment .detail  span{
+    float: right;
+    font-size: 14px;
+    color: #c1af74;
+    position: relative;
+    top: -0.1rem;
+}
+.activityOrder .singleAppointment .detail .time{
+    font-size: 12px;
+    position: absolute;
+    bottom: 0.06rem;
+    width: 0.65rem;
+    color: #9f9f9f;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.activityOrder .singleAppointment .detail .time img{
+    height: 0.03rem;
+    vertical-align:middle;
+    margin-bottom: 2px;
+    margin-right: 0.03rem;
+}
+.activityOrder .singleAppointment .detail .address{
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    color: #9f9f9f;
+    width: 0.65rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.activityOrder .singleAppointment .detail .address img{
+    height: 0.04rem;
+    vertical-align: middle;
+    margin-right: 0.03rem;
+}
+/************ ↑活动****************/
+
+
+
+
+
+/***************臻品订单******************/
+.goodsOrder>.itemGood h4{
+    height: 0.1rem;
+    line-height: 0.1rem;
+    padding: 0 0.03rem;
+    border-bottom: 1px #f0f0f0 solid;
+}
+
+.goodsOrder>.itemGood h4>span{
+    color: #323232;
+}
+
+.goodsOrder>.itemGood h4>i{
+    font-style: normal;
+    color: #b9984f;
+    float: right;
+    font-size: 0.9em;
+}
+
+.goodsOrder>.itemGood li{
+    border-bottom: 1px #f0f0f0 solid;
+    padding: 0.03rem 0 0.02rem 0.03rem;
+    overflow: hidden;
+    color: #323232;
+}
+
+.goodsOrder>.itemGood li>img{
+    float: left;
+    overflow: hidden;
+    width: 0.18rem;
+    height: 0.18rem;
+    background: red;
+}
+
+.goodsOrder>.itemGood li>p{
+    float: left;
+    width: 0.73rem;
+    margin: 0 0 0 0.03rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.goodsOrder>.itemGood li>p:nth-child(2){
+    font-size: 0.95em;
+}
+.goodsOrder>.itemGood li>p:nth-child(3){
+    font-size: 0.8em;
+    color: #909090;
+}
+.goodsOrder>.itemGood li>p:nth-child(4){
+    font-size: 0.9em;
+    margin-top: 0.03rem;
+    color: #646464;
+}
+
+.goodsOrder>.itemGood li>p:nth-child(4) .num{
+    float: right;
+    color: #646464;
+}
+
+.goodsOrder>.itemGood>div{
+    padding: 0 0 0 0.03rem;
+    height: 0.13rem;
+    line-height: 0.13rem;
+    border-bottom: 10px #f5f5f5 solid;
+}
+
+.goodsOrder>.itemGood>div i{
+    color: #b9984f;
+    font-style: normal;
+}
+
+.goodsOrder>.itemGood>div button{
+    float: right;
+    border: navajowhite;
+    font-size: 0.9em;
+    width: 0.22rem;
+    height: 0.08rem;
+    margin: 0.025rem 0.03rem 0 0;
+    border-radius: 2px;
+}
+
+.goodsOrder>.itemGood>div button.payNow{
+    background: #b9984f;
+    color: #fff;
+}
+
+.goodsOrder>.itemGood>div button.cancel{
+    background: none;
+    border: 1px #909090 solid;
+    color: #909090;
+}
+
+/***************↑臻品订单******************/
+
+
+
+
+
+/***************乐享订单******************/
+.enjoyOrder ul,.enjoyOrder li{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    color: #7D7D7D;
+}
+
+.enjoyOrder>.itemOrder{
+    width: 0.92rem;
+    /*height: 0.75rem;*/
+    border-top: 10px #fafafa solid;
+    border-bottom: 1px #E7E6E5 solid;
+    padding: 0 0.04rem;
+}
+
+.enjoyOrder>.itemOrder li{
+    height: 0.13rem;
+    line-height: 0.13rem;
+    border-bottom: 1px #E7E6E5 solid;;
+}
+
+.enjoyOrder>.itemOrder li:nth-child(2){
+    height: 0.23rem;
+    line-height: 0.23rem;
+    padding: 0.025rem 0;
+}
+
+.enjoyOrder>.itemOrder li:nth-child(2)>img{
+    width: 0.3rem;
+    height: 0.23rem;
+}
+
+.enjoyOrder>.itemOrder li:nth-child(2)>.title{
+    width: 0.59rem;
+    line-height: 0.05rem;
+    color: #323232;
+    font-size: 17px;
+    margin-left: 0.01rem;
+}
+
+
+.enjoyOrder>.itemOrder li:last-child{
+    border-bottom: none;
+    text-align: center;
+    color: #C1AF74;
+}
+
+.enjoyOrder>.itemOrder li>span:last-child{
+    float: right;
+}
+
+.enjoyOrder>.itemOrder .state{
+    color: #C1AF74;
+}
+
+.enjoyOrder>.itemOrder .state.cancel{
+    color: #989898;
+}
+
+.enjoyOrder>.itemOrder .state.finished{
+    color: #323232;
+}
+
+
+.enjoyOrder>.itemOrder .pay ,.enjoyOrder>.itemOrder .payAgain ,.enjoyOrder>.itemOrder .deleteOrder{
+    color: #fff;
+    background: #C1AF74;
+    display: inline-block;
+    width: 0.17rem;
+    height: 0.06rem;
+    line-height: 0.06rem;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 0.035rem;
+    float: right;
+    border: none;
+}
+
+.enjoyOrder>.itemOrder .deleteOrder{
+    background: #B1B1B1;
+    margin-right: 0.02rem;
+}
+/***************↑乐享订单******************/
+
+
 #loading{
-	display: block;
-	width: 100%;
-	margin: auto;
-	text-align: center;
-	margin-top: 200px;
-	font-size: 2em;
+    text-align: center;
+    margin-top: 0.05rem;
 }
 
-
-/* =--------  乐享订单 -- -----*/
-.enjoyer>.header>div>a{
-	color: #9F9F9F;
-	text-decoration: none;
+#loading >img{
+    display: inline-block;
+    width: 0.05rem;
+    height: 0.05rem;
 }
-
-.enjoyer>.header>div.active{
-	background: #C1AF74;
-}
-
-.enjoyer>.header>div>a.active{
-	color: #fff;
-}
-
-
-.enjoyList ul,.enjoyList li{
-	padding: 0;
-	margin: 0;
-	list-style: none;
-	color: #7D7D7D;
-}
-
-.enjoyList>.itemOrder{
-	width: 0.92rem;
-	/*height: 0.75rem;*/
-	border-top: 10px #fafafa solid;
-	border-bottom: 1px #E7E6E5 solid;
-	padding: 0 0.04rem;
-}
-
-.enjoyList>.itemOrder li{
-	height: 0.13rem;
-	line-height: 0.13rem;
-	border-bottom: 1px #E7E6E5 solid;;
-}
-
-.enjoyList>.itemOrder li:nth-child(2){
-	height: 0.23rem;
-	line-height: 0.23rem;
-	padding: 0.025rem 0;
-}
-
-.enjoyList>.itemOrder li:nth-child(2)>img{
-	width: 0.3rem;
-	height: 0.23rem;
-}
-
-.enjoyList>.itemOrder li:nth-child(2)>.title{
-	width: 0.59rem;
-	line-height: 0.05rem;
-	color: #323232;
-	font-size: 17px;
-	margin-left: 0.01rem;
-}
-
-
-.enjoyList>.itemOrder li:last-child{
-	border-bottom: none;
-	text-align: center;
-	color: #C1AF74;
-}
-
-.enjoyList>.itemOrder li>span:last-child{
-	float: right;
-}
-
-.enjoyList>.itemOrder .state{
-	color: #C1AF74;
-}
-
-.enjoyList>.itemOrder .state.cancel{
-	color: #989898;
-}
-
-.enjoyList>.itemOrder .state.finished{
-	color: #323232;
-}
-
-
-.enjoyList>.itemOrder .pay ,.enjoyList>.itemOrder .payAgain ,.enjoyList>.itemOrder .deleteOrder{
-	color: #fff;
-	background: #C1AF74;
-	display: inline-block;
-	width: 0.17rem;
-	height: 0.06rem;
-	line-height: 0.06rem;
-	text-align: center;
-	font-size: 13px;
-	margin-top: 0.035rem;
-	float: right;
-}
-
-.enjoyList>.itemOrder .deleteOrder{
-	background: #B1B1B1;
-	margin-right: 0.02rem;
-}
-
-
-
-
-	/* =------- -  loading 图  -- -----*/
-
-.spinner {
-	margin: 100px auto;
-	width: 20px;
-	height: 20px;
-	position: relative;
-}
-
-.container1 > div, .container2 > div, .container3 > div {
-	width: 6px;
-	height: 6px;
-	background-color: #333;
-
-	border-radius: 100%;
-	position: absolute;
-	-webkit-animation: bouncedelay 1.2s infinite ease-in-out;
-	animation: bouncedelay 1.2s infinite ease-in-out;
-	-webkit-animation-fill-mode: both;
-	animation-fill-mode: both;
-}
-
-.spinner .spinner-container {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-}
-
-.container2 {
-	-webkit-transform: rotateZ(45deg);
-	transform: rotateZ(45deg);
-}
-
-.container3 {
-	-webkit-transform: rotateZ(90deg);
-	transform: rotateZ(90deg);
-}
-
-.circle1 { top: 0; left: 0; }
-.circle2 { top: 0; right: 0; }
-.circle3 { right: 0; bottom: 0; }
-.circle4 { left: 0; bottom: 0; }
-
-.container2 .circle1 {
-	-webkit-animation-delay: -1.1s;
-	animation-delay: -1.1s;
-}
-
-.container3 .circle1 {
-	-webkit-animation-delay: -1.0s;
-	animation-delay: -1.0s;
-}
-
-.container1 .circle2 {
-	-webkit-animation-delay: -0.9s;
-	animation-delay: -0.9s;
-}
-
-.container2 .circle2 {
-	-webkit-animation-delay: -0.8s;
-	animation-delay: -0.8s;
-}
-
-.container3 .circle2 {
-	-webkit-animation-delay: -0.7s;
-	animation-delay: -0.7s;
-}
-
-.container1 .circle3 {
-	-webkit-animation-delay: -0.6s;
-	animation-delay: -0.6s;
-}
-
-.container2 .circle3 {
-	-webkit-animation-delay: -0.5s;
-	animation-delay: -0.5s;
-}
-
-.container3 .circle3 {
-	-webkit-animation-delay: -0.4s;
-	animation-delay: -0.4s;
-}
-
-.container1 .circle4 {
-	-webkit-animation-delay: -0.3s;
-	animation-delay: -0.3s;
-}
-
-.container2 .circle4 {
-	-webkit-animation-delay: -0.2s;
-	animation-delay: -0.2s;
-}
-
-.container3 .circle4 {
-	-webkit-animation-delay: -0.1s;
-	animation-delay: -0.1s;
-}
-
-@-webkit-keyframes bouncedelay {
-	0%, 80%, 100% { -webkit-transform: scale(0.0) }
-	40% { -webkit-transform: scale(1.0) }
-}
-
-@keyframes bouncedelay {
-	0%, 80%, 100% {
-		transform: scale(0.0);
-		-webkit-transform: scale(0.0);
-	} 40% {
-		  transform: scale(1.0);
-		  -webkit-transform: scale(1.0);
-	  }
-}
-
-#orderLoading{
-	z-index: 600;
-	position: fixed;
-	width: 20px;
-	left: 50%;
-	margin: 0 0 0 -10px;
-	bottom: 6px;
-}
-/* =--------  loading 图  -- -----*/

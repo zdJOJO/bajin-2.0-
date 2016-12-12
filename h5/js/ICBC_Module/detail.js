@@ -3,6 +3,7 @@
  */
 
 $(function () {
+    var token = getCookie('token') || 0;
     var href = window.location.href;
     var searchStr = window.location.search;
 
@@ -15,7 +16,7 @@ $(function () {
 
     //分享时候 传当前页面的url 和 对象obj
     get_url(href);
-
+    hitsOnFn(token,22,1,cardId);
     //请求卡详情
     $.ajax({
         type: 'get',

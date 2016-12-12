@@ -3,7 +3,7 @@
  */
 $(document).ready(function(){
 
-    token = getCookie("token");//便于本地测试
+    var token = getCookie("token") || 0;//便于本地测试
     //获取页面的名称
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
@@ -23,6 +23,8 @@ $(document).ready(function(){
             //todo
         }
     });
+
+    hitsOnFn(token,16,1,subjectId);
 
     //分页获取产品
     function getLocalDisList(pageNum) {
@@ -66,7 +68,6 @@ $(document).ready(function(){
                 dropload.resetload();
 
                 $('#localList').children('.itemCell').click(function () {
-                    hitsOnFn(token,17,1,$(this).attr('data-productId'));
                     window.location.href = 'localDisDetail.html?productId=' + $(this).attr('data-productId');
                 });
             },

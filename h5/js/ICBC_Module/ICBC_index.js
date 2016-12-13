@@ -25,6 +25,8 @@ $(function(){
         kabin=  searchStr.split('&')[1].split('=')[1];
     }
 
+    hitsOnFn(token,24,1,0);
+
     //二级广告
     // isAudit 表示是否审核  0 为审核  1已审核  (默认获取已审核) isDelete 表示是否删除的数据 0正常  1删除 (默认获取未删除的数据)
     $.ajax({

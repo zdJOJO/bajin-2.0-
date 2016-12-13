@@ -68,8 +68,8 @@ $(document).ready(function(){
 					for(var i=0,len=data.list.length;i<len;i++){
 						str_good += '<div class="lar" data-id="'+data.list[i].goodsId+'">' +
 							'<img data-original="'+data.list[i].hotPic+'"/>' +
-							'<div class="detail"><p class="title" style="margin: 5px 0 5px 0;">'+data.list[i].goodsTitle+'</p>' +
-							'<p class="subTitle">'+data.list[i].goodsSubtitle+'</p><p class="pirce">￥&nbsp;'+data.list[i].goodsPrice.toFixed(2)+'</p></div></div>' ;
+							'<div class="detail"><p class="title">'+data.list[i].goodsTitle+'</p>' +
+							'<p class="pirce">￥'+data.list[i].goodsPrice.toFixed(2)+'</p></div></div>' ;
 					}
 					$("#good").find('.content').append(str_good);
 					//图片预加载

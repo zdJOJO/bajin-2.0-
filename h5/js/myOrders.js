@@ -402,7 +402,7 @@ $(document).ready(function() {
 			}
 		}
 		var timeP = setInterval(timer,1000);
-	}
+	};
 
 
 });

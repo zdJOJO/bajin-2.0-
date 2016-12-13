@@ -20,7 +20,7 @@ $(function(){
         }
         return undefined;
     }
-    token = getCookie("token");
+    token = getCookie("token") || 0;
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
 
@@ -42,7 +42,6 @@ $(function(){
     var str = '';
 
 
-
     // tab 切换页面
     $(".tab > div").click(function () {
         pageNum = 0;
@@ -55,6 +54,7 @@ $(function(){
         }else if($(this).hasClass('life')){
             window.location.href = 'read.html?life';
         }else {
+            hitsOnFn(token,23,1,0);
             window.location.href = 'read.html';
         }
     });

@@ -88,7 +88,6 @@ input{
 
 .tab > div.active{
     color: #000;
-    border-bottom: 2px #000 solid;
 }
 
 
@@ -100,19 +99,9 @@ input{
     top: 15px;
 }
 
-
-    /*.tab .active{*/
-        /*color: #ceb07c;*/
-        /*border-color: #ceb07c;*/
-    /*}*/
-
 .list{
     width: 1rem;
-    /*margin-top: 0.14rem;*/
-    /*margin-bottom: 0.14rem;*/
-    /*-webkit-margin-after:0.14rem;*/
     overflow: hidden;
-    /*position: absolute;*/
 }
 
 .vipList{

@@ -6,7 +6,6 @@ h1,h2,h3{
 }
 body{
 	font-family:"微软雅黑";
-	/*background: #eeeeee;*/
 	margin: 0;
 	padding: 0;
 	overflow-x: hidden;
@@ -548,6 +547,12 @@ footer{
 	background: #B7A66E;
 	color: #FAFAFA;
 	right: 0;
+}
+
+
+.message_1 p{
+	-webkit-margin-before: 0!important;
+	-webkit-margin-after: 0!important;
 }
 
 

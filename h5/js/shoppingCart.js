@@ -88,7 +88,7 @@ $(document).ready(function(){
 								$(".dropload-down").css("height","0");
 							}
 							var emptyPage = '<center><img class="shopping" src="imgs/shoppingCar.png" />' +
-								'<h3>您的购物车空空如也</h3><a class="turnPage">再去逛逛吧>></a></center>';
+								'<h3>您的购物车是空的</h3><a class="turnPage">立即购买>></a></center>';
 							$(".content").append(emptyPage);
 							$('header,footer').hide();
 							$(".content .turnPage").click(function(){

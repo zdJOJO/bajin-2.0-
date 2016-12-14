@@ -61,7 +61,7 @@ header >div.active{
 }
 
 .infoList{
-	margin-bottom: 0.123rem;
+	margin-bottom: 0.15rem;
 	overflow-x: hidden;
 }
 
@@ -169,7 +169,7 @@ header >div.active{
 
 footer{
 	width: 1rem;
-	height: 0.12rem;
+	height: 0.15rem;
 	background-color:#252525;
 	position: fixed;
 	bottom: 0;
@@ -184,8 +184,8 @@ footer div{
 	/*background-color: #222;*/
 }
 footer div img{
-	height: 0.04rem;
-	width: 0.04rem;
+	height: 0.055rem;
+	width: 0.055rem;
 	margin-top: 0.02rem;
 }
 footer div p{

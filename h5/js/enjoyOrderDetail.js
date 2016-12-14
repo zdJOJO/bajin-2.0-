@@ -153,7 +153,7 @@ $(document).ready(function(){
             success: function (res) {
                if(isDelete){
                    $.toast('删除成功',function () {
-                       window.location.href = 'myOrders.html#all';
+                       window.location.href = 'myOrders.html#enjoyOrder';
                    });
                }else {
                    location.reload();

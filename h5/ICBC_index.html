@@ -17,49 +17,43 @@
         <div class="swiper-pagination"></div>
     </div>
 
-    <div class="nav" style="height: 3rem">
-        <nav>
-            <div>
-                <a href="#first" id="mine" class="active" data-type="index">我 的</a>
-                <!--<img src="imgs/ICBC_service/separator.png">-->
-            </div>
-            <div id="menu">
-                <div class="swiper-wrapper"></div>
-                <div class="swiper-button-next"><img src="imgs/ICBC_service/next.png"></div>
-            </div>
-        </nav>
+    <div id="content">
+        <header>
+            <!--ajax请求-->
+            <span>我的信用卡</span>
+            <span class="cardNum"></span>
+            <span><img src="imgs/ICBC_service/separator.png"></span>
+            <span class="change">更换</span>
+        </header>
     </div>
 
     <section class="index">
         <div id="service">
             <ul class="serviceList"></ul>
         </div>
-        <div id="content">
-            <header>
-                <!--ajax请求-->
-                <span>我的信用卡</span>
-                <span class="cardNum"></span>
-                <span><img src="imgs/ICBC_service/separator.png"></span>
-                <span class="change">更换</span>
-            </header>
-
+        <div class="nav">
+            <nav>
+                <div>
+                    <a href="#first" id="mine" class="active" data-type="index">我 的</a>
+                    <!--<img src="imgs/ICBC_service/separator.png">-->
+                </div>
+                <div id="menu">
+                    <div class="swiper-wrapper"></div>
+                    <div class="swiper-button-next"><img src="imgs/ICBC_service/next.png"></div>
+                </div>
+            </nav>
             <!--信用卡详情-->
             <div id="cardDetail" class="allCards" style="display: none"></div>
 
             <!-- 没登录或者没有绑卡-->
-            <div class="tip" style="display: none">
+            <div id="tip" class="tip" style="display: none">
                 <h2 class="title"></h2>
-                <p></p>
+                <p>登录白金尊享,<br>查看所有工行信用卡服务和权益。</p>
                 <button class="act"></button>
             </div>
-
         </div>
     </section>
-
-    <section class="allCards" style="display: none"></section>
-
     <div id="loading" style="display: none"><img src="imgs/gift/loading.gif"></div>
-
     <form name="info" id="info" method="post" action="http://web.zj.icbc.com.cn/mobile/Bjzx.do?scene=bjzx">
         <input type="hidden" id="merSignMsg" name="merSignMsg" value=""/>
         <input type="hidden" id="companyCis" name="companyCis" value="bjzx"/>

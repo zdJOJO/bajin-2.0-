@@ -180,7 +180,7 @@ $(document).ready(function(){
 						}else if(window.location.search.indexOf('isShopCart') > 0){
 							window.location.href = "shoppingCart.html";
 						}else {
-							window.location.href = "myOrders.html?";
+							window.location.href = "myOrders.html#goodsOrder";
 						}
 					});
 				},

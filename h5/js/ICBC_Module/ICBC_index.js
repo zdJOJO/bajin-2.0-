@@ -22,7 +22,7 @@ $(function(){
     }
     if(searchStr.indexOf('cardnum') > 0){
         cardNum = searchStr.split('&')[0].split('=')[1];
-        kabin=  searchStr.split('&')[1].split('=')[1];
+        kabin = searchStr.split('&')[1].split('=')[1];
     }
 
     hitsOnFn(token,24,1,0);
@@ -120,13 +120,13 @@ $(function(){
         $.get( port + '/card/card?token=' + token,function (result) {
             //判断是否有卡
             if(result.list.length == 0){
-                $('#content').find('.tip').show();
+                $('#tip').show();
                 changeCardJO.css('color','#929292');
-                $('#content').find('.title').html('您还未绑定工行信用卡');
-                $('#content').find('p').html('绑定工行信用卡，享受精致的尊享服务，'+'<br>'+'了解详细的信用卡权益。');
+                $('#tip').find('.title').html('您还未绑定工行信用卡');
+                $('#tip').find('p').html('绑定工行信用卡，享受精致的尊享服务，'+'<br>'+'了解详细的信用卡权益。');
 
                 //绑定信用卡
-                $('#content').find('button').html('绑定信用卡').click(function () {
+                $('#tip').find('button').html('绑定信用卡').click(function () {
                     // window.location.href = "bank.html?pickid=''&token=" + token;
                     window.location.href = "bindCardIFrame.html?pickid=''&token=" + token + '&android=true';
                 });
@@ -143,6 +143,7 @@ $(function(){
                 }else {
                     $('#content').find('.cardNum').html('尾号' + result.list[0].cardNumber);
                     myCardDeatil(result.list[0].kabin);
+                    kabin = result.list[0].kabin;
                 }
 
                 //更换银行卡
@@ -152,11 +153,9 @@ $(function(){
             }
         });
     }else {
-        $('#content').find('header').hide();
-        $('#content').find('.tip').show();
-        $('#content').find('.title').html('您还未登录');
-        $('#content').find('p').html('登录白金尊享，'+'<br>'+'查看所有工行信用卡服务和权益。');
-        $('#content').find('button').html('登录').click(function () {
+        $('#tip').show();
+        $('#tip').find('.title').html('您还未登录');
+        $('#tip').find('button').html('登录').click(function () {
             window.location.href = "login.html?his="+his;
         });
     }
@@ -165,20 +164,16 @@ $(function(){
     //菜单栏按钮点击
     function menuClickFn(type,groupId) {
         $('#loading').show();
-        if(!type){
-            $('section.index').show().siblings('section').hide();
-        }else {
-            $('section.allCards').show().siblings('section').hide();
-        }
         if(type == 'allCards'){
-            $('section.allCardsl').html('');
             getList('cardtype',{pageNum: 1});
-            $('section.allCards').preventScroll();//滚动条冒泡阻止
         }else if(type == 'groupCards'){
             getList('groupCards',{groupId: groupId});
-            $('section.allCards').preventScroll();//滚动条冒泡阻止
+            $('#cardDetail').show();
+            $('#tip').hide();
         }else {
             // 点击‘我的’
+            $('#cardDetail').hide();
+            myCardDeatil(kabin);
         }
     };
 
@@ -219,7 +214,7 @@ $(function(){
             success: function (result) {
                 $('#loading').hide();
                 if(typeStr == 'groupCards' && result.data.length == 0){
-                    $('section.allCards').html('<div class="singleCard"><p style="text-align: center">无此类信用卡卡种</p></div>');
+                    $('#cardDetail').html('<div class="singleCard"><p style="text-align: center">无此类信用卡卡种</p></div>');
                     return;
                 }
                 var len = result.data.list ? result.data.list.length : result.data.length;
@@ -253,7 +248,7 @@ $(function(){
                             }else {
                                 $(this).children('a').addClass('active');
                                 $(this).siblings('li').children('a').removeClass('active');
-                                $('section.allCards').html('');
+                                $('#cardDetail').html('');
                                 menuClickFn(match($(this).attr('data-groupId')),$(this).attr('data-groupId'));
                             }
                         });
@@ -270,12 +265,13 @@ $(function(){
                                 '<p>'+ cardList[i].description +'</p></div></div>';
                         }
                         if(!_obj.pageNum){
-                            $('section.allCards').html(str);
+                            $('#cardDetail').html(str);
+                            $("body").scrollTop($(window).outerHeight()); //滚动条滚动底部 
                         }else {
                            if(_obj.pageNum > 1){
                                $('#moreCard').remove();
                            }
-                            $('section.allCards').append(str+'<div id="moreCard">点击加载更多</div>');
+                            $('#cardDetail').append(str+'<div id="moreCard">点击加载更多</div>');
                             if(len < 10){
                                 $('#moreCard').hide();
                             }
@@ -309,7 +305,7 @@ $(function(){
                             return
                         }else {
                             $(this).addClass('active').siblings('li').removeClass('active');
-                            $('section.allCards').html('');
+                            $('#cardDetail').html('');
                             menuClickFn(match($(this).attr('data-groupId')),$(this).attr('data-groupId'));
                         }
                     });
@@ -329,10 +325,15 @@ $(function(){
 
     //我的信用卡详情
     function  myCardDeatil(kabin) {
+        if(!kabin){
+            $('#tip').show();
+            return
+        }
         $.get( port + '/card/cardtype/kinds?kabin=' + kabin ,function (result) {
             var cardList = result.data;
             if( result.data == '未匹配到卡信息' || result.data.length == 0){
-                $('#cardDetail').html('<p class="none">未匹配到卡信息</p>');
+                $('#tip').hide();
+                $('#cardDetail').show().html('<p class="none">未匹配到卡信息</p>');
             }else {
                 var len = result.data.length;
                 var cardStr = '';
@@ -342,14 +343,16 @@ $(function(){
                         '<div><h2>'+ cardList[i].name +'</h2>' +
                         '<p>'+ cardList[i].description +'</p></div></div>';
                 }
-                $('#cardDetail').html(cardStr);
+                $('#cardDetail').show().html(cardStr);
+                $('#tip').hide();
+                $("body").scrollTop($(window).outerHeight()); //滚动条滚动底部
                 $(".singleCard").click(function () {
                     window.location.href = 'ICBC_cardDetail.html?cardId=' + $(this).attr('data-cardid');
                 });
 
             }
         });
-    }
+    };
 
 
     //人群id 和 人群type
@@ -418,24 +421,16 @@ $(function(){
 
 
     //滚动到一定程度时候，悬浮菜单栏  获取要定位元素距离浏览器顶部的距离
-    var navH = $("nav").offset().top;
+    var navH = $("#content").offset().top;
     //滚动条事件
     $(window).bind('scroll',function () {
         //获取滚动条的滑动距离
         var scroH = $(this).scrollTop();
         //滚动条的滑动距离大于等于定位元素距离浏览器顶部的距离，就固定，反之就不固定
-        if(scroH >= navH){
-            $('nav').addClass('fixed');
-
-            $('nav>div:first-child').css({'width':'15%'});
-            $('nav > div:first-child img').css({'left':'15%'});
-            $('nav > div:last-child').css({'width':'70%'});
+        if(scroH >= navH+100){
+            $("#content").addClass('fixed');
         }else if(scroH<navH){
-            $('nav').removeClass('fixed');
-
-            $('nav>div:first-child').css({'width':'18%'});
-            $('nav > div:first-child img').css({'left':'18%'});
-            $('nav > div:last-child').css({'width':'70%'});
+            $("#content").removeClass('fixed');
         }
     });
 

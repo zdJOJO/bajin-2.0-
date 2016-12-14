@@ -5,7 +5,6 @@ h1,h2,h3{
 body{
 	margin: 0;
 	padding: 0;
-	font-size: 15px;
 }
 header ,section ,footer{
 	font-size: 15px;
@@ -62,37 +61,33 @@ header>center>div.active{
 
 footer{
 	width: 1rem;
-	height: 0.12rem;
+	height: 0.15rem;
 	background-color:#252525;
 	position: fixed;
 	bottom: 0;
+	z-index: 2500;
 	text-align: center;
-	z-index: 21;
 }
 footer div{
 	width: 0.25rem;
 	float: left;
 	box-sizing:border-box;
 	height: 0.12rem;
-	/*background-color: #222;*/
 }
 footer div img{
-	height: 0.04rem;
-	width: 0.04rem;
+	height: 0.055rem;
+	width: 0.055rem;;
 	margin-top: 0.02rem;
 }
 footer div p{
 	-webkit-margin-before: 0;
 	-webkit-margin-after: 0;
-	font-size: 9px;
-	/*line-height: 18px;*/
 	margin-top: 4px;
+	font-size: 9px;
 	color: #a7a7a7;
 }
 footer div.pierrePage{
-	/*background-color: #2E3133;*/
 	color: #fff0cc;
-	height: 0.12rem;
 }
 section{
 	width: 1rem;
@@ -100,11 +95,11 @@ section{
 	z-index: 19;
 	-webkit-margin-after: 0.11rem;
 	box-sizing: content-box;
-	margin-bottom: 0.12rem;
+	margin-bottom: 0.14rem;
 }
 
 section .content .lar{
-	height: 0.68rem;
+	height: 0.72rem;
 	width: 47%;
 	float: left;
 	margin: 2% 1% 0 1%;
@@ -146,7 +141,7 @@ section .content .lar .detail .subTitle{
 }
 section .content .lar .detail .title{
 	height: 0.125rem;
-	line-height: 0.06rem;
+	line-height: 0.07rem;
 	color: #353535;
 	font-size: 0.9em;
 	display: -webkit-box;
@@ -155,7 +150,7 @@ section .content .lar .detail .title{
 	overflow: hidden;
 	border-bottom: 1px #f0f0f0 solid;
 	text-align: left;
-	padding: 0 0.02rem;
+	padding: 0.02rem;
 }
 section .content .lar .detail .pirce{
 	font-size: 14px;
@@ -205,16 +200,31 @@ section .content .uad .buy{
 /*购物车悬浮图标*/
 .shoppingCart{
 	font-size: 16px;
-	position:fixed;
-	right: 0.02rem;
-	top: 1.5%;
+	position: fixed;
+	right: 0.04rem;
+	top: 0.04rem;
 	z-index: 40;
-	height:
 }
 .shoppingCart img{
 	width: auto;
-	height: 0.08rem;
+	height: 0.07rem;
 }
+
+.shoppingCart .num{
+	width: 0.045rem;
+	height: 0.045rem;
+	line-height: 0.045rem;
+	display: inline-block;
+	background: #dd1415;
+	border-radius: 100%;
+	position: fixed;
+	right: 0.02rem;
+	top: 0.03rem;
+	z-index: 45;
+	text-align: center;
+	color: #fff;
+}
+
 /*店铺样式表*/
 .brandList .topBanner{
 	width: 1rem;

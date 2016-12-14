@@ -175,7 +175,7 @@
                                                                 }
                                                                 },
                                                                 { text: "确认离开",className: "default",onClick: function(){
-                                                                    window.location.href = "myOrders.html";
+                                                                    window.location.href = "myOrders.html#activityOrder";
                                                                 }
                                                                 },
                                                             ]

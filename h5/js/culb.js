@@ -164,7 +164,7 @@ $(function(){
 
                 if(!isHotDoor){
                     $('#actList>.lists').append(actStr);
-                    $('.infoList').css('margin-bottom','0.123rem');
+                    $('.infoList').css('margin-bottom','0.15rem');
                 }else {
                     $('.lists').append(actStr);
                 }

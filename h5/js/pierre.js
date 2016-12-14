@@ -291,7 +291,7 @@ $(document).ready(function(){
 	if(token){
 		$.get(port+"/card/car?currentPage="+1+"&size="+ 10 +"&token="+token ,function (result) {
 			if(result.list.length > 0){
-				$(".shoppingCart>img").attr('src','imgs/shoppingCart-2.png');
+				$(".shoppingCart>.num").show().html(result.list.length);
 			}
 		})
 	}

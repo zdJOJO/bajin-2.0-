@@ -95,6 +95,7 @@ $(document).ready(function() {
 				}
 
 				var str = '';
+				var state = '';
 				for(var i=0,len=res.list.length;i<len;i++){
 					if(res.list[i].applyPrice == 0){//付款与否的状态确定
 						state = "会员专享";
@@ -176,7 +177,7 @@ $(document).ready(function() {
 						state = "待付款";
 						isCancelStr = '<button class="payNow">立即支付</button><button class="cancel" data-cardId="'+cardId+'">取消订单</button>';
 					}else if(data.list[i].orderModel.orderState == 2){
-						state = "已付款";
+						state = "待发货";
 					}else if(data.list[i].orderModel.orderState == 3){
 						state = "已发货";
 					}

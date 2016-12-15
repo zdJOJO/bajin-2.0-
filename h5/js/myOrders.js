@@ -174,12 +174,15 @@ $(document).ready(function() {
 					}
 
 					if(data.list[i].orderModel.orderState == 1){
-						state = "待付款";
+						state = "";
 						isCancelStr = '<button class="payNow">立即支付</button><button class="cancel" data-cardId="'+cardId+'">取消订单</button>';
 					}else if(data.list[i].orderModel.orderState == 2){
 						state = "待发货";
 					}else if(data.list[i].orderModel.orderState == 3){
 						state = "已发货";
+						isCancelStr = '<button class="cancel logisticsInfo" data-cardId="'+cardId+'">' +
+							'<a style="color: #646464;width: 100%;height: 100%" ' +
+							'href="logisticsInfo.html?expressId='+data.list[i].orderModel.expressId+'">查看物流</a></button>';
 					}
 					html += '<div class="itemGood" data-cardId="'+cardId+'" data-state="'+data.list[i].orderModel.orderState+'">' +
 						'<h4><span>订单编号: '+data.list[i].orderModel.orderId+'</span><i>'+state+'</i></h4>' +
@@ -189,14 +192,13 @@ $(document).ready(function() {
 				$('#loading').hide();
 				//绑定点击跳转事件
 				$(".itemGood").bind("click",function(){
-					if($(this).attr('data-state')=='3'){
-						window.location.href = "unpaid.html?cardid=" + $(this).attr('data-cardId') + '&orderState=3';
-					}else {
-						window.location.href = "unpaid.html?cardid=" + $(this).attr('data-cardId');
-					}
+					window.location.href = "unpaid.html?cardid=" + $(this).attr('data-cardId');
 				});
 				//取消订单
 				$(".itemGood").find('.cancel').click(function (event) {
+					if($(this).hasClass('logisticsInfo')){
+						return
+					}
 					var $thisParent = $(this).parent().parent();
 					event.stopPropagation();
 					$.modal({

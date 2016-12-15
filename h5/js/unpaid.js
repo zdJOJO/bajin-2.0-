@@ -10,7 +10,8 @@ $(document).ready(function(){
 	var hrefStr = window.location.search;
 	var cardid = hrefStr.split("=")[1];
 	var goodId = hrefStr.split("=")[2];   //goodId
-	var orderState = GetQueryString('orderState');
+	var orderStateStr = GetQueryString('orderState');
+	var orderState = 0;
 
 	var his = window.location.pathname.split("/");
 	his = his[his.length-1];
@@ -43,28 +44,27 @@ $(document).ready(function(){
 			if(!data){
 				window.location.href = 'index.html'
 			}
-			var orderState = '';
+			orderState = data.orderModel.orderState;
 			if(data.orderModel.orderState==1){
-				orderState = '待付款';
+				orderStateStr = '待付款';
 			}else if(data.orderModel.orderState==2){
-				orderState = '已付款';
+				orderStateStr = '待发货';
 				$('footer').hide();
 			}else if(data.orderModel.orderState==3){
-				orderState = '已发货';
+				orderStateStr = '已发货';
 			}else if(data.orderModel.orderState==4){
-				orderState = '已退款';
+				orderStateStr = '已退款';
 			}else if(data.orderModel.orderState==5){
-				orderState = '交易关闭';
+				orderStateStr = '交易关闭';
 			}else if(data.orderModel.orderState==6){
-				orderState = '已收货';
+				orderStateStr = '已收货';
 			}else {
-				orderState = '全部';
+				orderStateStr = '全部';
 			}
-			var cancelOrderStr = data.orderModel.orderState==1 ? '<i id="cancelOrder">取消订单</i>' : '' ;
-			var orderInfoStr = '<h3>订单信息</h3>' +
-				'<ul><li><span>订单编号:</span><span>'+data.orderModel.orderId+'</span></li>' +
+			var cancelOrderStr = orderState==1 ? '<button id="cancelOrder">取消订单</button>' : '' ;
+			var orderInfoStr = '<h3>订单信息</h3><ul><li><span>订单编号:</span><span>'+data.orderModel.orderId+'</span></li>' +
 				'<li><span>下单时间:</span><span>'+new Date(data.orderModel.createTime*1000).Formate()+'</span></li>' +
-				'<li><span>订单状态:</span>'+cancelOrderStr+'<span>'+orderState+'</span></li></ul>';
+				'<li><span>订单状态:</span>'+cancelOrderStr+'<span>'+orderStateStr+'</span></li></ul>';
 			$('#info').children('.orderInfo').html(orderInfoStr);
 			$("#cancelOrder").bind("click",function(){
 				cancelOrderFn($("#cancelOrder"));
@@ -78,9 +78,8 @@ $(document).ready(function(){
 					'<p><span class="price">￥'+data.detailOrderModels[i].skuPrice.toFixed(2)+'</span>' +
 					'<span class="num">×'+ data.detailOrderModels[i].count+'</span></p></div></div><div></div>';
 			}
-			var tellStr = '<div class="tell"><a href="tel:">联系白金尊享</a><span><img src="imgs/enjoy/right.png" style="width: 0.02rem"></span></div>';
-			$('#info').children('.goodInfo').append(goodInfoStr).append(tellStr);
-
+			//var tellStr = '<div class="tell"><a href="tel:">联系白金尊享</a><span><img src="imgs/enjoy/right.png" style="width: 0.02rem"></span></div>';
+			$('#info').children('.goodInfo').append(goodInfoStr);
 			if(window.location.href.indexOf('brandDetail') > 0 ){
 				goodId = data.detailOrderModels[0].goodsId;
 			}
@@ -111,8 +110,9 @@ $(document).ready(function(){
 				type:"get",
 				url:port+"/card/receiver/"+data.orderModel.receiveId+"?token="+token,
 				success:function(data){
-					var addressStr = '<h3>配送信息</h3><ul>' +
-						'<li><span>收货人:</span><span>'+data.receiverName+'</span></li>' +
+					var headrStr = orderState==3 ? '<h3>配送信息<a href="logisticsInfo.html?expressId='+expressId+'"">查看物流 ></a></h3>'
+						: '<h3>配送信息</h3>';
+					var addressStr = headrStr + '<ul><li><span>收货人:</span><span>'+data.receiverName+'</span></li>' +
 						'<li><span>联系电话:</span><span>'+data.receiverPhone+'</span></li>' +
 						'<li class="adderDetail"><span>收货地址:</span>' +
 						'<span>'+data.province+data.city+data.district+data.detilAddress+'</span>' +

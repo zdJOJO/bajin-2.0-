@@ -28,8 +28,9 @@
     </div>
 
 </body>
-<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery/jquery-weui.min.js"></script>
+<script type="text/javascript" src="js/public/public.js"></script>
 <script type="text/javascript">
 
     var expressId = window.location.search.split('=')[1];
@@ -62,6 +63,8 @@
                 }
 
                 $('#detail ul').append(infoDetailStr);
+                $('#detail').find('li:first-child').addClass('active');
+                $('#detail').find('li:first-child').children('.point').addClass('active');
             }
         },
         error:function(XMLHttpRequest, textStatus, errorThrown) {

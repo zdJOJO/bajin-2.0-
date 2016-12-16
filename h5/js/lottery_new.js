@@ -11,27 +11,11 @@ $(function (){
     var searchStr = window.location.search;
     var phoneNumArray = ['139****3415','131****3995','189****5613','157****5779','182****2235','131****5809','156****2175','136****5889','187****4779'];
 
-    //获取存在于cookie中的token值
-    function getCookie(c_name) {
-        if (document.cookie.length>0) {
-            c_start=document.cookie.indexOf(c_name + "=")
-            if (c_start!=-1)
-            {
-                c_start=c_start + c_name.length+1
-                c_end=document.cookie.indexOf(";",c_start)
-                if (c_end==-1) c_end=document.cookie.length
-                return unescape(document.cookie.substring(c_start,c_end))
-            }
-        }
-        return undefined;
-    }
-
-
     if(searchStr.indexOf('token')>0){
         token = searchStr.split("&")[1].split("=").length == 2 ? searchStr.split("&")[1].split("=")[1] : '';
         setCookie('token',token);
     }
-    token = getCookie("token");
+    token = getCookie("token") || 0;
 
 
     if( searchStr.indexOf('id')>0 || searchStr.indexOf('sectionId')>0){
@@ -62,6 +46,8 @@ $(function (){
         event: 'scroll'
     });
 
+
+    hitsOnFn(token,12,1,sectionId);
 
     //是否为白金卡用户
     if(token){

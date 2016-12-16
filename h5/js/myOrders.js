@@ -95,20 +95,20 @@ $(document).ready(function() {
 				}
 
 				var str = '';
-				var state = '';
+				var stateStr = '';
 				for(var i=0,len=res.list.length;i<len;i++){
 					if(res.list[i].applyPrice == 0){//付款与否的状态确定
-						state = "会员专享";
+						stateStr = "会员专享";
 					}else{
 						if(res.list[i].isPay==0){
-							state = "待付款";
+							stateStr = "待付款";
 						}else if(res.list[i].isPay==1){
-							state = "已付款";
+							stateStr = "已付款";
 						}
 					}
 					str += '<div class="singleAppointment" data-id="'+res.list[i].applyId+'" data-timeStamp="'+res.list[i].createTime+'" data-price="'+res.list[i].applyPrice+'" data-isPay="'+res.list[i].isPay+'">' +
 						'<img src="'+res.list[i].activity.maxPic+'"/><div class="detail">' +
-						'<h4>'+res.list[i].activity.activityTitle+'</h4><span>'+state+'</span><p class="time">' +
+						'<h4>'+res.list[i].activity.activityTitle+'</h4><span>'+stateStr+'</span><p class="time">' +
 						'<img src="imgs/time.png"/>'+new Date(res.list[i].activity.startTime*1000).Formate()+' - '+new Date(res.list[i].activity.endTime*1000).Formate()+'</p>' +
 						'<p class="address"><img src="imgs/address.png"/>'+res.list[i].activity.activityAddress+'</p></div></div>';
 				}
@@ -162,7 +162,7 @@ $(document).ready(function() {
 				var html = '';
 				for(var i=0;i<data.list.length;i++){
 					var str= "";
-					var state = "";
+					var stateStr = "";
 					var cardId = data.list[i].orderModel.orderId;
 					var isCancelStr = '';
 					for(var j=0; j<data.list[i].detailOrderModels.length;j++){
@@ -174,18 +174,20 @@ $(document).ready(function() {
 					}
 
 					if(data.list[i].orderModel.orderState == 1){
-						state = "";
+						stateStr = "待付款";
 						isCancelStr = '<button class="payNow">立即支付</button><button class="cancel" data-cardId="'+cardId+'">取消订单</button>';
 					}else if(data.list[i].orderModel.orderState == 2){
-						state = "待发货";
+						stateStr = "待发货";
 					}else if(data.list[i].orderModel.orderState == 3){
-						state = "已发货";
+						stateStr = "已发货";
 						isCancelStr = '<button class="cancel logisticsInfo" data-cardId="'+cardId+'">' +
 							'<a style="color: #646464;width: 100%;height: 100%" ' +
 							'href="logisticsInfo.html?expressId='+data.list[i].orderModel.expressId+'">查看物流</a></button>';
+					}else if(data.list[i].orderModel.orderState == 6){
+						stateStr = "已收货";
 					}
 					html += '<div class="itemGood" data-cardId="'+cardId+'" data-state="'+data.list[i].orderModel.orderState+'">' +
-						'<h4><span>订单编号: '+data.list[i].orderModel.orderId+'</span><i>'+state+'</i></h4>' +
+						'<h4><span>订单编号: '+data.list[i].orderModel.orderId+'</span><i>'+stateStr+'</i></h4>' +
 						'<ul class="goodDetailList">'+str+'</ul><div><span>总价：<i>￥'+data.list[i].orderModel.orderCount.toFixed(2)+'</i></span>'+isCancelStr+'</div></div>';
 				}
 				$goodsOrder.append(html);
@@ -252,22 +254,22 @@ $(document).ready(function() {
 
 				for(var i=0;i<res.data.list.length;i++){
 					var str = "";
-					var state = '<span class="state"></span>';
+					var stateStr = '<span class="state"></span>';
 					var orderHandle  = '<span></span>';
 					if(res.data.list[i].status == 0){
-						state = '<span class="state">待付款</span>';
+						stateStr = '<span class="state">待付款</span>';
 						orderHandle = '<button class="pay">去付款</button>'
 					}else if(res.data.list[i].status == 1){
-						state = '<span class="state">待使用</span>';
+						stateStr = '<span class="state">待使用</span>';
 						orderHandle = '<button class="pay">使用</button>'
 					}else if(res.data.list[i].status == 2){
-						state = '<span class="state finished">已完成</span>';
+						stateStr = '<span class="state finished">已完成</span>';
 						orderHandle = '<button class="pay">评价</button>'
 					}else if(res.data.list[i].status == 3){
-						state = '<span class="state cancel">已取消</span>';
+						stateStr = '<span class="state cancel">已取消</span>';
 						orderHandle = '<button class="deleteOrder" data-orderid="'+res.data.list[i].id+'">删除订单</button>';
 					} else if(!res.data.list[i].status){
-						state = "全部";
+						stateStr = "全部";
 					}
 
 					if(res.data.list[i].status == 0){
@@ -276,7 +278,7 @@ $(document).ready(function() {
 						timerStr = '<li class="timer" style="height: 0"></li>';
 					}
 					str = $('<div class="itemOrder" data-orderid="'+res.data.list[i].id+'">' +
-						'<ul><li><span class="orderNum">订单编号:'+res.data.list[i].number+'</span>'+state+'</li> ' +
+						'<ul><li><span class="orderNum">订单编号:'+res.data.list[i].number+'</span>'+stateStr+'</li> ' +
 						'<li class="content"><img src="'+res.data.list[i].productModel.pic+'"><span class="title">'+res.data.list[i].title+'</span></li>' +
 						'<li><span>￥'+res.data.list[i].sumPrice.toFixed(2)+'</span>'+orderHandle+'</li>'+timerStr+'</ul> </div>');
 

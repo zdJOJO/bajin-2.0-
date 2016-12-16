@@ -54,10 +54,12 @@ $(document).ready(function(){
 				orderStateStr = '已发货';
 			}else if(data.orderModel.orderState==4){
 				orderStateStr = '已退款';
+				$('footer').hide();
 			}else if(data.orderModel.orderState==5){
 				orderStateStr = '交易关闭';
 			}else if(data.orderModel.orderState==6){
 				orderStateStr = '已收货';
+				$('footer').hide();
 			}else {
 				orderStateStr = '全部';
 			}
@@ -104,6 +106,41 @@ $(document).ready(function(){
 				}
 
 			});
+
+			//已发货订单 需要确认收货
+			if(orderState == 3){
+				$('.logistical').show();
+				$('.logistical a').click(function () {
+					window.location.href = "logisticsInfo.html?expressId=" + expressId ;
+				});
+				$('footer').html('<p class="confirmReceipt">确认收货</p>');
+				$('footer .confirmReceipt').click(function () {
+					$.modal({
+						title: "提示",
+						text: '确认收货吗?',
+						buttons: [
+							{ text: "确定", onClick: function(){
+								$.ajax({
+									type: 'put',
+									url: port + '/card/order/' + data.orderModel.orderId + '?token=' + token,
+									data: JSON.stringify({
+										orderState: 6  //确认收货状态
+									}),
+									dataType: "json",
+									contentType : "application/json",
+									success: function (res) {
+										window.location.href = 'myOrders.html#goodsOrder';
+									},
+									error: function (e) {
+										//todo
+									}
+								})
+							} },
+							{ text: "取消", className: "default", onClick: function(){ console.log(3)} },
+						]
+					});
+				});
+			};
 			
 			//这里需要拿到收货人的receiveId再来请求收货地址以及相关的东西
 			$.ajax({
@@ -254,16 +291,6 @@ $(document).ready(function(){
 			]
 		});
 	});
-
-
-	//已付款  订单的 详情页面
-	if(orderState == '3'){
-		$('.logistical').show();
-		$('footer').html('').append('<p class="confirmReceipt">确认收货</p>');
-		$('.logistical a').click(function () {
-			window.location.href = "logisticsInfo.html?expressId=" + expressId ;
-		});
-	}
 });
 
 

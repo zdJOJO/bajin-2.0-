@@ -3,7 +3,6 @@ html,body{
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 黑体;
     font-size: 16px;
     color: #b2b2b2;
     background: rgba(189, 189, 189, 0.06);
@@ -68,8 +67,12 @@ body>ul>li.statu{
     position: relative;
 }
 
-#detail>ul>li:first-child{
+#detail>ul>li.active{
     color: #23C225;
+}
+
+#detail>ul>li>.point.active{
+    background: #23C225;
 }
 
 #detail>ul>li>.point{
@@ -80,11 +83,6 @@ body>ul>li.statu{
     border-radius: 10px;
     background: #DADADA;
     left: -53px;
-}
-
-
-#detail>ul>li>span:last-child{
-    color: #b2b2b2;;
 }
 
 

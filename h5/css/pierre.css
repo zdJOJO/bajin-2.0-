@@ -5,6 +5,7 @@ h1,h2,h3{
 body{
 	margin: 0;
 	padding: 0;
+	font-size: 15px;
 }
 header ,section ,footer{
 	font-size: 15px;

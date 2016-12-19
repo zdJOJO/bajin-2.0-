@@ -22,6 +22,7 @@ $(function(){
 					data.gender="";
 				}
 				$(".headPic").attr("src",headPic);
+				$("#userName").html(data.userName);
 				$("#setUserName").val(data.userName);
 				$("#setPhoneNum").val(data.phone);
 				$("#setAgx").val(data.gender);
@@ -51,7 +52,6 @@ $(function(){
 	var  info = {};
 	$("#myImage,#setUserName,#setEmail,#setAddress,select").blur(function(){
 		//更新设置函数
-		
 		var regExp = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
 		if(regExp.test($("#setEmail").val())||$("#setEmail").val()==""){
 			if($("#setUserName").val().length>18){
@@ -83,6 +83,7 @@ $(function(){
 							if(data.code == '202'){
 								if($(this).attr('id') != 'myImage'){
 									$.toast('更新成功');
+									$("#userName").html(info.userName);
 								}
 							}else {
 								$.toast('更新失败');

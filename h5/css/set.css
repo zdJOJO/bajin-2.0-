@@ -6,92 +6,109 @@ h1,h2,h3{
 }
 body{
 	font-family: "微软雅黑";
-	background: #fff;
+	background: #fafafa;
 }
+
+input{
+	background: #fafafa;
+}
+
 center,.wrap{
 	font-size: 16px;
 }
 center{
 	width: 1rem;
-	height: 0.5rem;
+	height: 0.85rem;
+	background: url(../images/login/set-bg.png) no-repeat;
+	background-size: 100%;
+	position: relative;
 }
 center input,center img{
-	width: 0.3rem;
-	height: 0.3rem;
-	border-radius: 0.3rem;
+	width: 0.2rem;
+	height: 0.2rem;
+	border-radius: 100%;
 	position: absolute;
-	top: 0.1rem;
+	top: 0.45rem;
+	right: 0.38rem;
 }
 center input{
 	opacity:0;
-	left: 0.35rem;
 	z-index: 20;
 }
-center img{
-	right: 0.35rem;
-	left: 0.35rem;
+
+#myImage{
 	z-index: 19;
+	border: 4px #fafafa solid;
 }
-.wrap{
+
+#cover{
+	width: 1rem;
+	height: auto;
+}
+
+#userName{
+	display: inline-block;
+	width: 1rem;
 	position: absolute;
-	top: 0.5rem;
+	top: 0.7rem;
+	margin-left: -0.5rem;
+	color: #323232;
+	z-index: 10;
+	font-size: 1.1em;
 }
+
+
+
 .wrap div{
 	position: relative;
-	box-sizing:border-box;
+	box-sizing: border-box;
 	border-bottom: #f2f2f2 1px solid;
-	height: 0.18rem;
 	width: 1rem;
-	line-height: 0.18rem;
-	padding-left: 0.04rem;
-	padding-right: 0.04rem;
+	height: 0.15rem;
+	line-height: 0.15rem;
+	padding: 0 0.04rem;
 }
 .wrap div img{
 	width: auto;
 	height: 15px;
 	position: absolute;
-	top: 0.079rem;
+	top: 0.065rem;
 	right: 0.04rem;
 }
 .wrap div input{
-	color:#888;
+	color:#909090;
 	text-align: right;
 	overflow: hidden;
 	width: 0.5rem;
 	position: absolute;
 	height: 0.06rem;
 	line-height: 0.06rem;
-	font-size: 14px;
-	top: 0.065rem;
+	font-size: 0.9em;
+	top: 0.05rem;
 	right: 0.08rem;
 	border: none;
 	padding-right: 20px;
 }
 .wrap div input#setPhoneNum{
 	width: 0.25rem;
-	background-color: #fff;
-    color: #000;
+    color: #909090;
 }
 .wrap div input#setAddress{
-	background-color: #fff;
-    color: #000;
+    color: #909090;
 }
 select#setAgx{
     color: #888;
     text-align: right;
-    /*overflow: hidden;*/
-    /*width: 0.1rem;*/
     position: absolute;
-    height: 0.04rem;
-    top: 0.065rem;
+    top: 0.05rem;
     right: 0.08rem;
     height: 0.06rem;
     font-size: 14px;
     border: none;
+	background: #fafafa;
     appearance:none;
  	-moz-appearance:none; /* Firefox */
  	-webkit-appearance:none; /* Safari 和 Chrome */
- 	background-color: #fff;
 	padding-right: 20px;
 }
 .wrap div .btn{
@@ -111,11 +128,12 @@ select#setAgx{
 .wrap div input:disabled{
 	color:#888;
 }
-.wrap div input#setAddress{
-	background-color: #fff;
-}
 
 #setAddress{
-	width: 0.6rem;
+	width: 0.45rem;
 	text-overflow: ellipsis;
+}
+
+label{
+	font-size: 0.9em;
 }

@@ -112,45 +112,6 @@ var isCollected = function (type) {
 
 //每一页评论默认返回10条数据
 var isPublishCtm = false;
-// var getCommentList = function (page) {
-//
-//     $('#loading').show();
-//     $('#loading span').show();
-//     $('#moreComts').hide();
-//
-//     if(isPublishCtm){
-//         $("article>.comments>.commentList").html('');
-//     }
-//
-//     commentStr = '' ;
-//
-//     var url = port + '/card/comment/list?currentPage=' + page + '&type=' + typeNum + '&itemId=' + itemId ;
-//     $.get(url ,function (data) {
-//         $("article>.comments>.totalNum").html('共' + data.rowCount + '条评论');
-//         if(data.list.length !=0){
-//             var headPicStr = '';
-//             var nameStr = '';
-//             for(var i=0 ;i<data.list.length;i++){
-//                 if(data.list[i].user){
-//                     headPicStr = data.list[i].user.headPic || portStr + '/imgs/headPic_default.png' ;
-//                     nameStr = data.list[i].user.userName || '';
-//                 }else {
-//                     headPicStr = portStr + '/imgs/headPic_default.png';
-//                     nameStr = '';
-//                 }
-//                 commentStr += '<li class="singleCmt">' +
-//                     '<img src="'+ headPicStr +'">' + '<span class="userName">' + nameStr + '</span>' +
-//                     '<p>'+ data.list[i].commentContent +'</p>' + '<span class="creatTime">'+ timeAgo((new Date().getTime()/1000)-data.list[i].createTime) +'</span></li>';
-//             }
-//             $("article>.comments>.commentList").append(commentStr);
-//             $('#loading').hide();
-//             $('#moreComts').show();
-//         }else {
-//             setTimeout('$("#loading").hide()',1000);
-//         }
-//     });
-// };
-
 
 
 //获取评论
@@ -163,8 +124,8 @@ function  getComment(itemId) {
                 $("#comment").find('.cmtNUm').html('评论 ' + result.rowCount + '条');
                 var headPicStr = result.list[0].user.headPic || portStr + '/imgs/headPic_default.png';
                 $('#comment').find('.list').show().html('<img src="'+ headPicStr +'">' +
-                    '<span>'+ result.list[0].user.userName +'</span>' +
-                    '<p>' + result.list[0].commentContent + '</p>');
+                    '<div class="customerCmt"><span>'+ result.list[0].user.userName +'</span>' +
+                    '<p>' + result.list[0].commentContent + '</p></div>');
             }else {
                 $('#comment>.box').css({'margin-top': '0.02rem'});
             }

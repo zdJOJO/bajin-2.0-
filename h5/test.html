@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+test test  test
+</body>
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/public/public.js"></script>
+<script>
+    try {
+        javascript: window.handler.isNativeApp();    //Android
+        javascript: window.handler.getNativeAppToken();    //Android
+        if(window.handler.isNativeApp() || window.handler.getNativeAppToken()){
+            alert('Android');
+            alert(window.handler.getNativeAppToken());
+            alert(window.handler.isNativeApp());
+        }else {
+            alert('error');
+        }
+
+    }catch (e){
+        //todo
+        alert('error');
+    }
+
+
+//IOS
+    try {
+        if(isNativeApp() || getNativeAppToken()){
+            alert('IOS');
+            alert(getNativeAppToken())
+            alert(isNativeApp());
+        }else {
+            alert('error');
+        }
+
+    }catch (e){
+        //todo
+        alert('error');
+    }
+</script>
+</html>

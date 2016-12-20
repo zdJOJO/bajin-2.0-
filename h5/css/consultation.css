@@ -1,5 +1,5 @@
 html,body{
-    font-size: 20px;
+    font-size: 15px;
     width: 100%;
     height: 100%;
     margin: 0;
@@ -14,42 +14,31 @@ ul li{
 }
 
 header{
-    position: relative;
-    height: 0.25rem;
-    border-top: 1px rgba(128, 128, 128, 0.21) solid;
+    border-bottom: 1px rgba(128, 128, 128, 0.21) solid;
+    overflow: hidden;
+    margin-bottom: 0.04rem;
 }
 
 header>h3{
-    margin-top: 25px;
-    padding-left: 4.5%;
+    width: 80%;
+    text-align: center;
+    margin: 0.05rem auto 0.03rem auto;
+    font-size: 1.4em;
+    color: #323232;
 }
 
 header>span{
-    font-size: 0.7em;
-    color: #808080;
-    display: block;
-    position: absolute;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding-left: 9%;
-    width: 25%;
+    display: inline-block;
+    float: left;
+    font-size: 0.9em;
+    color: #909090;
+    height: 0.08rem;
+    line-height: 0.08rem;
+    margin-left: 0.04rem;
 }
 
-header>.abstr{
-    background: url("../imgs/life-hot/author.png") no-repeat 0 55%;
-    background-size: 30%;
-    left: 3%;
-    top: 67%;
-
-}
-
-header>.time{
-    background: url("../imgs/life-hot/time.png") no-repeat 0 55%;
-    background-size: 30%;
-    left: 30.5%;
-    top: 67%;
-    margin-left: 10px;
+header>.author{
+    margin-left: 0.06rem;
 }
 
 #collectionShare{
@@ -84,8 +73,11 @@ article>.content{
 article>.content>.readNum{
     display: block;
     color: rgba(173, 173, 173, 0.53);
-    font-size: 0.8em;
-    margin-top: 10px;
+    font-size: 0.9em;
+    margin: 0.01rem;
+    padding-left: 0.07rem;
+    background: url(../imgs/life-hot/time.png) no-repeat -2% 50%;
+    background-size: 9%;
 }
 
 article img{
@@ -225,10 +217,6 @@ footer>.box{
 @media only screen and (min-width: 430px){
     header>h3{
         margin-top: 20px;
-        width: 72%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
     }
     #collectionShare {
         position: absolute;
@@ -240,13 +228,6 @@ footer>.box{
 
 
 @media only screen and (max-width: 430px){
-    header>h3{
-        margin-top: 20px;
-        width: 72%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
     #collectionShare{
         top: 0.063rem;
     }
@@ -255,14 +236,6 @@ footer>.box{
 
 /*   */
 @media only screen and (max-width: 420px){
-    header>h3{
-        margin-top: 20px;
-        width: 70%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
     #collectionShare{
         top: 0.065rem;
     }
@@ -301,15 +274,6 @@ footer>.box{
 
     #commentContent {
         margin-top: 10px;
-    }
-
-
-    header>h3{
-        margin-top: 20px;
-        width: 68%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
     }
 
     article >.comments>.commentList>.singleCmt{

@@ -7,32 +7,12 @@ $(function(){
     	his = "index.html";
     }
 
-	function focusFn(inputId) {
-		var imgPath = inputId=='user' ? 'images/login/phone.png' : 'images/login/pwd.png';
-		var $this = $('#'+inputId);
-		$this.prev('img').attr('src',imgPath);
-		$this.next('.cancel').show();
-	}
-
-	function blurFn(inputId) {
-		var imgPath = inputId=='user' ? 'images/login/unphone.png' : 'images/login/unpwd.png';
-		var $this = $('#'+inputId);
-		if(!$this.val()){
-			$this.prev('img').attr('src',imgPath);
-			$this.next('.cancel').hide();
-		}
-	}
-
 	$('#user').focus(function () {
-		focusFn('user');
-	}).blur(function () {
-		blurFn('user');
+		$(this).addClass('active');
 	});
 
 	$('#pass').focus(function () {
-		focusFn('pass');
-	}).blur(function () {
-		blurFn('pass');
+		$(this).addClass('active');
 	});
 
 	$('#content').find('.cancel').click(function () {
@@ -133,12 +113,9 @@ $(function(){
     });
 
     (function() {
-        // window.history.pushState({page : 1}, 'test', 'index.html');
-        // window.history.pushState({page : 2}, 'test', 'index.html');
-        history.replaceState(null, "首页", "index.html");
+		history.replaceState(null, "首页", "index.html");
 	    window.onpopstate = function(e) {
-	        // alert(e.state);
-	        // alert(2222222);
+	      	//todo
 	    };
 	})();
 });

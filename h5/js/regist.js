@@ -100,13 +100,7 @@ $(function(){
 																		//设置cookie
 																		setCookie("token",data.message,365);
 																		setCookie("phone",phoneNum,365);
-
-																		//测试  环境
-																		window.location.href = 'login.html?his=index.html';
-
-																		// //正式环境  微信授权
-																		// var token = getCookie("token");
-																		// window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx886a1d1acb7084a5&redirect_uri=http%3a%2f%2fwww.winthen.com%2fcard%2fweixin%2fauthorize&response_type=code&scope=snsapi_base&state=" + token + "bjzx" + "index.html#wechat_redirect";
+																		window.location.href = 'interesting.html';
 																	}
 																});
 															}else{

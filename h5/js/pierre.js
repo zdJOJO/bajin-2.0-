@@ -89,7 +89,8 @@ $(document).ready(function(){
 						if(token){
 							hitsOnFn(token,3,1,$(this).data("id"));
 						}
-						window.location.href = "brandDetail.html?id="+$(this).data("id");
+						console.log($(this))
+						//window.location.href = "brandDetail.html?id="+$(this).data("id");
 					});
 
 

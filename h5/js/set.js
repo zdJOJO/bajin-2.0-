@@ -12,7 +12,7 @@ $(function(){
 			if(typeof(data) == "string"){
 				window.location.href = "login.html?his="+his;
 			}else{
-				var headPic = data.headPic==""?"imgs/defaultPic.png":data.headPic;
+				var headPic = data.headPic==""?"imgs/headPic_default.png":data.headPic;
 				if(data.gender==1){
 					data.gender="男"
 				}else if(data.gender==2){
@@ -27,7 +27,7 @@ $(function(){
 				$("#setPhoneNum").val(data.phone);
 				$("#setAgx").val(data.gender);
 				// $("#setGx").val(data.signature==undefined?"":data.signature);
-				$("#setEmail").val(data.email==undefined?"":data.email);
+				//$("#setEmail").val(data.email==undefined?"":data.email);
 
 				//将用户的手机号存入cookie
 				setCookie('phone',data.phone,365);
@@ -49,56 +49,49 @@ $(function(){
 
 
 	//  #setPic  #setUserName #setEmail #setAddress
-	var  info = {};
-	$("#myImage,#setUserName,#setEmail,#setAddress,select").blur(function(){
-		//更新设置函数
-		var regExp = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
-		if(regExp.test($("#setEmail").val())||$("#setEmail").val()==""){
-			if($("#setUserName").val().length>18){
-				alert("用户名的字符不要超过18个字符");
-			}else{
-				var setAgx = $("#setAgx").val();
-				if(setAgx=="男"){
-					setAgx=1;
-				}else{
-					setAgx=2
-				}
-
-				info = {
-					"headPic":$("#myImage").attr("src"),
-					"gender": setAgx,
-					"userName": $("#setUserName").val(),
-					"email":$("#setEmail").val()
-				};
-
-
-				//更新信息
-				if(setAgx && info.userName){
-					$.ajax({
-						type:"PUT",
-						url:port+"/card/user?token="+token,
-						contentType: "application/json",
-						data:JSON.stringify(info),
-						success:function(data){
-							if(data.code == '202'){
-								if($(this).attr('id') != 'myImage'){
-									$.toast('更新成功');
-									$("#userName").html(info.userName);
-								}
-							}else {
-								$.toast('更新失败');
-							}
-						},
-						error:function(data){
-							// window.location.href = "login.html?his="+his;
-						}
-					});
-				}else {
-					$.toast('请正确填姓名');
-				}
-			}
+	var info = {};
+	$("#myImage,#setUserName,#setAddress,select").blur(function(){
+		if($("#setUserName").val().length>18){
+			$.alert("用户名的字符不要超过18个字符");
 		}else{
-			$.toast("请输入正确格式的邮箱地址");
+			var setAgx = $("#setAgx").val();
+			if(setAgx=="男"){
+				setAgx=1;
+			}else{
+				setAgx=2
+			}
+
+			info = {
+				"headPic":$("#myImage").attr("src"),
+				"gender": setAgx,
+				"userName": $("#setUserName").val(),
+			};
+
+
+			//更新信息
+			if(setAgx && info.userName){
+				$.ajax({
+					type:"PUT",
+					url:port+"/card/user?token="+token,
+					contentType: "application/json",
+					data:JSON.stringify(info),
+					success:function(data){
+						if(data.code == '202'){
+							if($(this).attr('id') != 'myImage'){
+								$.toast('更新成功');
+								$("#userName").html(info.userName);
+							}
+						}else {
+							$.toast('更新失败');
+						}
+					},
+					error:function(data){
+						// window.location.href = "login.html?his="+his;
+					}
+				});
+			}else {
+				$.toast('请正确填姓名');
+			}
 		}
 	});
 

@@ -434,4 +434,23 @@ $(function(){
         }
     });
 
+
+    // 移动端 返回api
+    // case 1;  native 直接退回到上一页
+    // case 2；  native 退回历史记录
+
+    //Android
+    try {
+        javascript: window.handler.backPressType(1);
+    }catch (e){
+        console.log(e);
+    }
+
+    //IOS
+    try {
+        backPressType(1);
+    }catch (e){
+        console.log(e);
+    }
+
 });

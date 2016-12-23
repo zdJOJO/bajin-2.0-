@@ -28,7 +28,8 @@ $(document).ready(function(){
 	//侧边栏切换
 	$.get(port +"/card/user?token="+token,function(data){
 		if(token){
-			$('#vip').children('img').attr('src',data.headPic);
+			var headPic = !data.headPic?"imgs/headPic_default.png":data.headPic;
+			$('#vip').children('img').attr('src',headPic);
 		}
 		$("#vip").click(function(){
 
@@ -48,7 +49,7 @@ $(document).ready(function(){
 					return;
 				}
 				$(".pic_but").html("");
-				var headPic = data.headPic==""?"imgs/headPic_default.png":data.headPic;
+				var headPic = !data.headPic?"imgs/headPic_default.png":data.headPic;
 				var userName = data.userName==""?"已登录":data.userName;
 				var item=$('<div class="pic"><img src='+headPic+'></div><div class="user_But">'+userName+'</div>');
 				$(".pic_but").append(item);

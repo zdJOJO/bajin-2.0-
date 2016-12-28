@@ -226,6 +226,8 @@ $(document).ready(function(){
 			        	return;
                     }else if(type == 12){
 						window.location.href = $(this).attr('data-url');
+					}else if(type == 16){
+						window.location.href = "localDiscount.html?id="+$(this).data("id");
 					}
 				});
 			}

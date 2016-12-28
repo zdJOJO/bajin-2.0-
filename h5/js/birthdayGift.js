@@ -489,7 +489,12 @@ jsSdkApi('share',{
 });
 
 //调用安卓、 IOS 的原生分享功能
-share_Android_Ios('白金尊享送您生日礼包' ,'白金用户生日当月可以领取为您精心准备的礼包' ,portStr+'/imgs/gift/gift-head.jpg',portStr+'/birthdayGift.html');
+share_Android_Ios(
+    '白金尊享送您生日礼包' ,
+    '白金用户生日当月可以领取为您精心准备的礼包' ,
+    portStr+'/imgs/gift/gift-head.jpg',
+    portStr+'/birthdayGift.html'
+);
 
 
 

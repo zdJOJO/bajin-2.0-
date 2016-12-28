@@ -16,7 +16,7 @@ body>span{
 }
 
 hr{
-    background: rgb(247, 230, 184);
+    background: #962737;
     height: 12px;
     border: none;
 }
@@ -24,17 +24,17 @@ hr{
 h3{
     text-align: center;
     font-weight: 100;
-    background: red;
+    background: #a6002a;
     width: 90%;
     height: 1px;
     margin: 35px auto 5px auto;
     position: relative;
-    color: red;
+    color: #a6002a;
 }
 
 h3>span{
     display: inline-block;
-    background: #FFF7D3;
+    background: #f7f4e6;
     font-size: 0.8em;
     width: 80px;
     position: absolute;
@@ -48,16 +48,19 @@ h3>span{
 }
 
 .down{
-    background: #F7E6B8;
+    /*background: #F7E6B8;*/
+    background: url("../../imgs/lottery_midAutumn/bg_newYear.png");
+    background-size: 100%;
+    padding-bottom: 1rem;
 }
 
 .down-next{
-    background: #FFF7D3;
+    background: #f7f4e6;
     width: 92%;
     margin: auto;
     overflow: hidden;
     position: relative;
-    top: -3.5rem;
+    /*top: -3.5rem;*/
 }
 
 
@@ -111,7 +114,7 @@ h3>span{
 
 #nameList li{
     height: 44px;
-    background: url("../../imgs/lottery_midAutumn/itemPre.png") no-repeat;
+    background: url("../../imgs/lottery_midAutumn/itemPre_newYear.png") no-repeat;
     background-size: 100% 100%;
     color: #fff;
     font-size: 0.7rem;
@@ -143,12 +146,13 @@ h3>span{
 /****************************************************/
 .turntable-bg {
     width: 100%;
-    height: 45rem;
     /*background: url("../../imgs/lottery_midAutumn/bg.jpg") no-repeat;*/
     background-size: 100% 100%;
     margin: 0 auto;
     overflow: hidden;
     position: relative;
+
+    padding-bottom: 2rem;
 }
 .turntable-bg .mask {
     width: 454px;
@@ -290,12 +294,32 @@ h3>span{
     color: #63615F;
 }
 
+.detail>ul>li:last-child{
+    border: none;
+}
+
 .detail>ul>li img{
     width: 100%!important;
 }
 
 /*适配*/
+/*@media screen and (max-width: 414px) {*/
+    /*.turntable-bg{*/
+        /*height: 46rem;*/
+    /*}*/
+/*}*/
+
+/*@media screen and (max-width: 375px) {*/
+    /*.turntable-bg{*/
+        /*height: 44rem;*/
+    /*}*/
+/*}*/
+
+
 @media screen and (max-width: 360px) {
+    /*.turntable-bg{*/
+        /*height: 40rem;*/
+    /*}*/
     .turntable-bg .rotate{
         width: 330px;
         height: 330px;
@@ -310,6 +334,10 @@ h3>span{
     #poPub button{
         bottom: 15px;
     }
+
+    /*.turntable-bg{*/
+        /*height: 36rem;*/
+    /*}*/
 
     .turntable-bg .rotate{
         width: 320px;
@@ -421,7 +449,7 @@ h3>span{
 
 /****************新的抽奖***********************/
 ul.presentList{
-    border: 1rem rgb(25, 68, 121) solid;
+    border: 1rem rgb(131, 18, 34) solid;
 }
 
 .myBox{
@@ -437,6 +465,7 @@ ul.presentList{
     font-size: 2em;
     color: #fff;
     background-color: rgb(246, 192, 0);
+    border-radius: 6px;
 }
 
 .myBox li>span{
@@ -465,6 +494,7 @@ ul.presentList{
     left: 50%;
     top: 50%;
     margin: -2.95rem 0 0 -3.5rem;
+    border-radius: 6px;
 }
 
 .bt1{

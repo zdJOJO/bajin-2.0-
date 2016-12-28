@@ -150,7 +150,7 @@ $(function (){
         success: function (result) {
             //调用分享借口
             jsSdkApi('share',{
-                title: '白金尊享绑卡有礼',
+                title: '新年大狂欢',
                 desc: ' 新用户通过下载/注册“白金尊享”APP并绑定工商银行信用卡，可获得一次抽奖机会',
                 link: portStr + '/fareDraw_new.html?id=' + sectionId,
                 imgUrl: result.prizeSectionModel.sectionAdpic
@@ -171,7 +171,7 @@ $(function (){
             var detailStr = '';
             for(var i=0;i<len;i++){
                 var liStr = '<li>'+ prizeModelList[i].prizeDescription +'</li>';
-                if(!prizeModelList[i].prizeDescription){
+                if(!prizeModelList[i].prizeDescription || prizeModelList[i].prizeName =='谢谢参与'){
                     liStr = '';
                 }
                 detailStr += liStr;

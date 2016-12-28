@@ -1,0 +1,24 @@
+li>div{
+    margin-top: 0.06rem;
+}
+
+li img{
+    margin: 0.04rem 0.04rem 0 00.04rem;
+}
+
+li:first-child{
+    border-top: none;
+}
+
+li:nth-child(3){
+    border-bottom: 1px #f0f0f0 solid;
+}
+
+.sort_letter{
+    height: 0.05rem;
+    line-height: 0.05rem;
+    padding-left: 20px;
+    color: #787878;
+    font-size: 1em;
+    background: #ebebeb;;
+}

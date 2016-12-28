@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
+    <meta name="screen-orientation"content="portrait">
+    <meta name="x5-orientation"content="portrait">
     <title>test</title>
 </head>
 <body>
 test test  test
+<a href="wx468e08e2cd5f415a://WeChat">点我</a>
 </body>
 <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="js/public/public.js"></script>
@@ -14,32 +18,26 @@ test test  test
         javascript: window.handler.isNativeApp();    //Android
         javascript: window.handler.getNativeAppToken();    //Android
         if(window.handler.isNativeApp() || window.handler.getNativeAppToken()){
-            alert('Android');
-            alert(window.handler.getNativeAppToken());
-            alert(window.handler.isNativeApp());
+            //todo
         }else {
-            alert('error');
+            //todo
         }
 
     }catch (e){
         //todo
-        alert('error');
     }
 
 
 //IOS
     try {
         if(isNativeApp() || getNativeAppToken()){
-            alert('IOS');
-            alert(getNativeAppToken())
-            alert(isNativeApp());
+          //todo
         }else {
-            alert('error');
+            //todo
         }
 
     }catch (e){
         //todo
-        alert('error');
     }
 </script>
 </html>

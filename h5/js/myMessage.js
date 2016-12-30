@@ -69,7 +69,7 @@ $(document).ready(function(){
 						if(data.list[i].itemType!=6){
 							itemid=data.list[i].itemId;
 							if(data.list[i].itemType==1){
-								url="enrol.html?id="+data.list[i].itemId;
+								url="enrol.html?activityId="+data.list[i].itemId;
 							}else if(data.list[i].itemType==2){
 								url="life.html?id="+data.list[i].itemId;
 							}if(data.list[i].itemType==3){

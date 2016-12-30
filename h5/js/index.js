@@ -203,7 +203,7 @@ $(document).ready(function(){
                     if(type == 0){
 			        	return;
                     }else if(type == 1){
-			        	window.location.href = "enrol.html?id=" + $(this).data("id");
+			        	window.location.href = "enrol.html?activityId=" + $(this).data("id");
                     }else if(type == 2){
 			        	window.location.href = "life.html?id="+ $(this).data("id");
                     }else if(type == 3){
@@ -280,7 +280,7 @@ $(document).ready(function(){
 			function toActivity(type,id){
 				hitsOnFn(token,type,1,id);
 				if(type == 1)
-					window.location.href="enrol.html?id="+id;
+					window.location.href="enrol.html?activityId="+id;
 				else if(type == 2)
 					window.location.href="life.html?id="+id;
 				else if(type == 3)

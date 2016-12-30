@@ -6,6 +6,8 @@
     <meta name="screen-orientation"content="portrait">
     <meta name="x5-orientation"content="portrait">
     <title>下载</title>
+    <link rel="stylesheet" href="../css/weiXin/weui.min.css">
+    <link rel="stylesheet" href="../css/weiXin/jquery-weui.css">
     <link rel="stylesheet" type="text/css" href="css/download.css">
 </head>
 <body>
@@ -28,77 +30,14 @@
     </p>
     <button id="download" class="active">下载白金尊享</button>
 </div>
+<div id="mask" style="display: none"></div>
 </body>
 <script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery-weui.min.js"></script>
 <script type="text/javascript" src="../js/public/public.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" src="js/download.js"></script>
+<script>
     var iWidth=document.documentElement.clientWidth;
     document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
-
-    $('input').focus(function () {
-        var height = $('#content').outerHeight();
-        $('#content').scrollTop(height);
-    });
-
-
-    $('#getCode').click(function () {
-        var phoneNum = $('#phone').val();
-        var sec = 60;
-        if(!phoneNum){
-            return ;
-        }
-        if(!(/^1(3|4|5|7|8)\d{9}$/.test(phoneNum))){
-            alert("手机号码有误，请重填");
-            return;
-        }
-        var time = setInterval(timer, 1000);
-        function timer() {
-            if(sec > 0){
-                sec--;
-                $('#getCode').attr('disabled','true').html(sec + '秒后重新获取');
-            }else if(sec == 0){
-                clearInterval(time);
-                $('#getCode').removeAttr('disabled').html('获取验证码');
-            }
-        }
-
-        //获取验证码
-        $.ajax({
-            type: 'post',
-            dataType: "json",
-            url: port + '/card/tcaptcha?phone='+ phoneNum +'&version=v2',
-            success: function (res) {
-
-            },
-            error: function (e) {
-                //todo
-            }
-        })
-
-    });
-
-    $('#download').click(function () {
-        var phoneNum = $('#phone').val();
-        var captcha =  $('#code').val();
-        if(!phoneNum || !captcha){
-            console.log(111);
-            return
-        }
-        if(!(/^1(3|4|5|7|8)\d{9}$/.test(phoneNum))){
-            return
-        }
-        //验证码是否正确
-        $.ajax({
-            type: 'get',
-            url: port + '/card/user/validate?captcha=' + captcha + '&phone=' + phoneNum,
-            success: function (res) {
-
-            },
-            error: function (e) {
-                //todo
-            }
-        })
-    });
-    
 </script>
 </html>

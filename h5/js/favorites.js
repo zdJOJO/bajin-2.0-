@@ -45,7 +45,7 @@ $(document).ready(function(){
 								}
 								less_q($(".activity .detail p"));
 								$(".contentStyle .detail,.contentStyle .activityPic").click(function(){//这里需要区分类型的
-									window.location.href="enrol.html?id="+$(this).parent().data("itemid");
+									window.location.href="enrol.html?activityId="+$(this).parent().data("itemid");
 				    			});
 							}else{			//没有活动收藏
 								var emptyPage = $('<center><img src="imgs/save_.png"/><h2>你还没有收藏任何活动</h2><p>再去看看吧</p><p class="turnPage">再去看看</p></center>');

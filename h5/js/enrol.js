@@ -1,21 +1,26 @@
 
 $(function(){
+    var isWX = browserFn('wx'); //判断是否为微信内置浏览器
+    var isIOS = terminalFn('IOS');    // 判断 是否是IOS终端
+    var itemType = GetQueryString('itemType') || 0;
+    if(isIOS&&isWX&&itemType){
+        $('#mask').show()
+    }
+
 
     //此页面逻辑：进入页面加载活动内容，然后判断用户是否收藏该活动，如果收藏就要现实收藏的图标，否则就是没有收藏
     var data;
     var token = getCookie("token") || 0;
-    var activityid = window.location.search.split("=")[1];
-    if(/&/g.test(activityid)){
-        activityid = activityid.split("&")[0];
-    }
-
+    var activityId = GetQueryString('activityId');
+    var itemId = activityId;
+    var userId = GetQueryString('userId');   //判断是否为客户经理分享
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
     his = his + window.location.search;
 
     //跳转预览界面
     if(window.location.search.indexOf('cms') > 0 ){
-        window.location.href = 'enrol_preview.html?id=' +  activityid;
+        window.location.href = 'enrol_preview.html?activityId=' +  activityid;
     }
 
     //设置为1s
@@ -26,10 +31,6 @@ $(function(){
     if(window.location.pathname.indexOf('hotDoorDetail') > 0){
         isHotDoor = true;
     }
-
-    var itemId = activityid;
-    var commentStr = '';
-    var pageNum = 1;
 
     $("#culb_But").click(function(){			
         window.location.href="index.html";
@@ -45,10 +46,10 @@ $(function(){
     get_url(window.location.href);
 
     //浏览数目统计
-    hitsOnFn(token,1,1,activityid);
+    hitsOnFn(token,1,1,activityId);
 
     function getActDetail(){
-        $.get(port+"/card/activity/"+activityid,function(data){
+        $.get(port+"/card/activity/"+activityId,function(data){
             //调用分享借口 和 传递统计数据
             jsSdkApi('share',{
                 title: data.activityTitle,
@@ -59,7 +60,7 @@ $(function(){
                 token: token,
                 type: 1,
                 subType: 4,
-                typeId: activityid
+                typeId: activityId
             });
 
             peopleNumber = data.peopleNumber;
@@ -185,7 +186,6 @@ $(function(){
             $(".btn_q .love-btn").unbind('click').click(function(target){
                 if(token){
                     var info ={
-                        //"userId":data.userId,
                         "itemId": data.activityId,
                         "itemType":"1",   //1表示收藏活动，2表示收藏白金人生
                     }
@@ -203,7 +203,7 @@ $(function(){
                                         window.location.href = "login.html?his="+escape(his);
                                     }else{
                                         $.toast("收藏成功");
-                                        hitsOnFn(token,1,2,activityid);
+                                        hitsOnFn(token,1,2,activityId);
                                     }
                                 },
                                 error:function(data){
@@ -269,7 +269,7 @@ $(function(){
 
     //获取报名状态
     var getEnrollStatu = function () {
-        $.get(port + '/card/apply/status/' + activityid + '?token=' + token,function (result) {
+        $.get(port + '/card/apply/status/' + activityId + '?token=' + token,function (result) {
             function statuStr (num) {
                 var statuStr = '';
                 switch (num) {
@@ -340,7 +340,11 @@ $(function(){
             if(applyNumber >= peopleNumber ){
                 $.alert("活动申请人数已满", "报名失败");
             }else {
-                window.location.href = "doenrol.html?id=" + activityid;
+                if(userId){
+                    window.location.href = 'bjzx://data?itemType=1&itemId='+ itemId +'&userId=' + userId;
+                }else {
+                    window.location.href = "doenrol.html?id=" + activityId;
+                }
             };
         }else{
             console.log(his);

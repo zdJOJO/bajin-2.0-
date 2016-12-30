@@ -51,7 +51,7 @@ $(function(){
 
 				$(".appo_ri_sc").click(function(){
 					// var activityid = $(this).data("caid");
-					// window.location.href="enrol.html?id="+activityid;
+					// window.location.href="enrol.html?activityId="+activityid;
 					var applyid = $(this).data("applyid");
 					window.location.href = "enrollMsg.html?applyid="+applyid;
 				})

@@ -16,7 +16,7 @@ ul,p,h4{
 }
 
 h4{
-    font-size: 1.2em;
+    font-size: 1em!important;
 }
 
 li{
@@ -42,12 +42,14 @@ i{
     height: 0.18rem;
     line-height: 0.18rem;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 1.2em!important;
     color: #909090;
+    font-family: "微软雅黑"!important;
 }
 
 i.active{
     color: #e0363b;
+    font-size: 1.4em!important;
 }
 
 
@@ -66,4 +68,6 @@ li>div{
 
 li>div>p{
     color: #909090;
+    font-size: 0.85em;
+    margin-top: 0.01rem;
 }

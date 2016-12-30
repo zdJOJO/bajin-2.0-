@@ -230,3 +230,29 @@ function scrollSmoothSlib(idStr) {
     });
 }
 
+
+// 判断 是否 IOS || Android  终端
+function terminalFn(string) {
+    var u = navigator.userAgent
+    switch (string){
+        case 'IOS':
+            return !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
+            break
+        case 'Android':
+            return u.indexOf('Android') > -1 || u.indexOf('Linux') > -1
+            break
+    }
+}
+
+
+//判断是否为微信内置浏览器
+function browserFn(string) {
+    var ua = window.navigator.userAgent.toLowerCase();
+    switch (string){
+        case 'wx':
+            return ua.match(/MicroMessenger/i) == 'micromessenger'
+            break
+    }
+}
+
+

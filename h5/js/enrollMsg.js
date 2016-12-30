@@ -89,7 +89,7 @@ $(document).ready(function(){
 			}
 			//注册事件
 			$(".detailUrl").click(function(){
-				window.location.href = "enrol.html?id="+$(this).data("activity")
+				window.location.href = "enrol.html?activityId="+$(this).data("activity")
 			});
 
 

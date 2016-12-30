@@ -62,6 +62,7 @@ li{
     line-height: 0.06rem;
     text-align: left;
     margin: 0.02rem 0 0 0.055rem;
+    font-family: 微软雅黑;
 }
 
 #main>.info>li:first-child{

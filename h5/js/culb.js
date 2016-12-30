@@ -297,7 +297,7 @@ $(function(){
     // hitsOnFn(token,type,subType,typeId)
     function toActivity(id,_type){
         if(!isHotDoor){
-            window.location.href = "enrol.html?id=" + id;
+            window.location.href = "enrol.html?activityId=" + id;
         }else {
             window.location.href = jumpPage(_type).htmlStr + '?id=' + id ;
         }

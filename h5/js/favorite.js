@@ -52,7 +52,7 @@ $(document).ready(function(){
 			
 			$(".fav_content_cen,.fav_content_ri h2,.fav_content_ri p").click(function(){	
 				if($(this).data("itemtype") == 1){
-					window.location.href = "enrol.html?id="+$(this).data("collectid");
+					window.location.href = "enrol.html?activityId="+$(this).data("collectid");
 				}else if($(this).data("itemtype") == 2){
 					window.location.href = "life.html?id="+$(this).data("collectid");
 				}				

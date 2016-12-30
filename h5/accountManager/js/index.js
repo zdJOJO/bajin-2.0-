@@ -40,8 +40,8 @@ $(function(){
             var str = '<div class="headPicBox"><img src="'+headPicPath+'"></div>' +
                 '<h2>'+res.data.userModel.userName+'</h2><ul class="info">' +
                 '<li><span>'+res.data.inviteCode+'号员工</span></li><li><span>'+res.data.bankInfo+'</span></li></ul>' +
-                '<ul class="num"><li class="list"><span>29</span><span>客户</span></li>' +
-                '<li class="rank"><span>29</span><span>排行榜</span></li></ul>' +
+                '<ul class="num"><li class="list"><span>0</span><span>客户</span></li>' +
+                '<li class="rank"><span>未上榜</span><span>排行榜</span></li></ul>' +
                 '<button id="invite">邀请客户</button>';
             $('#main').html(str);
             var height =  $('#main').find('.info').outerHeight();

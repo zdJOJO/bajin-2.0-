@@ -119,12 +119,15 @@ li{
 }
 
 #main>.num>li>span:first-child{
-    font-size: 2em;
+    font-size: 1.5em;
     color: #323232;
 }
 #main>.num>li>span:last-child{
     font-size: 1em;
     color: #909090;
+}
+#main>.num>.rank>span:first-child{
+    font-size: 1.3em;
 }
 
 

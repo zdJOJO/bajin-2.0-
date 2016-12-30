@@ -1,26 +1,21 @@
 
 $(function(){
     var isWX = browserFn('wx'); //判断是否为微信内置浏览器
-    var isIOS = terminalFn('IOS');    // 判断 是否是IOS终端
-    var itemType = GetQueryString('itemType') || 0;
-    if(isIOS&&isWX&&itemType){
-        $('#mask').show()
-    }
-
+    var isAndroid = terminalFn('Android');
+    var userId = GetQueryString('userId');   //判断是否为客户经理分享
 
     //此页面逻辑：进入页面加载活动内容，然后判断用户是否收藏该活动，如果收藏就要现实收藏的图标，否则就是没有收藏
     var data;
     var token = getCookie("token") || 0;
-    var activityId = GetQueryString('activityId');
+    var activityId = GetQueryString('id') || GetQueryString('activityId');
     var itemId = activityId;
-    var userId = GetQueryString('userId');   //判断是否为客户经理分享
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
     his = his + window.location.search;
 
     //跳转预览界面
     if(window.location.search.indexOf('cms') > 0 ){
-        window.location.href = 'enrol_preview.html?activityId=' +  activityid;
+        window.location.href = 'enrol_preview.html?activityId=' +  activityId;
     }
 
     //设置为1s
@@ -341,7 +336,19 @@ $(function(){
                 $.alert("活动申请人数已满", "报名失败");
             }else {
                 if(userId){
-                    window.location.href = 'bjzx://data?itemType=1&itemId='+ itemId +'&userId=' + userId;
+                    if(isWX){
+                        $('#mask').show()
+                        if(isAndroid){
+                            $('#mask').css({
+                                'background' : 'url("../imgs/mask_Android.png") no-repeat'
+                            });
+                        }
+                    }else {
+                        window.location.href = 'bjzx://data?itemType=1&itemId='+ itemId +'&userId=' + userId;
+                        setTimeout(function () {
+                            window.location.href = './accountManager/download.html';
+                        },3000);
+                    }
                 }else {
                     window.location.href = "doenrol.html?id=" + activityId;
                 }

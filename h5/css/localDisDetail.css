@@ -518,6 +518,16 @@ header .saveAndShare img:first-child{
 }
 
 
+#mask{
+    background: url("../imgs/mask_ios.png") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3000;
+}
 
 @media screen and (max-width: 320px){
     #order>.proInfo>.name>p{

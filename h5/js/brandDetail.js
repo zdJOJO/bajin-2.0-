@@ -8,17 +8,29 @@ var his = window.location.pathname.split("/");
 his = his[his.length-1];
 his = his + window.location.search;
 
-//获取商品http://121.196.232.233/card/goods/{goodsId}
-var goodsid =  window.location.search.split("=")[1] ? window.location.search.split("=")[1] : 1;
-if(/&/g.test(goodsid)){
-	goodsid = goodsid.split("&")[0];
+//获取商品 http://121.196.232.233/card/goods/{goodsId}
+var goodsid = GetQueryString('id');
+var itemId = goodsid;
+
+var userId =  GetQueryString('userId');
+var isWX = browserFn('wx'); //判断是否为微信内置浏览器
+var isAndroid = terminalFn('Android');
+if(userId && isWX){
+	$('#mask').show();
+	if(isAndroid){
+		$('#mask').css({
+			'background' : 'url("./imgs/mask_Android.png") no-repeat',
+			'background-size' : '100%'
+		});
+	}
+}else if(userId && !isWX){
+	window.location.href = 'bjzx://data?itemType=3&itemId='+ itemId +'&userId=' + userId;
+	setTimeout(function () {
+		window.location.href = './accountManager/download.html';
+	},4000);
 }
 
-$.toast.prototype.defaults.duration = 500;
-
-
-var itemId = window.location.search.split("=")[1];
-itemId = goodsid;
+$.toast.prototype.defaults.duration = 1000;
 
 //跳转预览界面
 if(window.location.search.indexOf('cms') > 0 ){
@@ -278,12 +290,10 @@ var sureGoodInfo = function (data_sku) {
 
 //点击 具体规格时候
 var oneSpe = function (sku_info) {
-
 	$('#goodDetail>.name>.price').html('￥ ' + sku_info.skuPrice.toFixed(2));
 	$('#goodDetail>.name>.count').html('限量' + sku_info.stockNumber + ' 件');
 	$('#goodDetail>.name>.spe>span').html(sku_info.skuGague);
-
-}
+};
 
 
 
@@ -355,9 +365,7 @@ var sureBuyNowFn = function () {
 	// 	url_obj.goodsId+ "&&num=" +url_obj.num+ "&&pic=" +url_obj.pic+ "&&skuId="+url_obj.skuId+
 	// 	"&&subTitle="+url_obj.subTitle + "&&title="+url_obj.title ;
 	window.location.href = 'fillInOrder.html?isShoppingCart=false'+'&goodsId='+goodsid+'&skuId='+url_obj.skuId+'&num='+url_obj.num;
-}
-
-
+};
 
 
 
@@ -426,7 +434,7 @@ $('#addToShoppingCart ,#buyNow, .wrapper>.stock').click(function () {
 	}
 
 	$('footer').hide();
-	$('#mask').fadeIn(150);
+	$('#mask_b').fadeIn(150);
 	if(window.screen.height <=480){
 		$("#goodDetail").show().animate({
 			height:'77%'
@@ -443,7 +451,7 @@ $('#addToShoppingCart ,#buyNow, .wrapper>.stock').click(function () {
 
 
 //弹出层
-$('#mask').click(function () {
+$('#mask_b').click(function () {
 	$(this).fadeOut(150);
 	$('#goodDetail').animate({
 		height:'0'
@@ -454,7 +462,7 @@ $('#mask').click(function () {
 
 //关闭弹出
 $("#goodDetail>.name>.close").click(function () {
-	$('#mask').click();
+	$('#mask_b').click();
 });
 
 

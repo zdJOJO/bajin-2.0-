@@ -2,14 +2,46 @@
  * Created by Administrator on 2016/10/9.
  */
 $(document).ready(function(){
-
+    var userId = 0;
     var token = getCookie("token") || 0;//便于本地测试
     //获取页面的名称
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
 
-    var subjectId = window.location.search.split('=')[1];
+    var subjectId = GetQueryString('id');
     var page = 0;
+
+    var userId_2 = GetQueryString('userId');
+    var isWX = browserFn('wx'); //判断是否为微信内置浏览器
+    var isAndroid = terminalFn('Android');
+    if(userId_2 && isWX){
+        $('#mask').show();
+        if(isAndroid){
+            $('#mask').css({
+                'background' : 'url("./imgs/mask_Android.png") no-repeat',
+                'background-size' : '100%'
+            });
+        }
+    }else if(userId_2 && !isWX){
+        window.location.href = 'bjzx://data?itemType=16&itemId='+ subjectId +'&userId=' + userId_2;
+        setTimeout(function () {
+            window.location.href = './accountManager/download.html';
+        },4000);
+    }
+
+
+    //分享时候 传当前页面的url 和 对象obj
+    get_url(window.location.href);
+
+    hitsOnFn(token,16,1,subjectId);
+
+    //请求客户经理状态  获取userId
+    $.get( port + '/card/icbcManger/check?token='+token ,function (res) {
+        //是否是客户经理
+        if(res.data){
+            userId = res.data.userId;
+        }
+    });
 
     //获取主题信息
     $.ajax({
@@ -18,13 +50,25 @@ $(document).ready(function(){
         success: function (result) {
             $('title').html(result.data.title);
             $( '.localTitle').html(result.data.title);
+            console.log(userId)
+            //调用分享借口
+            jsSdkApi('share',{
+                title: result.data.title,
+                desc: result.data.subtitle,
+                link: (userId==0||!userId )? portStr+'/localDiscount.html?id='+result.data.id :
+                portStr+'/localDiscount.html?id='+result.data.id+'&userId='+userId ,
+                imgUrl: result.data.pic
+            },{
+                token: token,
+                type: 16,
+                subType: 4,
+                typeId: result.data.id
+            });
         },
         error: function (e) {
             //todo
         }
     });
-
-    hitsOnFn(token,16,1,subjectId);
 
     //分页获取产品
     function getLocalDisList(pageNum) {

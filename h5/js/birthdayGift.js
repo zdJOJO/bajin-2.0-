@@ -1,43 +1,26 @@
 /**
  * Created by Administrator on 2016/8/16.
  *///获取存在于cookie中的token值
-function getCookie(c_name) {
-    if (document.cookie.length>0)
-    {
-        c_start=document.cookie.indexOf(c_name + "=")
-        if (c_start!=-1)
-        {
-            c_start=c_start + c_name.length+1
-            c_end=document.cookie.indexOf(";",c_start)
-            if (c_end==-1) c_end=document.cookie.length
-            return unescape(document.cookie.substring(c_start,c_end))
-        }
-    }
-    return undefined;
-}
-
 var token = '';
 var status = -1; //0-- 正常  , 1-- 过期
 var receiveId = ''; //根据id去请求 实物的收获地址
 var urlSearch = window.location.search;
 var localStorage = window.localStorage;   //用于存储生日日期和礼包领取码
 if(urlSearch.indexOf('token') > 0){
-    token = urlSearch.split('&')[0].split('=')[1];
+    token = GetQueryString('token');
     setCookie('token',token);
 }else {
     token = getCookie('token');
 }
 if(urlSearch.indexOf('status') > 0){
-    status = urlSearch.split('&')[1].split('=')[1];  //用于判断是否 已领取
+    status = GetQueryString('status'); //用于判断是否 已领取
     localStorage.setItem("status",status);
 }else {
     status = localStorage.status;
 }
 if(urlSearch.indexOf('receiveId') > 0){
-    receiveId = urlSearch.split('&')[2].split('=')[1];  //用于判断是否 已领取
+    receiveId = GetQueryString('receiveId')  //用于判断是否 已领取
 }
-
-
 
 var his = window.location.pathname.split("/");
 his = his[his.length-1];
@@ -148,7 +131,7 @@ function getAddress() {
     }
 
     function setAdressFn(defaulAddresObj) {
-        $defaultAddress.html(' <img id="right" src="imgs/gift/right.png">' +
+        $defaultAddress.html('<img id="right" src="imgs/gift/right.png">' +
             '<input id="choose" type="checkbox"><label id="chooseBox" for="choose"></label>' +
             '<span class="info">' + defaulAddresObj.receiverName + '&nbsp;&nbsp;' + defaulAddresObj.receiverPhone +'</span> ' +
             '<span class="address">' + defaulAddresObj.province + defaulAddresObj.city + defaulAddresObj.district + '</span> ' +
@@ -255,6 +238,9 @@ $("#receiveNow").click(function () {
             $.alert("请输入您的生日或者生日礼包领取码", "提示");
             return
         }
+
+        hasBinded = true;  //临时
+
         if(!hasBinded){
             $.modal({
                 title: "提示",

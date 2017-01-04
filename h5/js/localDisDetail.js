@@ -6,9 +6,26 @@ $(document).ready(function(){
     //获取页面的名称
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
-    console.log(his);
-    var productId = window.location.search.split('&')[0].split('=')[1];
-    var productOrderId;
+    var productId = GetQueryString('productId') || GetQueryString('id');
+    var userId =  GetQueryString('userId');
+    var isWX = browserFn('wx'); //判断是否为微信内置浏览器
+    var isAndroid = terminalFn('Android');
+    if(userId && isWX){
+        $('#mask').show();
+        if(isAndroid){
+            $('#mask').css({
+                'background' : 'url("./imgs/mask_Android.png") no-repeat',
+                'background-size' : '100%'
+            });
+        }
+    }else if(userId && !isWX){
+        window.location.href = 'bjzx://data?itemType=17&itemId='+ productId +'&userId=' + userId;
+        setTimeout(function () {
+            window.location.href = './accountManager/download.html';
+        },4000);
+    }
+
+    var productOrderId ;
     var productObj = {};
     var totalPrice = 0;
     var leftTime = 0;

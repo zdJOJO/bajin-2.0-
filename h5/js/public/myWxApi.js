@@ -22,7 +22,6 @@ var get_url = function (url) {
     urlStr = String(url);
 };
 
-
 //随机字符生成算法
 function randomString(len) {
     len = len || 32;

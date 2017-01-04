@@ -1,28 +1,63 @@
 <!doctype html>
 <html>
 <head>
-<title>我的消息</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
-<link href="css/myMessage.css" rel="stylesheet" type="text/css">
-<meta name="screen-orientation"content="portrait">
-<meta name="x5-orientation"content="portrait">
+    <title>我的消息</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <meta name="screen-orientation"content="portrait">
+    <meta name="x5-orientation"content="portrait">
+    <link rel="stylesheet" href="js/jquery-weui/1.0.0-rc.1/weui.min.css">
+    <link rel="stylesheet" href="js/jquery-weui/1.0.0-rc.1/jquery-weui.css">
+    <link  rel="stylesheet" type="text/css" href="css/myMessage.css">
 </head>
-<body>
-<header>
-    <nav class="nav">
-        <a id="systemMsg" class="active"><span>系统消息</span></a>
-        <a id="discountMsg"><span>优惠信息</span></a>
+<body >
+<div  class="weui-tab">
+    <nav class="weui-navbar">
+        <div id="systemMsg" class="weui-navbar__item weui-bar__item--on" href="#systemMsgList">
+            <span>系统消息</span>
+        </div>
+        <div id="discountMsg" class="weui-navbar__item" href="#discountMsgList">
+            <span>优惠消息</span>
+        </div>
     </nav>
-</header>
-<div class="wrapper">
+    <div class="weui-tab__bd">
+        <div id="systemMsgList" class="weui-tab__bd-item weui-tab__bd-item--active weui-pull-to-refresh">
+            <div class="weui-pull-to-refresh__layer">
+                <div class='weui-pull-to-refresh__arrow'></div>
+                <div class='weui-pull-to-refresh__preloader'></div>
+                <div class="down">下拉刷新</div>
+                <div class="up">释放刷新</div>
+                <div class="refresh">正在刷新</div>
+            </div>
+            <div class="content-padded wrapper"></div>
+            <div class="weui-loadmore">
+                <i class="weui-loading"></i>
+                <span class="weui-loadmore__tips">正在加载</span>
+            </div>
+        </div>
+        <div id="discountMsgList" class="weui-tab__bd-item weui-pull-to-refresh">
+            <div class="weui-pull-to-refresh__layer">
+                <div class='weui-pull-to-refresh__arrow'></div>
+                <div class='weui-pull-to-refresh__preloader'></div>
+                <div class="down">下拉刷新</div>
+                <div class="up">释放刷新</div>
+                <div class="refresh">正在刷新</div>
+            </div>
+            <div class="content-padded wrapper"></div>
+            <div class="weui-loadmore">
+                <i class="weui-loading"></i>
+                <span class="weui-loadmore__tips">正在加载</span>
+            </div>
+        </div>
+    </div>
 </div>
+</body>
 <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-weui/1.0.0-rc.1/jquery-weui.min.js"></script>
 <script type="text/javascript" src="js/public/public.js"></script>
 <script type="text/javascript" src="js/myMessage.js"></script>
 <script>
     var iWidth=document.documentElement.clientWidth;
     document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
 </script>
-</body>
 </html>

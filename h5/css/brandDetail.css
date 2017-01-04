@@ -326,7 +326,7 @@ footer{
 }
 
 
-#mask{
+#mask_b{
 	position: fixed;
 	width: 100%;
 	height: 100%;
@@ -556,13 +556,20 @@ footer{
 }
 
 
+#mask{
+	background: url("../imgs/mask_ios.png") no-repeat;
+	background-size: 100%;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 3000;
+}
+
 
 
 @media screen and (max-width: 850px){
-	/*#goodDetail>div{*/
-	/*min-height: 0.22rem;*/
-	/*}*/
-
 	#goodDetail>.name>.goodHeadPic{
 		width: 0.22rem;
 		height: 0.22rem;

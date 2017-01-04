@@ -8,7 +8,8 @@ html,body{
 	margin: 0;
 	padding: 0;
 	background: #fafafa;
-	font-size: 15px;
+	font-size: 14px;
+	-webkit-overflow-scrolling : touch;
 }
 
 header{
@@ -49,10 +50,6 @@ header a.active{
 	color: #b9984f;
 }
 
-.wrapper{
-	margin-top: 0.12rem;
-}
-
 .wrapper .singleMsg{
 	border-bottom: 1px rgba(144,144,144,0.2) solid;
 	overflow: hidden;
@@ -62,7 +59,7 @@ header a.active{
 .singleMsg img{
 	width: 0.12rem;
 	height: 0.12rem;
-	background: red;
+	background: #f0f0f0;
 	float: left;
 	margin: 0 0.02rem 0.02rem 0;
 	border-radius: 4px;
@@ -77,13 +74,14 @@ header a.active{
 .singleMsg>.content>h3{
 	margin: 0 0 0.02rem 0;
 	color: #323232;
-	font-size: 1.1em;
+	font-size: 1em;
 	padding-right: 0.01rem;
 }
 
 .singleMsg>.content>p{
 	margin: 0;
 	color: #909090;
+	font-size: 0.9em;
 }
 
 i{
@@ -94,20 +92,49 @@ i{
 	float: right;
 }
 
+#systemMsgList,#discountMsgList{
+	-webkit-overflow-scrolling : touch;
+}
+/**********************/
 
+.weui-tab{
+	width: 100%;
+	overflow-x: hidden;
+}
+.weui-navbar span{
+	display: inline-block;
+	width: 100%;
+}
+.weui-navbar span:first-child{
+	border-right: 1px #f0f0f0 solid;
+}
 
+.weui-navbar:after{
+	border-bottom: 1px rgba(144,144,144,0.5) solid;
+}
 
+.weui-navbar__item:after{
+	border-right: none;
+}
 
+.weui-navbar__item.weui-bar__item--on{
+	color: #b9984f;
+	background: none;
+}
 
+.weui-tab__bd .weui-tab__bd-item{
+	width: 100%;
+}
 
+.weui-loadmore{
+	width: 29%;
+	margin: 10px auto;
+}
 
-
-
-
-
-
-
-
+.weui-loading{
+	float: left;
+	margin: 4px;
+}
 
 
 

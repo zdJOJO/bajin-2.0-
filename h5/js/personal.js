@@ -63,7 +63,7 @@ $(document).ready(function() {
 	$("#personal_dl").click(function(){
 		if(token != undefined){			
 			$(".pe_benner_djdl img").attr("src","images/personal_dl.png");
-			window.location.href="set.html";			
+			window.location.href="set.html";
 		}else{				
 			window.location.href="login.html?his="+his;				
 		}

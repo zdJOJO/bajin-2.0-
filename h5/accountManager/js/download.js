@@ -127,9 +127,7 @@ $(function(){
             success: function (res) {
                 if(res.status){
                     creatManagerInviteInfoFn(userId,26,0,phoneNum);
-                    if(itemType != 26){
-                        creatManagerInviteInfoFn(userId,itemType,itemId,phoneNum);
-                    }
+                    creatManagerInviteInfoFn(userId,itemType,itemId,phoneNum);
                     $.showLoading("app加载中");
                     //已被注册
                     window.location.href = 'bjzx://data?itemType=26&itemId=0&userId=' + userId;

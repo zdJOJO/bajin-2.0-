@@ -34,7 +34,6 @@ li>div:nth-child(2)>.content{
 
 li>div:nth-child(2)>.content>span{
     float: left;
-    font-family: 微软雅黑;
 }
 
 li>div:nth-child(2)>.content>span:first-child{
@@ -46,15 +45,24 @@ li>div:nth-child(2)>.content>span:first-child{
 }
 
 li>div:nth-child(3){
-    width: 0.13rem;
-    height: 0.22rem;
-    line-height: 0.22rem;
-    margin: 0;
+    width: 0.135rem;
+    margin-top: 0.05rem;
     color: #909090;
     font-size: 13px;
-    text-align: center;
+    text-align: right;
     opacity: 0.8;
+    font-family: 微软雅黑;
 }
+
+li>div:nth-child(3)>.time{
+    display: inline-block;
+    margin-bottom: 0.01rem;
+}
+
+li>div:nth-child(3)>span:last-child{
+    color: #c2b075;
+}
+
 
 img{
     width: 0.13rem;
@@ -68,7 +76,7 @@ img{
         width: 0.58rem;
     }
     li>div:nth-child(3){
-        width: 0.15rem;
+        width: 0.16rem;
     }
 }
 

@@ -35,9 +35,10 @@ $(function(){
                         headPic = res.data.list[i].userModel.headPic || headPic ;
                         str += ' <li class="sort_list"><img src="'+headPic+'"><div class="second">' +
                             '<span class="name">'+res.data.list[i].userModel.userName+'</span><p class="content">' +
-                            '<span>'+res.data.list[i].title+'</span>' +
-                            '<span>('+typeStr+')</span></p></div>' +
-                            '<div class="third">'+timeAgo(new Date().getTime()/1000-res.data.list[i].updateTime)+'</div></li>';
+                            '<span>'+res.data.list[i].title+'</span></p></div>' +
+                            '<div class="third">' +
+                            '<span class="time">'+timeAgo(new Date().getTime()/1000-res.data.list[i].updateTime)+'</span><br>' +
+                            '<span>'+typeStr+'</span></div></li>';
                     }
                     $('ul').append(str);
                     $('#loadMore').children('.spinner').hide();

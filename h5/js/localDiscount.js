@@ -23,9 +23,9 @@ $(document).ready(function(){
             });
         }
     }else if(userId_2 && !isWX){
-        window.location.href = 'bjzx://data?itemType=16&itemId='+ subjectId +'&userId=' + userId_2;
+        window.location.href = 'bjzx://data?itemType=16&itemId='+ subjectId +'&userId=' + userId_2 ;
         setTimeout(function () {
-            window.location.href = './accountManager/download.html';
+            window.location.href = './accountManager/download.html?itemType=16&itemId='+ subjectId +'&userId=' + userId_2 ;
         },4000);
     }
 

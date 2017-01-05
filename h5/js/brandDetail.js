@@ -26,7 +26,7 @@ if(userId && isWX){
 }else if(userId && !isWX){
 	window.location.href = 'bjzx://data?itemType=3&itemId='+ itemId +'&userId=' + userId;
 	setTimeout(function () {
-		window.location.href = './accountManager/download.html';
+		window.location.href = './accountManager/download.html?itemType=3&itemId='+ itemId +'&userId=' + userId;
 	},4000);
 }
 

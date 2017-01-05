@@ -24,7 +24,7 @@ $(function(){
     }else if(userId && !isWX) {
         window.location.href = 'bjzx://data?itemType=1&itemId='+ itemId +'&userId=' + userId;
         setTimeout(function () {
-            window.location.href = './accountManager/download.html';
+            window.location.href = './accountManager/download.html?itemType=1&itemId='+ itemId +'&userId=' + userId;
         },4000);
     }
 

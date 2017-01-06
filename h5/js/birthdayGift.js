@@ -238,9 +238,6 @@ $("#receiveNow").click(function () {
             $.alert("请输入您的生日或者生日礼包领取码", "提示");
             return
         }
-
-        hasBinded = true;  //临时
-
         if(!hasBinded){
             $.modal({
                 title: "提示",

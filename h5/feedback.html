@@ -6,19 +6,15 @@
 <meta name="screen-orientation"content="portrait">
 <meta name="x5-orientation"content="portrait">
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-
 	<link rel="stylesheet" href="js/jquery-weui/jquery-weui.css">
 	<link rel="stylesheet" href="js/jquery-weui/weui.min.css">
 	<link rel="stylesheet" href="css/style.css">
-
     <script>
         var iWidth=document.documentElement.clientWidth;
         document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
     </script>
 </head>
-<body>
-
-
+<body style="background: #fff">
 <div class="weui_tab">
 	<div class="weui_navbar">
 		<a class="weui_navbar_item weui_bar_item_on">问题与意见</a>
@@ -55,7 +51,8 @@
 					<ul class="weui_uploader_files"  id="imgList">
 						<!--<li class="weui_uploader_file" ></li>-->
 						<li class="weui_uploader_input_wrp">
-							<input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" id="advicePic" onchange="upLoadImg(this)">
+							<input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif"
+								   id="advicePic" onchange="upLoadImg(this)">
 						</li>
 					</ul>
 				</div>

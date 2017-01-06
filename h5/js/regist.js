@@ -100,7 +100,7 @@ $(function(){
 																		//设置cookie
 																		setCookie("token",data.message,365);
 																		setCookie("phone",phoneNum,365);
-																		window.location.href = 'interesting.html';
+																		window.location.href = 'regist_Info.html';
 																	}
 																});
 															}else{

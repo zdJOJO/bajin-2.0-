@@ -13,7 +13,7 @@ $(function(){
 
 
     $('#gb_but').click(function () {
-        history.go(1)
+        window.history.back();
     });
 
     function getInterestingList(currentPage,size) {

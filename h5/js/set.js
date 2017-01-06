@@ -62,7 +62,7 @@ $(function(){
 			}
 
 			info = {
-				"headPic":$("#myImage").attr("src"),
+				"headPic": $("#myImage").attr("src"),
 				"gender": setAgx,
 				"userName": $("#setUserName").val(),
 			};

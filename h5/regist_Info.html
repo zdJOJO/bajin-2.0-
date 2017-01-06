@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+     "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>填写信息</title>
+    <meta charset="utf-8">
+    <meta name="screen-orientation"content="portrait">
+    <meta name="x5-orientation"content="portrait">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" >
+    <link rel="stylesheet" type="text/css" href="css/regist_Info.css" >
+</head>
+<body>
+<div id="ld_bj">
+    <div id="gb_but"><a><img src="images/login/back.png"></a></div>
+    <div id="zc_content">
+        <div class="headPic">
+           <label for="headPic">
+               <img id="headImg" src="./imgs/headPic_default.png"><br>
+           </label>
+            <span>设置头像</span>
+            <input id="headPic" type="file" accept="image/*" onchange="upLoadImg(this)" style="display: none">
+        </div>
+        <ul class="list">
+            <li>
+                <input id="name" type="text" placeholder="请设置昵称">
+            </li>
+            <li>
+                <select id="sexValue">
+                    <option value="">请选择性别</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                </select>
+            </li>
+            <li>
+                <label id="birthDay" for="birthDayValue">请选择生日</label>
+                <input id="birthDayValue" type="date">
+            </li>
+        </ul>
+        <button id="finished" class="but_dl">下一步</button>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/public/public.js"></script>
+<script type="text/javascript">
+    var iWidth=document.documentElement.clientWidth;
+    document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+    var token = getCookie("token");
+    var nameValue = '', sexValue = '', birthDayValue = '';
+
+
+    // 头像上传
+    function upLoadImg(obj) {
+        var file = obj.files[0];
+        if(obj.files[0].size > 8000*1024){
+            alert("上传图片不要大于80kb！");
+            return
+        }
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(e){
+            var imgBase = this.result;
+            $.ajax({
+                type:"POST",
+                contentType: "application/json",
+                url:  port+"/card/file/base64.method?fileName=" + Math.floor(Math.random()*1000000)+".png",
+                data: imgBase ,
+                success:function(data){
+                    $('#headImg').attr('src',data.url)
+                }
+            });
+        }
+    }
+
+
+    $('#name').change(function () {
+        nameValue = $(this).val();
+    });
+
+    $('#sexValue').change(function () {
+        sexValue = $(this).val();
+        if(sexValue){
+            $(this).css('color','#fafafa')
+        }else {
+            $(this).css('color','rgba(144, 144, 144, 0.8)')
+        }
+    });
+
+    $('#birthDay').click(function () {
+        $('#birthDayValue').change(function () {
+            birthDayValue = $('#birthDayValue').val();
+            $('#birthDay').val(birthDayValue)
+            console.log(birthDayValue)
+        })
+    });
+
+
+
+    //上一步
+    $('#gb_but').click(function () {
+        window.history.back();
+    })
+    //下一步
+    $('#finished').click(function () {
+        console.log(nameValue)
+        console.log(sexValue)
+        console.log(birthDayValue)
+        if( !nameValue || !sexValue || !birthDayValue ){
+            alert('请正确填写信息');
+            return
+        }
+        var info = {
+            userName: nameValue,
+            gender: sexValue,
+            birthDay: birthDayValue
+        }
+
+        $.ajax({
+            type:"PUT",
+            url:port+"/card/user?token="+token,
+            contentType: "application/json",
+            data:JSON.stringify(info),
+            success:function(data){
+                if(data.code == '202'){
+                    window.location.href = 'interesting.html';
+                }else {
+                    alert('创建信息失败，请重新填写');
+                }
+            },
+            error:function(data){
+               //todo
+            }
+        });
+    })
+
+</script>
+</body>
+</html>

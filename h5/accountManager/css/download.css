@@ -22,13 +22,13 @@ html,body{
 }
 
 #content>.bgPic>img{
-    width: 0.2rem;
-    height: 0.2rem;
+    width: 0.34rem;
+    height: 0.34rem;
     border-radius: 10px;
     position: absolute;
     left: 50%;
-    bottom: -0.1rem;
-    margin-left: -0.1rem;
+    bottom: -0.17rem;
+    margin-left: -0.17rem;
 }
 
 #content>.inputBox{

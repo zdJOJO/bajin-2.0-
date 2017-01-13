@@ -36,7 +36,7 @@ $(function(){
 	Butlog.click(function(){
 		window.name = "";
 		var User=$("#user").val();
-		var Pass=hex_md5($("#pass").val());
+		var Pass= hex_md5($("#pass").val());
 		if(User!=""&&Pass!=""){
 			$.ajax({
 				type:"POST",
@@ -80,6 +80,7 @@ $(function(){
 						  }
 						return ""
 						}
+
 	                    if(window.history.length > 1){
 							//测试  环境
 							window.location.href = unescape(his);

@@ -288,7 +288,7 @@ footer div p{
 #consultationList>.hotList>.singleHot>h4.title{
 	color: #343434;
 	font-size: 18px;
-	font-weight: 100;
+	font-weight: normal;
 	position: absolute;
 	top: 3.5%;
 	left: 3%;

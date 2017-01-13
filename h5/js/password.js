@@ -36,10 +36,7 @@ $(function(){
 							type:"POST",
 							url:port+"/card/tcaptcha?phone="+phone+"&version=v2",
 							success:function(data){
-
 								console.log("进入获取验证码阶段");
-
-
 								$("#next").click(function(){
 									var zc_content=$("#zc_content").eq(0);
 									var zc_content2=$("#zc_content2").eq(0);

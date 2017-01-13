@@ -76,6 +76,8 @@ var isGiftDisabled = true ;  //判断礼包是否全部停用  是-true  否-fal
 
 
 
+hitsOnFn(token,25,1,0);
+
 //判断是否绑定了银行卡
 function bankCard() {
     $.get( port + '/card/card?token=' + token,function (result) {

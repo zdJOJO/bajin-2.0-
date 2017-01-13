@@ -30,8 +30,8 @@ $(function(){
     if(!token && isApp){
        window.location.href = '../../login.html';
     }
-    token = '2d06c622-b445-43b7-8f28-965f66adebea'
     //查询单个客户经理  http://121.196.232.233/card/icbcManger/check?token={token}
+    token = '2d06c622-b445-43b7-8f28-965f66adebea'
     $.ajax({
         type: 'get',
         url: port + '/card/icbcManger/check?token=' + token ,
@@ -53,7 +53,8 @@ $(function(){
                     window.location.href = 'inviteRecord.html?userId='+res.data.userId;
                 });
                 $('#main').find('.rank').click(function () {
-                    window.location.href = 'ranking.html';
+                    $.alert('暂未开放，敬请期待')
+                    //window.location.href = 'ranking.html';
                 });
 
                 $('#codeBox').find('.info').children('span:first-child').html(res.data.userModel.userName);

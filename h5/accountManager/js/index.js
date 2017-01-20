@@ -31,11 +31,11 @@ $(function(){
        window.location.href = '../../login.html';
     }
     //查询单个客户经理  http://121.196.232.233/card/icbcManger/check?token={token}
-    token = '2d06c622-b445-43b7-8f28-965f66adebea'
     $.ajax({
         type: 'get',
         url: port + '/card/icbcManger/check?token=' + token ,
         success: function (res) {
+            var sharePic = '../img/share.png';
             var headPicPath = res.data.userModel.headPic || '../imgs/headPic_default.png';
             //邀请名额
             $.get(port+'/card/icbcManger/invite/result?userId='+res.data.userModel.userId+'&currentPage=1&size=10',function (data) {
@@ -43,7 +43,7 @@ $(function(){
                     '<h2>'+res.data.userModel.userName+'</h2><ul class="info">' +
                     '<li><span>'+res.data.inviteCode+'号员工</span></li><li><span>'+res.data.bankInfo+'</span></li></ul>' +
                     '<ul class="num"><li class="list"><span>'+data.data.rowCount+'</span><span>邀请</span></li>' +
-                    '<li class="rank"><span>未上榜</span><span>排行榜</span></li></ul>' +
+                    '<li class="rank"><span>未开放</span><span>排行榜</span></li></ul>' +
                     '<a id="showBox" href="javascript:;" class="open-popup" data-target="#codeBox">邀请客户</a>';
                 $('#main').html(str);
                 var height =  $('#main').find('.info').outerHeight();
@@ -82,8 +82,8 @@ $(function(){
                 try {
                     javascript: window.handler.showShareBoard(
                         '白金尊享',
-                        res.data.userModel.userName+'邀请您加入白金尊享',
-                        headPicPath,
+                        '工银客户经理' + res.data.userModel.userName+'邀请您加入白金尊享',
+                        sharePic,
                         portStr+'/accountManager/download.html?userId='+res.data.userModel.userId
                     );    //Android
                 }catch (e){
@@ -92,8 +92,8 @@ $(function(){
                 try {
                     showShareBoard(
                         '白金尊享',
-                        res.data.userModel.userName+'邀请您加入白金尊享',
-                        headPicPath,
+                        '工银客户经理' + res.data.userModel.userName+'邀请您加入白金尊享',
+                        sharePic,
                         portStr+'/accountManager/download.html?userId='+res.data.userModel.userId
                     );   //IOS
                 }catch (e){

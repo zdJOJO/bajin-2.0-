@@ -73,7 +73,7 @@ $(function(){
 														type:"POST",
 														dataType:"json",
 														contentType : "application/json;charset=UTF-8",
-														url:port+"/card/user?captcha="+captchabox,
+														url: port+"/card/user?captcha="+captchabox,
 														data:JSON.stringify(data),
 														success:function(data){
 															if(data.code==201){

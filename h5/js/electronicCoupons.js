@@ -10,7 +10,7 @@ var ticketObj = {
     token: ticketArray[3].split('=')[1]
 }
 var token = ticketObj.token;
-var ticketId = ticketObj.ticketId ;
+var ticketId = ticketObj.ticketId;
 
 function setCookie(c_name,value,expiredays) {
     var exdate = new Date();

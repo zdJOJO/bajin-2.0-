@@ -57,17 +57,17 @@ $(function(){
 															type:"POST",
 															dataType:"json",
 															contentType : "application/json;charset=UTF-8",
-															url:port+"/card/user/updatePassword",
+															url: port+"/card/user/updatePassword",
 															data:JSON.stringify({
 																phone:phone,
-																password:Newpass
+																password: Newpass
 															}),
 															success:function(data){
 																console.log(data);
 																alert("修改成功");
 																$.ajax({
 																	type:"POST",
-																	url:port+"/card/login",
+																	url: port+"/card/login",
 																	dataType:"json",
 																	contentType : "application/json;charset=UTF-8",
 																	data:JSON.stringify({

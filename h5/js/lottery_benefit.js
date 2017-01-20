@@ -8,16 +8,16 @@
  * Created by Administrator on 2016/9/11.
  */
 //  当初 从我的权益 进入 抽奖
+// http://www.winthen.com/test/fareDraw_new.html?id=7?token=374a906a-2056-4c40-999a-cbed31419512&status=0
+// ["", "id=7", "token=374a906a-2056-4c40-999a-cbed31419512&status=0"]
 
 $(function (){
     var token = "";
     var sectionId = ''; //抽奖期数
 
     var searchStr = window.location.search;
-    var phoneNumArray = ['139****3415','131****3995','189****5613','157****5779','182****2235','131****5809','156****2175','136****5889','187****4779'];
-
-    //http://www.winthen.com/test/fareDraw_new.html?id=7?token=374a906a-2056-4c40-999a-cbed31419512&status=0
-     // ["", "id=7", "token=374a906a-2056-4c40-999a-cbed31419512&status=0"]
+    var phoneNumArray = ['139****3415','131****3995','189****5613','157****5779',
+        '182****2235','131****5809','156****2175','136****5889','187****4779'];
 
     token = getCookie("token");
 

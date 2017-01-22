@@ -236,7 +236,7 @@ $("#receiveNow").click(function () {
             ]
         });
     }else {
-        if( birthday == '请选择您的生日' || !birthday || !gifCode){
+        if( birthday == '请选择您的生日' || !birthday || !gifCode || birthday==null){
             $.alert("请输入您的生日或者生日礼包领取码", "提示");
             return
         }

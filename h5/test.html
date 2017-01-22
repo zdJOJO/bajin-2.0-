@@ -2,66 +2,609 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
     <meta name="screen-orientation"content="portrait">
     <meta name="x5-orientation"content="portrait">
-    <link rel="stylesheet" href="js/jquery-weui/1.0.0-rc.1/weui.min.css">
-    <link rel="stylesheet" href="js/jquery-weui/1.0.0-rc.1/jquery-weui.css">
-    <title>test</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,userscalable=no"/>
+    <title>生日礼包</title>
+
+    <link rel="stylesheet" type="text/css" href="js/jquery-weui/weui.min.css">
+    <link rel="stylesheet" type="text/css" href="js/jquery-weui/jquery-weui.css">
+    <link rel="stylesheet" type="text/css" href="css/birthdayGift.css">
+
+    <style>
+        #birthDayBox{
+            width: 95%;
+            height: 45px;
+            line-height: 45px;
+            border: 2px #F0F0F0 solid;
+            margin: 8px 0;
+            padding-left: 15px;
+            z-index: 5;
+            position: relative;
+        }
+        #birthDay{
+            position: absolute;
+            top: 2px;
+            z-index: -1;
+        }
+        #birthDayValue{
+            display: inline-block;
+            width: 100%;
+            height: 95%;
+            text-align: left;
+            color: #929292 !important;
+            font-size: 0.9em;
+            z-index: 10;
+            background: #fff;
+        }
+    </style>
 </head>
 <body>
-<!-- body 顶部加上如下代码 -->
-<div class="weui-pull-to-refresh__layer">
-    <div class="weui-pull-to-refresh__arrow"></div>
-    <div class="weui-pull-to-refresh__preloader"></div>
-    <div class="down">下拉刷新</div>
-    <div class="up">释放刷新</div>
-    <div class="refresh">正在刷新</div>
-</div>
-<div>
-    <a href="wx468e08e2cd5f415a://WeChat">点我</a>
-    界100多个国家的1200多所大学用作教材。《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》的最新版全面而系统地介绍了人工智能的理论和实践，阐述了人工智能领域的核心内容，并深入介绍了各个主要的研究方向。全书分为七大部分：第Ⅰ部分“人工智能”，第Ⅱ部分“问题求解”，第Ⅲ部分“知识、推理与规划”，第Ⅳ部分“不确定知识与推理”，第Ⅴ部分“学习”，第Ⅵ部分“通信、感知与行动”，第Ⅶ部分“结论”。《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》既详细介绍了人工智能的基本概念、思想和算法，还描述了其各个研究方向最前沿的进展，同时收集整理了详实的历史文献与事件。《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》适合于不同层次和领域的研究人员及学生，是高等院校本科生和研究生人工智能课的首选教材，也是相关领域的科研与工程技术人员的重要参考书。
-    《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》是最权威、最经典的人工智能教材，已被全世界100多个国家的1200多所大学用作教材。《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》的最新版全面而系统地介绍了人工智能的理论和实践，阐述了人工智能领域的核心内容，并深入介绍了各个主要的研究方向。全书分为七大部分：第Ⅰ部分“人工智能”，第Ⅱ部分“问题求解”，第Ⅲ部分“知识、推理与规划”，第Ⅳ部分“不确定知识与推理”，第Ⅴ部分“学习”，第Ⅵ部分“通信、感知与行动”，第Ⅶ部分“结论”。《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》既详细介绍了人工智能的基本概念、思想和算法，还描述了其各个研究方向最前沿的进展，同时收集整理了详实的历史文献与事件。《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》适合于不同层次和领域的研究人员及学生，是高等院校本科生和研究生人工智能课的首选教材，也是相关领域的科研与工程技术人员的重要参考书。
-    《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》是最权威、最经典的人工智能教材，已被全世界100多个国家的1200多所大学用作教材。《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》的最新版全面而系统地介绍了人工智能的理论和实践，阐述了人工智能领域的核心内容，并深入介绍了各个主要的研究方向。全书分为七大部分：第Ⅰ部分“人工智能”，第Ⅱ部分“问题求解”，第Ⅲ部分“知识、推理与规划”，第Ⅳ部分“不确定知识与推理”，第Ⅴ部分“学习”，第Ⅵ部分“通信、感知与行动”，第Ⅶ部分“结论”。《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》既详细介绍了人工智能的基本概念、思想和算法，还描述了其各个研究方向最前沿的进展，同时收集整理了详实的历史文献与事件。《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》适合于不同层次和领域的研究人员及学生，是高等院校本科生和研究生人工智能课的首选教材，也是相关领域的科研与工程技术人员的重要参考书。
-    《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》是最权威、最经典的人工智能教材，已被全世界100多个国家的1200多所大学用作教材。《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》的最新版全面而系统地介绍了人工智能的理论和实践，阐述了人工智能领域的核心内容，并深入介绍了各个主要的研究方向。全书分为七大部分：第Ⅰ部分“人工智能”，第Ⅱ部分“问题求解”，第Ⅲ部分“知识、推理与规划”，第Ⅳ部分“不确定知识与推理”，第Ⅴ部分“学习”，第Ⅵ部分“通信、感知与行动”，第Ⅶ部分“结论”。《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》既详细介绍了人工智能的基本概念、思想和算法，还描述了其各个研究方向最前沿的进展，同时收集整理了详实的历史文献与事件。《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》适合于不同层次和领域的研究人员及学生，是高等院校本科生和研究生人工智能课的首选教材，也是相关领域的科研与工程技术人员的重要参考书。
-    《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》是最权威、最经典的人工智能教材，已被全世界100多个国家的1200多所大学用作教材。《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》的最新版全面而系统地介绍了人工智能的理论和实践，阐述了人工智能领域的核心内容，并深入介绍了各个主要的研究方向。全书分为七大部分：第Ⅰ部分“人工智能”，第Ⅱ部分“问题求解”，第Ⅲ部分“知识、推理与规划”，第Ⅳ部分“不确定知识与推理”，第Ⅴ部分“学习”，第Ⅵ部分“通信、感知与行动”，第Ⅶ部分“结论”。《世界著名计算机教材精选·人工智能:一种现代的方法(第3版)》既详细介绍了人工智能的基本概念、思想和算法，还描述了其各个研究方向最前沿的进展，同时收集整理了详实的历史文献与事件。《世界著名计算机教材精选·人工智
+<div class="topImg"><img src="./imgs/gift/gift-head.jpg" style="height: 100%"></div>
+<div id="content">
+    <section class="receiveBefore">
+        <div class="receive">
+            <h3>白金尊享 生日大礼包</h3>
+            <div id="birthDayBox">
+                <input id="birthDay" type="date" placeholder="请选择您的生日" value="1980-01-01">
+                <label id="birthDayValue" for="birthDay">请选择您的生日</label>
+            </div>
+            <input id="birthDayCode" type="number" placeholder="请输入生日礼包的领取码">
+            <button id="receiveNow">立即领取</button>
+            <p style="text-align: left">
+                温馨提示:<br>
+                1.领取前请先注册/登录APP，绑定您的白金信用卡<br>
+                2.生日礼包领取码请查阅工行发送的生日祝福短信
+            </p>
+        </div>
+        <div class="giftContent">
+            <h3>礼包内容</h3>
+            <ul class="giftList"></ul>
+            <div class="bottomBox" style="height: 30px">
+                <button id="more" style="display: none">点击查看更多↓</button>
+                <img src="imgs/gift/loading.gif" id="giftLoading" >
+            </div>
+        </div>
+        <div class="giftRule">
+            <h3>礼包领取规则</h3>
+            <li>1.礼包仅限中国工商银行白金信用卡持卡人领取，且需持卡人在白金尊享APP中注册并绑定工银白金卡/黑金卡</li>
+            <li>2.工行会在持卡人生日当月发送生日祝福短信，持卡人须凭生日短信中的领取码领取生日礼包</li>
+            <li>3.领取码有效期为30天（从短信发送之日起计算），逾期领取码将失效，无法验证领取生日礼包，也无法再补发</li>
+            <li>4.每位工银白金卡持卡人一个自然年只能领取一次生日礼包</li>
+            <li>5.白金生日礼包自2016年10月开始启动，因此2016年在10月之前生日的工银白金卡持卡人无法领取这一年的生日礼包</li>
+            <li>6.本活动的最终解释权归杭州圆臻科技有限公司所有</li>
+        </div>
+    </section>
+
+    <section class="receiveAfter" style="display: none">
+        <div class="gifList">
+            <img class="success" src="imgs/gift/success.png">
+            <h3>领取成功</h3>
+        </div>
+        <div class="toAccount" style="position: relative;display: none">
+            <h3>礼包已放至账户</h3>
+            <span class="account"></span>
+        </div>
+        <div class="toAddress" style="display: none">
+            <h3>礼包将配送到</h3>
+            <p class="address"></p>
+        </div>
+        <p>(礼包可至个人中心-我的权益-领取记录查看使用)</p>
+    </section>
+
+    <div id="popPub" style="display: none">
+        <div class="defaulAddress"></div>
+    </div>
+
+    <div  id="orderLoading" class="spinner" style="display: none">
+        <div class="spinner-container container1">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container2">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container3">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+    </div>
 </div>
 </body>
 <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery-weui/1.0.0-rc.1/jquery-weui.min.js"></script>
+<script type="text/javascript" src="js/jquery-weui/jquery-weui.min.js"></script>
 <script type="text/javascript" src="js/public/public.js"></script>
-<script>
-    $(document.body).pullToRefresh().on("pull-to-refresh", function() {
-        setTimeout(function() {
-            $("#time").text(new Date);
-            $(document.body).pullToRefreshDone();
-        }, 2000);
-    });
 
+<script type="text/javascript" src="js/public/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="js/public/sha1.js"></script>
+<script type="text/javascript" src="js/public/myWxApi.js"></script>
+
+<script type="text/javascript">
+    var iWidth=document.documentElement.clientWidth;
+    document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+    /**
+     * Created by Administrator on 2016/8/16.
+     *///获取存在于cookie中的token值
+    var receiveId = ''; //根据id去请求 实物的收获地址
+    var urlSearch = window.location.search;
+    var localStorage = window.localStorage;   //用于存储生日日期和礼包领取码
+
+    var token = '';
+    //Android
     try {
         javascript: window.handler.isNativeApp();    //Android
         javascript: window.handler.getNativeAppToken();    //Android
-        if(window.handler.isNativeApp() || window.handler.getNativeAppToken()){
-            //todo
+        if(window.handler.isNativeApp()){
+            alert('Android')
+            token = window.handler.getNativeAppToken();
+            alert('token tokentoken ' + token)
         }else {
             //todo
         }
-
     }catch (e){
         //todo
     }
-
-
-//IOS
+    //IOS
     try {
-        if(isNativeApp() || getNativeAppToken()){
-          //todo
+        if(isNativeApp()){
+            alert('IOS')
+            token = getNativeAppToken();
         }else {
             //todo
         }
-
     }catch (e){
         //todo
     }
+    token = token || getCookie('token');
+    alert('token isssssss:' + token)
+
+    if(urlSearch.indexOf('receiveId') > 0){
+        receiveId = GetQueryString('receiveId')  //收获地址
+    }
+
+    var his = window.location.pathname.split("/");
+    his = his[his.length-1];
+
+    $('#birthDay').bind('change',function () {
+        if($(this).val()){
+            $('#birthDayValue').html($(this).val());
+            localStorage.setItem("birthDay",$(this).val());
+        }else {
+            $('#birthDayValue').html('请选择您的生日');
+        }
+    });
+    if(localStorage.birthDay){
+        $('#birthDay').val(localStorage.birthDay);
+    }
+
+    var hasBinded = false; //是否绑白金卡  是true
+    var hasRealGift = false; //是否有 实物
+    var hasElec = false;     //是否有 电子券
+    var giftArray = [];
+    var addressStr = '';
+    var pageNum = 1;
+    var $defaultAddress = $("#popPub").find('.defaulAddress');
+    var hasGifts = false ;   // 判断生日礼包是否存在    存在-true  不存在-false
+    var isGiftDisabled = true ;  //判断礼包是否全部停用  是-true  否-false
+
+    hitsOnFn(token,25,1,0);
+
+    //判断是否绑定了银行卡
+    function bankCard() {
+        $.get( port + '/card/card?token=' + token,function (result) {
+            //判断是否有白金卡
+            // if(result.list.length > 0){
+            //     for(var i=0;i<result.list.length;i++){
+            //         if(result.list[i].bjke == 1){
+            //             hasBinded = true;
+            //         }
+            //     }
+            // }
+            //判断是否有卡
+            if(result.list.length > 0){
+                hasBinded = true;
+            }
+        });
+    }
+    bankCard();
+
+    //获取地址
+    function getAddress() {
+        var defaultAddressObj = {};
+        if(receiveId){
+            $.get( port + '/card/receiver/' + receiveId + '?token=' + token,function (result) {
+                defaultAddressObj = result;
+                setAdressFn(defaultAddressObj);
+                $('#popPub').show(1,function () {
+                    $(this).children('.defaulAddress').animate({'bottom': '0'},200,function () {
+                        $('#chooseBox').click();
+                    });
+                });
+            })
+        }else {
+            $.get( port + '/card/receiver?token=' + token + '&currentPage=1',function (result) {
+                if(result.list.length == 0){
+                    $defaultAddress.html('<a style="margin-top: 11%;text-align: center;display: inherit;">你还没有创建收货地址，赶快创建一个吧</a>' +
+                         '<button id="sureReceive">新建地址</button>');
+                    //（存在实物情况下） 确认领取
+                    $('#sureReceive').click(function () {
+                        window.location.href = 'addAddress.html?fromeGift&obj=' + escape(JSON.stringify({})) + '';
+                    });
+                }else {
+                    for(var i =0;i<result.list.length;i++){
+                        if(result.list[i].isDefault == 0){
+                            defaultAddressObj = result.list[0];
+                        }else {
+                            defaultAddressObj = result.list[i];
+                        }
+                    };
+                    setAdressFn(defaultAddressObj);
+                }
+            });
+        }
+
+        function setAdressFn(defaulAddresObj) {
+            $defaultAddress.html('<img id="right" src="imgs/gift/right.png">' +
+                 '<input id="choose" type="checkbox"><label id="chooseBox" for="choose"></label>' +
+                 '<span class="info">' + defaulAddresObj.receiverName + '&nbsp;&nbsp;' + defaulAddresObj.receiverPhone +'</span> ' +
+                 '<span class="address">' + defaulAddresObj.province + defaulAddresObj.city + defaulAddresObj.district + '</span> ' +
+                 '<button id="sureReceive">确认领取</button>');
+
+            //选取地址
+            if(!receiveId){
+                $('#chooseBox').click();
+            }
+            $('#right').click(function () {
+                window.location.href = 'setAddress.html?fromeGift&obj=' + escape(JSON.stringify({}));
+            });
+            //（存在实物情况下） 确认领取
+            $('#sureReceive').click(function () {
+                if(!$('#choose').is(':checked')){
+                    $('#popPub').attr('z-index','-1');
+                    $.alert("请选择收货地址", "提示");
+                }else {
+                    giftAjax(defaulAddresObj.receiveId);
+                }
+            });
+        }
+    }
+    getAddress();
+
+    //生日礼包列表获取   type=0---实物  isOnline=1---停用  sum=0---领完
+    function getGIftsList(currentPage) {
+        $.ajax({
+            type: 'get',
+            url: port + '/card/birthgift?currentPage=' + currentPage + '&token=' + token,
+            success: function (result) {
+                var giftStr = '';
+                if( currentPage==1 &&(!result || result.data.list.length == 0)){
+                    hasGifts = false;
+                    $('#content>.receiveBefore .giftList').html('<li class="giftTitle">暂无礼包</li>');
+                    $('.bottomBox').hide();
+                    return;
+                }
+                for(var i=0;i<result.data.list.length;i++){
+                    if(result.data.list[i].sum > 0 && result.data.list[i].isOnline == 0){
+                        giftStr += '<li class="giftTitle">'+ result.data.list[i].title +' ' +
+                             '<span class="giftSubTitle">'+ result.data.list[i].subTitle +'</span></li>';
+                        //判断是否有实物
+                        if(result.data.list[i].type == 0){
+                            hasRealGift = true;
+                        }
+                        //判断是否有电子券
+                        if(result.data.list[i].type == 1){
+                            hasElec = true;
+                        }
+                        //判断 是否全部停用
+                        if(result.data.list[i].isOnline == 0){
+                            isGiftDisabled = false;
+                        }else {
+                            isGiftDisabled = true;
+                        }
+                    }
+                }
+
+                if(isGiftDisabled){
+                    $('#content>.receiveBefore .giftList').html('<li class="giftTitle">暂无礼包</li>');
+                    $('.bottomBox').hide();
+                    hasGifts = false;
+                    return;
+                }
+
+                $('#content').find('.giftList').append(giftStr);
+                if( currentPage > 1 && result.data.list.length == 0){
+                    setTimeout(function () {
+                        $('#giftLoading').hide();
+                        $('#more').show();
+                    },300);
+                }
+
+            },
+            error: function () {
+                //todo
+            }
+        });
+    }
+    getGIftsList(1);
+
+
+
+    // （不存在实物情况下）立即领取
+    $("#receiveNow").click(function () {
+        var birthday = $('#birthDayValue').html();
+        var gifCode = $('#birthDayCode').val();
+
+        alert('token is ' + token)
+        if(!token){
+            $.modal({
+                title: "提示",
+                text: "您还未登录白金尊享",
+                buttons: [
+                    { text: "去登录", onClick: function(){
+                        window.location.href = "login.html?his=" + escape(his);
+                    } },
+                    { text: "取消", className: "default", onClick: function(){
+                        //todo
+                    } },
+                ]
+            });
+        }else {
+            var re = /^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/;
+            if( !re.test(birthday) || !$('#birthDay').val() || !gifCode){
+                $.alert("请输入您的生日或者生日礼包领取码", "提示");
+                return
+            }
+            if(!hasBinded){
+                $.modal({
+                    title: "提示",
+                    text: "生日礼包仅限工行白金信用卡用户领取，请先绑定您的白金信用卡",
+                    buttons: [
+                        { text: "去绑卡", onClick: function(){
+                            window.location.href = 'bank.html'; //后面需要加几个参数
+                        } },
+                        { text: "取消", className: "default", onClick: function(){
+                            //todo
+                        } },
+                    ]
+                });
+                return
+            }
+            if(hasRealGift){    //有实物
+                $('#popPub').show(1,function () {
+                    $(this).children('.defaulAddress').animate({'bottom': '0'},200);
+                });
+            }else {
+                giftAjax();
+            }
+        }
+    });
+
+
+    //领取 生日礼包的 ajax请求
+    function giftAjax(_receiverId) {
+        var birthday = $('#birthDayValue').html();
+        var re = /^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/;
+        if( !re.test(birthday) || !$('#birthDay').val()){
+            $.alert("请输入您的生日或者生日礼包领取码", "提示");
+            return
+        }
+        var birthdayTimeStamp = new Date(birthday.replace(/-/g,'/')).getTime()/1000; //单位s
+        var data = {
+            code: $('#birthDayCode').val()
+        };
+        if(_receiverId){
+            data.receiverId = _receiverId;
+        }
+        $.ajax({
+            type: 'post',
+            url: port + '/card/usergift?birth=' + birthdayTimeStamp + '&token=' + token,
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType : "application/json;charset=UTF-8",
+            success: function (result) {
+                if(result.code == '601'){
+                    var msgObj = [];
+                    if(result.message == '该用户已经领取过该礼包'){
+                        msgObj = [
+                            { text: "查看", className: "primary", onClick: function(){
+                                //跳到领取成功页面
+                                $('#popPub').hide();
+                                var len = result.data.length;
+                                var deleteLen = 0;
+                                for(var i=0;i<len;i++){
+                                    $.get( port + '/card/birthgift/'+result.data[i].giftId+'?token='+token ,function (gift) {
+                                        if(gift.data){
+                                            giftArray.push(gift.data);
+                                        }else {
+                                            deleteLen++;
+                                        }
+                                        if(i == giftArray.length + deleteLen){
+                                            giftSuccess(result.data[0].receiverId,true,giftArray);
+                                        }
+                                    })
+                                }
+                                // if(hasRealGift){
+                                //     $('.receiveAfter .toAccount').show();
+                                //     $('.receiveAfter .address').html(addressStr);
+                                // }
+                                $('#content').children('.receiveBefore').hide().siblings('.receiveAfter').show();
+                            } },
+                            {text: "取消", className: "default", onClick: function(){
+                                // window.localStorage.clear();
+                            } }
+                        ]
+                    }else {
+                        msgObj = [
+                            {text: '知道了', className: "default", onClick: function(){
+                                // window.localStorage.clear();
+                            } }
+                        ]
+                    }
+
+                    $.modal({
+                        title: "提示",
+                        text: result.message,
+                        buttons: msgObj
+                    });
+
+                }else if(result.code == '619'){
+                    $.toast("礼包已领取", "text");
+                }else {
+                    //生日礼包为空 且 用户未领取
+                    if(!hasGifts){
+                        $.modal({
+                            title: "提示",
+                            text: "礼包正在紧急筹备中，请稍后领取",
+                            buttons: [
+                                { text: "知道了", className: "default", onClick: function(){
+                                    //todo
+                                } },
+                            ]
+                        });
+                        return;
+                    }
+
+                    $('.receiveBefore').hide();
+                    $('#popPub').hide();
+                    $('#orderLoading').show();
+                    setTimeout(function () {
+                        var len = result.data.length;
+                        var deleteLen = 0;
+                        for(var i=0;i<len;i++){
+                            $.get( port + '/card/birthgift/'+result.data[i].giftId+'?token='+token ,function (gift) {
+                                if(gift.data){
+                                    giftArray.push(gift.data);
+                                }else {
+                                    deleteLen++;
+                                }
+                                if(i == giftArray.length + deleteLen){
+                                    giftSuccess(result.data[0].receiverId,false,giftArray);
+                                }
+                            })
+                        }
+                        $('.receiveAfter').show();
+                        $('#orderLoading').hide();
+                    },300);
+                    window.localStorage.clear();
+                }
+            },
+            error: function (e) {
+            }
+        });
+    }
+
+
+
+
+
+    //领取成功页面
+    function giftSuccess(id,_hasRealGift,_giftArray) {
+        var str = '';
+        var imgStr = '';
+        for(var i=0;i<_giftArray.length;i++){
+            if(_giftArray[i].type == 1){
+                imgStr = portStr+'/imgs/gift/logo.png';
+            }else {
+                _hasRealGift = true; //判断有无实物
+                imgStr = _giftArray[i].pic
+            }
+            str = $('<li class="gift"><img class="logo" src="'+imgStr+'">' +
+                 '<img class="success" src="imgs/gift/gift.png">' + '<span class="title">'+ _giftArray[i].title +'</span>' +
+                 '<span class="subTitle">'+ _giftArray[i].subTitle +'</span></li>');
+            if(_giftArray[i].type == 0){
+                str.attr('data-type','0');  //实物
+            }
+            if(str.children('img').eq(0).attr('src') == 'undefined'){
+                str.children('img').eq(0).attr('src','imgs/gift/logo.png');
+            }
+            $('.receiveAfter>.gifList>h3').after(str);
+        }
+
+        if(hasRealGift || _hasRealGift){
+            $.get( port + '/card/receiver/' + id + '?token=' + token,function (result) {
+                addressStr = '<span class="address">' + result.province + result.city + result.district + '</span><br>'+
+                     '<span class="info">' + result.receiverName + '&nbsp;&nbsp;' + result.receiverPhone +'</span>';
+                $('.receiveAfter .toAddress').show();
+                $('.receiveAfter .address').html(addressStr);
+            });
+        }
+        if(hasElec){
+            $('.receiveAfter .toAccount').show();
+            $.get( port + '/card/user?token=' + token ,function (result) {
+                $('.receiveAfter .account').html(result.phone);
+            });
+        }
+    }
+
+
+    //地址弹框点击 事件范围监听
+    $('#popPub').on('click',function(e){
+        e = window.event || e; // 兼容IE7
+        var obj = $(e.srcElement || e.target);
+        if ($(obj).is(".defaulAddress,.defaulAddress>span,.defaulAddress>img,#choose,#chooseBox,#sureReceive")) {
+            //todo  ('内部区域');
+        } else {
+            $('#popPub').find('.defaulAddress').animate({'bottom': '-150px'},200,function () {
+                $('#popPub').hide();
+            });
+        }
+    });
+
+
+    //点击查看更多礼物
+    $('#more').click(function () {
+        $('#giftLoading').show();
+        $('#more').hide();
+        pageNum++;
+        getGIftsList(pageNum);
+    });
+
+
+
+    //判断浏览器
+    function myBrowser(){
+        var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+        var isOpera = userAgent.indexOf("Opera") > -1;
+        if (isOpera) {
+            return "Opera"
+        }; //判断是否Opera浏览器
+        if (userAgent.indexOf("Firefox") > -1) {
+            return "FF";
+        } //判断是否Firefox浏览器
+        if (userAgent.indexOf("Chrome") > -1){
+            return "Chrome";
+        }
+        if (userAgent.indexOf("Safari") > -1) {
+            return "Safari";
+        } //判断是否Safari浏览器
+        if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera) {
+            return "IE";
+        }; //判断是否IE浏览器
+    }
+
+    //微信分享
+    get_url(portStr+'/birthdayGift.html');
+    //调用分享借口
+    jsSdkApi('share', {
+        title: '白金尊享送您生日礼包',
+        desc: '白金用户生日当月可以领取为您精心准备的礼包',
+        link: portStr+'/birthdayGift.html',
+        imgUrl: portStr+'/imgs/gift/gift-head.jpg'
+    });
+
+    //调用安卓、 IOS 的原生分享功能
+    share_Android_Ios(
+         '白金尊享送您生日礼包' ,
+         '白金用户生日当月可以领取为您精心准备的礼包' ,
+         portStr+'/imgs/gift/gift-head.jpg',
+         portStr+'/birthdayGift.html'
+    );
 </script>
 </html>

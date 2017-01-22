@@ -64,6 +64,25 @@ function share_Android_Ios(title,subTitle,imgPath,url) {
     }
 };
 
+function getTokenFrome_Android_Ios() {
+    try {
+        alert('IOS：' + getNativeAppToken())
+        return getNativeAppToken()   //IOS
+    }catch (e){
+        //todo
+    }
+    try {
+        alert('Android：' + window.handler.getNativeAppToken())
+        return window.handler.getNativeAppToken();    //Android
+    }catch (e){
+        //todo
+    }
+}
+
+
+
+
+
 
 // 获取 min 到 max 的随机整数   如： var random = getRandom(0, 100);
 function getRandom(min, max){

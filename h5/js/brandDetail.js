@@ -9,7 +9,7 @@ his = his[his.length-1];
 his = his + window.location.search;
 
 //获取商品 http://121.196.232.233/card/goods/{goodsId}
-var goodsid = GetQueryString('id');
+var goodsid = GetQueryString('id') || GetQueryString('cmsid');
 var itemId = goodsid;
 
 var userId =  GetQueryString('userId');

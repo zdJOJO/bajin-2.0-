@@ -35,7 +35,8 @@ $.ajax({
             });
             $('#content >.img>.benefit').html(result.data.title);
             $('#content >.img>.subTitle').html(result.data.subTitle);
-            $('#content >.img>.time').html('有效期' + new Date(result.data.startTime*1000).Formate_short() + '至' + new Date(result.data.startTime*1000).Formate_short(result.data.endTime*1000));
+            $('#content >.img>.time').html('有效期' + new Date(result.data.startTime*1000).Formate_short() +
+                '至' + new Date(result.data.endTime*1000).Formate_short());
 
             $('#content>li>.code').html(ticketObj.ticketCode);
             $('#content>li>.instructions').html(result.data.ticketDescription);

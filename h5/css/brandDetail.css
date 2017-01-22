@@ -253,6 +253,7 @@ header .saveAndShare img:first-child{
 /*富文本图片限制*/
 .message_1 img,.message_2 img{
 	width: 0.92rem;
+	display: block;
 }
 .wrapper .currentCost{
 	color: #B7A66E;

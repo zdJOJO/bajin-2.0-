@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+     "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>促销</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <meta name="screen-orientation"content="portrait">
+    <meta name="x5-orientation"content="portrait">
+    <link rel="stylesheet"  type="text/css" href="css/reset.css">
+    <link  rel="stylesheet" type="text/css" href="css/pierre.css">
+</head>
+<body>
+    <div></div>
+    <section id="good">
+        <div class="content"></div>
+    </section>
+</body>
+<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/plugin/jquery.lazyload.js"></script>
+<script type="text/javascript" src="js/public/public.js"></script>
+<script>
+    var iWidth=document.documentElement.clientWidth;
+    document.getElementsByTagName("html")[0].style.fontSize=iWidth+"px";
+
+    var token = getCookie("token");
+    var saleId = GetQueryString('saleId');
+    var page = 0;
+    var str_good = '';
+
+    // http://121.196.232.233/card/saleSet/{id}
+    $.ajax({
+        type:"get",
+        url:port+"/card/saleSet/"+saleId,
+        success:function(res){
+            var len = res.data.contentModels.length;
+            for(var i=0;i<len;i++){
+                str_good += '<div class="lar" data-type="'+res.data.contentModels[i].itemType+'" ' +
+                     'data-typeId="'+res.data.contentModels[i].itemId+'">' +
+                     '<img data-original="'+res.data.contentModels[i].pic+'"/>' +
+                     '<div class="detail"><p class="title">'+res.data.contentModels[i].title+'</p>'+
+                     '<p class="pirce">￥'+res.data.contentModels[i].price.toFixed(2)+'</p></div></div>';
+            }
+            $("#good").find('.content').append(str_good);
+            //图片预加载
+            $("#good img").lazyload({
+                placeholder : "",
+                threshold: 0,
+                effect : "fadeIn",
+                effectspeed: 250,
+                event: 'scroll',
+            });
+
+            //添加导航事件
+            $(".lar,.uad").bind("click",function(){
+                if($(this).attr('data-type')=='1' ){
+                    window.location.href = "enrol.html?id="+$(this).attr("data-typeId");
+                }else if($(this).attr('data-type')=='3'){
+                    window.location.href = "brandDetail.html?id="+$(this).attr("data-typeId");
+                }else if($(this).attr('data-type')=='17'){
+                    window.location.href = "localDisDetail.html?id="+$(this).attr("data-typeId");
+                }
+            });
+        },
+        error:function(data){
+            //todo
+        }
+    });
+
+</script>
+</html>

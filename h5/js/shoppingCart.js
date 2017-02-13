@@ -21,7 +21,12 @@ $(document).ready(function(){
 						}
 						for(var i=0,len = data.list.length;i<len;i++){
 							str += '<div class="singleBrand" >' +
-								'<input type="checkbox" id="checkbox-'+ i +'" value="false" data-cardid = "'+data.list[i].carModel.id+ '" data-cost="'+data.list[i].skuModel.skuPrice+'" data-num="'+data.list[i].carModel.num+'" class="regular-checkbox" />' +
+								'<input type="checkbox" id="checkbox-'+ i +'" value="false" ' +
+								'data-cardid = "'+data.list[i].carModel.id+ '" ' +
+								'data-cost="'+data.list[i].skuModel.skuPrice+'" ' +
+								'data-num="'+data.list[i].carModel.num+'" ' +
+								'data-isDelete="'+data.list[i].goodsModel.isDelete+'" ' +
+								'class="regular-checkbox" />' +
 								'<label for="checkbox-'+ i +'"></label>' +
 								'<img src="'+ data.list[i].goodsModel.hotPic+'" class="activityPic" data-id="'+ data.list[i].carModel.goodsId+'"/>' +
 								'<div class="detail" data-id="'+ data.list[i].carModel.goodsId+'"><h3>'+
@@ -203,13 +208,17 @@ $(document).ready(function(){
 		var checkNum = 0;  //被勾选的数量，用于底部小括号的数字
 		var brandObj = {
 			cards: [],
-			numAll: 0
+			numAll: 0,
+			isDelete: false  //判断是否有商品是已经下架的  0-未下架  1-下架
 		};
 		var cost = 0;//价格
 		var number = 1;//单个商品的数量
 		var cardids=[];
 
 		for(var i=0;i<inpuJO.length;i++){
+			if($(inpuJO[i]).attr('data-isDelete') == '1'){
+				brandObj.isDelete = 1
+			}
 			if( $(inpuJO[i]).attr('value') == 'true'){
 				number = $(inpuJO[i]).data('num');
 				brandObj.numAll += number;
@@ -239,23 +248,25 @@ $(document).ready(function(){
 	$(".done .brandNum").bind("click",function(){
 		if(costAll().numAll==0){
 			$.alert("你还没选择商品")
-		}else {
-			var skuIdStr = '';
-			var tmpArray = costAll().cards;
-			for(var i=0; i<tmpArray.length; i++){
-				skuIdStr +=  tmpArray[i] + '&&' ;
-			}
-			//cards 用于判读
-			if(tmpArray.length > 0){
-				window.location.href = "fillInOrder.html?isShoppingCart=true&cards&obj=" + escape(JSON.stringify(costAll()));
-			}else {
-				$.alert('请选择商品');
-			}
+			return
 		}
-
-
-
+		if(costAll().isDelete==1){
+			$.alert("存在已下架商品，请删除后重新购买")
+			return
+		}
+		var skuIdStr = '';
+		var tmpArray = costAll().cards;
+		for(var i=0; i<tmpArray.length; i++){
+			skuIdStr +=  tmpArray[i] + '&&' ;
+		}
+		//cards 用于判读
+		if(tmpArray.length > 0){
+			window.location.href = "fillInOrder.html?isShoppingCart=true&cards&obj=" + escape(JSON.stringify(costAll()));
+		}else {
+			$.alert('请选择商品');
+		}
 	});
+
 	//更新数量函数
 	function update(cardid,num,skuId){
 		$.ajax({

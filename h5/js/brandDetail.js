@@ -59,8 +59,11 @@ var url_obj = {
 
 //分享时候 传当前页面的url 和 对象obj
 get_url(window.location.href);
-hitsOnFn(token,3,1,itemId);
-
+if(userId){
+	hitsOnFn(token,3,1,itemId,userId);
+}else {
+	hitsOnFn(token,3,1,itemId);
+}
 
 //判断 是否 被收藏
 var isCollected = function () {
@@ -188,7 +191,12 @@ var getGoodDetail = function () {
 					scrollbarSnapOnRelease : true ,
 				});
 			}
-			getGoodSkuInfo();
+			//是否下架  下架 isDelete-1   未下架 isDelete-0
+			if(data.isDelete==1){
+				$('footer').hide();
+			}
+
+			getGoodSkuInfo(data.isDelete);
 		},
 		error: function () {
 			//todo
@@ -218,13 +226,13 @@ getComment();
 
 
 // 获取商品 sku 详细信息
-var getGoodSkuInfo = function () {
+var getGoodSkuInfo = function (isDelete) {
 	$.ajax({
 		type: "get",
 		url: port + "/card/goods/" + itemId + "/sku",
 		dataType: "json",
 		success: function (result) {
-			sureGoodInfo(result);
+			sureGoodInfo(result,isDelete);
 		},
 		error: function () {
 			//todo
@@ -234,7 +242,7 @@ var getGoodSkuInfo = function () {
 
 
 // 对弹出框 进行 商品各个规格 赋值
-var sureGoodInfo = function (data_sku) {
+var sureGoodInfo = function (data_sku ,isDelete) {
 
 	$('#goodDetail >.name>.goodHeadPic').attr('src',data_pic);
 	// $('#goodDetail >.name>.info').append('<li class="price">+'data.'+</li><li></li><li></li>');
@@ -251,6 +259,10 @@ var sureGoodInfo = function (data_sku) {
 	$('.wrapper>.primeCost>span').html('￥ ' + data_sku[0].marketPrice.toFixed(2));
 	$('.wrapper>.currentCost>span').html('￥ ' + data_sku[0].skuPrice.toFixed(2));
 	$('.wrapper>.stock >span').html( data_sku[0].skuGague + '×'+ buyNum);  // 默认是1
+	if(isDelete==1){
+		$('.wrapper>.stock ').hide();
+		$('.wrapper>.hasDelete ').show();
+	}
 	$('#goodDetail>.specifications li').eq(0).addClass('active');
 	$('#goodNum').val(1);  // 默认是1
 	stockNum = data_sku[0].stockNumber;

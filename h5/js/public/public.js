@@ -35,10 +35,12 @@ function setCookie(c_name,value,expiredays) {
 
 
 //统计点击量 公共函数
-function hitsOnFn(token,type,subType,typeId) {
+function hitsOnFn(token,type,subType,typeId ,_userId) {
+    var url = _userId ? port + '/card/count?token=' + token + '&type=' + type + '&typeId=' + typeId + '&subType=' + subType+'&userId='+_userId :
+     port + '/card/count?token=' + token + '&type=' + type + '&typeId=' + typeId + '&subType=' + subType+'&userId='
     $.ajax({
         type: 'put',
-        url: port + '/card/count?token=' + token + '&type=' + type + '&typeId=' + typeId + '&subType=' + subType,
+        url: url,
         success: function (res) {
             //todo
         },

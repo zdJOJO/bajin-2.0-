@@ -6,7 +6,6 @@ $(function(){
     var his = window.location.pathname.split("/");
     his = his[his.length-1];
 
-    var token = '';
     var kabin = ''; //前六位
     var cardNum = ''; //尾号
     var loadingPaht = portStr + '/imgs/gift/loading.gif';

@@ -33,7 +33,12 @@ $(document).ready(function(){
     //分享时候 传当前页面的url 和 对象obj
     get_url(window.location.href);
 
-    hitsOnFn(token,16,1,subjectId);
+    if(userId_2){
+        hitsOnFn(token,16,1,subjectId,userId_2);
+    }else {
+        hitsOnFn(token,16,1,subjectId);
+    }
+
 
     //请求客户经理状态  获取userId
     $.get( port + '/card/icbcManger/check?token='+token ,function (res) {

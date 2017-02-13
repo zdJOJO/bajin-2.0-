@@ -4,8 +4,56 @@ html, body {
     -webkit-overflow-scrolling: touch;
 }
 
+header>.item{
+    width: 33.3%;
+    height: 0.2rem;
+    line-height:  0.2rem;
+    float: left;
+    position: relative;
+}
+
+header>.item>span{
+    display: inline-block;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+}
+
+header>.item>span:first-child{
+    font-size: 24px;
+    font-weight: bold;
+    height: 0.1rem;
+    line-height: 0.1rem;
+    top: 0.03rem;
+    color: #323232;
+}
+header>.item>span:last-child{
+    height: 0.08rem;
+    line-height: 0.08rem;
+    bottom: 0.02rem;
+    color: #909090;
+}
+
+header>.item>i{
+    display: inline-block;
+    position: absolute;
+    width: 0;
+    height: 0.06rem;
+    border-left: 1px #e0e0e0 solid;
+    top: 50%;
+    margin-top: -0.03rem;
+}
+
+ul{
+    margin-top:  0.2rem;
+}
+
 li{
     height: 0.22rem;
+}
+
+li:first-child{
+    border-top: 1px #f0f0f0 solid;
 }
 
 li:nth-child(3){
@@ -28,7 +76,7 @@ li>div:nth-child(2)>.name{
 li>div:nth-child(2)>.content{
     color: #909090;
     font-size: 14px;
-    margin: 0;
+    margin-top: 5px;
 }
 
 

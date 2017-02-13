@@ -3,14 +3,38 @@
  */
 $(function(){
     var userId = GetQueryString('userId');
+    var token = GetQueryString('token');
     var page = 1;
     var headPic = '../img/headPic_default.png';
+    
+    function getCount(subType) {
+        $.ajax({
+            type: 'get',
+            url: port + '/card/icbcManger/counting?subType='+subType+'&token='+token,
+            success: function (res) {
+                if(subType==1){
+                    $('#look').html(res.data.sum || 0)
+                }else {
+                    $('#share').html(res.data.sum || 0)
+                }
+            },
+            error: function (e) {
+                //todo
+            }
+        })
+    }
+    //浏览量
+    getCount(1);
+    //分享量
+    getCount(4);
+
 
     function getList(currentPage,size) {
         $.ajax({
             type: 'get',
             url: port + '/card/icbcManger/invite/result?userId='+userId+'&currentPage='+currentPage+'&size='+size,
             success: function (res) {
+                $('#shareSuccess').html(res.data.rowCount)
                 if(res.data.list.length > 0){
                     var str = '';
                     var typeStr = '';

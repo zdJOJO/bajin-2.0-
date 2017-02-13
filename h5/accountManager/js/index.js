@@ -30,6 +30,7 @@ $(function(){
     if(!token && isApp){
        window.location.href = '../../login.html';
     }
+
     //查询单个客户经理  http://121.196.232.233/card/icbcManger/check?token={token}
     $.ajax({
         type: 'get',
@@ -50,7 +51,7 @@ $(function(){
                 $('#main').find('.info li').css('height',height);
 
                 $('#main').find('.list').click(function () {
-                    window.location.href = 'inviteRecord.html?userId='+res.data.userId;
+                    window.location.href = 'inviteRecord.html?userId='+res.data.userId+'&token='+token;
                 });
                 $('#main').find('.rank').click(function () {
                     $.alert('暂未开放，敬请期待')

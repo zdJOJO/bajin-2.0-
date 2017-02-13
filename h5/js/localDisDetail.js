@@ -33,7 +33,12 @@ $(document).ready(function(){
     //分享时候 传当前页面的url 和 对象obj
     get_url(window.location.href);
 
-    hitsOnFn(token,17,1,productId);
+    if(userId){
+        hitsOnFn(token,17,1,productId,userId);
+    }else {
+        hitsOnFn(token,17,1,productId);
+    }
+
     //获取单个产品的详细信息
     $.ajax({
         type: 'get',

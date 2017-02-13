@@ -56,7 +56,11 @@ $(function(){
     get_url(window.location.href);
 
     //浏览数目统计
-    hitsOnFn(token,1,1,activityId);
+    if(userId){
+        hitsOnFn(token,1,1,activityId,userId);
+    }else {
+        hitsOnFn(token,1,1,activityId);
+    }
 
     function getActDetail(){
         $.get(port+"/card/activity/"+activityId,function(data){

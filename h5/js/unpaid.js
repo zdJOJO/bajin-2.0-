@@ -185,7 +185,7 @@ $(document).ready(function(){
 				appid =  String(result.appId);
 				nonceStr = String(result.nonceStr);
 				package = String(result.package);
-				timeStamp = String(myDate.getTime());
+				timeStamp = String(myDate.getTime()); 
 
 				stringA = "appId=" + appid + "&nonceStr=" + nonceStr + "&package=" + package + "&signType=MD5&timeStamp=" + timeStamp ;
 				stringSignTemp = stringA + "&key=29798840529798840529798840529798";

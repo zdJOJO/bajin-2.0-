@@ -31,6 +31,7 @@ $(function(){
        window.location.href = '../../login.html';
     }
 
+    //token = 'ade2ad91-377e-443b-aeb5-d79fbdc12089'
     //查询单个客户经理  http://121.196.232.233/card/icbcManger/check?token={token}
     $.ajax({
         type: 'get',
@@ -42,13 +43,12 @@ $(function(){
             $.get(port+'/card/icbcManger/invite/result?userId='+res.data.userModel.userId+'&currentPage=1&size=10',function (data) {
                 var str = '<div class="headPicBox"><img src="'+headPicPath+'"></div>' +
                     '<h2>'+res.data.userModel.userName+'</h2><ul class="info">' +
-                    '<li><span>'+res.data.inviteCode+'号员工</span></li><li><span>'+res.data.bankInfo+'</span></li></ul>' +
+                    '<li><span>员工号: '+res.data.inviteCode+'</span></li>' +
+                    '<li><span><img src="../imgs/bankIcon.png">'+res.data.bankInfo+'</span></li></ul>' +
                     '<ul class="num"><li class="list"><span>'+data.data.rowCount+'</span><span>邀请</span></li>' +
-                    '<li class="rank"><span>未开放</span><span>排行榜</span></li></ul>' +
+                    '<li class="rank"><span>0</span><span>排行榜</span></li></ul>' +
                     '<a id="showBox" href="javascript:;" class="open-popup" data-target="#codeBox">邀请客户</a>';
                 $('#main').html(str);
-                var height =  $('#main').find('.info').outerHeight();
-                $('#main').find('.info li').css('height',height);
 
                 $('#main').find('.list').click(function () {
                     window.location.href = 'inviteRecord.html?userId='+res.data.userId+'&token='+token;

@@ -44,7 +44,7 @@ $(function(){
 		function cardData(){
 			$.ajax({
 				type:"get",
-				url:port+"/card/card?token="+token,
+				url: port+"/card/card?token="+token,
 				success:function(data){
 					var bankTypeStr = '';
 					var classStr = 'cardItem pu';
@@ -56,6 +56,8 @@ $(function(){
 							$('.addCard,.cardList').show().siblings('.noList').hide();
 							for(var i=0;i<data.list.length;i++){
 								bankTypeStr = '信用卡';
+								classStr = 'cardItem pu';
+								picStr = 'imgs/bankList/pu-Card.png';
 								if(data.list[i].bjke==1){
 									bankTypeStr = '白金卡';
 									classStr = 'cardItem bj';
